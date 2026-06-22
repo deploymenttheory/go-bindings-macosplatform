@@ -58,37 +58,37 @@ func (sci *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhr
 	return sci
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (sci *StartCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent {
 	objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return sci
 }
 
-// CallRecordFilter wraps the corresponding Objective-C method.
+// CallRecordFilter returns the call record filter.
 func (sci *StartCallIntent) CallRecordFilter() *CallRecordFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("callRecordFilter"))
 	return CallRecordFilterFromID(_r)
 }
 
-// CallRecordToCallBack wraps the corresponding Objective-C method.
+// CallRecordToCallBack returns the call record to call back.
 func (sci *StartCallIntent) CallRecordToCallBack() *CallRecord {
 	_r := objc.Send[objc.ID](objref.IDOf(sci), objc.RegisterName("callRecordToCallBack"))
 	return CallRecordFromID(_r)
 }
 
-// AudioRoute wraps the corresponding Objective-C method.
+// AudioRoute returns the audio route.
 func (sci *StartCallIntent) AudioRoute() CallAudioRoute {
 	_r := objc.Send[CallAudioRoute](objref.IDOf(sci), objc.RegisterName("audioRoute"))
 	return _r
 }
 
-// DestinationType wraps the corresponding Objective-C method.
+// DestinationType returns the destination type.
 func (sci *StartCallIntent) DestinationType() CallDestinationType {
 	_r := objc.Send[CallDestinationType](objref.IDOf(sci), objc.RegisterName("destinationType"))
 	return _r
 }
 
-// Contacts wraps the corresponding Objective-C method.
+// Contacts returns the contacts.
 //
 // Contacts returns the collection as a Go slice.
 func (sci *StartCallIntent) Contacts() []*Person {
@@ -96,7 +96,7 @@ func (sci *StartCallIntent) Contacts() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// CallCapability wraps the corresponding Objective-C method.
+// CallCapability returns the call capability.
 func (sci *StartCallIntent) CallCapability() CallCapability {
 	_r := objc.Send[CallCapability](objref.IDOf(sci), objc.RegisterName("callCapability"))
 	return _r

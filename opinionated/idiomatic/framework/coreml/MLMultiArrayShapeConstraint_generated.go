@@ -72,13 +72,13 @@ func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 	return multiArrayShapeConstraintAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (masc *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
 	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(masc), objc.RegisterName("type"))
 	return _r
 }
 
-// SizeRangeForDimension wraps the corresponding Objective-C method.
+// SizeRangeForDimension returns the size range for dimension.
 //
 // SizeRangeForDimension returns the collection as a Go slice.
 func (masc *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
@@ -86,7 +86,7 @@ func (masc *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// EnumeratedShapes wraps the corresponding Objective-C method.
+// EnumeratedShapes returns the enumerated shapes.
 //
 // EnumeratedShapes returns the collection as a Go slice.
 func (masc *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {

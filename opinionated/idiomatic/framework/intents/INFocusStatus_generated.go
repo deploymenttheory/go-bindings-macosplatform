@@ -73,7 +73,7 @@ func NewFocusStatusWithIsFocused(isFocused obj.Object) *FocusStatus {
 	return focusStatusAdopt(_id)
 }
 
-// IsFocused wraps the corresponding Objective-C method.
+// IsFocused returns the is focused.
 func (fs *FocusStatus) IsFocused() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("isFocused"))
 	return obj.Wrap(_r)

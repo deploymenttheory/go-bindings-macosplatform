@@ -181,26 +181,26 @@ func (sf *SearchField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy
 	return sf
 }
 
-// WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingTools sets the allows writing tools.
 func (sf *SearchField) WithAllowsWritingTools(allowsWritingTools bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return sf
 }
 
-// WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (sf *SearchField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return sf
 }
 
-// WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderStrings sets the placeholder strings.
 func (sf *SearchField) WithPlaceholderStrings(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return sf
 }
 
-// WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (sf *SearchField) WithPlaceholderAttributedStrings(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
@@ -369,38 +369,38 @@ func (sf *SearchField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 	return sf
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (sf *SearchField) WithCell(cell CellProvider) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return sf
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (sf *SearchField) WithSubviews(items ...ViewProvider) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setSubviews:"), _arr)
 	return sf
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (sf *SearchField) WithHidden(hidden bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHidden:"), hidden)
 	return sf
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sf *SearchField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return sf
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (sf *SearchField) WithAutoresizesSubviews(autoresizesSubviews bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return sf
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (sf *SearchField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return sf
@@ -412,19 +412,19 @@ func (sf *SearchField) WithFrame(frame corefoundation.CGRect) *SearchField {
 	return sf
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (sf *SearchField) WithFrameRotation(frameRotation float64) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return sf
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (sf *SearchField) WithFrameCenterRotation(frameCenterRotation float64) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return sf
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (sf *SearchField) WithBoundsRotation(boundsRotation float64) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return sf
@@ -436,7 +436,7 @@ func (sf *SearchField) WithBounds(bounds corefoundation.CGRect) *SearchField {
 	return sf
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (sf *SearchField) WithCanDrawConcurrently(canDrawConcurrently bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return sf
@@ -448,148 +448,148 @@ func (sf *SearchField) WithNeedsDisplay(needsDisplay bool) *SearchField {
 	return sf
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (sf *SearchField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return sf
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (sf *SearchField) WithWantsRestingTouches(wantsRestingTouches bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return sf
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sf *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return sf
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (sf *SearchField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return sf
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (sf *SearchField) WithWantsLayer(wantsLayer bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return sf
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (sf *SearchField) WithLayer(layer obj.Object) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return sf
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sf *SearchField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return sf
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (sf *SearchField) WithNeedsLayout(needsLayout bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return sf
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (sf *SearchField) WithAlphaValue(alphaValue float64) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return sf
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sf *SearchField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return sf
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (sf *SearchField) WithBackgroundFilters(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return sf
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (sf *SearchField) WithCompositingFilter(compositingFilter obj.Object) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sf
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (sf *SearchField) WithContentFilters(items ...obj.Object) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setContentFilters:"), _arr)
 	return sf
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (sf *SearchField) WithShadow(shadow *Shadow) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return sf
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (sf *SearchField) WithClipsToBounds(clipsToBounds bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return sf
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sf *SearchField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return sf
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (sf *SearchField) WithToolTip(toolTip string) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return sf
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sf *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return sf
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (sf *SearchField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return sf
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (sf *SearchField) WithNextKeyView(nextKeyView ViewProvider) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return sf
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (sf *SearchField) WithFocusRingType(focusRingType FocusRingType) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return sf
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (sf *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return sf
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (sf *SearchField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return sf
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sf *SearchField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return sf
@@ -601,49 +601,49 @@ func (sf *SearchField) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 	return sf
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sf *SearchField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return sf
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (sf *SearchField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return sf
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sf *SearchField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return sf
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sf *SearchField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return sf
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sf *SearchField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return sf
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sf *SearchField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return sf
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sf *SearchField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return sf
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (sf *SearchField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField {
 	objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return sf
@@ -673,25 +673,25 @@ func (sf *SearchField) WithTouchBar(touchBar *TouchBar) *SearchField {
 	return sf
 }
 
-// SearchTextBounds wraps the corresponding Objective-C method.
+// SearchTextBounds returns the search text bounds.
 func (sf *SearchField) SearchTextBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchTextBounds"))
 	return _r
 }
 
-// SearchButtonBounds wraps the corresponding Objective-C method.
+// SearchButtonBounds returns the search button bounds.
 func (sf *SearchField) SearchButtonBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("searchButtonBounds"))
 	return _r
 }
 
-// CancelButtonBounds wraps the corresponding Objective-C method.
+// CancelButtonBounds returns the cancel button bounds.
 func (sf *SearchField) CancelButtonBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sf), objc.RegisterName("cancelButtonBounds"))
 	return _r
 }
 
-// RecentSearches wraps the corresponding Objective-C method.
+// RecentSearches returns the recent searches.
 //
 // RecentSearches returns the collection as a Go slice.
 func (sf *SearchField) RecentSearches() []string {
@@ -699,13 +699,13 @@ func (sf *SearchField) RecentSearches() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecentsAutosaveName wraps the corresponding Objective-C method.
+// RecentsAutosaveName returns the recents autosave name.
 func (sf *SearchField) RecentsAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("recentsAutosaveName"))
 	return obj.Wrap(_r)
 }
 
-// SearchMenuTemplate wraps the corresponding Objective-C method.
+// SearchMenuTemplate returns the search menu template.
 func (sf *SearchField) SearchMenuTemplate() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("searchMenuTemplate"))
 	return MenuFromID(_r)
@@ -717,7 +717,7 @@ func (sf *SearchField) SendsWholeSearchString() bool {
 	return _r
 }
 
-// MaximumRecents wraps the corresponding Objective-C method.
+// MaximumRecents returns the maximum recents.
 func (sf *SearchField) MaximumRecents() int {
 	_r := objc.Send[int](objref.IDOf(sf), objc.RegisterName("maximumRecents"))
 	return _r

@@ -70,7 +70,7 @@ func NewMTRThreadNetworkDirectoryClusterGetOperationalDatasetParams() *MTRThread
 	return mTRThreadNetworkDirectoryClusterGetOperationalDatasetParamsAdopt(_id)
 }
 
-// WithExtendedPanID sets the property and returns the receiver so calls can be chained.
+// WithExtendedPanID sets the extended pan ID.
 func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams {
 	objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 	return mtndcgodp
@@ -88,7 +88,7 @@ func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) Wi
 	return mtndcgodp
 }
 
-// ExtendedPanID wraps the corresponding Objective-C method.
+// ExtendedPanID returns the extended pan ID.
 func (mtndcgodp *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) ExtendedPanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcgodp), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)

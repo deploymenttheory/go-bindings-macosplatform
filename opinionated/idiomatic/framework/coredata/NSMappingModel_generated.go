@@ -80,7 +80,7 @@ func (mm *MappingModel) WithEntityMappings(items ...*EntityMapping) *MappingMode
 	return mm
 }
 
-// EntityMappings wraps the corresponding Objective-C method.
+// EntityMappings returns the entity mappings.
 //
 // EntityMappings returns the collection as a Go slice.
 func (mm *MappingModel) EntityMappings() []*EntityMapping {
@@ -88,7 +88,7 @@ func (mm *MappingModel) EntityMappings() []*EntityMapping {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityMapping { return EntityMappingFromID(_id) })
 }
 
-// EntityMappingsByName wraps the corresponding Objective-C method.
+// EntityMappingsByName returns the entity mappings by name.
 func (mm *MappingModel) EntityMappingsByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("entityMappingsByName"))
 	return obj.Wrap(_r)

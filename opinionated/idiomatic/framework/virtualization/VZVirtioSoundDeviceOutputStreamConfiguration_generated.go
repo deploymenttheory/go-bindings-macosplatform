@@ -57,7 +57,7 @@ func (vsdosc *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOut
 	return vsdosc
 }
 
-// Sink wraps the corresponding Objective-C method.
+// Sink returns the sink.
 func (vsdosc *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
 	_r := objc.Send[objc.ID](objref.IDOf(vsdosc), objc.RegisterName("sink"))
 	return AudioOutputStreamSinkFromID(_r)

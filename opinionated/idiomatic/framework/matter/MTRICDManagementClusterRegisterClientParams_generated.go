@@ -70,31 +70,31 @@ func NewMTRICDManagementClusterRegisterClientParams() *MTRICDManagementClusterRe
 	return mTRICDManagementClusterRegisterClientParamsAdopt(_id)
 }
 
-// WithCheckInNodeID sets the property and returns the receiver so calls can be chained.
+// WithCheckInNodeID sets the check in node ID.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterRegisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcrcp
 }
 
-// WithMonitoredSubject sets the property and returns the receiver so calls can be chained.
+// WithMonitoredSubject sets the monitored subject.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterRegisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return mmcrcp
 }
 
-// WithKey sets the property and returns the receiver so calls can be chained.
+// WithKey sets the key.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithKey(key obj.Object) *MTRICDManagementClusterRegisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return mmcrcp
 }
 
-// WithVerificationKey sets the property and returns the receiver so calls can be chained.
+// WithVerificationKey sets the verification key.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterRegisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 	return mmcrcp
 }
 
-// WithClientType sets the property and returns the receiver so calls can be chained.
+// WithClientType sets the client type.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithClientType(clientType obj.Object) *MTRICDManagementClusterRegisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return mmcrcp
@@ -112,31 +112,31 @@ func (mmcrcp *MTRICDManagementClusterRegisterClientParams) WithServerSideProcess
 	return mmcrcp
 }
 
-// CheckInNodeID wraps the corresponding Objective-C method.
+// CheckInNodeID returns the check in node ID.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("checkInNodeID"))
 	return obj.Wrap(_r)
 }
 
-// MonitoredSubject wraps the corresponding Objective-C method.
+// MonitoredSubject returns the monitored subject.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("monitoredSubject"))
 	return obj.Wrap(_r)
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) Key() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("key"))
 	return obj.Wrap(_r)
 }
 
-// VerificationKey wraps the corresponding Objective-C method.
+// VerificationKey returns the verification key.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) VerificationKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("verificationKey"))
 	return obj.Wrap(_r)
 }
 
-// ClientType wraps the corresponding Objective-C method.
+// ClientType returns the client type.
 func (mmcrcp *MTRICDManagementClusterRegisterClientParams) ClientType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcp), objc.RegisterName("clientType"))
 	return obj.Wrap(_r)

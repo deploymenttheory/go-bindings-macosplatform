@@ -96,7 +96,7 @@ func (pc *PageController) WithChildViewControllers(items ...ViewControllerProvid
 	return pc
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (pc *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return pc
@@ -157,19 +157,19 @@ func (pc *PageController) TakeSelectedIndexFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
 }
 
-// SelectedViewController wraps the corresponding Objective-C method.
+// SelectedViewController returns the selected view controller.
 func (pc *PageController) SelectedViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("selectedViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// TransitionStyle wraps the corresponding Objective-C method.
+// TransitionStyle returns the transition style.
 func (pc *PageController) TransitionStyle() PageControllerTransitionStyle {
 	_r := objc.Send[PageControllerTransitionStyle](objref.IDOf(pc), objc.RegisterName("transitionStyle"))
 	return _r
 }
 
-// ArrangedObjects wraps the corresponding Objective-C method.
+// ArrangedObjects returns the arranged objects.
 func (pc *PageController) ArrangedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("arrangedObjects"))
 	return obj.Wrap(_r)
@@ -180,7 +180,7 @@ func (pc *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
 }
 
-// SelectedIndex wraps the corresponding Objective-C method.
+// SelectedIndex returns the selected index.
 func (pc *PageController) SelectedIndex() int {
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("selectedIndex"))
 	return _r

@@ -70,7 +70,7 @@ func NewTransformTranslateOp() *TransformTranslateOp {
 	return transformTranslateOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (tto *TransformTranslateOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tto), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (tto *TransformTranslateOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (tto *TransformTranslateOp) AnimatedValue() *AnimatedVector3 {
 	_r := objc.Send[objc.ID](objref.IDOf(tto), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)

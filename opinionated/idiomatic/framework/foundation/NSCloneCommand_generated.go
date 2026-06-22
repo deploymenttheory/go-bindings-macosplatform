@@ -94,13 +94,13 @@ func (cc *CloneCommand) WithScriptErrorString(scriptErrorString StringProvider) 
 	return cc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cc *CloneCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloneCommand {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cc
 }
 
-// KeySpecifier wraps the corresponding Objective-C method.
+// KeySpecifier returns the key specifier.
 func (cc *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

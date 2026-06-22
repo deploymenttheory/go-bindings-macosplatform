@@ -200,7 +200,7 @@ func (s *Score) ReportScore(ctx context.Context) error {
 	}
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (s *Score) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("category"))
 	if _r == 0 {
@@ -209,7 +209,7 @@ func (s *Score) Category() string {
 	return purego.GoString(_r)
 }
 
-// PlayerID wraps the corresponding Objective-C method.
+// PlayerID returns the player ID.
 func (s *Score) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("playerID"))
 	if _r == 0 {

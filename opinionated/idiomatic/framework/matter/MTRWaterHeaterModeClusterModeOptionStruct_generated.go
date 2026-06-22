@@ -70,19 +70,19 @@ func NewMTRWaterHeaterModeClusterModeOptionStruct() *MTRWaterHeaterModeClusterMo
 	return mTRWaterHeaterModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) WithLabel(label string) *MTRWaterHeaterModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mwhmcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRWaterHeaterModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mwhmcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

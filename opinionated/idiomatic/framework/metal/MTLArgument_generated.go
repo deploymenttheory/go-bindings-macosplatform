@@ -72,7 +72,7 @@ func NewArgument() *Argument {
 	return argumentAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Argument) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,91 +81,91 @@ func (a *Argument) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (a *Argument) Type() ArgumentType {
 	_r := objc.Send[ArgumentType](objref.IDOf(a), objc.RegisterName("type"))
 	return _r
 }
 
-// Access wraps the corresponding Objective-C method.
+// Access returns the access.
 func (a *Argument) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(a), objc.RegisterName("access"))
 	return _r
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (a *Argument) Index() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("index"))
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (a *Argument) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
 	return _r
 }
 
-// BufferAlignment wraps the corresponding Objective-C method.
+// BufferAlignment returns the buffer alignment.
 func (a *Argument) BufferAlignment() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferAlignment"))
 	return _r
 }
 
-// BufferDataSize wraps the corresponding Objective-C method.
+// BufferDataSize returns the buffer data size.
 func (a *Argument) BufferDataSize() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("bufferDataSize"))
 	return _r
 }
 
-// BufferDataType wraps the corresponding Objective-C method.
+// BufferDataType returns the buffer data type.
 func (a *Argument) BufferDataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("bufferDataType"))
 	return _r
 }
 
-// BufferStructType wraps the corresponding Objective-C method.
+// BufferStructType returns the buffer struct type.
 func (a *Argument) BufferStructType() *StructType {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferStructType"))
 	return StructTypeFromID(_r)
 }
 
-// BufferPointerType wraps the corresponding Objective-C method.
+// BufferPointerType returns the buffer pointer type.
 func (a *Argument) BufferPointerType() *PointerType {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bufferPointerType"))
 	return PointerTypeFromID(_r)
 }
 
-// ThreadgroupMemoryAlignment wraps the corresponding Objective-C method.
+// ThreadgroupMemoryAlignment returns the threadgroup memory alignment.
 func (a *Argument) ThreadgroupMemoryAlignment() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryAlignment"))
 	return _r
 }
 
-// ThreadgroupMemoryDataSize wraps the corresponding Objective-C method.
+// ThreadgroupMemoryDataSize returns the threadgroup memory data size.
 func (a *Argument) ThreadgroupMemoryDataSize() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("threadgroupMemoryDataSize"))
 	return _r
 }
 
-// TextureType wraps the corresponding Objective-C method.
+// TextureType returns the texture type.
 func (a *Argument) TextureType() TextureType {
 	_r := objc.Send[TextureType](objref.IDOf(a), objc.RegisterName("textureType"))
 	return _r
 }
 
-// TextureDataType wraps the corresponding Objective-C method.
+// TextureDataType returns the texture data type.
 func (a *Argument) TextureDataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("textureDataType"))
 	return _r
 }
 
-// IsDepthTexture wraps the corresponding Objective-C method.
+// IsDepthTexture reports whether the object is depth texture.
 func (a *Argument) IsDepthTexture() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isDepthTexture"))
 	return _r
 }
 
-// ArrayLength wraps the corresponding Objective-C method.
+// ArrayLength returns the array length.
 func (a *Argument) ArrayLength() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("arrayLength"))
 	return _r

@@ -66,25 +66,25 @@ func (mdlccs *MTRDoorLockClusterCredentialStruct) String() string {
 	return rt.Description(objref.IDOf(mdlccs))
 }
 
-// WithCredentialType sets the property and returns the receiver so calls can be chained.
+// WithCredentialType sets the credential type.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterCredentialStruct {
 	objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return mdlccs
 }
 
-// WithCredentialIndex sets the property and returns the receiver so calls can be chained.
+// WithCredentialIndex sets the credential index.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterCredentialStruct {
 	objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return mdlccs
 }
 
-// CredentialType wraps the corresponding Objective-C method.
+// CredentialType returns the credential type.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("credentialType"))
 	return obj.Wrap(_r)
 }
 
-// CredentialIndex wraps the corresponding Objective-C method.
+// CredentialIndex returns the credential index.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("credentialIndex"))
 	return obj.Wrap(_r)

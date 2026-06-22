@@ -79,7 +79,7 @@ func (p *Person) WithContactIdentifier(contactIdentifier string) *Person {
 	return p
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (p *Person) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (p *Person) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Handles wraps the corresponding Objective-C method.
+// Handles returns the handles.
 //
 // Handles returns the collection as a Go slice.
 func (p *Person) Handles() []string {
@@ -96,7 +96,7 @@ func (p *Person) Handles() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// HandleIdentifier wraps the corresponding Objective-C method.
+// HandleIdentifier returns the handle identifier.
 func (p *Person) HandleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("handleIdentifier"))
 	if _r == 0 {
@@ -105,7 +105,7 @@ func (p *Person) HandleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ContactIdentifier wraps the corresponding Objective-C method.
+// ContactIdentifier returns the contact identifier.
 func (p *Person) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {

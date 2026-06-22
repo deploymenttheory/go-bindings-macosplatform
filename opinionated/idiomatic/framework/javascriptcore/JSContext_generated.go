@@ -159,7 +159,7 @@ func (c *Context) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) 
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(object), objref.IDOf(key))
 }
 
-// JSGlobalContextRef wraps the corresponding Objective-C method.
+// JSGlobalContextRef returns the js global context ref.
 func (c *Context) JSGlobalContextRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("JSGlobalContextRef"))
 	return obj.Wrap(_r)

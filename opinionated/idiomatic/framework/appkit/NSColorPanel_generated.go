@@ -481,25 +481,25 @@ func (cp *ColorPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPane
 	return cp
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (cp *ColorPanel) WithAutodisplay(autodisplay bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return cp
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (cp *ColorPanel) WithOneShot(oneShot bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setOneShot:"), oneShot)
 	return cp
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (cp *ColorPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return cp
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (cp *ColorPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *ColorPanel {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return cp
@@ -556,13 +556,13 @@ func (cp *ColorPanel) DetachColorList(colorList *ColorList) {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
 }
 
-// AccessoryView wraps the corresponding Objective-C method.
+// AccessoryView returns the accessory view.
 func (cp *ColorPanel) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
-// IsContinuous wraps the corresponding Objective-C method.
+// IsContinuous reports whether the object is continuous.
 func (cp *ColorPanel) IsContinuous() bool {
 	_r := objc.Send[bool](objref.IDOf(cp), objc.RegisterName("isContinuous"))
 	return _r
@@ -574,19 +574,19 @@ func (cp *ColorPanel) ShowsAlpha() bool {
 	return _r
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (cp *ColorPanel) Mode() ColorPanelMode {
 	_r := objc.Send[ColorPanelMode](objref.IDOf(cp), objc.RegisterName("mode"))
 	return _r
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (cp *ColorPanel) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
-// Alpha wraps the corresponding Objective-C method.
+// Alpha returns the alpha.
 func (cp *ColorPanel) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(cp), objc.RegisterName("alpha"))
 	return _r

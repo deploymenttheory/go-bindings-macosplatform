@@ -88,25 +88,25 @@ func (lp *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonic
 	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
 }
 
-// ReflectiveTexture wraps the corresponding Objective-C method.
+// ReflectiveTexture returns the reflective texture.
 func (lp *LightProbe) ReflectiveTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("reflectiveTexture"))
 	return TextureFromID(_r)
 }
 
-// IrradianceTexture wraps the corresponding Objective-C method.
+// IrradianceTexture returns the irradiance texture.
 func (lp *LightProbe) IrradianceTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("irradianceTexture"))
 	return TextureFromID(_r)
 }
 
-// SphericalHarmonicsLevel wraps the corresponding Objective-C method.
+// SphericalHarmonicsLevel returns the spherical harmonics level.
 func (lp *LightProbe) SphericalHarmonicsLevel() int {
 	_r := objc.Send[int](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
-// SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
+// SphericalHarmonicsCoefficients returns the spherical harmonics coefficients.
 func (lp *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsCoefficients"))
 	return obj.Wrap(_r)

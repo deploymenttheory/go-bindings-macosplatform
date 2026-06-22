@@ -29,7 +29,7 @@ func IsSupported() bool {
 	return _r
 }
 
-// ProcessorSupported wraps the corresponding Objective-C method.
+// ProcessorSupported returns the processor supported.
 func ProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTFrameRateConversionConfiguration")), objc.RegisterName("processorSupported"))
 	return _r
@@ -83,7 +83,7 @@ func VTMotionBlurConfigurationIsSupported() bool {
 	return _r
 }
 
-// VTMotionBlurConfigurationProcessorSupported wraps the corresponding Objective-C method.
+// VTMotionBlurConfigurationProcessorSupported returns the vt motion blur configuration processor supported.
 func VTMotionBlurConfigurationProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTMotionBlurConfiguration")), objc.RegisterName("processorSupported"))
 	return _r
@@ -107,7 +107,7 @@ func VTOpticalFlowConfigurationIsSupported() bool {
 	return _r
 }
 
-// VTOpticalFlowConfigurationProcessorSupported wraps the corresponding Objective-C method.
+// VTOpticalFlowConfigurationProcessorSupported returns the vt optical flow configuration processor supported.
 func VTOpticalFlowConfigurationProcessorSupported() uint8 {
 	_r := objc.Send[uint8](objc.ID(_class("VTOpticalFlowConfiguration")), objc.RegisterName("processorSupported"))
 	return _r

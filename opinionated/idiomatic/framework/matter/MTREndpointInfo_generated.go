@@ -72,13 +72,13 @@ func NewMTREndpointInfo() *MTREndpointInfo {
 	return mTREndpointInfoAdopt(_id)
 }
 
-// EndpointID wraps the corresponding Objective-C method.
+// EndpointID returns the endpoint ID.
 func (mei *MTREndpointInfo) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
 
-// DeviceTypes wraps the corresponding Objective-C method.
+// DeviceTypes returns the device types.
 //
 // DeviceTypes returns the collection as a Go slice.
 func (mei *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
@@ -86,7 +86,7 @@ func (mei *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
 
-// PartsList wraps the corresponding Objective-C method.
+// PartsList returns the parts list.
 //
 // PartsList returns the collection as a Go slice.
 func (mei *MTREndpointInfo) PartsList() []obj.Object {

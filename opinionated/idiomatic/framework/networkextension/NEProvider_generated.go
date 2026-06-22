@@ -97,7 +97,7 @@ func (np *NEProvider) DisplayMessageCompletionHandler(message string, completion
 	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// DefaultPath wraps the corresponding Objective-C method.
+// DefaultPath returns the default path.
 func (np *NEProvider) DefaultPath() *NWPath {
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("defaultPath"))
 	return NWPathFromID(_r)

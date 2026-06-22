@@ -70,13 +70,13 @@ func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmE
 	return mTRDoorLockClusterDoorLockAlarmEventAdopt(_id)
 }
 
-// WithAlarmCode sets the property and returns the receiver so calls can be chained.
+// WithAlarmCode sets the alarm code.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
 	return mdlcdlae
 }
 
-// AlarmCode wraps the corresponding Objective-C method.
+// AlarmCode returns the alarm code.
 func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("alarmCode"))
 	return obj.Wrap(_r)

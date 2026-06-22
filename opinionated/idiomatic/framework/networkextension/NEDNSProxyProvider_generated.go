@@ -103,7 +103,7 @@ func (npp *NEDNSProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *N
 	return _r
 }
 
-// SystemDNSSettings wraps the corresponding Objective-C method.
+// SystemDNSSettings returns the system DNS settings.
 //
 // SystemDNSSettings returns the collection as a Go slice.
 func (npp *NEDNSProxyProvider) SystemDNSSettings() []*NEDNSSettings {

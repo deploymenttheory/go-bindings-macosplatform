@@ -143,7 +143,7 @@ func (tic *TextInputContext) AcceptsGlyphInfo() bool {
 	return _r
 }
 
-// AllowedInputSourceLocales wraps the corresponding Objective-C method.
+// AllowedInputSourceLocales returns the allowed input source locales.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tic *TextInputContext) AllowedInputSourceLocales() []string {
@@ -151,7 +151,7 @@ func (tic *TextInputContext) AllowedInputSourceLocales() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// KeyboardInputSources wraps the corresponding Objective-C method.
+// KeyboardInputSources returns the keyboard input sources.
 //
 // KeyboardInputSources returns the collection as a Go slice.
 func (tic *TextInputContext) KeyboardInputSources() []obj.Object {
@@ -159,7 +159,7 @@ func (tic *TextInputContext) KeyboardInputSources() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SelectedKeyboardInputSource wraps the corresponding Objective-C method.
+// SelectedKeyboardInputSource returns the selected keyboard input source.
 func (tic *TextInputContext) SelectedKeyboardInputSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tic), objc.RegisterName("selectedKeyboardInputSource"))
 	return obj.Wrap(_r)

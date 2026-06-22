@@ -61,7 +61,7 @@ func NewMTRBaseClusterPowerSourceConfigurationWithDeviceEndpointQueue(device *MT
 	return mTRBaseClusterPowerSourceConfigurationAdopt(_id)
 }
 
-// ReadAttributeSourcesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSourcesWithCompletion reads attribute sources with completion.
 //
 // ReadAttributeSourcesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeSourcesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeSourcesW
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeClusterR
 	}
 }
 
-// ReadAttributeSources wraps the corresponding Objective-C method.
+// ReadAttributeSources reads attribute sources.
 //
 // ReadAttributeSources blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeSources(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeSourcesW
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcpsc *MTRBaseClusterPowerSourceConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

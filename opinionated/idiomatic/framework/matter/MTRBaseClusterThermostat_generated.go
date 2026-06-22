@@ -111,7 +111,7 @@ func (mbct *MTRBaseClusterThermostat) AtomicRequestWithParamsCompletion(ctx cont
 	}
 }
 
-// ReadAttributeLocalTemperatureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocalTemperatureWithCompletion reads attribute local temperature with completion.
 //
 // ReadAttributeLocalTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeLocalTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeLocalTemperatureWithPara
 	}
 }
 
-// ReadAttributeOutdoorTemperatureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOutdoorTemperatureWithCompletion reads attribute outdoor temperature with completion.
 //
 // ReadAttributeOutdoorTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOutdoorTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOutdoorTemperatureWithPa
 	}
 }
 
-// ReadAttributeOccupancyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupancyWithCompletion reads attribute occupancy with completion.
 //
 // ReadAttributeOccupancyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupancyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupancyWithParamsSubsc
 	}
 }
 
-// ReadAttributeAbsMinHeatSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMinHeatSetpointLimitWithCompletion reads attribute abs min heat setpoint limit with completion.
 //
 // ReadAttributeAbsMinHeatSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMinHeatSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMinHeatSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMaxHeatSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMaxHeatSetpointLimitWithCompletion reads attribute abs max heat setpoint limit with completion.
 //
 // ReadAttributeAbsMaxHeatSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMaxHeatSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMinCoolSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMinCoolSetpointLimitWithCompletion reads attribute abs min cool setpoint limit with completion.
 //
 // ReadAttributeAbsMinCoolSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMinCoolSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMinCoolSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMaxCoolSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMaxCoolSetpointLimitWithCompletion reads attribute abs max cool setpoint limit with completion.
 //
 // ReadAttributeAbsMaxCoolSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMaxCoolSetpointLimitW
 	}
 }
 
-// ReadAttributePICoolingDemandWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePICoolingDemandWithCompletion reads attribute pi cooling demand with completion.
 //
 // ReadAttributePICoolingDemandWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePICoolingDemandWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePICoolingDemandWithParam
 	}
 }
 
-// ReadAttributePIHeatingDemandWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePIHeatingDemandWithCompletion reads attribute pi heating demand with completion.
 //
 // ReadAttributePIHeatingDemandWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePIHeatingDemandWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePIHeatingDemandWithParam
 	}
 }
 
-// ReadAttributeHVACSystemTypeConfigurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHVACSystemTypeConfigurationWithCompletion reads attribute hvac system type configuration with completion.
 //
 // ReadAttributeHVACSystemTypeConfigurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeHVACSystemTypeConfigurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeHVACSystemTypeConfigurat
 	}
 }
 
-// ReadAttributeLocalTemperatureCalibrationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocalTemperatureCalibrationWithCompletion reads attribute local temperature calibration with completion.
 //
 // ReadAttributeLocalTemperatureCalibrationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeLocalTemperatureCalibrationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeLocalTemperatureCalibrat
 	}
 }
 
-// ReadAttributeOccupiedCoolingSetpointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedCoolingSetpointWithCompletion reads attribute occupied cooling setpoint with completion.
 //
 // ReadAttributeOccupiedCoolingSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedCoolingSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedCoolingSetpointW
 	}
 }
 
-// ReadAttributeOccupiedHeatingSetpointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedHeatingSetpointWithCompletion reads attribute occupied heating setpoint with completion.
 //
 // ReadAttributeOccupiedHeatingSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedHeatingSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedHeatingSetpointW
 	}
 }
 
-// ReadAttributeUnoccupiedCoolingSetpointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedCoolingSetpointWithCompletion reads attribute unoccupied cooling setpoint with completion.
 //
 // ReadAttributeUnoccupiedCoolingSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedCoolingSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedCoolingSetpoin
 	}
 }
 
-// ReadAttributeUnoccupiedHeatingSetpointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedHeatingSetpointWithCompletion reads attribute unoccupied heating setpoint with completion.
 //
 // ReadAttributeUnoccupiedHeatingSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedHeatingSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedHeatingSetpoin
 	}
 }
 
-// ReadAttributeMinHeatSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinHeatSetpointLimitWithCompletion reads attribute min heat setpoint limit with completion.
 //
 // ReadAttributeMinHeatSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinHeatSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinHeatSetpointLimitWith
 	}
 }
 
-// ReadAttributeMaxHeatSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxHeatSetpointLimitWithCompletion reads attribute max heat setpoint limit with completion.
 //
 // ReadAttributeMaxHeatSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMaxHeatSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMaxHeatSetpointLimitWith
 	}
 }
 
-// ReadAttributeMinCoolSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinCoolSetpointLimitWithCompletion reads attribute min cool setpoint limit with completion.
 //
 // ReadAttributeMinCoolSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinCoolSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinCoolSetpointLimitWith
 	}
 }
 
-// ReadAttributeMaxCoolSetpointLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxCoolSetpointLimitWithCompletion reads attribute max cool setpoint limit with completion.
 //
 // ReadAttributeMaxCoolSetpointLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMaxCoolSetpointLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMaxCoolSetpointLimitWith
 	}
 }
 
-// ReadAttributeMinSetpointDeadBandWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinSetpointDeadBandWithCompletion reads attribute min setpoint dead band with completion.
 //
 // ReadAttributeMinSetpointDeadBandWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinSetpointDeadBandWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinSetpointDeadBandWithP
 	}
 }
 
-// ReadAttributeRemoteSensingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRemoteSensingWithCompletion reads attribute remote sensing with completion.
 //
 // ReadAttributeRemoteSensingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeRemoteSensingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeRemoteSensingWithParamsS
 	}
 }
 
-// ReadAttributeControlSequenceOfOperationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeControlSequenceOfOperationWithCompletion reads attribute control sequence of operation with completion.
 //
 // ReadAttributeControlSequenceOfOperationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeControlSequenceOfOperationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeControlSequenceOfOperati
 	}
 }
 
-// ReadAttributeSystemModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSystemModeWithCompletion reads attribute system mode with completion.
 //
 // ReadAttributeSystemModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSystemModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSystemModeWithParamsSubs
 	}
 }
 
-// ReadAttributeThermostatRunningModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThermostatRunningModeWithCompletion reads attribute thermostat running mode with completion.
 //
 // ReadAttributeThermostatRunningModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatRunningModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatRunningModeWit
 	}
 }
 
-// ReadAttributeStartOfWeekWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartOfWeekWithCompletion reads attribute start of week with completion.
 //
 // ReadAttributeStartOfWeekWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeStartOfWeekWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeStartOfWeekWithParamsSub
 	}
 }
 
-// ReadAttributeNumberOfWeeklyTransitionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfWeeklyTransitionsWithCompletion reads attribute number of weekly transitions with completion.
 //
 // ReadAttributeNumberOfWeeklyTransitionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfWeeklyTransitionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfWeeklyTransition
 	}
 }
 
-// ReadAttributeNumberOfDailyTransitionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfDailyTransitionsWithCompletion reads attribute number of daily transitions with completion.
 //
 // ReadAttributeNumberOfDailyTransitionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfDailyTransitionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfDailyTransitions
 	}
 }
 
-// ReadAttributeTemperatureSetpointHoldWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointHoldWithCompletion reads attribute temperature setpoint hold with completion.
 //
 // ReadAttributeTemperatureSetpointHoldWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeTemperatureSetpointHoldWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeTemperatureSetpointHoldW
 	}
 }
 
-// ReadAttributeTemperatureSetpointHoldDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointHoldDurationWithCompletion reads attribute temperature setpoint hold duration with completion.
 //
 // ReadAttributeTemperatureSetpointHoldDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeTemperatureSetpointHoldDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeTemperatureSetpointHoldD
 	}
 }
 
-// ReadAttributeThermostatProgrammingOperationModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThermostatProgrammingOperationModeWithCompletion reads attribute thermostat programming operation mode with completion.
 //
 // ReadAttributeThermostatProgrammingOperationModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatProgrammingOperationModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatProgrammingOpe
 	}
 }
 
-// ReadAttributeThermostatRunningStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThermostatRunningStateWithCompletion reads attribute thermostat running state with completion.
 //
 // ReadAttributeThermostatRunningStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatRunningStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatRunningStateWi
 	}
 }
 
-// ReadAttributeSetpointChangeSourceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeSourceWithCompletion reads attribute setpoint change source with completion.
 //
 // ReadAttributeSetpointChangeSourceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeSourceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeSourceWith
 	}
 }
 
-// ReadAttributeSetpointChangeAmountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeAmountWithCompletion reads attribute setpoint change amount with completion.
 //
 // ReadAttributeSetpointChangeAmountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeAmountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeAmountWith
 	}
 }
 
-// ReadAttributeSetpointChangeSourceTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeSourceTimestampWithCompletion reads attribute setpoint change source timestamp with completion.
 //
 // ReadAttributeSetpointChangeSourceTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeSourceTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeSourceTime
 	}
 }
 
-// ReadAttributeOccupiedSetbackWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetbackWithCompletion reads attribute occupied setback with completion.
 //
 // ReadAttributeOccupiedSetbackWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetbackWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackWithParam
 	}
 }
 
-// ReadAttributeOccupiedSetbackMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetbackMinWithCompletion reads attribute occupied setback min with completion.
 //
 // ReadAttributeOccupiedSetbackMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetbackMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackMinWithPa
 	}
 }
 
-// ReadAttributeOccupiedSetbackMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetbackMaxWithCompletion reads attribute occupied setback max with completion.
 //
 // ReadAttributeOccupiedSetbackMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetbackMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackMaxWithPa
 	}
 }
 
-// ReadAttributeUnoccupiedSetbackWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetbackWithCompletion reads attribute unoccupied setback with completion.
 //
 // ReadAttributeUnoccupiedSetbackWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetbackWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackWithPar
 	}
 }
 
-// ReadAttributeUnoccupiedSetbackMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetbackMinWithCompletion reads attribute unoccupied setback min with completion.
 //
 // ReadAttributeUnoccupiedSetbackMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetbackMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackMinWith
 	}
 }
 
-// ReadAttributeUnoccupiedSetbackMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetbackMaxWithCompletion reads attribute unoccupied setback max with completion.
 //
 // ReadAttributeUnoccupiedSetbackMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetbackMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackMaxWith
 	}
 }
 
-// ReadAttributeEmergencyHeatDeltaWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEmergencyHeatDeltaWithCompletion reads attribute emergency heat delta with completion.
 //
 // ReadAttributeEmergencyHeatDeltaWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeEmergencyHeatDeltaWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeEmergencyHeatDeltaWithPa
 	}
 }
 
-// ReadAttributeACTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACTypeWithCompletion reads attribute ac type with completion.
 //
 // ReadAttributeACTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACTypeWithParamsSubscrip
 	}
 }
 
-// ReadAttributeACCapacityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACCapacityWithCompletion reads attribute ac capacity with completion.
 //
 // ReadAttributeACCapacityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCapacityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCapacityWithParamsSubs
 	}
 }
 
-// ReadAttributeACRefrigerantTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACRefrigerantTypeWithCompletion reads attribute ac refrigerant type with completion.
 //
 // ReadAttributeACRefrigerantTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACRefrigerantTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACRefrigerantTypeWithPar
 	}
 }
 
-// ReadAttributeACCompressorTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACCompressorTypeWithCompletion reads attribute ac compressor type with completion.
 //
 // ReadAttributeACCompressorTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCompressorTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCompressorTypeWithPara
 	}
 }
 
-// ReadAttributeACErrorCodeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACErrorCodeWithCompletion reads attribute ac error code with completion.
 //
 // ReadAttributeACErrorCodeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACErrorCodeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACErrorCodeWithParamsSub
 	}
 }
 
-// ReadAttributeACLouverPositionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACLouverPositionWithCompletion reads attribute ac louver position with completion.
 //
 // ReadAttributeACLouverPositionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACLouverPositionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACLouverPositionWithPara
 	}
 }
 
-// ReadAttributeACCoilTemperatureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACCoilTemperatureWithCompletion reads attribute ac coil temperature with completion.
 //
 // ReadAttributeACCoilTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCoilTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCoilTemperatureWithPar
 	}
 }
 
-// ReadAttributeACCapacityformatWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACCapacityformatWithCompletion reads attribute ac capacityformat with completion.
 //
 // ReadAttributeACCapacityformatWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCapacityformatWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCapacityformatWithPara
 	}
 }
 
-// ReadAttributePresetTypesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePresetTypesWithCompletion reads attribute preset types with completion.
 //
 // ReadAttributePresetTypesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePresetTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePresetTypesWithParamsSub
 	}
 }
 
-// ReadAttributeScheduleTypesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScheduleTypesWithCompletion reads attribute schedule types with completion.
 //
 // ReadAttributeScheduleTypesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeScheduleTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeScheduleTypesWithParamsS
 	}
 }
 
-// ReadAttributeNumberOfPresetsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPresetsWithCompletion reads attribute number of presets with completion.
 //
 // ReadAttributeNumberOfPresetsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfPresetsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfPresetsWithParam
 	}
 }
 
-// ReadAttributeNumberOfSchedulesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfSchedulesWithCompletion reads attribute number of schedules with completion.
 //
 // ReadAttributeNumberOfSchedulesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfSchedulesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfSchedulesWithPar
 	}
 }
 
-// ReadAttributeNumberOfScheduleTransitionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfScheduleTransitionsWithCompletion reads attribute number of schedule transitions with completion.
 //
 // ReadAttributeNumberOfScheduleTransitionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfScheduleTransitionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfScheduleTransiti
 	}
 }
 
-// ReadAttributeNumberOfScheduleTransitionPerDayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfScheduleTransitionPerDayWithCompletion reads attribute number of schedule transition per day with completion.
 //
 // ReadAttributeNumberOfScheduleTransitionPerDayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfScheduleTransitionPerDayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfScheduleTransiti
 	}
 }
 
-// ReadAttributeActivePresetHandleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePresetHandleWithCompletion reads attribute active preset handle with completion.
 //
 // ReadAttributeActivePresetHandleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeActivePresetHandleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2911,7 +2911,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeActivePresetHandleWithPa
 	}
 }
 
-// ReadAttributeActiveScheduleHandleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveScheduleHandleWithCompletion reads attribute active schedule handle with completion.
 //
 // ReadAttributeActiveScheduleHandleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeActiveScheduleHandleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeActiveScheduleHandleWith
 	}
 }
 
-// ReadAttributePresetsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePresetsWithCompletion reads attribute presets with completion.
 //
 // ReadAttributePresetsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePresetsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3011,7 +3011,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePresetsWithParamsSubscri
 	}
 }
 
-// ReadAttributeSchedulesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSchedulesWithCompletion reads attribute schedules with completion.
 //
 // ReadAttributeSchedulesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSchedulesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3061,7 +3061,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSchedulesWithParamsSubsc
 	}
 }
 
-// ReadAttributeSetpointHoldExpiryTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSetpointHoldExpiryTimestampWithCompletion reads attribute setpoint hold expiry timestamp with completion.
 //
 // ReadAttributeSetpointHoldExpiryTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointHoldExpiryTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointHoldExpiryTimest
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3161,7 +3161,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAcceptedCommandListWithP
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3261,7 +3261,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAttributeListWithParamsS
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeFeatureMapWithParamsSubs
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3386,7 +3386,7 @@ func (mbct *MTRBaseClusterThermostat) GetWeeklyScheduleWithParams(ctx context.Co
 	}
 }
 
-// ReadAttributeLocalTemperature wraps the corresponding Objective-C method.
+// ReadAttributeLocalTemperature reads attribute local temperature.
 //
 // ReadAttributeLocalTemperature blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeLocalTemperature(ctx context.Context) (result obj.Object, err error) {
@@ -3436,7 +3436,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeLocalTemperatureWithMinI
 	}
 }
 
-// ReadAttributeOutdoorTemperature wraps the corresponding Objective-C method.
+// ReadAttributeOutdoorTemperature reads attribute outdoor temperature.
 //
 // ReadAttributeOutdoorTemperature blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOutdoorTemperature(ctx context.Context) (result obj.Object, err error) {
@@ -3486,7 +3486,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOutdoorTemperatureWithMi
 	}
 }
 
-// ReadAttributeOccupancy wraps the corresponding Objective-C method.
+// ReadAttributeOccupancy reads attribute occupancy.
 //
 // ReadAttributeOccupancy blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupancy(ctx context.Context) (result obj.Object, err error) {
@@ -3536,7 +3536,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupancyWithMinInterval
 	}
 }
 
-// ReadAttributeAbsMinHeatSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeAbsMinHeatSetpointLimit reads attribute abs min heat setpoint limit.
 //
 // ReadAttributeAbsMinHeatSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMinHeatSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -3586,7 +3586,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMinHeatSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMaxHeatSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeAbsMaxHeatSetpointLimit reads attribute abs max heat setpoint limit.
 //
 // ReadAttributeAbsMaxHeatSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -3636,7 +3636,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMaxHeatSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMinCoolSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeAbsMinCoolSetpointLimit reads attribute abs min cool setpoint limit.
 //
 // ReadAttributeAbsMinCoolSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMinCoolSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -3686,7 +3686,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMinCoolSetpointLimitW
 	}
 }
 
-// ReadAttributeAbsMaxCoolSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeAbsMaxCoolSetpointLimit reads attribute abs max cool setpoint limit.
 //
 // ReadAttributeAbsMaxCoolSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -3736,7 +3736,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAbsMaxCoolSetpointLimitW
 	}
 }
 
-// ReadAttributePICoolingDemand wraps the corresponding Objective-C method.
+// ReadAttributePICoolingDemand reads attribute pi cooling demand.
 //
 // ReadAttributePICoolingDemand blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePICoolingDemand(ctx context.Context) (result obj.Object, err error) {
@@ -3786,7 +3786,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePICoolingDemandWithMinIn
 	}
 }
 
-// ReadAttributePIHeatingDemand wraps the corresponding Objective-C method.
+// ReadAttributePIHeatingDemand reads attribute pi heating demand.
 //
 // ReadAttributePIHeatingDemand blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributePIHeatingDemand(ctx context.Context) (result obj.Object, err error) {
@@ -3836,7 +3836,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributePIHeatingDemandWithMinIn
 	}
 }
 
-// ReadAttributeHVACSystemTypeConfiguration wraps the corresponding Objective-C method.
+// ReadAttributeHVACSystemTypeConfiguration reads attribute hvac system type configuration.
 //
 // ReadAttributeHVACSystemTypeConfiguration blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeHVACSystemTypeConfiguration(ctx context.Context) (result obj.Object, err error) {
@@ -3886,7 +3886,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeHVACSystemTypeConfigurat
 	}
 }
 
-// ReadAttributeLocalTemperatureCalibration wraps the corresponding Objective-C method.
+// ReadAttributeLocalTemperatureCalibration reads attribute local temperature calibration.
 //
 // ReadAttributeLocalTemperatureCalibration blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeLocalTemperatureCalibration(ctx context.Context) (result obj.Object, err error) {
@@ -3936,7 +3936,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeLocalTemperatureCalibrat
 	}
 }
 
-// ReadAttributeOccupiedCoolingSetpoint wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedCoolingSetpoint reads attribute occupied cooling setpoint.
 //
 // ReadAttributeOccupiedCoolingSetpoint blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedCoolingSetpoint(ctx context.Context) (result obj.Object, err error) {
@@ -3986,7 +3986,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedCoolingSetpointW
 	}
 }
 
-// ReadAttributeOccupiedHeatingSetpoint wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedHeatingSetpoint reads attribute occupied heating setpoint.
 //
 // ReadAttributeOccupiedHeatingSetpoint blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedHeatingSetpoint(ctx context.Context) (result obj.Object, err error) {
@@ -4036,7 +4036,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedHeatingSetpointW
 	}
 }
 
-// ReadAttributeUnoccupiedCoolingSetpoint wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedCoolingSetpoint reads attribute unoccupied cooling setpoint.
 //
 // ReadAttributeUnoccupiedCoolingSetpoint blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedCoolingSetpoint(ctx context.Context) (result obj.Object, err error) {
@@ -4086,7 +4086,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedCoolingSetpoin
 	}
 }
 
-// ReadAttributeUnoccupiedHeatingSetpoint wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedHeatingSetpoint reads attribute unoccupied heating setpoint.
 //
 // ReadAttributeUnoccupiedHeatingSetpoint blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedHeatingSetpoint(ctx context.Context) (result obj.Object, err error) {
@@ -4136,7 +4136,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedHeatingSetpoin
 	}
 }
 
-// ReadAttributeMinHeatSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeMinHeatSetpointLimit reads attribute min heat setpoint limit.
 //
 // ReadAttributeMinHeatSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinHeatSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -4186,7 +4186,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinHeatSetpointLimitWith
 	}
 }
 
-// ReadAttributeMaxHeatSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeMaxHeatSetpointLimit reads attribute max heat setpoint limit.
 //
 // ReadAttributeMaxHeatSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMaxHeatSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -4236,7 +4236,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMaxHeatSetpointLimitWith
 	}
 }
 
-// ReadAttributeMinCoolSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeMinCoolSetpointLimit reads attribute min cool setpoint limit.
 //
 // ReadAttributeMinCoolSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinCoolSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -4286,7 +4286,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinCoolSetpointLimitWith
 	}
 }
 
-// ReadAttributeMaxCoolSetpointLimit wraps the corresponding Objective-C method.
+// ReadAttributeMaxCoolSetpointLimit reads attribute max cool setpoint limit.
 //
 // ReadAttributeMaxCoolSetpointLimit blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMaxCoolSetpointLimit(ctx context.Context) (result obj.Object, err error) {
@@ -4336,7 +4336,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMaxCoolSetpointLimitWith
 	}
 }
 
-// ReadAttributeMinSetpointDeadBand wraps the corresponding Objective-C method.
+// ReadAttributeMinSetpointDeadBand reads attribute min setpoint dead band.
 //
 // ReadAttributeMinSetpointDeadBand blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeMinSetpointDeadBand(ctx context.Context) (result obj.Object, err error) {
@@ -4386,7 +4386,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeMinSetpointDeadBandWithM
 	}
 }
 
-// ReadAttributeRemoteSensing wraps the corresponding Objective-C method.
+// ReadAttributeRemoteSensing reads attribute remote sensing.
 //
 // ReadAttributeRemoteSensing blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeRemoteSensing(ctx context.Context) (result obj.Object, err error) {
@@ -4436,7 +4436,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeRemoteSensingWithMinInte
 	}
 }
 
-// ReadAttributeControlSequenceOfOperation wraps the corresponding Objective-C method.
+// ReadAttributeControlSequenceOfOperation reads attribute control sequence of operation.
 //
 // ReadAttributeControlSequenceOfOperation blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeControlSequenceOfOperation(ctx context.Context) (result obj.Object, err error) {
@@ -4486,7 +4486,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeControlSequenceOfOperati
 	}
 }
 
-// ReadAttributeSystemMode wraps the corresponding Objective-C method.
+// ReadAttributeSystemMode reads attribute system mode.
 //
 // ReadAttributeSystemMode blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSystemMode(ctx context.Context) (result obj.Object, err error) {
@@ -4536,7 +4536,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSystemModeWithMinInterva
 	}
 }
 
-// ReadAttributeThermostatRunningMode wraps the corresponding Objective-C method.
+// ReadAttributeThermostatRunningMode reads attribute thermostat running mode.
 //
 // ReadAttributeThermostatRunningMode blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatRunningMode(ctx context.Context) (result obj.Object, err error) {
@@ -4586,7 +4586,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatRunningModeWit
 	}
 }
 
-// ReadAttributeStartOfWeek wraps the corresponding Objective-C method.
+// ReadAttributeStartOfWeek reads attribute start of week.
 //
 // ReadAttributeStartOfWeek blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeStartOfWeek(ctx context.Context) (result obj.Object, err error) {
@@ -4636,7 +4636,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeStartOfWeekWithMinInterv
 	}
 }
 
-// ReadAttributeNumberOfWeeklyTransitions wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfWeeklyTransitions reads attribute number of weekly transitions.
 //
 // ReadAttributeNumberOfWeeklyTransitions blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfWeeklyTransitions(ctx context.Context) (result obj.Object, err error) {
@@ -4686,7 +4686,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfWeeklyTransition
 	}
 }
 
-// ReadAttributeNumberOfDailyTransitions wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfDailyTransitions reads attribute number of daily transitions.
 //
 // ReadAttributeNumberOfDailyTransitions blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeNumberOfDailyTransitions(ctx context.Context) (result obj.Object, err error) {
@@ -4736,7 +4736,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeNumberOfDailyTransitions
 	}
 }
 
-// ReadAttributeTemperatureSetpointHold wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointHold reads attribute temperature setpoint hold.
 //
 // ReadAttributeTemperatureSetpointHold blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeTemperatureSetpointHold(ctx context.Context) (result obj.Object, err error) {
@@ -4786,7 +4786,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeTemperatureSetpointHoldW
 	}
 }
 
-// ReadAttributeTemperatureSetpointHoldDuration wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointHoldDuration reads attribute temperature setpoint hold duration.
 //
 // ReadAttributeTemperatureSetpointHoldDuration blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeTemperatureSetpointHoldDuration(ctx context.Context) (result obj.Object, err error) {
@@ -4836,7 +4836,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeTemperatureSetpointHoldD
 	}
 }
 
-// ReadAttributeThermostatProgrammingOperationMode wraps the corresponding Objective-C method.
+// ReadAttributeThermostatProgrammingOperationMode reads attribute thermostat programming operation mode.
 //
 // ReadAttributeThermostatProgrammingOperationMode blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatProgrammingOperationMode(ctx context.Context) (result obj.Object, err error) {
@@ -4886,7 +4886,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatProgrammingOpe
 	}
 }
 
-// ReadAttributeThermostatRunningState wraps the corresponding Objective-C method.
+// ReadAttributeThermostatRunningState reads attribute thermostat running state.
 //
 // ReadAttributeThermostatRunningState blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeThermostatRunningState(ctx context.Context) (result obj.Object, err error) {
@@ -4936,7 +4936,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeThermostatRunningStateWi
 	}
 }
 
-// ReadAttributeSetpointChangeSource wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeSource reads attribute setpoint change source.
 //
 // ReadAttributeSetpointChangeSource blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeSource(ctx context.Context) (result obj.Object, err error) {
@@ -4986,7 +4986,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeSourceWith
 	}
 }
 
-// ReadAttributeSetpointChangeAmount wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeAmount reads attribute setpoint change amount.
 //
 // ReadAttributeSetpointChangeAmount blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeAmount(ctx context.Context) (result obj.Object, err error) {
@@ -5036,7 +5036,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeAmountWith
 	}
 }
 
-// ReadAttributeSetpointChangeSourceTimestamp wraps the corresponding Objective-C method.
+// ReadAttributeSetpointChangeSourceTimestamp reads attribute setpoint change source timestamp.
 //
 // ReadAttributeSetpointChangeSourceTimestamp blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeSetpointChangeSourceTimestamp(ctx context.Context) (result obj.Object, err error) {
@@ -5086,7 +5086,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeSetpointChangeSourceTime
 	}
 }
 
-// ReadAttributeOccupiedSetback wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetback reads attribute occupied setback.
 //
 // ReadAttributeOccupiedSetback blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetback(ctx context.Context) (result obj.Object, err error) {
@@ -5136,7 +5136,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackWithMinIn
 	}
 }
 
-// ReadAttributeOccupiedSetbackMin wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetbackMin reads attribute occupied setback min.
 //
 // ReadAttributeOccupiedSetbackMin blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetbackMin(ctx context.Context) (result obj.Object, err error) {
@@ -5186,7 +5186,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackMinWithMi
 	}
 }
 
-// ReadAttributeOccupiedSetbackMax wraps the corresponding Objective-C method.
+// ReadAttributeOccupiedSetbackMax reads attribute occupied setback max.
 //
 // ReadAttributeOccupiedSetbackMax blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeOccupiedSetbackMax(ctx context.Context) (result obj.Object, err error) {
@@ -5236,7 +5236,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeOccupiedSetbackMaxWithMi
 	}
 }
 
-// ReadAttributeUnoccupiedSetback wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetback reads attribute unoccupied setback.
 //
 // ReadAttributeUnoccupiedSetback blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetback(ctx context.Context) (result obj.Object, err error) {
@@ -5286,7 +5286,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackWithMin
 	}
 }
 
-// ReadAttributeUnoccupiedSetbackMin wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetbackMin reads attribute unoccupied setback min.
 //
 // ReadAttributeUnoccupiedSetbackMin blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetbackMin(ctx context.Context) (result obj.Object, err error) {
@@ -5336,7 +5336,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackMinWith
 	}
 }
 
-// ReadAttributeUnoccupiedSetbackMax wraps the corresponding Objective-C method.
+// ReadAttributeUnoccupiedSetbackMax reads attribute unoccupied setback max.
 //
 // ReadAttributeUnoccupiedSetbackMax blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeUnoccupiedSetbackMax(ctx context.Context) (result obj.Object, err error) {
@@ -5386,7 +5386,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeUnoccupiedSetbackMaxWith
 	}
 }
 
-// ReadAttributeEmergencyHeatDelta wraps the corresponding Objective-C method.
+// ReadAttributeEmergencyHeatDelta reads attribute emergency heat delta.
 //
 // ReadAttributeEmergencyHeatDelta blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeEmergencyHeatDelta(ctx context.Context) (result obj.Object, err error) {
@@ -5436,7 +5436,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeEmergencyHeatDeltaWithMi
 	}
 }
 
-// ReadAttributeACType wraps the corresponding Objective-C method.
+// ReadAttributeACType reads attribute ac type.
 //
 // ReadAttributeACType blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACType(ctx context.Context) (result obj.Object, err error) {
@@ -5486,7 +5486,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACTypeWithMinIntervalMax
 	}
 }
 
-// ReadAttributeACCapacity wraps the corresponding Objective-C method.
+// ReadAttributeACCapacity reads attribute ac capacity.
 //
 // ReadAttributeACCapacity blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCapacity(ctx context.Context) (result obj.Object, err error) {
@@ -5536,7 +5536,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCapacityWithMinInterva
 	}
 }
 
-// ReadAttributeACRefrigerantType wraps the corresponding Objective-C method.
+// ReadAttributeACRefrigerantType reads attribute ac refrigerant type.
 //
 // ReadAttributeACRefrigerantType blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACRefrigerantType(ctx context.Context) (result obj.Object, err error) {
@@ -5586,7 +5586,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACRefrigerantTypeWithMin
 	}
 }
 
-// ReadAttributeACCompressorType wraps the corresponding Objective-C method.
+// ReadAttributeACCompressorType reads attribute ac compressor type.
 //
 // ReadAttributeACCompressorType blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCompressorType(ctx context.Context) (result obj.Object, err error) {
@@ -5636,7 +5636,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCompressorTypeWithMinI
 	}
 }
 
-// ReadAttributeACErrorCode wraps the corresponding Objective-C method.
+// ReadAttributeACErrorCode reads attribute ac error code.
 //
 // ReadAttributeACErrorCode blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACErrorCode(ctx context.Context) (result obj.Object, err error) {
@@ -5686,7 +5686,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACErrorCodeWithMinInterv
 	}
 }
 
-// ReadAttributeACLouverPosition wraps the corresponding Objective-C method.
+// ReadAttributeACLouverPosition reads attribute ac louver position.
 //
 // ReadAttributeACLouverPosition blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACLouverPosition(ctx context.Context) (result obj.Object, err error) {
@@ -5736,7 +5736,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACLouverPositionWithMinI
 	}
 }
 
-// ReadAttributeACCoilTemperature wraps the corresponding Objective-C method.
+// ReadAttributeACCoilTemperature reads attribute ac coil temperature.
 //
 // ReadAttributeACCoilTemperature blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCoilTemperature(ctx context.Context) (result obj.Object, err error) {
@@ -5786,7 +5786,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCoilTemperatureWithMin
 	}
 }
 
-// ReadAttributeACCapacityformat wraps the corresponding Objective-C method.
+// ReadAttributeACCapacityformat reads attribute ac capacityformat.
 //
 // ReadAttributeACCapacityformat blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeACCapacityformat(ctx context.Context) (result obj.Object, err error) {
@@ -5836,7 +5836,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeACCapacityformatWithMinI
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -5886,7 +5886,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -5936,7 +5936,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAcceptedCommandListWithM
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -5986,7 +5986,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeAttributeListWithMinInte
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -6036,7 +6036,7 @@ func (mbct *MTRBaseClusterThermostat) SubscribeAttributeFeatureMapWithMinInterva
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbct *MTRBaseClusterThermostat) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

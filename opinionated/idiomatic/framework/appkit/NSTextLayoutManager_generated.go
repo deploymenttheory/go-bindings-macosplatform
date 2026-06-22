@@ -217,37 +217,37 @@ func (tlm *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection()
 	return _r
 }
 
-// TextContentManager wraps the corresponding Objective-C method.
+// TextContentManager returns the text content manager.
 func (tlm *TextLayoutManager) TextContentManager() *TextContentManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
-// TextContainer wraps the corresponding Objective-C method.
+// TextContainer returns the text container.
 func (tlm *TextLayoutManager) TextContainer() *TextContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContainer"))
 	return TextContainerFromID(_r)
 }
 
-// UsageBoundsForTextContainer wraps the corresponding Objective-C method.
+// UsageBoundsForTextContainer returns the usage bounds for text container.
 func (tlm *TextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlm), objc.RegisterName("usageBoundsForTextContainer"))
 	return _r
 }
 
-// TextViewportLayoutController wraps the corresponding Objective-C method.
+// TextViewportLayoutController returns the text viewport layout controller.
 func (tlm *TextLayoutManager) TextViewportLayoutController() *TextViewportLayoutController {
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textViewportLayoutController"))
 	return TextViewportLayoutControllerFromID(_r)
 }
 
-// LayoutQueue wraps the corresponding Objective-C method.
+// LayoutQueue returns the layout queue.
 func (tlm *TextLayoutManager) LayoutQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("layoutQueue"))
 	return obj.Wrap(_r)
 }
 
-// TextSelections wraps the corresponding Objective-C method.
+// TextSelections returns the text selections.
 //
 // TextSelections returns the collection as a Go slice.
 func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
@@ -255,7 +255,7 @@ func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextSelection { return TextSelectionFromID(_id) })
 }
 
-// TextSelectionNavigation wraps the corresponding Objective-C method.
+// TextSelectionNavigation returns the text selection navigation.
 func (tlm *TextLayoutManager) TextSelectionNavigation() *TextSelectionNavigation {
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelectionNavigation"))
 	return TextSelectionNavigationFromID(_r)

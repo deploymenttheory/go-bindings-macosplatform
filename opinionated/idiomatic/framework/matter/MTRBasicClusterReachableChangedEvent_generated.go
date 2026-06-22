@@ -50,7 +50,7 @@ func NewMTRBasicClusterReachableChangedEvent() *MTRBasicClusterReachableChangedE
 	return mTRBasicClusterReachableChangedEventAdopt(_id)
 }
 
-// WithReachableNewValue sets the property and returns the receiver so calls can be chained.
+// WithReachableNewValue sets the reachable new value.
 func (mbcrce *MTRBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBasicClusterReachableChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(mbcrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return mbcrce

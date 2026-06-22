@@ -52,13 +52,13 @@ func NewAsynchronousFetchResult() *AsynchronousFetchResult {
 	return asynchronousFetchResultAdopt(_id)
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (afr *AsynchronousFetchResult) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
-// FinalResult wraps the corresponding Objective-C method.
+// FinalResult returns the final result.
 func (afr *AsynchronousFetchResult) FinalResult() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("finalResult"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

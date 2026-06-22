@@ -61,7 +61,7 @@ func NewMTRBaseClusterBinaryInputBasicWithDeviceEndpointQueue(device *MTRBaseDev
 	return mTRBaseClusterBinaryInputBasicAdopt(_id)
 }
 
-// ReadAttributeActiveTextWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveTextWithCompletion reads attribute active text with completion.
 //
 // ReadAttributeActiveTextWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeActiveTextWithCompletion(ctx context.Context) (result string, err error) {
@@ -111,7 +111,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeActiveTextWithPa
 	}
 }
 
-// ReadAttributeDescriptionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDescriptionWithCompletion reads attribute description with completion.
 //
 // ReadAttributeDescriptionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeDescriptionWithCompletion(ctx context.Context) (result string, err error) {
@@ -161,7 +161,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeDescriptionWithP
 	}
 }
 
-// ReadAttributeInactiveTextWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInactiveTextWithCompletion reads attribute inactive text with completion.
 //
 // ReadAttributeInactiveTextWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeInactiveTextWithCompletion(ctx context.Context) (result string, err error) {
@@ -211,7 +211,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeInactiveTextWith
 	}
 }
 
-// ReadAttributeOutOfServiceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOutOfServiceWithCompletion reads attribute out of service with completion.
 //
 // ReadAttributeOutOfServiceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeOutOfServiceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeOutOfServiceWith
 	}
 }
 
-// ReadAttributePolarityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePolarityWithCompletion reads attribute polarity with completion.
 //
 // ReadAttributePolarityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributePolarityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributePolarityWithPara
 	}
 }
 
-// ReadAttributePresentValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePresentValueWithCompletion reads attribute present value with completion.
 //
 // ReadAttributePresentValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributePresentValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributePresentValueWith
 	}
 }
 
-// ReadAttributeReliabilityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReliabilityWithCompletion reads attribute reliability with completion.
 //
 // ReadAttributeReliabilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeReliabilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeReliabilityWithP
 	}
 }
 
-// ReadAttributeStatusFlagsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStatusFlagsWithCompletion reads attribute status flags with completion.
 //
 // ReadAttributeStatusFlagsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeStatusFlagsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeStatusFlagsWithP
 	}
 }
 
-// ReadAttributeApplicationTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApplicationTypeWithCompletion reads attribute application type with completion.
 //
 // ReadAttributeApplicationTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeApplicationTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeApplicationTypeW
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeGeneratedCommand
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeAcceptedCommandL
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeAttributeListWit
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeClusterRevisionW
 	}
 }
 
-// ReadAttributeActiveText wraps the corresponding Objective-C method.
+// ReadAttributeActiveText reads attribute active text.
 //
 // ReadAttributeActiveText blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeActiveText(ctx context.Context) (result string, err error) {
@@ -811,7 +811,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeActiveTextWithMi
 	}
 }
 
-// ReadAttributeDescription wraps the corresponding Objective-C method.
+// ReadAttributeDescription reads attribute description.
 //
 // ReadAttributeDescription blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeDescription(ctx context.Context) (result string, err error) {
@@ -861,7 +861,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeDescriptionWithM
 	}
 }
 
-// ReadAttributeInactiveText wraps the corresponding Objective-C method.
+// ReadAttributeInactiveText reads attribute inactive text.
 //
 // ReadAttributeInactiveText blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeInactiveText(ctx context.Context) (result string, err error) {
@@ -911,7 +911,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeInactiveTextWith
 	}
 }
 
-// ReadAttributeOutOfService wraps the corresponding Objective-C method.
+// ReadAttributeOutOfService reads attribute out of service.
 //
 // ReadAttributeOutOfService blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeOutOfService(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeOutOfServiceWith
 	}
 }
 
-// ReadAttributePolarity wraps the corresponding Objective-C method.
+// ReadAttributePolarity reads attribute polarity.
 //
 // ReadAttributePolarity blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributePolarity(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributePolarityWithMinI
 	}
 }
 
-// ReadAttributePresentValue wraps the corresponding Objective-C method.
+// ReadAttributePresentValue reads attribute present value.
 //
 // ReadAttributePresentValue blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributePresentValue(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributePresentValueWith
 	}
 }
 
-// ReadAttributeReliability wraps the corresponding Objective-C method.
+// ReadAttributeReliability reads attribute reliability.
 //
 // ReadAttributeReliability blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeReliability(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeReliabilityWithM
 	}
 }
 
-// ReadAttributeStatusFlags wraps the corresponding Objective-C method.
+// ReadAttributeStatusFlags reads attribute status flags.
 //
 // ReadAttributeStatusFlags blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeStatusFlags(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeStatusFlagsWithM
 	}
 }
 
-// ReadAttributeApplicationType wraps the corresponding Objective-C method.
+// ReadAttributeApplicationType reads attribute application type.
 //
 // ReadAttributeApplicationType blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeApplicationType(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeApplicationTypeW
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeGeneratedCommand
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeAcceptedCommandL
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeAttributeListWit
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcbib *MTRBaseClusterBinaryInputBasic) SubscribeAttributeFeatureMapWithMi
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcbib *MTRBaseClusterBinaryInputBasic) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

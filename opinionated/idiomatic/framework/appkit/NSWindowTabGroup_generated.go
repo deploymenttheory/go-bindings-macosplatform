@@ -99,13 +99,13 @@ func (wtg *WindowTabGroup) RemoveWindow(window *Window) {
 	objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("removeWindow:"), objref.IDOf(window))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (wtg *WindowTabGroup) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Windows wraps the corresponding Objective-C method.
+// Windows returns the windows.
 //
 // Windows returns the collection as a Go slice.
 func (wtg *WindowTabGroup) Windows() []*Window {
@@ -113,19 +113,19 @@ func (wtg *WindowTabGroup) Windows() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// IsOverviewVisible wraps the corresponding Objective-C method.
+// IsOverviewVisible reports whether the object is overview visible.
 func (wtg *WindowTabGroup) IsOverviewVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(wtg), objc.RegisterName("isOverviewVisible"))
 	return _r
 }
 
-// IsTabBarVisible wraps the corresponding Objective-C method.
+// IsTabBarVisible reports whether the object is tab bar visible.
 func (wtg *WindowTabGroup) IsTabBarVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(wtg), objc.RegisterName("isTabBarVisible"))
 	return _r
 }
 
-// SelectedWindow wraps the corresponding Objective-C method.
+// SelectedWindow returns the selected window.
 func (wtg *WindowTabGroup) SelectedWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(wtg), objc.RegisterName("selectedWindow"))
 	return WindowFromID(_r)

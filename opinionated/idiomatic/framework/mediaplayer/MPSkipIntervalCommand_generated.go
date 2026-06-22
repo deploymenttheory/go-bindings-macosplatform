@@ -65,7 +65,7 @@ func (sic *SkipIntervalCommand) WithEnabled(enabled bool) *SkipIntervalCommand {
 	return sic
 }
 
-// PreferredIntervals wraps the corresponding Objective-C method.
+// PreferredIntervals returns the preferred intervals.
 //
 // PreferredIntervals returns the collection as a Go slice.
 func (sic *SkipIntervalCommand) PreferredIntervals() []obj.Object {

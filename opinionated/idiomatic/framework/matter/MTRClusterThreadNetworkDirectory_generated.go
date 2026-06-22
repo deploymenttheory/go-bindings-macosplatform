@@ -81,59 +81,59 @@ func (mctnd *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsEx
 	}
 }
 
-// ReadAttributePreferredExtendedPanIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributePreferredExtendedPanIDWithParams reads attribute preferred extended pan ID with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePreferredExtendedPanIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval writes attribute preferred extended pan ID with value expected value interval.
 func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams writes attribute preferred extended pan ID with value expected value interval params.
 func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeThreadNetworksWithParams wraps the corresponding Objective-C method.
+// ReadAttributeThreadNetworksWithParams reads attribute thread networks with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeThreadNetworksWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeThreadNetworkTableSizeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeThreadNetworkTableSizeWithParams reads attribute thread network table size with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeThreadNetworkTableSizeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

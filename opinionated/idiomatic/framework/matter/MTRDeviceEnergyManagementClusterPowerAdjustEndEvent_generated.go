@@ -70,37 +70,37 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustEndEvent() *MTRDeviceEnergyMa
 	return mTRDeviceEnergyManagementClusterPowerAdjustEndEventAdopt(_id)
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcpaee
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcpaee
 }
 
-// WithEnergyUse sets the property and returns the receiver so calls can be chained.
+// WithEnergyUse sets the energy use.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) WithEnergyUse(energyUse obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent {
 	objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("setEnergyUse:"), objref.IDOf(energyUse))
 	return mdemcpaee
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("cause"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// EnergyUse wraps the corresponding Objective-C method.
+// EnergyUse returns the energy use.
 func (mdemcpaee *MTRDeviceEnergyManagementClusterPowerAdjustEndEvent) EnergyUse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpaee), objc.RegisterName("energyUse"))
 	return obj.Wrap(_r)

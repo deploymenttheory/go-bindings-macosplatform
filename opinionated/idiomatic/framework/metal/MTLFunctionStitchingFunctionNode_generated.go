@@ -86,7 +86,7 @@ func (fsfn *FunctionStitchingFunctionNode) WithControlDependencies(items ...*Fun
 	return fsfn
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (fsfn *FunctionStitchingFunctionNode) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("name"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (fsfn *FunctionStitchingFunctionNode) Name() string {
 	return purego.GoString(_r)
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 func (fsfn *FunctionStitchingFunctionNode) Arguments() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -106,7 +106,7 @@ func (fsfn *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) 
 	objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ControlDependencies wraps the corresponding Objective-C method.
+// ControlDependencies returns the control dependencies.
 //
 // ControlDependencies returns the collection as a Go slice.
 func (fsfn *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {

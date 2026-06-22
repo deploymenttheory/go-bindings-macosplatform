@@ -70,49 +70,49 @@ func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct() *MTRE
 	return mTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructAdopt(_id)
 }
 
-// WithImportedResetTimestamp sets the property and returns the receiver so calls can be chained.
+// WithImportedResetTimestamp sets the imported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetTimestamp(importedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetTimestamp:"), objref.IDOf(importedResetTimestamp))
 	return meemccers
 }
 
-// WithExportedResetTimestamp sets the property and returns the receiver so calls can be chained.
+// WithExportedResetTimestamp sets the exported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetTimestamp(exportedResetTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetTimestamp:"), objref.IDOf(exportedResetTimestamp))
 	return meemccers
 }
 
-// WithImportedResetSystime sets the property and returns the receiver so calls can be chained.
+// WithImportedResetSystime sets the imported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithImportedResetSystime(importedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setImportedResetSystime:"), objref.IDOf(importedResetSystime))
 	return meemccers
 }
 
-// WithExportedResetSystime sets the property and returns the receiver so calls can be chained.
+// WithExportedResetSystime sets the exported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithExportedResetSystime(exportedResetSystime obj.Object) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct {
 	objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("setExportedResetSystime:"), objref.IDOf(exportedResetSystime))
 	return meemccers
 }
 
-// ImportedResetTimestamp wraps the corresponding Objective-C method.
+// ImportedResetTimestamp returns the imported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetTimestamp"))
 	return obj.Wrap(_r)
 }
 
-// ExportedResetTimestamp wraps the corresponding Objective-C method.
+// ExportedResetTimestamp returns the exported reset timestamp.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetTimestamp"))
 	return obj.Wrap(_r)
 }
 
-// ImportedResetSystime wraps the corresponding Objective-C method.
+// ImportedResetSystime returns the imported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("importedResetSystime"))
 	return obj.Wrap(_r)
 }
 
-// ExportedResetSystime wraps the corresponding Objective-C method.
+// ExportedResetSystime returns the exported reset systime.
 func (meemccers *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemccers), objc.RegisterName("exportedResetSystime"))
 	return obj.Wrap(_r)

@@ -72,25 +72,25 @@ func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
 	return persistentObjectChangeDetailsAdopt(_id)
 }
 
-// ObjectType wraps the corresponding Objective-C method.
+// ObjectType returns the object type.
 func (pocd *PersistentObjectChangeDetails) ObjectType() ObjectType {
 	_r := objc.Send[ObjectType](objref.IDOf(pocd), objc.RegisterName("objectType"))
 	return _r
 }
 
-// InsertedLocalIdentifiers wraps the corresponding Objective-C method.
+// InsertedLocalIdentifiers returns the inserted local identifiers.
 func (pocd *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("insertedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
-// UpdatedLocalIdentifiers wraps the corresponding Objective-C method.
+// UpdatedLocalIdentifiers returns the updated local identifiers.
 func (pocd *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("updatedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
-// DeletedLocalIdentifiers wraps the corresponding Objective-C method.
+// DeletedLocalIdentifiers returns the deleted local identifiers.
 func (pocd *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("deletedLocalIdentifiers"))
 	return obj.Wrap(_r)

@@ -70,25 +70,25 @@ func NewMTRGeneralCommissioningClusterBasicCommissioningInfo() *MTRGeneralCommis
 	return mTRGeneralCommissioningClusterBasicCommissioningInfoAdopt(_id)
 }
 
-// WithFailSafeExpiryLengthSeconds sets the property and returns the receiver so calls can be chained.
+// WithFailSafeExpiryLengthSeconds sets the fail safe expiry length seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
 	objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("setFailSafeExpiryLengthSeconds:"), objref.IDOf(failSafeExpiryLengthSeconds))
 	return mgccbci
 }
 
-// WithMaxCumulativeFailsafeSeconds sets the property and returns the receiver so calls can be chained.
+// WithMaxCumulativeFailsafeSeconds sets the max cumulative failsafe seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
 	objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("setMaxCumulativeFailsafeSeconds:"), objref.IDOf(maxCumulativeFailsafeSeconds))
 	return mgccbci
 }
 
-// FailSafeExpiryLengthSeconds wraps the corresponding Objective-C method.
+// FailSafeExpiryLengthSeconds returns the fail safe expiry length seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("failSafeExpiryLengthSeconds"))
 	return obj.Wrap(_r)
 }
 
-// MaxCumulativeFailsafeSeconds wraps the corresponding Objective-C method.
+// MaxCumulativeFailsafeSeconds returns the max cumulative failsafe seconds.
 func (mgccbci *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccbci), objc.RegisterName("maxCumulativeFailsafeSeconds"))
 	return obj.Wrap(_r)

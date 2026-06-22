@@ -70,13 +70,13 @@ func NewMTRContentAppObserverClusterContentAppMessageParams() *MTRContentAppObse
 	return mTRContentAppObserverClusterContentAppMessageParamsAdopt(_id)
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams {
 	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mcaoccamp
 }
 
-// WithEncodingHint sets the property and returns the receiver so calls can be chained.
+// WithEncodingHint sets the encoding hint.
 func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams {
 	objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
 	return mcaoccamp
@@ -94,7 +94,7 @@ func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) WithServer
 	return mcaoccamp
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("data"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) Data() str
 	return purego.GoString(_r)
 }
 
-// EncodingHint wraps the corresponding Objective-C method.
+// EncodingHint returns the encoding hint.
 func (mcaoccamp *MTRContentAppObserverClusterContentAppMessageParams) EncodingHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamp), objc.RegisterName("encodingHint"))
 	if _r == 0 {

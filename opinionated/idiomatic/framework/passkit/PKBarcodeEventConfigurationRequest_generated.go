@@ -70,7 +70,7 @@ func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
 	return barcodeEventConfigurationRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier wraps the corresponding Objective-C method.
+// DeviceAccountIdentifier returns the device account identifier.
 func (becr *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -79,13 +79,13 @@ func (becr *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ConfigurationData wraps the corresponding Objective-C method.
+// ConfigurationData returns the configuration data.
 func (becr *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(becr), objc.RegisterName("configurationData"))
 	return obj.Wrap(_r)
 }
 
-// ConfigurationDataType wraps the corresponding Objective-C method.
+// ConfigurationDataType returns the configuration data type.
 func (becr *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
 	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(becr), objc.RegisterName("configurationDataType"))
 	return _r

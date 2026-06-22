@@ -50,13 +50,13 @@ func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numer
 	return mathExpressionFractionAdopt(_id)
 }
 
-// NumeratorExpression wraps the corresponding Objective-C method.
+// NumeratorExpression returns the numerator expression.
 func (mef *MathExpressionFraction) NumeratorExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("numeratorExpression"))
 	return MathExpressionFromID(_r)
 }
 
-// DenimonatorExpression wraps the corresponding Objective-C method.
+// DenimonatorExpression returns the denimonator expression.
 func (mef *MathExpressionFraction) DenimonatorExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("denimonatorExpression"))
 	return MathExpressionFromID(_r)

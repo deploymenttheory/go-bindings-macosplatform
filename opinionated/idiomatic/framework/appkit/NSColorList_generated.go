@@ -125,13 +125,13 @@ func (cl *ColorList) RemoveFile() {
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("removeFile"))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (cl *ColorList) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// AllKeys wraps the corresponding Objective-C method.
+// AllKeys returns the all keys.
 //
 // AllKeys returns the collection as a Go slice.
 func (cl *ColorList) AllKeys() []obj.Object {
@@ -139,7 +139,7 @@ func (cl *ColorList) AllKeys() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (cl *ColorList) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("isEditable"))
 	return _r

@@ -153,13 +153,13 @@ func (ks *KeyframeSequence) SampleAtTime(time_ float64) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// InterpolationMode wraps the corresponding Objective-C method.
+// InterpolationMode returns the interpolation mode.
 func (ks *KeyframeSequence) InterpolationMode() InterpolationMode {
 	_r := objc.Send[InterpolationMode](objref.IDOf(ks), objc.RegisterName("interpolationMode"))
 	return _r
 }
 
-// RepeatMode wraps the corresponding Objective-C method.
+// RepeatMode returns the repeat mode.
 func (ks *KeyframeSequence) RepeatMode() RepeatMode {
 	_r := objc.Send[RepeatMode](objref.IDOf(ks), objc.RegisterName("repeatMode"))
 	return _r

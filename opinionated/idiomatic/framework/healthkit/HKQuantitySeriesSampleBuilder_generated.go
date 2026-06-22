@@ -152,19 +152,19 @@ func (qssb *QuantitySeriesSampleBuilder) Discard() {
 	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("discard"))
 }
 
-// QuantityType wraps the corresponding Objective-C method.
+// QuantityType returns the quantity type.
 func (qssb *QuantitySeriesSampleBuilder) QuantityType() *QuantityType {
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (qssb *QuantitySeriesSampleBuilder) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// Device wraps the corresponding Objective-C method.
+// Device returns the device.
 func (qssb *QuantitySeriesSampleBuilder) Device() *Device {
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("device"))
 	return DeviceFromID(_r)

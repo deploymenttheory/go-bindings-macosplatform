@@ -17,24 +17,24 @@ func ChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier string, c
 	return obj.Wrap(_r)
 }
 
-// SharedManager wraps the corresponding Objective-C method.
+// SharedManager returns the shared manager.
 func SharedManager() *ISyncManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncManager")), objc.RegisterName("sharedManager"))
 	return ISyncManagerFromID(_r)
 }
 
-// BeginSessionWithClientEntityNamesBeforeDate wraps the corresponding Objective-C method.
+// BeginSessionWithClientEntityNamesBeforeDate begins session with client entity names before date.
 func BeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames obj.Object, date obj.Object) *ISyncSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date))
 	return ISyncSessionFromID(_r)
 }
 
-// CancelPreviousBeginSessionWithClient wraps the corresponding Objective-C method.
+// CancelPreviousBeginSessionWithClient cancels previous begin session with client.
 func CancelPreviousBeginSessionWithClient(client *ISyncClient) {
 	objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("cancelPreviousBeginSessionWithClient:"), objref.IDOf(client))
 }
 
-// BeginSessionWithClientEntityNamesBeforeDateLastAnchors wraps the corresponding Objective-C method.
+// BeginSessionWithClientEntityNamesBeforeDateLastAnchors begins session with client entity names before date last anchors.
 func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames obj.Object, date obj.Object, anchors obj.Object) *ISyncSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date), objref.IDOf(anchors))
 	return ISyncSessionFromID(_r)

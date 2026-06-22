@@ -80,7 +80,7 @@ func NewMTRUnitTestingClusterTestEmitTestEventResponseParamsWithResponseValueErr
 	return mTRUnitTestingClusterTestEmitTestEventResponseParamsAdopt(_id), nil
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterTestEmitTestEventResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mutcteterp
@@ -92,7 +92,7 @@ func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventResponseParams) WithTime
 	return mutcteterp
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventResponseParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("value"))
 	return obj.Wrap(_r)

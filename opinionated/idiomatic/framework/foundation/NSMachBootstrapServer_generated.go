@@ -52,7 +52,7 @@ func NewMachBootstrapServer() *MachBootstrapServer {
 	return machBootstrapServerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mbs *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
 	objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mbs

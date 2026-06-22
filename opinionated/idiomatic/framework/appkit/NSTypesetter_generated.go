@@ -193,19 +193,19 @@ func (t *Typesetter) UsesFontLeading() bool {
 	return _r
 }
 
-// TypesetterBehavior wraps the corresponding Objective-C method.
+// TypesetterBehavior returns the typesetter behavior.
 func (t *Typesetter) TypesetterBehavior() TypesetterBehavior {
 	_r := objc.Send[TypesetterBehavior](objref.IDOf(t), objc.RegisterName("typesetterBehavior"))
 	return _r
 }
 
-// HyphenationFactor wraps the corresponding Objective-C method.
+// HyphenationFactor returns the hyphenation factor.
 func (t *Typesetter) HyphenationFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("hyphenationFactor"))
 	return _r
 }
 
-// LineFragmentPadding wraps the corresponding Objective-C method.
+// LineFragmentPadding returns the line fragment padding.
 func (t *Typesetter) LineFragmentPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("lineFragmentPadding"))
 	return _r
@@ -217,49 +217,49 @@ func (t *Typesetter) BidiProcessingEnabled() bool {
 	return _r
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (t *Typesetter) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
-// ParagraphGlyphRange wraps the corresponding Objective-C method.
+// ParagraphGlyphRange returns the paragraph glyph range.
 func (t *Typesetter) ParagraphGlyphRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("paragraphGlyphRange"))
 	return _r
 }
 
-// ParagraphSeparatorGlyphRange wraps the corresponding Objective-C method.
+// ParagraphSeparatorGlyphRange returns the paragraph separator glyph range.
 func (t *Typesetter) ParagraphSeparatorGlyphRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("paragraphSeparatorGlyphRange"))
 	return _r
 }
 
-// ParagraphCharacterRange wraps the corresponding Objective-C method.
+// ParagraphCharacterRange returns the paragraph character range.
 func (t *Typesetter) ParagraphCharacterRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("paragraphCharacterRange"))
 	return _r
 }
 
-// ParagraphSeparatorCharacterRange wraps the corresponding Objective-C method.
+// ParagraphSeparatorCharacterRange returns the paragraph separator character range.
 func (t *Typesetter) ParagraphSeparatorCharacterRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("paragraphSeparatorCharacterRange"))
 	return _r
 }
 
-// AttributesForExtraLineFragment wraps the corresponding Objective-C method.
+// AttributesForExtraLineFragment returns the attributes for extra line fragment.
 func (t *Typesetter) AttributesForExtraLineFragment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("attributesForExtraLineFragment"))
 	return obj.Wrap(_r)
 }
 
-// LayoutManager wraps the corresponding Objective-C method.
+// LayoutManager returns the layout manager.
 func (t *Typesetter) LayoutManager() *LayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("layoutManager"))
 	return LayoutManagerFromID(_r)
 }
 
-// TextContainers wraps the corresponding Objective-C method.
+// TextContainers returns the text containers.
 //
 // TextContainers returns the collection as a Go slice.
 func (t *Typesetter) TextContainers() []*TextContainer {
@@ -267,13 +267,13 @@ func (t *Typesetter) TextContainers() []*TextContainer {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextContainer { return TextContainerFromID(_id) })
 }
 
-// CurrentTextContainer wraps the corresponding Objective-C method.
+// CurrentTextContainer returns the current text container.
 func (t *Typesetter) CurrentTextContainer() *TextContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentTextContainer"))
 	return TextContainerFromID(_r)
 }
 
-// CurrentParagraphStyle wraps the corresponding Objective-C method.
+// CurrentParagraphStyle returns the current paragraph style.
 func (t *Typesetter) CurrentParagraphStyle() *ParagraphStyle {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentParagraphStyle"))
 	return ParagraphStyleFromID(_r)

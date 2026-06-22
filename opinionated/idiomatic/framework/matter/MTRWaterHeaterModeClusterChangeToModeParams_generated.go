@@ -70,7 +70,7 @@ func NewMTRWaterHeaterModeClusterChangeToModeParams() *MTRWaterHeaterModeCluster
 	return mTRWaterHeaterModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mwhmcctmp
@@ -88,8 +88,8 @@ func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) WithServerSideProc
 	return mwhmcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

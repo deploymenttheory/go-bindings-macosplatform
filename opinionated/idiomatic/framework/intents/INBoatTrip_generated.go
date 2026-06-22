@@ -73,7 +73,7 @@ func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalL
 	return boatTripAdopt(_id)
 }
 
-// Provider wraps the corresponding Objective-C method.
+// Provider returns the provider.
 func (bt *BoatTrip) Provider() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (bt *BoatTrip) Provider() string {
 	return purego.GoString(_r)
 }
 
-// BoatName wraps the corresponding Objective-C method.
+// BoatName returns the boat name.
 func (bt *BoatTrip) BoatName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatName"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (bt *BoatTrip) BoatName() string {
 	return purego.GoString(_r)
 }
 
-// BoatNumber wraps the corresponding Objective-C method.
+// BoatNumber returns the boat number.
 func (bt *BoatTrip) BoatNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("boatNumber"))
 	if _r == 0 {
@@ -100,19 +100,19 @@ func (bt *BoatTrip) BoatNumber() string {
 	return purego.GoString(_r)
 }
 
-// TripDuration wraps the corresponding Objective-C method.
+// TripDuration returns the trip duration.
 func (bt *BoatTrip) TripDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureBoatTerminalLocation wraps the corresponding Objective-C method.
+// DepartureBoatTerminalLocation returns the departure boat terminal location.
 func (bt *BoatTrip) DepartureBoatTerminalLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBoatTerminalLocation"))
 	return obj.Wrap(_r)
 }
 
-// ArrivalBoatTerminalLocation wraps the corresponding Objective-C method.
+// ArrivalBoatTerminalLocation returns the arrival boat terminal location.
 func (bt *BoatTrip) ArrivalBoatTerminalLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBoatTerminalLocation"))
 	return obj.Wrap(_r)

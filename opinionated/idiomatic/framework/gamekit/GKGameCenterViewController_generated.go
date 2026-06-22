@@ -110,43 +110,43 @@ func NewGameCenterViewControllerWithPlayer(player *Player) *GameCenterViewContro
 	return gameCenterViewControllerAdopt(_id)
 }
 
-// WithViewState sets the property and returns the receiver so calls can be chained.
+// WithViewState sets the view state.
 func (gcvc *GameCenterViewController) WithViewState(viewState GameCenterViewControllerState) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("setViewState:"), viewState)
 	return gcvc
 }
 
-// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the leaderboard time scope.
 func (gcvc *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return gcvc
 }
 
-// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the leaderboard identifier.
 func (gcvc *GameCenterViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return gcvc
 }
 
-// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the leaderboard category.
 func (gcvc *GameCenterViewController) WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController {
 	objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return gcvc
 }
 
-// ViewState wraps the corresponding Objective-C method.
+// ViewState returns the view state.
 func (gcvc *GameCenterViewController) ViewState() GameCenterViewControllerState {
 	_r := objc.Send[GameCenterViewControllerState](objref.IDOf(gcvc), objc.RegisterName("viewState"))
 	return _r
 }
 
-// LeaderboardTimeScope wraps the corresponding Objective-C method.
+// LeaderboardTimeScope returns the leaderboard time scope.
 func (gcvc *GameCenterViewController) LeaderboardTimeScope() LeaderboardTimeScope {
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(gcvc), objc.RegisterName("leaderboardTimeScope"))
 	return _r
 }
 
-// LeaderboardIdentifier wraps the corresponding Objective-C method.
+// LeaderboardIdentifier returns the leaderboard identifier.
 func (gcvc *GameCenterViewController) LeaderboardIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("leaderboardIdentifier"))
 	if _r == 0 {
@@ -155,7 +155,7 @@ func (gcvc *GameCenterViewController) LeaderboardIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// LeaderboardCategory wraps the corresponding Objective-C method.
+// LeaderboardCategory returns the leaderboard category.
 func (gcvc *GameCenterViewController) LeaderboardCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gcvc), objc.RegisterName("leaderboardCategory"))
 	if _r == 0 {

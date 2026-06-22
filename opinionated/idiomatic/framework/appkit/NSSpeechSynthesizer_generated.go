@@ -172,19 +172,19 @@ func (ss *SpeechSynthesizer) SetObjectForProperty(object obj.Object, property ob
 	return nil
 }
 
-// IsSpeaking wraps the corresponding Objective-C method.
+// IsSpeaking reports whether the object is speaking.
 func (ss *SpeechSynthesizer) IsSpeaking() bool {
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (ss *SpeechSynthesizer) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(ss), objc.RegisterName("rate"))
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (ss *SpeechSynthesizer) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(ss), objc.RegisterName("volume"))
 	return _r

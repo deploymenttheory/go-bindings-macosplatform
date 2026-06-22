@@ -50,19 +50,19 @@ func NewMTRTestClusterClusterTestEmitTestEventRequestParams() *MTRTestClusterClu
 	return mTRTestClusterClusterTestEmitTestEventRequestParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtccteterp
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mtccteterp
 }
 
-// WithArg3 sets the property and returns the receiver so calls can be chained.
+// WithArg3 sets the arg3.
 func (mtccteterp *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return mtccteterp

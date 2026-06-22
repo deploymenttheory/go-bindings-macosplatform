@@ -88,7 +88,7 @@ func (mdcecp *MTRDeviceControllerExternalCertificateParameters) WithStartSuspend
 	return mdcecp
 }
 
-// RootCertificate wraps the corresponding Objective-C method.
+// RootCertificate returns the root certificate.
 func (mdcecp *MTRDeviceControllerExternalCertificateParameters) RootCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdcecp), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)

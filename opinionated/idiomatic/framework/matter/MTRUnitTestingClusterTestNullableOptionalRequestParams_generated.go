@@ -66,7 +66,7 @@ func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalRequestParams) String(
 	return rt.Description(objref.IDOf(mutctnorp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestNullableOptionalRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctnorp
@@ -84,7 +84,7 @@ func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalRequestParams) WithSer
 	return mutctnorp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)

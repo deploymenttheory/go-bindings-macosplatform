@@ -115,7 +115,7 @@ func (dpr *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancella
 	return dpr
 }
 
-// PaymentDescription wraps the corresponding Objective-C method.
+// PaymentDescription returns the payment description.
 func (dpr *DeferredPaymentRequest) PaymentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
@@ -124,13 +124,13 @@ func (dpr *DeferredPaymentRequest) PaymentDescription() string {
 	return purego.GoString(_r)
 }
 
-// DeferredBilling wraps the corresponding Objective-C method.
+// DeferredBilling returns the deferred billing.
 func (dpr *DeferredPaymentRequest) DeferredBilling() *DeferredPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("deferredBilling"))
 	return DeferredPaymentSummaryItemFromID(_r)
 }
 
-// BillingAgreement wraps the corresponding Objective-C method.
+// BillingAgreement returns the billing agreement.
 func (dpr *DeferredPaymentRequest) BillingAgreement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
@@ -139,25 +139,25 @@ func (dpr *DeferredPaymentRequest) BillingAgreement() string {
 	return purego.GoString(_r)
 }
 
-// ManagementURL wraps the corresponding Objective-C method.
+// ManagementURL returns the management URL.
 func (dpr *DeferredPaymentRequest) ManagementURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("managementURL"))
 	return obj.Wrap(_r)
 }
 
-// TokenNotificationURL wraps the corresponding Objective-C method.
+// TokenNotificationURL returns the token notification URL.
 func (dpr *DeferredPaymentRequest) TokenNotificationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("tokenNotificationURL"))
 	return obj.Wrap(_r)
 }
 
-// FreeCancellationDate wraps the corresponding Objective-C method.
+// FreeCancellationDate returns the free cancellation date.
 func (dpr *DeferredPaymentRequest) FreeCancellationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("freeCancellationDate"))
 	return obj.Wrap(_r)
 }
 
-// FreeCancellationDateTimeZone wraps the corresponding Objective-C method.
+// FreeCancellationDateTimeZone returns the free cancellation date time zone.
 func (dpr *DeferredPaymentRequest) FreeCancellationDateTimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("freeCancellationDateTimeZone"))
 	return obj.Wrap(_r)

@@ -66,73 +66,73 @@ func (mutctfs *MTRUnitTestingClusterTestFabricScoped) String() string {
 	return rt.Description(objref.IDOf(mutctfs))
 }
 
-// WithFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveInt8u sets the fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 	return mutctfs
 }
 
-// WithOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithOptionalFabricSensitiveInt8u sets the optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 	return mutctfs
 }
 
-// WithNullableFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithNullableFabricSensitiveInt8u sets the nullable fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 	return mutctfs
 }
 
-// WithNullableOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithNullableOptionalFabricSensitiveInt8u sets the nullable optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 	return mutctfs
 }
 
-// WithFabricSensitiveCharString sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveCharString sets the fabric sensitive char string.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
 	return mutctfs
 }
 
-// WithFabricSensitiveStruct sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveStruct sets the fabric sensitive struct.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 	return mutctfs
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mutctfs
 }
 
-// FabricSensitiveInt8u wraps the corresponding Objective-C method.
+// FabricSensitiveInt8u returns the fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
-// OptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
+// OptionalFabricSensitiveInt8u returns the optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("optionalFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
-// NullableFabricSensitiveInt8u wraps the corresponding Objective-C method.
+// NullableFabricSensitiveInt8u returns the nullable fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("nullableFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
-// NullableOptionalFabricSensitiveInt8u wraps the corresponding Objective-C method.
+// NullableOptionalFabricSensitiveInt8u returns the nullable optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("nullableOptionalFabricSensitiveInt8u"))
 	return obj.Wrap(_r)
 }
 
-// FabricSensitiveCharString wraps the corresponding Objective-C method.
+// FabricSensitiveCharString returns the fabric sensitive char string.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveCharString"))
 	if _r == 0 {
@@ -141,13 +141,13 @@ func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString(
 	return purego.GoString(_r)
 }
 
-// FabricSensitiveStruct wraps the corresponding Objective-C method.
+// FabricSensitiveStruct returns the fabric sensitive struct.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// FabricSensitiveInt8uList wraps the corresponding Objective-C method.
+// FabricSensitiveInt8uList returns the fabric sensitive int8u list.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8uList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveInt8uList"))
 	return obj.Wrap(_r)
@@ -158,7 +158,7 @@ func (mutctfs *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uLis
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveInt8uList:"), objref.IDOf(fabricSensitiveInt8uList))
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

@@ -70,7 +70,7 @@ func NewMTRWindowCoveringClusterGoToTiltPercentageParams() *MTRWindowCoveringClu
 	return mTRWindowCoveringClusterGoToTiltPercentageParamsAdopt(_id)
 }
 
-// WithTiltPercent100thsValue sets the property and returns the receiver so calls can be chained.
+// WithTiltPercent100thsValue sets the tilt percent100ths value.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTiltPercent100thsValue(tiltPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
 	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setTiltPercent100thsValue:"), objref.IDOf(tiltPercent100thsValue))
 	return mwccgttpp
@@ -88,7 +88,7 @@ func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithServerSid
 	return mwccgttpp
 }
 
-// TiltPercent100thsValue wraps the corresponding Objective-C method.
+// TiltPercent100thsValue returns the tilt percent100ths value.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TiltPercent100thsValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("tiltPercent100thsValue"))
 	return obj.Wrap(_r)

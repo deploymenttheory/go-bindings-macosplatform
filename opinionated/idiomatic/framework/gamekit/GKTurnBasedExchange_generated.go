@@ -113,7 +113,7 @@ func (tbe *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx co
 	}
 }
 
-// ExchangeID wraps the corresponding Objective-C method.
+// ExchangeID returns the exchange ID.
 func (tbe *TurnBasedExchange) ExchangeID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("exchangeID"))
 	if _r == 0 {
@@ -122,13 +122,13 @@ func (tbe *TurnBasedExchange) ExchangeID() string {
 	return purego.GoString(_r)
 }
 
-// Sender wraps the corresponding Objective-C method.
+// Sender returns the sender.
 func (tbe *TurnBasedExchange) Sender() *TurnBasedParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("sender"))
 	return TurnBasedParticipantFromID(_r)
 }
 
-// Recipients wraps the corresponding Objective-C method.
+// Recipients returns the recipients.
 //
 // Recipients returns the collection as a Go slice.
 func (tbe *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
@@ -136,13 +136,13 @@ func (tbe *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (tbe *TurnBasedExchange) Status() TurnBasedExchangeStatus {
 	_r := objc.Send[TurnBasedExchangeStatus](objref.IDOf(tbe), objc.RegisterName("status"))
 	return _r
 }
 
-// Message wraps the corresponding Objective-C method.
+// Message returns the message.
 func (tbe *TurnBasedExchange) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("message"))
 	if _r == 0 {
@@ -151,31 +151,31 @@ func (tbe *TurnBasedExchange) Message() string {
 	return purego.GoString(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (tbe *TurnBasedExchange) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// SendDate wraps the corresponding Objective-C method.
+// SendDate returns the send date.
 func (tbe *TurnBasedExchange) SendDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("sendDate"))
 	return obj.Wrap(_r)
 }
 
-// TimeoutDate wraps the corresponding Objective-C method.
+// TimeoutDate returns the timeout date.
 func (tbe *TurnBasedExchange) TimeoutDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("timeoutDate"))
 	return obj.Wrap(_r)
 }
 
-// CompletionDate wraps the corresponding Objective-C method.
+// CompletionDate returns the completion date.
 func (tbe *TurnBasedExchange) CompletionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbe), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
-// Replies wraps the corresponding Objective-C method.
+// Replies returns the replies.
 //
 // Replies returns the collection as a Go slice.
 func (tbe *TurnBasedExchange) Replies() []*TurnBasedExchangeReply {

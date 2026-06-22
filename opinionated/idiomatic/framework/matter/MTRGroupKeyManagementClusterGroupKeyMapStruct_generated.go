@@ -70,37 +70,37 @@ func NewMTRGroupKeyManagementClusterGroupKeyMapStruct() *MTRGroupKeyManagementCl
 	return mTRGroupKeyManagementClusterGroupKeyMapStructAdopt(_id)
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupID(groupId obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return mgkmcgkms
 }
 
-// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+// WithGroupKeySetID sets the group key set ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcgkms
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mgkmcgkms
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupId"))
 	return obj.Wrap(_r)
 }
 
-// GroupKeySetID wraps the corresponding Objective-C method.
+// GroupKeySetID returns the group key set ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupKeySetID"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

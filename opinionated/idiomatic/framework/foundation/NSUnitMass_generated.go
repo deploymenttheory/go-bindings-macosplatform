@@ -52,7 +52,7 @@ func NewUnitMass() *UnitMass {
 	return unitMassAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (um *UnitMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitMass {
 	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return um

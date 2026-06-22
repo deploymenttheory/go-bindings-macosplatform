@@ -116,7 +116,7 @@ func (s *Shader) RemoveUniformNamed(name string) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (s *Shader) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
@@ -133,7 +133,7 @@ func (s *Shader) Uniforms() []*Uniform {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Uniform { return UniformFromID(_id) })
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 //
 // Attributes returns the collection as a Go slice.
 func (s *Shader) Attributes() []*Attribute {

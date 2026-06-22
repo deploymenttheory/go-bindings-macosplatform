@@ -54,7 +54,7 @@ func NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue(device *MTRBaseDevice,
 	return mTRBaseClusterAirQualityAdopt(_id)
 }
 
-// ReadAttributeAirQualityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAirQualityWithCompletion reads attribute air quality with completion.
 //
 // ReadAttributeAirQualityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeAirQualityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcaq *MTRBaseClusterAirQuality) SubscribeAttributeAirQualityWithParamsSub
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcaq *MTRBaseClusterAirQuality) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcaq *MTRBaseClusterAirQuality) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcaq *MTRBaseClusterAirQuality) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcaq *MTRBaseClusterAirQuality) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcaq *MTRBaseClusterAirQuality) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

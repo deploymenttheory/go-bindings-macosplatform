@@ -50,25 +50,25 @@ func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
 	return mTRMediaInputClusterInputInfoAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (mmicii *MTRMediaInputClusterInputInfo) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmicii
 }
 
-// WithInputType sets the property and returns the receiver so calls can be chained.
+// WithInputType sets the input type.
 func (mmicii *MTRMediaInputClusterInputInfo) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return mmicii
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mmicii *MTRMediaInputClusterInputInfo) WithName(name string) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setName:"), purego.NSString(name))
 	return mmicii
 }
 
-// WithDescriptionString sets the property and returns the receiver so calls can be chained.
+// WithDescriptionString sets the description string.
 func (mmicii *MTRMediaInputClusterInputInfo) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo {
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return mmicii

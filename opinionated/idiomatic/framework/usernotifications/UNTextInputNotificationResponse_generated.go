@@ -51,7 +51,7 @@ func NewTextInputNotificationResponse() *TextInputNotificationResponse {
 	return textInputNotificationResponseAdopt(_id)
 }
 
-// UserText wraps the corresponding Objective-C method.
+// UserText returns the user text.
 func (tinr *TextInputNotificationResponse) UserText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tinr), objc.RegisterName("userText"))
 	if _r == 0 {

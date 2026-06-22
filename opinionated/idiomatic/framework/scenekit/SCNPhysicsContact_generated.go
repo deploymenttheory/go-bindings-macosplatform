@@ -72,31 +72,31 @@ func NewPhysicsContact() *PhysicsContact {
 	return physicsContactAdopt(_id)
 }
 
-// NodeA wraps the corresponding Objective-C method.
+// NodeA returns the node a.
 func (pc *PhysicsContact) NodeA() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeA"))
 	return NodeFromID(_r)
 }
 
-// NodeB wraps the corresponding Objective-C method.
+// NodeB returns the node b.
 func (pc *PhysicsContact) NodeB() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeB"))
 	return NodeFromID(_r)
 }
 
-// CollisionImpulse wraps the corresponding Objective-C method.
+// CollisionImpulse returns the collision impulse.
 func (pc *PhysicsContact) CollisionImpulse() float64 {
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("collisionImpulse"))
 	return _r
 }
 
-// PenetrationDistance wraps the corresponding Objective-C method.
+// PenetrationDistance returns the penetration distance.
 func (pc *PhysicsContact) PenetrationDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("penetrationDistance"))
 	return _r
 }
 
-// SweepTestFraction wraps the corresponding Objective-C method.
+// SweepTestFraction returns the sweep test fraction.
 func (pc *PhysicsContact) SweepTestFraction() float64 {
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("sweepTestFraction"))
 	return _r

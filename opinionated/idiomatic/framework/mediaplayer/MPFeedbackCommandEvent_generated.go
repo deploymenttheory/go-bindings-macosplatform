@@ -51,7 +51,7 @@ func NewFeedbackCommandEvent() *FeedbackCommandEvent {
 	return feedbackCommandEventAdopt(_id)
 }
 
-// IsNegative wraps the corresponding Objective-C method.
+// IsNegative reports whether the object is negative.
 func (fce *FeedbackCommandEvent) IsNegative() bool {
 	_r := objc.Send[bool](objref.IDOf(fce), objc.RegisterName("isNegative"))
 	return _r

@@ -71,7 +71,7 @@ func (pivo *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvan
 	objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
 }
 
-// DelegateQueue wraps the corresponding Objective-C method.
+// DelegateQueue returns the delegate queue.
 func (pivo *PlayerItemVideoOutput) DelegateQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)

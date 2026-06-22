@@ -74,7 +74,7 @@ func (i *Intent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string)
 	return i
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (i *Intent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *Intent {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return i
@@ -97,7 +97,7 @@ func (i *Intent) KeyImage() *Image {
 	return ImageFromID(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (i *Intent) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (i *Intent) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// IntentDescription wraps the corresponding Objective-C method.
+// IntentDescription returns the intent description.
 func (i *Intent) IntentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intentDescription"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (i *Intent) IntentDescription() string {
 	return purego.GoString(_r)
 }
 
-// SuggestedInvocationPhrase wraps the corresponding Objective-C method.
+// SuggestedInvocationPhrase returns the suggested invocation phrase.
 func (i *Intent) SuggestedInvocationPhrase() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("suggestedInvocationPhrase"))
 	if _r == 0 {
@@ -124,7 +124,7 @@ func (i *Intent) SuggestedInvocationPhrase() string {
 	return purego.GoString(_r)
 }
 
-// DonationMetadata wraps the corresponding Objective-C method.
+// DonationMetadata returns the donation metadata.
 func (i *Intent) DonationMetadata() *IntentDonationMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("donationMetadata"))
 	return IntentDonationMetadataFromID(_r)

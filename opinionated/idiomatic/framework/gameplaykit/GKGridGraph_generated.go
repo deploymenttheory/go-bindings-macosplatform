@@ -56,13 +56,13 @@ func (gg *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
 	objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
-// GridWidth wraps the corresponding Objective-C method.
+// GridWidth returns the grid width.
 func (gg *GridGraph) GridWidth() int {
 	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridWidth"))
 	return _r
 }
 
-// GridHeight wraps the corresponding Objective-C method.
+// GridHeight returns the grid height.
 func (gg *GridGraph) GridHeight() int {
 	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridHeight"))
 	return _r

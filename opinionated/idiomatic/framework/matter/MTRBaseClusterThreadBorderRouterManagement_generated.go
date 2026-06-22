@@ -156,7 +156,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) GetPendingDatasetRequ
 	}
 }
 
-// ReadAttributeBorderRouterNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBorderRouterNameWithCompletion reads attribute border router name with completion.
 //
 // ReadAttributeBorderRouterNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -206,7 +206,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 	}
 }
 
-// ReadAttributeBorderAgentIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBorderAgentIDWithCompletion reads attribute border agent ID with completion.
 //
 // ReadAttributeBorderAgentIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeBor
 	}
 }
 
-// ReadAttributeThreadVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThreadVersionWithCompletion reads attribute thread version with completion.
 //
 // ReadAttributeThreadVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeThr
 	}
 }
 
-// ReadAttributeInterfaceEnabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInterfaceEnabledWithCompletion reads attribute interface enabled with completion.
 //
 // ReadAttributeInterfaceEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeInt
 	}
 }
 
-// ReadAttributeActiveDatasetTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveDatasetTimestampWithCompletion reads attribute active dataset timestamp with completion.
 //
 // ReadAttributeActiveDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAct
 	}
 }
 
-// ReadAttributePendingDatasetTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePendingDatasetTimestampWithCompletion reads attribute pending dataset timestamp with completion.
 //
 // ReadAttributePendingDatasetTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributePen
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeGen
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAcc
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeAtt
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -656,7 +656,7 @@ func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) SubscribeAttributeFea
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctbrm *MTRBaseClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

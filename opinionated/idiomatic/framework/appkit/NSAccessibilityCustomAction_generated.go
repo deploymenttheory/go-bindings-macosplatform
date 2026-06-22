@@ -85,7 +85,7 @@ func (aca *AccessibilityCustomAction) WithHandler(handler func() bool) *Accessib
 	return aca
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (aca *AccessibilityCustomAction) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aca), objc.RegisterName("name"))
 	if _r == 0 {

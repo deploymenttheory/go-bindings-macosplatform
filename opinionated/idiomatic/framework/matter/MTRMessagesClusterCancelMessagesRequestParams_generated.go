@@ -82,7 +82,7 @@ func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) WithServerSideProc
 	return mmccmrp
 }
 
-// MessageIDs wraps the corresponding Objective-C method.
+// MessageIDs returns the message i ds.
 func (mmccmrp *MTRMessagesClusterCancelMessagesRequestParams) MessageIDs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmccmrp), objc.RegisterName("messageIDs"))
 	return obj.Wrap(_r)

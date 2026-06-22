@@ -72,7 +72,7 @@ func NewBiologicalSexObject() *BiologicalSexObject {
 	return biologicalSexObjectAdopt(_id)
 }
 
-// BiologicalSex wraps the corresponding Objective-C method.
+// BiologicalSex returns the biological sex.
 func (bso *BiologicalSexObject) BiologicalSex() BiologicalSex {
 	_r := objc.Send[BiologicalSex](objref.IDOf(bso), objc.RegisterName("biologicalSex"))
 	return _r

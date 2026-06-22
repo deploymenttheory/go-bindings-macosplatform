@@ -63,13 +63,13 @@ func (ackpc *AddCarKeyPassConfiguration) WithSupportedRadioTechnologies(supporte
 	return ackpc
 }
 
-// WithManufacturerIdentifier sets the property and returns the receiver so calls can be chained.
+// WithManufacturerIdentifier sets the manufacturer identifier.
 func (ackpc *AddCarKeyPassConfiguration) WithManufacturerIdentifier(manufacturerIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("setManufacturerIdentifier:"), purego.NSString(manufacturerIdentifier))
 	return ackpc
 }
 
-// WithProvisioningTemplateIdentifier sets the property and returns the receiver so calls can be chained.
+// WithProvisioningTemplateIdentifier sets the provisioning template identifier.
 func (ackpc *AddCarKeyPassConfiguration) WithProvisioningTemplateIdentifier(provisioningTemplateIdentifier string) *AddCarKeyPassConfiguration {
 	objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("setProvisioningTemplateIdentifier:"), purego.NSString(provisioningTemplateIdentifier))
 	return ackpc
@@ -93,7 +93,7 @@ func (ackpc *AddCarKeyPassConfiguration) WithLocalizedDescription(localizedDescr
 	return ackpc
 }
 
-// Password wraps the corresponding Objective-C method.
+// Password returns the password.
 func (ackpc *AddCarKeyPassConfiguration) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("password"))
 	if _r == 0 {
@@ -102,13 +102,13 @@ func (ackpc *AddCarKeyPassConfiguration) Password() string {
 	return purego.GoString(_r)
 }
 
-// SupportedRadioTechnologies wraps the corresponding Objective-C method.
+// SupportedRadioTechnologies returns the supported radio technologies.
 func (ackpc *AddCarKeyPassConfiguration) SupportedRadioTechnologies() RadioTechnology {
 	_r := objc.Send[RadioTechnology](objref.IDOf(ackpc), objc.RegisterName("supportedRadioTechnologies"))
 	return _r
 }
 
-// ManufacturerIdentifier wraps the corresponding Objective-C method.
+// ManufacturerIdentifier returns the manufacturer identifier.
 func (ackpc *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("manufacturerIdentifier"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (ackpc *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
+// ProvisioningTemplateIdentifier returns the provisioning template identifier.
 func (ackpc *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
@@ -126,7 +126,7 @@ func (ackpc *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string
 	return purego.GoString(_r)
 }
 
-// ProductPlanIdentifier wraps the corresponding Objective-C method.
+// ProductPlanIdentifier returns the product plan identifier.
 func (ackpc *AddCarKeyPassConfiguration) ProductPlanIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("productPlanIdentifier"))
 	if _r == 0 {

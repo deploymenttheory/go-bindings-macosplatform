@@ -72,7 +72,7 @@ func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialEx
 	return passkeyAssertionCredentialExtensionInputAdopt(_id)
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (pacei *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(pacei), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)

@@ -70,73 +70,73 @@ func NewMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct() *MTRWaterHea
 	return mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructAdopt(_id)
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithDuration(duration obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mwhmcwhbis
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithOneShot(oneShot obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setOneShot:"), objref.IDOf(oneShot))
 	return mwhmcwhbis
 }
 
-// WithEmergencyBoost sets the property and returns the receiver so calls can be chained.
+// WithEmergencyBoost sets the emergency boost.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithEmergencyBoost(emergencyBoost obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setEmergencyBoost:"), objref.IDOf(emergencyBoost))
 	return mwhmcwhbis
 }
 
-// WithTemporarySetpoint sets the property and returns the receiver so calls can be chained.
+// WithTemporarySetpoint sets the temporary setpoint.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTemporarySetpoint(temporarySetpoint obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTemporarySetpoint:"), objref.IDOf(temporarySetpoint))
 	return mwhmcwhbis
 }
 
-// WithTargetPercentage sets the property and returns the receiver so calls can be chained.
+// WithTargetPercentage sets the target percentage.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetPercentage(targetPercentage obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetPercentage:"), objref.IDOf(targetPercentage))
 	return mwhmcwhbis
 }
 
-// WithTargetReheat sets the property and returns the receiver so calls can be chained.
+// WithTargetReheat sets the target reheat.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetReheat(targetReheat obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetReheat:"), objref.IDOf(targetReheat))
 	return mwhmcwhbis
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// OneShot wraps the corresponding Objective-C method.
+// OneShot returns the one shot.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("oneShot"))
 	return obj.Wrap(_r)
 }
 
-// EmergencyBoost wraps the corresponding Objective-C method.
+// EmergencyBoost returns the emergency boost.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("emergencyBoost"))
 	return obj.Wrap(_r)
 }
 
-// TemporarySetpoint wraps the corresponding Objective-C method.
+// TemporarySetpoint returns the temporary setpoint.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("temporarySetpoint"))
 	return obj.Wrap(_r)
 }
 
-// TargetPercentage wraps the corresponding Objective-C method.
+// TargetPercentage returns the target percentage.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetPercentage"))
 	return obj.Wrap(_r)
 }
 
-// TargetReheat wraps the corresponding Objective-C method.
+// TargetReheat returns the target reheat.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetReheat"))
 	return obj.Wrap(_r)

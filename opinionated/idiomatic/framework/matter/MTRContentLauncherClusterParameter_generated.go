@@ -50,13 +50,13 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 	return mTRContentLauncherClusterParameterAdopt(_id)
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (mclcp *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
 	objc.Send[objc.ID](objref.IDOf(mclcp), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mclcp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mclcp *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
 	objc.Send[objc.ID](objref.IDOf(mclcp), objc.RegisterName("setValue:"), purego.NSString(value))
 	return mclcp

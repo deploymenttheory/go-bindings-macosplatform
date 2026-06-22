@@ -70,7 +70,7 @@ func NewMTRChannelClusterSkipChannelParams() *MTRChannelClusterSkipChannelParams
 	return mTRChannelClusterSkipChannelParamsAdopt(_id)
 }
 
-// WithCount sets the property and returns the receiver so calls can be chained.
+// WithCount sets the count.
 func (mccscp *MTRChannelClusterSkipChannelParams) WithCount(count obj.Object) *MTRChannelClusterSkipChannelParams {
 	objc.Send[objc.ID](objref.IDOf(mccscp), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return mccscp
@@ -88,8 +88,8 @@ func (mccscp *MTRChannelClusterSkipChannelParams) WithServerSideProcessingTimeou
 	return mccscp
 }
 
-// GetCount wraps the corresponding Objective-C method.
-func (mccscp *MTRChannelClusterSkipChannelParams) GetCount() obj.Object {
+// Count returns the count.
+func (mccscp *MTRChannelClusterSkipChannelParams) Count() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccscp), objc.RegisterName("getCount"))
 	return obj.Wrap(_r)
 }

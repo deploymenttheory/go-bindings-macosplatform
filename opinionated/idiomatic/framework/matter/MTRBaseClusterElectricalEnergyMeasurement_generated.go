@@ -54,7 +54,7 @@ func NewMTRBaseClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(devic
 	return mTRBaseClusterElectricalEnergyMeasurementAdopt(_id)
 }
 
-// ReadAttributeAccuracyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAccuracyWithCompletion reads attribute accuracy with completion.
 //
 // ReadAttributeAccuracyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct, err error) {
@@ -104,7 +104,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAccur
 	}
 }
 
-// ReadAttributeCumulativeEnergyImportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyImportedWithCompletion reads attribute cumulative energy imported with completion.
 //
 // ReadAttributeCumulativeEnergyImportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
@@ -154,7 +154,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumul
 	}
 }
 
-// ReadAttributeCumulativeEnergyExportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyExportedWithCompletion reads attribute cumulative energy exported with completion.
 //
 // ReadAttributeCumulativeEnergyExportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
@@ -204,7 +204,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumul
 	}
 }
 
-// ReadAttributePeriodicEnergyImportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePeriodicEnergyImportedWithCompletion reads attribute periodic energy imported with completion.
 //
 // ReadAttributePeriodicEnergyImportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
@@ -254,7 +254,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePerio
 	}
 }
 
-// ReadAttributePeriodicEnergyExportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePeriodicEnergyExportedWithCompletion reads attribute periodic energy exported with completion.
 //
 // ReadAttributePeriodicEnergyExportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct, err error) {
@@ -304,7 +304,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributePerio
 	}
 }
 
-// ReadAttributeCumulativeEnergyResetWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyResetWithCompletion reads attribute cumulative energy reset with completion.
 //
 // ReadAttributeCumulativeEnergyResetWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithCompletion(ctx context.Context) (result *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct, err error) {
@@ -354,7 +354,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeCumul
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeGener
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAccep
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeAttri
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) SubscribeAttributeFeatu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbceem *MTRBaseClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

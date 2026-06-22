@@ -90,7 +90,7 @@ func (wsvc *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyP
 	return wsvc
 }
 
-// SearchResults wraps the corresponding Objective-C method.
+// SearchResults returns the search results.
 func (wsvc *WidgetSearchViewController) SearchResults() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResults"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -101,7 +101,7 @@ func (wsvc *WidgetSearchViewController) SetSearchResults(searchResults []obj.Obj
 	objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResults:"), purego.SliceToNSArray(searchResults, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SearchDescription wraps the corresponding Objective-C method.
+// SearchDescription returns the search description.
 func (wsvc *WidgetSearchViewController) SearchDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchDescription"))
 	if _r == 0 {
@@ -110,7 +110,7 @@ func (wsvc *WidgetSearchViewController) SearchDescription() string {
 	return purego.GoString(_r)
 }
 
-// SearchResultsPlaceholderString wraps the corresponding Objective-C method.
+// SearchResultsPlaceholderString returns the search results placeholder string.
 func (wsvc *WidgetSearchViewController) SearchResultsPlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultsPlaceholderString"))
 	if _r == 0 {
@@ -119,7 +119,7 @@ func (wsvc *WidgetSearchViewController) SearchResultsPlaceholderString() string 
 	return purego.GoString(_r)
 }
 
-// SearchResultKeyPath wraps the corresponding Objective-C method.
+// SearchResultKeyPath returns the search result key path.
 func (wsvc *WidgetSearchViewController) SearchResultKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("searchResultKeyPath"))
 	if _r == 0 {

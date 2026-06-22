@@ -78,7 +78,7 @@ func NewMTROperationalCredentialsClusterCertificateChainResponseParamsWithRespon
 	return mTROperationalCredentialsClusterCertificateChainResponseParamsAdopt(_id), nil
 }
 
-// WithCertificate sets the property and returns the receiver so calls can be chained.
+// WithCertificate sets the certificate.
 func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) WithCertificate(certificate obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
 	return moccccrp
@@ -90,7 +90,7 @@ func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) 
 	return moccccrp
 }
 
-// Certificate wraps the corresponding Objective-C method.
+// Certificate returns the certificate.
 func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) Certificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)

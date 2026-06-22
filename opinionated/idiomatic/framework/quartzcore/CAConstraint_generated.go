@@ -73,13 +73,13 @@ func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAtt
 	return constraintAdopt(_id)
 }
 
-// Attribute wraps the corresponding Objective-C method.
+// Attribute returns the attribute.
 func (c *Constraint) Attribute() ConstraintAttribute {
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("attribute"))
 	return _r
 }
 
-// SourceName wraps the corresponding Objective-C method.
+// SourceName returns the source name.
 func (c *Constraint) SourceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sourceName"))
 	if _r == 0 {
@@ -88,19 +88,19 @@ func (c *Constraint) SourceName() string {
 	return purego.GoString(_r)
 }
 
-// SourceAttribute wraps the corresponding Objective-C method.
+// SourceAttribute returns the source attribute.
 func (c *Constraint) SourceAttribute() ConstraintAttribute {
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("sourceAttribute"))
 	return _r
 }
 
-// Scale wraps the corresponding Objective-C method.
+// Scale returns the scale.
 func (c *Constraint) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("scale"))
 	return _r
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (c *Constraint) Offset() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("offset"))
 	return _r

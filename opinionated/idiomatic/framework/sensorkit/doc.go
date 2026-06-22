@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package sensorkit provides a fluent Go API over the macOS SensorKit framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package sensorkit

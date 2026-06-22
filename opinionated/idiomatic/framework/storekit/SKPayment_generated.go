@@ -68,19 +68,19 @@ func (p *Payment) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// RequestData wraps the corresponding Objective-C method.
+// RequestData returns the request data.
 func (p *Payment) RequestData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("requestData"))
 	return obj.Wrap(_r)
 }
 
-// Quantity wraps the corresponding Objective-C method.
+// Quantity returns the quantity.
 func (p *Payment) Quantity() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("quantity"))
 	return _r
 }
 
-// ApplicationUsername wraps the corresponding Objective-C method.
+// ApplicationUsername returns the application username.
 func (p *Payment) ApplicationUsername() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("applicationUsername"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (p *Payment) SimulatesAskToBuyInSandbox() bool {
 	return _r
 }
 
-// PaymentDiscount wraps the corresponding Objective-C method.
+// PaymentDiscount returns the payment discount.
 func (p *Payment) PaymentDiscount() *PaymentDiscount {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("paymentDiscount"))
 	return PaymentDiscountFromID(_r)

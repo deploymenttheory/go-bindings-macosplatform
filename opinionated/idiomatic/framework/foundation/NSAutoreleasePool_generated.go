@@ -72,7 +72,7 @@ func NewAutoreleasePool() *AutoreleasePool {
 	return autoreleasePoolAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ap *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ap

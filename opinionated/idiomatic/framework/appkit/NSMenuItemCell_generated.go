@@ -498,7 +498,7 @@ func (mic *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefo
 	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
-// MenuItem wraps the corresponding Objective-C method.
+// MenuItem returns the menu item.
 func (mic *MenuItemCell) MenuItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("menuItem"))
 	return MenuItemFromID(_r)
@@ -516,25 +516,25 @@ func (mic *MenuItemCell) NeedsDisplay() bool {
 	return _r
 }
 
-// StateImageWidth wraps the corresponding Objective-C method.
+// StateImageWidth returns the state image width.
 func (mic *MenuItemCell) StateImageWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("stateImageWidth"))
 	return _r
 }
 
-// ImageWidth wraps the corresponding Objective-C method.
+// ImageWidth returns the image width.
 func (mic *MenuItemCell) ImageWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("imageWidth"))
 	return _r
 }
 
-// TitleWidth wraps the corresponding Objective-C method.
+// TitleWidth returns the title width.
 func (mic *MenuItemCell) TitleWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("titleWidth"))
 	return _r
 }
 
-// KeyEquivalentWidth wraps the corresponding Objective-C method.
+// KeyEquivalentWidth returns the key equivalent width.
 func (mic *MenuItemCell) KeyEquivalentWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("keyEquivalentWidth"))
 	return _r

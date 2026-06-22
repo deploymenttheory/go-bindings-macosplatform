@@ -72,13 +72,13 @@ func (mi *MetadataItem) String() string {
 	return rt.Description(objref.IDOf(mi))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (mi *MetadataItem) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// ExtendedLanguageTag wraps the corresponding Objective-C method.
+// ExtendedLanguageTag returns the extended language tag.
 func (mi *MetadataItem) ExtendedLanguageTag() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {
@@ -87,13 +87,13 @@ func (mi *MetadataItem) ExtendedLanguageTag() string {
 	return purego.GoString(_r)
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (mi *MetadataItem) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// DataType wraps the corresponding Objective-C method.
+// DataType returns the data type.
 func (mi *MetadataItem) DataType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataType"))
 	if _r == 0 {
@@ -102,25 +102,25 @@ func (mi *MetadataItem) DataType() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mi *MetadataItem) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// ExtraAttributes wraps the corresponding Objective-C method.
+// ExtraAttributes returns the extra attributes.
 func (mi *MetadataItem) ExtraAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("extraAttributes"))
 	return obj.Wrap(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (mi *MetadataItem) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (mi *MetadataItem) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -129,19 +129,19 @@ func (mi *MetadataItem) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// NumberValue wraps the corresponding Objective-C method.
+// NumberValue returns the number value.
 func (mi *MetadataItem) NumberValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("numberValue"))
 	return obj.Wrap(_r)
 }
 
-// DateValue wraps the corresponding Objective-C method.
+// DateValue returns the date value.
 func (mi *MetadataItem) DateValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dateValue"))
 	return obj.Wrap(_r)
 }
 
-// DataValue wraps the corresponding Objective-C method.
+// DataValue returns the data value.
 func (mi *MetadataItem) DataValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("dataValue"))
 	return obj.Wrap(_r)
@@ -174,19 +174,19 @@ func (mi *MetadataItem) LoadValuesAsynchronouslyForKeys(ctx context.Context, key
 	}
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (mi *MetadataItem) Key() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("key"))
 	return obj.Wrap(_r)
 }
 
-// CommonKey wraps the corresponding Objective-C method.
+// CommonKey returns the common key.
 func (mi *MetadataItem) CommonKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("commonKey"))
 	return obj.Wrap(_r)
 }
 
-// KeySpace wraps the corresponding Objective-C method.
+// KeySpace returns the key space.
 func (mi *MetadataItem) KeySpace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keySpace"))
 	return obj.Wrap(_r)

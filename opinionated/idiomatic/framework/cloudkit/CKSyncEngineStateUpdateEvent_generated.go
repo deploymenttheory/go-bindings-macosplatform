@@ -51,7 +51,7 @@ func NewSyncEngineStateUpdateEvent() *SyncEngineStateUpdateEvent {
 	return syncEngineStateUpdateEventAdopt(_id)
 }
 
-// StateSerialization wraps the corresponding Objective-C method.
+// StateSerialization returns the state serialization.
 func (sesue *SyncEngineStateUpdateEvent) StateSerialization() *SyncEngineStateSerialization {
 	_r := objc.Send[objc.ID](objref.IDOf(sesue), objc.RegisterName("stateSerialization"))
 	return SyncEngineStateSerializationFromID(_r)

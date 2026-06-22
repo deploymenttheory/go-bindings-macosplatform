@@ -72,19 +72,19 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationOutput() *AuthorizationPu
 	return authorizationPublicKeyCredentialPRFRegistrationOutputAdopt(_id)
 }
 
-// IsSupported wraps the corresponding Objective-C method.
+// IsSupported reports whether the object is supported.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(apkcpro), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// First wraps the corresponding Objective-C method.
+// First returns the first.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
-// Second wraps the corresponding Objective-C method.
+// Second returns the second.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("second"))
 	return obj.Wrap(_r)

@@ -53,7 +53,7 @@ func NewMusicUserEventWithData(data obj.Object) *MusicUserEvent {
 	return musicUserEventAdopt(_id)
 }
 
-// SizeInBytes wraps the corresponding Objective-C method.
+// SizeInBytes returns the size in bytes.
 func (mue *MusicUserEvent) SizeInBytes() int {
 	_r := objc.Send[int](objref.IDOf(mue), objc.RegisterName("sizeInBytes"))
 	return _r

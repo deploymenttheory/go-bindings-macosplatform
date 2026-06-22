@@ -70,13 +70,13 @@ func NewMTRGeneralDiagnosticsClusterTestEventTriggerParams() *MTRGeneralDiagnost
 	return mTRGeneralDiagnosticsClusterTestEventTriggerParamsAdopt(_id)
 }
 
-// WithEnableKey sets the property and returns the receiver so calls can be chained.
+// WithEnableKey sets the enable key.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
 	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 	return mgdctetp
 }
 
-// WithEventTrigger sets the property and returns the receiver so calls can be chained.
+// WithEventTrigger sets the event trigger.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithEventTrigger(eventTrigger obj.Object) *MTRGeneralDiagnosticsClusterTestEventTriggerParams {
 	objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("setEventTrigger:"), objref.IDOf(eventTrigger))
 	return mgdctetp
@@ -94,13 +94,13 @@ func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) WithServerSi
 	return mgdctetp
 }
 
-// EnableKey wraps the corresponding Objective-C method.
+// EnableKey returns the enable key.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EnableKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("enableKey"))
 	return obj.Wrap(_r)
 }
 
-// EventTrigger wraps the corresponding Objective-C method.
+// EventTrigger returns the event trigger.
 func (mgdctetp *MTRGeneralDiagnosticsClusterTestEventTriggerParams) EventTrigger() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctetp), objc.RegisterName("eventTrigger"))
 	return obj.Wrap(_r)

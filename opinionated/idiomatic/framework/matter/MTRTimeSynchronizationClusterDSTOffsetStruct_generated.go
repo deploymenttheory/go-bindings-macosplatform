@@ -66,37 +66,37 @@ func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) String() string {
 	return rt.Description(objref.IDOf(mtscdos))
 }
 
-// WithOffset sets the property and returns the receiver so calls can be chained.
+// WithOffset sets the offset.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtscdos
 }
 
-// WithValidStarting sets the property and returns the receiver so calls can be chained.
+// WithValidStarting sets the valid starting.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 	return mtscdos
 }
 
-// WithValidUntil sets the property and returns the receiver so calls can be chained.
+// WithValidUntil sets the valid until.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 	return mtscdos
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("offset"))
 	return obj.Wrap(_r)
 }
 
-// ValidStarting wraps the corresponding Objective-C method.
+// ValidStarting returns the valid starting.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("validStarting"))
 	return obj.Wrap(_r)
 }
 
-// ValidUntil wraps the corresponding Objective-C method.
+// ValidUntil returns the valid until.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("validUntil"))
 	return obj.Wrap(_r)

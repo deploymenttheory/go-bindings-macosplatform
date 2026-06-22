@@ -73,7 +73,7 @@ func NewURLHandleWithURLCached(anURL string, willCache bool) *URLHandle {
 	return uRLHandleAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uh *URLHandle) WithScriptingProperties(scriptingProperties obj.Object) *URLHandle {
 	objc.Send[objc.ID](objref.IDOf(uh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uh

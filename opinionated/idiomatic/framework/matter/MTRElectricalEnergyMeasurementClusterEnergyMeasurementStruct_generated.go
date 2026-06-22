@@ -70,61 +70,61 @@ func NewMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct() *MTRElect
 	return mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructAdopt(_id)
 }
 
-// WithEnergy sets the property and returns the receiver so calls can be chained.
+// WithEnergy sets the energy.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEnergy(energy obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEnergy:"), objref.IDOf(energy))
 	return meemcems
 }
 
-// WithStartTimestamp sets the property and returns the receiver so calls can be chained.
+// WithStartTimestamp sets the start timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
 	return meemcems
 }
 
-// WithEndTimestamp sets the property and returns the receiver so calls can be chained.
+// WithEndTimestamp sets the end timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
 	return meemcems
 }
 
-// WithStartSystime sets the property and returns the receiver so calls can be chained.
+// WithStartSystime sets the start systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartSystime(startSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
 	return meemcems
 }
 
-// WithEndSystime sets the property and returns the receiver so calls can be chained.
+// WithEndSystime sets the end systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndSystime(endSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
 	return meemcems
 }
 
-// Energy wraps the corresponding Objective-C method.
+// Energy returns the energy.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("energy"))
 	return obj.Wrap(_r)
 }
 
-// StartTimestamp wraps the corresponding Objective-C method.
+// StartTimestamp returns the start timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startTimestamp"))
 	return obj.Wrap(_r)
 }
 
-// EndTimestamp wraps the corresponding Objective-C method.
+// EndTimestamp returns the end timestamp.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endTimestamp"))
 	return obj.Wrap(_r)
 }
 
-// StartSystime wraps the corresponding Objective-C method.
+// StartSystime returns the start systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startSystime"))
 	return obj.Wrap(_r)
 }
 
-// EndSystime wraps the corresponding Objective-C method.
+// EndSystime returns the end systime.
 func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endSystime"))
 	return obj.Wrap(_r)

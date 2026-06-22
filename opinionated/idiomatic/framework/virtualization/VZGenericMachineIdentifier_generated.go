@@ -79,7 +79,7 @@ func NewGenericMachineIdentifierWithDataRepresentation(dataRepresentation obj.Ob
 	return genericMachineIdentifierAdopt(_id)
 }
 
-// DataRepresentation wraps the corresponding Objective-C method.
+// DataRepresentation returns the data representation.
 func (gmi *GenericMachineIdentifier) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gmi), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

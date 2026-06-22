@@ -70,13 +70,13 @@ func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
 	return chooseIdentityTableCellViewAdopt(_id)
 }
 
-// WithIssuerTextField sets the property and returns the receiver so calls can be chained.
+// WithIssuerTextField sets the issuer text field.
 func (citcv *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
 	objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
 	return citcv
 }
 
-// IssuerTextField wraps the corresponding Objective-C method.
+// IssuerTextField returns the issuer text field.
 func (citcv *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(citcv), objc.RegisterName("issuerTextField"))
 	return obj.Wrap(_r)

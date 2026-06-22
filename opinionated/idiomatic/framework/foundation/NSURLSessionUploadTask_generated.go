@@ -54,43 +54,43 @@ func NewURLSessionUploadTask() *URLSessionUploadTask {
 	return uRLSessionUploadTaskAdopt(_id)
 }
 
-// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the earliest begin date.
 func (usut *URLSessionUploadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usut
 }
 
-// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
 func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return usut
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
 func (usut *URLSessionUploadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return usut
 }
 
-// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+// WithTaskDescription sets the task description.
 func (usut *URLSessionUploadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usut
 }
 
-// WithPriority sets the property and returns the receiver so calls can be chained.
+// WithPriority sets the priority.
 func (usut *URLSessionUploadTask) WithPriority(priority float32) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPriority:"), priority)
 	return usut
 }
 
-// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (usut *URLSessionUploadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return usut
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (usut *URLSessionUploadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionUploadTask {
 	objc.Send[objc.ID](objref.IDOf(usut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return usut

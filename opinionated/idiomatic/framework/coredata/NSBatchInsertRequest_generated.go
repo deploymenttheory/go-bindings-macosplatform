@@ -126,7 +126,7 @@ func (bir *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvid
 	return bir
 }
 
-// EntityName wraps the corresponding Objective-C method.
+// EntityName returns the entity name.
 func (bir *BatchInsertRequest) EntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("entityName"))
 	if _r == 0 {
@@ -135,13 +135,13 @@ func (bir *BatchInsertRequest) EntityName() string {
 	return purego.GoString(_r)
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (bir *BatchInsertRequest) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// ObjectsToInsert wraps the corresponding Objective-C method.
+// ObjectsToInsert returns the objects to insert.
 //
 // ObjectsToInsert returns the collection as a Go slice.
 func (bir *BatchInsertRequest) ObjectsToInsert() []obj.Object {
@@ -149,7 +149,7 @@ func (bir *BatchInsertRequest) ObjectsToInsert() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bir *BatchInsertRequest) ResultType() BatchInsertRequestResultType {
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(bir), objc.RegisterName("resultType"))
 	return _r

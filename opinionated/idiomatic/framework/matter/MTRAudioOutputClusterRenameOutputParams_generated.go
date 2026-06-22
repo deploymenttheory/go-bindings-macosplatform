@@ -70,13 +70,13 @@ func NewMTRAudioOutputClusterRenameOutputParams() *MTRAudioOutputClusterRenameOu
 	return mTRAudioOutputClusterRenameOutputParamsAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams {
 	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocrop
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithName(name string) *MTRAudioOutputClusterRenameOutputParams {
 	objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("setName:"), purego.NSString(name))
 	return maocrop
@@ -94,13 +94,13 @@ func (maocrop *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessing
 	return maocrop
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (maocrop *MTRAudioOutputClusterRenameOutputParams) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(maocrop), objc.RegisterName("name"))
 	if _r == 0 {

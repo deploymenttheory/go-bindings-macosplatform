@@ -50,7 +50,7 @@ func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicCluster
 	return mTRBridgedDeviceBasicClusterStartUpEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mbdbcsue *MTRBridgedDeviceBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicClusterStartUpEvent {
 	objc.Send[objc.ID](objref.IDOf(mbdbcsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mbdbcsue

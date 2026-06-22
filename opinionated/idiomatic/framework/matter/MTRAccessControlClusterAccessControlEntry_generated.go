@@ -50,19 +50,19 @@ func NewMTRAccessControlClusterAccessControlEntry() *MTRAccessControlClusterAcce
 	return mTRAccessControlClusterAccessControlEntryAdopt(_id)
 }
 
-// WithPrivilege sets the property and returns the receiver so calls can be chained.
+// WithPrivilege sets the privilege.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntry {
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
 	return maccace
 }
 
-// WithAuthMode sets the property and returns the receiver so calls can be chained.
+// WithAuthMode sets the auth mode.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntry {
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
 	return maccace
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccace *MTRAccessControlClusterAccessControlEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntry {
 	objc.Send[objc.ID](objref.IDOf(maccace), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccace

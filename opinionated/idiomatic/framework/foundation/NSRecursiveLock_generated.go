@@ -78,7 +78,7 @@ func (rl *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
 	return rl
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (rl *RecursiveLock) WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return rl
@@ -96,7 +96,7 @@ func (rl *RecursiveLock) LockBeforeDate(limit *Date) bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (rl *RecursiveLock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("name"))
 	if _r == 0 {

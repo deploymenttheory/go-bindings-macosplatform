@@ -56,7 +56,7 @@ func (rplep *RAWProcessingListElementParameter) WithEnabled(enabled bool) *RAWPr
 	return rplep
 }
 
-// ListElementID wraps the corresponding Objective-C method.
+// ListElementID returns the list element ID.
 func (rplep *RAWProcessingListElementParameter) ListElementID() int {
 	_r := objc.Send[int](objref.IDOf(rplep), objc.RegisterName("listElementID"))
 	return _r

@@ -50,13 +50,13 @@ func NewMTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *MTROtaSo
 	return mTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsAdopt(_id)
 }
 
-// WithUpdateToken sets the property and returns the receiver so calls can be chained.
+// WithUpdateToken sets the update token.
 func (mosupcnuap *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcnuap), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
 	return mosupcnuap
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mosupcnuap *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcnuap), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosupcnuap

@@ -51,7 +51,7 @@ func NewChangeHistoryDeleteGroupEvent() *ChangeHistoryDeleteGroupEvent {
 	return changeHistoryDeleteGroupEventAdopt(_id)
 }
 
-// GroupIdentifier wraps the corresponding Objective-C method.
+// GroupIdentifier returns the group identifier.
 func (chdge *ChangeHistoryDeleteGroupEvent) GroupIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(chdge), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {

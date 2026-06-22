@@ -49,36 +49,36 @@ func NewDOMCSSMediaRule() *DOMCSSMediaRule {
 	return dOMCSSMediaRuleAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dmr *DOMCSSMediaRule) WithCSSText(cssText string) *DOMCSSMediaRule {
 	objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dmr
 }
 
-// InsertRuleIndex wraps the corresponding Objective-C method.
+// InsertRuleIndex inserts rule index.
 func (dmr *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
-// DeleteRule wraps the corresponding Objective-C method.
+// DeleteRule deletes rule.
 func (dmr *DOMCSSMediaRule) DeleteRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("deleteRule:"), index)
 }
 
-// Media wraps the corresponding Objective-C method.
+// Media returns the media.
 func (dmr *DOMCSSMediaRule) Media() *DOMMediaList {
 	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
-// CSSRules wraps the corresponding Objective-C method.
+// CSSRules returns the CSS rules.
 func (dmr *DOMCSSMediaRule) CSSRules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
-// InsertRule wraps the corresponding Objective-C method.
+// InsertRule inserts rule.
 func (dmr *DOMCSSMediaRule) InsertRule(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r

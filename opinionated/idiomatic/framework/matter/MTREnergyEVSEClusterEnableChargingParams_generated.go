@@ -70,19 +70,19 @@ func NewMTREnergyEVSEClusterEnableChargingParams() *MTREnergyEVSEClusterEnableCh
 	return mTREnergyEVSEClusterEnableChargingParamsAdopt(_id)
 }
 
-// WithChargingEnabledUntil sets the property and returns the receiver so calls can be chained.
+// WithChargingEnabledUntil sets the charging enabled until.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithChargingEnabledUntil(chargingEnabledUntil obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
 	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setChargingEnabledUntil:"), objref.IDOf(chargingEnabledUntil))
 	return meececp
 }
 
-// WithMinimumChargeCurrent sets the property and returns the receiver so calls can be chained.
+// WithMinimumChargeCurrent sets the minimum charge current.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithMinimumChargeCurrent(minimumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
 	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setMinimumChargeCurrent:"), objref.IDOf(minimumChargeCurrent))
 	return meececp
 }
 
-// WithMaximumChargeCurrent sets the property and returns the receiver so calls can be chained.
+// WithMaximumChargeCurrent sets the maximum charge current.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithMaximumChargeCurrent(maximumChargeCurrent obj.Object) *MTREnergyEVSEClusterEnableChargingParams {
 	objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("setMaximumChargeCurrent:"), objref.IDOf(maximumChargeCurrent))
 	return meececp
@@ -100,19 +100,19 @@ func (meececp *MTREnergyEVSEClusterEnableChargingParams) WithServerSideProcessin
 	return meececp
 }
 
-// ChargingEnabledUntil wraps the corresponding Objective-C method.
+// ChargingEnabledUntil returns the charging enabled until.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) ChargingEnabledUntil() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("chargingEnabledUntil"))
 	return obj.Wrap(_r)
 }
 
-// MinimumChargeCurrent wraps the corresponding Objective-C method.
+// MinimumChargeCurrent returns the minimum charge current.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) MinimumChargeCurrent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("minimumChargeCurrent"))
 	return obj.Wrap(_r)
 }
 
-// MaximumChargeCurrent wraps the corresponding Objective-C method.
+// MaximumChargeCurrent returns the maximum charge current.
 func (meececp *MTREnergyEVSEClusterEnableChargingParams) MaximumChargeCurrent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meececp), objc.RegisterName("maximumChargeCurrent"))
 	return obj.Wrap(_r)

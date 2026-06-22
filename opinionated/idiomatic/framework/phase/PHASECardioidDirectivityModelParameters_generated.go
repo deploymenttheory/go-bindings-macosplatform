@@ -52,7 +52,7 @@ func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameter
 	return cardioidDirectivityModelParametersAdopt(_id)
 }
 
-// SubbandParameters wraps the corresponding Objective-C method.
+// SubbandParameters returns the subband parameters.
 //
 // SubbandParameters returns the collection as a Go slice.
 func (cdmp *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {

@@ -70,25 +70,25 @@ func NewQuartzFilterManager() *QuartzFilterManager {
 	return quartzFilterManagerAdopt(_id)
 }
 
-// FilterPanel wraps the corresponding Objective-C method.
+// FilterPanel returns the filter panel.
 func (qfm *QuartzFilterManager) FilterPanel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterPanel"))
 	return obj.Wrap(_r)
 }
 
-// FilterView wraps the corresponding Objective-C method.
+// FilterView returns the filter view.
 func (qfm *QuartzFilterManager) FilterView() *QuartzFilterView {
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterView"))
 	return QuartzFilterViewFromID(_r)
 }
 
-// SelectedFilter wraps the corresponding Objective-C method.
+// SelectedFilter returns the selected filter.
 func (qfm *QuartzFilterManager) SelectedFilter() *QuartzFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("selectedFilter"))
 	return QuartzFilterFromID(_r)
 }
 
-// SelectFilter wraps the corresponding Objective-C method.
+// SelectFilter selects filter.
 func (qfm *QuartzFilterManager) SelectFilter(filter *QuartzFilter) bool {
 	_r := objc.Send[bool](objref.IDOf(qfm), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
 	return _r
@@ -99,7 +99,7 @@ func (qfm *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (qfm *QuartzFilterManager) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

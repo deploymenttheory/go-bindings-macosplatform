@@ -44,7 +44,7 @@ func simpleCStringAdopt(id objc.ID) *SimpleCString {
 	return x
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (scs *SimpleCString) WithScriptingProperties(scriptingProperties obj.Object) *SimpleCString {
 	objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return scs

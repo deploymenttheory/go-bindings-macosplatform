@@ -161,13 +161,13 @@ func (ed *EntityDescription) IsKindOfEntity(entity *EntityDescription) bool {
 	return _r
 }
 
-// ManagedObjectModel wraps the corresponding Objective-C method.
+// ManagedObjectModel returns the managed object model.
 func (ed *EntityDescription) ManagedObjectModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// ManagedObjectClassName wraps the corresponding Objective-C method.
+// ManagedObjectClassName returns the managed object class name.
 func (ed *EntityDescription) ManagedObjectClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectClassName"))
 	if _r == 0 {
@@ -176,7 +176,7 @@ func (ed *EntityDescription) ManagedObjectClassName() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ed *EntityDescription) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("name"))
 	if _r == 0 {
@@ -185,19 +185,19 @@ func (ed *EntityDescription) Name() string {
 	return purego.GoString(_r)
 }
 
-// IsAbstract wraps the corresponding Objective-C method.
+// IsAbstract reports whether the object is abstract.
 func (ed *EntityDescription) IsAbstract() bool {
 	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("isAbstract"))
 	return _r
 }
 
-// SubentitiesByName wraps the corresponding Objective-C method.
+// SubentitiesByName returns the subentities by name.
 func (ed *EntityDescription) SubentitiesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("subentitiesByName"))
 	return obj.Wrap(_r)
 }
 
-// Subentities wraps the corresponding Objective-C method.
+// Subentities returns the subentities.
 //
 // Subentities returns the collection as a Go slice.
 func (ed *EntityDescription) Subentities() []*EntityDescription {
@@ -205,19 +205,19 @@ func (ed *EntityDescription) Subentities() []*EntityDescription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
-// Superentity wraps the corresponding Objective-C method.
+// Superentity returns the superentity.
 func (ed *EntityDescription) Superentity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("superentity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// PropertiesByName wraps the corresponding Objective-C method.
+// PropertiesByName returns the properties by name.
 func (ed *EntityDescription) PropertiesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("propertiesByName"))
 	return obj.Wrap(_r)
 }
 
-// Properties wraps the corresponding Objective-C method.
+// Properties returns the properties.
 //
 // Properties returns the collection as a Go slice.
 func (ed *EntityDescription) Properties() []*PropertyDescription {
@@ -225,31 +225,31 @@ func (ed *EntityDescription) Properties() []*PropertyDescription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyDescription { return PropertyDescriptionFromID(_id) })
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (ed *EntityDescription) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// AttributesByName wraps the corresponding Objective-C method.
+// AttributesByName returns the attributes by name.
 func (ed *EntityDescription) AttributesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("attributesByName"))
 	return obj.Wrap(_r)
 }
 
-// RelationshipsByName wraps the corresponding Objective-C method.
+// RelationshipsByName returns the relationships by name.
 func (ed *EntityDescription) RelationshipsByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("relationshipsByName"))
 	return obj.Wrap(_r)
 }
 
-// VersionHash wraps the corresponding Objective-C method.
+// VersionHash returns the version hash.
 func (ed *EntityDescription) VersionHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHash"))
 	return obj.Wrap(_r)
 }
 
-// VersionHashModifier wraps the corresponding Objective-C method.
+// VersionHashModifier returns the version hash modifier.
 func (ed *EntityDescription) VersionHashModifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
@@ -258,7 +258,7 @@ func (ed *EntityDescription) VersionHashModifier() string {
 	return purego.GoString(_r)
 }
 
-// RenamingIdentifier wraps the corresponding Objective-C method.
+// RenamingIdentifier returns the renaming identifier.
 func (ed *EntityDescription) RenamingIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {
@@ -267,7 +267,7 @@ func (ed *EntityDescription) RenamingIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Indexes wraps the corresponding Objective-C method.
+// Indexes returns the indexes.
 //
 // Indexes returns the collection as a Go slice.
 func (ed *EntityDescription) Indexes() []*FetchIndexDescription {
@@ -275,7 +275,7 @@ func (ed *EntityDescription) Indexes() []*FetchIndexDescription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexDescription { return FetchIndexDescriptionFromID(_id) })
 }
 
-// UniquenessConstraints wraps the corresponding Objective-C method.
+// UniquenessConstraints returns the uniqueness constraints.
 //
 // UniquenessConstraints returns the collection as a Go slice.
 func (ed *EntityDescription) UniquenessConstraints() []obj.Object {
@@ -283,7 +283,7 @@ func (ed *EntityDescription) UniquenessConstraints() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CompoundIndexes wraps the corresponding Objective-C method.
+// CompoundIndexes returns the compound indexes.
 //
 // CompoundIndexes returns the collection as a Go slice.
 func (ed *EntityDescription) CompoundIndexes() []obj.Object {
@@ -291,7 +291,7 @@ func (ed *EntityDescription) CompoundIndexes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CoreSpotlightDisplayNameExpression wraps the corresponding Objective-C method.
+// CoreSpotlightDisplayNameExpression returns the core spotlight display name expression.
 func (ed *EntityDescription) CoreSpotlightDisplayNameExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("coreSpotlightDisplayNameExpression"))
 	return obj.Wrap(_r)

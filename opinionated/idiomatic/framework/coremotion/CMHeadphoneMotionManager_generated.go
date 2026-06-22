@@ -82,35 +82,35 @@ func (hmm *HeadphoneMotionManager) StopDeviceMotionUpdates() {
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopDeviceMotionUpdates"))
 }
 
-// StartConnectionStatusUpdates wraps the corresponding Objective-C method.
+// StartConnectionStatusUpdates starts connection status updates.
 func (hmm *HeadphoneMotionManager) StartConnectionStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startConnectionStatusUpdates"))
 }
 
-// StopConnectionStatusUpdates wraps the corresponding Objective-C method.
+// StopConnectionStatusUpdates stops connection status updates.
 func (hmm *HeadphoneMotionManager) StopConnectionStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopConnectionStatusUpdates"))
 }
 
-// IsConnectionStatusActive wraps the corresponding Objective-C method.
+// IsConnectionStatusActive reports whether the object is connection status active.
 func (hmm *HeadphoneMotionManager) IsConnectionStatusActive() bool {
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isConnectionStatusActive"))
 	return _r
 }
 
-// IsDeviceMotionAvailable wraps the corresponding Objective-C method.
+// IsDeviceMotionAvailable reports whether the object is device motion available.
 func (hmm *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionAvailable"))
 	return _r
 }
 
-// IsDeviceMotionActive wraps the corresponding Objective-C method.
+// IsDeviceMotionActive reports whether the object is device motion active.
 func (hmm *HeadphoneMotionManager) IsDeviceMotionActive() bool {
 	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionActive"))
 	return _r
 }
 
-// DeviceMotion wraps the corresponding Objective-C method.
+// DeviceMotion returns the device motion.
 func (hmm *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
 	_r := objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("deviceMotion"))
 	return DeviceMotionFromID(_r)

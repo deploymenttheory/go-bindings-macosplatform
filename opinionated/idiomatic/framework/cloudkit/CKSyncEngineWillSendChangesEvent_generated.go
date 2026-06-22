@@ -51,7 +51,7 @@ func NewSyncEngineWillSendChangesEvent() *SyncEngineWillSendChangesEvent {
 	return syncEngineWillSendChangesEventAdopt(_id)
 }
 
-// Context wraps the corresponding Objective-C method.
+// Context returns the context.
 func (sewsce *SyncEngineWillSendChangesEvent) Context() *SyncEngineSendChangesContext {
 	_r := objc.Send[objc.ID](objref.IDOf(sewsce), objc.RegisterName("context"))
 	return SyncEngineSendChangesContextFromID(_r)

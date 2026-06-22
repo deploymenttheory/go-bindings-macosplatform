@@ -94,25 +94,25 @@ func (r *Request) PreparedURLRequest() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Account wraps the corresponding Objective-C method.
+// Account returns the account.
 func (r *Request) Account() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("account"))
 	return obj.Wrap(_r)
 }
 
-// RequestMethod wraps the corresponding Objective-C method.
+// RequestMethod returns the request method.
 func (r *Request) RequestMethod() RequestMethod {
 	_r := objc.Send[RequestMethod](objref.IDOf(r), objc.RegisterName("requestMethod"))
 	return _r
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (r *Request) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Parameters wraps the corresponding Objective-C method.
+// Parameters returns the parameters.
 func (r *Request) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)

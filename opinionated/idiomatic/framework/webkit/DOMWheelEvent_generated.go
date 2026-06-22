@@ -50,37 +50,37 @@ func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKe
 	return dOMWheelEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (dwe *DOMWheelEvent) WithReturnValue(returnValue bool) *DOMWheelEvent {
 	objc.Send[objc.ID](objref.IDOf(dwe), objc.RegisterName("setReturnValue:"), returnValue)
 	return dwe
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (dwe *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
 	objc.Send[objc.ID](objref.IDOf(dwe), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return dwe
 }
 
-// WheelDeltaX wraps the corresponding Objective-C method.
+// WheelDeltaX returns the wheel delta x.
 func (dwe *DOMWheelEvent) WheelDeltaX() int {
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaX"))
 	return _r
 }
 
-// WheelDeltaY wraps the corresponding Objective-C method.
+// WheelDeltaY returns the wheel delta y.
 func (dwe *DOMWheelEvent) WheelDeltaY() int {
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDeltaY"))
 	return _r
 }
 
-// WheelDelta wraps the corresponding Objective-C method.
+// WheelDelta returns the wheel delta.
 func (dwe *DOMWheelEvent) WheelDelta() int {
 	_r := objc.Send[int](objref.IDOf(dwe), objc.RegisterName("wheelDelta"))
 	return _r
 }
 
-// IsHorizontal wraps the corresponding Objective-C method.
+// IsHorizontal reports whether the object is horizontal.
 func (dwe *DOMWheelEvent) IsHorizontal() bool {
 	_r := objc.Send[bool](objref.IDOf(dwe), objc.RegisterName("isHorizontal"))
 	return _r

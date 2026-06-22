@@ -56,7 +56,7 @@ func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MT
 	return mTRBaseClusterDeviceEnergyManagementAdopt(_id)
 }
 
-// ReadAttributeESATypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeESATypeWithCompletion reads attribute esa type with completion.
 //
 // ReadAttributeESATypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWit
 	}
 }
 
-// ReadAttributeESACanGenerateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeESACanGenerateWithCompletion reads attribute esa can generate with completion.
 //
 // ReadAttributeESACanGenerateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGene
 	}
 }
 
-// ReadAttributeESAStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeESAStateWithCompletion reads attribute esa state with completion.
 //
 // ReadAttributeESAStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWi
 	}
 }
 
-// ReadAttributeAbsMinPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMinPowerWithCompletion reads attribute abs min power with completion.
 //
 // ReadAttributeAbsMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowe
 	}
 }
 
-// ReadAttributeAbsMaxPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAbsMaxPowerWithCompletion reads attribute abs max power with completion.
 //
 // ReadAttributeAbsMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowe
 	}
 }
 
-// ReadAttributePowerAdjustmentCapabilityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerAdjustmentCapabilityWithCompletion reads attribute power adjustment capability with completion.
 //
 // ReadAttributePowerAdjustmentCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, err error) {
@@ -356,7 +356,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjus
 	}
 }
 
-// ReadAttributeForecastWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeForecastWithCompletion reads attribute forecast with completion.
 //
 // ReadAttributeForecastWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterForecastStruct, err error) {
@@ -406,7 +406,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWi
 	}
 }
 
-// ReadAttributeOptOutStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOptOutStateWithCompletion reads attribute opt out state with completion.
 //
 // ReadAttributeOptOutStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStat
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedC
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCo
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeL
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -656,7 +656,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMap
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

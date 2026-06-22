@@ -70,7 +70,7 @@ func NewMTRBarrierControlClusterBarrierControlGoToPercentParams() *MTRBarrierCon
 	return mTRBarrierControlClusterBarrierControlGoToPercentParamsAdopt(_id)
 }
 
-// WithPercentOpen sets the property and returns the receiver so calls can be chained.
+// WithPercentOpen sets the percent open.
 func (mbccbcgtpp *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithPercentOpen(percentOpen obj.Object) *MTRBarrierControlClusterBarrierControlGoToPercentParams {
 	objc.Send[objc.ID](objref.IDOf(mbccbcgtpp), objc.RegisterName("setPercentOpen:"), objref.IDOf(percentOpen))
 	return mbccbcgtpp
@@ -88,7 +88,7 @@ func (mbccbcgtpp *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithS
 	return mbccbcgtpp
 }
 
-// PercentOpen wraps the corresponding Objective-C method.
+// PercentOpen returns the percent open.
 func (mbccbcgtpp *MTRBarrierControlClusterBarrierControlGoToPercentParams) PercentOpen() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbccbcgtpp), objc.RegisterName("percentOpen"))
 	return obj.Wrap(_r)

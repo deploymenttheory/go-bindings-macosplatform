@@ -247,7 +247,7 @@ func (aw *AssetWriter) AddInputGroup(inputGroup *AssetWriterInputGroup) {
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("addInputGroup:"), objref.IDOf(inputGroup))
 }
 
-// InputGroups wraps the corresponding Objective-C method.
+// InputGroups returns the input groups.
 //
 // InputGroups returns the collection as a Go slice.
 func (aw *AssetWriter) InputGroups() []*AssetWriterInputGroup {
@@ -260,7 +260,7 @@ func (aw *AssetWriter) FlushSegment() {
 	objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("flushSegment"))
 }
 
-// OutputFileTypeProfile wraps the corresponding Objective-C method.
+// OutputFileTypeProfile returns the output file type profile.
 func (aw *AssetWriter) OutputFileTypeProfile() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aw), objc.RegisterName("outputFileTypeProfile"))
 	return obj.Wrap(_r)

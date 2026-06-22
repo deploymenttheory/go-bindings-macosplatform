@@ -70,13 +70,13 @@ func NewMTRSwitchClusterLongReleaseEvent() *MTRSwitchClusterLongReleaseEvent {
 	return mTRSwitchClusterLongReleaseEventAdopt(_id)
 }
 
-// WithPreviousPosition sets the property and returns the receiver so calls can be chained.
+// WithPreviousPosition sets the previous position.
 func (msclre *MTRSwitchClusterLongReleaseEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterLongReleaseEvent {
 	objc.Send[objc.ID](objref.IDOf(msclre), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 	return msclre
 }
 
-// PreviousPosition wraps the corresponding Objective-C method.
+// PreviousPosition returns the previous position.
 func (msclre *MTRSwitchClusterLongReleaseEvent) PreviousPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msclre), objc.RegisterName("previousPosition"))
 	return obj.Wrap(_r)

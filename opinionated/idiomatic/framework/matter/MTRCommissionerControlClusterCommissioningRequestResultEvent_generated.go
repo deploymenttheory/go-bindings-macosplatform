@@ -70,49 +70,49 @@ func NewMTRCommissionerControlClusterCommissioningRequestResultEvent() *MTRCommi
 	return mTRCommissionerControlClusterCommissioningRequestResultEventAdopt(_id)
 }
 
-// WithRequestID sets the property and returns the receiver so calls can be chained.
+// WithRequestID sets the request ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mccccrre
 }
 
-// WithClientNodeID sets the property and returns the receiver so calls can be chained.
+// WithClientNodeID sets the client node ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithClientNodeID(clientNodeID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setClientNodeID:"), objref.IDOf(clientNodeID))
 	return mccccrre
 }
 
-// WithStatusCode sets the property and returns the receiver so calls can be chained.
+// WithStatusCode sets the status code.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithStatusCode(statusCode obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mccccrre
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithFabricIndex(fabricIndex obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
 	objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mccccrre
 }
 
-// RequestID wraps the corresponding Objective-C method.
+// RequestID returns the request ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("requestID"))
 	return obj.Wrap(_r)
 }
 
-// ClientNodeID wraps the corresponding Objective-C method.
+// ClientNodeID returns the client node ID.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("clientNodeID"))
 	return obj.Wrap(_r)
 }
 
-// StatusCode wraps the corresponding Objective-C method.
+// StatusCode returns the status code.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mccccrre *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrre), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

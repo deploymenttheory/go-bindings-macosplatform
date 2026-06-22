@@ -54,13 +54,13 @@ func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationS
 	return boatReservationAdopt(_id)
 }
 
-// ReservedSeat wraps the corresponding Objective-C method.
+// ReservedSeat returns the reserved seat.
 func (br *BoatReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
-// BoatTrip wraps the corresponding Objective-C method.
+// BoatTrip returns the boat trip.
 func (br *BoatReservation) BoatTrip() *BoatTrip {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("boatTrip"))
 	return BoatTripFromID(_r)

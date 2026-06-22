@@ -81,25 +81,25 @@ func (pj *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
 	return pj
 }
 
-// BodyA wraps the corresponding Objective-C method.
+// BodyA returns the body a.
 func (pj *PhysicsJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
-// BodyB wraps the corresponding Objective-C method.
+// BodyB returns the body b.
 func (pj *PhysicsJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
-// ReactionForce wraps the corresponding Objective-C method.
+// ReactionForce returns the reaction force.
 func (pj *PhysicsJoint) ReactionForce() corefoundation.CGVector {
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pj), objc.RegisterName("reactionForce"))
 	return _r
 }
 
-// ReactionTorque wraps the corresponding Objective-C method.
+// ReactionTorque returns the reaction torque.
 func (pj *PhysicsJoint) ReactionTorque() float64 {
 	_r := objc.Send[float64](objref.IDOf(pj), objc.RegisterName("reactionTorque"))
 	return _r

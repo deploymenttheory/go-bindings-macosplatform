@@ -77,25 +77,25 @@ func (wd *WKDownload) Cancel(completionHandler func(obj.Object) int) {
 	objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 }
 
-// OriginalRequest wraps the corresponding Objective-C method.
+// OriginalRequest returns the original request.
 func (wd *WKDownload) OriginalRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originalRequest"))
 	return obj.Wrap(_r)
 }
 
-// WebView wraps the corresponding Objective-C method.
+// WebView returns the web view.
 func (wd *WKDownload) WebView() *WKWebView {
 	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("webView"))
 	return WKWebViewFromID(_r)
 }
 
-// IsUserInitiated wraps the corresponding Objective-C method.
+// IsUserInitiated reports whether the object is user initiated.
 func (wd *WKDownload) IsUserInitiated() bool {
 	_r := objc.Send[bool](objref.IDOf(wd), objc.RegisterName("isUserInitiated"))
 	return _r
 }
 
-// OriginatingFrame wraps the corresponding Objective-C method.
+// OriginatingFrame returns the originating frame.
 func (wd *WKDownload) OriginatingFrame() *WKFrameInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originatingFrame"))
 	return WKFrameInfoFromID(_r)

@@ -70,7 +70,7 @@ func (ibr *ImageBasedRequest) WithRevision(revision int) *ImageBasedRequest {
 	return ibr
 }
 
-// RegionOfInterest wraps the corresponding Objective-C method.
+// RegionOfInterest returns the region of interest.
 func (ibr *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ibr), objc.RegisterName("regionOfInterest"))
 	return _r

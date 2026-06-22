@@ -73,7 +73,7 @@ func NewMediaLibraryWithOptions(options obj.Object) *MediaLibrary {
 	return mediaLibraryAdopt(_id)
 }
 
-// MediaSources wraps the corresponding Objective-C method.
+// MediaSources returns the media sources.
 func (ml *MediaLibrary) MediaSources() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("mediaSources"))
 	return obj.Wrap(_r)

@@ -157,43 +157,43 @@ func (si *StatusItem) WithView(view ViewProvider) *StatusItem {
 	return si
 }
 
-// StatusBar wraps the corresponding Objective-C method.
+// StatusBar returns the status bar.
 func (si *StatusItem) StatusBar() *StatusBar {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("statusBar"))
 	return StatusBarFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (si *StatusItem) Length() float64 {
 	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("length"))
 	return _r
 }
 
-// Menu wraps the corresponding Objective-C method.
+// Menu returns the menu.
 func (si *StatusItem) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
-// Button wraps the corresponding Objective-C method.
+// Button returns the button.
 func (si *StatusItem) Button() *StatusBarButton {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("button"))
 	return StatusBarButtonFromID(_r)
 }
 
-// Behavior wraps the corresponding Objective-C method.
+// Behavior returns the behavior.
 func (si *StatusItem) Behavior() StatusItemBehavior {
 	_r := objc.Send[StatusItemBehavior](objref.IDOf(si), objc.RegisterName("behavior"))
 	return _r
 }
 
-// IsVisible wraps the corresponding Objective-C method.
+// IsVisible reports whether the object is visible.
 func (si *StatusItem) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// AutosaveName wraps the corresponding Objective-C method.
+// AutosaveName returns the autosave name.
 func (si *StatusItem) AutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("autosaveName"))
 	return obj.Wrap(_r)
@@ -215,13 +215,13 @@ func (si *StatusItem) PopUpStatusItemMenu(menu *Menu) {
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("popUpStatusItemMenu:"), objref.IDOf(menu))
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (si *StatusItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (si *StatusItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("title"))
 	if _r == 0 {
@@ -230,25 +230,25 @@ func (si *StatusItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (si *StatusItem) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (si *StatusItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// AlternateImage wraps the corresponding Objective-C method.
+// AlternateImage returns the alternate image.
 func (si *StatusItem) AlternateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (si *StatusItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isEnabled"))
 	return _r
@@ -260,7 +260,7 @@ func (si *StatusItem) HighlightMode() bool {
 	return _r
 }
 
-// ToolTip wraps the corresponding Objective-C method.
+// ToolTip returns the tool tip.
 func (si *StatusItem) ToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("toolTip"))
 	if _r == 0 {
@@ -269,7 +269,7 @@ func (si *StatusItem) ToolTip() string {
 	return purego.GoString(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (si *StatusItem) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("view"))
 	return ViewFromID(_r)

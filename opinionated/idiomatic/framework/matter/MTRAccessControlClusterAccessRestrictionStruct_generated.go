@@ -70,25 +70,25 @@ func NewMTRAccessControlClusterAccessRestrictionStruct() *MTRAccessControlCluste
 	return mTRAccessControlClusterAccessRestrictionStructAdopt(_id)
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) WithType(type_ obj.Object) *MTRAccessControlClusterAccessRestrictionStruct {
 	objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return maccars
 }
 
-// WithID sets the property and returns the receiver so calls can be chained.
+// WithID sets the ID.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) WithID(id_ obj.Object) *MTRAccessControlClusterAccessRestrictionStruct {
 	objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return maccars
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// ID wraps the corresponding Objective-C method.
+// ID returns the ID.
 func (maccars *MTRAccessControlClusterAccessRestrictionStruct) ID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccars), objc.RegisterName("id"))
 	return obj.Wrap(_r)

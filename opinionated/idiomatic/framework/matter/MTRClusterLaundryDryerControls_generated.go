@@ -53,53 +53,53 @@ func NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue(device *MTRDevic
 	return mTRClusterLaundryDryerControlsAdopt(_id)
 }
 
-// ReadAttributeSupportedDrynessLevelsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedDrynessLevelsWithParams reads attribute supported dryness levels with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeSupportedDrynessLevelsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeSupportedDrynessLevelsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSelectedDrynessLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSelectedDrynessLevelWithParams reads attribute selected dryness level with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeSelectedDrynessLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeSelectedDrynessLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval writes attribute selected dryness level with value expected value interval.
 func (mcldc *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams writes attribute selected dryness level with value expected value interval params.
 func (mcldc *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("writeAttributeSelectedDrynessLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcldc *MTRClusterLaundryDryerControls) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcldc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

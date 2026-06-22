@@ -66,25 +66,25 @@ func (mutctlso *MTRUnitTestingClusterTestListStructOctet) String() string {
 	return rt.Description(objref.IDOf(mutctlso))
 }
 
-// WithMember1 sets the property and returns the receiver so calls can be chained.
+// WithMember1 sets the member1.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return mutctlso
 }
 
-// WithMember2 sets the property and returns the receiver so calls can be chained.
+// WithMember2 sets the member2.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 	return mutctlso
 }
 
-// Member1 wraps the corresponding Objective-C method.
+// Member1 returns the member1.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member1"))
 	return obj.Wrap(_r)
 }
 
-// Member2 wraps the corresponding Objective-C method.
+// Member2 returns the member2.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member2"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewSpellServer() *SpellServer {
 	return spellServerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ss *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ss

@@ -63,7 +63,7 @@ func (crmc *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatMode
 	return crmc
 }
 
-// CurrentRepeatType wraps the corresponding Objective-C method.
+// CurrentRepeatType returns the current repeat type.
 func (crmc *ChangeRepeatModeCommand) CurrentRepeatType() RepeatType {
 	_r := objc.Send[RepeatType](objref.IDOf(crmc), objc.RegisterName("currentRepeatType"))
 	return _r

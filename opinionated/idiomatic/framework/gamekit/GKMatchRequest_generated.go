@@ -193,7 +193,7 @@ func (mr *MatchRequest) RestrictToAutomatch() bool {
 	return _r
 }
 
-// PlayersToInvite wraps the corresponding Objective-C method.
+// PlayersToInvite returns the players to invite.
 //
 // PlayersToInvite returns the collection as a Go slice.
 func (mr *MatchRequest) PlayersToInvite() []string {

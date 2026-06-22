@@ -72,7 +72,7 @@ func NewValueFunction() *ValueFunction {
 	return valueFunctionAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (vf *ValueFunction) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vf), objc.RegisterName("name"))
 	return obj.Wrap(_r)

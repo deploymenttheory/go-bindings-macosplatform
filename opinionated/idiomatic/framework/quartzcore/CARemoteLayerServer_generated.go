@@ -72,7 +72,7 @@ func NewRemoteLayerServer() *RemoteLayerServer {
 	return remoteLayerServerAdopt(_id)
 }
 
-// ServerPort wraps the corresponding Objective-C method.
+// ServerPort returns the server port.
 func (rls *RemoteLayerServer) ServerPort() int {
 	_r := objc.Send[int](objref.IDOf(rls), objc.RegisterName("serverPort"))
 	return _r

@@ -45,7 +45,7 @@ func nNBinaryGradientStateAdopt(id objc.ID) *NNBinaryGradientState {
 	return x
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (nbgs *NNBinaryGradientState) WithReadCount(readCount int) *NNBinaryGradientState {
 	objc.Send[objc.ID](objref.IDOf(nbgs), objc.RegisterName("setReadCount:"), readCount)
 	return nbgs

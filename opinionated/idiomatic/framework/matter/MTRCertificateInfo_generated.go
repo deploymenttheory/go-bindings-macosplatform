@@ -83,13 +83,13 @@ func (mci *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
-// NotBefore wraps the corresponding Objective-C method.
+// NotBefore returns the not before.
 func (mci *MTRCertificateInfo) NotBefore() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notBefore"))
 	return obj.Wrap(_r)
 }
 
-// NotAfter wraps the corresponding Objective-C method.
+// NotAfter returns the not after.
 func (mci *MTRCertificateInfo) NotAfter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notAfter"))
 	return obj.Wrap(_r)

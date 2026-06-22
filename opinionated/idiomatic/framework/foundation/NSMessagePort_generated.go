@@ -52,7 +52,7 @@ func NewMessagePort() *MessagePort {
 	return messagePortAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mp *MessagePort) WithScriptingProperties(scriptingProperties obj.Object) *MessagePort {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mp

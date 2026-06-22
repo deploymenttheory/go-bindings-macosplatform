@@ -51,19 +51,19 @@ func NewCNNSubtractGradient() *CNNSubtractGradient {
 	return cNNSubtractGradientAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (csg *CNNSubtractGradient) WithPrimaryScale(primaryScale float32) *CNNSubtractGradient {
 	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return csg
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (csg *CNNSubtractGradient) WithSecondaryScale(secondaryScale float32) *CNNSubtractGradient {
 	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return csg
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (csg *CNNSubtractGradient) WithBias(bias float32) *CNNSubtractGradient {
 	objc.Send[objc.ID](objref.IDOf(csg), objc.RegisterName("setBias:"), bias)
 	return csg

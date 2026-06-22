@@ -64,7 +64,7 @@ func (snd *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *SoundEventNodeDe
 	objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("addSubtree:switchValue:"), objref.IDOf(subtree), purego.NSString(switchValue))
 }
 
-// SwitchMetaParameterDefinition wraps the corresponding Objective-C method.
+// SwitchMetaParameterDefinition returns the switch meta parameter definition.
 func (snd *SwitchNodeDefinition) SwitchMetaParameterDefinition() *StringMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(snd), objc.RegisterName("switchMetaParameterDefinition"))
 	return StringMetaParameterDefinitionFromID(_r)

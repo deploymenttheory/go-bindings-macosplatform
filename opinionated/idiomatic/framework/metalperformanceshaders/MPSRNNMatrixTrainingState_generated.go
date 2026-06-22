@@ -51,7 +51,7 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 	return rNNMatrixTrainingStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (rmts *RNNMatrixTrainingState) WithReadCount(readCount int) *RNNMatrixTrainingState {
 	objc.Send[objc.ID](objref.IDOf(rmts), objc.RegisterName("setReadCount:"), readCount)
 	return rmts

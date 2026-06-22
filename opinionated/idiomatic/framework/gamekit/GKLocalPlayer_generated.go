@@ -154,7 +154,7 @@ func (lp *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, cate
 	}
 }
 
-// LoadDefaultLeaderboardCategoryID wraps the corresponding Objective-C method.
+// LoadDefaultLeaderboardCategoryID loads default leaderboard category ID.
 //
 // LoadDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (result string, err error) {
@@ -198,7 +198,7 @@ func (lp *LocalPlayer) Authenticate(ctx context.Context) error {
 	}
 }
 
-// LoadFriendPlayers wraps the corresponding Objective-C method.
+// LoadFriendPlayers loads friend players.
 //
 // LoadFriendPlayers blocks until the operation completes or ctx is cancelled.
 func (lp *LocalPlayer) LoadFriendPlayers(ctx context.Context) (result obj.Object, err error) {
@@ -292,7 +292,7 @@ func (lp *LocalPlayer) LoadFriends(ctx context.Context) (result obj.Object, err 
 	}
 }
 
-// Friends wraps the corresponding Objective-C method.
+// Friends returns the friends.
 //
 // Friends returns the collection as a Go slice.
 func (lp *LocalPlayer) Friends() []string {

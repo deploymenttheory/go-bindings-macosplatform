@@ -49,7 +49,7 @@ func NewDOMCounter() *DOMCounter {
 	return dOMCounterAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (dc *DOMCounter) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -58,7 +58,7 @@ func (dc *DOMCounter) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// ListStyle wraps the corresponding Objective-C method.
+// ListStyle returns the list style.
 func (dc *DOMCounter) ListStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("listStyle"))
 	if _r == 0 {
@@ -67,7 +67,7 @@ func (dc *DOMCounter) ListStyle() string {
 	return purego.GoString(_r)
 }
 
-// Separator wraps the corresponding Objective-C method.
+// Separator returns the separator.
 func (dc *DOMCounter) Separator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("separator"))
 	if _r == 0 {

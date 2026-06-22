@@ -76,7 +76,7 @@ func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int
 	return calendarDateAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cd *CalendarDate) WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cd
@@ -88,61 +88,61 @@ func (cd *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int,
 	return CalendarDateFromID(_r)
 }
 
-// DayOfCommonEra wraps the corresponding Objective-C method.
+// DayOfCommonEra returns the day of common era.
 func (cd *CalendarDate) DayOfCommonEra() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfCommonEra"))
 	return _r
 }
 
-// DayOfMonth wraps the corresponding Objective-C method.
+// DayOfMonth returns the day of month.
 func (cd *CalendarDate) DayOfMonth() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfMonth"))
 	return _r
 }
 
-// DayOfWeek wraps the corresponding Objective-C method.
+// DayOfWeek returns the day of week.
 func (cd *CalendarDate) DayOfWeek() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfWeek"))
 	return _r
 }
 
-// DayOfYear wraps the corresponding Objective-C method.
+// DayOfYear returns the day of year.
 func (cd *CalendarDate) DayOfYear() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfYear"))
 	return _r
 }
 
-// HourOfDay wraps the corresponding Objective-C method.
+// HourOfDay returns the hour of day.
 func (cd *CalendarDate) HourOfDay() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("hourOfDay"))
 	return _r
 }
 
-// MinuteOfHour wraps the corresponding Objective-C method.
+// MinuteOfHour returns the minute of hour.
 func (cd *CalendarDate) MinuteOfHour() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("minuteOfHour"))
 	return _r
 }
 
-// MonthOfYear wraps the corresponding Objective-C method.
+// MonthOfYear returns the month of year.
 func (cd *CalendarDate) MonthOfYear() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("monthOfYear"))
 	return _r
 }
 
-// SecondOfMinute wraps the corresponding Objective-C method.
+// SecondOfMinute returns the second of minute.
 func (cd *CalendarDate) SecondOfMinute() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("secondOfMinute"))
 	return _r
 }
 
-// YearOfCommonEra wraps the corresponding Objective-C method.
+// YearOfCommonEra returns the year of common era.
 func (cd *CalendarDate) YearOfCommonEra() int {
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("yearOfCommonEra"))
 	return _r
 }
 
-// CalendarFormat wraps the corresponding Objective-C method.
+// CalendarFormat returns the calendar format.
 func (cd *CalendarDate) CalendarFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("calendarFormat"))
 	if _r == 0 {
@@ -169,7 +169,7 @@ func (cd *CalendarDate) DescriptionWithCalendarFormat(format string) string {
 	return purego.GoString(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (cd *CalendarDate) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)

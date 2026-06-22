@@ -70,7 +70,7 @@ func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNe
 	return mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetC
 	objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

@@ -58,79 +58,79 @@ func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue(de
 	return mTRClusterThermostatUserInterfaceConfigurationAdopt(_id)
 }
 
-// ReadAttributeTemperatureDisplayModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureDisplayModeWithParams reads attribute temperature display mode with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeTemperatureDisplayModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval writes attribute temperature display mode with value expected value interval.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams writes attribute temperature display mode with value expected value interval params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeKeypadLockoutWithParams wraps the corresponding Objective-C method.
+// ReadAttributeKeypadLockoutWithParams reads attribute keypad lockout with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeKeypadLockoutWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeKeypadLockoutWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeKeypadLockoutWithValueExpectedValueInterval writes attribute keypad lockout with value expected value interval.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams writes attribute keypad lockout with value expected value interval params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeScheduleProgrammingVisibilityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeScheduleProgrammingVisibilityWithParams reads attribute schedule programming visibility with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeScheduleProgrammingVisibilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval writes attribute schedule programming visibility with value expected value interval.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams writes attribute schedule programming visibility with value expected value interval params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mctuic *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctuic), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

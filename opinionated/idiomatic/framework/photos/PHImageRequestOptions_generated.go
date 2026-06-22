@@ -103,37 +103,37 @@ func (iro *ImageRequestOptions) WithSynchronous(synchronous bool) *ImageRequestO
 	return iro
 }
 
-// WithAllowSecondaryDegradedImage sets the property and returns the receiver so calls can be chained.
+// WithAllowSecondaryDegradedImage sets the allow secondary degraded image.
 func (iro *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDegradedImage bool) *ImageRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(iro), objc.RegisterName("setAllowSecondaryDegradedImage:"), allowSecondaryDegradedImage)
 	return iro
 }
 
-// DeliveryMode wraps the corresponding Objective-C method.
+// DeliveryMode returns the delivery mode.
 func (iro *ImageRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(iro), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
-// ResizeMode wraps the corresponding Objective-C method.
+// ResizeMode returns the resize mode.
 func (iro *ImageRequestOptions) ResizeMode() ImageRequestOptionsResizeMode {
 	_r := objc.Send[ImageRequestOptionsResizeMode](objref.IDOf(iro), objc.RegisterName("resizeMode"))
 	return _r
 }
 
-// NormalizedCropRect wraps the corresponding Objective-C method.
+// NormalizedCropRect returns the normalized crop rect.
 func (iro *ImageRequestOptions) NormalizedCropRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iro), objc.RegisterName("normalizedCropRect"))
 	return _r
 }
 
-// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
+// IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (iro *ImageRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
-// IsSynchronous wraps the corresponding Objective-C method.
+// IsSynchronous reports whether the object is synchronous.
 func (iro *ImageRequestOptions) IsSynchronous() bool {
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("isSynchronous"))
 	return _r

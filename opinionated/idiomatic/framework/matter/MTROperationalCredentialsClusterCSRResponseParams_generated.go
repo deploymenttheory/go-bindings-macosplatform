@@ -78,13 +78,13 @@ func NewMTROperationalCredentialsClusterCSRResponseParamsWithResponseValueError(
 	return mTROperationalCredentialsClusterCSRResponseParamsAdopt(_id), nil
 }
 
-// WithNocsrElements sets the property and returns the receiver so calls can be chained.
+// WithNocsrElements sets the nocsr elements.
 func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithNocsrElements(nocsrElements obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setNocsrElements:"), objref.IDOf(nocsrElements))
 	return mocccrp
 }
 
-// WithAttestationSignature sets the property and returns the receiver so calls can be chained.
+// WithAttestationSignature sets the attestation signature.
 func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterCSRResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
 	return mocccrp
@@ -96,13 +96,13 @@ func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) WithTimedInvok
 	return mocccrp
 }
 
-// NocsrElements wraps the corresponding Objective-C method.
+// NocsrElements returns the nocsr elements.
 func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) NocsrElements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("nocsrElements"))
 	return obj.Wrap(_r)
 }
 
-// AttestationSignature wraps the corresponding Objective-C method.
+// AttestationSignature returns the attestation signature.
 func (mocccrp *MTROperationalCredentialsClusterCSRResponseParams) AttestationSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("attestationSignature"))
 	return obj.Wrap(_r)

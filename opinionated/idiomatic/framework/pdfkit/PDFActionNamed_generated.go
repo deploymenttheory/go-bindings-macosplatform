@@ -58,7 +58,7 @@ func (an *ActionNamed) WithName(name ActionNamedName) *ActionNamed {
 	return an
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (an *ActionNamed) Name() ActionNamedName {
 	_r := objc.Send[ActionNamedName](objref.IDOf(an), objc.RegisterName("name"))
 	return _r

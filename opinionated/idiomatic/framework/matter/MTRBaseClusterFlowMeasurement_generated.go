@@ -61,7 +61,7 @@ func NewMTRBaseClusterFlowMeasurementWithDeviceEndpointQueue(device *MTRBaseDevi
 	return mTRBaseClusterFlowMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValueWithCompletion reads attribute measured value with completion.
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMeasuredValueWithP
 	}
 }
 
-// ReadAttributeMinMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValueWithCompletion reads attribute min measured value with completion.
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMinMeasuredValueWi
 	}
 }
 
-// ReadAttributeMaxMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValueWithCompletion reads attribute max measured value with completion.
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMaxMeasuredValueWi
 	}
 }
 
-// ReadAttributeToleranceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeToleranceWithCompletion reads attribute tolerance with completion.
 //
 // ReadAttributeToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeToleranceWithParam
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeAttributeListWithP
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeFeatureMapWithPara
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeClusterRevisionWit
 	}
 }
 
-// ReadAttributeMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValue reads attribute measured value.
 //
 // ReadAttributeMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMeasuredValueWithM
 	}
 }
 
-// ReadAttributeMinMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValue reads attribute min measured value.
 //
 // ReadAttributeMinMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMinMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMinMeasuredValueWi
 	}
 }
 
-// ReadAttributeMaxMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValue reads attribute max measured value.
 //
 // ReadAttributeMaxMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeMaxMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeMaxMeasuredValueWi
 	}
 }
 
-// ReadAttributeTolerance wraps the corresponding Objective-C method.
+// ReadAttributeTolerance reads attribute tolerance.
 //
 // ReadAttributeTolerance blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeTolerance(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeToleranceWithMinIn
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeAttributeListWithM
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcfm *MTRBaseClusterFlowMeasurement) SubscribeAttributeFeatureMapWithMinI
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcfm *MTRBaseClusterFlowMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

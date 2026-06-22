@@ -104,17 +104,17 @@ func (iss *ISyncSession) ShouldReplaceAllRecordsOnClientForEntityName(entityName
 	return _r
 }
 
-// PushChange wraps the corresponding Objective-C method.
+// PushChange pushes change.
 func (iss *ISyncSession) PushChange(change *ISyncChange) {
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("pushChange:"), objref.IDOf(change))
 }
 
-// PushChangesFromRecordWithIdentifier wraps the corresponding Objective-C method.
+// PushChangesFromRecordWithIdentifier pushes changes from record with identifier.
 func (iss *ISyncSession) PushChangesFromRecordWithIdentifier(record obj.Object, recordId string) {
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("pushChangesFromRecord:withIdentifier:"), objref.IDOf(record), purego.NSString(recordId))
 }
 
-// DeleteRecordWithIdentifier wraps the corresponding Objective-C method.
+// DeleteRecordWithIdentifier deletes record with identifier.
 func (iss *ISyncSession) DeleteRecordWithIdentifier(recordId string) {
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("deleteRecordWithIdentifier:"), purego.NSString(recordId))
 }
@@ -129,7 +129,7 @@ func (iss *ISyncSession) ClientFinishedPushingChangesWithNextAnchors(anchors obj
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientFinishedPushingChangesWithNextAnchors:"), objref.IDOf(anchors))
 }
 
-// PrepareToPullChangesForEntityNamesBeforeDate wraps the corresponding Objective-C method.
+// PrepareToPullChangesForEntityNamesBeforeDate prepares to pull changes for entity names before date.
 func (iss *ISyncSession) PrepareToPullChangesForEntityNamesBeforeDate(entityNames obj.Object, date obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("prepareToPullChangesForEntityNames:beforeDate:"), objref.IDOf(entityNames), objref.IDOf(date))
 	return _r
@@ -166,13 +166,13 @@ func (iss *ISyncSession) ClientChangedRecordIdentifiers(oldToNew obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("clientChangedRecordIdentifiers:"), objref.IDOf(oldToNew))
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (iss *ISyncSession) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(iss), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// CancelSyncing wraps the corresponding Objective-C method.
+// CancelSyncing cancels syncing.
 func (iss *ISyncSession) CancelSyncing() {
 	objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("cancelSyncing"))
 }
@@ -188,7 +188,7 @@ func (iss *ISyncSession) ClientInfoForRecordWithIdentifier(recordId string) obj.
 	return obj.Wrap(_r)
 }
 
-// SnapshotOfRecordsInTruth wraps the corresponding Objective-C method.
+// SnapshotOfRecordsInTruth returns the snapshot of records in truth.
 func (iss *ISyncSession) SnapshotOfRecordsInTruth() *ISyncRecordSnapshot {
 	_r := objc.Send[objc.ID](objref.IDOf(iss), objc.RegisterName("snapshotOfRecordsInTruth"))
 	return ISyncRecordSnapshotFromID(_r)

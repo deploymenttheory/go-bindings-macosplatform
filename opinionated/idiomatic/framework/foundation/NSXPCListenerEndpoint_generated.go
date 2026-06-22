@@ -72,7 +72,7 @@ func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 	return xPCListenerEndpointAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xle *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint {
 	objc.Send[objc.ID](objref.IDOf(xle), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xle

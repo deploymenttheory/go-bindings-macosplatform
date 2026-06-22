@@ -149,13 +149,13 @@ func (pp *PreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems []obj.Objec
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateHelpMenuWithArray:"), purego.SliceToNSArray(inArrayOfMenuItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Bundle wraps the corresponding Objective-C method.
+// Bundle returns the bundle.
 func (pp *PreferencePane) Bundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
-// MainNibName wraps the corresponding Objective-C method.
+// MainNibName returns the main nib name.
 func (pp *PreferencePane) MainNibName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("mainNibName"))
 	if _r == 0 {
@@ -164,25 +164,25 @@ func (pp *PreferencePane) MainNibName() string {
 	return purego.GoString(_r)
 }
 
-// ShouldUnselect wraps the corresponding Objective-C method.
+// ShouldUnselect returns the should unselect.
 func (pp *PreferencePane) ShouldUnselect() PreferencePaneUnselectReply {
 	_r := objc.Send[PreferencePaneUnselectReply](objref.IDOf(pp), objc.RegisterName("shouldUnselect"))
 	return _r
 }
 
-// MainView wraps the corresponding Objective-C method.
+// MainView returns the main view.
 func (pp *PreferencePane) MainView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("mainView"))
 	return obj.Wrap(_r)
 }
 
-// FirstKeyView wraps the corresponding Objective-C method.
+// FirstKeyView returns the first key view.
 func (pp *PreferencePane) FirstKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
-// LastKeyView wraps the corresponding Objective-C method.
+// LastKeyView returns the last key view.
 func (pp *PreferencePane) LastKeyView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
@@ -194,7 +194,7 @@ func (pp *PreferencePane) AutoSaveTextFields() bool {
 	return _r
 }
 
-// IsSelected wraps the corresponding Objective-C method.
+// IsSelected reports whether the object is selected.
 func (pp *PreferencePane) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("isSelected"))
 	return _r

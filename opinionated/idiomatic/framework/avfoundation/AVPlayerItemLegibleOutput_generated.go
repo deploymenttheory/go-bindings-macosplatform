@@ -83,7 +83,7 @@ func (pilo *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() floa
 	return _r
 }
 
-// TextStylingResolution wraps the corresponding Objective-C method.
+// TextStylingResolution returns the text styling resolution.
 func (pilo *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("textStylingResolution"))
 	return obj.Wrap(_r)

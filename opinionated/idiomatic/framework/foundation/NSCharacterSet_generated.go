@@ -75,7 +75,7 @@ func NewCharacterSetWithCoder(coder *Coder) *CharacterSet {
 	return characterSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cs *CharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *CharacterSet {
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cs
@@ -105,13 +105,13 @@ func (cs *CharacterSet) HasMemberInPlane(thePlane uint8) bool {
 	return _r
 }
 
-// BitmapRepresentation wraps the corresponding Objective-C method.
+// BitmapRepresentation returns the bitmap representation.
 func (cs *CharacterSet) BitmapRepresentation() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("bitmapRepresentation"))
 	return DataFromID(_r)
 }
 
-// InvertedSet wraps the corresponding Objective-C method.
+// InvertedSet returns the inverted set.
 func (cs *CharacterSet) InvertedSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("invertedSet"))
 	return CharacterSetFromID(_r)

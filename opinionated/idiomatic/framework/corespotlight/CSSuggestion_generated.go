@@ -72,13 +72,13 @@ func NewSuggestion() *Suggestion {
 	return suggestionAdopt(_id)
 }
 
-// LocalizedAttributedSuggestion wraps the corresponding Objective-C method.
+// LocalizedAttributedSuggestion returns the localized attributed suggestion.
 func (s *Suggestion) LocalizedAttributedSuggestion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedAttributedSuggestion"))
 	return obj.Wrap(_r)
 }
 
-// SuggestionKind wraps the corresponding Objective-C method.
+// SuggestionKind returns the suggestion kind.
 func (s *Suggestion) SuggestionKind() SuggestionKind {
 	_r := objc.Send[SuggestionKind](objref.IDOf(s), objc.RegisterName("suggestionKind"))
 	return _r

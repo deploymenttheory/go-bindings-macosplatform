@@ -64,7 +64,7 @@ func (pckcer *PersistentCloudKitContainerEventRequest) WithAffectedStores(items 
 	return pckcer
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (pckcer *PersistentCloudKitContainerEventRequest) ResultType() PersistentCloudKitContainerEventResultType {
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r

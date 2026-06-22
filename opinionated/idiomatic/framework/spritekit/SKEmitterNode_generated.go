@@ -526,19 +526,19 @@ func (en *EmitterNode) ParticleColorRedRange() float64 {
 	return _r
 }
 
-// ParticleColorGreenRange wraps the corresponding Objective-C method.
+// ParticleColorGreenRange returns the particle color green range.
 func (en *EmitterNode) ParticleColorGreenRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenRange"))
 	return _r
 }
 
-// ParticleColorBlueRange wraps the corresponding Objective-C method.
+// ParticleColorBlueRange returns the particle color blue range.
 func (en *EmitterNode) ParticleColorBlueRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueRange"))
 	return _r
 }
 
-// ParticleColorAlphaRange wraps the corresponding Objective-C method.
+// ParticleColorAlphaRange returns the particle color alpha range.
 func (en *EmitterNode) ParticleColorAlphaRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaRange"))
 	return _r
@@ -550,25 +550,25 @@ func (en *EmitterNode) ParticleColorRedSpeed() float64 {
 	return _r
 }
 
-// ParticleColorGreenSpeed wraps the corresponding Objective-C method.
+// ParticleColorGreenSpeed returns the particle color green speed.
 func (en *EmitterNode) ParticleColorGreenSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorGreenSpeed"))
 	return _r
 }
 
-// ParticleColorBlueSpeed wraps the corresponding Objective-C method.
+// ParticleColorBlueSpeed returns the particle color blue speed.
 func (en *EmitterNode) ParticleColorBlueSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorBlueSpeed"))
 	return _r
 }
 
-// ParticleColorAlphaSpeed wraps the corresponding Objective-C method.
+// ParticleColorAlphaSpeed returns the particle color alpha speed.
 func (en *EmitterNode) ParticleColorAlphaSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("particleColorAlphaSpeed"))
 	return _r
 }
 
-// ParticleColorSequence wraps the corresponding Objective-C method.
+// ParticleColorSequence returns the particle color sequence.
 func (en *EmitterNode) ParticleColorSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorSequence"))
 	return KeyframeSequenceFromID(_r)
@@ -592,7 +592,7 @@ func (en *EmitterNode) ParticleColorBlendFactorSpeed() float64 {
 	return _r
 }
 
-// ParticleColorBlendFactorSequence wraps the corresponding Objective-C method.
+// ParticleColorBlendFactorSequence returns the particle color blend factor sequence.
 func (en *EmitterNode) ParticleColorBlendFactorSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleColorBlendFactorSequence"))
 	return KeyframeSequenceFromID(_r)
@@ -640,7 +640,7 @@ func (en *EmitterNode) XAcceleration() float64 {
 	return _r
 }
 
-// YAcceleration wraps the corresponding Objective-C method.
+// YAcceleration returns the y acceleration.
 func (en *EmitterNode) YAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(en), objc.RegisterName("yAcceleration"))
 	return _r
@@ -712,7 +712,7 @@ func (en *EmitterNode) ParticleScaleSpeed() float64 {
 	return _r
 }
 
-// ParticleScaleSequence wraps the corresponding Objective-C method.
+// ParticleScaleSequence returns the particle scale sequence.
 func (en *EmitterNode) ParticleScaleSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleScaleSequence"))
 	return KeyframeSequenceFromID(_r)
@@ -736,7 +736,7 @@ func (en *EmitterNode) ParticleAlphaSpeed() float64 {
 	return _r
 }
 
-// ParticleAlphaSequence wraps the corresponding Objective-C method.
+// ParticleAlphaSequence returns the particle alpha sequence.
 func (en *EmitterNode) ParticleAlphaSequence() *KeyframeSequence {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("particleAlphaSequence"))
 	return KeyframeSequenceFromID(_r)
@@ -760,7 +760,7 @@ func (en *EmitterNode) TargetNode() *Node {
 	return NodeFromID(_r)
 }
 
-// Shader wraps the corresponding Objective-C method.
+// Shader returns the shader.
 func (en *EmitterNode) Shader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
 	return ShaderFromID(_r)

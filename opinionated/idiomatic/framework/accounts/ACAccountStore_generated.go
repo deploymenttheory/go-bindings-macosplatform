@@ -90,7 +90,7 @@ func (as *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Ob
 	return obj.Wrap(_r)
 }
 
-// Accounts wraps the corresponding Objective-C method.
+// Accounts returns the accounts.
 func (as *AccountStore) Accounts() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accounts"))
 	return obj.Wrap(_r)

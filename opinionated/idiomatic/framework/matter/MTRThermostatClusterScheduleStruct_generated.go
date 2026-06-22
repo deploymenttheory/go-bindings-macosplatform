@@ -70,49 +70,49 @@ func NewMTRThermostatClusterScheduleStruct() *MTRThermostatClusterScheduleStruct
 	return mTRThermostatClusterScheduleStructAdopt(_id)
 }
 
-// WithScheduleHandle sets the property and returns the receiver so calls can be chained.
+// WithScheduleHandle sets the schedule handle.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
 	return mtcss
 }
 
-// WithSystemMode sets the property and returns the receiver so calls can be chained.
+// WithSystemMode sets the system mode.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcss
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithName(name string) *MTRThermostatClusterScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtcss
 }
 
-// WithPresetHandle sets the property and returns the receiver so calls can be chained.
+// WithPresetHandle sets the preset handle.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
 	return mtcss
 }
 
-// WithBuiltIn sets the property and returns the receiver so calls can be chained.
+// WithBuiltIn sets the built in.
 func (mtcss *MTRThermostatClusterScheduleStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
 	return mtcss
 }
 
-// ScheduleHandle wraps the corresponding Objective-C method.
+// ScheduleHandle returns the schedule handle.
 func (mtcss *MTRThermostatClusterScheduleStruct) ScheduleHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("scheduleHandle"))
 	return obj.Wrap(_r)
 }
 
-// SystemMode wraps the corresponding Objective-C method.
+// SystemMode returns the system mode.
 func (mtcss *MTRThermostatClusterScheduleStruct) SystemMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("systemMode"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mtcss *MTRThermostatClusterScheduleStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("name"))
 	if _r == 0 {
@@ -121,13 +121,13 @@ func (mtcss *MTRThermostatClusterScheduleStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// PresetHandle wraps the corresponding Objective-C method.
+// PresetHandle returns the preset handle.
 func (mtcss *MTRThermostatClusterScheduleStruct) PresetHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)
 }
 
-// Transitions wraps the corresponding Objective-C method.
+// Transitions returns the transitions.
 func (mtcss *MTRThermostatClusterScheduleStruct) Transitions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("transitions"))
 	return obj.Wrap(_r)
@@ -138,7 +138,7 @@ func (mtcss *MTRThermostatClusterScheduleStruct) SetTransitions(transitions obj.
 	objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
 }
 
-// BuiltIn wraps the corresponding Objective-C method.
+// BuiltIn returns the built in.
 func (mtcss *MTRThermostatClusterScheduleStruct) BuiltIn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcss), objc.RegisterName("builtIn"))
 	return obj.Wrap(_r)

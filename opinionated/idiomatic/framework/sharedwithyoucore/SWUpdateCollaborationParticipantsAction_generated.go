@@ -51,13 +51,13 @@ func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipants
 	return updateCollaborationParticipantsActionAdopt(_id)
 }
 
-// CollaborationMetadata wraps the corresponding Objective-C method.
+// CollaborationMetadata returns the collaboration metadata.
 func (ucpa *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }
 
-// AddedIdentities wraps the corresponding Objective-C method.
+// AddedIdentities returns the added identities.
 //
 // AddedIdentities returns the collection as a Go slice.
 func (ucpa *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
@@ -65,7 +65,7 @@ func (ucpa *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonId
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
 
-// RemovedIdentities wraps the corresponding Objective-C method.
+// RemovedIdentities returns the removed identities.
 //
 // RemovedIdentities returns the collection as a Go slice.
 func (ucpa *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {

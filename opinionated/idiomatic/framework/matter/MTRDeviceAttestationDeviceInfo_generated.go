@@ -94,19 +94,19 @@ func (mdadi *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() obj.Obj
 	return obj.Wrap(_r)
 }
 
-// DacCertificate wraps the corresponding Objective-C method.
+// DacCertificate returns the dac certificate.
 func (mdadi *MTRDeviceAttestationDeviceInfo) DacCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("dacCertificate"))
 	return obj.Wrap(_r)
 }
 
-// DacPAICertificate wraps the corresponding Objective-C method.
+// DacPAICertificate returns the dac pai certificate.
 func (mdadi *MTRDeviceAttestationDeviceInfo) DacPAICertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("dacPAICertificate"))
 	return obj.Wrap(_r)
 }
 
-// CertificateDeclaration wraps the corresponding Objective-C method.
+// CertificateDeclaration returns the certificate declaration.
 func (mdadi *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("certificateDeclaration"))
 	return obj.Wrap(_r)

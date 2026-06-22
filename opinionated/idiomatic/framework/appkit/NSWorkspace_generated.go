@@ -358,13 +358,13 @@ func (w *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Cont
 	}
 }
 
-// NotificationCenter wraps the corresponding Objective-C method.
+// NotificationCenter returns the notification center.
 func (w *Workspace) NotificationCenter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("notificationCenter"))
 	return obj.Wrap(_r)
 }
 
-// FileLabels wraps the corresponding Objective-C method.
+// FileLabels returns the file labels.
 //
 // FileLabels returns the collection as a Go slice.
 func (w *Workspace) FileLabels() []string {
@@ -372,7 +372,7 @@ func (w *Workspace) FileLabels() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// FileLabelColors wraps the corresponding Objective-C method.
+// FileLabelColors returns the file label colors.
 //
 // FileLabelColors returns the collection as a Go slice.
 func (w *Workspace) FileLabelColors() []*Color {
@@ -380,13 +380,13 @@ func (w *Workspace) FileLabelColors() []*Color {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
-// FrontmostApplication wraps the corresponding Objective-C method.
+// FrontmostApplication returns the frontmost application.
 func (w *Workspace) FrontmostApplication() *RunningApplication {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("frontmostApplication"))
 	return RunningApplicationFromID(_r)
 }
 
-// MenuBarOwningApplication wraps the corresponding Objective-C method.
+// MenuBarOwningApplication returns the menu bar owning application.
 func (w *Workspace) MenuBarOwningApplication() *RunningApplication {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("menuBarOwningApplication"))
 	return RunningApplicationFromID(_r)
@@ -439,19 +439,19 @@ func (w *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ Worksp
 	}
 }
 
-// OpenFile wraps the corresponding Objective-C method.
+// OpenFile opens file.
 func (w *Workspace) OpenFile(fullPath string) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:"), purego.NSString(fullPath))
 	return _r
 }
 
-// OpenFileWithApplication wraps the corresponding Objective-C method.
+// OpenFileWithApplication opens file with application.
 func (w *Workspace) OpenFileWithApplication(fullPath string, appName string) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:"), purego.NSString(fullPath), purego.NSString(appName))
 	return _r
 }
 
-// OpenFileWithApplicationAndDeactivate wraps the corresponding Objective-C method.
+// OpenFileWithApplicationAndDeactivate opens file with application and deactivate.
 func (w *Workspace) OpenFileWithApplicationAndDeactivate(fullPath string, appName string, flag bool) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:withApplication:andDeactivate:"), purego.NSString(fullPath), purego.NSString(appName), flag)
 	return _r
@@ -473,7 +473,7 @@ func (w *Workspace) LaunchApplicationAtURLOptionsConfigurationError(url string, 
 	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLOptionsConfigurationError wraps the corresponding Objective-C method.
+// OpenURLOptionsConfigurationError opens URL options configuration error.
 func (w *Workspace) OpenURLOptionsConfigurationError(url string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURL:options:configuration:error:"), rt.FileURL(url), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
@@ -483,7 +483,7 @@ func (w *Workspace) OpenURLOptionsConfigurationError(url string, options Workspa
 	return RunningApplicationFromID(_r), nil
 }
 
-// OpenURLsWithApplicationAtURLOptionsConfigurationError wraps the corresponding Objective-C method.
+// OpenURLsWithApplicationAtURLOptionsConfigurationError opens ur ls with application at URL options configuration error.
 func (w *Workspace) OpenURLsWithApplicationAtURLOptionsConfigurationError(urls []obj.Object, applicationURL string, options WorkspaceLaunchOptions, configuration obj.Object) (result *RunningApplication, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("openURLs:withApplicationAtURL:options:configuration:error:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.FileURL(applicationURL), options, objref.IDOf(configuration), unsafe.Pointer(&_nsErr))
@@ -523,13 +523,13 @@ func (w *Workspace) LaunchAppWithBundleIdentifierOptionsAdditionalEventParamDesc
 	return _r
 }
 
-// OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers wraps the corresponding Objective-C method.
+// OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers opens ur ls with app bundle identifier options additional event param descriptor launch identifiers.
 func (w *Workspace) OpenURLsWithAppBundleIdentifierOptionsAdditionalEventParamDescriptorLaunchIdentifiers(urls []obj.Object, bundleIdentifier string, options WorkspaceLaunchOptions, descriptor obj.Object, identifiers []obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openURLs:withAppBundleIdentifier:options:additionalEventParamDescriptor:launchIdentifiers:"), purego.SliceToNSArray(urls, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(bundleIdentifier), options, objref.IDOf(descriptor), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
-// OpenTempFile wraps the corresponding Objective-C method.
+// OpenTempFile opens temp file.
 func (w *Workspace) OpenTempFile(fullPath string) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openTempFile:"), purego.NSString(fullPath))
 	return _r
@@ -572,43 +572,43 @@ func (w *Workspace) UserDefaultsChanged() bool {
 	return _r
 }
 
-// MountNewRemovableMedia wraps the corresponding Objective-C method.
+// MountNewRemovableMedia returns the mount new removable media.
 func (w *Workspace) MountNewRemovableMedia() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountNewRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
-// ActiveApplication wraps the corresponding Objective-C method.
+// ActiveApplication returns the active application.
 func (w *Workspace) ActiveApplication() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("activeApplication"))
 	return obj.Wrap(_r)
 }
 
-// MountedLocalVolumePaths wraps the corresponding Objective-C method.
+// MountedLocalVolumePaths returns the mounted local volume paths.
 func (w *Workspace) MountedLocalVolumePaths() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedLocalVolumePaths"))
 	return obj.Wrap(_r)
 }
 
-// MountedRemovableMedia wraps the corresponding Objective-C method.
+// MountedRemovableMedia returns the mounted removable media.
 func (w *Workspace) MountedRemovableMedia() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mountedRemovableMedia"))
 	return obj.Wrap(_r)
 }
 
-// LaunchedApplications wraps the corresponding Objective-C method.
+// LaunchedApplications returns the launched applications.
 func (w *Workspace) LaunchedApplications() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("launchedApplications"))
 	return obj.Wrap(_r)
 }
 
-// OpenFileFromImageAtInView wraps the corresponding Objective-C method.
+// OpenFileFromImageAtInView opens file from image at in view.
 func (w *Workspace) OpenFileFromImageAtInView(fullPath string, image *Image, point corefoundation.CGPoint, view *View) bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("openFile:fromImage:at:inView:"), purego.NSString(fullPath), objref.IDOf(image), point, objref.IDOf(view))
 	return _r
 }
 
-// PerformFileOperationSourceDestinationFilesTag wraps the corresponding Objective-C method.
+// PerformFileOperationSourceDestinationFilesTag performs file operation source destination files tag.
 func (w *Workspace) PerformFileOperationSourceDestinationFilesTag(operation obj.Object, source string, destination string, files obj.Object) (ok bool, tag int64) {
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("performFileOperation:source:destination:files:tag:"), objref.IDOf(operation), purego.NSString(source), purego.NSString(destination), objref.IDOf(files), unsafe.Pointer(&_out0))
@@ -700,19 +700,19 @@ func (w *Workspace) AccessibilityDisplayShouldInvertColors() bool {
 	return _r
 }
 
-// IsVoiceOverEnabled wraps the corresponding Objective-C method.
+// IsVoiceOverEnabled reports whether the object is voice over enabled.
 func (w *Workspace) IsVoiceOverEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isVoiceOverEnabled"))
 	return _r
 }
 
-// IsSwitchControlEnabled wraps the corresponding Objective-C method.
+// IsSwitchControlEnabled reports whether the object is switch control enabled.
 func (w *Workspace) IsSwitchControlEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isSwitchControlEnabled"))
 	return _r
 }
 
-// RunningApplications wraps the corresponding Objective-C method.
+// RunningApplications returns the running applications.
 //
 // RunningApplications returns the collection as a Go slice.
 func (w *Workspace) RunningApplications() []*RunningApplication {

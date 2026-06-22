@@ -78,25 +78,25 @@ func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseV
 	return mTRThermostatClusterAtomicResponseParamsAdopt(_id), nil
 }
 
-// WithStatusCode sets the property and returns the receiver so calls can be chained.
+// WithStatusCode sets the status code.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) WithStatusCode(statusCode obj.Object) *MTRThermostatClusterAtomicResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mtcarp
 }
 
-// WithTimeout sets the property and returns the receiver so calls can be chained.
+// WithTimeout sets the timeout.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return mtcarp
 }
 
-// StatusCode wraps the corresponding Objective-C method.
+// StatusCode returns the status code.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
 
-// AttributeStatus wraps the corresponding Objective-C method.
+// AttributeStatus returns the attribute status.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) AttributeStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("attributeStatus"))
 	return obj.Wrap(_r)
@@ -107,7 +107,7 @@ func (mtcarp *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attri
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setAttributeStatus:"), objref.IDOf(attributeStatus))
 }
 
-// Timeout wraps the corresponding Objective-C method.
+// Timeout returns the timeout.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) Timeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("timeout"))
 	return obj.Wrap(_r)

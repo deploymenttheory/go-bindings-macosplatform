@@ -95,19 +95,19 @@ func (pp *PDFPanel) BeginSheetWithPDFInfoModalForWindowCompletionHandler(pdfInfo
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetWithPDFInfo:modalForWindow:completionHandler:"), objref.IDOf(pdfInfo), objref.IDOf(docWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
-// AccessoryController wraps the corresponding Objective-C method.
+// AccessoryController returns the accessory controller.
 func (pp *PDFPanel) AccessoryController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("accessoryController"))
 	return ViewControllerFromID(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (pp *PDFPanel) Options() PDFPanelOptions {
 	_r := objc.Send[PDFPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
 	return _r
 }
 
-// DefaultFileName wraps the corresponding Objective-C method.
+// DefaultFileName returns the default file name.
 func (pp *PDFPanel) DefaultFileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("defaultFileName"))
 	if _r == 0 {

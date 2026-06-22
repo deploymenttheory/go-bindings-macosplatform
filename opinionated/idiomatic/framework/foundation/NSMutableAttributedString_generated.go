@@ -52,7 +52,7 @@ func NewMutableAttributedString() *MutableAttributedString {
 	return mutableAttributedStringAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mas *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mas
@@ -83,7 +83,7 @@ func (mas *MutableAttributedString) EndEditing() {
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("endEditing"))
 }
 
-// MutableString wraps the corresponding Objective-C method.
+// MutableString returns the mutable string.
 func (mas *MutableAttributedString) MutableString() *MutableString {
 	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("mutableString"))
 	return MutableStringFromID(_r)

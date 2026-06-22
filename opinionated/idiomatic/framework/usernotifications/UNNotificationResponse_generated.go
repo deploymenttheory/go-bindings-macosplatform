@@ -68,13 +68,13 @@ func (nr *NotificationResponse) String() string {
 	return rt.Description(objref.IDOf(nr))
 }
 
-// Notification wraps the corresponding Objective-C method.
+// Notification returns the notification.
 func (nr *NotificationResponse) Notification() *Notification {
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("notification"))
 	return NotificationFromID(_r)
 }
 
-// ActionIdentifier wraps the corresponding Objective-C method.
+// ActionIdentifier returns the action identifier.
 func (nr *NotificationResponse) ActionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("actionIdentifier"))
 	if _r == 0 {

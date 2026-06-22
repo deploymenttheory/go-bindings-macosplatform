@@ -232,7 +232,7 @@ func (gs *GameSession) ClearBadgeForPlayers(ctx context.Context, players []*Clou
 	}
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (gs *GameSession) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -241,7 +241,7 @@ func (gs *GameSession) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (gs *GameSession) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("title"))
 	if _r == 0 {
@@ -250,13 +250,13 @@ func (gs *GameSession) Title() string {
 	return purego.GoString(_r)
 }
 
-// Owner wraps the corresponding Objective-C method.
+// Owner returns the owner.
 func (gs *GameSession) Owner() *CloudPlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("owner"))
 	return CloudPlayerFromID(_r)
 }
 
-// Players wraps the corresponding Objective-C method.
+// Players returns the players.
 //
 // Players returns the collection as a Go slice.
 func (gs *GameSession) Players() []*CloudPlayer {
@@ -264,25 +264,25 @@ func (gs *GameSession) Players() []*CloudPlayer {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CloudPlayer { return CloudPlayerFromID(_id) })
 }
 
-// LastModifiedDate wraps the corresponding Objective-C method.
+// LastModifiedDate returns the last modified date.
 func (gs *GameSession) LastModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("lastModifiedDate"))
 	return obj.Wrap(_r)
 }
 
-// LastModifiedPlayer wraps the corresponding Objective-C method.
+// LastModifiedPlayer returns the last modified player.
 func (gs *GameSession) LastModifiedPlayer() *CloudPlayer {
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("lastModifiedPlayer"))
 	return CloudPlayerFromID(_r)
 }
 
-// MaxNumberOfConnectedPlayers wraps the corresponding Objective-C method.
+// MaxNumberOfConnectedPlayers returns the max number of connected players.
 func (gs *GameSession) MaxNumberOfConnectedPlayers() int {
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("maxNumberOfConnectedPlayers"))
 	return _r
 }
 
-// BadgedPlayers wraps the corresponding Objective-C method.
+// BadgedPlayers returns the badged players.
 //
 // BadgedPlayers returns the collection as a Go slice.
 func (gs *GameSession) BadgedPlayers() []*CloudPlayer {

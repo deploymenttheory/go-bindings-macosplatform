@@ -128,7 +128,7 @@ func (tmn *TileMapNode) WithLightingBitMask(lightingBitMask uint32) *TileMapNode
 	return tmn
 }
 
-// WithEnableAutomapping sets the property and returns the receiver so calls can be chained.
+// WithEnableAutomapping sets the enable automapping.
 func (tmn *TileMapNode) WithEnableAutomapping(enableAutomapping bool) *TileMapNode {
 	objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setEnableAutomapping:"), enableAutomapping)
 	return tmn

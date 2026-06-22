@@ -66,25 +66,25 @@ func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) String(
 	return rt.Description(objref.IDOf(msurcvae))
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return msurcvae
 }
 
-// WithProductID sets the property and returns the receiver so calls can be chained.
+// WithProductID sets the product ID.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return msurcvae
 }
 
-// SoftwareVersion wraps the corresponding Objective-C method.
+// SoftwareVersion returns the software version.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
-// ProductID wraps the corresponding Objective-C method.
+// ProductID returns the product ID.
 func (msurcvae *MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcvae), objc.RegisterName("productID"))
 	return obj.Wrap(_r)

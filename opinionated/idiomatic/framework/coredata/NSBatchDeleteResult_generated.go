@@ -52,13 +52,13 @@ func NewBatchDeleteResult() *BatchDeleteResult {
 	return batchDeleteResultAdopt(_id)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (bdr *BatchDeleteResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bdr *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r

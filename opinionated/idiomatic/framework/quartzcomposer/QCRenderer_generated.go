@@ -105,19 +105,19 @@ func (r *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Ob
 	return _r
 }
 
-// Composition wraps the corresponding Objective-C method.
+// Composition returns the composition.
 func (r *Renderer) Composition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }
 
-// SnapshotImage wraps the corresponding Objective-C method.
+// SnapshotImage returns the snapshot image.
 func (r *Renderer) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
-// CreateSnapshotImageOfType wraps the corresponding Objective-C method.
+// CreateSnapshotImageOfType creates snapshot image of type.
 func (r *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)

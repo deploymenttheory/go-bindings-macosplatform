@@ -77,7 +77,7 @@ func (pa *PostalAddress) Street() string {
 	return purego.GoString(_r)
 }
 
-// SubLocality wraps the corresponding Objective-C method.
+// SubLocality returns the sub locality.
 func (pa *PostalAddress) SubLocality() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subLocality"))
 	if _r == 0 {
@@ -86,7 +86,7 @@ func (pa *PostalAddress) SubLocality() string {
 	return purego.GoString(_r)
 }
 
-// City wraps the corresponding Objective-C method.
+// City returns the city.
 func (pa *PostalAddress) City() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("city"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (pa *PostalAddress) City() string {
 	return purego.GoString(_r)
 }
 
-// SubAdministrativeArea wraps the corresponding Objective-C method.
+// SubAdministrativeArea returns the sub administrative area.
 func (pa *PostalAddress) SubAdministrativeArea() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
@@ -104,7 +104,7 @@ func (pa *PostalAddress) SubAdministrativeArea() string {
 	return purego.GoString(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (pa *PostalAddress) State() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("state"))
 	if _r == 0 {
@@ -113,7 +113,7 @@ func (pa *PostalAddress) State() string {
 	return purego.GoString(_r)
 }
 
-// PostalCode wraps the corresponding Objective-C method.
+// PostalCode returns the postal code.
 func (pa *PostalAddress) PostalCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("postalCode"))
 	if _r == 0 {
@@ -122,7 +122,7 @@ func (pa *PostalAddress) PostalCode() string {
 	return purego.GoString(_r)
 }
 
-// Country wraps the corresponding Objective-C method.
+// Country returns the country.
 func (pa *PostalAddress) Country() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("country"))
 	if _r == 0 {
@@ -131,7 +131,7 @@ func (pa *PostalAddress) Country() string {
 	return purego.GoString(_r)
 }
 
-// ISOCountryCode wraps the corresponding Objective-C method.
+// ISOCountryCode returns the iso country code.
 func (pa *PostalAddress) ISOCountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("ISOCountryCode"))
 	if _r == 0 {

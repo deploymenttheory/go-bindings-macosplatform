@@ -70,25 +70,25 @@ func NewMTRHEPAFilterMonitoringClusterReplacementProductStruct() *MTRHEPAFilterM
 	return mTRHEPAFilterMonitoringClusterReplacementProductStructAdopt(_id)
 }
 
-// WithProductIdentifierType sets the property and returns the receiver so calls can be chained.
+// WithProductIdentifierType sets the product identifier type.
 func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
 	objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 	return mfmcrps
 }
 
-// WithProductIdentifierValue sets the property and returns the receiver so calls can be chained.
+// WithProductIdentifierValue sets the product identifier value.
 func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
 	objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
 	return mfmcrps
 }
 
-// ProductIdentifierType wraps the corresponding Objective-C method.
+// ProductIdentifierType returns the product identifier type.
 func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("productIdentifierType"))
 	return obj.Wrap(_r)
 }
 
-// ProductIdentifierValue wraps the corresponding Objective-C method.
+// ProductIdentifierValue returns the product identifier value.
 func (mfmcrps *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mfmcrps), objc.RegisterName("productIdentifierValue"))
 	if _r == 0 {

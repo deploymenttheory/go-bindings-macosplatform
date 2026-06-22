@@ -70,7 +70,7 @@ func NewMTRICDManagementClusterStayActiveRequestParams() *MTRICDManagementCluste
 	return mTRICDManagementClusterStayActiveRequestParamsAdopt(_id)
 }
 
-// WithStayActiveDuration sets the property and returns the receiver so calls can be chained.
+// WithStayActiveDuration sets the stay active duration.
 func (mmcsarp *MTRICDManagementClusterStayActiveRequestParams) WithStayActiveDuration(stayActiveDuration obj.Object) *MTRICDManagementClusterStayActiveRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
 	return mmcsarp
@@ -88,7 +88,7 @@ func (mmcsarp *MTRICDManagementClusterStayActiveRequestParams) WithServerSidePro
 	return mmcsarp
 }
 
-// StayActiveDuration wraps the corresponding Objective-C method.
+// StayActiveDuration returns the stay active duration.
 func (mmcsarp *MTRICDManagementClusterStayActiveRequestParams) StayActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("stayActiveDuration"))
 	return obj.Wrap(_r)

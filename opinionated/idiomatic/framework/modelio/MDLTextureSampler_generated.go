@@ -90,19 +90,19 @@ func (ts *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
 	return ts
 }
 
-// Texture wraps the corresponding Objective-C method.
+// Texture returns the texture.
 func (ts *TextureSampler) Texture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("texture"))
 	return TextureFromID(_r)
 }
 
-// HardwareFilter wraps the corresponding Objective-C method.
+// HardwareFilter returns the hardware filter.
 func (ts *TextureSampler) HardwareFilter() *TextureFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("hardwareFilter"))
 	return TextureFilterFromID(_r)
 }
 
-// Transform wraps the corresponding Objective-C method.
+// Transform returns the transform.
 func (ts *TextureSampler) Transform() *Transform {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("transform"))
 	return TransformFromID(_r)

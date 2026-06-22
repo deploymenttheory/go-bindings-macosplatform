@@ -69,20 +69,20 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 	return outputStreamAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (os *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return os
 }
 
-// WriteMaxLength wraps the corresponding Objective-C method.
+// WriteMaxLength writes max length.
 func (os *OutputStream) WriteMaxLength(len_ int) (result int, buffer uint8) {
 	var _out0 uint8
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), len_)
 	return _r, _out0
 }
 
-// HasSpaceAvailable wraps the corresponding Objective-C method.
+// HasSpaceAvailable reports whether the object has space available.
 func (os *OutputStream) HasSpaceAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasSpaceAvailable"))
 	return _r

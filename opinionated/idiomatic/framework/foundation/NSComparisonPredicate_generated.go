@@ -60,37 +60,37 @@ func NewComparisonPredicateWithCoder(coder *Coder) *ComparisonPredicate {
 	return comparisonPredicateAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cp *ComparisonPredicate) WithScriptingProperties(scriptingProperties obj.Object) *ComparisonPredicate {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cp
 }
 
-// PredicateOperatorType wraps the corresponding Objective-C method.
+// PredicateOperatorType returns the predicate operator type.
 func (cp *ComparisonPredicate) PredicateOperatorType() PredicateOperatorType {
 	_r := objc.Send[PredicateOperatorType](objref.IDOf(cp), objc.RegisterName("predicateOperatorType"))
 	return _r
 }
 
-// ComparisonPredicateModifier wraps the corresponding Objective-C method.
+// ComparisonPredicateModifier returns the comparison predicate modifier.
 func (cp *ComparisonPredicate) ComparisonPredicateModifier() ComparisonPredicateModifier {
 	_r := objc.Send[ComparisonPredicateModifier](objref.IDOf(cp), objc.RegisterName("comparisonPredicateModifier"))
 	return _r
 }
 
-// LeftExpression wraps the corresponding Objective-C method.
+// LeftExpression returns the left expression.
 func (cp *ComparisonPredicate) LeftExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
-// RightExpression wraps the corresponding Objective-C method.
+// RightExpression returns the right expression.
 func (cp *ComparisonPredicate) RightExpression() *Expression {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (cp *ComparisonPredicate) Options() ComparisonPredicateOptions {
 	_r := objc.Send[ComparisonPredicateOptions](objref.IDOf(cp), objc.RegisterName("options"))
 	return _r

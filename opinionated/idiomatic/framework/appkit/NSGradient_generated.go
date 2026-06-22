@@ -140,13 +140,13 @@ func (g *Gradient) InterpolatedColorAtLocation(location float64) *Color {
 	return ColorFromID(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (g *Gradient) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// NumberOfColorStops wraps the corresponding Objective-C method.
+// NumberOfColorStops returns the number of color stops.
 func (g *Gradient) NumberOfColorStops() int {
 	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("numberOfColorStops"))
 	return _r

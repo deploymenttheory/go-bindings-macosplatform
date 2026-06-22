@@ -61,7 +61,7 @@ func NewMTRBaseClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *
 	return mTRBaseClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
-// ReadAttributePHYRateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePHYRateWithCompletion reads attribute phy rate with completion.
 //
 // ReadAttributePHYRateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRat
 	}
 }
 
-// ReadAttributeFullDuplexWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFullDuplexWithCompletion reads attribute full duplex with completion.
 //
 // ReadAttributeFullDuplexWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDu
 	}
 }
 
-// ReadAttributePacketRxCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePacketRxCountWithCompletion reads attribute packet rx count with completion.
 //
 // ReadAttributePacketRxCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacket
 	}
 }
 
-// ReadAttributePacketTxCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePacketTxCountWithCompletion reads attribute packet tx count with completion.
 //
 // ReadAttributePacketTxCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacket
 	}
 }
 
-// ReadAttributeTxErrCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxErrCountWithCompletion reads attribute tx err count with completion.
 //
 // ReadAttributeTxErrCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrC
 	}
 }
 
-// ReadAttributeCollisionCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCollisionCountWithCompletion reads attribute collision count with completion.
 //
 // ReadAttributeCollisionCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollis
 	}
 }
 
-// ReadAttributeOverrunCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOverrunCountWithCompletion reads attribute overrun count with completion.
 //
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverru
 	}
 }
 
-// ReadAttributeCarrierDetectWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCarrierDetectWithCompletion reads attribute carrier detect with completion.
 //
 // ReadAttributeCarrierDetectWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrie
 	}
 }
 
-// ReadAttributeTimeSinceResetWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimeSinceResetWithCompletion reads attribute time since reset with completion.
 //
 // ReadAttributeTimeSinceResetWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSi
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGenera
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAccept
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttrib
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatur
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCluste
 	}
 }
 
-// ReadAttributePHYRate wraps the corresponding Objective-C method.
+// ReadAttributePHYRate reads attribute phy rate.
 //
 // ReadAttributePHYRate blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePHYRate(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePHYRat
 	}
 }
 
-// ReadAttributeFullDuplex wraps the corresponding Objective-C method.
+// ReadAttributeFullDuplex reads attribute full duplex.
 //
 // ReadAttributeFullDuplex blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplex(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFullDu
 	}
 }
 
-// ReadAttributePacketRxCount wraps the corresponding Objective-C method.
+// ReadAttributePacketRxCount reads attribute packet rx count.
 //
 // ReadAttributePacketRxCount blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCount(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacket
 	}
 }
 
-// ReadAttributePacketTxCount wraps the corresponding Objective-C method.
+// ReadAttributePacketTxCount reads attribute packet tx count.
 //
 // ReadAttributePacketTxCount blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCount(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributePacket
 	}
 }
 
-// ReadAttributeTxErrCount wraps the corresponding Objective-C method.
+// ReadAttributeTxErrCount reads attribute tx err count.
 //
 // ReadAttributeTxErrCount blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCount(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTxErrC
 	}
 }
 
-// ReadAttributeCollisionCount wraps the corresponding Objective-C method.
+// ReadAttributeCollisionCount reads attribute collision count.
 //
 // ReadAttributeCollisionCount blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCount(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCollis
 	}
 }
 
-// ReadAttributeOverrunCount wraps the corresponding Objective-C method.
+// ReadAttributeOverrunCount reads attribute overrun count.
 //
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeOverru
 	}
 }
 
-// ReadAttributeCarrierDetect wraps the corresponding Objective-C method.
+// ReadAttributeCarrierDetect reads attribute carrier detect.
 //
 // ReadAttributeCarrierDetect blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetect(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeCarrie
 	}
 }
 
-// ReadAttributeTimeSinceReset wraps the corresponding Objective-C method.
+// ReadAttributeTimeSinceReset reads attribute time since reset.
 //
 // ReadAttributeTimeSinceReset blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceReset(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeTimeSi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeGenera
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAccept
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeAttrib
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) SubscribeAttributeFeatur
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcend *MTRBaseClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

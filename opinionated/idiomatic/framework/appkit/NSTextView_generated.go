@@ -199,7 +199,7 @@ func (tv *TextView) WithAllowsImageEditing(allowsImageEditing bool) *TextView {
 	return tv
 }
 
-// WithUsesRolloverButtonForSelection sets the property and returns the receiver so calls can be chained.
+// WithUsesRolloverButtonForSelection sets the uses rollover button for selection.
 func (tv *TextView) WithUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUsesRolloverButtonForSelection:"), usesRolloverButtonForSelection)
 	return tv
@@ -218,13 +218,13 @@ func (tv *TextView) WithAllowedInputSourceLocales(items ...obj.Object) *TextView
 	return tv
 }
 
-// WithWritingToolsBehavior sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsBehavior sets the writing tools behavior.
 func (tv *TextView) WithWritingToolsBehavior(writingToolsBehavior WritingToolsBehavior) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsBehavior:"), writingToolsBehavior)
 	return tv
 }
 
-// WithAllowedWritingToolsResultOptions sets the property and returns the receiver so calls can be chained.
+// WithAllowedWritingToolsResultOptions sets the allowed writing tools result options.
 func (tv *TextView) WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions WritingToolsResultOptions) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedWritingToolsResultOptions:"), allowedWritingToolsResultOptions)
 	return tv
@@ -296,13 +296,13 @@ func (tv *TextView) WithIncrementalSearchingEnabled(incrementalSearchingEnabled 
 	return tv
 }
 
-// WithInlinePredictionType sets the property and returns the receiver so calls can be chained.
+// WithInlinePredictionType sets the inline prediction type.
 func (tv *TextView) WithInlinePredictionType(inlinePredictionType TextInputTraitType) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInlinePredictionType:"), inlinePredictionType)
 	return tv
 }
 
-// WithMathExpressionCompletionType sets the property and returns the receiver so calls can be chained.
+// WithMathExpressionCompletionType sets the math expression completion type.
 func (tv *TextView) WithMathExpressionCompletionType(mathExpressionCompletionType TextInputTraitType) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMathExpressionCompletionType:"), mathExpressionCompletionType)
 	return tv
@@ -314,7 +314,7 @@ func (tv *TextView) WithAutomaticTextCompletionEnabled(automaticTextCompletionEn
 	return tv
 }
 
-// WithAllowsCharacterPickerTouchBarItem sets the property and returns the receiver so calls can be chained.
+// WithAllowsCharacterPickerTouchBarItem sets the allows character picker touch bar item.
 func (tv *TextView) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
 	return tv
@@ -434,32 +434,32 @@ func (tv *TextView) WithVerticallyResizable(verticallyResizable bool) *TextView 
 	return tv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (tv *TextView) WithSubviews(items ...ViewProvider) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSubviews:"), _arr)
 	return tv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (tv *TextView) WithHidden(hidden bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHidden:"), hidden)
 	return tv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tv *TextView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return tv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (tv *TextView) WithAutoresizesSubviews(autoresizesSubviews bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return tv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (tv *TextView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return tv
@@ -471,19 +471,19 @@ func (tv *TextView) WithFrame(frame corefoundation.CGRect) *TextView {
 	return tv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (tv *TextView) WithFrameRotation(frameRotation float64) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return tv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (tv *TextView) WithFrameCenterRotation(frameCenterRotation float64) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return tv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (tv *TextView) WithBoundsRotation(boundsRotation float64) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return tv
@@ -495,7 +495,7 @@ func (tv *TextView) WithBounds(bounds corefoundation.CGRect) *TextView {
 	return tv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (tv *TextView) WithCanDrawConcurrently(canDrawConcurrently bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return tv
@@ -507,148 +507,148 @@ func (tv *TextView) WithNeedsDisplay(needsDisplay bool) *TextView {
 	return tv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (tv *TextView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return tv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (tv *TextView) WithWantsRestingTouches(wantsRestingTouches bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return tv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tv *TextView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return tv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (tv *TextView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return tv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (tv *TextView) WithWantsLayer(wantsLayer bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return tv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (tv *TextView) WithLayer(layer obj.Object) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return tv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tv *TextView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return tv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (tv *TextView) WithNeedsLayout(needsLayout bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return tv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (tv *TextView) WithAlphaValue(alphaValue float64) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return tv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tv *TextView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return tv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (tv *TextView) WithBackgroundFilters(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return tv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (tv *TextView) WithCompositingFilter(compositingFilter obj.Object) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return tv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (tv *TextView) WithContentFilters(items ...obj.Object) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setContentFilters:"), _arr)
 	return tv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (tv *TextView) WithShadow(shadow *Shadow) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return tv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (tv *TextView) WithClipsToBounds(clipsToBounds bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return tv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tv *TextView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return tv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (tv *TextView) WithToolTip(toolTip string) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return tv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tv *TextView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return tv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (tv *TextView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return tv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (tv *TextView) WithNextKeyView(nextKeyView ViewProvider) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return tv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (tv *TextView) WithFocusRingType(focusRingType FocusRingType) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return tv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (tv *TextView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return tv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (tv *TextView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return tv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tv *TextView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return tv
@@ -660,49 +660,49 @@ func (tv *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 	return tv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TextView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return tv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (tv *TextView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return tv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tv *TextView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return tv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tv *TextView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return tv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tv *TextView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return tv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tv *TextView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return tv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tv *TextView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return tv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (tv *TextView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextView {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return tv
@@ -935,43 +935,43 @@ func (tv *TextView) PerformValidatedReplacementInRangeWithAttributedString(range
 	return _r
 }
 
-// TextContainer wraps the corresponding Objective-C method.
+// TextContainer returns the text container.
 func (tv *TextView) TextContainer() *TextContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContainer"))
 	return TextContainerFromID(_r)
 }
 
-// TextContainerInset wraps the corresponding Objective-C method.
+// TextContainerInset returns the text container inset.
 func (tv *TextView) TextContainerInset() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("textContainerInset"))
 	return _r
 }
 
-// TextContainerOrigin wraps the corresponding Objective-C method.
+// TextContainerOrigin returns the text container origin.
 func (tv *TextView) TextContainerOrigin() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tv), objc.RegisterName("textContainerOrigin"))
 	return _r
 }
 
-// LayoutManager wraps the corresponding Objective-C method.
+// LayoutManager returns the layout manager.
 func (tv *TextView) LayoutManager() *LayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("layoutManager"))
 	return LayoutManagerFromID(_r)
 }
 
-// TextStorage wraps the corresponding Objective-C method.
+// TextStorage returns the text storage.
 func (tv *TextView) TextStorage() *TextStorage {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textStorage"))
 	return TextStorageFromID(_r)
 }
 
-// TextLayoutManager wraps the corresponding Objective-C method.
+// TextLayoutManager returns the text layout manager.
 func (tv *TextView) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// TextContentStorage wraps the corresponding Objective-C method.
+// TextContentStorage returns the text content storage.
 func (tv *TextView) TextContentStorage() *TextContentStorage {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textContentStorage"))
 	return TextContentStorageFromID(_r)
@@ -1007,7 +1007,7 @@ func (tv *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word stri
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:"), purego.NSString(word), charRange, movement, flag)
 }
 
-// RangeForUserCompletion wraps the corresponding Objective-C method.
+// RangeForUserCompletion returns the range for user completion.
 func (tv *TextView) RangeForUserCompletion() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCompletion"))
 	return _r
@@ -1053,7 +1053,7 @@ func (tv *TextView) PasteAsRichText(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
 }
 
-// WritablePasteboardTypes wraps the corresponding Objective-C method.
+// WritablePasteboardTypes returns the writable pasteboard types.
 //
 // WritablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) WritablePasteboardTypes() []obj.Object {
@@ -1061,7 +1061,7 @@ func (tv *TextView) WritablePasteboardTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ReadablePasteboardTypes wraps the corresponding Objective-C method.
+// ReadablePasteboardTypes returns the readable pasteboard types.
 //
 // ReadablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) ReadablePasteboardTypes() []obj.Object {
@@ -1080,7 +1080,7 @@ func (tv *TextView) CleanUpAfterDragOperation() {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("cleanUpAfterDragOperation"))
 }
 
-// AcceptableDragTypes wraps the corresponding Objective-C method.
+// AcceptableDragTypes returns the acceptable drag types.
 //
 // AcceptableDragTypes returns the collection as a Go slice.
 func (tv *TextView) AcceptableDragTypes() []obj.Object {
@@ -1145,7 +1145,7 @@ func (tv *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("showFindIndicatorForRange:"), charRange)
 }
 
-// SelectedRanges wraps the corresponding Objective-C method.
+// SelectedRanges returns the selected ranges.
 //
 // SelectedRanges returns the collection as a Go slice.
 func (tv *TextView) SelectedRanges() []obj.Object {
@@ -1153,37 +1153,37 @@ func (tv *TextView) SelectedRanges() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SelectionAffinity wraps the corresponding Objective-C method.
+// SelectionAffinity returns the selection affinity.
 func (tv *TextView) SelectionAffinity() SelectionAffinity {
 	_r := objc.Send[SelectionAffinity](objref.IDOf(tv), objc.RegisterName("selectionAffinity"))
 	return _r
 }
 
-// SelectionGranularity wraps the corresponding Objective-C method.
+// SelectionGranularity returns the selection granularity.
 func (tv *TextView) SelectionGranularity() SelectionGranularity {
 	_r := objc.Send[SelectionGranularity](objref.IDOf(tv), objc.RegisterName("selectionGranularity"))
 	return _r
 }
 
-// SelectedTextAttributes wraps the corresponding Objective-C method.
+// SelectedTextAttributes returns the selected text attributes.
 func (tv *TextView) SelectedTextAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedTextAttributes"))
 	return obj.Wrap(_r)
 }
 
-// InsertionPointColor wraps the corresponding Objective-C method.
+// InsertionPointColor returns the insertion point color.
 func (tv *TextView) InsertionPointColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertionPointColor"))
 	return ColorFromID(_r)
 }
 
-// MarkedTextAttributes wraps the corresponding Objective-C method.
+// MarkedTextAttributes returns the marked text attributes.
 func (tv *TextView) MarkedTextAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("markedTextAttributes"))
 	return obj.Wrap(_r)
 }
 
-// LinkTextAttributes wraps the corresponding Objective-C method.
+// LinkTextAttributes returns the link text attributes.
 func (tv *TextView) LinkTextAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("linkTextAttributes"))
 	return obj.Wrap(_r)
@@ -1213,31 +1213,31 @@ func (tv *TextView) UsesInspectorBar() bool {
 	return _r
 }
 
-// IsContinuousSpellCheckingEnabled wraps the corresponding Objective-C method.
+// IsContinuousSpellCheckingEnabled reports whether the object is continuous spell checking enabled.
 func (tv *TextView) IsContinuousSpellCheckingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isContinuousSpellCheckingEnabled"))
 	return _r
 }
 
-// SpellCheckerDocumentTag wraps the corresponding Objective-C method.
+// SpellCheckerDocumentTag returns the spell checker document tag.
 func (tv *TextView) SpellCheckerDocumentTag() int {
 	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r
 }
 
-// IsGrammarCheckingEnabled wraps the corresponding Objective-C method.
+// IsGrammarCheckingEnabled reports whether the object is grammar checking enabled.
 func (tv *TextView) IsGrammarCheckingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isGrammarCheckingEnabled"))
 	return _r
 }
 
-// TypingAttributes wraps the corresponding Objective-C method.
+// TypingAttributes returns the typing attributes.
 func (tv *TextView) TypingAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("typingAttributes"))
 	return obj.Wrap(_r)
 }
 
-// RangesForUserTextChange wraps the corresponding Objective-C method.
+// RangesForUserTextChange returns the ranges for user text change.
 //
 // RangesForUserTextChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserTextChange() []obj.Object {
@@ -1245,7 +1245,7 @@ func (tv *TextView) RangesForUserTextChange() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RangesForUserCharacterAttributeChange wraps the corresponding Objective-C method.
+// RangesForUserCharacterAttributeChange returns the ranges for user character attribute change.
 //
 // RangesForUserCharacterAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserCharacterAttributeChange() []obj.Object {
@@ -1253,7 +1253,7 @@ func (tv *TextView) RangesForUserCharacterAttributeChange() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RangesForUserParagraphAttributeChange wraps the corresponding Objective-C method.
+// RangesForUserParagraphAttributeChange returns the ranges for user paragraph attribute change.
 //
 // RangesForUserParagraphAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserParagraphAttributeChange() []obj.Object {
@@ -1261,19 +1261,19 @@ func (tv *TextView) RangesForUserParagraphAttributeChange() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RangeForUserTextChange wraps the corresponding Objective-C method.
+// RangeForUserTextChange returns the range for user text change.
 func (tv *TextView) RangeForUserTextChange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserTextChange"))
 	return _r
 }
 
-// RangeForUserCharacterAttributeChange wraps the corresponding Objective-C method.
+// RangeForUserCharacterAttributeChange returns the range for user character attribute change.
 func (tv *TextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserCharacterAttributeChange"))
 	return _r
 }
 
-// RangeForUserParagraphAttributeChange wraps the corresponding Objective-C method.
+// RangeForUserParagraphAttributeChange returns the range for user paragraph attribute change.
 func (tv *TextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tv), objc.RegisterName("rangeForUserParagraphAttributeChange"))
 	return _r
@@ -1285,7 +1285,7 @@ func (tv *TextView) AllowsDocumentBackgroundColorChange() bool {
 	return _r
 }
 
-// DefaultParagraphStyle wraps the corresponding Objective-C method.
+// DefaultParagraphStyle returns the default paragraph style.
 func (tv *TextView) DefaultParagraphStyle() *ParagraphStyle {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("defaultParagraphStyle"))
 	return ParagraphStyleFromID(_r)
@@ -1297,7 +1297,7 @@ func (tv *TextView) AllowsUndo() bool {
 	return _r
 }
 
-// IsCoalescingUndo wraps the corresponding Objective-C method.
+// IsCoalescingUndo reports whether the object is coalescing undo.
 func (tv *TextView) IsCoalescingUndo() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isCoalescingUndo"))
 	return _r
@@ -1315,7 +1315,7 @@ func (tv *TextView) UsesRolloverButtonForSelection() bool {
 	return _r
 }
 
-// AllowedInputSourceLocales wraps the corresponding Objective-C method.
+// AllowedInputSourceLocales returns the allowed input source locales.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tv *TextView) AllowedInputSourceLocales() []string {
@@ -1323,19 +1323,19 @@ func (tv *TextView) AllowedInputSourceLocales() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsWritingToolsActive wraps the corresponding Objective-C method.
+// IsWritingToolsActive reports whether the object is writing tools active.
 func (tv *TextView) IsWritingToolsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isWritingToolsActive"))
 	return _r
 }
 
-// WritingToolsBehavior wraps the corresponding Objective-C method.
+// WritingToolsBehavior returns the writing tools behavior.
 func (tv *TextView) WritingToolsBehavior() WritingToolsBehavior {
 	_r := objc.Send[WritingToolsBehavior](objref.IDOf(tv), objc.RegisterName("writingToolsBehavior"))
 	return _r
 }
 
-// AllowedWritingToolsResultOptions wraps the corresponding Objective-C method.
+// AllowedWritingToolsResultOptions returns the allowed writing tools result options.
 func (tv *TextView) AllowedWritingToolsResultOptions() WritingToolsResultOptions {
 	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(tv), objc.RegisterName("allowedWritingToolsResultOptions"))
 	return _r
@@ -1436,43 +1436,43 @@ func (tv *TextView) SmartInsertDeleteEnabled() bool {
 	return _r
 }
 
-// IsAutomaticQuoteSubstitutionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticQuoteSubstitutionEnabled reports whether the object is automatic quote substitution enabled.
 func (tv *TextView) IsAutomaticQuoteSubstitutionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticQuoteSubstitutionEnabled"))
 	return _r
 }
 
-// IsAutomaticLinkDetectionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticLinkDetectionEnabled reports whether the object is automatic link detection enabled.
 func (tv *TextView) IsAutomaticLinkDetectionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticLinkDetectionEnabled"))
 	return _r
 }
 
-// IsAutomaticDataDetectionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticDataDetectionEnabled reports whether the object is automatic data detection enabled.
 func (tv *TextView) IsAutomaticDataDetectionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDataDetectionEnabled"))
 	return _r
 }
 
-// IsAutomaticDashSubstitutionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticDashSubstitutionEnabled reports whether the object is automatic dash substitution enabled.
 func (tv *TextView) IsAutomaticDashSubstitutionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticDashSubstitutionEnabled"))
 	return _r
 }
 
-// IsAutomaticTextReplacementEnabled wraps the corresponding Objective-C method.
+// IsAutomaticTextReplacementEnabled reports whether the object is automatic text replacement enabled.
 func (tv *TextView) IsAutomaticTextReplacementEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextReplacementEnabled"))
 	return _r
 }
 
-// IsAutomaticSpellingCorrectionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticSpellingCorrectionEnabled reports whether the object is automatic spelling correction enabled.
 func (tv *TextView) IsAutomaticSpellingCorrectionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticSpellingCorrectionEnabled"))
 	return _r
 }
 
-// EnabledTextCheckingTypes wraps the corresponding Objective-C method.
+// EnabledTextCheckingTypes returns the enabled text checking types.
 func (tv *TextView) EnabledTextCheckingTypes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(tv), objc.RegisterName("enabledTextCheckingTypes"))
 	return _r
@@ -1490,19 +1490,19 @@ func (tv *TextView) UsesFindBar() bool {
 	return _r
 }
 
-// IsIncrementalSearchingEnabled wraps the corresponding Objective-C method.
+// IsIncrementalSearchingEnabled reports whether the object is incremental searching enabled.
 func (tv *TextView) IsIncrementalSearchingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isIncrementalSearchingEnabled"))
 	return _r
 }
 
-// InlinePredictionType wraps the corresponding Objective-C method.
+// InlinePredictionType returns the inline prediction type.
 func (tv *TextView) InlinePredictionType() TextInputTraitType {
 	_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("inlinePredictionType"))
 	return _r
 }
 
-// MathExpressionCompletionType wraps the corresponding Objective-C method.
+// MathExpressionCompletionType returns the math expression completion type.
 func (tv *TextView) MathExpressionCompletionType() TextInputTraitType {
 	_r := objc.Send[TextInputTraitType](objref.IDOf(tv), objc.RegisterName("mathExpressionCompletionType"))
 	return _r
@@ -1529,27 +1529,27 @@ func (tv *TextView) OrderFrontSharingServicePicker(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSharingServicePicker:"), objref.IDOf(sender))
 }
 
-// ToggleAutomaticTextCompletion wraps the corresponding Objective-C method.
+// ToggleAutomaticTextCompletion toggles automatic text completion.
 func (tv *TextView) ToggleAutomaticTextCompletion(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextCompletion:"), objref.IDOf(sender))
 }
 
-// UpdateTouchBarItemIdentifiers wraps the corresponding Objective-C method.
+// UpdateTouchBarItemIdentifiers updates touch bar item identifiers.
 func (tv *TextView) UpdateTouchBarItemIdentifiers() {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTouchBarItemIdentifiers"))
 }
 
-// UpdateTextTouchBarItems wraps the corresponding Objective-C method.
+// UpdateTextTouchBarItems updates text touch bar items.
 func (tv *TextView) UpdateTextTouchBarItems() {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTextTouchBarItems"))
 }
 
-// UpdateCandidates wraps the corresponding Objective-C method.
+// UpdateCandidates updates candidates.
 func (tv *TextView) UpdateCandidates() {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateCandidates"))
 }
 
-// IsAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticTextCompletionEnabled reports whether the object is automatic text completion enabled.
 func (tv *TextView) IsAutomaticTextCompletionEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("isAutomaticTextCompletionEnabled"))
 	return _r
@@ -1561,7 +1561,7 @@ func (tv *TextView) AllowsCharacterPickerTouchBarItem() bool {
 	return _r
 }
 
-// DrawTextHighlightBackgroundForTextRangeOrigin wraps the corresponding Objective-C method.
+// DrawTextHighlightBackgroundForTextRangeOrigin draws text highlight background for text range origin.
 func (tv *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *TextRange, origin corefoundation.CGPoint) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:"), objref.IDOf(textRange), origin)
 }
@@ -1571,7 +1571,7 @@ func (tv *TextView) Highlight(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("highlight:"), objref.IDOf(sender))
 }
 
-// TextHighlightAttributes wraps the corresponding Objective-C method.
+// TextHighlightAttributes returns the text highlight attributes.
 func (tv *TextView) TextHighlightAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textHighlightAttributes"))
 	return obj.Wrap(_r)

@@ -98,7 +98,7 @@ func (hcpsm *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPo
 	return hcpsm
 }
 
-// UpdateLinkStateSpeedInhibitLinkStateChange wraps the corresponding Objective-C method.
+// UpdateLinkStateSpeedInhibitLinkStateChange updates link state speed inhibit link state change.
 func (hcpsm *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(linkState HostCILinkState, speed HostCIDeviceSpeed, inhibitLinkStateChange bool) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("updateLinkState:speed:inhibitLinkStateChange:error:"), linkState, speed, inhibitLinkStateChange, unsafe.Pointer(&_nsErr))
@@ -108,25 +108,25 @@ func (hcpsm *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(
 	return nil
 }
 
-// PortNumber wraps the corresponding Objective-C method.
+// PortNumber returns the port number.
 func (hcpsm *HostCIPortStateMachine) PortNumber() int {
 	_r := objc.Send[int](objref.IDOf(hcpsm), objc.RegisterName("portNumber"))
 	return _r
 }
 
-// PortState wraps the corresponding Objective-C method.
+// PortState returns the port state.
 func (hcpsm *HostCIPortStateMachine) PortState() HostCIPortState {
 	_r := objc.Send[HostCIPortState](objref.IDOf(hcpsm), objc.RegisterName("portState"))
 	return _r
 }
 
-// PortStatus wraps the corresponding Objective-C method.
+// PortStatus returns the port status.
 func (hcpsm *HostCIPortStateMachine) PortStatus() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(hcpsm), objc.RegisterName("portStatus"))
 	return _r
 }
 
-// ControllerInterface wraps the corresponding Objective-C method.
+// ControllerInterface returns the controller interface.
 func (hcpsm *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(hcpsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
@@ -150,13 +150,13 @@ func (hcpsm *HostCIPortStateMachine) Overcurrent() bool {
 	return _r
 }
 
-// LinkState wraps the corresponding Objective-C method.
+// LinkState returns the link state.
 func (hcpsm *HostCIPortStateMachine) LinkState() HostCILinkState {
 	_r := objc.Send[HostCILinkState](objref.IDOf(hcpsm), objc.RegisterName("linkState"))
 	return _r
 }
 
-// Speed wraps the corresponding Objective-C method.
+// Speed returns the speed.
 func (hcpsm *HostCIPortStateMachine) Speed() HostCIDeviceSpeed {
 	_r := objc.Send[HostCIDeviceSpeed](objref.IDOf(hcpsm), objc.RegisterName("speed"))
 	return _r

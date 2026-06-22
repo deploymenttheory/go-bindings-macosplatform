@@ -85,7 +85,7 @@ func (ls *LocalSearch) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cancel"))
 }
 
-// IsSearching wraps the corresponding Objective-C method.
+// IsSearching reports whether the object is searching.
 func (ls *LocalSearch) IsSearching() bool {
 	_r := objc.Send[bool](objref.IDOf(ls), objc.RegisterName("isSearching"))
 	return _r

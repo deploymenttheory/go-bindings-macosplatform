@@ -72,7 +72,7 @@ func NewProductsResponse() *ProductsResponse {
 	return productsResponseAdopt(_id)
 }
 
-// Products wraps the corresponding Objective-C method.
+// Products returns the products.
 //
 // Products returns the collection as a Go slice.
 func (pr *ProductsResponse) Products() []*Product {
@@ -80,7 +80,7 @@ func (pr *ProductsResponse) Products() []*Product {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Product { return ProductFromID(_id) })
 }
 
-// InvalidProductIdentifiers wraps the corresponding Objective-C method.
+// InvalidProductIdentifiers returns the invalid product identifiers.
 //
 // InvalidProductIdentifiers returns the collection as a Go slice.
 func (pr *ProductsResponse) InvalidProductIdentifiers() []string {

@@ -70,7 +70,7 @@ func NewMTROperationalCredentialsClusterCertificateChainRequestParams() *MTROper
 	return mTROperationalCredentialsClusterCertificateChainRequestParamsAdopt(_id)
 }
 
-// WithCertificateType sets the property and returns the receiver so calls can be chained.
+// WithCertificateType sets the certificate type.
 func (moccccrp *MTROperationalCredentialsClusterCertificateChainRequestParams) WithCertificateType(certificateType obj.Object) *MTROperationalCredentialsClusterCertificateChainRequestParams {
 	objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("setCertificateType:"), objref.IDOf(certificateType))
 	return moccccrp
@@ -88,7 +88,7 @@ func (moccccrp *MTROperationalCredentialsClusterCertificateChainRequestParams) W
 	return moccccrp
 }
 
-// CertificateType wraps the corresponding Objective-C method.
+// CertificateType returns the certificate type.
 func (moccccrp *MTROperationalCredentialsClusterCertificateChainRequestParams) CertificateType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("certificateType"))
 	return obj.Wrap(_r)

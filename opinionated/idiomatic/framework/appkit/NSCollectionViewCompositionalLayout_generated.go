@@ -65,7 +65,7 @@ func (cvcl *CollectionViewCompositionalLayout) WithConfiguration(configuration *
 	return cvcl
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (cvcl *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(cvcl), objc.RegisterName("configuration"))
 	return CollectionViewCompositionalLayoutConfigurationFromID(_r)

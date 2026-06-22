@@ -75,68 +75,68 @@ func NewTask() *Task {
 	return taskAdopt(_id)
 }
 
-// WithExecutableURL sets the property and returns the receiver so calls can be chained.
+// WithExecutableURL sets the executable URL.
 func (t *Task) WithExecutableURL(executableURL string) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setExecutableURL:"), rt.FileURL(executableURL))
 	return t
 }
 
-// WithArguments sets the property and returns the receiver so calls can be chained.
+// WithArguments sets the arguments.
 func (t *Task) WithArguments(items ...StringProvider) *Task {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setArguments:"), _arr)
 	return t
 }
 
-// WithEnvironment sets the property and returns the receiver so calls can be chained.
+// WithEnvironment sets the environment.
 func (t *Task) WithEnvironment(environment obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
 	return t
 }
 
-// WithCurrentDirectoryURL sets the property and returns the receiver so calls can be chained.
+// WithCurrentDirectoryURL sets the current directory URL.
 func (t *Task) WithCurrentDirectoryURL(currentDirectoryURL string) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCurrentDirectoryURL:"), rt.FileURL(currentDirectoryURL))
 	return t
 }
 
-// WithLaunchRequirementData sets the property and returns the receiver so calls can be chained.
+// WithLaunchRequirementData sets the launch requirement data.
 func (t *Task) WithLaunchRequirementData(launchRequirementData DataProvider) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLaunchRequirementData:"), objref.IDOf(launchRequirementData))
 	return t
 }
 
-// WithStandardInput sets the property and returns the receiver so calls can be chained.
+// WithStandardInput sets the standard input.
 func (t *Task) WithStandardInput(standardInput obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 	return t
 }
 
-// WithStandardOutput sets the property and returns the receiver so calls can be chained.
+// WithStandardOutput sets the standard output.
 func (t *Task) WithStandardOutput(standardOutput obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 	return t
 }
 
-// WithStandardError sets the property and returns the receiver so calls can be chained.
+// WithStandardError sets the standard error.
 func (t *Task) WithStandardError(standardError obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 	return t
 }
 
-// WithTerminationHandler sets the property and returns the receiver so calls can be chained.
+// WithTerminationHandler sets the termination handler.
 func (t *Task) WithTerminationHandler(terminationHandler func(obj.Object)) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTerminationHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
 	return t
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (t *Task) WithQualityOfService(qualityOfService QualityOfService) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return t
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (t *Task) WithScriptingProperties(scriptingProperties obj.Object) *Task {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return t
@@ -176,13 +176,13 @@ func (t *Task) Resume() bool {
 	return _r
 }
 
-// ExecutableURL wraps the corresponding Objective-C method.
+// ExecutableURL returns the executable URL.
 func (t *Task) ExecutableURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("executableURL"))
 	return URLFromID(_r)
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (t *Task) Arguments() []string {
@@ -190,67 +190,67 @@ func (t *Task) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Environment wraps the corresponding Objective-C method.
+// Environment returns the environment.
 func (t *Task) Environment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("environment"))
 	return obj.Wrap(_r)
 }
 
-// CurrentDirectoryURL wraps the corresponding Objective-C method.
+// CurrentDirectoryURL returns the current directory URL.
 func (t *Task) CurrentDirectoryURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("currentDirectoryURL"))
 	return URLFromID(_r)
 }
 
-// LaunchRequirementData wraps the corresponding Objective-C method.
+// LaunchRequirementData returns the launch requirement data.
 func (t *Task) LaunchRequirementData() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("launchRequirementData"))
 	return DataFromID(_r)
 }
 
-// StandardInput wraps the corresponding Objective-C method.
+// StandardInput returns the standard input.
 func (t *Task) StandardInput() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardInput"))
 	return obj.Wrap(_r)
 }
 
-// StandardOutput wraps the corresponding Objective-C method.
+// StandardOutput returns the standard output.
 func (t *Task) StandardOutput() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardOutput"))
 	return obj.Wrap(_r)
 }
 
-// StandardError wraps the corresponding Objective-C method.
+// StandardError returns the standard error.
 func (t *Task) StandardError() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("standardError"))
 	return obj.Wrap(_r)
 }
 
-// ProcessIdentifier wraps the corresponding Objective-C method.
+// ProcessIdentifier returns the process identifier.
 func (t *Task) ProcessIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// IsRunning wraps the corresponding Objective-C method.
+// IsRunning reports whether the object is running.
 func (t *Task) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// TerminationStatus wraps the corresponding Objective-C method.
+// TerminationStatus returns the termination status.
 func (t *Task) TerminationStatus() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("terminationStatus"))
 	return _r
 }
 
-// TerminationReason wraps the corresponding Objective-C method.
+// TerminationReason returns the termination reason.
 func (t *Task) TerminationReason() TaskTerminationReason {
 	_r := objc.Send[TaskTerminationReason](objref.IDOf(t), objc.RegisterName("terminationReason"))
 	return _r
 }
 
-// QualityOfService wraps the corresponding Objective-C method.
+// QualityOfService returns the quality of service.
 func (t *Task) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(t), objc.RegisterName("qualityOfService"))
 	return _r

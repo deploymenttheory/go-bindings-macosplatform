@@ -58,151 +58,151 @@ func NewMTRClusterBarrierControlWithDeviceEndpointQueue(device *MTRDevice, endpo
 	return mTRClusterBarrierControlAdopt(_id)
 }
 
-// ReadAttributeBarrierMovingStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierMovingStateWithParams reads attribute barrier moving state with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierMovingStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierMovingStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBarrierSafetyStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierSafetyStatusWithParams reads attribute barrier safety status with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierSafetyStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierSafetyStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBarrierCapabilitiesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCapabilitiesWithParams reads attribute barrier capabilities with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierCapabilitiesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierCapabilitiesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBarrierOpenEventsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenEventsWithParams reads attribute barrier open events with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierOpenEventsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierOpenEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierOpenEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierOpenEventsWithValueExpectedValueInterval writes attribute barrier open events with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierOpenEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierOpenEventsWithValueExpectedValueIntervalParams writes attribute barrier open events with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierCloseEventsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCloseEventsWithParams reads attribute barrier close events with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierCloseEventsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierCloseEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierCloseEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCloseEventsWithValueExpectedValueInterval writes attribute barrier close events with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierCloseEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCloseEventsWithValueExpectedValueIntervalParams writes attribute barrier close events with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierCommandOpenEventsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandOpenEventsWithParams reads attribute barrier command open events with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierCommandOpenEventsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierCommandOpenEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueInterval writes attribute barrier command open events with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueIntervalParams writes attribute barrier command open events with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierCommandCloseEventsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandCloseEventsWithParams reads attribute barrier command close events with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierCommandCloseEventsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierCommandCloseEventsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueInterval writes attribute barrier command close events with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueIntervalParams writes attribute barrier command close events with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierOpenPeriodWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenPeriodWithParams reads attribute barrier open period with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierOpenPeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierOpenPeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierOpenPeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierOpenPeriodWithValueExpectedValueInterval writes attribute barrier open period with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierOpenPeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierOpenPeriodWithValueExpectedValueIntervalParams writes attribute barrier open period with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierClosePeriodWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierClosePeriodWithParams reads attribute barrier close period with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierClosePeriodWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierClosePeriodWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBarrierClosePeriodWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBarrierClosePeriodWithValueExpectedValueInterval writes attribute barrier close period with value expected value interval.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBarrierClosePeriodWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBarrierClosePeriodWithValueExpectedValueIntervalParams writes attribute barrier close period with value expected value interval params.
 func (mcbc *MTRClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBarrierPositionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBarrierPositionWithParams reads attribute barrier position with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeBarrierPositionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBarrierPositionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcbc *MTRClusterBarrierControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

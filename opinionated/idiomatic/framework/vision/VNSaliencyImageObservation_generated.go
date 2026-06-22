@@ -51,7 +51,7 @@ func NewSaliencyImageObservation() *SaliencyImageObservation {
 	return saliencyImageObservationAdopt(_id)
 }
 
-// SalientObjects wraps the corresponding Objective-C method.
+// SalientObjects returns the salient objects.
 //
 // SalientObjects returns the collection as a Go slice.
 func (sio *SaliencyImageObservation) SalientObjects() []*RectangleObservation {

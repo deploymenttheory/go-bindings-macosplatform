@@ -366,7 +366,7 @@ func (pcc *PathComponentCell) WithControlTint(controlTint ControlTint) *PathComp
 	return pcc
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (pcc *PathComponentCell) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

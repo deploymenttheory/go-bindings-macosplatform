@@ -112,7 +112,7 @@ func (whi *WebHistoryItem) LastVisitedTimeInterval() float64 {
 	return _r
 }
 
-// AlternateTitle wraps the corresponding Objective-C method.
+// AlternateTitle returns the alternate title.
 func (whi *WebHistoryItem) AlternateTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("alternateTitle"))
 	if _r == 0 {

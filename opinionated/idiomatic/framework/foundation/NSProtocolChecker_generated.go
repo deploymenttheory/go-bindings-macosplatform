@@ -72,7 +72,7 @@ func NewProtocolChecker() *ProtocolChecker {
 	return protocolCheckerAdopt(_id)
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (pc *ProtocolChecker) Target() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("target"))
 	return ObjectFromID(_r)

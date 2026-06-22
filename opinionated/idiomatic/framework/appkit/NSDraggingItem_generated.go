@@ -84,19 +84,19 @@ func (di *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, co
 	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setDraggingFrame:contents:"), frame, objref.IDOf(contents))
 }
 
-// Item wraps the corresponding Objective-C method.
+// Item returns the item.
 func (di *DraggingItem) Item() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
-// DraggingFrame wraps the corresponding Objective-C method.
+// DraggingFrame returns the dragging frame.
 func (di *DraggingItem) DraggingFrame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(di), objc.RegisterName("draggingFrame"))
 	return _r
 }
 
-// ImageComponents wraps the corresponding Objective-C method.
+// ImageComponents returns the image components.
 //
 // ImageComponents returns the collection as a Go slice.
 func (di *DraggingItem) ImageComponents() []*DraggingImageComponent {

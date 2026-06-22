@@ -50,43 +50,43 @@ func NewMTRChannelClusterChannelInfo() *MTRChannelClusterChannelInfo {
 	return mTRChannelClusterChannelInfoAdopt(_id)
 }
 
-// WithMajorNumber sets the property and returns the receiver so calls can be chained.
+// WithMajorNumber sets the major number.
 func (mccci *MTRChannelClusterChannelInfo) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return mccci
 }
 
-// WithMinorNumber sets the property and returns the receiver so calls can be chained.
+// WithMinorNumber sets the minor number.
 func (mccci *MTRChannelClusterChannelInfo) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return mccci
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mccci *MTRChannelClusterChannelInfo) WithName(name string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setName:"), purego.NSString(name))
 	return mccci
 }
 
-// WithCallSign sets the property and returns the receiver so calls can be chained.
+// WithCallSign sets the call sign.
 func (mccci *MTRChannelClusterChannelInfo) WithCallSign(callSign string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setCallSign:"), purego.NSString(callSign))
 	return mccci
 }
 
-// WithAffiliateCallSign sets the property and returns the receiver so calls can be chained.
+// WithAffiliateCallSign sets the affiliate call sign.
 func (mccci *MTRChannelClusterChannelInfo) WithAffiliateCallSign(affiliateCallSign string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setAffiliateCallSign:"), purego.NSString(affiliateCallSign))
 	return mccci
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (mccci *MTRChannelClusterChannelInfo) WithIdentifier(identifier string) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return mccci
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (mccci *MTRChannelClusterChannelInfo) WithType(type_ obj.Object) *MTRChannelClusterChannelInfo {
 	objc.Send[objc.ID](objref.IDOf(mccci), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mccci

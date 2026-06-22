@@ -56,7 +56,7 @@ func NewMTRClusterICDManagementWithDeviceEndpointIDQueue(device *MTRDevice, endp
 	return mTRClusterICDManagementAdopt(_id)
 }
 
-// RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion registers client with params expected values expected value interval completion.
 //
 // RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcim *MTRClusterICDManagement) RegisterClientWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRICDManagementClusterRegisterClientParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRICDManagementClusterRegisterClientResponseParams, err error) {
@@ -106,91 +106,91 @@ func (mcim *MTRClusterICDManagement) StayActiveRequestWithParamsExpectedValuesEx
 	}
 }
 
-// ReadAttributeIdleModeDurationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeIdleModeDurationWithParams reads attribute idle mode duration with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeIdleModeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeIdleModeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveModeDurationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveModeDurationWithParams reads attribute active mode duration with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeActiveModeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveModeThresholdWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveModeThresholdWithParams reads attribute active mode threshold with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeActiveModeThresholdWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeActiveModeThresholdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRegisteredClientsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRegisteredClientsWithParams reads attribute registered clients with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeRegisteredClientsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeRegisteredClientsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeICDCounterWithParams wraps the corresponding Objective-C method.
+// ReadAttributeICDCounterWithParams reads attribute icd counter with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeICDCounterWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeICDCounterWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClientsSupportedPerFabricWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClientsSupportedPerFabricWithParams reads attribute clients supported per fabric with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeClientsSupportedPerFabricWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUserActiveModeTriggerHintWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUserActiveModeTriggerHintWithParams reads attribute user active mode trigger hint with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeUserActiveModeTriggerHintWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUserActiveModeTriggerInstructionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUserActiveModeTriggerInstructionWithParams reads attribute user active mode trigger instruction with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeUserActiveModeTriggerInstructionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperatingModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperatingModeWithParams reads attribute operating mode with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaximumCheckInBackOffWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaximumCheckInBackOffWithParams reads attribute maximum check in back off with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeMaximumCheckInBackOffWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcim *MTRClusterICDManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcim), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

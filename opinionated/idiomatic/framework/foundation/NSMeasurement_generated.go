@@ -73,7 +73,7 @@ func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit obj.Object) *Me
 	return measurementAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (m *Measurement) WithScriptingProperties(scriptingProperties obj.Object) *Measurement {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return m
@@ -103,13 +103,13 @@ func (m *Measurement) MeasurementBySubtractingMeasurement(measurement obj.Object
 	return obj.Wrap(_r)
 }
 
-// Unit wraps the corresponding Objective-C method.
+// Unit returns the unit.
 func (m *Measurement) Unit() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("unit"))
 	return obj.Wrap(_r)
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (m *Measurement) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("doubleValue"))
 	return _r

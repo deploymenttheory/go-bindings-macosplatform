@@ -66,32 +66,32 @@ func (ssv *ScrubberSelectionView) WithHighlighted(highlighted bool) *ScrubberSel
 	return ssv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (ssv *ScrubberSelectionView) WithSubviews(items ...ViewProvider) *ScrubberSelectionView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setSubviews:"), _arr)
 	return ssv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (ssv *ScrubberSelectionView) WithHidden(hidden bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setHidden:"), hidden)
 	return ssv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (ssv *ScrubberSelectionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return ssv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (ssv *ScrubberSelectionView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return ssv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (ssv *ScrubberSelectionView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return ssv
@@ -103,19 +103,19 @@ func (ssv *ScrubberSelectionView) WithFrame(frame corefoundation.CGRect) *Scrubb
 	return ssv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (ssv *ScrubberSelectionView) WithFrameRotation(frameRotation float64) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return ssv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (ssv *ScrubberSelectionView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return ssv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (ssv *ScrubberSelectionView) WithBoundsRotation(boundsRotation float64) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return ssv
@@ -127,7 +127,7 @@ func (ssv *ScrubberSelectionView) WithBounds(bounds corefoundation.CGRect) *Scru
 	return ssv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (ssv *ScrubberSelectionView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return ssv
@@ -139,148 +139,148 @@ func (ssv *ScrubberSelectionView) WithNeedsDisplay(needsDisplay bool) *ScrubberS
 	return ssv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (ssv *ScrubberSelectionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return ssv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (ssv *ScrubberSelectionView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return ssv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (ssv *ScrubberSelectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return ssv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (ssv *ScrubberSelectionView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return ssv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (ssv *ScrubberSelectionView) WithWantsLayer(wantsLayer bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return ssv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (ssv *ScrubberSelectionView) WithLayer(layer obj.Object) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return ssv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (ssv *ScrubberSelectionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return ssv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (ssv *ScrubberSelectionView) WithNeedsLayout(needsLayout bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return ssv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (ssv *ScrubberSelectionView) WithAlphaValue(alphaValue float64) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return ssv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (ssv *ScrubberSelectionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return ssv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (ssv *ScrubberSelectionView) WithBackgroundFilters(items ...obj.Object) *ScrubberSelectionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return ssv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (ssv *ScrubberSelectionView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return ssv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (ssv *ScrubberSelectionView) WithContentFilters(items ...obj.Object) *ScrubberSelectionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setContentFilters:"), _arr)
 	return ssv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (ssv *ScrubberSelectionView) WithShadow(shadow *Shadow) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return ssv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (ssv *ScrubberSelectionView) WithClipsToBounds(clipsToBounds bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return ssv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (ssv *ScrubberSelectionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return ssv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (ssv *ScrubberSelectionView) WithToolTip(toolTip string) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return ssv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (ssv *ScrubberSelectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return ssv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (ssv *ScrubberSelectionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return ssv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (ssv *ScrubberSelectionView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return ssv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (ssv *ScrubberSelectionView) WithFocusRingType(focusRingType FocusRingType) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return ssv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (ssv *ScrubberSelectionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberSelectionView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return ssv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (ssv *ScrubberSelectionView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return ssv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (ssv *ScrubberSelectionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return ssv
@@ -292,49 +292,49 @@ func (ssv *ScrubberSelectionView) WithPrefersCompactControlSizeMetrics(prefersCo
 	return ssv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ssv *ScrubberSelectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return ssv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (ssv *ScrubberSelectionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return ssv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (ssv *ScrubberSelectionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return ssv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (ssv *ScrubberSelectionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return ssv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (ssv *ScrubberSelectionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return ssv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (ssv *ScrubberSelectionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return ssv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (ssv *ScrubberSelectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return ssv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (ssv *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberSelectionView {
 	objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return ssv

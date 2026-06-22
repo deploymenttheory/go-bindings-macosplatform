@@ -77,31 +77,31 @@ func NewInstallerPaneWithSection(parent obj.Object) *InstallerPane {
 	return installerPaneAdopt(_id)
 }
 
-// WithContentView sets the property and returns the receiver so calls can be chained.
+// WithContentView sets the content view.
 func (ip *InstallerPane) WithContentView(contentView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return ip
 }
 
-// WithInitialKeyView sets the property and returns the receiver so calls can be chained.
+// WithInitialKeyView sets the initial key view.
 func (ip *InstallerPane) WithInitialKeyView(initialKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 	return ip
 }
 
-// WithFirstKeyView sets the property and returns the receiver so calls can be chained.
+// WithFirstKeyView sets the first key view.
 func (ip *InstallerPane) WithFirstKeyView(firstKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 	return ip
 }
 
-// WithLastKeyView sets the property and returns the receiver so calls can be chained.
+// WithLastKeyView sets the last key view.
 func (ip *InstallerPane) WithLastKeyView(lastKeyView obj.Object) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 	return ip
 }
 
-// WithNextPane sets the property and returns the receiver so calls can be chained.
+// WithNextPane sets the next pane.
 func (ip *InstallerPane) WithNextPane(nextPane *InstallerPane) *InstallerPane {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setNextPane:"), objref.IDOf(nextPane))
 	return ip

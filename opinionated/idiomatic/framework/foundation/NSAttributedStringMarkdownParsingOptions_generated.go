@@ -102,7 +102,7 @@ func (asmpo *AttributedStringMarkdownParsingOptions) WithAppliesSourcePositionAt
 	return asmpo
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (asmpo *AttributedStringMarkdownParsingOptions) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownParsingOptions {
 	objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return asmpo
@@ -114,19 +114,19 @@ func (asmpo *AttributedStringMarkdownParsingOptions) AllowsExtendedAttributes() 
 	return _r
 }
 
-// InterpretedSyntax wraps the corresponding Objective-C method.
+// InterpretedSyntax returns the interpreted syntax.
 func (asmpo *AttributedStringMarkdownParsingOptions) InterpretedSyntax() AttributedStringMarkdownInterpretedSyntax {
 	_r := objc.Send[AttributedStringMarkdownInterpretedSyntax](objref.IDOf(asmpo), objc.RegisterName("interpretedSyntax"))
 	return _r
 }
 
-// FailurePolicy wraps the corresponding Objective-C method.
+// FailurePolicy returns the failure policy.
 func (asmpo *AttributedStringMarkdownParsingOptions) FailurePolicy() AttributedStringMarkdownParsingFailurePolicy {
 	_r := objc.Send[AttributedStringMarkdownParsingFailurePolicy](objref.IDOf(asmpo), objc.RegisterName("failurePolicy"))
 	return _r
 }
 
-// LanguageCode wraps the corresponding Objective-C method.
+// LanguageCode returns the language code.
 func (asmpo *AttributedStringMarkdownParsingOptions) LanguageCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(asmpo), objc.RegisterName("languageCode"))
 	if _r == 0 {

@@ -72,13 +72,13 @@ func NewContactsUserDefaults() *ContactsUserDefaults {
 	return contactsUserDefaultsAdopt(_id)
 }
 
-// SortOrder wraps the corresponding Objective-C method.
+// SortOrder returns the sort order.
 func (cud *ContactsUserDefaults) SortOrder() ContactSortOrder {
 	_r := objc.Send[ContactSortOrder](objref.IDOf(cud), objc.RegisterName("sortOrder"))
 	return _r
 }
 
-// CountryCode wraps the corresponding Objective-C method.
+// CountryCode returns the country code.
 func (cud *ContactsUserDefaults) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cud), objc.RegisterName("countryCode"))
 	if _r == 0 {

@@ -73,7 +73,7 @@ func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants []*
 	return callRecordFilterAdopt(_id)
 }
 
-// Participants wraps the corresponding Objective-C method.
+// Participants returns the participants.
 //
 // Participants returns the collection as a Go slice.
 func (crf *CallRecordFilter) Participants() []*Person {
@@ -81,13 +81,13 @@ func (crf *CallRecordFilter) Participants() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// CallTypes wraps the corresponding Objective-C method.
+// CallTypes returns the call types.
 func (crf *CallRecordFilter) CallTypes() CallRecordTypeOptions {
 	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(crf), objc.RegisterName("callTypes"))
 	return _r
 }
 
-// CallCapability wraps the corresponding Objective-C method.
+// CallCapability returns the call capability.
 func (crf *CallRecordFilter) CallCapability() CallCapability {
 	_r := objc.Send[CallCapability](objref.IDOf(crf), objc.RegisterName("callCapability"))
 	return _r

@@ -61,7 +61,7 @@ func NewMTRBaseClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRBase
 	return mTRBaseClusterSoftwareDiagnosticsAdopt(_id)
 }
 
-// ReadAttributeThreadMetricsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThreadMetricsWithCompletion reads attribute thread metrics with completion.
 //
 // ReadAttributeThreadMetricsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeThreadMetricsW
 	}
 }
 
-// ReadAttributeCurrentHeapFreeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapFreeWithCompletion reads attribute current heap free with completion.
 //
 // ReadAttributeCurrentHeapFreeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapFre
 	}
 }
 
-// ReadAttributeCurrentHeapUsedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapUsedWithCompletion reads attribute current heap used with completion.
 //
 // ReadAttributeCurrentHeapUsedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapUse
 	}
 }
 
-// ReadAttributeCurrentHeapHighWatermarkWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapHighWatermarkWithCompletion reads attribute current heap high watermark with completion.
 //
 // ReadAttributeCurrentHeapHighWatermarkWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapHig
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeClusterRevisio
 	}
 }
 
-// ReadAttributeThreadMetrics wraps the corresponding Objective-C method.
+// ReadAttributeThreadMetrics reads attribute thread metrics.
 //
 // ReadAttributeThreadMetrics blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeThreadMetrics(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeThreadMetricsW
 	}
 }
 
-// ReadAttributeCurrentHeapFree wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapFree reads attribute current heap free.
 //
 // ReadAttributeCurrentHeapFree blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFree(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapFre
 	}
 }
 
-// ReadAttributeCurrentHeapUsed wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapUsed reads attribute current heap used.
 //
 // ReadAttributeCurrentHeapUsed blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsed(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapUse
 	}
 }
 
-// ReadAttributeCurrentHeapHighWatermark wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHeapHighWatermark reads attribute current heap high watermark.
 //
 // ReadAttributeCurrentHeapHighWatermark blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermark(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeCurrentHeapHig
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcsd *MTRBaseClusterSoftwareDiagnostics) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcsd *MTRBaseClusterSoftwareDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

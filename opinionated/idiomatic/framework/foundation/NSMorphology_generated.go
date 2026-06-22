@@ -93,85 +93,85 @@ func (m *Morphology) WithNumber(number GrammaticalNumber) *Morphology {
 	return m
 }
 
-// WithGrammaticalCase sets the property and returns the receiver so calls can be chained.
+// WithGrammaticalCase sets the grammatical case.
 func (m *Morphology) WithGrammaticalCase(grammaticalCase GrammaticalCase) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGrammaticalCase:"), grammaticalCase)
 	return m
 }
 
-// WithDetermination sets the property and returns the receiver so calls can be chained.
+// WithDetermination sets the determination.
 func (m *Morphology) WithDetermination(determination GrammaticalDetermination) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDetermination:"), determination)
 	return m
 }
 
-// WithGrammaticalPerson sets the property and returns the receiver so calls can be chained.
+// WithGrammaticalPerson sets the grammatical person.
 func (m *Morphology) WithGrammaticalPerson(grammaticalPerson GrammaticalPerson) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGrammaticalPerson:"), grammaticalPerson)
 	return m
 }
 
-// WithPronounType sets the property and returns the receiver so calls can be chained.
+// WithPronounType sets the pronoun type.
 func (m *Morphology) WithPronounType(pronounType GrammaticalPronounType) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPronounType:"), pronounType)
 	return m
 }
 
-// WithDefiniteness sets the property and returns the receiver so calls can be chained.
+// WithDefiniteness sets the definiteness.
 func (m *Morphology) WithDefiniteness(definiteness GrammaticalDefiniteness) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDefiniteness:"), definiteness)
 	return m
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (m *Morphology) WithScriptingProperties(scriptingProperties obj.Object) *Morphology {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return m
 }
 
-// GrammaticalGender wraps the corresponding Objective-C method.
+// GrammaticalGender returns the grammatical gender.
 func (m *Morphology) GrammaticalGender() GrammaticalGender {
 	_r := objc.Send[GrammaticalGender](objref.IDOf(m), objc.RegisterName("grammaticalGender"))
 	return _r
 }
 
-// PartOfSpeech wraps the corresponding Objective-C method.
+// PartOfSpeech returns the part of speech.
 func (m *Morphology) PartOfSpeech() GrammaticalPartOfSpeech {
 	_r := objc.Send[GrammaticalPartOfSpeech](objref.IDOf(m), objc.RegisterName("partOfSpeech"))
 	return _r
 }
 
-// Number wraps the corresponding Objective-C method.
+// Number returns the number.
 func (m *Morphology) Number() GrammaticalNumber {
 	_r := objc.Send[GrammaticalNumber](objref.IDOf(m), objc.RegisterName("number"))
 	return _r
 }
 
-// GrammaticalCase wraps the corresponding Objective-C method.
+// GrammaticalCase returns the grammatical case.
 func (m *Morphology) GrammaticalCase() GrammaticalCase {
 	_r := objc.Send[GrammaticalCase](objref.IDOf(m), objc.RegisterName("grammaticalCase"))
 	return _r
 }
 
-// Determination wraps the corresponding Objective-C method.
+// Determination returns the determination.
 func (m *Morphology) Determination() GrammaticalDetermination {
 	_r := objc.Send[GrammaticalDetermination](objref.IDOf(m), objc.RegisterName("determination"))
 	return _r
 }
 
-// GrammaticalPerson wraps the corresponding Objective-C method.
+// GrammaticalPerson returns the grammatical person.
 func (m *Morphology) GrammaticalPerson() GrammaticalPerson {
 	_r := objc.Send[GrammaticalPerson](objref.IDOf(m), objc.RegisterName("grammaticalPerson"))
 	return _r
 }
 
-// PronounType wraps the corresponding Objective-C method.
+// PronounType returns the pronoun type.
 func (m *Morphology) PronounType() GrammaticalPronounType {
 	_r := objc.Send[GrammaticalPronounType](objref.IDOf(m), objc.RegisterName("pronounType"))
 	return _r
 }
 
-// Definiteness wraps the corresponding Objective-C method.
+// Definiteness returns the definiteness.
 func (m *Morphology) Definiteness() GrammaticalDefiniteness {
 	_r := objc.Send[GrammaticalDefiniteness](objref.IDOf(m), objc.RegisterName("definiteness"))
 	return _r
@@ -193,7 +193,7 @@ func (m *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomProno
 	return nil
 }
 
-// IsUnspecified wraps the corresponding Objective-C method.
+// IsUnspecified reports whether the object is unspecified.
 func (m *Morphology) IsUnspecified() bool {
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isUnspecified"))
 	return _r

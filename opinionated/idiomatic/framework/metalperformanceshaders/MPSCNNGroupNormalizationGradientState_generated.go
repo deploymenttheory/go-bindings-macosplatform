@@ -50,7 +50,7 @@ func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState
 	return cNNGroupNormalizationGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cgngs *CNNGroupNormalizationGradientState) WithReadCount(readCount int) *CNNGroupNormalizationGradientState {
 	objc.Send[objc.ID](objref.IDOf(cgngs), objc.RegisterName("setReadCount:"), readCount)
 	return cgngs

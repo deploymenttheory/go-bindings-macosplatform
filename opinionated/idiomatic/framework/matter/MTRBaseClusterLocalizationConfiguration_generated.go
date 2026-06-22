@@ -61,7 +61,7 @@ func NewMTRBaseClusterLocalizationConfigurationWithDeviceEndpointQueue(device *M
 	return mTRBaseClusterLocalizationConfigurationAdopt(_id)
 }
 
-// ReadAttributeActiveLocaleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveLocaleWithCompletion reads attribute active locale with completion.
 //
 // ReadAttributeActiveLocaleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeActiveLocaleWithCompletion(ctx context.Context) (result string, err error) {
@@ -111,7 +111,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeActiveLo
 	}
 }
 
-// ReadAttributeSupportedLocalesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedLocalesWithCompletion reads attribute supported locales with completion.
 //
 // ReadAttributeSupportedLocalesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeSupportedLocalesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeSupporte
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeClusterR
 	}
 }
 
-// ReadAttributeActiveLocale wraps the corresponding Objective-C method.
+// ReadAttributeActiveLocale reads attribute active locale.
 //
 // ReadAttributeActiveLocale blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeActiveLocale(ctx context.Context) (result string, err error) {
@@ -461,7 +461,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeActiveLo
 	}
 }
 
-// ReadAttributeSupportedLocales wraps the corresponding Objective-C method.
+// ReadAttributeSupportedLocales reads attribute supported locales.
 //
 // ReadAttributeSupportedLocales blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeSupportedLocales(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeSupporte
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbclc *MTRBaseClusterLocalizationConfiguration) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLocalizationConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

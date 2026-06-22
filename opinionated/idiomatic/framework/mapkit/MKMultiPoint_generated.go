@@ -70,7 +70,7 @@ func (mp *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PointCount wraps the corresponding Objective-C method.
+// PointCount returns the point count.
 func (mp *MultiPoint) PointCount() int {
 	_r := objc.Send[int](objref.IDOf(mp), objc.RegisterName("pointCount"))
 	return _r

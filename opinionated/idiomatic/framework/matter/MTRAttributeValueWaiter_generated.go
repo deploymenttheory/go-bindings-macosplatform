@@ -75,7 +75,7 @@ func (mavw *MTRAttributeValueWaiter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("cancel"))
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (mavw *MTRAttributeValueWaiter) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)

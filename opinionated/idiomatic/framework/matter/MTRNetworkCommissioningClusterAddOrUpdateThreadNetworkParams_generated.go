@@ -70,13 +70,13 @@ func NewMTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams() *MTRNetwo
 	return mTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParamsAdopt(_id)
 }
 
-// WithOperationalDataset sets the property and returns the receiver so calls can be chained.
+// WithOperationalDataset sets the operational dataset.
 func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithOperationalDataset(operationalDataset obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 	return mnccaoutnp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccaoutnp
@@ -94,13 +94,13 @@ func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) 
 	return mnccaoutnp
 }
 
-// OperationalDataset wraps the corresponding Objective-C method.
+// OperationalDataset returns the operational dataset.
 func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) OperationalDataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("operationalDataset"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mnccaoutnp *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaoutnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

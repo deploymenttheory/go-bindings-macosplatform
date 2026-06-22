@@ -72,13 +72,13 @@ func NewCIDiscoveredNode() *CIDiscoveredNode {
 	return cIDiscoveredNodeAdopt(_id)
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (cdn *CIDiscoveredNode) Destination() int {
 	_r := objc.Send[int](objref.IDOf(cdn), objc.RegisterName("destination"))
 	return _r
 }
 
-// DeviceInfo wraps the corresponding Objective-C method.
+// DeviceInfo returns the device info.
 func (cdn *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(cdn), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
@@ -96,7 +96,7 @@ func (cdn *CIDiscoveredNode) SupportsProperties() bool {
 	return _r
 }
 
-// MaximumSysExSize wraps the corresponding Objective-C method.
+// MaximumSysExSize returns the maximum sys ex size.
 func (cdn *CIDiscoveredNode) MaximumSysExSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cdn), objc.RegisterName("maximumSysExSize"))
 	return obj.Wrap(_r)

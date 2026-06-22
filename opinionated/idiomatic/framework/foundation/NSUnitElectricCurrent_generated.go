@@ -52,7 +52,7 @@ func NewUnitElectricCurrent() *UnitElectricCurrent {
 	return unitElectricCurrentAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uec *UnitElectricCurrent) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricCurrent {
 	objc.Send[objc.ID](objref.IDOf(uec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uec

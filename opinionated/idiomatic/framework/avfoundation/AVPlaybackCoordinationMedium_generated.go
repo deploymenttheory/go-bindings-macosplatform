@@ -72,7 +72,7 @@ func NewPlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 	return playbackCoordinationMediumAdopt(_id)
 }
 
-// ConnectedPlaybackCoordinators wraps the corresponding Objective-C method.
+// ConnectedPlaybackCoordinators returns the connected playback coordinators.
 //
 // ConnectedPlaybackCoordinators returns the collection as a Go slice.
 func (pcm *PlaybackCoordinationMedium) ConnectedPlaybackCoordinators() []*PlayerPlaybackCoordinator {

@@ -87,19 +87,19 @@ func (te *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
 	return te
 }
 
-// TextContentManager wraps the corresponding Objective-C method.
+// TextContentManager returns the text content manager.
 func (te *TextElement) TextContentManager() *TextContentManager {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
-// ElementRange wraps the corresponding Objective-C method.
+// ElementRange returns the element range.
 func (te *TextElement) ElementRange() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("elementRange"))
 	return TextRangeFromID(_r)
 }
 
-// ChildElements wraps the corresponding Objective-C method.
+// ChildElements returns the child elements.
 //
 // ChildElements returns the collection as a Go slice.
 func (te *TextElement) ChildElements() []*TextElement {
@@ -107,13 +107,13 @@ func (te *TextElement) ChildElements() []*TextElement {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
 
-// ParentElement wraps the corresponding Objective-C method.
+// ParentElement returns the parent element.
 func (te *TextElement) ParentElement() *TextElement {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("parentElement"))
 	return TextElementFromID(_r)
 }
 
-// IsRepresentedElement wraps the corresponding Objective-C method.
+// IsRepresentedElement reports whether the object is represented element.
 func (te *TextElement) IsRepresentedElement() bool {
 	_r := objc.Send[bool](objref.IDOf(te), objc.RegisterName("isRepresentedElement"))
 	return _r

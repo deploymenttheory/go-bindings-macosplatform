@@ -68,7 +68,7 @@ func (fl *FaceLandmarks) String() string {
 	return rt.Description(objref.IDOf(fl))
 }
 
-// Confidence wraps the corresponding Objective-C method.
+// Confidence returns the confidence.
 func (fl *FaceLandmarks) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(fl), objc.RegisterName("confidence"))
 	return _r

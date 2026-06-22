@@ -134,13 +134,13 @@ func (w *Workflow) MoveActionAtIndexToIndex(startIndex int, endIndex int) {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("moveActionAtIndex:toIndex:"), startIndex, endIndex)
 }
 
-// FileURL wraps the corresponding Objective-C method.
+// FileURL returns the file URL.
 func (w *Workflow) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
 
-// Actions wraps the corresponding Objective-C method.
+// Actions returns the actions.
 //
 // Actions returns the collection as a Go slice.
 func (w *Workflow) Actions() []*Action {
@@ -148,7 +148,7 @@ func (w *Workflow) Actions() []*Action {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Action { return ActionFromID(_id) })
 }
 
-// Input wraps the corresponding Objective-C method.
+// Input returns the input.
 func (w *Workflow) Input() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("input"))
 	return obj.Wrap(_r)

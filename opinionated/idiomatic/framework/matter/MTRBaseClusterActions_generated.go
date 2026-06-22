@@ -61,7 +61,7 @@ func NewMTRBaseClusterActionsWithDeviceEndpointQueue(device *MTRBaseDevice, endp
 	return mTRBaseClusterActionsAdopt(_id)
 }
 
-// ReadAttributeActionListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActionListWithCompletion reads attribute action list with completion.
 //
 // ReadAttributeActionListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeActionListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeActionListWithParamsSubscri
 	}
 }
 
-// ReadAttributeEndpointListsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEndpointListsWithCompletion reads attribute endpoint lists with completion.
 //
 // ReadAttributeEndpointListsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeEndpointListsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeEndpointListsWithParamsSubs
 	}
 }
 
-// ReadAttributeSetupURLWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSetupURLWithCompletion reads attribute setup URL with completion.
 //
 // ReadAttributeSetupURLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeSetupURLWithCompletion(ctx context.Context) (result string, err error) {
@@ -211,7 +211,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeSetupURLWithParamsSubscript
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeGeneratedCommandListWithPar
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAcceptedCommandListWithPara
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAttributeListWithParamsSubs
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeFeatureMapWithParamsSubscri
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeClusterRevisionWithParamsSu
 	}
 }
 
-// ReadAttributeActionList wraps the corresponding Objective-C method.
+// ReadAttributeActionList reads attribute action list.
 //
 // ReadAttributeActionList blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeActionList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeActionListWithMinIntervalMa
 	}
 }
 
-// ReadAttributeEndpointLists wraps the corresponding Objective-C method.
+// ReadAttributeEndpointLists reads attribute endpoint lists.
 //
 // ReadAttributeEndpointLists blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeEndpointLists(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeEndpointListsWithMinInterva
 	}
 }
 
-// ReadAttributeSetupURL wraps the corresponding Objective-C method.
+// ReadAttributeSetupURL reads attribute setup URL.
 //
 // ReadAttributeSetupURL blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeSetupURL(ctx context.Context) (result string, err error) {
@@ -611,7 +611,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeSetupURLWithMinIntervalMaxI
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeGeneratedCommandListWithMin
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAcceptedCommandListWithMinI
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAttributeListWithMinInterva
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeFeatureMapWithMinIntervalMa
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbca *MTRBaseClusterActions) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

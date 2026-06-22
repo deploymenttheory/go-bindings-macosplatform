@@ -78,31 +78,31 @@ func NewMTRDoorLockClusterGetYearDayScheduleResponseParamsWithResponseValueError
 	return mTRDoorLockClusterGetYearDayScheduleResponseParamsAdopt(_id), nil
 }
 
-// WithYearDayIndex sets the property and returns the receiver so calls can be chained.
+// WithYearDayIndex sets the year day index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return mdlcgydsrp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgydsrp
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcgydsrp
 }
 
-// WithLocalStartTime sets the property and returns the receiver so calls can be chained.
+// WithLocalStartTime sets the local start time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return mdlcgydsrp
 }
 
-// WithLocalEndTime sets the property and returns the receiver so calls can be chained.
+// WithLocalEndTime sets the local end time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterGetYearDayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return mdlcgydsrp
@@ -114,31 +114,31 @@ func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithTimedI
 	return mdlcgydsrp
 }
 
-// YearDayIndex wraps the corresponding Objective-C method.
+// YearDayIndex returns the year day index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("yearDayIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// LocalStartTime wraps the corresponding Objective-C method.
+// LocalStartTime returns the local start time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("localStartTime"))
 	return obj.Wrap(_r)
 }
 
-// LocalEndTime wraps the corresponding Objective-C method.
+// LocalEndTime returns the local end time.
 func (mdlcgydsrp *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsrp), objc.RegisterName("localEndTime"))
 	return obj.Wrap(_r)

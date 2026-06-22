@@ -293,7 +293,7 @@ func (atw *AnnotationTextWidget) SetStringValue(value string) {
 	objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("setStringValue:"), purego.NSString(value))
 }
 
-// AttributedStringValue wraps the corresponding Objective-C method.
+// AttributedStringValue returns the attributed string value.
 func (atw *AnnotationTextWidget) AttributedStringValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(atw), objc.RegisterName("attributedStringValue"))
 	return obj.Wrap(_r)

@@ -73,19 +73,19 @@ func (argt *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
 	return argt
 }
 
-// PageIndex wraps the corresponding Objective-C method.
+// PageIndex returns the page index.
 func (argt *ActionRemoteGoTo) PageIndex() int {
 	_r := objc.Send[int](objref.IDOf(argt), objc.RegisterName("pageIndex"))
 	return _r
 }
 
-// Point wraps the corresponding Objective-C method.
+// Point returns the point.
 func (argt *ActionRemoteGoTo) Point() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(argt), objc.RegisterName("point"))
 	return _r
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (argt *ActionRemoteGoTo) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

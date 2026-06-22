@@ -70,13 +70,13 @@ func NewMTRDoorLockClusterGetYearDayScheduleParams() *MTRDoorLockClusterGetYearD
 	return mTRDoorLockClusterGetYearDayScheduleParamsAdopt(_id)
 }
 
-// WithYearDayIndex sets the property and returns the receiver so calls can be chained.
+// WithYearDayIndex sets the year day index.
 func (mdlcgydsp *MTRDoorLockClusterGetYearDayScheduleParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsp), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return mdlcgydsp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcgydsp *MTRDoorLockClusterGetYearDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetYearDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgydsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgydsp
@@ -94,13 +94,13 @@ func (mdlcgydsp *MTRDoorLockClusterGetYearDayScheduleParams) WithServerSideProce
 	return mdlcgydsp
 }
 
-// YearDayIndex wraps the corresponding Objective-C method.
+// YearDayIndex returns the year day index.
 func (mdlcgydsp *MTRDoorLockClusterGetYearDayScheduleParams) YearDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsp), objc.RegisterName("yearDayIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcgydsp *MTRDoorLockClusterGetYearDayScheduleParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgydsp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)

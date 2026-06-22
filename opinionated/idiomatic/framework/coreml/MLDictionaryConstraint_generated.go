@@ -72,7 +72,7 @@ func NewDictionaryConstraint() *DictionaryConstraint {
 	return dictionaryConstraintAdopt(_id)
 }
 
-// KeyType wraps the corresponding Objective-C method.
+// KeyType returns the key type.
 func (dc *DictionaryConstraint) KeyType() FeatureType {
 	_r := objc.Send[FeatureType](objref.IDOf(dc), objc.RegisterName("keyType"))
 	return _r

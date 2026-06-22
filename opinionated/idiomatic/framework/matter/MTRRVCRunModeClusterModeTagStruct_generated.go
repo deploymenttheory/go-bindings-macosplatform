@@ -70,25 +70,25 @@ func NewMTRRVCRunModeClusterModeTagStruct() *MTRRVCRunModeClusterModeTagStruct {
 	return mTRRVCRunModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mrmcmts *MTRRVCRunModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRVCRunModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mrmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mrmcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mrmcmts *MTRRVCRunModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRVCRunModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mrmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mrmcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mrmcmts *MTRRVCRunModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mrmcmts *MTRRVCRunModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

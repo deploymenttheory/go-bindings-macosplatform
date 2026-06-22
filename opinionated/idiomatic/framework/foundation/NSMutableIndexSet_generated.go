@@ -52,7 +52,7 @@ func NewMutableIndexSet() *MutableIndexSet {
 	return mutableIndexSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mis *MutableIndexSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableIndexSet {
 	objc.Send[objc.ID](objref.IDOf(mis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mis

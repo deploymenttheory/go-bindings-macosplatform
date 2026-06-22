@@ -70,7 +70,7 @@ func NewMTRMicrowaveOvenControlClusterAddMoreTimeParams() *MTRMicrowaveOvenContr
 	return mTRMicrowaveOvenControlClusterAddMoreTimeParamsAdopt(_id)
 }
 
-// WithTimeToAdd sets the property and returns the receiver so calls can be chained.
+// WithTimeToAdd sets the time to add.
 func (mmoccamtp *MTRMicrowaveOvenControlClusterAddMoreTimeParams) WithTimeToAdd(timeToAdd obj.Object) *MTRMicrowaveOvenControlClusterAddMoreTimeParams {
 	objc.Send[objc.ID](objref.IDOf(mmoccamtp), objc.RegisterName("setTimeToAdd:"), objref.IDOf(timeToAdd))
 	return mmoccamtp
@@ -88,7 +88,7 @@ func (mmoccamtp *MTRMicrowaveOvenControlClusterAddMoreTimeParams) WithServerSide
 	return mmoccamtp
 }
 
-// TimeToAdd wraps the corresponding Objective-C method.
+// TimeToAdd returns the time to add.
 func (mmoccamtp *MTRMicrowaveOvenControlClusterAddMoreTimeParams) TimeToAdd() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccamtp), objc.RegisterName("timeToAdd"))
 	return obj.Wrap(_r)

@@ -120,19 +120,19 @@ func (pr *PolygonRenderer) WithAlpha(alpha float64) *PolygonRenderer {
 	return pr
 }
 
-// Polygon wraps the corresponding Objective-C method.
+// Polygon returns the polygon.
 func (pr *PolygonRenderer) Polygon() *Polygon {
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("polygon"))
 	return PolygonFromID(_r)
 }
 
-// StrokeStart wraps the corresponding Objective-C method.
+// StrokeStart returns the stroke start.
 func (pr *PolygonRenderer) StrokeStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
-// StrokeEnd wraps the corresponding Objective-C method.
+// StrokeEnd returns the stroke end.
 func (pr *PolygonRenderer) StrokeEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeEnd"))
 	return _r

@@ -80,37 +80,37 @@ func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffe
 	return openGLPixelBufferAdopt(_id)
 }
 
-// CGLPBufferObj wraps the corresponding Objective-C method.
+// CGLPBufferObj returns the cglp buffer obj.
 func (ogpb *OpenGLPixelBuffer) CGLPBufferObj() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ogpb), objc.RegisterName("CGLPBufferObj"))
 	return obj.Wrap(_r)
 }
 
-// PixelsWide wraps the corresponding Objective-C method.
+// PixelsWide returns the pixels wide.
 func (ogpb *OpenGLPixelBuffer) PixelsWide() int32 {
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
-// PixelsHigh wraps the corresponding Objective-C method.
+// PixelsHigh returns the pixels high.
 func (ogpb *OpenGLPixelBuffer) PixelsHigh() int32 {
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
-// TextureTarget wraps the corresponding Objective-C method.
+// TextureTarget returns the texture target.
 func (ogpb *OpenGLPixelBuffer) TextureTarget() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ogpb), objc.RegisterName("textureTarget"))
 	return _r
 }
 
-// TextureInternalFormat wraps the corresponding Objective-C method.
+// TextureInternalFormat returns the texture internal format.
 func (ogpb *OpenGLPixelBuffer) TextureInternalFormat() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ogpb), objc.RegisterName("textureInternalFormat"))
 	return _r
 }
 
-// TextureMaxMipMapLevel wraps the corresponding Objective-C method.
+// TextureMaxMipMapLevel returns the texture max mip map level.
 func (ogpb *OpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
 	_r := objc.Send[int32](objref.IDOf(ogpb), objc.RegisterName("textureMaxMipMapLevel"))
 	return _r

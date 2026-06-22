@@ -49,31 +49,31 @@ func NewDOMAttr() *DOMAttr {
 	return dOMAttrAdopt(_id)
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (da *DOMAttr) WithValue(value string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setValue:"), purego.NSString(value))
 	return da
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (da *DOMAttr) WithNodeValue(nodeValue string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return da
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (da *DOMAttr) WithPrefix(prefix string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return da
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (da *DOMAttr) WithTextContent(textContent string) *DOMAttr {
 	objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return da
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (da *DOMAttr) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (da *DOMAttr) Specified() bool {
 	return _r
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (da *DOMAttr) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("value"))
 	if _r == 0 {
@@ -97,13 +97,13 @@ func (da *DOMAttr) Value() string {
 	return purego.GoString(_r)
 }
 
-// OwnerElement wraps the corresponding Objective-C method.
+// OwnerElement returns the owner element.
 func (da *DOMAttr) OwnerElement() *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("ownerElement"))
 	return DOMElementFromID(_r)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (da *DOMAttr) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)

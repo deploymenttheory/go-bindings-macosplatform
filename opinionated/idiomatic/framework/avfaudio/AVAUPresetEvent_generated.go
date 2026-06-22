@@ -65,19 +65,19 @@ func (ape *AUPresetEvent) WithElement(element int) *AUPresetEvent {
 	return ape
 }
 
-// Scope wraps the corresponding Objective-C method.
+// Scope returns the scope.
 func (ape *AUPresetEvent) Scope() int {
 	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("scope"))
 	return _r
 }
 
-// Element wraps the corresponding Objective-C method.
+// Element returns the element.
 func (ape *AUPresetEvent) Element() int {
 	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("element"))
 	return _r
 }
 
-// PresetDictionary wraps the corresponding Objective-C method.
+// PresetDictionary returns the preset dictionary.
 func (ape *AUPresetEvent) PresetDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ape), objc.RegisterName("presetDictionary"))
 	return obj.Wrap(_r)

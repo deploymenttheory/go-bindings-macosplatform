@@ -49,7 +49,7 @@ func NewDOMCSSValueList() *DOMCSSValueList {
 	return dOMCSSValueListAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dvl *DOMCSSValueList) WithCSSText(cssText string) *DOMCSSValueList {
 	objc.Send[objc.ID](objref.IDOf(dvl), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dvl
@@ -61,7 +61,7 @@ func (dvl *DOMCSSValueList) Item(index int) *DOMCSSValue {
 	return DOMCSSValueFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dvl *DOMCSSValueList) Length() int {
 	_r := objc.Send[int](objref.IDOf(dvl), objc.RegisterName("length"))
 	return _r

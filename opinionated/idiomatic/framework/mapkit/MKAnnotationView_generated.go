@@ -211,7 +211,7 @@ func (av *AnnotationView) SetDragStateAnimated(newDragState AnnotationViewDragSt
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:animated:"), newDragState, animated)
 }
 
-// ReuseIdentifier wraps the corresponding Objective-C method.
+// ReuseIdentifier returns the reuse identifier.
 func (av *AnnotationView) ReuseIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("reuseIdentifier"))
 	if _r == 0 {
@@ -220,55 +220,55 @@ func (av *AnnotationView) ReuseIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (av *AnnotationView) Image() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
-// CenterOffset wraps the corresponding Objective-C method.
+// CenterOffset returns the center offset.
 func (av *AnnotationView) CenterOffset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("centerOffset"))
 	return _r
 }
 
-// AccessoryOffset wraps the corresponding Objective-C method.
+// AccessoryOffset returns the accessory offset.
 func (av *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("accessoryOffset"))
 	return _r
 }
 
-// CalloutOffset wraps the corresponding Objective-C method.
+// CalloutOffset returns the callout offset.
 func (av *AnnotationView) CalloutOffset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("calloutOffset"))
 	return _r
 }
 
-// LeftCalloutOffset wraps the corresponding Objective-C method.
+// LeftCalloutOffset returns the left callout offset.
 func (av *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("leftCalloutOffset"))
 	return _r
 }
 
-// RightCalloutOffset wraps the corresponding Objective-C method.
+// RightCalloutOffset returns the right callout offset.
 func (av *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(av), objc.RegisterName("rightCalloutOffset"))
 	return _r
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (av *AnnotationView) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// IsHighlighted wraps the corresponding Objective-C method.
+// IsHighlighted reports whether the object is highlighted.
 func (av *AnnotationView) IsHighlighted() bool {
 	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
-// IsSelected wraps the corresponding Objective-C method.
+// IsSelected reports whether the object is selected.
 func (av *AnnotationView) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isSelected"))
 	return _r
@@ -280,37 +280,37 @@ func (av *AnnotationView) CanShowCallout() bool {
 	return _r
 }
 
-// LeftCalloutAccessoryView wraps the corresponding Objective-C method.
+// LeftCalloutAccessoryView returns the left callout accessory view.
 func (av *AnnotationView) LeftCalloutAccessoryView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("leftCalloutAccessoryView"))
 	return obj.Wrap(_r)
 }
 
-// RightCalloutAccessoryView wraps the corresponding Objective-C method.
+// RightCalloutAccessoryView returns the right callout accessory view.
 func (av *AnnotationView) RightCalloutAccessoryView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("rightCalloutAccessoryView"))
 	return obj.Wrap(_r)
 }
 
-// DetailCalloutAccessoryView wraps the corresponding Objective-C method.
+// DetailCalloutAccessoryView returns the detail callout accessory view.
 func (av *AnnotationView) DetailCalloutAccessoryView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("detailCalloutAccessoryView"))
 	return obj.Wrap(_r)
 }
 
-// IsDraggable wraps the corresponding Objective-C method.
+// IsDraggable reports whether the object is draggable.
 func (av *AnnotationView) IsDraggable() bool {
 	_r := objc.Send[bool](objref.IDOf(av), objc.RegisterName("isDraggable"))
 	return _r
 }
 
-// DragState wraps the corresponding Objective-C method.
+// DragState returns the drag state.
 func (av *AnnotationView) DragState() AnnotationViewDragState {
 	_r := objc.Send[AnnotationViewDragState](objref.IDOf(av), objc.RegisterName("dragState"))
 	return _r
 }
 
-// ClusteringIdentifier wraps the corresponding Objective-C method.
+// ClusteringIdentifier returns the clustering identifier.
 func (av *AnnotationView) ClusteringIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusteringIdentifier"))
 	if _r == 0 {
@@ -319,31 +319,31 @@ func (av *AnnotationView) ClusteringIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ClusterAnnotationView wraps the corresponding Objective-C method.
+// ClusterAnnotationView returns the cluster annotation view.
 func (av *AnnotationView) ClusterAnnotationView() *AnnotationView {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("clusterAnnotationView"))
 	return AnnotationViewFromID(_r)
 }
 
-// DisplayPriority wraps the corresponding Objective-C method.
+// DisplayPriority returns the display priority.
 func (av *AnnotationView) DisplayPriority() float32 {
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("displayPriority"))
 	return _r
 }
 
-// ZPriority wraps the corresponding Objective-C method.
+// ZPriority returns the z priority.
 func (av *AnnotationView) ZPriority() float32 {
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("zPriority"))
 	return _r
 }
 
-// SelectedZPriority wraps the corresponding Objective-C method.
+// SelectedZPriority returns the selected z priority.
 func (av *AnnotationView) SelectedZPriority() float32 {
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("selectedZPriority"))
 	return _r
 }
 
-// CollisionMode wraps the corresponding Objective-C method.
+// CollisionMode returns the collision mode.
 func (av *AnnotationView) CollisionMode() AnnotationViewCollisionMode {
 	_r := objc.Send[AnnotationViewCollisionMode](objref.IDOf(av), objc.RegisterName("collisionMode"))
 	return _r

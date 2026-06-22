@@ -70,13 +70,13 @@ func NewMTRTimeSynchronizationClusterDSTStatusEvent() *MTRTimeSynchronizationClu
 	return mTRTimeSynchronizationClusterDSTStatusEventAdopt(_id)
 }
 
-// WithDstOffsetActive sets the property and returns the receiver so calls can be chained.
+// WithDstOffsetActive sets the dst offset active.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOffsetActive obj.Object) *MTRTimeSynchronizationClusterDSTStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(mtscdse), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
 	return mtscdse
 }
 
-// DstOffsetActive wraps the corresponding Objective-C method.
+// DstOffsetActive returns the dst offset active.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdse), objc.RegisterName("dstOffsetActive"))
 	return obj.Wrap(_r)

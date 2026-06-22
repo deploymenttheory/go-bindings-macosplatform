@@ -84,13 +84,13 @@ func (wv *WorkflowView) WithWorkflowController(workflowController *WorkflowContr
 	return wv
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (wv *WorkflowView) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// WorkflowController wraps the corresponding Objective-C method.
+// WorkflowController returns the workflow controller.
 func (wv *WorkflowView) WorkflowController() *WorkflowController {
 	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("workflowController"))
 	return WorkflowControllerFromID(_r)

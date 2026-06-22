@@ -66,7 +66,7 @@ func (mclccss *MTRContentLauncherClusterContentSearchStruct) String() string {
 	return rt.Description(objref.IDOf(mclccss))
 }
 
-// ParameterList wraps the corresponding Objective-C method.
+// ParameterList returns the parameter list.
 func (mclccss *MTRContentLauncherClusterContentSearchStruct) ParameterList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclccss), objc.RegisterName("parameterList"))
 	return obj.Wrap(_r)

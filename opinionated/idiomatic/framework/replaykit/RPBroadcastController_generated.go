@@ -104,25 +104,25 @@ func (bc *BroadcastController) FinishBroadcastWithHandler(ctx context.Context) e
 	}
 }
 
-// IsBroadcasting wraps the corresponding Objective-C method.
+// IsBroadcasting reports whether the object is broadcasting.
 func (bc *BroadcastController) IsBroadcasting() bool {
 	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isBroadcasting"))
 	return _r
 }
 
-// IsPaused wraps the corresponding Objective-C method.
+// IsPaused reports whether the object is paused.
 func (bc *BroadcastController) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isPaused"))
 	return _r
 }
 
-// BroadcastURL wraps the corresponding Objective-C method.
+// BroadcastURL returns the broadcast URL.
 func (bc *BroadcastController) BroadcastURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("broadcastURL"))
 	return obj.Wrap(_r)
 }
 
-// ServiceInfo wraps the corresponding Objective-C method.
+// ServiceInfo returns the service info.
 func (bc *BroadcastController) ServiceInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("serviceInfo"))
 	return obj.Wrap(_r)

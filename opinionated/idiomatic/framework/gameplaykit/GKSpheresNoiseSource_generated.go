@@ -58,7 +58,7 @@ func (sns *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSou
 	return sns
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (sns *SpheresNoiseSource) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(sns), objc.RegisterName("frequency"))
 	return _r

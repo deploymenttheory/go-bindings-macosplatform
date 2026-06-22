@@ -70,7 +70,7 @@ func NewMTRAccountLoginClusterLogoutParams() *MTRAccountLoginClusterLogoutParams
 	return mTRAccountLoginClusterLogoutParamsAdopt(_id)
 }
 
-// WithNode sets the property and returns the receiver so calls can be chained.
+// WithNode sets the node.
 func (malclp *MTRAccountLoginClusterLogoutParams) WithNode(node obj.Object) *MTRAccountLoginClusterLogoutParams {
 	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return malclp
@@ -88,7 +88,7 @@ func (malclp *MTRAccountLoginClusterLogoutParams) WithServerSideProcessingTimeou
 	return malclp
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (malclp *MTRAccountLoginClusterLogoutParams) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("node"))
 	return obj.Wrap(_r)

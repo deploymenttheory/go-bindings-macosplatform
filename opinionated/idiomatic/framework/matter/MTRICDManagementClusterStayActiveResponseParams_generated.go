@@ -78,13 +78,13 @@ func NewMTRICDManagementClusterStayActiveResponseParamsWithResponseValueError(re
 	return mTRICDManagementClusterStayActiveResponseParamsAdopt(_id), nil
 }
 
-// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
+// WithPromisedActiveDuration sets the promised active duration.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRICDManagementClusterStayActiveResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return mmcsarp
 }
 
-// PromisedActiveDuration wraps the corresponding Objective-C method.
+// PromisedActiveDuration returns the promised active duration.
 func (mmcsarp *MTRICDManagementClusterStayActiveResponseParams) PromisedActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcsarp), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)

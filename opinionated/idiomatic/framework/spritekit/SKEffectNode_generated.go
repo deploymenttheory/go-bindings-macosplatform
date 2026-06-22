@@ -264,7 +264,7 @@ func (en *EffectNode) BlendMode() BlendMode {
 	return _r
 }
 
-// Shader wraps the corresponding Objective-C method.
+// Shader returns the shader.
 func (en *EffectNode) Shader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("shader"))
 	return ShaderFromID(_r)

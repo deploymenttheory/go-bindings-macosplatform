@@ -78,7 +78,7 @@ func (mcad *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4Command
 	return mcad
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mcad *MTL4CommandAllocatorDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcad), objc.RegisterName("label"))
 	if _r == 0 {

@@ -49,25 +49,25 @@ func NewDOMComment() *DOMComment {
 	return dOMCommentAdopt(_id)
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (dc *DOMComment) WithData(data string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setData:"), purego.NSString(data))
 	return dc
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dc *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dc
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dc *DOMComment) WithPrefix(prefix string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dc
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dc *DOMComment) WithTextContent(textContent string) *DOMComment {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dc

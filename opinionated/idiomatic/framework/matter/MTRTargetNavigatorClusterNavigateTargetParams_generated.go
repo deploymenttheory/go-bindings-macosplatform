@@ -70,13 +70,13 @@ func NewMTRTargetNavigatorClusterNavigateTargetParams() *MTRTargetNavigatorClust
 	return mTRTargetNavigatorClusterNavigateTargetParamsAdopt(_id)
 }
 
-// WithTarget sets the property and returns the receiver so calls can be chained.
+// WithTarget sets the target.
 func (mtncntp *MTRTargetNavigatorClusterNavigateTargetParams) WithTarget(target obj.Object) *MTRTargetNavigatorClusterNavigateTargetParams {
 	objc.Send[objc.ID](objref.IDOf(mtncntp), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return mtncntp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mtncntp *MTRTargetNavigatorClusterNavigateTargetParams) WithData(data string) *MTRTargetNavigatorClusterNavigateTargetParams {
 	objc.Send[objc.ID](objref.IDOf(mtncntp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mtncntp
@@ -94,13 +94,13 @@ func (mtncntp *MTRTargetNavigatorClusterNavigateTargetParams) WithServerSideProc
 	return mtncntp
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (mtncntp *MTRTargetNavigatorClusterNavigateTargetParams) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtncntp), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mtncntp *MTRTargetNavigatorClusterNavigateTargetParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtncntp), objc.RegisterName("data"))
 	if _r == 0 {

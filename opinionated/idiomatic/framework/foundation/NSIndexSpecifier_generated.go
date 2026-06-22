@@ -101,13 +101,13 @@ func (is *IndexSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *
 	return is
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (is *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return is
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (is *IndexSpecifier) Index() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("index"))
 	return _r

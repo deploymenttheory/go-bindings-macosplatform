@@ -29,7 +29,7 @@ func MoveByDuration(delta corefoundation.CGVector, duration float64) *Action {
 	return ActionFromID(_r)
 }
 
-// MoveByXYDuration wraps the corresponding Objective-C method.
+// MoveByXYDuration moves by xy duration.
 func MoveByXYDuration(deltaX float64, deltaY float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveByX:y:duration:"), deltaX, deltaY, duration)
 	return ActionFromID(_r)
@@ -41,13 +41,13 @@ func MoveToDuration(location corefoundation.CGPoint, duration float64) *Action {
 	return ActionFromID(_r)
 }
 
-// MoveToXDuration wraps the corresponding Objective-C method.
+// MoveToXDuration moves to x duration.
 func MoveToXDuration(x_ float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveToX:duration:"), x_, duration)
 	return ActionFromID(_r)
 }
 
-// MoveToYDuration wraps the corresponding Objective-C method.
+// MoveToYDuration moves to y duration.
 func MoveToYDuration(y float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("moveToY:duration:"), y, duration)
 	return ActionFromID(_r)
@@ -437,55 +437,55 @@ func ChangeMassByDuration(v float32, duration float64) *Action {
 	return ActionFromID(_r)
 }
 
-// ApplyForceDuration wraps the corresponding Objective-C method.
+// ApplyForceDuration applies force duration.
 func ApplyForceDuration(force corefoundation.CGVector, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyForce:duration:"), force, duration)
 	return ActionFromID(_r)
 }
 
-// ApplyForceAtPointDuration wraps the corresponding Objective-C method.
+// ApplyForceAtPointDuration applies force at point duration.
 func ApplyForceAtPointDuration(force corefoundation.CGVector, point corefoundation.CGPoint, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyForce:atPoint:duration:"), force, point, duration)
 	return ActionFromID(_r)
 }
 
-// ApplyTorqueDuration wraps the corresponding Objective-C method.
+// ApplyTorqueDuration applies torque duration.
 func ApplyTorqueDuration(torque float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyTorque:duration:"), torque, duration)
 	return ActionFromID(_r)
 }
 
-// ApplyImpulseDuration wraps the corresponding Objective-C method.
+// ApplyImpulseDuration applies impulse duration.
 func ApplyImpulseDuration(impulse corefoundation.CGVector, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyImpulse:duration:"), impulse, duration)
 	return ActionFromID(_r)
 }
 
-// ApplyImpulseAtPointDuration wraps the corresponding Objective-C method.
+// ApplyImpulseAtPointDuration applies impulse at point duration.
 func ApplyImpulseAtPointDuration(impulse corefoundation.CGVector, point corefoundation.CGPoint, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyImpulse:atPoint:duration:"), impulse, point, duration)
 	return ActionFromID(_r)
 }
 
-// ApplyAngularImpulseDuration wraps the corresponding Objective-C method.
+// ApplyAngularImpulseDuration applies angular impulse duration.
 func ApplyAngularImpulseDuration(impulse float64, duration float64) *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("applyAngularImpulse:duration:"), impulse, duration)
 	return ActionFromID(_r)
 }
 
-// Play wraps the corresponding Objective-C method.
+// Play returns the play.
 func Play() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("play"))
 	return ActionFromID(_r)
 }
 
-// Pause wraps the corresponding Objective-C method.
+// Pause returns the pause.
 func Pause() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("pause"))
 	return ActionFromID(_r)
 }
 
-// Stop wraps the corresponding Objective-C method.
+// Stop returns the stop.
 func Stop() *Action {
 	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("stop"))
 	return ActionFromID(_r)

@@ -115,19 +115,19 @@ func (frc *FetchedResultsController) SectionForSectionIndexTitleAtIndex(title st
 	return _r
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (frc *FetchedResultsController) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
-// ManagedObjectContext wraps the corresponding Objective-C method.
+// ManagedObjectContext returns the managed object context.
 func (frc *FetchedResultsController) ManagedObjectContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// SectionNameKeyPath wraps the corresponding Objective-C method.
+// SectionNameKeyPath returns the section name key path.
 func (frc *FetchedResultsController) SectionNameKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("sectionNameKeyPath"))
 	if _r == 0 {
@@ -136,7 +136,7 @@ func (frc *FetchedResultsController) SectionNameKeyPath() string {
 	return purego.GoString(_r)
 }
 
-// CacheName wraps the corresponding Objective-C method.
+// CacheName returns the cache name.
 func (frc *FetchedResultsController) CacheName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("cacheName"))
 	if _r == 0 {
@@ -145,13 +145,13 @@ func (frc *FetchedResultsController) CacheName() string {
 	return purego.GoString(_r)
 }
 
-// FetchedObjects wraps the corresponding Objective-C method.
+// FetchedObjects returns the fetched objects.
 func (frc *FetchedResultsController) FetchedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("fetchedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SectionIndexTitles wraps the corresponding Objective-C method.
+// SectionIndexTitles returns the section index titles.
 //
 // SectionIndexTitles returns the collection as a Go slice.
 func (frc *FetchedResultsController) SectionIndexTitles() []string {
@@ -159,7 +159,7 @@ func (frc *FetchedResultsController) SectionIndexTitles() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Sections wraps the corresponding Objective-C method.
+// Sections returns the sections.
 func (frc *FetchedResultsController) Sections() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frc), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -70,37 +70,37 @@ func NewMTREnergyEVSEClusterEnergyTransferStartedEvent() *MTREnergyEVSEClusterEn
 	return mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(_id)
 }
 
-// WithSessionID sets the property and returns the receiver so calls can be chained.
+// WithSessionID sets the session ID.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecetse
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecetse
 }
 
-// WithMaximumCurrent sets the property and returns the receiver so calls can be chained.
+// WithMaximumCurrent sets the maximum current.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maximumCurrent obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 	return meecetse
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// MaximumCurrent wraps the corresponding Objective-C method.
+// MaximumCurrent returns the maximum current.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("maximumCurrent"))
 	return obj.Wrap(_r)

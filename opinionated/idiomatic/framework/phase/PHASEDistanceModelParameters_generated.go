@@ -74,7 +74,7 @@ func (dmp *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *Dis
 	return dmp
 }
 
-// FadeOutParameters wraps the corresponding Objective-C method.
+// FadeOutParameters returns the fade out parameters.
 func (dmp *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
 	_r := objc.Send[objc.ID](objref.IDOf(dmp), objc.RegisterName("fadeOutParameters"))
 	return DistanceModelFadeOutParametersFromID(_r)

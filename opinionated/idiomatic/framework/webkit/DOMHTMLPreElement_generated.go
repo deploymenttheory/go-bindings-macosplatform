@@ -49,121 +49,121 @@ func NewDOMHTMLPreElement() *DOMHTMLPreElement {
 	return dOMHTMLPreElementAdopt(_id)
 }
 
-// WithWidth sets the property and returns the receiver so calls can be chained.
+// WithWidth sets the width.
 func (dpe *DOMHTMLPreElement) WithWidth(width int) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setWidth:"), width)
 	return dpe
 }
 
-// WithWrap sets the property and returns the receiver so calls can be chained.
+// WithWrap sets the wrap.
 func (dpe *DOMHTMLPreElement) WithWrap(wrap bool) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setWrap:"), wrap)
 	return dpe
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dpe *DOMHTMLPreElement) WithTitle(title string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dpe
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dpe *DOMHTMLPreElement) WithLang(lang string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dpe
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dpe *DOMHTMLPreElement) WithDir(dir string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dpe
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dpe *DOMHTMLPreElement) WithTabIndex(tabIndex int) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dpe
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dpe *DOMHTMLPreElement) WithAccessKey(accessKey string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dpe
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dpe *DOMHTMLPreElement) WithInnerText(innerText string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dpe
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dpe *DOMHTMLPreElement) WithOuterText(outerText string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dpe
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dpe *DOMHTMLPreElement) WithContentEditable(contentEditable string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dpe
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dpe *DOMHTMLPreElement) WithIDName(idName string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dpe
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dpe *DOMHTMLPreElement) WithScrollLeft(scrollLeft int) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dpe
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dpe *DOMHTMLPreElement) WithScrollTop(scrollTop int) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dpe
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dpe *DOMHTMLPreElement) WithInnerHTML(innerHTML string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dpe
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dpe *DOMHTMLPreElement) WithOuterHTML(outerHTML string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dpe
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dpe *DOMHTMLPreElement) WithClassName(className string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dpe
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dpe *DOMHTMLPreElement) WithNodeValue(nodeValue string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dpe
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dpe *DOMHTMLPreElement) WithPrefix(prefix string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dpe
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dpe *DOMHTMLPreElement) WithTextContent(textContent string) *DOMHTMLPreElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dpe
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (dpe *DOMHTMLPreElement) Width() int {
 	_r := objc.Send[int](objref.IDOf(dpe), objc.RegisterName("width"))
 	return _r

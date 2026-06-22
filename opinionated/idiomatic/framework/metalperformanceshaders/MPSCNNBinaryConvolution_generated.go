@@ -83,7 +83,7 @@ func (cbc *CNNBinaryConvolution) WithLabel(label string) *CNNBinaryConvolution {
 	return cbc
 }
 
-// InputFeatureChannels wraps the corresponding Objective-C method.
+// InputFeatureChannels returns the input feature channels.
 func (cbc *CNNBinaryConvolution) InputFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("inputFeatureChannels"))
 	return _r

@@ -50,47 +50,47 @@ func NewMTRControllerFactoryParams() *MTRControllerFactoryParams {
 	return mTRControllerFactoryParamsAdopt(_id)
 }
 
-// WithStartServer sets the property and returns the receiver so calls can be chained.
+// WithStartServer sets the start server.
 func (mcfp *MTRControllerFactoryParams) WithStartServer(startServer bool) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setStartServer:"), startServer)
 	return mcfp
 }
 
-// WithPaaCerts sets the property and returns the receiver so calls can be chained.
+// WithPaaCerts sets the paa certs.
 func (mcfp *MTRControllerFactoryParams) WithPaaCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setPaaCerts:"), _arr)
 	return mcfp
 }
 
-// WithCdCerts sets the property and returns the receiver so calls can be chained.
+// WithCdCerts sets the cd certs.
 func (mcfp *MTRControllerFactoryParams) WithCdCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setCdCerts:"), _arr)
 	return mcfp
 }
 
-// WithProductAttestationAuthorityCertificates sets the property and returns the receiver so calls can be chained.
+// WithProductAttestationAuthorityCertificates sets the product attestation authority certificates.
 func (mcfp *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
 	return mcfp
 }
 
-// WithCertificationDeclarationCertificates sets the property and returns the receiver so calls can be chained.
+// WithCertificationDeclarationCertificates sets the certification declaration certificates.
 func (mcfp *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
 	return mcfp
 }
 
-// WithPort sets the property and returns the receiver so calls can be chained.
+// WithPort sets the port.
 func (mcfp *MTRControllerFactoryParams) WithPort(port obj.Object) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return mcfp
 }
 
-// WithShouldStartServer sets the property and returns the receiver so calls can be chained.
+// WithShouldStartServer sets the should start server.
 func (mcfp *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
 	return mcfp
@@ -102,7 +102,7 @@ func (mcfp *MTRControllerFactoryParams) StartServer() bool {
 	return _r
 }
 
-// PaaCerts wraps the corresponding Objective-C method.
+// PaaCerts returns the paa certs.
 //
 // PaaCerts returns the collection as a Go slice.
 func (mcfp *MTRControllerFactoryParams) PaaCerts() []obj.Object {
@@ -110,7 +110,7 @@ func (mcfp *MTRControllerFactoryParams) PaaCerts() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CdCerts wraps the corresponding Objective-C method.
+// CdCerts returns the cd certs.
 //
 // CdCerts returns the collection as a Go slice.
 func (mcfp *MTRControllerFactoryParams) CdCerts() []obj.Object {

@@ -70,25 +70,25 @@ func NewMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent() *MTRBoolean
 	return mTRBooleanStateConfigurationClusterAlarmsStateChangedEventAdopt(_id)
 }
 
-// WithAlarmsActive sets the property and returns the receiver so calls can be chained.
+// WithAlarmsActive sets the alarms active.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsActive(alarmsActive obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsActive:"), objref.IDOf(alarmsActive))
 	return mbsccasce
 }
 
-// WithAlarmsSuppressed sets the property and returns the receiver so calls can be chained.
+// WithAlarmsSuppressed sets the alarms suppressed.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsSuppressed(alarmsSuppressed obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsSuppressed:"), objref.IDOf(alarmsSuppressed))
 	return mbsccasce
 }
 
-// AlarmsActive wraps the corresponding Objective-C method.
+// AlarmsActive returns the alarms active.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsActive"))
 	return obj.Wrap(_r)
 }
 
-// AlarmsSuppressed wraps the corresponding Objective-C method.
+// AlarmsSuppressed returns the alarms suppressed.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsSuppressed"))
 	return obj.Wrap(_r)

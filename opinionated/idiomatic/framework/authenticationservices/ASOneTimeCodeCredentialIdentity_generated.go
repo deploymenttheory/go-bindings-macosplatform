@@ -71,7 +71,7 @@ func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(
 	return oneTimeCodeCredentialIdentityAdopt(_id)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (otcci *OneTimeCodeCredentialIdentity) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(otcci), objc.RegisterName("label"))
 	if _r == 0 {

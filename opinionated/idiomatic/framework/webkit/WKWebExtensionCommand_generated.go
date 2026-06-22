@@ -109,7 +109,7 @@ func (wwec *WKWebExtensionCommand) ActivationKey() string {
 	return purego.GoString(_r)
 }
 
-// MenuItem wraps the corresponding Objective-C method.
+// MenuItem returns the menu item.
 func (wwec *WKWebExtensionCommand) MenuItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("menuItem"))
 	return obj.Wrap(_r)

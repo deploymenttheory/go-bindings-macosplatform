@@ -203,97 +203,97 @@ func (pi *PrintInfo) TakeSettingsFromPDFInfo(inPDFInfo *PDFInfo) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("takeSettingsFromPDFInfo:"), objref.IDOf(inPDFInfo))
 }
 
-// PaperName wraps the corresponding Objective-C method.
+// PaperName returns the paper name.
 func (pi *PrintInfo) PaperName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("paperName"))
 	return obj.Wrap(_r)
 }
 
-// PaperSize wraps the corresponding Objective-C method.
+// PaperSize returns the paper size.
 func (pi *PrintInfo) PaperSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("paperSize"))
 	return _r
 }
 
-// Orientation wraps the corresponding Objective-C method.
+// Orientation returns the orientation.
 func (pi *PrintInfo) Orientation() PaperOrientation {
 	_r := objc.Send[PaperOrientation](objref.IDOf(pi), objc.RegisterName("orientation"))
 	return _r
 }
 
-// ScalingFactor wraps the corresponding Objective-C method.
+// ScalingFactor returns the scaling factor.
 func (pi *PrintInfo) ScalingFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("scalingFactor"))
 	return _r
 }
 
-// LeftMargin wraps the corresponding Objective-C method.
+// LeftMargin returns the left margin.
 func (pi *PrintInfo) LeftMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("leftMargin"))
 	return _r
 }
 
-// RightMargin wraps the corresponding Objective-C method.
+// RightMargin returns the right margin.
 func (pi *PrintInfo) RightMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("rightMargin"))
 	return _r
 }
 
-// TopMargin wraps the corresponding Objective-C method.
+// TopMargin returns the top margin.
 func (pi *PrintInfo) TopMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("topMargin"))
 	return _r
 }
 
-// BottomMargin wraps the corresponding Objective-C method.
+// BottomMargin returns the bottom margin.
 func (pi *PrintInfo) BottomMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("bottomMargin"))
 	return _r
 }
 
-// IsHorizontallyCentered wraps the corresponding Objective-C method.
+// IsHorizontallyCentered reports whether the object is horizontally centered.
 func (pi *PrintInfo) IsHorizontallyCentered() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isHorizontallyCentered"))
 	return _r
 }
 
-// IsVerticallyCentered wraps the corresponding Objective-C method.
+// IsVerticallyCentered reports whether the object is vertically centered.
 func (pi *PrintInfo) IsVerticallyCentered() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isVerticallyCentered"))
 	return _r
 }
 
-// HorizontalPagination wraps the corresponding Objective-C method.
+// HorizontalPagination returns the horizontal pagination.
 func (pi *PrintInfo) HorizontalPagination() PrintingPaginationMode {
 	_r := objc.Send[PrintingPaginationMode](objref.IDOf(pi), objc.RegisterName("horizontalPagination"))
 	return _r
 }
 
-// VerticalPagination wraps the corresponding Objective-C method.
+// VerticalPagination returns the vertical pagination.
 func (pi *PrintInfo) VerticalPagination() PrintingPaginationMode {
 	_r := objc.Send[PrintingPaginationMode](objref.IDOf(pi), objc.RegisterName("verticalPagination"))
 	return _r
 }
 
-// JobDisposition wraps the corresponding Objective-C method.
+// JobDisposition returns the job disposition.
 func (pi *PrintInfo) JobDisposition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("jobDisposition"))
 	return obj.Wrap(_r)
 }
 
-// Printer wraps the corresponding Objective-C method.
+// Printer returns the printer.
 func (pi *PrintInfo) Printer() *Printer {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("printer"))
 	return PrinterFromID(_r)
 }
 
-// ImageablePageBounds wraps the corresponding Objective-C method.
+// ImageablePageBounds returns the imageable page bounds.
 func (pi *PrintInfo) ImageablePageBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pi), objc.RegisterName("imageablePageBounds"))
 	return _r
 }
 
-// LocalizedPaperName wraps the corresponding Objective-C method.
+// LocalizedPaperName returns the localized paper name.
 func (pi *PrintInfo) LocalizedPaperName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("localizedPaperName"))
 	if _r == 0 {
@@ -302,13 +302,13 @@ func (pi *PrintInfo) LocalizedPaperName() string {
 	return purego.GoString(_r)
 }
 
-// PrintSettings wraps the corresponding Objective-C method.
+// PrintSettings returns the print settings.
 func (pi *PrintInfo) PrintSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("printSettings"))
 	return obj.Wrap(_r)
 }
 
-// IsSelectionOnly wraps the corresponding Objective-C method.
+// IsSelectionOnly reports whether the object is selection only.
 func (pi *PrintInfo) IsSelectionOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isSelectionOnly"))
 	return _r

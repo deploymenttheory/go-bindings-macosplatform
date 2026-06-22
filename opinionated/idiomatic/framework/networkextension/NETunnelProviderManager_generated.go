@@ -178,7 +178,7 @@ func (ntpm *NETunnelProviderManager) ContactsDomains() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AppRules wraps the corresponding Objective-C method.
+// AppRules returns the app rules.
 //
 // AppRules returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) AppRules() []*NEAppRule {
@@ -186,7 +186,7 @@ func (ntpm *NETunnelProviderManager) AppRules() []*NEAppRule {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
-// ExcludedDomains wraps the corresponding Objective-C method.
+// ExcludedDomains returns the excluded domains.
 //
 // ExcludedDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) ExcludedDomains() []string {
@@ -194,7 +194,7 @@ func (ntpm *NETunnelProviderManager) ExcludedDomains() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AssociatedDomains wraps the corresponding Objective-C method.
+// AssociatedDomains returns the associated domains.
 //
 // AssociatedDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) AssociatedDomains() []string {

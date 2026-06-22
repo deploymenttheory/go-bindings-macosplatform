@@ -79,7 +79,7 @@ func (fsin *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *Fu
 	return fsin
 }
 
-// ArgumentIndex wraps the corresponding Objective-C method.
+// ArgumentIndex returns the argument index.
 func (fsin *FunctionStitchingInputNode) ArgumentIndex() int {
 	_r := objc.Send[int](objref.IDOf(fsin), objc.RegisterName("argumentIndex"))
 	return _r

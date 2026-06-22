@@ -72,7 +72,7 @@ func NewGarbageCollector() *GarbageCollector {
 	return garbageCollectorAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (gc *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return gc

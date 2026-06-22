@@ -70,7 +70,7 @@ func (asa *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScr
 	return asa
 }
 
-// Script wraps the corresponding Objective-C method.
+// Script returns the script.
 func (asa *AppleScriptAction) Script() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("script"))
 	return obj.Wrap(_r)

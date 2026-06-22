@@ -124,7 +124,7 @@ func (tf *TextFinder) FindIndicatorNeedsUpdate() bool {
 	return _r
 }
 
-// IsIncrementalSearchingEnabled wraps the corresponding Objective-C method.
+// IsIncrementalSearchingEnabled reports whether the object is incremental searching enabled.
 func (tf *TextFinder) IsIncrementalSearchingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isIncrementalSearchingEnabled"))
 	return _r
@@ -136,7 +136,7 @@ func (tf *TextFinder) IncrementalSearchingShouldDimContentView() bool {
 	return _r
 }
 
-// IncrementalMatchRanges wraps the corresponding Objective-C method.
+// IncrementalMatchRanges returns the incremental match ranges.
 //
 // IncrementalMatchRanges returns the collection as a Go slice.
 func (tf *TextFinder) IncrementalMatchRanges() []obj.Object {

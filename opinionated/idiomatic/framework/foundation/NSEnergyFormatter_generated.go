@@ -54,25 +54,25 @@ func NewEnergyFormatter() *EnergyFormatter {
 	return energyFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the number formatter.
 func (ef *EnergyFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return ef
 }
 
-// WithUnitStyle sets the property and returns the receiver so calls can be chained.
+// WithUnitStyle sets the unit style.
 func (ef *EnergyFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return ef
 }
 
-// WithForFoodEnergyUse sets the property and returns the receiver so calls can be chained.
+// WithForFoodEnergyUse sets the for food energy use.
 func (ef *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setForFoodEnergyUse:"), forFoodEnergyUse)
 	return ef
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ef *EnergyFormatter) WithScriptingProperties(scriptingProperties obj.Object) *EnergyFormatter {
 	objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ef
@@ -116,19 +116,19 @@ func (ef *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64) 
 	return _v, _out0
 }
 
-// NumberFormatter wraps the corresponding Objective-C method.
+// NumberFormatter returns the number formatter.
 func (ef *EnergyFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(ef), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle wraps the corresponding Objective-C method.
+// UnitStyle returns the unit style.
 func (ef *EnergyFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(ef), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForFoodEnergyUse wraps the corresponding Objective-C method.
+// IsForFoodEnergyUse reports whether the object is for food energy use.
 func (ef *EnergyFormatter) IsForFoodEnergyUse() bool {
 	_r := objc.Send[bool](objref.IDOf(ef), objc.RegisterName("isForFoodEnergyUse"))
 	return _r

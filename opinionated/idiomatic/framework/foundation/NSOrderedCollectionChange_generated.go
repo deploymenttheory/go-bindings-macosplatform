@@ -80,31 +80,31 @@ func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.O
 	return orderedCollectionChangeAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (occ *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
 	objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return occ
 }
 
-// Object wraps the corresponding Objective-C method.
+// Object returns the object.
 func (occ *OrderedCollectionChange) Object() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
-// ChangeType wraps the corresponding Objective-C method.
+// ChangeType returns the change type.
 func (occ *OrderedCollectionChange) ChangeType() CollectionChangeType {
 	_r := objc.Send[CollectionChangeType](objref.IDOf(occ), objc.RegisterName("changeType"))
 	return _r
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (occ *OrderedCollectionChange) Index() int {
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("index"))
 	return _r
 }
 
-// AssociatedIndex wraps the corresponding Objective-C method.
+// AssociatedIndex returns the associated index.
 func (occ *OrderedCollectionChange) AssociatedIndex() int {
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("associatedIndex"))
 	return _r

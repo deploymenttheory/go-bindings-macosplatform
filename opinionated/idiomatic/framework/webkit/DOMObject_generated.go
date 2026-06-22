@@ -43,7 +43,7 @@ func dOMObjectAdopt(id objc.ID) *DOMObject {
 	return x
 }
 
-// Sheet wraps the corresponding Objective-C method.
+// Sheet returns the sheet.
 func (do *DOMObject) Sheet() *DOMStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("sheet"))
 	return DOMStyleSheetFromID(_r)

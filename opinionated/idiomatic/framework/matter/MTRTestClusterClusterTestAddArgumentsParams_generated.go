@@ -50,13 +50,13 @@ func NewMTRTestClusterClusterTestAddArgumentsParams() *MTRTestClusterClusterTest
 	return mTRTestClusterClusterTestAddArgumentsParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtcctaap *MTRTestClusterClusterTestAddArgumentsParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestAddArgumentsParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctaap), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtcctaap
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mtcctaap *MTRTestClusterClusterTestAddArgumentsParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestAddArgumentsParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctaap), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mtcctaap

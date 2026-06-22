@@ -75,7 +75,7 @@ func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL stri
 	return uRLResponseAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ur *URLResponse) WithScriptingProperties(scriptingProperties obj.Object) *URLResponse {
 	objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ur

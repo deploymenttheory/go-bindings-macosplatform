@@ -70,7 +70,7 @@ func NewMTRMediaPlaybackClusterRewindParams() *MTRMediaPlaybackClusterRewindPara
 	return mTRMediaPlaybackClusterRewindParamsAdopt(_id)
 }
 
-// WithAudioAdvanceUnmuted sets the property and returns the receiver so calls can be chained.
+// WithAudioAdvanceUnmuted sets the audio advance unmuted.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterRewindParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 	return mmpcrp
@@ -88,7 +88,7 @@ func (mmpcrp *MTRMediaPlaybackClusterRewindParams) WithServerSideProcessingTimeo
 	return mmpcrp
 }
 
-// AudioAdvanceUnmuted wraps the corresponding Objective-C method.
+// AudioAdvanceUnmuted returns the audio advance unmuted.
 func (mmpcrp *MTRMediaPlaybackClusterRewindParams) AudioAdvanceUnmuted() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcrp), objc.RegisterName("audioAdvanceUnmuted"))
 	return obj.Wrap(_r)

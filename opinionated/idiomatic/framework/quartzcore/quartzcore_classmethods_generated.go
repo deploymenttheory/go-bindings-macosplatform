@@ -67,13 +67,13 @@ func HLGMetadataWithAmbientViewingEnvironment(data obj.Object) *EDRMetadata {
 	return EDRMetadataFromID(_r)
 }
 
-// HLGMetadata wraps the corresponding Objective-C method.
+// HLGMetadata returns the hlg metadata.
 func HLGMetadata() *EDRMetadata {
 	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HLGMetadata"))
 	return EDRMetadataFromID(_r)
 }
 
-// IsAvailable wraps the corresponding Objective-C method.
+// IsAvailable reports whether the object is available.
 func IsAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("isAvailable"))
 	return _r

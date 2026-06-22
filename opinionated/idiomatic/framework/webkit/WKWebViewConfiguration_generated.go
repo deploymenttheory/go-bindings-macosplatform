@@ -231,7 +231,7 @@ func (wwvc *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
 	return _r
 }
 
-// MediaTypesRequiringUserActionForPlayback wraps the corresponding Objective-C method.
+// MediaTypesRequiringUserActionForPlayback returns the media types requiring user action for playback.
 func (wwvc *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() WKAudiovisualMediaTypes {
 	_r := objc.Send[WKAudiovisualMediaTypes](objref.IDOf(wwvc), objc.RegisterName("mediaTypesRequiringUserActionForPlayback"))
 	return _r

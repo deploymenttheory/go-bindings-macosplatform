@@ -57,67 +57,67 @@ func (ppsf *PhysicallyPlausibleScatteringFunction) WithName(name string) *Physic
 	return ppsf
 }
 
-// Subsurface wraps the corresponding Objective-C method.
+// Subsurface returns the subsurface.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Subsurface() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("subsurface"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Metallic wraps the corresponding Objective-C method.
+// Metallic returns the metallic.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Metallic() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("metallic"))
 	return MaterialPropertyFromID(_r)
 }
 
-// SpecularAmount wraps the corresponding Objective-C method.
+// SpecularAmount returns the specular amount.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularAmount() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularAmount"))
 	return MaterialPropertyFromID(_r)
 }
 
-// SpecularTint wraps the corresponding Objective-C method.
+// SpecularTint returns the specular tint.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularTint() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularTint"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Roughness wraps the corresponding Objective-C method.
+// Roughness returns the roughness.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Roughness() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("roughness"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Anisotropic wraps the corresponding Objective-C method.
+// Anisotropic returns the anisotropic.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Anisotropic() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropic"))
 	return MaterialPropertyFromID(_r)
 }
 
-// AnisotropicRotation wraps the corresponding Objective-C method.
+// AnisotropicRotation returns the anisotropic rotation.
 func (ppsf *PhysicallyPlausibleScatteringFunction) AnisotropicRotation() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropicRotation"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Sheen wraps the corresponding Objective-C method.
+// Sheen returns the sheen.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Sheen() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheen"))
 	return MaterialPropertyFromID(_r)
 }
 
-// SheenTint wraps the corresponding Objective-C method.
+// SheenTint returns the sheen tint.
 func (ppsf *PhysicallyPlausibleScatteringFunction) SheenTint() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheenTint"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Clearcoat wraps the corresponding Objective-C method.
+// Clearcoat returns the clearcoat.
 func (ppsf *PhysicallyPlausibleScatteringFunction) Clearcoat() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoat"))
 	return MaterialPropertyFromID(_r)
 }
 
-// ClearcoatGloss wraps the corresponding Objective-C method.
+// ClearcoatGloss returns the clearcoat gloss.
 func (ppsf *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoatGloss"))
 	return MaterialPropertyFromID(_r)

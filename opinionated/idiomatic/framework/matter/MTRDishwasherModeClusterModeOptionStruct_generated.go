@@ -70,19 +70,19 @@ func NewMTRDishwasherModeClusterModeOptionStruct() *MTRDishwasherModeClusterMode
 	return mTRDishwasherModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) WithLabel(label string) *MTRDishwasherModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mdmcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRDishwasherModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mdmcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (mdmcmos *MTRDishwasherModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

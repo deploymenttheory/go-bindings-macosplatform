@@ -49,13 +49,13 @@ func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
 	return dOMCSSFontFaceRuleAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dffr *DOMCSSFontFaceRule) WithCSSText(cssText string) *DOMCSSFontFaceRule {
 	objc.Send[objc.ID](objref.IDOf(dffr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dffr
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (dffr *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(dffr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)

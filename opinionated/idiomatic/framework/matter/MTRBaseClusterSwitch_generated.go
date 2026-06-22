@@ -61,7 +61,7 @@ func NewMTRBaseClusterSwitchWithDeviceEndpointQueue(device *MTRBaseDevice, endpo
 	return mTRBaseClusterSwitchAdopt(_id)
 }
 
-// ReadAttributeNumberOfPositionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPositionsWithCompletion reads attribute number of positions with completion.
 //
 // ReadAttributeNumberOfPositionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeNumberOfPositionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeNumberOfPositionsWithParamsS
 	}
 }
 
-// ReadAttributeCurrentPositionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionWithCompletion reads attribute current position with completion.
 //
 // ReadAttributeCurrentPositionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeCurrentPositionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeCurrentPositionWithParamsSub
 	}
 }
 
-// ReadAttributeMultiPressMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMultiPressMaxWithCompletion reads attribute multi press max with completion.
 //
 // ReadAttributeMultiPressMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeMultiPressMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeMultiPressMaxWithParamsSubsc
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeGeneratedCommandListWithPara
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeAcceptedCommandListWithParam
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeAttributeListWithParamsSubsc
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeFeatureMapWithParamsSubscrip
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeClusterRevisionWithParamsSub
 	}
 }
 
-// ReadAttributeNumberOfPositions wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPositions reads attribute number of positions.
 //
 // ReadAttributeNumberOfPositions blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeNumberOfPositions(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeNumberOfPositionsWithMinInte
 	}
 }
 
-// ReadAttributeCurrentPosition wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPosition reads attribute current position.
 //
 // ReadAttributeCurrentPosition blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeCurrentPosition(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeCurrentPositionWithMinInterv
 	}
 }
 
-// ReadAttributeMultiPressMax wraps the corresponding Objective-C method.
+// ReadAttributeMultiPressMax reads attribute multi press max.
 //
 // ReadAttributeMultiPressMax blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeMultiPressMax(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeMultiPressMaxWithMinInterval
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeGeneratedCommandListWithMinI
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeAcceptedCommandListWithMinIn
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeAttributeListWithMinInterval
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcs *MTRBaseClusterSwitch) SubscribeAttributeFeatureMapWithMinIntervalMax
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcs *MTRBaseClusterSwitch) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

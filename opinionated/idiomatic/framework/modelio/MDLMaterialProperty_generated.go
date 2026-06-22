@@ -156,7 +156,7 @@ func (mp *MaterialProperty) WithFloatValue(floatValue float32) *MaterialProperty
 	return mp
 }
 
-// WithLuminance sets the property and returns the receiver so calls can be chained.
+// WithLuminance sets the luminance.
 func (mp *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setLuminance:"), luminance)
 	return mp
@@ -167,19 +167,19 @@ func (mp *MaterialProperty) SetProperties(property *MaterialProperty) {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setProperties:"), objref.IDOf(property))
 }
 
-// Semantic wraps the corresponding Objective-C method.
+// Semantic returns the semantic.
 func (mp *MaterialProperty) Semantic() MaterialSemantic {
 	_r := objc.Send[MaterialSemantic](objref.IDOf(mp), objc.RegisterName("semantic"))
 	return _r
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (mp *MaterialProperty) Type() MaterialPropertyType {
 	_r := objc.Send[MaterialPropertyType](objref.IDOf(mp), objc.RegisterName("type"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mp *MaterialProperty) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("name"))
 	if _r == 0 {
@@ -188,7 +188,7 @@ func (mp *MaterialProperty) Name() string {
 	return purego.GoString(_r)
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (mp *MaterialProperty) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -197,31 +197,31 @@ func (mp *MaterialProperty) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// URLValue wraps the corresponding Objective-C method.
+// URLValue returns the URL value.
 func (mp *MaterialProperty) URLValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("URLValue"))
 	return obj.Wrap(_r)
 }
 
-// TextureSamplerValue wraps the corresponding Objective-C method.
+// TextureSamplerValue returns the texture sampler value.
 func (mp *MaterialProperty) TextureSamplerValue() *TextureSampler {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("textureSamplerValue"))
 	return TextureSamplerFromID(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (mp *MaterialProperty) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (mp *MaterialProperty) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// Luminance wraps the corresponding Objective-C method.
+// Luminance returns the luminance.
 func (mp *MaterialProperty) Luminance() float32 {
 	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("luminance"))
 	return _r

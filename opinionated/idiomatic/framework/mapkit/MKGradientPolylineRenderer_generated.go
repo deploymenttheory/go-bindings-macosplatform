@@ -124,7 +124,7 @@ func (gpr *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, l
 	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Locations wraps the corresponding Objective-C method.
+// Locations returns the locations.
 //
 // Locations returns the collection as a Go slice.
 func (gpr *GradientPolylineRenderer) Locations() []obj.Object {
@@ -132,7 +132,7 @@ func (gpr *GradientPolylineRenderer) Locations() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Colors wraps the corresponding Objective-C method.
+// Colors returns the colors.
 //
 // Colors returns the collection as a Go slice.
 func (gpr *GradientPolylineRenderer) Colors() []obj.Object {

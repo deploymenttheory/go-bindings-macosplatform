@@ -94,7 +94,7 @@ func (uc *URLCache) WithDiskCapacity(diskCapacity int) *URLCache {
 	return uc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uc *URLCache) WithScriptingProperties(scriptingProperties obj.Object) *URLCache {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uc
@@ -179,7 +179,7 @@ func (uc *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *
 	}
 }
 
-// RemoveCachedResponseForDataTask wraps the corresponding Objective-C method.
+// RemoveCachedResponseForDataTask removes cached response for data task.
 func (uc *URLCache) RemoveCachedResponseForDataTask(dataTask *URLSessionDataTask) {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponseForDataTask:"), objref.IDOf(dataTask))
 }

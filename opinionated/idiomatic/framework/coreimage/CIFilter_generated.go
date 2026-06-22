@@ -68,19 +68,19 @@ func (f *Filter) String() string {
 	return rt.Description(objref.IDOf(f))
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (f *Filter) WithName(name string) *Filter {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setName:"), purego.NSString(name))
 	return f
 }
 
-// WithEnabled sets the property and returns the receiver so calls can be chained.
+// WithEnabled sets the enabled.
 func (f *Filter) WithEnabled(enabled bool) *Filter {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setEnabled:"), enabled)
 	return f
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (f *Filter) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("name"))
 	if _r == 0 {
@@ -100,13 +100,13 @@ func (f *Filter) ApplyArgumentsOptions(k *Kernel, args obj.Object, dict obj.Obje
 	return ImageFromID(_r)
 }
 
-// OutputImage wraps the corresponding Objective-C method.
+// OutputImage returns the output image.
 func (f *Filter) OutputImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("outputImage"))
 	return ImageFromID(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (f *Filter) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isEnabled"))
 	return _r

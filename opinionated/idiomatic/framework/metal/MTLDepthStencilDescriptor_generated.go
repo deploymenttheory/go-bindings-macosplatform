@@ -102,25 +102,25 @@ func (dsd *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescript
 	return dsd
 }
 
-// DepthCompareFunction wraps the corresponding Objective-C method.
+// DepthCompareFunction returns the depth compare function.
 func (dsd *DepthStencilDescriptor) DepthCompareFunction() CompareFunction {
 	_r := objc.Send[CompareFunction](objref.IDOf(dsd), objc.RegisterName("depthCompareFunction"))
 	return _r
 }
 
-// IsDepthWriteEnabled wraps the corresponding Objective-C method.
+// IsDepthWriteEnabled reports whether the object is depth write enabled.
 func (dsd *DepthStencilDescriptor) IsDepthWriteEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(dsd), objc.RegisterName("isDepthWriteEnabled"))
 	return _r
 }
 
-// FrontFaceStencil wraps the corresponding Objective-C method.
+// FrontFaceStencil returns the front face stencil.
 func (dsd *DepthStencilDescriptor) FrontFaceStencil() *StencilDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("frontFaceStencil"))
 	return StencilDescriptorFromID(_r)
 }
 
-// BackFaceStencil wraps the corresponding Objective-C method.
+// BackFaceStencil returns the back face stencil.
 func (dsd *DepthStencilDescriptor) BackFaceStencil() *StencilDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backFaceStencil"))
 	return StencilDescriptorFromID(_r)

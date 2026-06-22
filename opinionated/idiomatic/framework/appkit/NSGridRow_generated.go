@@ -73,37 +73,37 @@ func NewGridRow() *GridRow {
 	return gridRowAdopt(_id)
 }
 
-// WithYPlacement sets the property and returns the receiver so calls can be chained.
+// WithYPlacement sets the y placement.
 func (gr *GridRow) WithYPlacement(yPlacement GridCellPlacement) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setYPlacement:"), yPlacement)
 	return gr
 }
 
-// WithRowAlignment sets the property and returns the receiver so calls can be chained.
+// WithRowAlignment sets the row alignment.
 func (gr *GridRow) WithRowAlignment(rowAlignment GridRowAlignment) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setRowAlignment:"), rowAlignment)
 	return gr
 }
 
-// WithHeight sets the property and returns the receiver so calls can be chained.
+// WithHeight sets the height.
 func (gr *GridRow) WithHeight(height float64) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setHeight:"), height)
 	return gr
 }
 
-// WithTopPadding sets the property and returns the receiver so calls can be chained.
+// WithTopPadding sets the top padding.
 func (gr *GridRow) WithTopPadding(topPadding float64) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setTopPadding:"), topPadding)
 	return gr
 }
 
-// WithBottomPadding sets the property and returns the receiver so calls can be chained.
+// WithBottomPadding sets the bottom padding.
 func (gr *GridRow) WithBottomPadding(bottomPadding float64) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setBottomPadding:"), bottomPadding)
 	return gr
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (gr *GridRow) WithHidden(hidden bool) *GridRow {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setHidden:"), hidden)
 	return gr
@@ -120,49 +120,49 @@ func (gr *GridRow) MergeCellsInRange(range_ foundation.NSRange) {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("mergeCellsInRange:"), range_)
 }
 
-// GridView wraps the corresponding Objective-C method.
+// GridView returns the grid view.
 func (gr *GridRow) GridView() *GridView {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("gridView"))
 	return GridViewFromID(_r)
 }
 
-// NumberOfCells wraps the corresponding Objective-C method.
+// NumberOfCells returns the number of cells.
 func (gr *GridRow) NumberOfCells() int {
 	_r := objc.Send[int](objref.IDOf(gr), objc.RegisterName("numberOfCells"))
 	return _r
 }
 
-// YPlacement wraps the corresponding Objective-C method.
+// YPlacement returns the y placement.
 func (gr *GridRow) YPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(gr), objc.RegisterName("yPlacement"))
 	return _r
 }
 
-// RowAlignment wraps the corresponding Objective-C method.
+// RowAlignment returns the row alignment.
 func (gr *GridRow) RowAlignment() GridRowAlignment {
 	_r := objc.Send[GridRowAlignment](objref.IDOf(gr), objc.RegisterName("rowAlignment"))
 	return _r
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (gr *GridRow) Height() float64 {
 	_r := objc.Send[float64](objref.IDOf(gr), objc.RegisterName("height"))
 	return _r
 }
 
-// TopPadding wraps the corresponding Objective-C method.
+// TopPadding returns the top padding.
 func (gr *GridRow) TopPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(gr), objc.RegisterName("topPadding"))
 	return _r
 }
 
-// BottomPadding wraps the corresponding Objective-C method.
+// BottomPadding returns the bottom padding.
 func (gr *GridRow) BottomPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(gr), objc.RegisterName("bottomPadding"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (gr *GridRow) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isHidden"))
 	return _r

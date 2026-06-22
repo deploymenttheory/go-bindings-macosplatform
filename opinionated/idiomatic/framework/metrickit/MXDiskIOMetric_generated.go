@@ -52,7 +52,7 @@ func NewDiskIOMetric() *DiskIOMetric {
 	return diskIOMetricAdopt(_id)
 }
 
-// CumulativeLogicalWrites wraps the corresponding Objective-C method.
+// CumulativeLogicalWrites returns the cumulative logical writes.
 func (dim *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dim), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)

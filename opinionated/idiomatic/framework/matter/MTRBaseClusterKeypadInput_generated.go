@@ -86,7 +86,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParamsCompletion(ctx context.
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -136,7 +136,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeClusterRevisionWithPar
 	}
 }
 
-// SendKeyWithParams wraps the corresponding Objective-C method.
+// SendKeyWithParams sends key with params.
 //
 // SendKeyWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParams(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams) (result *MTRKeypadInputClusterSendKeyResponseParams, err error) {
@@ -361,7 +361,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParams(ctx context.Context, p
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithMinIn
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithMinInter
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

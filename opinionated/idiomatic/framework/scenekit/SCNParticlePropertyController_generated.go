@@ -108,37 +108,37 @@ func (ppc *ParticlePropertyController) WithInputProperty(inputProperty obj.Objec
 	return ppc
 }
 
-// Animation wraps the corresponding Objective-C method.
+// Animation returns the animation.
 func (ppc *ParticlePropertyController) Animation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("animation"))
 	return obj.Wrap(_r)
 }
 
-// InputMode wraps the corresponding Objective-C method.
+// InputMode returns the input mode.
 func (ppc *ParticlePropertyController) InputMode() ParticleInputMode {
 	_r := objc.Send[ParticleInputMode](objref.IDOf(ppc), objc.RegisterName("inputMode"))
 	return _r
 }
 
-// InputScale wraps the corresponding Objective-C method.
+// InputScale returns the input scale.
 func (ppc *ParticlePropertyController) InputScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputScale"))
 	return _r
 }
 
-// InputBias wraps the corresponding Objective-C method.
+// InputBias returns the input bias.
 func (ppc *ParticlePropertyController) InputBias() float64 {
 	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputBias"))
 	return _r
 }
 
-// InputOrigin wraps the corresponding Objective-C method.
+// InputOrigin returns the input origin.
 func (ppc *ParticlePropertyController) InputOrigin() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputOrigin"))
 	return NodeFromID(_r)
 }
 
-// InputProperty wraps the corresponding Objective-C method.
+// InputProperty returns the input property.
 func (ppc *ParticlePropertyController) InputProperty() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputProperty"))
 	return obj.Wrap(_r)

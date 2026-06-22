@@ -72,7 +72,7 @@ func NewPresentationIntent() *PresentationIntent {
 	return presentationIntentAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pi *PresentationIntent) WithScriptingProperties(scriptingProperties obj.Object) *PresentationIntent {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pi
@@ -84,13 +84,13 @@ func (pi *PresentationIntent) IsEquivalentToPresentationIntent(other *Presentati
 	return _r
 }
 
-// IntentKind wraps the corresponding Objective-C method.
+// IntentKind returns the intent kind.
 func (pi *PresentationIntent) IntentKind() PresentationIntentKind {
 	_r := objc.Send[PresentationIntentKind](objref.IDOf(pi), objc.RegisterName("intentKind"))
 	return _r
 }
 
-// ParentIntent wraps the corresponding Objective-C method.
+// ParentIntent returns the parent intent.
 func (pi *PresentationIntent) ParentIntent() *PresentationIntent {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("parentIntent"))
 	return PresentationIntentFromID(_r)

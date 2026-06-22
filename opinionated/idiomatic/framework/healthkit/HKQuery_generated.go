@@ -68,19 +68,19 @@ func (q *Query) String() string {
 	return rt.Description(objref.IDOf(q))
 }
 
-// ObjectType wraps the corresponding Objective-C method.
+// ObjectType returns the object type.
 func (q *Query) ObjectType() *ObjectType {
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("objectType"))
 	return ObjectTypeFromID(_r)
 }
 
-// SampleType wraps the corresponding Objective-C method.
+// SampleType returns the sample type.
 func (q *Query) SampleType() *SampleType {
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
-// Predicate wraps the corresponding Objective-C method.
+// Predicate returns the predicate.
 func (q *Query) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)

@@ -72,25 +72,25 @@ func NewDictionaryControllerKeyValuePair() *DictionaryControllerKeyValuePair {
 	return dictionaryControllerKeyValuePairAdopt(_id)
 }
 
-// WithKey sets the property and returns the receiver so calls can be chained.
+// WithKey sets the key.
 func (dckvp *DictionaryControllerKeyValuePair) WithKey(key string) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("setKey:"), purego.NSString(key))
 	return dckvp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (dckvp *DictionaryControllerKeyValuePair) WithValue(value obj.Object) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return dckvp
 }
 
-// WithLocalizedKey sets the property and returns the receiver so calls can be chained.
+// WithLocalizedKey sets the localized key.
 func (dckvp *DictionaryControllerKeyValuePair) WithLocalizedKey(localizedKey string) *DictionaryControllerKeyValuePair {
 	objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("setLocalizedKey:"), purego.NSString(localizedKey))
 	return dckvp
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (dckvp *DictionaryControllerKeyValuePair) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("key"))
 	if _r == 0 {
@@ -99,13 +99,13 @@ func (dckvp *DictionaryControllerKeyValuePair) Key() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (dckvp *DictionaryControllerKeyValuePair) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedKey wraps the corresponding Objective-C method.
+// LocalizedKey returns the localized key.
 func (dckvp *DictionaryControllerKeyValuePair) LocalizedKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dckvp), objc.RegisterName("localizedKey"))
 	if _r == 0 {
@@ -114,7 +114,7 @@ func (dckvp *DictionaryControllerKeyValuePair) LocalizedKey() string {
 	return purego.GoString(_r)
 }
 
-// IsExplicitlyIncluded wraps the corresponding Objective-C method.
+// IsExplicitlyIncluded reports whether the object is explicitly included.
 func (dckvp *DictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
 	_r := objc.Send[bool](objref.IDOf(dckvp), objc.RegisterName("isExplicitlyIncluded"))
 	return _r

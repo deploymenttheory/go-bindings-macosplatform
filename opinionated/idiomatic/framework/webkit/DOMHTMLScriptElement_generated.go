@@ -49,151 +49,151 @@ func NewDOMHTMLScriptElement() *DOMHTMLScriptElement {
 	return dOMHTMLScriptElementAdopt(_id)
 }
 
-// WithText sets the property and returns the receiver so calls can be chained.
+// WithText sets the text.
 func (dse *DOMHTMLScriptElement) WithText(text string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setText:"), purego.NSString(text))
 	return dse
 }
 
-// WithHTMLFor sets the property and returns the receiver so calls can be chained.
+// WithHTMLFor sets the HTML for.
 func (dse *DOMHTMLScriptElement) WithHTMLFor(htmlFor string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setHtmlFor:"), purego.NSString(htmlFor))
 	return dse
 }
 
-// WithEvent sets the property and returns the receiver so calls can be chained.
+// WithEvent sets the event.
 func (dse *DOMHTMLScriptElement) WithEvent(event string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setEvent:"), purego.NSString(event))
 	return dse
 }
 
-// WithCharset sets the property and returns the receiver so calls can be chained.
+// WithCharset sets the charset.
 func (dse *DOMHTMLScriptElement) WithCharset(charset string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return dse
 }
 
-// WithDefer sets the property and returns the receiver so calls can be chained.
+// WithDefer sets the defer.
 func (dse *DOMHTMLScriptElement) WithDefer(defer_ bool) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDefer:"), defer_)
 	return dse
 }
 
-// WithSrc sets the property and returns the receiver so calls can be chained.
+// WithSrc sets the src.
 func (dse *DOMHTMLScriptElement) WithSrc(src string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setSrc:"), purego.NSString(src))
 	return dse
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (dse *DOMHTMLScriptElement) WithType(type_ string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setType:"), purego.NSString(type_))
 	return dse
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dse *DOMHTMLScriptElement) WithTitle(title string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dse
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dse *DOMHTMLScriptElement) WithLang(lang string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dse
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dse *DOMHTMLScriptElement) WithDir(dir string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dse
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dse *DOMHTMLScriptElement) WithTabIndex(tabIndex int) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dse
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dse *DOMHTMLScriptElement) WithAccessKey(accessKey string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dse
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dse *DOMHTMLScriptElement) WithInnerText(innerText string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dse
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dse *DOMHTMLScriptElement) WithOuterText(outerText string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dse
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dse *DOMHTMLScriptElement) WithContentEditable(contentEditable string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dse
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dse *DOMHTMLScriptElement) WithIDName(idName string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dse
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dse *DOMHTMLScriptElement) WithScrollLeft(scrollLeft int) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dse
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dse *DOMHTMLScriptElement) WithScrollTop(scrollTop int) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dse
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dse *DOMHTMLScriptElement) WithInnerHTML(innerHTML string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dse
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dse *DOMHTMLScriptElement) WithOuterHTML(outerHTML string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dse
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dse *DOMHTMLScriptElement) WithClassName(className string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dse
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dse *DOMHTMLScriptElement) WithNodeValue(nodeValue string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dse
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dse *DOMHTMLScriptElement) WithPrefix(prefix string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dse
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dse *DOMHTMLScriptElement) WithTextContent(textContent string) *DOMHTMLScriptElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dse
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (dse *DOMHTMLScriptElement) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("text"))
 	if _r == 0 {
@@ -202,7 +202,7 @@ func (dse *DOMHTMLScriptElement) Text() string {
 	return purego.GoString(_r)
 }
 
-// HTMLFor wraps the corresponding Objective-C method.
+// HTMLFor returns the HTML for.
 func (dse *DOMHTMLScriptElement) HTMLFor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("htmlFor"))
 	if _r == 0 {
@@ -211,7 +211,7 @@ func (dse *DOMHTMLScriptElement) HTMLFor() string {
 	return purego.GoString(_r)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func (dse *DOMHTMLScriptElement) Event() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("event"))
 	if _r == 0 {
@@ -220,7 +220,7 @@ func (dse *DOMHTMLScriptElement) Event() string {
 	return purego.GoString(_r)
 }
 
-// Charset wraps the corresponding Objective-C method.
+// Charset returns the charset.
 func (dse *DOMHTMLScriptElement) Charset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("charset"))
 	if _r == 0 {
@@ -235,7 +235,7 @@ func (dse *DOMHTMLScriptElement) Defer() bool {
 	return _r
 }
 
-// Src wraps the corresponding Objective-C method.
+// Src returns the src.
 func (dse *DOMHTMLScriptElement) Src() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("src"))
 	if _r == 0 {
@@ -244,7 +244,7 @@ func (dse *DOMHTMLScriptElement) Src() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dse *DOMHTMLScriptElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {

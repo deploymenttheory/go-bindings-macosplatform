@@ -70,19 +70,19 @@ func NewMTRThermostatClusterSetWeeklyScheduleParams() *MTRThermostatClusterSetWe
 	return mTRThermostatClusterSetWeeklyScheduleParamsAdopt(_id)
 }
 
-// WithNumberOfTransitionsForSequence sets the property and returns the receiver so calls can be chained.
+// WithNumberOfTransitionsForSequence sets the number of transitions for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
 	return mtcswsp
 }
 
-// WithDayOfWeekForSequence sets the property and returns the receiver so calls can be chained.
+// WithDayOfWeekForSequence sets the day of week for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 	return mtcswsp
 }
 
-// WithModeForSequence sets the property and returns the receiver so calls can be chained.
+// WithModeForSequence sets the mode for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
 	return mtcswsp
@@ -100,25 +100,25 @@ func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithServerSideProces
 	return mtcswsp
 }
 
-// NumberOfTransitionsForSequence wraps the corresponding Objective-C method.
+// NumberOfTransitionsForSequence returns the number of transitions for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) NumberOfTransitionsForSequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("numberOfTransitionsForSequence"))
 	return obj.Wrap(_r)
 }
 
-// DayOfWeekForSequence wraps the corresponding Objective-C method.
+// DayOfWeekForSequence returns the day of week for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) DayOfWeekForSequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("dayOfWeekForSequence"))
 	return obj.Wrap(_r)
 }
 
-// ModeForSequence wraps the corresponding Objective-C method.
+// ModeForSequence returns the mode for sequence.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) ModeForSequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("modeForSequence"))
 	return obj.Wrap(_r)
 }
 
-// Transitions wraps the corresponding Objective-C method.
+// Transitions returns the transitions.
 func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) Transitions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("transitions"))
 	return obj.Wrap(_r)

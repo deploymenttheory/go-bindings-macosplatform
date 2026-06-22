@@ -73,7 +73,7 @@ func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier
 	return mapItemIdentifierAdopt(_id)
 }
 
-// IdentifierString wraps the corresponding Objective-C method.
+// IdentifierString returns the identifier string.
 func (mii *MapItemIdentifier) IdentifierString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mii), objc.RegisterName("identifierString"))
 	if _r == 0 {

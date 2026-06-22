@@ -60,7 +60,7 @@ func (pur *PathURLResource) URL() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// IsWritable wraps the corresponding Objective-C method.
+// IsWritable reports whether the object is writable.
 func (pur *PathURLResource) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(pur), objc.RegisterName("isWritable"))
 	return _r

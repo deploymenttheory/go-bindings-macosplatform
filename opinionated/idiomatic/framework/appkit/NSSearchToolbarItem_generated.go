@@ -137,7 +137,7 @@ func (sti *SearchToolbarItem) WithBordered(bordered bool) *SearchToolbarItem {
 	return sti
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (sti *SearchToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SearchToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return sti

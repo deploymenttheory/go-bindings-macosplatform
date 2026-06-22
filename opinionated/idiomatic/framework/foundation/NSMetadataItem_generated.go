@@ -73,7 +73,7 @@ func NewMetadataItemWithURL(url string) *MetadataItem {
 	return metadataItemAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mi *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mi
@@ -91,7 +91,7 @@ func (mi *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 //
 // Attributes returns the collection as a Go slice.
 func (mi *MetadataItem) Attributes() []string {

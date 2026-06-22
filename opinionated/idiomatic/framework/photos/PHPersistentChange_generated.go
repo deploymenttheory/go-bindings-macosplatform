@@ -85,7 +85,7 @@ func (pc *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectTyp
 	return PersistentObjectChangeDetailsFromID(_r), nil
 }
 
-// ChangeToken wraps the corresponding Objective-C method.
+// ChangeToken returns the change token.
 func (pc *PersistentChange) ChangeToken() *PersistentChangeToken {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("changeToken"))
 	return PersistentChangeTokenFromID(_r)

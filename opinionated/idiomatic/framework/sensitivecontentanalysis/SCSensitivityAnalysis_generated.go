@@ -72,7 +72,7 @@ func NewSensitivityAnalysis() *SensitivityAnalysis {
 	return sensitivityAnalysisAdopt(_id)
 }
 
-// IsSensitive wraps the corresponding Objective-C method.
+// IsSensitive reports whether the object is sensitive.
 func (sa *SensitivityAnalysis) IsSensitive() bool {
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isSensitive"))
 	return _r

@@ -78,19 +78,19 @@ func NewMTROperationalCredentialsClusterNOCResponseParamsWithResponseValueError(
 	return mTROperationalCredentialsClusterNOCResponseParamsAdopt(_id), nil
 }
 
-// WithStatusCode sets the property and returns the receiver so calls can be chained.
+// WithStatusCode sets the status code.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) WithStatusCode(statusCode obj.Object) *MTROperationalCredentialsClusterNOCResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return moccnrp
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccnrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) WithDebugText(debugText string) *MTROperationalCredentialsClusterNOCResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return moccnrp
@@ -102,19 +102,19 @@ func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) WithTimedInvok
 	return moccnrp
 }
 
-// StatusCode wraps the corresponding Objective-C method.
+// StatusCode returns the status code.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (moccnrp *MTROperationalCredentialsClusterNOCResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(moccnrp), objc.RegisterName("debugText"))
 	if _r == 0 {

@@ -49,121 +49,121 @@ func NewDOMHTMLStyleElement() *DOMHTMLStyleElement {
 	return dOMHTMLStyleElementAdopt(_id)
 }
 
-// WithDisabled sets the property and returns the receiver so calls can be chained.
+// WithDisabled sets the disabled.
 func (dse *DOMHTMLStyleElement) WithDisabled(disabled bool) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDisabled:"), disabled)
 	return dse
 }
 
-// WithMedia sets the property and returns the receiver so calls can be chained.
+// WithMedia sets the media.
 func (dse *DOMHTMLStyleElement) WithMedia(media string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setMedia:"), purego.NSString(media))
 	return dse
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (dse *DOMHTMLStyleElement) WithType(type_ string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setType:"), purego.NSString(type_))
 	return dse
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dse *DOMHTMLStyleElement) WithTitle(title string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dse
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dse *DOMHTMLStyleElement) WithLang(lang string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dse
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dse *DOMHTMLStyleElement) WithDir(dir string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dse
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dse *DOMHTMLStyleElement) WithTabIndex(tabIndex int) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dse
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dse *DOMHTMLStyleElement) WithAccessKey(accessKey string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dse
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dse *DOMHTMLStyleElement) WithInnerText(innerText string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dse
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dse *DOMHTMLStyleElement) WithOuterText(outerText string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dse
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dse *DOMHTMLStyleElement) WithContentEditable(contentEditable string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dse
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dse *DOMHTMLStyleElement) WithIDName(idName string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dse
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dse *DOMHTMLStyleElement) WithScrollLeft(scrollLeft int) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dse
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dse *DOMHTMLStyleElement) WithScrollTop(scrollTop int) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dse
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dse *DOMHTMLStyleElement) WithInnerHTML(innerHTML string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dse
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dse *DOMHTMLStyleElement) WithOuterHTML(outerHTML string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dse
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dse *DOMHTMLStyleElement) WithClassName(className string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dse
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dse *DOMHTMLStyleElement) WithNodeValue(nodeValue string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dse
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dse *DOMHTMLStyleElement) WithPrefix(prefix string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dse
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dse *DOMHTMLStyleElement) WithTextContent(textContent string) *DOMHTMLStyleElement {
 	objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dse
@@ -175,7 +175,7 @@ func (dse *DOMHTMLStyleElement) Disabled() bool {
 	return _r
 }
 
-// Media wraps the corresponding Objective-C method.
+// Media returns the media.
 func (dse *DOMHTMLStyleElement) Media() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("media"))
 	if _r == 0 {
@@ -184,7 +184,7 @@ func (dse *DOMHTMLStyleElement) Media() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dse *DOMHTMLStyleElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {

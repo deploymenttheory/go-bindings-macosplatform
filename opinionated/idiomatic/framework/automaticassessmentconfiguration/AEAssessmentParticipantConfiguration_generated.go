@@ -78,13 +78,13 @@ func (apc *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNet
 	return apc
 }
 
-// WithRequired sets the property and returns the receiver so calls can be chained.
+// WithRequired sets the required.
 func (apc *AssessmentParticipantConfiguration) WithRequired(required bool) *AssessmentParticipantConfiguration {
 	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setRequired:"), required)
 	return apc
 }
 
-// WithConfigurationInfo sets the property and returns the receiver so calls can be chained.
+// WithConfigurationInfo sets the configuration info.
 func (apc *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
 	objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
 	return apc
@@ -96,13 +96,13 @@ func (apc *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
 	return _r
 }
 
-// IsRequired wraps the corresponding Objective-C method.
+// IsRequired reports whether the object is required.
 func (apc *AssessmentParticipantConfiguration) IsRequired() bool {
 	_r := objc.Send[bool](objref.IDOf(apc), objc.RegisterName("isRequired"))
 	return _r
 }
 
-// ConfigurationInfo wraps the corresponding Objective-C method.
+// ConfigurationInfo returns the configuration info.
 func (apc *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apc), objc.RegisterName("configurationInfo"))
 	return obj.Wrap(_r)

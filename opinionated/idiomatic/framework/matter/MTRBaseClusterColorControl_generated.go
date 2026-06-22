@@ -61,7 +61,7 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterColorControlAdopt(_id)
 }
 
-// ReadAttributeCurrentHueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHueWithCompletion reads attribute current hue with completion.
 //
 // ReadAttributeCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsS
 	}
 }
 
-// ReadAttributeCurrentSaturationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentSaturationWithCompletion reads attribute current saturation with completion.
 //
 // ReadAttributeCurrentSaturationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 	}
 }
 
-// ReadAttributeRemainingTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRemainingTimeWithCompletion reads attribute remaining time with completion.
 //
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithPara
 	}
 }
 
-// ReadAttributeCurrentXWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentXWithCompletion reads attribute current x with completion.
 //
 // ReadAttributeCurrentXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSub
 	}
 }
 
-// ReadAttributeCurrentYWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentYWithCompletion reads attribute current y with completion.
 //
 // ReadAttributeCurrentYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSub
 	}
 }
 
-// ReadAttributeDriftCompensationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDriftCompensationWithCompletion reads attribute drift compensation with completion.
 //
 // ReadAttributeDriftCompensationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 	}
 }
 
-// ReadAttributeCompensationTextWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCompensationTextWithCompletion reads attribute compensation text with completion.
 //
 // ReadAttributeCompensationTextWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (result string, err error) {
@@ -411,7 +411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithP
 	}
 }
 
-// ReadAttributeColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorTemperatureMiredsWithCompletion reads attribute color temperature mireds with completion.
 //
 // ReadAttributeColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 	}
 }
 
-// ReadAttributeColorModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorModeWithCompletion reads attribute color mode with completion.
 //
 // ReadAttributeColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSu
 	}
 }
 
-// ReadAttributeOptionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOptionsWithCompletion reads attribute options with completion.
 //
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubs
 	}
 }
 
-// ReadAttributeNumberOfPrimariesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPrimariesWithCompletion reads attribute number of primaries with completion.
 //
 // ReadAttributeNumberOfPrimariesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 	}
 }
 
-// ReadAttributePrimary1XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary1XWithCompletion reads attribute primary1 x with completion.
 //
 // ReadAttributePrimary1XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary1YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary1YWithCompletion reads attribute primary1 y with completion.
 //
 // ReadAttributePrimary1YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary1IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary1IntensityWithCompletion reads attribute primary1 intensity with completion.
 //
 // ReadAttributePrimary1IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 	}
 }
 
-// ReadAttributePrimary2XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary2XWithCompletion reads attribute primary2 x with completion.
 //
 // ReadAttributePrimary2XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary2YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary2YWithCompletion reads attribute primary2 y with completion.
 //
 // ReadAttributePrimary2YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary2IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary2IntensityWithCompletion reads attribute primary2 intensity with completion.
 //
 // ReadAttributePrimary2IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 	}
 }
 
-// ReadAttributePrimary3XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary3XWithCompletion reads attribute primary3 x with completion.
 //
 // ReadAttributePrimary3XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary3YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary3YWithCompletion reads attribute primary3 y with completion.
 //
 // ReadAttributePrimary3YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary3IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary3IntensityWithCompletion reads attribute primary3 intensity with completion.
 //
 // ReadAttributePrimary3IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 	}
 }
 
-// ReadAttributePrimary4XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary4XWithCompletion reads attribute primary4 x with completion.
 //
 // ReadAttributePrimary4XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary4YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary4YWithCompletion reads attribute primary4 y with completion.
 //
 // ReadAttributePrimary4YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary4IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary4IntensityWithCompletion reads attribute primary4 intensity with completion.
 //
 // ReadAttributePrimary4IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 	}
 }
 
-// ReadAttributePrimary5XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary5XWithCompletion reads attribute primary5 x with completion.
 //
 // ReadAttributePrimary5XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary5YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary5YWithCompletion reads attribute primary5 y with completion.
 //
 // ReadAttributePrimary5YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary5IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary5IntensityWithCompletion reads attribute primary5 intensity with completion.
 //
 // ReadAttributePrimary5IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 	}
 }
 
-// ReadAttributePrimary6XWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary6XWithCompletion reads attribute primary6 x with completion.
 //
 // ReadAttributePrimary6XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSu
 	}
 }
 
-// ReadAttributePrimary6YWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary6YWithCompletion reads attribute primary6 y with completion.
 //
 // ReadAttributePrimary6YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSu
 	}
 }
 
-// ReadAttributePrimary6IntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePrimary6IntensityWithCompletion reads attribute primary6 intensity with completion.
 //
 // ReadAttributePrimary6IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 	}
 }
 
-// ReadAttributeWhitePointXWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointXWithCompletion reads attribute white point x with completion.
 //
 // ReadAttributeWhitePointXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParams
 	}
 }
 
-// ReadAttributeWhitePointYWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointYWithCompletion reads attribute white point y with completion.
 //
 // ReadAttributeWhitePointYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParams
 	}
 }
 
-// ReadAttributeColorPointRXWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRXWithCompletion reads attribute color point rx with completion.
 //
 // ReadAttributeColorPointRXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParam
 	}
 }
 
-// ReadAttributeColorPointRYWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRYWithCompletion reads attribute color point ry with completion.
 //
 // ReadAttributeColorPointRYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParam
 	}
 }
 
-// ReadAttributeColorPointRIntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRIntensityWithCompletion reads attribute color point r intensity with completion.
 //
 // ReadAttributeColorPointRIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 	}
 }
 
-// ReadAttributeColorPointGXWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGXWithCompletion reads attribute color point gx with completion.
 //
 // ReadAttributeColorPointGXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParam
 	}
 }
 
-// ReadAttributeColorPointGYWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGYWithCompletion reads attribute color point gy with completion.
 //
 // ReadAttributeColorPointGYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParam
 	}
 }
 
-// ReadAttributeColorPointGIntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGIntensityWithCompletion reads attribute color point g intensity with completion.
 //
 // ReadAttributeColorPointGIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 	}
 }
 
-// ReadAttributeColorPointBXWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBXWithCompletion reads attribute color point bx with completion.
 //
 // ReadAttributeColorPointBXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParam
 	}
 }
 
-// ReadAttributeColorPointBYWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBYWithCompletion reads attribute color point by with completion.
 //
 // ReadAttributeColorPointBYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParam
 	}
 }
 
-// ReadAttributeColorPointBIntensityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBIntensityWithCompletion reads attribute color point b intensity with completion.
 //
 // ReadAttributeColorPointBIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 	}
 }
 
-// ReadAttributeEnhancedCurrentHueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedCurrentHueWithCompletion reads attribute enhanced current hue with completion.
 //
 // ReadAttributeEnhancedCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 	}
 }
 
-// ReadAttributeEnhancedColorModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedColorModeWithCompletion reads attribute enhanced color mode with completion.
 //
 // ReadAttributeEnhancedColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 	}
 }
 
-// ReadAttributeColorLoopActiveWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopActiveWithCompletion reads attribute color loop active with completion.
 //
 // ReadAttributeColorLoopActiveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithPa
 	}
 }
 
-// ReadAttributeColorLoopDirectionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopDirectionWithCompletion reads attribute color loop direction with completion.
 //
 // ReadAttributeColorLoopDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 	}
 }
 
-// ReadAttributeColorLoopTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopTimeWithCompletion reads attribute color loop time with completion.
 //
 // ReadAttributeColorLoopTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithPara
 	}
 }
 
-// ReadAttributeColorLoopStartEnhancedHueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStartEnhancedHueWithCompletion reads attribute color loop start enhanced hue with completion.
 //
 // ReadAttributeColorLoopStartEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 	}
 }
 
-// ReadAttributeColorLoopStoredEnhancedHueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStoredEnhancedHueWithCompletion reads attribute color loop stored enhanced hue with completion.
 //
 // ReadAttributeColorLoopStoredEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 	}
 }
 
-// ReadAttributeColorCapabilitiesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorCapabilitiesWithCompletion reads attribute color capabilities with completion.
 //
 // ReadAttributeColorCapabilitiesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 	}
 }
 
-// ReadAttributeColorTempPhysicalMinMiredsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMinMiredsWithCompletion reads attribute color temp physical min mireds with completion.
 //
 // ReadAttributeColorTempPhysicalMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 	}
 }
 
-// ReadAttributeColorTempPhysicalMaxMiredsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMaxMiredsWithCompletion reads attribute color temp physical max mireds with completion.
 //
 // ReadAttributeColorTempPhysicalMaxMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 	}
 }
 
-// ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion reads attribute couple color temp to level min mireds with completion.
 //
 // ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 	}
 }
 
-// ReadAttributeStartUpColorTemperatureMiredsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartUpColorTemperatureMiredsWithCompletion reads attribute start up color temperature mireds with completion.
 //
 // ReadAttributeStartUpColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithPara
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsS
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2911,7 +2911,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithPa
 	}
 }
 
-// ReadAttributeCurrentHue wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHue reads attribute current hue.
 //
 // ReadAttributeCurrentHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInte
 	}
 }
 
-// ReadAttributeCurrentSaturation wraps the corresponding Objective-C method.
+// ReadAttributeCurrentSaturation reads attribute current saturation.
 //
 // ReadAttributeCurrentSaturation blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (result obj.Object, err error) {
@@ -3011,7 +3011,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 	}
 }
 
-// ReadAttributeRemainingTime wraps the corresponding Objective-C method.
+// ReadAttributeRemainingTime reads attribute remaining time.
 //
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
@@ -3061,7 +3061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinI
 	}
 }
 
-// ReadAttributeCurrentX wraps the corresponding Objective-C method.
+// ReadAttributeCurrentX reads attribute current x.
 //
 // ReadAttributeCurrentX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinInterv
 	}
 }
 
-// ReadAttributeCurrentY wraps the corresponding Objective-C method.
+// ReadAttributeCurrentY reads attribute current y.
 //
 // ReadAttributeCurrentY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (result obj.Object, err error) {
@@ -3161,7 +3161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinInterv
 	}
 }
 
-// ReadAttributeDriftCompensation wraps the corresponding Objective-C method.
+// ReadAttributeDriftCompensation reads attribute drift compensation.
 //
 // ReadAttributeDriftCompensation blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 	}
 }
 
-// ReadAttributeCompensationText wraps the corresponding Objective-C method.
+// ReadAttributeCompensationText reads attribute compensation text.
 //
 // ReadAttributeCompensationText blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (result string, err error) {
@@ -3261,7 +3261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithM
 	}
 }
 
-// ReadAttributeColorTemperatureMireds wraps the corresponding Objective-C method.
+// ReadAttributeColorTemperatureMireds reads attribute color temperature mireds.
 //
 // ReadAttributeColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 	}
 }
 
-// ReadAttributeColorMode wraps the corresponding Objective-C method.
+// ReadAttributeColorMode reads attribute color mode.
 //
 // ReadAttributeColorMode blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (result obj.Object, err error) {
@@ -3361,7 +3361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinInter
 	}
 }
 
-// ReadAttributeOptions wraps the corresponding Objective-C method.
+// ReadAttributeOptions reads attribute options.
 //
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
@@ -3411,7 +3411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinInterva
 	}
 }
 
-// ReadAttributeNumberOfPrimaries wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPrimaries reads attribute number of primaries.
 //
 // ReadAttributeNumberOfPrimaries blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (result obj.Object, err error) {
@@ -3461,7 +3461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 	}
 }
 
-// ReadAttributePrimary1X wraps the corresponding Objective-C method.
+// ReadAttributePrimary1X reads attribute primary1 x.
 //
 // ReadAttributePrimary1X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (result obj.Object, err error) {
@@ -3511,7 +3511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinInter
 	}
 }
 
-// ReadAttributePrimary1Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary1Y reads attribute primary1 y.
 //
 // ReadAttributePrimary1Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (result obj.Object, err error) {
@@ -3561,7 +3561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinInter
 	}
 }
 
-// ReadAttributePrimary1Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary1Intensity reads attribute primary1 intensity.
 //
 // ReadAttributePrimary1Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -3611,7 +3611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 	}
 }
 
-// ReadAttributePrimary2X wraps the corresponding Objective-C method.
+// ReadAttributePrimary2X reads attribute primary2 x.
 //
 // ReadAttributePrimary2X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (result obj.Object, err error) {
@@ -3661,7 +3661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinInter
 	}
 }
 
-// ReadAttributePrimary2Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary2Y reads attribute primary2 y.
 //
 // ReadAttributePrimary2Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (result obj.Object, err error) {
@@ -3711,7 +3711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinInter
 	}
 }
 
-// ReadAttributePrimary2Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary2Intensity reads attribute primary2 intensity.
 //
 // ReadAttributePrimary2Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -3761,7 +3761,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 	}
 }
 
-// ReadAttributePrimary3X wraps the corresponding Objective-C method.
+// ReadAttributePrimary3X reads attribute primary3 x.
 //
 // ReadAttributePrimary3X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (result obj.Object, err error) {
@@ -3811,7 +3811,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinInter
 	}
 }
 
-// ReadAttributePrimary3Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary3Y reads attribute primary3 y.
 //
 // ReadAttributePrimary3Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (result obj.Object, err error) {
@@ -3861,7 +3861,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinInter
 	}
 }
 
-// ReadAttributePrimary3Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary3Intensity reads attribute primary3 intensity.
 //
 // ReadAttributePrimary3Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -3911,7 +3911,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 	}
 }
 
-// ReadAttributePrimary4X wraps the corresponding Objective-C method.
+// ReadAttributePrimary4X reads attribute primary4 x.
 //
 // ReadAttributePrimary4X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (result obj.Object, err error) {
@@ -3961,7 +3961,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinInter
 	}
 }
 
-// ReadAttributePrimary4Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary4Y reads attribute primary4 y.
 //
 // ReadAttributePrimary4Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (result obj.Object, err error) {
@@ -4011,7 +4011,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinInter
 	}
 }
 
-// ReadAttributePrimary4Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary4Intensity reads attribute primary4 intensity.
 //
 // ReadAttributePrimary4Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -4061,7 +4061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 	}
 }
 
-// ReadAttributePrimary5X wraps the corresponding Objective-C method.
+// ReadAttributePrimary5X reads attribute primary5 x.
 //
 // ReadAttributePrimary5X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (result obj.Object, err error) {
@@ -4111,7 +4111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinInter
 	}
 }
 
-// ReadAttributePrimary5Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary5Y reads attribute primary5 y.
 //
 // ReadAttributePrimary5Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (result obj.Object, err error) {
@@ -4161,7 +4161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinInter
 	}
 }
 
-// ReadAttributePrimary5Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary5Intensity reads attribute primary5 intensity.
 //
 // ReadAttributePrimary5Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -4211,7 +4211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 	}
 }
 
-// ReadAttributePrimary6X wraps the corresponding Objective-C method.
+// ReadAttributePrimary6X reads attribute primary6 x.
 //
 // ReadAttributePrimary6X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (result obj.Object, err error) {
@@ -4261,7 +4261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinInter
 	}
 }
 
-// ReadAttributePrimary6Y wraps the corresponding Objective-C method.
+// ReadAttributePrimary6Y reads attribute primary6 y.
 //
 // ReadAttributePrimary6Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (result obj.Object, err error) {
@@ -4311,7 +4311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinInter
 	}
 }
 
-// ReadAttributePrimary6Intensity wraps the corresponding Objective-C method.
+// ReadAttributePrimary6Intensity reads attribute primary6 intensity.
 //
 // ReadAttributePrimary6Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (result obj.Object, err error) {
@@ -4361,7 +4361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 	}
 }
 
-// ReadAttributeWhitePointX wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointX reads attribute white point x.
 //
 // ReadAttributeWhitePointX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (result obj.Object, err error) {
@@ -4411,7 +4411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInt
 	}
 }
 
-// ReadAttributeWhitePointY wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointY reads attribute white point y.
 //
 // ReadAttributeWhitePointY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (result obj.Object, err error) {
@@ -4461,7 +4461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInt
 	}
 }
 
-// ReadAttributeColorPointRX wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRX reads attribute color point rx.
 //
 // ReadAttributeColorPointRX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (result obj.Object, err error) {
@@ -4511,7 +4511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIn
 	}
 }
 
-// ReadAttributeColorPointRY wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRY reads attribute color point ry.
 //
 // ReadAttributeColorPointRY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (result obj.Object, err error) {
@@ -4561,7 +4561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIn
 	}
 }
 
-// ReadAttributeColorPointRIntensity wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRIntensity reads attribute color point r intensity.
 //
 // ReadAttributeColorPointRIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (result obj.Object, err error) {
@@ -4611,7 +4611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 	}
 }
 
-// ReadAttributeColorPointGX wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGX reads attribute color point gx.
 //
 // ReadAttributeColorPointGX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (result obj.Object, err error) {
@@ -4661,7 +4661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIn
 	}
 }
 
-// ReadAttributeColorPointGY wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGY reads attribute color point gy.
 //
 // ReadAttributeColorPointGY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (result obj.Object, err error) {
@@ -4711,7 +4711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIn
 	}
 }
 
-// ReadAttributeColorPointGIntensity wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGIntensity reads attribute color point g intensity.
 //
 // ReadAttributeColorPointGIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (result obj.Object, err error) {
@@ -4761,7 +4761,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 	}
 }
 
-// ReadAttributeColorPointBX wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBX reads attribute color point bx.
 //
 // ReadAttributeColorPointBX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (result obj.Object, err error) {
@@ -4811,7 +4811,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIn
 	}
 }
 
-// ReadAttributeColorPointBY wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBY reads attribute color point by.
 //
 // ReadAttributeColorPointBY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (result obj.Object, err error) {
@@ -4861,7 +4861,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIn
 	}
 }
 
-// ReadAttributeColorPointBIntensity wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBIntensity reads attribute color point b intensity.
 //
 // ReadAttributeColorPointBIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (result obj.Object, err error) {
@@ -4911,7 +4911,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 	}
 }
 
-// ReadAttributeEnhancedCurrentHue wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedCurrentHue reads attribute enhanced current hue.
 //
 // ReadAttributeEnhancedCurrentHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (result obj.Object, err error) {
@@ -4961,7 +4961,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 	}
 }
 
-// ReadAttributeEnhancedColorMode wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedColorMode reads attribute enhanced color mode.
 //
 // ReadAttributeEnhancedColorMode blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (result obj.Object, err error) {
@@ -5011,7 +5011,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 	}
 }
 
-// ReadAttributeColorLoopActive wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopActive reads attribute color loop active.
 //
 // ReadAttributeColorLoopActive blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (result obj.Object, err error) {
@@ -5061,7 +5061,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMi
 	}
 }
 
-// ReadAttributeColorLoopDirection wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopDirection reads attribute color loop direction.
 //
 // ReadAttributeColorLoopDirection blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (result obj.Object, err error) {
@@ -5111,7 +5111,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 	}
 }
 
-// ReadAttributeColorLoopTime wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopTime reads attribute color loop time.
 //
 // ReadAttributeColorLoopTime blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (result obj.Object, err error) {
@@ -5161,7 +5161,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinI
 	}
 }
 
-// ReadAttributeColorLoopStartEnhancedHue wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStartEnhancedHue reads attribute color loop start enhanced hue.
 //
 // ReadAttributeColorLoopStartEnhancedHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (result obj.Object, err error) {
@@ -5211,7 +5211,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 	}
 }
 
-// ReadAttributeColorLoopStoredEnhancedHue wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStoredEnhancedHue reads attribute color loop stored enhanced hue.
 //
 // ReadAttributeColorLoopStoredEnhancedHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (result obj.Object, err error) {
@@ -5261,7 +5261,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 	}
 }
 
-// ReadAttributeColorCapabilities wraps the corresponding Objective-C method.
+// ReadAttributeColorCapabilities reads attribute color capabilities.
 //
 // ReadAttributeColorCapabilities blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (result obj.Object, err error) {
@@ -5311,7 +5311,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 	}
 }
 
-// ReadAttributeColorTempPhysicalMinMireds wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMinMireds reads attribute color temp physical min mireds.
 //
 // ReadAttributeColorTempPhysicalMinMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (result obj.Object, err error) {
@@ -5361,7 +5361,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 	}
 }
 
-// ReadAttributeColorTempPhysicalMaxMireds wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMaxMireds reads attribute color temp physical max mireds.
 //
 // ReadAttributeColorTempPhysicalMaxMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (result obj.Object, err error) {
@@ -5411,7 +5411,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 	}
 }
 
-// ReadAttributeCoupleColorTempToLevelMinMireds wraps the corresponding Objective-C method.
+// ReadAttributeCoupleColorTempToLevelMinMireds reads attribute couple color temp to level min mireds.
 //
 // ReadAttributeCoupleColorTempToLevelMinMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (result obj.Object, err error) {
@@ -5461,7 +5461,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 	}
 }
 
-// ReadAttributeStartUpColorTemperatureMireds wraps the corresponding Objective-C method.
+// ReadAttributeStartUpColorTemperatureMireds reads attribute start up color temperature mireds.
 //
 // ReadAttributeStartUpColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
@@ -5511,7 +5511,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -5561,7 +5561,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -5611,7 +5611,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -5661,7 +5661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinI
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -5711,7 +5711,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInte
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

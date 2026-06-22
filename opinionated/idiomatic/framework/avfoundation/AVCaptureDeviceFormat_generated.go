@@ -160,7 +160,7 @@ func (cdf *CaptureDeviceFormat) IsAutoVideoFrameRateSupported() bool {
 	return _r
 }
 
-// IsSpatialVideoCaptureSupported wraps the corresponding Objective-C method.
+// IsSpatialVideoCaptureSupported reports whether the object is spatial video capture supported.
 func (cdf *CaptureDeviceFormat) IsSpatialVideoCaptureSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isSpatialVideoCaptureSupported"))
 	return _r
@@ -238,7 +238,7 @@ func (cdf *CaptureDeviceFormat) VideoFrameRateRangeForBackgroundReplacement() *F
 	return FrameRateRangeFromID(_r)
 }
 
-// IsEdgeLightSupported wraps the corresponding Objective-C method.
+// IsEdgeLightSupported reports whether the object is edge light supported.
 func (cdf *CaptureDeviceFormat) IsEdgeLightSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isEdgeLightSupported"))
 	return _r
@@ -300,13 +300,13 @@ func (cdf *CaptureDeviceFormat) SupportedDynamicAspectRatios() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsSmartFramingSupported wraps the corresponding Objective-C method.
+// IsSmartFramingSupported reports whether the object is smart framing supported.
 func (cdf *CaptureDeviceFormat) IsSmartFramingSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isSmartFramingSupported"))
 	return _r
 }
 
-// IsCameraLensSmudgeDetectionSupported wraps the corresponding Objective-C method.
+// IsCameraLensSmudgeDetectionSupported reports whether the object is camera lens smudge detection supported.
 func (cdf *CaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(cdf), objc.RegisterName("isCameraLensSmudgeDetectionSupported"))
 	return _r

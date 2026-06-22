@@ -89,19 +89,19 @@ func (tavp *TextAttachmentViewProvider) LoadView() {
 	objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("loadView"))
 }
 
-// TextAttachment wraps the corresponding Objective-C method.
+// TextAttachment returns the text attachment.
 func (tavp *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textAttachment"))
 	return TextAttachmentFromID(_r)
 }
 
-// TextLayoutManager wraps the corresponding Objective-C method.
+// TextLayoutManager returns the text layout manager.
 func (tavp *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (tavp *TextAttachmentViewProvider) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(tavp), objc.RegisterName("view"))
 	return ViewFromID(_r)

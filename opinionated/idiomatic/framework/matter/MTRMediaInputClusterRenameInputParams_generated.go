@@ -70,13 +70,13 @@ func NewMTRMediaInputClusterRenameInputParams() *MTRMediaInputClusterRenameInput
 	return mTRMediaInputClusterRenameInputParamsAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) WithIndex(index obj.Object) *MTRMediaInputClusterRenameInputParams {
 	objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmicrip
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) WithName(name string) *MTRMediaInputClusterRenameInputParams {
 	objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("setName:"), purego.NSString(name))
 	return mmicrip
@@ -94,13 +94,13 @@ func (mmicrip *MTRMediaInputClusterRenameInputParams) WithServerSideProcessingTi
 	return mmicrip
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mmicrip *MTRMediaInputClusterRenameInputParams) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmicrip), objc.RegisterName("name"))
 	if _r == 0 {

@@ -72,7 +72,7 @@ func NewURLProtocol() *URLProtocol {
 	return uRLProtocolAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (up *URLProtocol) WithScriptingProperties(scriptingProperties obj.Object) *URLProtocol {
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return up
@@ -100,7 +100,7 @@ func (up *URLProtocol) CachedResponse() *CachedURLResponse {
 	return CachedURLResponseFromID(_r)
 }
 
-// Task wraps the corresponding Objective-C method.
+// Task returns the task.
 func (up *URLProtocol) Task() *URLSessionTask {
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("task"))
 	return URLSessionTaskFromID(_r)

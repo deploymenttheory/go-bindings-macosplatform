@@ -124,7 +124,7 @@ func (m *Menu) WithAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) *Menu
 	return m
 }
 
-// WithAutomaticallyInsertsWritingToolsItems sets the property and returns the receiver so calls can be chained.
+// WithAutomaticallyInsertsWritingToolsItems sets the automatically inserts writing tools items.
 func (m *Menu) WithAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWritingToolsItems bool) *Menu {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setAutomaticallyInsertsWritingToolsItems:"), automaticallyInsertsWritingToolsItems)
 	return m
@@ -282,7 +282,7 @@ func (m *Menu) CancelTrackingWithoutAnimation() {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancelTrackingWithoutAnimation"))
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (m *Menu) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("title"))
 	if _r == 0 {
@@ -291,13 +291,13 @@ func (m *Menu) Title() string {
 	return purego.GoString(_r)
 }
 
-// Supermenu wraps the corresponding Objective-C method.
+// Supermenu returns the supermenu.
 func (m *Menu) Supermenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("supermenu"))
 	return MenuFromID(_r)
 }
 
-// ItemArray wraps the corresponding Objective-C method.
+// ItemArray returns the item array.
 //
 // ItemArray returns the collection as a Go slice.
 func (m *Menu) ItemArray() []*MenuItem {
@@ -305,7 +305,7 @@ func (m *Menu) ItemArray() []*MenuItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (m *Menu) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("numberOfItems"))
 	return _r
@@ -317,31 +317,31 @@ func (m *Menu) AutoenablesItems() bool {
 	return _r
 }
 
-// MenuBarHeight wraps the corresponding Objective-C method.
+// MenuBarHeight returns the menu bar height.
 func (m *Menu) MenuBarHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("menuBarHeight"))
 	return _r
 }
 
-// HighlightedItem wraps the corresponding Objective-C method.
+// HighlightedItem returns the highlighted item.
 func (m *Menu) HighlightedItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("highlightedItem"))
 	return MenuItemFromID(_r)
 }
 
-// MinimumWidth wraps the corresponding Objective-C method.
+// MinimumWidth returns the minimum width.
 func (m *Menu) MinimumWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("minimumWidth"))
 	return _r
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (m *Menu) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(m), objc.RegisterName("size"))
 	return _r
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (m *Menu) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("font"))
 	return FontFromID(_r)
@@ -365,7 +365,7 @@ func (m *Menu) ShowsStateColumn() bool {
 	return _r
 }
 
-// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+// UserInterfaceLayoutDirection returns the user interface layout direction.
 func (m *Menu) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(m), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
@@ -396,7 +396,7 @@ func (m *Menu) SubmenuAction(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("submenuAction:"), objref.IDOf(sender))
 }
 
-// PropertiesToUpdate wraps the corresponding Objective-C method.
+// PropertiesToUpdate returns the properties to update.
 func (m *Menu) PropertiesToUpdate() MenuProperties {
 	_r := objc.Send[MenuProperties](objref.IDOf(m), objc.RegisterName("propertiesToUpdate"))
 	return _r
@@ -469,7 +469,7 @@ func (m *Menu) MenuChangedMessagesEnabled() bool {
 	return _r
 }
 
-// IsTornOff wraps the corresponding Objective-C method.
+// IsTornOff reports whether the object is torn off.
 func (m *Menu) IsTornOff() bool {
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isTornOff"))
 	return _r

@@ -70,49 +70,49 @@ func NewMTRActionsClusterActionStruct() *MTRActionsClusterActionStruct {
 	return mTRActionsClusterActionStructAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (macas *MTRActionsClusterActionStruct) WithActionID(actionID obj.Object) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macas
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (macas *MTRActionsClusterActionStruct) WithName(name string) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setName:"), purego.NSString(name))
 	return macas
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (macas *MTRActionsClusterActionStruct) WithType(type_ obj.Object) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return macas
 }
 
-// WithEndpointListID sets the property and returns the receiver so calls can be chained.
+// WithEndpointListID sets the endpoint list ID.
 func (macas *MTRActionsClusterActionStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return macas
 }
 
-// WithSupportedCommands sets the property and returns the receiver so calls can be chained.
+// WithSupportedCommands sets the supported commands.
 func (macas *MTRActionsClusterActionStruct) WithSupportedCommands(supportedCommands obj.Object) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setSupportedCommands:"), objref.IDOf(supportedCommands))
 	return macas
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (macas *MTRActionsClusterActionStruct) WithState(state obj.Object) *MTRActionsClusterActionStruct {
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setState:"), objref.IDOf(state))
 	return macas
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (macas *MTRActionsClusterActionStruct) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (macas *MTRActionsClusterActionStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("name"))
 	if _r == 0 {
@@ -121,25 +121,25 @@ func (macas *MTRActionsClusterActionStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (macas *MTRActionsClusterActionStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// EndpointListID wraps the corresponding Objective-C method.
+// EndpointListID returns the endpoint list ID.
 func (macas *MTRActionsClusterActionStruct) EndpointListID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("endpointListID"))
 	return obj.Wrap(_r)
 }
 
-// SupportedCommands wraps the corresponding Objective-C method.
+// SupportedCommands returns the supported commands.
 func (macas *MTRActionsClusterActionStruct) SupportedCommands() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("supportedCommands"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (macas *MTRActionsClusterActionStruct) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("state"))
 	return obj.Wrap(_r)

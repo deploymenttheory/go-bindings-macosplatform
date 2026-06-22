@@ -70,25 +70,25 @@ func NewMTRBasicInformationClusterProductAppearanceStruct() *MTRBasicInformation
 	return mTRBasicInformationClusterProductAppearanceStructAdopt(_id)
 }
 
-// WithFinish sets the property and returns the receiver so calls can be chained.
+// WithFinish sets the finish.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 	return mbicpas
 }
 
-// WithPrimaryColor sets the property and returns the receiver so calls can be chained.
+// WithPrimaryColor sets the primary color.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 	return mbicpas
 }
 
-// Finish wraps the corresponding Objective-C method.
+// Finish returns the finish.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("finish"))
 	return obj.Wrap(_r)
 }
 
-// PrimaryColor wraps the corresponding Objective-C method.
+// PrimaryColor returns the primary color.
 func (mbicpas *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbicpas), objc.RegisterName("primaryColor"))
 	return obj.Wrap(_r)

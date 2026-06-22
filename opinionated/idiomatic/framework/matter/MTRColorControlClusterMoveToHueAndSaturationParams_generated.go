@@ -70,31 +70,31 @@ func NewMTRColorControlClusterMoveToHueAndSaturationParams() *MTRColorControlClu
 	return mTRColorControlClusterMoveToHueAndSaturationParamsAdopt(_id)
 }
 
-// WithHue sets the property and returns the receiver so calls can be chained.
+// WithHue sets the hue.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithHue(hue obj.Object) *MTRColorControlClusterMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("setHue:"), objref.IDOf(hue))
 	return mcccmthasp
 }
 
-// WithSaturation sets the property and returns the receiver so calls can be chained.
+// WithSaturation sets the saturation.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 	return mcccmthasp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccmthasp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmthasp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmthasp
@@ -112,31 +112,31 @@ func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) WithServer
 	return mcccmthasp
 }
 
-// Hue wraps the corresponding Objective-C method.
+// Hue returns the hue.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) Hue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("hue"))
 	return obj.Wrap(_r)
 }
 
-// Saturation wraps the corresponding Objective-C method.
+// Saturation returns the saturation.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) Saturation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("saturation"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccmthasp *MTRColorControlClusterMoveToHueAndSaturationParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmthasp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

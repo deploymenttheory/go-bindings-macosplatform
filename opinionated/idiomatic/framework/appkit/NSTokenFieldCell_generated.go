@@ -377,19 +377,19 @@ func (tfc *TokenFieldCell) WithControlTint(controlTint ControlTint) *TokenFieldC
 	return tfc
 }
 
-// TokenStyle wraps the corresponding Objective-C method.
+// TokenStyle returns the token style.
 func (tfc *TokenFieldCell) TokenStyle() TokenStyle {
 	_r := objc.Send[TokenStyle](objref.IDOf(tfc), objc.RegisterName("tokenStyle"))
 	return _r
 }
 
-// CompletionDelay wraps the corresponding Objective-C method.
+// CompletionDelay returns the completion delay.
 func (tfc *TokenFieldCell) CompletionDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(tfc), objc.RegisterName("completionDelay"))
 	return _r
 }
 
-// TokenizingCharacterSet wraps the corresponding Objective-C method.
+// TokenizingCharacterSet returns the tokenizing character set.
 func (tfc *TokenFieldCell) TokenizingCharacterSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("tokenizingCharacterSet"))
 	return obj.Wrap(_r)

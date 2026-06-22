@@ -103,7 +103,7 @@ func (ptc *PaymentTokenContext) WithAmount(amount obj.Object) *PaymentTokenConte
 	return ptc
 }
 
-// MerchantIdentifier wraps the corresponding Objective-C method.
+// MerchantIdentifier returns the merchant identifier.
 func (ptc *PaymentTokenContext) MerchantIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantIdentifier"))
 	if _r == 0 {
@@ -112,7 +112,7 @@ func (ptc *PaymentTokenContext) MerchantIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ExternalIdentifier wraps the corresponding Objective-C method.
+// ExternalIdentifier returns the external identifier.
 func (ptc *PaymentTokenContext) ExternalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("externalIdentifier"))
 	if _r == 0 {
@@ -121,7 +121,7 @@ func (ptc *PaymentTokenContext) ExternalIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// MerchantName wraps the corresponding Objective-C method.
+// MerchantName returns the merchant name.
 func (ptc *PaymentTokenContext) MerchantName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantName"))
 	if _r == 0 {
@@ -130,7 +130,7 @@ func (ptc *PaymentTokenContext) MerchantName() string {
 	return purego.GoString(_r)
 }
 
-// MerchantDomain wraps the corresponding Objective-C method.
+// MerchantDomain returns the merchant domain.
 func (ptc *PaymentTokenContext) MerchantDomain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantDomain"))
 	if _r == 0 {
@@ -139,7 +139,7 @@ func (ptc *PaymentTokenContext) MerchantDomain() string {
 	return purego.GoString(_r)
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (ptc *PaymentTokenContext) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("amount"))
 	return obj.Wrap(_r)

@@ -70,31 +70,31 @@ func NewMTRActionsClusterEndpointListStruct() *MTRActionsClusterEndpointListStru
 	return mTRActionsClusterEndpointListStructAdopt(_id)
 }
 
-// WithEndpointListID sets the property and returns the receiver so calls can be chained.
+// WithEndpointListID sets the endpoint list ID.
 func (macels *MTRActionsClusterEndpointListStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return macels
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (macels *MTRActionsClusterEndpointListStruct) WithName(name string) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setName:"), purego.NSString(name))
 	return macels
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (macels *MTRActionsClusterEndpointListStruct) WithType(type_ obj.Object) *MTRActionsClusterEndpointListStruct {
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return macels
 }
 
-// EndpointListID wraps the corresponding Objective-C method.
+// EndpointListID returns the endpoint list ID.
 func (macels *MTRActionsClusterEndpointListStruct) EndpointListID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("endpointListID"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (macels *MTRActionsClusterEndpointListStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("name"))
 	if _r == 0 {
@@ -103,13 +103,13 @@ func (macels *MTRActionsClusterEndpointListStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (macels *MTRActionsClusterEndpointListStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// Endpoints wraps the corresponding Objective-C method.
+// Endpoints returns the endpoints.
 func (macels *MTRActionsClusterEndpointListStruct) Endpoints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)

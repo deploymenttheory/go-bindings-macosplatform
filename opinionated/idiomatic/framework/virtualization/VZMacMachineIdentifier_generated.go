@@ -79,7 +79,7 @@ func NewMACMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object
 	return macMachineIdentifierAdopt(_id)
 }
 
-// DataRepresentation wraps the corresponding Objective-C method.
+// DataRepresentation returns the data representation.
 func (mmi *MacMachineIdentifier) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

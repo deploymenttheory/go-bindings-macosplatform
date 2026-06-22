@@ -75,25 +75,25 @@ func (ept *EffectPropertyTexture) WithEnvMode(envMode TextureEnvMode) *EffectPro
 	return ept
 }
 
-// Enabled wraps the corresponding Objective-C method.
+// Enabled returns the enabled.
 func (ept *EffectPropertyTexture) Enabled() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ept), objc.RegisterName("enabled"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ept *EffectPropertyTexture) Name() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ept), objc.RegisterName("name"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (ept *EffectPropertyTexture) Target() TextureTarget {
 	_r := objc.Send[TextureTarget](objref.IDOf(ept), objc.RegisterName("target"))
 	return _r
 }
 
-// EnvMode wraps the corresponding Objective-C method.
+// EnvMode returns the env mode.
 func (ept *EffectPropertyTexture) EnvMode() TextureEnvMode {
 	_r := objc.Send[TextureEnvMode](objref.IDOf(ept), objc.RegisterName("envMode"))
 	return _r

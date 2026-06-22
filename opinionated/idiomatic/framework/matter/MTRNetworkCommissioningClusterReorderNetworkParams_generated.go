@@ -70,19 +70,19 @@ func NewMTRNetworkCommissioningClusterReorderNetworkParams() *MTRNetworkCommissi
 	return mTRNetworkCommissioningClusterReorderNetworkParamsAdopt(_id)
 }
 
-// WithNetworkID sets the property and returns the receiver so calls can be chained.
+// WithNetworkID sets the network ID.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return mnccrnp
 }
 
-// WithNetworkIndex sets the property and returns the receiver so calls can be chained.
+// WithNetworkIndex sets the network index.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) WithNetworkIndex(networkIndex obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setNetworkIndex:"), objref.IDOf(networkIndex))
 	return mnccrnp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterReorderNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccrnp
@@ -100,19 +100,19 @@ func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) WithServerSid
 	return mnccrnp
 }
 
-// NetworkID wraps the corresponding Objective-C method.
+// NetworkID returns the network ID.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
 }
 
-// NetworkIndex wraps the corresponding Objective-C method.
+// NetworkIndex returns the network index.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) NetworkIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("networkIndex"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mnccrnp *MTRNetworkCommissioningClusterReorderNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

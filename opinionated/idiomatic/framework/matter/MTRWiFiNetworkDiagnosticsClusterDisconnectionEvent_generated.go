@@ -70,13 +70,13 @@ func NewMTRWiFiNetworkDiagnosticsClusterDisconnectionEvent() *MTRWiFiNetworkDiag
 	return mTRWiFiNetworkDiagnosticsClusterDisconnectionEventAdopt(_id)
 }
 
-// WithReasonCode sets the property and returns the receiver so calls can be chained.
+// WithReasonCode sets the reason code.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) WithReasonCode(reasonCode obj.Object) *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent {
 	objc.Send[objc.ID](objref.IDOf(mwfndcde), objc.RegisterName("setReasonCode:"), objref.IDOf(reasonCode))
 	return mwfndcde
 }
 
-// ReasonCode wraps the corresponding Objective-C method.
+// ReasonCode returns the reason code.
 func (mwfndcde *MTRWiFiNetworkDiagnosticsClusterDisconnectionEvent) ReasonCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcde), objc.RegisterName("reasonCode"))
 	return obj.Wrap(_r)

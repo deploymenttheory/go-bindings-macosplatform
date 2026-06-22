@@ -50,49 +50,49 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageResponseParams() *MTROtaSof
 	return mTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsAdopt(_id)
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithStatus(status obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mosupcqirp
 }
 
-// WithDelayedActionTime sets the property and returns the receiver so calls can be chained.
+// WithDelayedActionTime sets the delayed action time.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithDelayedActionTime(delayedActionTime obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setDelayedActionTime:"), objref.IDOf(delayedActionTime))
 	return mosupcqirp
 }
 
-// WithImageURI sets the property and returns the receiver so calls can be chained.
+// WithImageURI sets the image URI.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithImageURI(imageURI string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setImageURI:"), purego.NSString(imageURI))
 	return mosupcqirp
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosupcqirp
 }
 
-// WithSoftwareVersionString sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersionString sets the software version string.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithSoftwareVersionString(softwareVersionString string) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setSoftwareVersionString:"), purego.NSString(softwareVersionString))
 	return mosupcqirp
 }
 
-// WithUpdateToken sets the property and returns the receiver so calls can be chained.
+// WithUpdateToken sets the update token.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
 	return mosupcqirp
 }
 
-// WithUserConsentNeeded sets the property and returns the receiver so calls can be chained.
+// WithUserConsentNeeded sets the user consent needed.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithUserConsentNeeded(userConsentNeeded obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setUserConsentNeeded:"), objref.IDOf(userConsentNeeded))
 	return mosupcqirp
 }
 
-// WithMetadataForRequestor sets the property and returns the receiver so calls can be chained.
+// WithMetadataForRequestor sets the metadata for requestor.
 func (mosupcqirp *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) WithMetadataForRequestor(metadataForRequestor obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqirp), objc.RegisterName("setMetadataForRequestor:"), objref.IDOf(metadataForRequestor))
 	return mosupcqirp

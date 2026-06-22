@@ -54,7 +54,7 @@ func (cbns *CNNBatchNormalizationState) Reset() {
 	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
-// BatchNormalization wraps the corresponding Objective-C method.
+// BatchNormalization returns the batch normalization.
 func (cbns *CNNBatchNormalizationState) BatchNormalization() *CNNBatchNormalization {
 	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return CNNBatchNormalizationFromID(_r)

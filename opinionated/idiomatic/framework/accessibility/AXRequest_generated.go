@@ -70,7 +70,7 @@ func NewRequest() *Request {
 	return requestAdopt(_id)
 }
 
-// Technology wraps the corresponding Objective-C method.
+// Technology returns the technology.
 func (r *Request) Technology() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("technology"))
 	if _r == 0 {

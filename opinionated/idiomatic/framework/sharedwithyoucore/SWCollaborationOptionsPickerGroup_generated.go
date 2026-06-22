@@ -76,7 +76,7 @@ func (copg *CollaborationOptionsPickerGroup) WithOptions(items ...*Collaboration
 	return copg
 }
 
-// SelectedOptionIdentifier wraps the corresponding Objective-C method.
+// SelectedOptionIdentifier returns the selected option identifier.
 func (copg *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("selectedOptionIdentifier"))
 	if _r == 0 {

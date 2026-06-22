@@ -70,7 +70,7 @@ func NewMTRWindowCoveringClusterGoToLiftValueParams() *MTRWindowCoveringClusterG
 	return mTRWindowCoveringClusterGoToLiftValueParamsAdopt(_id)
 }
 
-// WithLiftValue sets the property and returns the receiver so calls can be chained.
+// WithLiftValue sets the lift value.
 func (mwccgtlvp *MTRWindowCoveringClusterGoToLiftValueParams) WithLiftValue(liftValue obj.Object) *MTRWindowCoveringClusterGoToLiftValueParams {
 	objc.Send[objc.ID](objref.IDOf(mwccgtlvp), objc.RegisterName("setLiftValue:"), objref.IDOf(liftValue))
 	return mwccgtlvp
@@ -88,7 +88,7 @@ func (mwccgtlvp *MTRWindowCoveringClusterGoToLiftValueParams) WithServerSideProc
 	return mwccgtlvp
 }
 
-// LiftValue wraps the corresponding Objective-C method.
+// LiftValue returns the lift value.
 func (mwccgtlvp *MTRWindowCoveringClusterGoToLiftValueParams) LiftValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgtlvp), objc.RegisterName("liftValue"))
 	return obj.Wrap(_r)

@@ -78,19 +78,19 @@ func (ss *StoryboardSegue) Perform() {
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("perform"))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (ss *StoryboardSegue) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// SourceController wraps the corresponding Objective-C method.
+// SourceController returns the source controller.
 func (ss *StoryboardSegue) SourceController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sourceController"))
 	return obj.Wrap(_r)
 }
 
-// DestinationController wraps the corresponding Objective-C method.
+// DestinationController returns the destination controller.
 func (ss *StoryboardSegue) DestinationController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("destinationController"))
 	return obj.Wrap(_r)

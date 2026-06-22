@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package coregraphics provides a fluent Go API over the macOS CoreGraphics framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package coregraphics

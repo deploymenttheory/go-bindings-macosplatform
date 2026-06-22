@@ -53,7 +53,7 @@ func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MID
 	return mIDIMetaEventAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (mme *MIDIMetaEvent) Type() MIDIMetaEventType {
 	_r := objc.Send[MIDIMetaEventType](objref.IDOf(mme), objc.RegisterName("type"))
 	return _r

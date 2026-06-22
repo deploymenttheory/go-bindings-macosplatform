@@ -78,8 +78,8 @@ func (bpc *BluetoothPairingController) RunModal() int {
 	return _r
 }
 
-// GetResults returns an NSArray of the devices that were paired.
-func (bpc *BluetoothPairingController) GetResults() obj.Object {
+// Results returns an NSArray of the devices that were paired.
+func (bpc *BluetoothPairingController) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("getResults"))
 	return obj.Wrap(_r)
 }
@@ -89,8 +89,8 @@ func (bpc *BluetoothPairingController) SetOptions(options uint32) {
 	objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setOptions:"), options)
 }
 
-// GetOptions returns the option bits that control the panel’s behavior.
-func (bpc *BluetoothPairingController) GetOptions() uint32 {
+// Options returns the option bits that control the panel’s behavior.
+func (bpc *BluetoothPairingController) Options() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(bpc), objc.RegisterName("getOptions"))
 	return _r
 }
@@ -115,8 +115,8 @@ func (bpc *BluetoothPairingController) SetTitle(windowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
-// GetTitle returns the title of the device selector panel.
-func (bpc *BluetoothPairingController) GetTitle() string {
+// Title returns the title of the device selector panel.
+func (bpc *BluetoothPairingController) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
@@ -129,8 +129,8 @@ func (bpc *BluetoothPairingController) SetDescriptionText(descriptionText string
 	objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 }
 
-// GetDescriptionText returns the description text that appears in the device selector panel.
-func (bpc *BluetoothPairingController) GetDescriptionText() string {
+// DescriptionText returns the description text that appears in the device selector panel.
+func (bpc *BluetoothPairingController) DescriptionText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("getDescriptionText"))
 	if _r == 0 {
 		return ""
@@ -143,8 +143,8 @@ func (bpc *BluetoothPairingController) SetPrompt(prompt string) {
 	objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 }
 
-// GetPrompt returns the title of the default/select button in the device selector panel.
-func (bpc *BluetoothPairingController) GetPrompt() string {
+// Prompt returns the title of the default/select button in the device selector panel.
+func (bpc *BluetoothPairingController) Prompt() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bpc), objc.RegisterName("getPrompt"))
 	if _r == 0 {
 		return ""

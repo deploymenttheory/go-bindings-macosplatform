@@ -80,7 +80,7 @@ func NewHashTableWithPointerFunctionsCapacity(functions *PointerFunctions, initi
 	return hashTableAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ht *HashTable) WithScriptingProperties(scriptingProperties obj.Object) *HashTable {
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ht
@@ -152,31 +152,31 @@ func (ht *HashTable) MinusHashTable(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
 }
 
-// PointerFunctions wraps the corresponding Objective-C method.
+// PointerFunctions returns the pointer functions.
 func (ht *HashTable) PointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (ht *HashTable) Count() int {
 	_r := objc.Send[int](objref.IDOf(ht), objc.RegisterName("count"))
 	return _r
 }
 
-// AllObjects wraps the corresponding Objective-C method.
+// AllObjects returns the all objects.
 func (ht *HashTable) AllObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AnyObject wraps the corresponding Objective-C method.
+// AnyObject returns the any object.
 func (ht *HashTable) AnyObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
-// SetRepresentation wraps the corresponding Objective-C method.
+// SetRepresentation returns the set representation.
 func (ht *HashTable) SetRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setRepresentation"))
 	return obj.Wrap(_r)

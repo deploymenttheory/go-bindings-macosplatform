@@ -70,31 +70,31 @@ func NewMTRColorControlClusterEnhancedMoveToHueParams() *MTRColorControlClusterE
 	return mTRColorControlClusterEnhancedMoveToHueParamsAdopt(_id)
 }
 
-// WithEnhancedHue sets the property and returns the receiver so calls can be chained.
+// WithEnhancedHue sets the enhanced hue.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
 	return mcccemthp
 }
 
-// WithDirection sets the property and returns the receiver so calls can be chained.
+// WithDirection sets the direction.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithDirection(direction obj.Object) *MTRColorControlClusterEnhancedMoveToHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return mcccemthp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccemthp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccemthp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccemthp
@@ -112,31 +112,31 @@ func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) WithServerSidePr
 	return mcccemthp
 }
 
-// EnhancedHue wraps the corresponding Objective-C method.
+// EnhancedHue returns the enhanced hue.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) EnhancedHue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("enhancedHue"))
 	return obj.Wrap(_r)
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) Direction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("direction"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccemthp *MTRColorControlClusterEnhancedMoveToHueParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

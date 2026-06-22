@@ -68,7 +68,7 @@ func (gd *GraphicsDevice) String() string {
 	return rt.Description(objref.IDOf(gd))
 }
 
-// Displays wraps the corresponding Objective-C method.
+// Displays returns the displays.
 //
 // Displays returns the collection as a Go slice.
 func (gd *GraphicsDevice) Displays() []*GraphicsDisplay {

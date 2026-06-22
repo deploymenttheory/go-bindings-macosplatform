@@ -52,7 +52,7 @@ func NewUnitAcceleration() *UnitAcceleration {
 	return unitAccelerationAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ua *UnitAcceleration) WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ua

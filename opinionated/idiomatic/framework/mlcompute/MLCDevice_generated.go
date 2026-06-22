@@ -84,7 +84,7 @@ func (d *Device) ActualDeviceType() DeviceType {
 	return _r
 }
 
-// GPUDevices wraps the corresponding Objective-C method.
+// GPUDevices returns the GPU devices.
 func (d *Device) GPUDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("gpuDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

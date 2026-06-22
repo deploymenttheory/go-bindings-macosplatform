@@ -131,7 +131,7 @@ func (mur *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) 
 	return mur
 }
 
-// WithCookiePartitionIdentifier sets the property and returns the receiver so calls can be chained.
+// WithCookiePartitionIdentifier sets the cookie partition identifier.
 func (mur *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest {
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setCookiePartitionIdentifier:"), objref.IDOf(cookiePartitionIdentifier))
 	return mur
@@ -173,7 +173,7 @@ func (mur *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelinin
 	return mur
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mur *MutableURLRequest) WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest {
 	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mur

@@ -43,7 +43,7 @@ func dOMBlobAdopt(id objc.ID) *DOMBlob {
 	return x
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (db *DOMBlob) Size() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(db), objc.RegisterName("size"))
 	return _r

@@ -80,44 +80,44 @@ func NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(newType uint8, 
 	return iOBluetoothSDPDataElementAdopt(_id)
 }
 
-// GetSDPDataElementRef returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.
-func (ibsde *IOBluetoothSDPDataElement) GetSDPDataElementRef() obj.Object {
+// SDPDataElementRef returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.
+func (ibsde *IOBluetoothSDPDataElement) SDPDataElementRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getSDPDataElementRef"))
 	return obj.Wrap(_r)
 }
 
-// GetTypeDescriptor returns the SDP spec defined data element type descriptor for the target data element.
-func (ibsde *IOBluetoothSDPDataElement) GetTypeDescriptor() uint8 {
+// TypeDescriptor returns the SDP spec defined data element type descriptor for the target data element.
+func (ibsde *IOBluetoothSDPDataElement) TypeDescriptor() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibsde), objc.RegisterName("getTypeDescriptor"))
 	return _r
 }
 
-// GetSizeDescriptor returns the SDP spec defined data element size descriptor for the target data element.
-func (ibsde *IOBluetoothSDPDataElement) GetSizeDescriptor() uint8 {
+// SizeDescriptor returns the SDP spec defined data element size descriptor for the target data element.
+func (ibsde *IOBluetoothSDPDataElement) SizeDescriptor() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibsde), objc.RegisterName("getSizeDescriptor"))
 	return _r
 }
 
-// GetSize returns the size in bytes of the target data element.
-func (ibsde *IOBluetoothSDPDataElement) GetSize() uint32 {
+// Size returns the size in bytes of the target data element.
+func (ibsde *IOBluetoothSDPDataElement) Size() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ibsde), objc.RegisterName("getSize"))
 	return _r
 }
 
-// GetNumberValue returns if the data element is represented by a number, it returns the value as an NSNumber.
-func (ibsde *IOBluetoothSDPDataElement) GetNumberValue() obj.Object {
+// NumberValue returns if the data element is represented by a number, it returns the value as an NSNumber.
+func (ibsde *IOBluetoothSDPDataElement) NumberValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getNumberValue"))
 	return obj.Wrap(_r)
 }
 
-// GetDataValue returns if the data element is represented by a data object, it returns the value as an NSData.
-func (ibsde *IOBluetoothSDPDataElement) GetDataValue() obj.Object {
+// DataValue returns if the data element is represented by a data object, it returns the value as an NSData.
+func (ibsde *IOBluetoothSDPDataElement) DataValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getDataValue"))
 	return obj.Wrap(_r)
 }
 
-// GetStringValue returns if the data element is represented by a string object, it returns the value as an NSString.
-func (ibsde *IOBluetoothSDPDataElement) GetStringValue() string {
+// StringValue returns if the data element is represented by a string object, it returns the value as an NSString.
+func (ibsde *IOBluetoothSDPDataElement) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getStringValue"))
 	if _r == 0 {
 		return ""
@@ -125,20 +125,20 @@ func (ibsde *IOBluetoothSDPDataElement) GetStringValue() string {
 	return purego.GoString(_r)
 }
 
-// GetArrayValue returns if the data element is represented by an array object, it returns the value as an NSArray.
-func (ibsde *IOBluetoothSDPDataElement) GetArrayValue() obj.Object {
+// ArrayValue returns if the data element is represented by an array object, it returns the value as an NSArray.
+func (ibsde *IOBluetoothSDPDataElement) ArrayValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getArrayValue"))
 	return obj.Wrap(_r)
 }
 
-// GetUUIDValue returns if the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
-func (ibsde *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
+// UUIDValue returns if the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
+func (ibsde *IOBluetoothSDPDataElement) UUIDValue() *IOBluetoothSDPUUID {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getUUIDValue"))
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 
-// GetValue returns the object value of the data element.
-func (ibsde *IOBluetoothSDPDataElement) GetValue() obj.Object {
+// Value returns the object value of the data element.
+func (ibsde *IOBluetoothSDPDataElement) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getValue"))
 	return obj.Wrap(_r)
 }

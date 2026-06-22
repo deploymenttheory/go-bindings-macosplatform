@@ -111,7 +111,7 @@ func (ts *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *T
 	return TextSelectionFromID(_r)
 }
 
-// TextRanges wraps the corresponding Objective-C method.
+// TextRanges returns the text ranges.
 //
 // TextRanges returns the collection as a Go slice.
 func (ts *TextSelection) TextRanges() []*TextRange {
@@ -119,37 +119,37 @@ func (ts *TextSelection) TextRanges() []*TextRange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
-// Granularity wraps the corresponding Objective-C method.
+// Granularity returns the granularity.
 func (ts *TextSelection) Granularity() TextSelectionGranularity {
 	_r := objc.Send[TextSelectionGranularity](objref.IDOf(ts), objc.RegisterName("granularity"))
 	return _r
 }
 
-// Affinity wraps the corresponding Objective-C method.
+// Affinity returns the affinity.
 func (ts *TextSelection) Affinity() TextSelectionAffinity {
 	_r := objc.Send[TextSelectionAffinity](objref.IDOf(ts), objc.RegisterName("affinity"))
 	return _r
 }
 
-// IsTransient wraps the corresponding Objective-C method.
+// IsTransient reports whether the object is transient.
 func (ts *TextSelection) IsTransient() bool {
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isTransient"))
 	return _r
 }
 
-// AnchorPositionOffset wraps the corresponding Objective-C method.
+// AnchorPositionOffset returns the anchor position offset.
 func (ts *TextSelection) AnchorPositionOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("anchorPositionOffset"))
 	return _r
 }
 
-// IsLogical wraps the corresponding Objective-C method.
+// IsLogical reports whether the object is logical.
 func (ts *TextSelection) IsLogical() bool {
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isLogical"))
 	return _r
 }
 
-// TypingAttributes wraps the corresponding Objective-C method.
+// TypingAttributes returns the typing attributes.
 func (ts *TextSelection) TypingAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("typingAttributes"))
 	return obj.Wrap(_r)

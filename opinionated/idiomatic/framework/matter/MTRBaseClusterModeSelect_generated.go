@@ -61,7 +61,7 @@ func NewMTRBaseClusterModeSelectWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterModeSelectAdopt(_id)
 }
 
-// ReadAttributeDescriptionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDescriptionWithCompletion reads attribute description with completion.
 //
 // ReadAttributeDescriptionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeDescriptionWithCompletion(ctx context.Context) (result string, err error) {
@@ -111,7 +111,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeDescriptionWithParamsSu
 	}
 }
 
-// ReadAttributeStandardNamespaceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStandardNamespaceWithCompletion reads attribute standard namespace with completion.
 //
 // ReadAttributeStandardNamespaceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeStandardNamespaceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeStandardNamespaceWithPa
 	}
 }
 
-// ReadAttributeSupportedModesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedModesWithCompletion reads attribute supported modes with completion.
 //
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeSupportedModesWithParam
 	}
 }
 
-// ReadAttributeCurrentModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentModeWithCompletion reads attribute current mode with completion.
 //
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeCurrentModeWithParamsSu
 	}
 }
 
-// ReadAttributeStartUpModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartUpModeWithCompletion reads attribute start up mode with completion.
 //
 // ReadAttributeStartUpModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeStartUpModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeStartUpModeWithParamsSu
 	}
 }
 
-// ReadAttributeOnModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnModeWithCompletion reads attribute on mode with completion.
 //
 // ReadAttributeOnModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeOnModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeOnModeWithParamsSubscri
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
-// ReadAttributeDescription wraps the corresponding Objective-C method.
+// ReadAttributeDescription reads attribute description.
 //
 // ReadAttributeDescription blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeDescription(ctx context.Context) (result string, err error) {
@@ -661,7 +661,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeDescriptionWithMinInter
 	}
 }
 
-// ReadAttributeStandardNamespace wraps the corresponding Objective-C method.
+// ReadAttributeStandardNamespace reads attribute standard namespace.
 //
 // ReadAttributeStandardNamespace blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeStandardNamespace(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeStandardNamespaceWithMi
 	}
 }
 
-// ReadAttributeSupportedModes wraps the corresponding Objective-C method.
+// ReadAttributeSupportedModes reads attribute supported modes.
 //
 // ReadAttributeSupportedModes blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeSupportedModes(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeSupportedModesWithMinIn
 	}
 }
 
-// ReadAttributeCurrentMode wraps the corresponding Objective-C method.
+// ReadAttributeCurrentMode reads attribute current mode.
 //
 // ReadAttributeCurrentMode blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeCurrentMode(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeCurrentModeWithMinInter
 	}
 }
 
-// ReadAttributeStartUpMode wraps the corresponding Objective-C method.
+// ReadAttributeStartUpMode reads attribute start up mode.
 //
 // ReadAttributeStartUpMode blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeStartUpMode(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeStartUpModeWithMinInter
 	}
 }
 
-// ReadAttributeOnMode wraps the corresponding Objective-C method.
+// ReadAttributeOnMode reads attribute on mode.
 //
 // ReadAttributeOnMode blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeOnMode(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeOnModeWithMinIntervalMa
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcms *MTRBaseClusterModeSelect) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcms *MTRBaseClusterModeSelect) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

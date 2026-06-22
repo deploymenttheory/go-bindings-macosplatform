@@ -282,7 +282,7 @@ func (n *Node) Light() *Light {
 	return LightFromID(_r)
 }
 
-// Camera wraps the corresponding Objective-C method.
+// Camera returns the camera.
 func (n *Node) Camera() *Camera {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("camera"))
 	return CameraFromID(_r)
@@ -414,7 +414,7 @@ func (n *Node) CategoryBitMask() int {
 	return _r
 }
 
-// FocusBehavior wraps the corresponding Objective-C method.
+// FocusBehavior returns the focus behavior.
 func (n *Node) FocusBehavior() NodeFocusBehavior {
 	_r := objc.Send[NodeFocusBehavior](objref.IDOf(n), objc.RegisterName("focusBehavior"))
 	return _r
@@ -435,7 +435,7 @@ func (n *Node) RemoveParticleSystem(system *ParticleSystem) {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
-// ParticleSystems wraps the corresponding Objective-C method.
+// ParticleSystems returns the particle systems.
 //
 // ParticleSystems returns the collection as a Go slice.
 func (n *Node) ParticleSystems() []*ParticleSystem {
@@ -458,7 +458,7 @@ func (n *Node) RemoveAudioPlayer(player *AudioPlayer) {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("removeAudioPlayer:"), objref.IDOf(player))
 }
 
-// AudioPlayers wraps the corresponding Objective-C method.
+// AudioPlayers returns the audio players.
 //
 // AudioPlayers returns the collection as a Go slice.
 func (n *Node) AudioPlayers() []*AudioPlayer {

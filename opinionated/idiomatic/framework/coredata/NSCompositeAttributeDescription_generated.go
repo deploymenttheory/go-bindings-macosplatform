@@ -155,7 +155,7 @@ func (cad *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentif
 	return cad
 }
 
-// Elements wraps the corresponding Objective-C method.
+// Elements returns the elements.
 //
 // Elements returns the collection as a Go slice.
 func (cad *CompositeAttributeDescription) Elements() []*AttributeDescription {

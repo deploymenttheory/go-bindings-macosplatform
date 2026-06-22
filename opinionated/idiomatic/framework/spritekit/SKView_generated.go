@@ -145,7 +145,7 @@ func (v_ *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
 	return v_
 }
 
-// WithDisableDepthStencilBuffer sets the property and returns the receiver so calls can be chained.
+// WithDisableDepthStencilBuffer sets the disable depth stencil buffer.
 func (v_ *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisableDepthStencilBuffer:"), disableDepthStencilBuffer)
 	return v_
@@ -163,7 +163,7 @@ func (v_ *View) WithFrameInterval(frameInterval int) *View {
 	return v_
 }
 
-// WithPreferredFrameRate sets the property and returns the receiver so calls can be chained.
+// WithPreferredFrameRate sets the preferred frame rate.
 func (v_ *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFrameRate:"), preferredFrameRate)
 	return v_
@@ -269,7 +269,7 @@ func (v_ *View) ShouldCullNonVisibleNodes() bool {
 	return _r
 }
 
-// PreferredFramesPerSecond wraps the corresponding Objective-C method.
+// PreferredFramesPerSecond returns the preferred frames per second.
 func (v_ *View) PreferredFramesPerSecond() int {
 	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
 	return _r
@@ -287,13 +287,13 @@ func (v_ *View) Delegate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// FrameInterval wraps the corresponding Objective-C method.
+// FrameInterval returns the frame interval.
 func (v_ *View) FrameInterval() int {
 	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("frameInterval"))
 	return _r
 }
 
-// PreferredFrameRate wraps the corresponding Objective-C method.
+// PreferredFrameRate returns the preferred frame rate.
 func (v_ *View) PreferredFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("preferredFrameRate"))
 	return _r

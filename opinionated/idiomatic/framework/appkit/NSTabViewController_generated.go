@@ -121,7 +121,7 @@ func (tvc *TabViewController) WithChildViewControllers(items ...ViewControllerPr
 	return tvc
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (tvc *TabViewController) WithSourceItemView(sourceItemView ViewProvider) *TabViewController {
 	objc.Send[objc.ID](objref.IDOf(tvc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return tvc

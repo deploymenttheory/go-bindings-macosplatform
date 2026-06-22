@@ -70,13 +70,13 @@ func NewMTRChannelClusterChangeChannelByNumberParams() *MTRChannelClusterChangeC
 	return mTRChannelClusterChangeChannelByNumberParamsAdopt(_id)
 }
 
-// WithMajorNumber sets the property and returns the receiver so calls can be chained.
+// WithMajorNumber sets the major number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return mccccbnp
 }
 
-// WithMinorNumber sets the property and returns the receiver so calls can be chained.
+// WithMinorNumber sets the minor number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChangeChannelByNumberParams {
 	objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return mccccbnp
@@ -94,13 +94,13 @@ func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) WithServerSideProc
 	return mccccbnp
 }
 
-// MajorNumber wraps the corresponding Objective-C method.
+// MajorNumber returns the major number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MajorNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("majorNumber"))
 	return obj.Wrap(_r)
 }
 
-// MinorNumber wraps the corresponding Objective-C method.
+// MinorNumber returns the minor number.
 func (mccccbnp *MTRChannelClusterChangeChannelByNumberParams) MinorNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccbnp), objc.RegisterName("minorNumber"))
 	return obj.Wrap(_r)

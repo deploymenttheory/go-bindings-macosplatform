@@ -80,7 +80,7 @@ func NewAppleScriptWithSource(source string) *AppleScript {
 	return appleScriptAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (as *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return as
@@ -104,7 +104,7 @@ func (as *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, error
 	return AppleEventDescriptorFromID(_r)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (as *AppleScript) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("source"))
 	if _r == 0 {
@@ -113,7 +113,7 @@ func (as *AppleScript) Source() string {
 	return purego.GoString(_r)
 }
 
-// IsCompiled wraps the corresponding Objective-C method.
+// IsCompiled reports whether the object is compiled.
 func (as *AppleScript) IsCompiled() bool {
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isCompiled"))
 	return _r

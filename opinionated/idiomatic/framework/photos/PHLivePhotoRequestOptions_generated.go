@@ -84,13 +84,13 @@ func (lpro *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllow
 	return lpro
 }
 
-// DeliveryMode wraps the corresponding Objective-C method.
+// DeliveryMode returns the delivery mode.
 func (lpro *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(lpro), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
-// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
+// IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (lpro *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(lpro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r

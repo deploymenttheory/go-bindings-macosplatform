@@ -97,25 +97,25 @@ func (ei *ExtensionItem) WithUserInfo(userInfo obj.Object) *ExtensionItem {
 	return ei
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ei *ExtensionItem) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionItem {
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ei
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (ei *ExtensionItem) AttributedTitle() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedTitle"))
 	return AttributedStringFromID(_r)
 }
 
-// AttributedContentText wraps the corresponding Objective-C method.
+// AttributedContentText returns the attributed content text.
 func (ei *ExtensionItem) AttributedContentText() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedContentText"))
 	return AttributedStringFromID(_r)
 }
 
-// Attachments wraps the corresponding Objective-C method.
+// Attachments returns the attachments.
 //
 // Attachments returns the collection as a Go slice.
 func (ei *ExtensionItem) Attachments() []*ItemProvider {
@@ -123,7 +123,7 @@ func (ei *ExtensionItem) Attachments() []*ItemProvider {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ItemProvider { return ItemProviderFromID(_id) })
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (ei *ExtensionItem) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

@@ -49,7 +49,7 @@ func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
 	return animatedMatrix4x4Adopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (am *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4 {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setInterpolation:"), interpolation)
 	return am

@@ -79,19 +79,19 @@ func (sdc *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float
 	return sdc
 }
 
-// MinimumScaleFactor wraps the corresponding Objective-C method.
+// MinimumScaleFactor returns the minimum scale factor.
 func (sdc *StringDrawingContext) MinimumScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("minimumScaleFactor"))
 	return _r
 }
 
-// ActualScaleFactor wraps the corresponding Objective-C method.
+// ActualScaleFactor returns the actual scale factor.
 func (sdc *StringDrawingContext) ActualScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("actualScaleFactor"))
 	return _r
 }
 
-// TotalBounds wraps the corresponding Objective-C method.
+// TotalBounds returns the total bounds.
 func (sdc *StringDrawingContext) TotalBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sdc), objc.RegisterName("totalBounds"))
 	return _r

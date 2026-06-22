@@ -50,13 +50,13 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 	return mTRAccessControlClusterExtensionEntryAdopt(_id)
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (maccee *MTRAccessControlClusterExtensionEntry) WithData(data obj.Object) *MTRAccessControlClusterExtensionEntry {
 	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setData:"), objref.IDOf(data))
 	return maccee
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccee *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterExtensionEntry {
 	objc.Send[objc.ID](objref.IDOf(maccee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccee

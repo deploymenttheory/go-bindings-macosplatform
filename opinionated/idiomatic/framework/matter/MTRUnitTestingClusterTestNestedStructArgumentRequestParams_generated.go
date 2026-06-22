@@ -66,7 +66,7 @@ func (mutctnsarp *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) St
 	return rt.Description(objref.IDOf(mutctnsarp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutctnsarp *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) WithArg1(arg1 MTRUnitTestingClusterNestedStructProvider) *MTRUnitTestingClusterTestNestedStructArgumentRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnsarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctnsarp
@@ -84,7 +84,7 @@ func (mutctnsarp *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) Wi
 	return mutctnsarp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctnsarp *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) Arg1() *MTRUnitTestingClusterNestedStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnsarp), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterNestedStructFromID(_r)

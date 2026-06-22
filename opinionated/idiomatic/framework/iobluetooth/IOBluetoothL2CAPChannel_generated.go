@@ -130,43 +130,43 @@ func (iblcc *IOBluetoothL2CAPChannel) IsIncoming() bool {
 	return _r
 }
 
-// OutgoingMTU wraps the corresponding Objective-C method.
+// OutgoingMTU returns the outgoing mtu.
 func (iblcc *IOBluetoothL2CAPChannel) OutgoingMTU() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(iblcc), objc.RegisterName("outgoingMTU"))
 	return _r
 }
 
-// IncomingMTU wraps the corresponding Objective-C method.
+// IncomingMTU returns the incoming mtu.
 func (iblcc *IOBluetoothL2CAPChannel) IncomingMTU() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(iblcc), objc.RegisterName("incomingMTU"))
 	return _r
 }
 
-// Device wraps the corresponding Objective-C method.
+// Device returns the device.
 func (iblcc *IOBluetoothL2CAPChannel) Device() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(iblcc), objc.RegisterName("device"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// ObjectID wraps the corresponding Objective-C method.
+// ObjectID returns the object ID.
 func (iblcc *IOBluetoothL2CAPChannel) ObjectID() int {
 	_r := objc.Send[int](objref.IDOf(iblcc), objc.RegisterName("objectID"))
 	return _r
 }
 
-// PSM wraps the corresponding Objective-C method.
+// PSM returns the psm.
 func (iblcc *IOBluetoothL2CAPChannel) PSM() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(iblcc), objc.RegisterName("PSM"))
 	return _r
 }
 
-// LocalChannelID wraps the corresponding Objective-C method.
+// LocalChannelID returns the local channel ID.
 func (iblcc *IOBluetoothL2CAPChannel) LocalChannelID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(iblcc), objc.RegisterName("localChannelID"))
 	return _r
 }
 
-// RemoteChannelID wraps the corresponding Objective-C method.
+// RemoteChannelID returns the remote channel ID.
 func (iblcc *IOBluetoothL2CAPChannel) RemoteChannelID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(iblcc), objc.RegisterName("remoteChannelID"))
 	return _r

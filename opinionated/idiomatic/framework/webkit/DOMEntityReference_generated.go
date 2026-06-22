@@ -49,19 +49,19 @@ func NewDOMEntityReference() *DOMEntityReference {
 	return dOMEntityReferenceAdopt(_id)
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (der *DOMEntityReference) WithNodeValue(nodeValue string) *DOMEntityReference {
 	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return der
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (der *DOMEntityReference) WithPrefix(prefix string) *DOMEntityReference {
 	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return der
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (der *DOMEntityReference) WithTextContent(textContent string) *DOMEntityReference {
 	objc.Send[objc.ID](objref.IDOf(der), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return der

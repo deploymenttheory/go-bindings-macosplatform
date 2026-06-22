@@ -70,25 +70,25 @@ func NewMTRServiceAreaClusterLandmarkInfoStruct() *MTRServiceAreaClusterLandmark
 	return mTRServiceAreaClusterLandmarkInfoStructAdopt(_id)
 }
 
-// WithLandmarkTag sets the property and returns the receiver so calls can be chained.
+// WithLandmarkTag sets the landmark tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 	return msaclis
 }
 
-// WithRelativePositionTag sets the property and returns the receiver so calls can be chained.
+// WithRelativePositionTag sets the relative position tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 	return msaclis
 }
 
-// LandmarkTag wraps the corresponding Objective-C method.
+// LandmarkTag returns the landmark tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("landmarkTag"))
 	return obj.Wrap(_r)
 }
 
-// RelativePositionTag wraps the corresponding Objective-C method.
+// RelativePositionTag returns the relative position tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("relativePositionTag"))
 	return obj.Wrap(_r)

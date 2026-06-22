@@ -70,7 +70,7 @@ func (rnd *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinit
 	objc.Send[objc.ID](objref.IDOf(rnd), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
 }
 
-// UniqueSelectionQueueLength wraps the corresponding Objective-C method.
+// UniqueSelectionQueueLength returns the unique selection queue length.
 func (rnd *RandomNodeDefinition) UniqueSelectionQueueLength() int {
 	_r := objc.Send[int](objref.IDOf(rnd), objc.RegisterName("uniqueSelectionQueueLength"))
 	return _r

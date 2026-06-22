@@ -58,7 +58,7 @@ func (sca *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url 
 	objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
 }
 
-// CollaborationMetadata wraps the corresponding Objective-C method.
+// CollaborationMetadata returns the collaboration metadata.
 func (sca *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)

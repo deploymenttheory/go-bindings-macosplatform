@@ -81,19 +81,19 @@ func (mcf *MTRControllerFactory) Shutdown() {
 	objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("shutdown"))
 }
 
-// StartControllerOnExistingFabric wraps the corresponding Objective-C method.
+// StartControllerOnExistingFabric starts controller on existing fabric.
 func (mcf *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
-// StartControllerOnNewFabric wraps the corresponding Objective-C method.
+// StartControllerOnNewFabric starts controller on new fabric.
 func (mcf *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
 	_r := objc.Send[objc.ID](objref.IDOf(mcf), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
 	return MTRDeviceControllerFromID(_r)
 }
 
-// IsRunning wraps the corresponding Objective-C method.
+// IsRunning reports whether the object is running.
 func (mcf *MTRControllerFactory) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(mcf), objc.RegisterName("isRunning"))
 	return _r

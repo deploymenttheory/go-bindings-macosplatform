@@ -94,13 +94,13 @@ func (gtbi *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32
 	return gtbi
 }
 
-// GroupTouchBar wraps the corresponding Objective-C method.
+// GroupTouchBar returns the group touch bar.
 func (gtbi *GroupTouchBarItem) GroupTouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("groupTouchBar"))
 	return TouchBarFromID(_r)
 }
 
-// GroupUserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+// GroupUserInterfaceLayoutDirection returns the group user interface layout direction.
 func (gtbi *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(gtbi), objc.RegisterName("groupUserInterfaceLayoutDirection"))
 	return _r
@@ -112,19 +112,19 @@ func (gtbi *GroupTouchBarItem) PrefersEqualWidths() bool {
 	return _r
 }
 
-// PreferredItemWidth wraps the corresponding Objective-C method.
+// PreferredItemWidth returns the preferred item width.
 func (gtbi *GroupTouchBarItem) PreferredItemWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(gtbi), objc.RegisterName("preferredItemWidth"))
 	return _r
 }
 
-// EffectiveCompressionOptions wraps the corresponding Objective-C method.
+// EffectiveCompressionOptions returns the effective compression options.
 func (gtbi *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(gtbi), objc.RegisterName("effectiveCompressionOptions"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// PrioritizedCompressionOptions wraps the corresponding Objective-C method.
+// PrioritizedCompressionOptions returns the prioritized compression options.
 //
 // PrioritizedCompressionOptions returns the collection as a Go slice.
 func (gtbi *GroupTouchBarItem) PrioritizedCompressionOptions() []*UserInterfaceCompressionOptions {

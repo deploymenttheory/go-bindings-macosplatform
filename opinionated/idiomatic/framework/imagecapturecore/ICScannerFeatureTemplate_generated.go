@@ -52,7 +52,7 @@ func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
 	return scannerFeatureTemplateAdopt(_id)
 }
 
-// Targets wraps the corresponding Objective-C method.
+// Targets returns the targets.
 //
 // Targets returns the collection as a Go slice.
 func (sft *ScannerFeatureTemplate) Targets() []obj.Object {

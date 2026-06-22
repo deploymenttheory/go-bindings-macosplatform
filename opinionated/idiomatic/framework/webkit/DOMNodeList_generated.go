@@ -55,7 +55,7 @@ func (dnl *DOMNodeList) Item(index int) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dnl *DOMNodeList) Length() int {
 	_r := objc.Send[int](objref.IDOf(dnl), objc.RegisterName("length"))
 	return _r

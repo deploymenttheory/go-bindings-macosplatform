@@ -61,25 +61,25 @@ func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReserva
 	return rentalCarReservationAdopt(_id)
 }
 
-// RentalCar wraps the corresponding Objective-C method.
+// RentalCar returns the rental car.
 func (rcr *RentalCarReservation) RentalCar() *RentalCar {
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalCar"))
 	return RentalCarFromID(_r)
 }
 
-// RentalDuration wraps the corresponding Objective-C method.
+// RentalDuration returns the rental duration.
 func (rcr *RentalCarReservation) RentalDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// PickupLocation wraps the corresponding Objective-C method.
+// PickupLocation returns the pickup location.
 func (rcr *RentalCarReservation) PickupLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("pickupLocation"))
 	return obj.Wrap(_r)
 }
 
-// DropOffLocation wraps the corresponding Objective-C method.
+// DropOffLocation returns the drop off location.
 func (rcr *RentalCarReservation) DropOffLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("dropOffLocation"))
 	return obj.Wrap(_r)

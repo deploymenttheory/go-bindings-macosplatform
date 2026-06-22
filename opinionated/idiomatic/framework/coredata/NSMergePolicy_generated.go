@@ -106,7 +106,7 @@ func (mp *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) er
 	return nil
 }
 
-// MergeType wraps the corresponding Objective-C method.
+// MergeType returns the merge type.
 func (mp *MergePolicy) MergeType() MergePolicyType {
 	_r := objc.Send[MergePolicyType](objref.IDOf(mp), objc.RegisterName("mergeType"))
 	return _r

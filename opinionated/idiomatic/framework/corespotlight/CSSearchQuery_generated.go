@@ -108,13 +108,13 @@ func (sq *SearchQuery) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("cancel"))
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (sq *SearchQuery) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(sq), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// FoundItemCount wraps the corresponding Objective-C method.
+// FoundItemCount returns the found item count.
 func (sq *SearchQuery) FoundItemCount() int {
 	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("foundItemCount"))
 	return _r
@@ -139,7 +139,7 @@ func (sq *SearchQuery) Set(ctx context.Context) error {
 	}
 }
 
-// ProtectionClasses wraps the corresponding Objective-C method.
+// ProtectionClasses returns the protection classes.
 //
 // ProtectionClasses returns the collection as a Go slice.
 func (sq *SearchQuery) ProtectionClasses() []obj.Object {

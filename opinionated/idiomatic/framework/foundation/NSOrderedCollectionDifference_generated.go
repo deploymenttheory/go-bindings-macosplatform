@@ -87,7 +87,7 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 	return orderedCollectionDifferenceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ocd *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
 	objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ocd
@@ -99,7 +99,7 @@ func (ocd *OrderedCollectionDifference) InverseDifference() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Insertions wraps the corresponding Objective-C method.
+// Insertions returns the insertions.
 //
 // Insertions returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
@@ -107,7 +107,7 @@ func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removals wraps the corresponding Objective-C method.
+// Removals returns the removals.
 //
 // Removals returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
@@ -115,7 +115,7 @@ func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// HasChanges wraps the corresponding Objective-C method.
+// HasChanges reports whether the object has changes.
 func (ocd *OrderedCollectionDifference) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("hasChanges"))
 	return _r

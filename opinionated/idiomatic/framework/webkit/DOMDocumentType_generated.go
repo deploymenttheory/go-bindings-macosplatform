@@ -49,25 +49,25 @@ func NewDOMDocumentType() *DOMDocumentType {
 	return dOMDocumentTypeAdopt(_id)
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (ddt *DOMDocumentType) WithNodeValue(nodeValue string) *DOMDocumentType {
 	objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return ddt
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (ddt *DOMDocumentType) WithPrefix(prefix string) *DOMDocumentType {
 	objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return ddt
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (ddt *DOMDocumentType) WithTextContent(textContent string) *DOMDocumentType {
 	objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return ddt
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ddt *DOMDocumentType) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("name"))
 	if _r == 0 {
@@ -76,19 +76,19 @@ func (ddt *DOMDocumentType) Name() string {
 	return purego.GoString(_r)
 }
 
-// Entities wraps the corresponding Objective-C method.
+// Entities returns the entities.
 func (ddt *DOMDocumentType) Entities() *DOMNamedNodeMap {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("entities"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
-// Notations wraps the corresponding Objective-C method.
+// Notations returns the notations.
 func (ddt *DOMDocumentType) Notations() *DOMNamedNodeMap {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("notations"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
-// PublicID wraps the corresponding Objective-C method.
+// PublicID returns the public ID.
 func (ddt *DOMDocumentType) PublicID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("publicId"))
 	if _r == 0 {
@@ -97,7 +97,7 @@ func (ddt *DOMDocumentType) PublicID() string {
 	return purego.GoString(_r)
 }
 
-// SystemID wraps the corresponding Objective-C method.
+// SystemID returns the system ID.
 func (ddt *DOMDocumentType) SystemID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("systemId"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (ddt *DOMDocumentType) SystemID() string {
 	return purego.GoString(_r)
 }
 
-// InternalSubset wraps the corresponding Objective-C method.
+// InternalSubset returns the internal subset.
 func (ddt *DOMDocumentType) InternalSubset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ddt), objc.RegisterName("internalSubset"))
 	if _r == 0 {

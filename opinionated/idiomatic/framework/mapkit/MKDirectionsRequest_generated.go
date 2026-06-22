@@ -73,67 +73,67 @@ func NewDirectionsRequestWithContentsOfURL(url string) *DirectionsRequest {
 	return directionsRequestAdopt(_id)
 }
 
-// WithSource sets the property and returns the receiver so calls can be chained.
+// WithSource sets the source.
 func (dr *DirectionsRequest) WithSource(source *MapItem) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return dr
 }
 
-// WithDestination sets the property and returns the receiver so calls can be chained.
+// WithDestination sets the destination.
 func (dr *DirectionsRequest) WithDestination(destination *MapItem) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return dr
 }
 
-// WithTransportType sets the property and returns the receiver so calls can be chained.
+// WithTransportType sets the transport type.
 func (dr *DirectionsRequest) WithTransportType(transportType DirectionsTransportType) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setTransportType:"), transportType)
 	return dr
 }
 
-// WithRequestsAlternateRoutes sets the property and returns the receiver so calls can be chained.
+// WithRequestsAlternateRoutes sets the requests alternate routes.
 func (dr *DirectionsRequest) WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setRequestsAlternateRoutes:"), requestsAlternateRoutes)
 	return dr
 }
 
-// WithDepartureDate sets the property and returns the receiver so calls can be chained.
+// WithDepartureDate sets the departure date.
 func (dr *DirectionsRequest) WithDepartureDate(departureDate obj.Object) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setDepartureDate:"), objref.IDOf(departureDate))
 	return dr
 }
 
-// WithArrivalDate sets the property and returns the receiver so calls can be chained.
+// WithArrivalDate sets the arrival date.
 func (dr *DirectionsRequest) WithArrivalDate(arrivalDate obj.Object) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setArrivalDate:"), objref.IDOf(arrivalDate))
 	return dr
 }
 
-// WithTollPreference sets the property and returns the receiver so calls can be chained.
+// WithTollPreference sets the toll preference.
 func (dr *DirectionsRequest) WithTollPreference(tollPreference DirectionsRoutePreference) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setTollPreference:"), tollPreference)
 	return dr
 }
 
-// WithHighwayPreference sets the property and returns the receiver so calls can be chained.
+// WithHighwayPreference sets the highway preference.
 func (dr *DirectionsRequest) WithHighwayPreference(highwayPreference DirectionsRoutePreference) *DirectionsRequest {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setHighwayPreference:"), highwayPreference)
 	return dr
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (dr *DirectionsRequest) Source() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (dr *DirectionsRequest) Destination() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
-// TransportType wraps the corresponding Objective-C method.
+// TransportType returns the transport type.
 func (dr *DirectionsRequest) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(dr), objc.RegisterName("transportType"))
 	return _r
@@ -145,25 +145,25 @@ func (dr *DirectionsRequest) RequestsAlternateRoutes() bool {
 	return _r
 }
 
-// DepartureDate wraps the corresponding Objective-C method.
+// DepartureDate returns the departure date.
 func (dr *DirectionsRequest) DepartureDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("departureDate"))
 	return obj.Wrap(_r)
 }
 
-// ArrivalDate wraps the corresponding Objective-C method.
+// ArrivalDate returns the arrival date.
 func (dr *DirectionsRequest) ArrivalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("arrivalDate"))
 	return obj.Wrap(_r)
 }
 
-// TollPreference wraps the corresponding Objective-C method.
+// TollPreference returns the toll preference.
 func (dr *DirectionsRequest) TollPreference() DirectionsRoutePreference {
 	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(dr), objc.RegisterName("tollPreference"))
 	return _r
 }
 
-// HighwayPreference wraps the corresponding Objective-C method.
+// HighwayPreference returns the highway preference.
 func (dr *DirectionsRequest) HighwayPreference() DirectionsRoutePreference {
 	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(dr), objc.RegisterName("highwayPreference"))
 	return _r

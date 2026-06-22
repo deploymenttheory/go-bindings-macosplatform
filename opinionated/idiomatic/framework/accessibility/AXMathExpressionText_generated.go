@@ -50,7 +50,7 @@ func NewMathExpressionTextWithContent(content string) *MathExpressionText {
 	return mathExpressionTextAdopt(_id)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (met *MathExpressionText) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(met), objc.RegisterName("content"))
 	if _r == 0 {

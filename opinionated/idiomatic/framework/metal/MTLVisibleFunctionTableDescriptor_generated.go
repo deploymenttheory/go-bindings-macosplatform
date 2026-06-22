@@ -78,7 +78,7 @@ func (vftd *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int)
 	return vftd
 }
 
-// FunctionCount wraps the corresponding Objective-C method.
+// FunctionCount returns the function count.
 func (vftd *VisibleFunctionTableDescriptor) FunctionCount() int {
 	_r := objc.Send[int](objref.IDOf(vftd), objc.RegisterName("functionCount"))
 	return _r

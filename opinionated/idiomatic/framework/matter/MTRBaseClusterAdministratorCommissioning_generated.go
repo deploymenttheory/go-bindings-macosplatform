@@ -61,7 +61,7 @@ func NewMTRBaseClusterAdministratorCommissioningWithDeviceEndpointQueue(device *
 	return mTRBaseClusterAdministratorCommissioningAdopt(_id)
 }
 
-// ReadAttributeWindowStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWindowStatusWithCompletion reads attribute window status with completion.
 //
 // ReadAttributeWindowStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeWindowStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeWindowS
 	}
 }
 
-// ReadAttributeAdminFabricIndexWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAdminFabricIndexWithCompletion reads attribute admin fabric index with completion.
 //
 // ReadAttributeAdminFabricIndexWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAdminFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminFa
 	}
 }
 
-// ReadAttributeAdminVendorIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAdminVendorIDWithCompletion reads attribute admin vendor ID with completion.
 //
 // ReadAttributeAdminVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAdminVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminVe
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeGenerat
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAccepte
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAttribu
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeFeature
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeCluster
 	}
 }
 
-// ReadAttributeWindowStatus wraps the corresponding Objective-C method.
+// ReadAttributeWindowStatus reads attribute window status.
 //
 // ReadAttributeWindowStatus blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeWindowStatus(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeWindowS
 	}
 }
 
-// ReadAttributeAdminFabricIndex wraps the corresponding Objective-C method.
+// ReadAttributeAdminFabricIndex reads attribute admin fabric index.
 //
 // ReadAttributeAdminFabricIndex blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAdminFabricIndex(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminFa
 	}
 }
 
-// ReadAttributeAdminVendorID wraps the corresponding Objective-C method.
+// ReadAttributeAdminVendorID reads attribute admin vendor ID.
 //
 // ReadAttributeAdminVendorID blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAdminVendorID(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAdminVe
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeGenerat
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAccepte
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeAttribu
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcac *MTRBaseClusterAdministratorCommissioning) SubscribeAttributeFeature
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAdministratorCommissioning) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

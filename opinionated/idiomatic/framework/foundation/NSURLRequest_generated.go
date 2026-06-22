@@ -82,7 +82,7 @@ func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLR
 	return uRLRequestAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ur *URLRequest) WithScriptingProperties(scriptingProperties obj.Object) *URLRequest {
 	objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ur
@@ -166,7 +166,7 @@ func (ur *URLRequest) AllowsPersistentDNS() bool {
 	return _r
 }
 
-// CookiePartitionIdentifier wraps the corresponding Objective-C method.
+// CookiePartitionIdentifier returns the cookie partition identifier.
 func (ur *URLRequest) CookiePartitionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ur), objc.RegisterName("cookiePartitionIdentifier"))
 	if _r == 0 {

@@ -70,7 +70,7 @@ func NewMTRThermostatClusterSetActivePresetRequestParams() *MTRThermostatCluster
 	return mTRThermostatClusterSetActivePresetRequestParamsAdopt(_id)
 }
 
-// WithPresetHandle sets the property and returns the receiver so calls can be chained.
+// WithPresetHandle sets the preset handle.
 func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
 	return mtcsaprp
@@ -88,7 +88,7 @@ func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) WithServerSide
 	return mtcsaprp
 }
 
-// PresetHandle wraps the corresponding Objective-C method.
+// PresetHandle returns the preset handle.
 func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) PresetHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)

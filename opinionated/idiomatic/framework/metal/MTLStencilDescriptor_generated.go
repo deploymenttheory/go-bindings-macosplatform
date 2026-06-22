@@ -108,7 +108,7 @@ func (sd *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor 
 	return sd
 }
 
-// StencilCompareFunction wraps the corresponding Objective-C method.
+// StencilCompareFunction returns the stencil compare function.
 func (sd *StencilDescriptor) StencilCompareFunction() CompareFunction {
 	_r := objc.Send[CompareFunction](objref.IDOf(sd), objc.RegisterName("stencilCompareFunction"))
 	return _r
@@ -132,13 +132,13 @@ func (sd *StencilDescriptor) DepthStencilPassOperation() StencilOperation {
 	return _r
 }
 
-// ReadMask wraps the corresponding Objective-C method.
+// ReadMask returns the read mask.
 func (sd *StencilDescriptor) ReadMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("readMask"))
 	return _r
 }
 
-// WriteMask wraps the corresponding Objective-C method.
+// WriteMask returns the write mask.
 func (sd *StencilDescriptor) WriteMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("writeMask"))
 	return _r

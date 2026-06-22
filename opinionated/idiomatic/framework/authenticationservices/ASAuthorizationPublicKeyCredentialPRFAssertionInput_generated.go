@@ -73,13 +73,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCrede
 	return authorizationPublicKeyCredentialPRFAssertionInputAdopt(_id)
 }
 
-// InputValues wraps the corresponding Objective-C method.
+// InputValues returns the input values.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
 
-// PerCredentialInputValues wraps the corresponding Objective-C method.
+// PerCredentialInputValues returns the per credential input values.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("perCredentialInputValues"))
 	return obj.Wrap(_r)

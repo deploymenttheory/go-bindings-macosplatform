@@ -253,25 +253,25 @@ func (el *EmitterLayer) WithContentsFormat(contentsFormat obj.Object) *EmitterLa
 	return el
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (el *EmitterLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return el
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (el *EmitterLayer) WithToneMapMode(toneMapMode obj.Object) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return el
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (el *EmitterLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return el
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (el *EmitterLayer) WithContentsHeadroom(contentsHeadroom float64) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return el
@@ -337,13 +337,13 @@ func (el *EmitterLayer) WithCornerRadius(cornerRadius float64) *EmitterLayer {
 	return el
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (el *EmitterLayer) WithMaskedCorners(maskedCorners CornerMask) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return el
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (el *EmitterLayer) WithCornerCurve(cornerCurve obj.Object) *EmitterLayer {
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return el
@@ -452,7 +452,7 @@ func (el *EmitterLayer) WithConstraints(items ...*Constraint) *EmitterLayer {
 	return el
 }
 
-// EmitterCells wraps the corresponding Objective-C method.
+// EmitterCells returns the emitter cells.
 //
 // EmitterCells returns the collection as a Go slice.
 func (el *EmitterLayer) EmitterCells() []*EmitterCell {
@@ -460,55 +460,55 @@ func (el *EmitterLayer) EmitterCells() []*EmitterCell {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
 }
 
-// BirthRate wraps the corresponding Objective-C method.
+// BirthRate returns the birth rate.
 func (el *EmitterLayer) BirthRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("birthRate"))
 	return _r
 }
 
-// Lifetime wraps the corresponding Objective-C method.
+// Lifetime returns the lifetime.
 func (el *EmitterLayer) Lifetime() float32 {
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("lifetime"))
 	return _r
 }
 
-// EmitterPosition wraps the corresponding Objective-C method.
+// EmitterPosition returns the emitter position.
 func (el *EmitterLayer) EmitterPosition() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(el), objc.RegisterName("emitterPosition"))
 	return _r
 }
 
-// EmitterZPosition wraps the corresponding Objective-C method.
+// EmitterZPosition returns the emitter z position.
 func (el *EmitterLayer) EmitterZPosition() float64 {
 	_r := objc.Send[float64](objref.IDOf(el), objc.RegisterName("emitterZPosition"))
 	return _r
 }
 
-// EmitterSize wraps the corresponding Objective-C method.
+// EmitterSize returns the emitter size.
 func (el *EmitterLayer) EmitterSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(el), objc.RegisterName("emitterSize"))
 	return _r
 }
 
-// EmitterDepth wraps the corresponding Objective-C method.
+// EmitterDepth returns the emitter depth.
 func (el *EmitterLayer) EmitterDepth() float64 {
 	_r := objc.Send[float64](objref.IDOf(el), objc.RegisterName("emitterDepth"))
 	return _r
 }
 
-// EmitterShape wraps the corresponding Objective-C method.
+// EmitterShape returns the emitter shape.
 func (el *EmitterLayer) EmitterShape() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("emitterShape"))
 	return obj.Wrap(_r)
 }
 
-// EmitterMode wraps the corresponding Objective-C method.
+// EmitterMode returns the emitter mode.
 func (el *EmitterLayer) EmitterMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("emitterMode"))
 	return obj.Wrap(_r)
 }
 
-// RenderMode wraps the corresponding Objective-C method.
+// RenderMode returns the render mode.
 func (el *EmitterLayer) RenderMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("renderMode"))
 	return obj.Wrap(_r)
@@ -520,25 +520,25 @@ func (el *EmitterLayer) PreservesDepth() bool {
 	return _r
 }
 
-// Velocity wraps the corresponding Objective-C method.
+// Velocity returns the velocity.
 func (el *EmitterLayer) Velocity() float32 {
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("velocity"))
 	return _r
 }
 
-// Scale wraps the corresponding Objective-C method.
+// Scale returns the scale.
 func (el *EmitterLayer) Scale() float32 {
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("scale"))
 	return _r
 }
 
-// Spin wraps the corresponding Objective-C method.
+// Spin returns the spin.
 func (el *EmitterLayer) Spin() float32 {
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("spin"))
 	return _r
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func (el *EmitterLayer) Seed() int {
 	_r := objc.Send[int](objref.IDOf(el), objc.RegisterName("seed"))
 	return _r

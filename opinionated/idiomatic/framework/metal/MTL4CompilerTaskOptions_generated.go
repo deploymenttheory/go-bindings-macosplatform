@@ -72,7 +72,7 @@ func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
 	return mTL4CompilerTaskOptionsAdopt(_id)
 }
 
-// LookupArchives wraps the corresponding Objective-C method.
+// LookupArchives returns the lookup archives.
 func (mcto *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcto), objc.RegisterName("lookupArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

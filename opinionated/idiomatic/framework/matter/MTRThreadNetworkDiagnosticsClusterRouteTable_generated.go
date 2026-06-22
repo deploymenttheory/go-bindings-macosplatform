@@ -50,61 +50,61 @@ func NewMTRThreadNetworkDiagnosticsClusterRouteTable() *MTRThreadNetworkDiagnost
 	return mTRThreadNetworkDiagnosticsClusterRouteTableAdopt(_id)
 }
 
-// WithExtAddress sets the property and returns the receiver so calls can be chained.
+// WithExtAddress sets the ext address.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
 	return mtndcrt
 }
 
-// WithRloc16 sets the property and returns the receiver so calls can be chained.
+// WithRloc16 sets the rloc16.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
 	return mtndcrt
 }
 
-// WithRouterID sets the property and returns the receiver so calls can be chained.
+// WithRouterID sets the router ID.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithRouterID(routerId obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setRouterId:"), objref.IDOf(routerId))
 	return mtndcrt
 }
 
-// WithNextHop sets the property and returns the receiver so calls can be chained.
+// WithNextHop sets the next hop.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithNextHop(nextHop obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setNextHop:"), objref.IDOf(nextHop))
 	return mtndcrt
 }
 
-// WithPathCost sets the property and returns the receiver so calls can be chained.
+// WithPathCost sets the path cost.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithPathCost(pathCost obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setPathCost:"), objref.IDOf(pathCost))
 	return mtndcrt
 }
 
-// WithLqiIn sets the property and returns the receiver so calls can be chained.
+// WithLqiIn sets the lqi in.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLqiIn(lqiIn obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setLqiIn:"), objref.IDOf(lqiIn))
 	return mtndcrt
 }
 
-// WithLqiOut sets the property and returns the receiver so calls can be chained.
+// WithLqiOut sets the lqi out.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLqiOut(lqiOut obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setLqiOut:"), objref.IDOf(lqiOut))
 	return mtndcrt
 }
 
-// WithAge sets the property and returns the receiver so calls can be chained.
+// WithAge sets the age.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setAge:"), objref.IDOf(age))
 	return mtndcrt
 }
 
-// WithAllocated sets the property and returns the receiver so calls can be chained.
+// WithAllocated sets the allocated.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithAllocated(allocated obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setAllocated:"), objref.IDOf(allocated))
 	return mtndcrt
 }
 
-// WithLinkEstablished sets the property and returns the receiver so calls can be chained.
+// WithLinkEstablished sets the link established.
 func (mtndcrt *MTRThreadNetworkDiagnosticsClusterRouteTable) WithLinkEstablished(linkEstablished obj.Object) *MTRThreadNetworkDiagnosticsClusterRouteTable {
 	objc.Send[objc.ID](objref.IDOf(mtndcrt), objc.RegisterName("setLinkEstablished:"), objref.IDOf(linkEstablished))
 	return mtndcrt

@@ -166,13 +166,13 @@ func (a *Achievement) ReportAchievement(ctx context.Context) error {
 	}
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (a *Achievement) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// PlayerID wraps the corresponding Objective-C method.
+// PlayerID returns the player ID.
 func (a *Achievement) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("playerID"))
 	if _r == 0 {

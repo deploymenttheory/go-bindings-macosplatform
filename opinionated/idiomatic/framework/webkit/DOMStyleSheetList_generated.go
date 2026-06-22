@@ -55,7 +55,7 @@ func (dssl *DOMStyleSheetList) Item(index int) *DOMStyleSheet {
 	return DOMStyleSheetFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dssl *DOMStyleSheetList) Length() int {
 	_r := objc.Send[int](objref.IDOf(dssl), objc.RegisterName("length"))
 	return _r

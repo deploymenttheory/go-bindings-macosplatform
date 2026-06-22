@@ -161,7 +161,7 @@ func (ti *TrackInfo) TrackEdits() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ExtendedLanguageTag wraps the corresponding Objective-C method.
+// ExtendedLanguageTag returns the extended language tag.
 func (ti *TrackInfo) ExtendedLanguageTag() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("extendedLanguageTag"))
 	if _r == 0 {

@@ -84,7 +84,7 @@ func (mgs *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler
 	return mgs
 }
 
-// SnapshotData wraps the corresponding Objective-C method.
+// SnapshotData returns the snapshot data.
 func (mgs *MicroGamepadSnapshot) SnapshotData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("snapshotData"))
 	return obj.Wrap(_r)

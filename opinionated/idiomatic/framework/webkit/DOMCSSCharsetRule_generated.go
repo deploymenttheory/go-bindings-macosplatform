@@ -49,13 +49,13 @@ func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
 	return dOMCSSCharsetRuleAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dcr *DOMCSSCharsetRule) WithCSSText(cssText string) *DOMCSSCharsetRule {
 	objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dcr
 }
 
-// Encoding wraps the corresponding Objective-C method.
+// Encoding returns the encoding.
 func (dcr *DOMCSSCharsetRule) Encoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("encoding"))
 	if _r == 0 {

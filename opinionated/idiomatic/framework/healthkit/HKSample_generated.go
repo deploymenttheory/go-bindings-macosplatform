@@ -46,19 +46,19 @@ func sampleAdopt(id objc.ID) *Sample {
 	return x
 }
 
-// SampleType wraps the corresponding Objective-C method.
+// SampleType returns the sample type.
 func (s *Sample) SampleType() *SampleType {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (s *Sample) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (s *Sample) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)

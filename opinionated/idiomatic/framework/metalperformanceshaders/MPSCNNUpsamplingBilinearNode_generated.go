@@ -66,13 +66,13 @@ func (cubn *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBil
 	return cubn
 }
 
-// ScaleFactorX wraps the corresponding Objective-C method.
+// ScaleFactorX returns the scale factor x.
 func (cubn *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
-// ScaleFactorY wraps the corresponding Objective-C method.
+// ScaleFactorY returns the scale factor y.
 func (cubn *CNNUpsamplingBilinearNode) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(cubn), objc.RegisterName("scaleFactorY"))
 	return _r

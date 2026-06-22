@@ -72,7 +72,7 @@ func NewVoiceAnalytics() *VoiceAnalytics {
 	return voiceAnalyticsAdopt(_id)
 }
 
-// Jitter wraps the corresponding Objective-C method.
+// Jitter returns the jitter.
 func (va *VoiceAnalytics) Jitter() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("jitter"))
 	return AcousticFeatureFromID(_r)
@@ -90,7 +90,7 @@ func (va *VoiceAnalytics) Pitch() *AcousticFeature {
 	return AcousticFeatureFromID(_r)
 }
 
-// Voicing wraps the corresponding Objective-C method.
+// Voicing returns the voicing.
 func (va *VoiceAnalytics) Voicing() *AcousticFeature {
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voicing"))
 	return AcousticFeatureFromID(_r)

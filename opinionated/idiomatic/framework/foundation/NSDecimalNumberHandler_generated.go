@@ -73,7 +73,7 @@ func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflow
 	return decimalNumberHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dnh *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
 	objc.Send[objc.ID](objref.IDOf(dnh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dnh

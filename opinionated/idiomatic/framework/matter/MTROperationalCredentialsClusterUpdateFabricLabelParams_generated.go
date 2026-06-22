@@ -70,7 +70,7 @@ func NewMTROperationalCredentialsClusterUpdateFabricLabelParams() *MTROperationa
 	return mTROperationalCredentialsClusterUpdateFabricLabelParamsAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithLabel(label string) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
 	objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return moccuflp
@@ -88,7 +88,7 @@ func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithSer
 	return moccuflp
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("label"))
 	if _r == 0 {

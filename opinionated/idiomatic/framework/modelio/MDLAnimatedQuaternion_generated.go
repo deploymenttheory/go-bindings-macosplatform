@@ -49,7 +49,7 @@ func NewAnimatedQuaternion() *AnimatedQuaternion {
 	return animatedQuaternionAdopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (aq *AnimatedQuaternion) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternion {
 	objc.Send[objc.ID](objref.IDOf(aq), objc.RegisterName("setInterpolation:"), interpolation)
 	return aq

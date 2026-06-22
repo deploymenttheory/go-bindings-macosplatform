@@ -88,13 +88,13 @@ func (as *AssessmentSession) UpdateToConfiguration(configuration *AssessmentConf
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("updateToConfiguration:"), objref.IDOf(configuration))
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (as *AssessmentSession) Configuration() *AssessmentConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("configuration"))
 	return AssessmentConfigurationFromID(_r)
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (as *AssessmentSession) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isActive"))
 	return _r

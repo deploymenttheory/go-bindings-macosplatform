@@ -51,7 +51,7 @@ func NewPaymentPass() *PaymentPass {
 	return paymentPassAdopt(_id)
 }
 
-// ActivationState wraps the corresponding Objective-C method.
+// ActivationState returns the activation state.
 func (pp *PaymentPass) ActivationState() PaymentPassActivationState {
 	_r := objc.Send[PaymentPassActivationState](objref.IDOf(pp), objc.RegisterName("activationState"))
 	return _r

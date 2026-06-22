@@ -74,7 +74,7 @@ func (mc *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle)
 	return mc
 }
 
-// ElevationStyle wraps the corresponding Objective-C method.
+// ElevationStyle returns the elevation style.
 func (mc *MapConfiguration) ElevationStyle() MapElevationStyle {
 	_r := objc.Send[MapElevationStyle](objref.IDOf(mc), objc.RegisterName("elevationStyle"))
 	return _r

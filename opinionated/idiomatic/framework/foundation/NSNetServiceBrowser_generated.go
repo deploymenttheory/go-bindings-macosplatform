@@ -72,13 +72,13 @@ func NewNetServiceBrowser() *NetServiceBrowser {
 	return netServiceBrowserAdopt(_id)
 }
 
-// WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
+// WithIncludesPeerToPeer sets the includes peer to peer.
 func (nsb *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return nsb
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (nsb *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return nsb
@@ -89,7 +89,7 @@ func (nsb *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
+// RemoveFromRunLoopForMode removes from run loop for mode.
 func (nsb *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }

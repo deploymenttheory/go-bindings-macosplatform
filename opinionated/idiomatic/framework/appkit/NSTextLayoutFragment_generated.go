@@ -103,25 +103,25 @@ func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint
 	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
 }
 
-// TextLayoutManager wraps the corresponding Objective-C method.
+// TextLayoutManager returns the text layout manager.
 func (tlf *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// TextElement wraps the corresponding Objective-C method.
+// TextElement returns the text element.
 func (tlf *TextLayoutFragment) TextElement() *TextElement {
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textElement"))
 	return TextElementFromID(_r)
 }
 
-// RangeInElement wraps the corresponding Objective-C method.
+// RangeInElement returns the range in element.
 func (tlf *TextLayoutFragment) RangeInElement() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("rangeInElement"))
 	return TextRangeFromID(_r)
 }
 
-// TextLineFragments wraps the corresponding Objective-C method.
+// TextLineFragments returns the text line fragments.
 //
 // TextLineFragments returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
@@ -129,55 +129,55 @@ func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLineFragment { return TextLineFragmentFromID(_id) })
 }
 
-// LayoutQueue wraps the corresponding Objective-C method.
+// LayoutQueue returns the layout queue.
 func (tlf *TextLayoutFragment) LayoutQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("layoutQueue"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (tlf *TextLayoutFragment) State() TextLayoutFragmentState {
 	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(tlf), objc.RegisterName("state"))
 	return _r
 }
 
-// LayoutFragmentFrame wraps the corresponding Objective-C method.
+// LayoutFragmentFrame returns the layout fragment frame.
 func (tlf *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("layoutFragmentFrame"))
 	return _r
 }
 
-// RenderingSurfaceBounds wraps the corresponding Objective-C method.
+// RenderingSurfaceBounds returns the rendering surface bounds.
 func (tlf *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("renderingSurfaceBounds"))
 	return _r
 }
 
-// LeadingPadding wraps the corresponding Objective-C method.
+// LeadingPadding returns the leading padding.
 func (tlf *TextLayoutFragment) LeadingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
-// TrailingPadding wraps the corresponding Objective-C method.
+// TrailingPadding returns the trailing padding.
 func (tlf *TextLayoutFragment) TrailingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
-// TopMargin wraps the corresponding Objective-C method.
+// TopMargin returns the top margin.
 func (tlf *TextLayoutFragment) TopMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("topMargin"))
 	return _r
 }
 
-// BottomMargin wraps the corresponding Objective-C method.
+// BottomMargin returns the bottom margin.
 func (tlf *TextLayoutFragment) BottomMargin() float64 {
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("bottomMargin"))
 	return _r
 }
 
-// TextAttachmentViewProviders wraps the corresponding Objective-C method.
+// TextAttachmentViewProviders returns the text attachment view providers.
 //
 // TextAttachmentViewProviders returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {

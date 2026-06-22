@@ -68,7 +68,7 @@ func (a *Asset) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (a *Asset) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {

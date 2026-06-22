@@ -89,31 +89,31 @@ func (enoe *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnE
 	return enoe
 }
 
-// MidiNote wraps the corresponding Objective-C method.
+// MidiNote returns the midi note.
 func (enoe *ExtendedNoteOnEvent) MidiNote() float32 {
 	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("midiNote"))
 	return _r
 }
 
-// Velocity wraps the corresponding Objective-C method.
+// Velocity returns the velocity.
 func (enoe *ExtendedNoteOnEvent) Velocity() float32 {
 	_r := objc.Send[float32](objref.IDOf(enoe), objc.RegisterName("velocity"))
 	return _r
 }
 
-// InstrumentID wraps the corresponding Objective-C method.
+// InstrumentID returns the instrument ID.
 func (enoe *ExtendedNoteOnEvent) InstrumentID() int {
 	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("instrumentID"))
 	return _r
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (enoe *ExtendedNoteOnEvent) GroupID() int {
 	_r := objc.Send[int](objref.IDOf(enoe), objc.RegisterName("groupID"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (enoe *ExtendedNoteOnEvent) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(enoe), objc.RegisterName("duration"))
 	return _r

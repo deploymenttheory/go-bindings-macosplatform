@@ -80,7 +80,7 @@ func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data obj.Object) *MeshB
 	return meshBufferDataAdopt(_id)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mbd *MeshBufferData) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbd), objc.RegisterName("data"))
 	return obj.Wrap(_r)

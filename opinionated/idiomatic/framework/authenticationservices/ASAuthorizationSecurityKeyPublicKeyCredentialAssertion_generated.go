@@ -78,7 +78,7 @@ func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() boo
 	return _r
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(askpkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)

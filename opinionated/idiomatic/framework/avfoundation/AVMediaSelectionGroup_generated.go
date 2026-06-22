@@ -94,7 +94,7 @@ func (msg *MediaSelectionGroup) AllowsEmptySelection() bool {
 	return _r
 }
 
-// CustomMediaSelectionScheme wraps the corresponding Objective-C method.
+// CustomMediaSelectionScheme returns the custom media selection scheme.
 func (msg *MediaSelectionGroup) CustomMediaSelectionScheme() *CustomMediaSelectionScheme {
 	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("customMediaSelectionScheme"))
 	return CustomMediaSelectionSchemeFromID(_r)

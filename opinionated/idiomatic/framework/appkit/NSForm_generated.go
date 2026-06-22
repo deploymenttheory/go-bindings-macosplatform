@@ -276,38 +276,38 @@ func (f *Form) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form {
 	return f
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (f *Form) WithCell(cell CellProvider) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return f
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (f *Form) WithSubviews(items ...ViewProvider) *Form {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setSubviews:"), _arr)
 	return f
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (f *Form) WithHidden(hidden bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setHidden:"), hidden)
 	return f
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (f *Form) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return f
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (f *Form) WithAutoresizesSubviews(autoresizesSubviews bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return f
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (f *Form) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return f
@@ -319,19 +319,19 @@ func (f *Form) WithFrame(frame corefoundation.CGRect) *Form {
 	return f
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (f *Form) WithFrameRotation(frameRotation float64) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return f
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (f *Form) WithFrameCenterRotation(frameCenterRotation float64) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return f
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (f *Form) WithBoundsRotation(boundsRotation float64) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return f
@@ -343,7 +343,7 @@ func (f *Form) WithBounds(bounds corefoundation.CGRect) *Form {
 	return f
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (f *Form) WithCanDrawConcurrently(canDrawConcurrently bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return f
@@ -355,148 +355,148 @@ func (f *Form) WithNeedsDisplay(needsDisplay bool) *Form {
 	return f
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (f *Form) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return f
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (f *Form) WithWantsRestingTouches(wantsRestingTouches bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return f
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (f *Form) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return f
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (f *Form) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return f
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (f *Form) WithWantsLayer(wantsLayer bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return f
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (f *Form) WithLayer(layer obj.Object) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return f
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (f *Form) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return f
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (f *Form) WithNeedsLayout(needsLayout bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return f
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (f *Form) WithAlphaValue(alphaValue float64) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return f
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (f *Form) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return f
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (f *Form) WithBackgroundFilters(items ...obj.Object) *Form {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return f
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (f *Form) WithCompositingFilter(compositingFilter obj.Object) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return f
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (f *Form) WithContentFilters(items ...obj.Object) *Form {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setContentFilters:"), _arr)
 	return f
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (f *Form) WithShadow(shadow *Shadow) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return f
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (f *Form) WithClipsToBounds(clipsToBounds bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return f
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (f *Form) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return f
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (f *Form) WithToolTip(toolTip string) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return f
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (f *Form) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return f
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (f *Form) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return f
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (f *Form) WithNextKeyView(nextKeyView ViewProvider) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return f
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (f *Form) WithFocusRingType(focusRingType FocusRingType) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return f
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (f *Form) WithGestureRecognizers(items ...GestureRecognizerProvider) *Form {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return f
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (f *Form) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return f
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (f *Form) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return f
@@ -508,49 +508,49 @@ func (f *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 	return f
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (f *Form) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return f
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (f *Form) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return f
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (f *Form) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return f
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (f *Form) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return f
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (f *Form) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return f
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (f *Form) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return f
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (f *Form) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return f
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (f *Form) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return f

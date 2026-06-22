@@ -78,7 +78,7 @@ func NewCompositionLayerWithComposition(composition obj.Object) *CompositionLaye
 	return compositionLayerAdopt(_id)
 }
 
-// Composition wraps the corresponding Objective-C method.
+// Composition returns the composition.
 func (cl *CompositionLayer) Composition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("composition"))
 	return obj.Wrap(_r)

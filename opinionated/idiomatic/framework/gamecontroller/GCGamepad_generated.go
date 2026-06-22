@@ -76,19 +76,19 @@ func (g *Gamepad) ButtonA() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonB wraps the corresponding Objective-C method.
+// ButtonB returns the button b.
 func (g *Gamepad) ButtonB() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonX wraps the corresponding Objective-C method.
+// ButtonX returns the button x.
 func (g *Gamepad) ButtonX() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonY wraps the corresponding Objective-C method.
+// ButtonY returns the button y.
 func (g *Gamepad) ButtonY() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)

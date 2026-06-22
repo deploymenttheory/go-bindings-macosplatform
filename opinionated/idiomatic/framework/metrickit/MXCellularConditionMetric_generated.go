@@ -52,7 +52,7 @@ func NewCellularConditionMetric() *CellularConditionMetric {
 	return cellularConditionMetricAdopt(_id)
 }
 
-// HistogrammedCellularConditionTime wraps the corresponding Objective-C method.
+// HistogrammedCellularConditionTime returns the histogrammed cellular condition time.
 func (ccm *CellularConditionMetric) HistogrammedCellularConditionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ccm), objc.RegisterName("histogrammedCellularConditionTime"))
 	return obj.Wrap(_r)

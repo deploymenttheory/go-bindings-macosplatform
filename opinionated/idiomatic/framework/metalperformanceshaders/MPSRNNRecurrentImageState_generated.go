@@ -52,7 +52,7 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	return rNNRecurrentImageStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (rris *RNNRecurrentImageState) WithReadCount(readCount int) *RNNRecurrentImageState {
 	objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("setReadCount:"), readCount)
 	return rris

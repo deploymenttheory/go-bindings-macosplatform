@@ -72,37 +72,37 @@ func NewPedometerData() *PedometerData {
 	return pedometerDataAdopt(_id)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (pd *PedometerData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (pd *PedometerData) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfSteps wraps the corresponding Objective-C method.
+// NumberOfSteps returns the number of steps.
 func (pd *PedometerData) NumberOfSteps() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numberOfSteps"))
 	return obj.Wrap(_r)
 }
 
-// Distance wraps the corresponding Objective-C method.
+// Distance returns the distance.
 func (pd *PedometerData) Distance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("distance"))
 	return obj.Wrap(_r)
 }
 
-// FloorsAscended wraps the corresponding Objective-C method.
+// FloorsAscended returns the floors ascended.
 func (pd *PedometerData) FloorsAscended() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsAscended"))
 	return obj.Wrap(_r)
 }
 
-// FloorsDescended wraps the corresponding Objective-C method.
+// FloorsDescended returns the floors descended.
 func (pd *PedometerData) FloorsDescended() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("floorsDescended"))
 	return obj.Wrap(_r)

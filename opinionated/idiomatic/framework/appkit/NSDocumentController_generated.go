@@ -262,7 +262,7 @@ func (dc *DocumentController) DisplayNameForType(typeName string) string {
 	return purego.GoString(_r)
 }
 
-// Documents wraps the corresponding Objective-C method.
+// Documents returns the documents.
 //
 // Documents returns the collection as a Go slice.
 func (dc *DocumentController) Documents() []*Document {
@@ -270,13 +270,13 @@ func (dc *DocumentController) Documents() []*Document {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
 }
 
-// CurrentDocument wraps the corresponding Objective-C method.
+// CurrentDocument returns the current document.
 func (dc *DocumentController) CurrentDocument() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("currentDocument"))
 	return DocumentFromID(_r)
 }
 
-// CurrentDirectory wraps the corresponding Objective-C method.
+// CurrentDirectory returns the current directory.
 func (dc *DocumentController) CurrentDirectory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("currentDirectory"))
 	if _r == 0 {
@@ -285,13 +285,13 @@ func (dc *DocumentController) CurrentDirectory() string {
 	return purego.GoString(_r)
 }
 
-// AutosavingDelay wraps the corresponding Objective-C method.
+// AutosavingDelay returns the autosaving delay.
 func (dc *DocumentController) AutosavingDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(dc), objc.RegisterName("autosavingDelay"))
 	return _r
 }
 
-// HasEditedDocuments wraps the corresponding Objective-C method.
+// HasEditedDocuments reports whether the object has edited documents.
 func (dc *DocumentController) HasEditedDocuments() bool {
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("hasEditedDocuments"))
 	return _r
@@ -303,13 +303,13 @@ func (dc *DocumentController) AllowsAutomaticShareMenu() bool {
 	return _r
 }
 
-// MaximumRecentDocumentCount wraps the corresponding Objective-C method.
+// MaximumRecentDocumentCount returns the maximum recent document count.
 func (dc *DocumentController) MaximumRecentDocumentCount() int {
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("maximumRecentDocumentCount"))
 	return _r
 }
 
-// RecentDocumentURLs wraps the corresponding Objective-C method.
+// RecentDocumentURLs returns the recent document ur ls.
 //
 // RecentDocumentURLs returns the collection as a Go slice.
 func (dc *DocumentController) RecentDocumentURLs() []obj.Object {
@@ -317,7 +317,7 @@ func (dc *DocumentController) RecentDocumentURLs() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DefaultType wraps the corresponding Objective-C method.
+// DefaultType returns the default type.
 func (dc *DocumentController) DefaultType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("defaultType"))
 	if _r == 0 {
@@ -326,7 +326,7 @@ func (dc *DocumentController) DefaultType() string {
 	return purego.GoString(_r)
 }
 
-// DocumentClassNames wraps the corresponding Objective-C method.
+// DocumentClassNames returns the document class names.
 //
 // DocumentClassNames returns the collection as a Go slice.
 func (dc *DocumentController) DocumentClassNames() []string {

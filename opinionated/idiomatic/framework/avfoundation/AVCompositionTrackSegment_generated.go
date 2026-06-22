@@ -52,13 +52,13 @@ func NewCompositionTrackSegment() *CompositionTrackSegment {
 	return compositionTrackSegmentAdopt(_id)
 }
 
-// SourceURL wraps the corresponding Objective-C method.
+// SourceURL returns the source URL.
 func (cts *CompositionTrackSegment) SourceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("sourceURL"))
 	return obj.Wrap(_r)
 }
 
-// SourceTrackID wraps the corresponding Objective-C method.
+// SourceTrackID returns the source track ID.
 func (cts *CompositionTrackSegment) SourceTrackID() int32 {
 	_r := objc.Send[int32](objref.IDOf(cts), objc.RegisterName("sourceTrackID"))
 	return _r

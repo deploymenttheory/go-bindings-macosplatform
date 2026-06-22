@@ -70,7 +70,7 @@ func NewMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams() *
 	return mTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsAdopt(_id)
 }
 
-// WithPendingDataset sets the property and returns the receiver so calls can be chained.
+// WithPendingDataset sets the pending dataset.
 func (mtbrmcspdrp *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithPendingDataset(pendingDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtbrmcspdrp), objc.RegisterName("setPendingDataset:"), objref.IDOf(pendingDataset))
 	return mtbrmcspdrp
@@ -88,7 +88,7 @@ func (mtbrmcspdrp *MTRThreadBorderRouterManagementClusterSetPendingDatasetReques
 	return mtbrmcspdrp
 }
 
-// PendingDataset wraps the corresponding Objective-C method.
+// PendingDataset returns the pending dataset.
 func (mtbrmcspdrp *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) PendingDataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcspdrp), objc.RegisterName("pendingDataset"))
 	return obj.Wrap(_r)

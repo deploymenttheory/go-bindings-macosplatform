@@ -105,7 +105,7 @@ func (og *ObstacleGraph) IsConnectionLockedFromNodeToNode(startNode obj.Object, 
 	return _r
 }
 
-// Obstacles wraps the corresponding Objective-C method.
+// Obstacles returns the obstacles.
 //
 // Obstacles returns the collection as a Go slice.
 func (og *ObstacleGraph) Obstacles() []*PolygonObstacle {
@@ -113,7 +113,7 @@ func (og *ObstacleGraph) Obstacles() []*PolygonObstacle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
-// BufferRadius wraps the corresponding Objective-C method.
+// BufferRadius returns the buffer radius.
 func (og *ObstacleGraph) BufferRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(og), objc.RegisterName("bufferRadius"))
 	return _r

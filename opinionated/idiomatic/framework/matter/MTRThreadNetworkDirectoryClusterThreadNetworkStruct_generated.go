@@ -70,37 +70,37 @@ func NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct() *MTRThreadNetworkD
 	return mTRThreadNetworkDirectoryClusterThreadNetworkStructAdopt(_id)
 }
 
-// WithExtendedPanID sets the property and returns the receiver so calls can be chained.
+// WithExtendedPanID sets the extended pan ID.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 	return mtndctns
 }
 
-// WithNetworkName sets the property and returns the receiver so calls can be chained.
+// WithNetworkName sets the network name.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 	return mtndctns
 }
 
-// WithChannel sets the property and returns the receiver so calls can be chained.
+// WithChannel sets the channel.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mtndctns
 }
 
-// WithActiveTimestamp sets the property and returns the receiver so calls can be chained.
+// WithActiveTimestamp sets the active timestamp.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
 	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
 	return mtndctns
 }
 
-// ExtendedPanID wraps the corresponding Objective-C method.
+// ExtendedPanID returns the extended pan ID.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)
 }
 
-// NetworkName wraps the corresponding Objective-C method.
+// NetworkName returns the network name.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -109,13 +109,13 @@ func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName
 	return purego.GoString(_r)
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("channel"))
 	return obj.Wrap(_r)
 }
 
-// ActiveTimestamp wraps the corresponding Objective-C method.
+// ActiveTimestamp returns the active timestamp.
 func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("activeTimestamp"))
 	return obj.Wrap(_r)

@@ -52,7 +52,7 @@ func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkIn
 	return bridgedNetworkDeviceAttachmentAdopt(_id)
 }
 
-// Interface wraps the corresponding Objective-C method.
+// Interface returns the interface.
 func (bnda *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(bnda), objc.RegisterName("interface"))
 	return BridgedNetworkInterfaceFromID(_r)

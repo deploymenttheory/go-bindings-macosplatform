@@ -68,7 +68,7 @@ func (ci *CaptureInput) String() string {
 	return rt.Description(objref.IDOf(ci))
 }
 
-// Ports wraps the corresponding Objective-C method.
+// Ports returns the ports.
 //
 // Ports returns the collection as a Go slice.
 func (ci *CaptureInput) Ports() []*CaptureInputPort {

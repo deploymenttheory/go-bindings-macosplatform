@@ -72,13 +72,13 @@ func NewInvite() *Invite {
 	return inviteAdopt(_id)
 }
 
-// Sender wraps the corresponding Objective-C method.
+// Sender returns the sender.
 func (i *Invite) Sender() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("sender"))
 	return PlayerFromID(_r)
 }
 
-// IsHosted wraps the corresponding Objective-C method.
+// IsHosted reports whether the object is hosted.
 func (i *Invite) IsHosted() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isHosted"))
 	return _r

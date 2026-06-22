@@ -51,7 +51,7 @@ func NewCameraFolder() *CameraFolder {
 	return cameraFolderAdopt(_id)
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 //
 // Contents returns the collection as a Go slice.
 func (cf *CameraFolder) Contents() []*CameraItem {

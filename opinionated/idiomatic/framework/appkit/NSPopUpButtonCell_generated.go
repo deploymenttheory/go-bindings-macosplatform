@@ -621,7 +621,7 @@ func (pubc *PopUpButtonCell) AltersStateOfSelectedItem() bool {
 	return _r
 }
 
-// ItemArray wraps the corresponding Objective-C method.
+// ItemArray returns the item array.
 //
 // ItemArray returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemArray() []*MenuItem {
@@ -629,31 +629,31 @@ func (pubc *PopUpButtonCell) ItemArray() []*MenuItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (pubc *PopUpButtonCell) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("numberOfItems"))
 	return _r
 }
 
-// LastItem wraps the corresponding Objective-C method.
+// LastItem returns the last item.
 func (pubc *PopUpButtonCell) LastItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("lastItem"))
 	return MenuItemFromID(_r)
 }
 
-// SelectedItem wraps the corresponding Objective-C method.
+// SelectedItem returns the selected item.
 func (pubc *PopUpButtonCell) SelectedItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectedItem"))
 	return MenuItemFromID(_r)
 }
 
-// IndexOfSelectedItem wraps the corresponding Objective-C method.
+// IndexOfSelectedItem returns the index of selected item.
 func (pubc *PopUpButtonCell) IndexOfSelectedItem() int {
 	_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfSelectedItem"))
 	return _r
 }
 
-// ItemTitles wraps the corresponding Objective-C method.
+// ItemTitles returns the item titles.
 //
 // ItemTitles returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemTitles() []string {
@@ -661,7 +661,7 @@ func (pubc *PopUpButtonCell) ItemTitles() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// TitleOfSelectedItem wraps the corresponding Objective-C method.
+// TitleOfSelectedItem returns the title of selected item.
 func (pubc *PopUpButtonCell) TitleOfSelectedItem() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("titleOfSelectedItem"))
 	if _r == 0 {
@@ -670,7 +670,7 @@ func (pubc *PopUpButtonCell) TitleOfSelectedItem() string {
 	return purego.GoString(_r)
 }
 
-// ArrowPosition wraps the corresponding Objective-C method.
+// ArrowPosition returns the arrow position.
 func (pubc *PopUpButtonCell) ArrowPosition() PopUpArrowPosition {
 	_r := objc.Send[PopUpArrowPosition](objref.IDOf(pubc), objc.RegisterName("arrowPosition"))
 	return _r

@@ -80,25 +80,25 @@ func NewNotificationWithCoder(coder *Coder) *Notification {
 	return notificationAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (n *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return n
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (n *Notification) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
-// Object wraps the corresponding Objective-C method.
+// Object returns the object.
 func (n *Notification) Object() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (n *Notification) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

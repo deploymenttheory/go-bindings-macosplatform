@@ -160,7 +160,7 @@ func (s *SVGF) WithChannelCount2(channelCount2 int) *SVGF {
 	return s
 }
 
-// EncodeWithCoder wraps the corresponding Objective-C method.
+// EncodeWithCoder encodes with coder.
 func (s *SVGF) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }

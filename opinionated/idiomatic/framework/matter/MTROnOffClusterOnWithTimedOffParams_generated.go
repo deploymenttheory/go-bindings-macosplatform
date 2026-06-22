@@ -70,19 +70,19 @@ func NewMTROnOffClusterOnWithTimedOffParams() *MTROnOffClusterOnWithTimedOffPara
 	return mTROnOffClusterOnWithTimedOffParamsAdopt(_id)
 }
 
-// WithOnOffControl sets the property and returns the receiver so calls can be chained.
+// WithOnOffControl sets the on off control.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) WithOnOffControl(onOffControl obj.Object) *MTROnOffClusterOnWithTimedOffParams {
 	objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("setOnOffControl:"), objref.IDOf(onOffControl))
 	return moocowtop
 }
 
-// WithOnTime sets the property and returns the receiver so calls can be chained.
+// WithOnTime sets the on time.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) WithOnTime(onTime obj.Object) *MTROnOffClusterOnWithTimedOffParams {
 	objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("setOnTime:"), objref.IDOf(onTime))
 	return moocowtop
 }
 
-// WithOffWaitTime sets the property and returns the receiver so calls can be chained.
+// WithOffWaitTime sets the off wait time.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) WithOffWaitTime(offWaitTime obj.Object) *MTROnOffClusterOnWithTimedOffParams {
 	objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("setOffWaitTime:"), objref.IDOf(offWaitTime))
 	return moocowtop
@@ -100,19 +100,19 @@ func (moocowtop *MTROnOffClusterOnWithTimedOffParams) WithServerSideProcessingTi
 	return moocowtop
 }
 
-// OnOffControl wraps the corresponding Objective-C method.
+// OnOffControl returns the on off control.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) OnOffControl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("onOffControl"))
 	return obj.Wrap(_r)
 }
 
-// OnTime wraps the corresponding Objective-C method.
+// OnTime returns the on time.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) OnTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("onTime"))
 	return obj.Wrap(_r)
 }
 
-// OffWaitTime wraps the corresponding Objective-C method.
+// OffWaitTime returns the off wait time.
 func (moocowtop *MTROnOffClusterOnWithTimedOffParams) OffWaitTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowtop), objc.RegisterName("offWaitTime"))
 	return obj.Wrap(_r)

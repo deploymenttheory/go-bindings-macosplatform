@@ -50,7 +50,7 @@ func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExp
 	return mathExpressionRootAdopt(_id)
 }
 
-// RadicandExpressions wraps the corresponding Objective-C method.
+// RadicandExpressions returns the radicand expressions.
 //
 // RadicandExpressions returns the collection as a Go slice.
 func (mer *MathExpressionRoot) RadicandExpressions() []*MathExpression {
@@ -58,7 +58,7 @@ func (mer *MathExpressionRoot) RadicandExpressions() []*MathExpression {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
-// RootIndexExpression wraps the corresponding Objective-C method.
+// RootIndexExpression returns the root index expression.
 func (mer *MathExpressionRoot) RootIndexExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("rootIndexExpression"))
 	return MathExpressionFromID(_r)

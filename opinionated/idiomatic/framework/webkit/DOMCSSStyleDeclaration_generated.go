@@ -49,7 +49,7 @@ func NewDOMCSSStyleDeclaration() *DOMCSSStyleDeclaration {
 	return dOMCSSStyleDeclarationAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dsd *DOMCSSStyleDeclaration) WithCSSText(cssText string) *DOMCSSStyleDeclaration {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dsd
@@ -70,7 +70,7 @@ func (dsd *DOMCSSStyleDeclaration) GetPropertyCSSValue(propertyName string) *DOM
 	return DOMCSSValueFromID(_r)
 }
 
-// RemoveProperty wraps the corresponding Objective-C method.
+// RemoveProperty removes property.
 func (dsd *DOMCSSStyleDeclaration) RemoveProperty(propertyName string) string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("removeProperty:"), purego.NSString(propertyName))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (dsd *DOMCSSStyleDeclaration) IsPropertyImplicit(propertyName string) bool 
 	return _r
 }
 
-// CSSText wraps the corresponding Objective-C method.
+// CSSText returns the CSS text.
 func (dsd *DOMCSSStyleDeclaration) CSSText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cssText"))
 	if _r == 0 {
@@ -126,13 +126,13 @@ func (dsd *DOMCSSStyleDeclaration) CSSText() string {
 	return purego.GoString(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dsd *DOMCSSStyleDeclaration) Length() int {
 	_r := objc.Send[int](objref.IDOf(dsd), objc.RegisterName("length"))
 	return _r
 }
 
-// ParentRule wraps the corresponding Objective-C method.
+// ParentRule returns the parent rule.
 func (dsd *DOMCSSStyleDeclaration) ParentRule() *DOMCSSRule {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("parentRule"))
 	return DOMCSSRuleFromID(_r)
@@ -143,7 +143,7 @@ func (dsd *DOMCSSStyleDeclaration) SetProperty(propertyName string, value string
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setProperty:::"), purego.NSString(propertyName), purego.NSString(value), purego.NSString(priority))
 }
 
-// Azimuth wraps the corresponding Objective-C method.
+// Azimuth returns the azimuth.
 func (dsd *DOMCSSStyleDeclaration) Azimuth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("azimuth"))
 	if _r == 0 {
@@ -157,7 +157,7 @@ func (dsd *DOMCSSStyleDeclaration) SetAzimuth(azimuth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setAzimuth:"), purego.NSString(azimuth))
 }
 
-// Background wraps the corresponding Objective-C method.
+// Background returns the background.
 func (dsd *DOMCSSStyleDeclaration) Background() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("background"))
 	if _r == 0 {
@@ -171,7 +171,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackground(background string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackground:"), purego.NSString(background))
 }
 
-// BackgroundAttachment wraps the corresponding Objective-C method.
+// BackgroundAttachment returns the background attachment.
 func (dsd *DOMCSSStyleDeclaration) BackgroundAttachment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backgroundAttachment"))
 	if _r == 0 {
@@ -185,7 +185,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackgroundAttachment(backgroundAttachment 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackgroundAttachment:"), purego.NSString(backgroundAttachment))
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (dsd *DOMCSSStyleDeclaration) BackgroundColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backgroundColor"))
 	if _r == 0 {
@@ -199,7 +199,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackgroundColor(backgroundColor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackgroundColor:"), purego.NSString(backgroundColor))
 }
 
-// BackgroundImage wraps the corresponding Objective-C method.
+// BackgroundImage returns the background image.
 func (dsd *DOMCSSStyleDeclaration) BackgroundImage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backgroundImage"))
 	if _r == 0 {
@@ -213,7 +213,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackgroundImage(backgroundImage string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackgroundImage:"), purego.NSString(backgroundImage))
 }
 
-// BackgroundPosition wraps the corresponding Objective-C method.
+// BackgroundPosition returns the background position.
 func (dsd *DOMCSSStyleDeclaration) BackgroundPosition() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backgroundPosition"))
 	if _r == 0 {
@@ -227,7 +227,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackgroundPosition(backgroundPosition stri
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackgroundPosition:"), purego.NSString(backgroundPosition))
 }
 
-// BackgroundRepeat wraps the corresponding Objective-C method.
+// BackgroundRepeat returns the background repeat.
 func (dsd *DOMCSSStyleDeclaration) BackgroundRepeat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backgroundRepeat"))
 	if _r == 0 {
@@ -241,7 +241,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBackgroundRepeat(backgroundRepeat string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackgroundRepeat:"), purego.NSString(backgroundRepeat))
 }
 
-// Border wraps the corresponding Objective-C method.
+// Border returns the border.
 func (dsd *DOMCSSStyleDeclaration) Border() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("border"))
 	if _r == 0 {
@@ -255,7 +255,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorder(border string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorder:"), purego.NSString(border))
 }
 
-// BorderCollapse wraps the corresponding Objective-C method.
+// BorderCollapse returns the border collapse.
 func (dsd *DOMCSSStyleDeclaration) BorderCollapse() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderCollapse"))
 	if _r == 0 {
@@ -269,7 +269,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderCollapse(borderCollapse string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderCollapse:"), purego.NSString(borderCollapse))
 }
 
-// BorderColor wraps the corresponding Objective-C method.
+// BorderColor returns the border color.
 func (dsd *DOMCSSStyleDeclaration) BorderColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderColor"))
 	if _r == 0 {
@@ -283,7 +283,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderColor(borderColor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderColor:"), purego.NSString(borderColor))
 }
 
-// BorderSpacing wraps the corresponding Objective-C method.
+// BorderSpacing returns the border spacing.
 func (dsd *DOMCSSStyleDeclaration) BorderSpacing() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderSpacing"))
 	if _r == 0 {
@@ -297,7 +297,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderSpacing(borderSpacing string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderSpacing:"), purego.NSString(borderSpacing))
 }
 
-// BorderStyle wraps the corresponding Objective-C method.
+// BorderStyle returns the border style.
 func (dsd *DOMCSSStyleDeclaration) BorderStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderStyle"))
 	if _r == 0 {
@@ -311,7 +311,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderStyle(borderStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderStyle:"), purego.NSString(borderStyle))
 }
 
-// BorderTop wraps the corresponding Objective-C method.
+// BorderTop returns the border top.
 func (dsd *DOMCSSStyleDeclaration) BorderTop() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderTop"))
 	if _r == 0 {
@@ -325,7 +325,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderTop(borderTop string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderTop:"), purego.NSString(borderTop))
 }
 
-// BorderRight wraps the corresponding Objective-C method.
+// BorderRight returns the border right.
 func (dsd *DOMCSSStyleDeclaration) BorderRight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderRight"))
 	if _r == 0 {
@@ -339,7 +339,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderRight(borderRight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderRight:"), purego.NSString(borderRight))
 }
 
-// BorderBottom wraps the corresponding Objective-C method.
+// BorderBottom returns the border bottom.
 func (dsd *DOMCSSStyleDeclaration) BorderBottom() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderBottom"))
 	if _r == 0 {
@@ -353,7 +353,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderBottom(borderBottom string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderBottom:"), purego.NSString(borderBottom))
 }
 
-// BorderLeft wraps the corresponding Objective-C method.
+// BorderLeft returns the border left.
 func (dsd *DOMCSSStyleDeclaration) BorderLeft() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderLeft"))
 	if _r == 0 {
@@ -367,7 +367,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderLeft(borderLeft string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderLeft:"), purego.NSString(borderLeft))
 }
 
-// BorderTopColor wraps the corresponding Objective-C method.
+// BorderTopColor returns the border top color.
 func (dsd *DOMCSSStyleDeclaration) BorderTopColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderTopColor"))
 	if _r == 0 {
@@ -381,7 +381,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderTopColor(borderTopColor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderTopColor:"), purego.NSString(borderTopColor))
 }
 
-// BorderRightColor wraps the corresponding Objective-C method.
+// BorderRightColor returns the border right color.
 func (dsd *DOMCSSStyleDeclaration) BorderRightColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderRightColor"))
 	if _r == 0 {
@@ -395,7 +395,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderRightColor(borderRightColor string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderRightColor:"), purego.NSString(borderRightColor))
 }
 
-// BorderBottomColor wraps the corresponding Objective-C method.
+// BorderBottomColor returns the border bottom color.
 func (dsd *DOMCSSStyleDeclaration) BorderBottomColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderBottomColor"))
 	if _r == 0 {
@@ -409,7 +409,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderBottomColor(borderBottomColor string
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderBottomColor:"), purego.NSString(borderBottomColor))
 }
 
-// BorderLeftColor wraps the corresponding Objective-C method.
+// BorderLeftColor returns the border left color.
 func (dsd *DOMCSSStyleDeclaration) BorderLeftColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderLeftColor"))
 	if _r == 0 {
@@ -423,7 +423,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderLeftColor(borderLeftColor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderLeftColor:"), purego.NSString(borderLeftColor))
 }
 
-// BorderTopStyle wraps the corresponding Objective-C method.
+// BorderTopStyle returns the border top style.
 func (dsd *DOMCSSStyleDeclaration) BorderTopStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderTopStyle"))
 	if _r == 0 {
@@ -437,7 +437,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderTopStyle(borderTopStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderTopStyle:"), purego.NSString(borderTopStyle))
 }
 
-// BorderRightStyle wraps the corresponding Objective-C method.
+// BorderRightStyle returns the border right style.
 func (dsd *DOMCSSStyleDeclaration) BorderRightStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderRightStyle"))
 	if _r == 0 {
@@ -451,7 +451,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderRightStyle(borderRightStyle string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderRightStyle:"), purego.NSString(borderRightStyle))
 }
 
-// BorderBottomStyle wraps the corresponding Objective-C method.
+// BorderBottomStyle returns the border bottom style.
 func (dsd *DOMCSSStyleDeclaration) BorderBottomStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderBottomStyle"))
 	if _r == 0 {
@@ -465,7 +465,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderBottomStyle(borderBottomStyle string
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderBottomStyle:"), purego.NSString(borderBottomStyle))
 }
 
-// BorderLeftStyle wraps the corresponding Objective-C method.
+// BorderLeftStyle returns the border left style.
 func (dsd *DOMCSSStyleDeclaration) BorderLeftStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderLeftStyle"))
 	if _r == 0 {
@@ -479,7 +479,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderLeftStyle(borderLeftStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderLeftStyle:"), purego.NSString(borderLeftStyle))
 }
 
-// BorderTopWidth wraps the corresponding Objective-C method.
+// BorderTopWidth returns the border top width.
 func (dsd *DOMCSSStyleDeclaration) BorderTopWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderTopWidth"))
 	if _r == 0 {
@@ -493,7 +493,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderTopWidth(borderTopWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderTopWidth:"), purego.NSString(borderTopWidth))
 }
 
-// BorderRightWidth wraps the corresponding Objective-C method.
+// BorderRightWidth returns the border right width.
 func (dsd *DOMCSSStyleDeclaration) BorderRightWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderRightWidth"))
 	if _r == 0 {
@@ -507,7 +507,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderRightWidth(borderRightWidth string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderRightWidth:"), purego.NSString(borderRightWidth))
 }
 
-// BorderBottomWidth wraps the corresponding Objective-C method.
+// BorderBottomWidth returns the border bottom width.
 func (dsd *DOMCSSStyleDeclaration) BorderBottomWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderBottomWidth"))
 	if _r == 0 {
@@ -521,7 +521,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderBottomWidth(borderBottomWidth string
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderBottomWidth:"), purego.NSString(borderBottomWidth))
 }
 
-// BorderLeftWidth wraps the corresponding Objective-C method.
+// BorderLeftWidth returns the border left width.
 func (dsd *DOMCSSStyleDeclaration) BorderLeftWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderLeftWidth"))
 	if _r == 0 {
@@ -535,7 +535,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderLeftWidth(borderLeftWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderLeftWidth:"), purego.NSString(borderLeftWidth))
 }
 
-// BorderWidth wraps the corresponding Objective-C method.
+// BorderWidth returns the border width.
 func (dsd *DOMCSSStyleDeclaration) BorderWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("borderWidth"))
 	if _r == 0 {
@@ -549,7 +549,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBorderWidth(borderWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBorderWidth:"), purego.NSString(borderWidth))
 }
 
-// Bottom wraps the corresponding Objective-C method.
+// Bottom returns the bottom.
 func (dsd *DOMCSSStyleDeclaration) Bottom() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("bottom"))
 	if _r == 0 {
@@ -563,7 +563,7 @@ func (dsd *DOMCSSStyleDeclaration) SetBottom(bottom string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBottom:"), purego.NSString(bottom))
 }
 
-// CaptionSide wraps the corresponding Objective-C method.
+// CaptionSide returns the caption side.
 func (dsd *DOMCSSStyleDeclaration) CaptionSide() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("captionSide"))
 	if _r == 0 {
@@ -577,7 +577,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCaptionSide(captionSide string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCaptionSide:"), purego.NSString(captionSide))
 }
 
-// Clear wraps the corresponding Objective-C method.
+// Clear returns the clear.
 func (dsd *DOMCSSStyleDeclaration) Clear() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("clear"))
 	if _r == 0 {
@@ -591,7 +591,7 @@ func (dsd *DOMCSSStyleDeclaration) SetClear(clear string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setClear:"), purego.NSString(clear))
 }
 
-// Clip wraps the corresponding Objective-C method.
+// Clip returns the clip.
 func (dsd *DOMCSSStyleDeclaration) Clip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("clip"))
 	if _r == 0 {
@@ -605,7 +605,7 @@ func (dsd *DOMCSSStyleDeclaration) SetClip(clip string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setClip:"), purego.NSString(clip))
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (dsd *DOMCSSStyleDeclaration) Color() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("color"))
 	if _r == 0 {
@@ -619,7 +619,7 @@ func (dsd *DOMCSSStyleDeclaration) SetColor(color string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setColor:"), purego.NSString(color))
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (dsd *DOMCSSStyleDeclaration) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("content"))
 	if _r == 0 {
@@ -633,7 +633,7 @@ func (dsd *DOMCSSStyleDeclaration) SetContent(content string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setContent:"), purego.NSString(content))
 }
 
-// CounterIncrement wraps the corresponding Objective-C method.
+// CounterIncrement returns the counter increment.
 func (dsd *DOMCSSStyleDeclaration) CounterIncrement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("counterIncrement"))
 	if _r == 0 {
@@ -647,7 +647,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCounterIncrement(counterIncrement string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCounterIncrement:"), purego.NSString(counterIncrement))
 }
 
-// CounterReset wraps the corresponding Objective-C method.
+// CounterReset returns the counter reset.
 func (dsd *DOMCSSStyleDeclaration) CounterReset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("counterReset"))
 	if _r == 0 {
@@ -661,7 +661,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCounterReset(counterReset string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCounterReset:"), purego.NSString(counterReset))
 }
 
-// Cue wraps the corresponding Objective-C method.
+// Cue returns the cue.
 func (dsd *DOMCSSStyleDeclaration) Cue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cue"))
 	if _r == 0 {
@@ -675,7 +675,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCue(cue string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCue:"), purego.NSString(cue))
 }
 
-// CueAfter wraps the corresponding Objective-C method.
+// CueAfter returns the cue after.
 func (dsd *DOMCSSStyleDeclaration) CueAfter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cueAfter"))
 	if _r == 0 {
@@ -689,7 +689,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCueAfter(cueAfter string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCueAfter:"), purego.NSString(cueAfter))
 }
 
-// CueBefore wraps the corresponding Objective-C method.
+// CueBefore returns the cue before.
 func (dsd *DOMCSSStyleDeclaration) CueBefore() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cueBefore"))
 	if _r == 0 {
@@ -703,7 +703,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCueBefore(cueBefore string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCueBefore:"), purego.NSString(cueBefore))
 }
 
-// Cursor wraps the corresponding Objective-C method.
+// Cursor returns the cursor.
 func (dsd *DOMCSSStyleDeclaration) Cursor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cursor"))
 	if _r == 0 {
@@ -717,7 +717,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCursor(cursor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCursor:"), purego.NSString(cursor))
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (dsd *DOMCSSStyleDeclaration) Direction() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("direction"))
 	if _r == 0 {
@@ -731,7 +731,7 @@ func (dsd *DOMCSSStyleDeclaration) SetDirection(direction string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setDirection:"), purego.NSString(direction))
 }
 
-// Display wraps the corresponding Objective-C method.
+// Display returns the display.
 func (dsd *DOMCSSStyleDeclaration) Display() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("display"))
 	if _r == 0 {
@@ -745,7 +745,7 @@ func (dsd *DOMCSSStyleDeclaration) SetDisplay(display string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setDisplay:"), purego.NSString(display))
 }
 
-// Elevation wraps the corresponding Objective-C method.
+// Elevation returns the elevation.
 func (dsd *DOMCSSStyleDeclaration) Elevation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("elevation"))
 	if _r == 0 {
@@ -759,7 +759,7 @@ func (dsd *DOMCSSStyleDeclaration) SetElevation(elevation string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setElevation:"), purego.NSString(elevation))
 }
 
-// EmptyCells wraps the corresponding Objective-C method.
+// EmptyCells returns the empty cells.
 func (dsd *DOMCSSStyleDeclaration) EmptyCells() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("emptyCells"))
 	if _r == 0 {
@@ -773,7 +773,7 @@ func (dsd *DOMCSSStyleDeclaration) SetEmptyCells(emptyCells string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setEmptyCells:"), purego.NSString(emptyCells))
 }
 
-// CSSFloat wraps the corresponding Objective-C method.
+// CSSFloat returns the CSS float.
 func (dsd *DOMCSSStyleDeclaration) CSSFloat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("cssFloat"))
 	if _r == 0 {
@@ -787,7 +787,7 @@ func (dsd *DOMCSSStyleDeclaration) SetCSSFloat(cssFloat string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setCssFloat:"), purego.NSString(cssFloat))
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (dsd *DOMCSSStyleDeclaration) Font() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("font"))
 	if _r == 0 {
@@ -801,7 +801,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFont(font string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFont:"), purego.NSString(font))
 }
 
-// FontFamily wraps the corresponding Objective-C method.
+// FontFamily returns the font family.
 func (dsd *DOMCSSStyleDeclaration) FontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontFamily"))
 	if _r == 0 {
@@ -815,7 +815,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontFamily(fontFamily string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontFamily:"), purego.NSString(fontFamily))
 }
 
-// FontSize wraps the corresponding Objective-C method.
+// FontSize returns the font size.
 func (dsd *DOMCSSStyleDeclaration) FontSize() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontSize"))
 	if _r == 0 {
@@ -829,7 +829,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontSize(fontSize string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontSize:"), purego.NSString(fontSize))
 }
 
-// FontSizeAdjust wraps the corresponding Objective-C method.
+// FontSizeAdjust returns the font size adjust.
 func (dsd *DOMCSSStyleDeclaration) FontSizeAdjust() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontSizeAdjust"))
 	if _r == 0 {
@@ -843,7 +843,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontSizeAdjust(fontSizeAdjust string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontSizeAdjust:"), purego.NSString(fontSizeAdjust))
 }
 
-// FontStretch wraps the corresponding Objective-C method.
+// FontStretch returns the font stretch.
 func (dsd *DOMCSSStyleDeclaration) FontStretch() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontStretch"))
 	if _r == 0 {
@@ -857,7 +857,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontStretch(fontStretch string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontStretch:"), purego.NSString(fontStretch))
 }
 
-// FontStyle wraps the corresponding Objective-C method.
+// FontStyle returns the font style.
 func (dsd *DOMCSSStyleDeclaration) FontStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontStyle"))
 	if _r == 0 {
@@ -871,7 +871,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontStyle(fontStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontStyle:"), purego.NSString(fontStyle))
 }
 
-// FontVariant wraps the corresponding Objective-C method.
+// FontVariant returns the font variant.
 func (dsd *DOMCSSStyleDeclaration) FontVariant() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontVariant"))
 	if _r == 0 {
@@ -885,7 +885,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontVariant(fontVariant string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontVariant:"), purego.NSString(fontVariant))
 }
 
-// FontWeight wraps the corresponding Objective-C method.
+// FontWeight returns the font weight.
 func (dsd *DOMCSSStyleDeclaration) FontWeight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("fontWeight"))
 	if _r == 0 {
@@ -899,7 +899,7 @@ func (dsd *DOMCSSStyleDeclaration) SetFontWeight(fontWeight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFontWeight:"), purego.NSString(fontWeight))
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (dsd *DOMCSSStyleDeclaration) Height() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("height"))
 	if _r == 0 {
@@ -913,7 +913,7 @@ func (dsd *DOMCSSStyleDeclaration) SetHeight(height string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setHeight:"), purego.NSString(height))
 }
 
-// Left wraps the corresponding Objective-C method.
+// Left returns the left.
 func (dsd *DOMCSSStyleDeclaration) Left() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("left"))
 	if _r == 0 {
@@ -927,7 +927,7 @@ func (dsd *DOMCSSStyleDeclaration) SetLeft(left string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setLeft:"), purego.NSString(left))
 }
 
-// LetterSpacing wraps the corresponding Objective-C method.
+// LetterSpacing returns the letter spacing.
 func (dsd *DOMCSSStyleDeclaration) LetterSpacing() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("letterSpacing"))
 	if _r == 0 {
@@ -941,7 +941,7 @@ func (dsd *DOMCSSStyleDeclaration) SetLetterSpacing(letterSpacing string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setLetterSpacing:"), purego.NSString(letterSpacing))
 }
 
-// LineHeight wraps the corresponding Objective-C method.
+// LineHeight returns the line height.
 func (dsd *DOMCSSStyleDeclaration) LineHeight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("lineHeight"))
 	if _r == 0 {
@@ -955,7 +955,7 @@ func (dsd *DOMCSSStyleDeclaration) SetLineHeight(lineHeight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setLineHeight:"), purego.NSString(lineHeight))
 }
 
-// ListStyle wraps the corresponding Objective-C method.
+// ListStyle returns the list style.
 func (dsd *DOMCSSStyleDeclaration) ListStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("listStyle"))
 	if _r == 0 {
@@ -969,7 +969,7 @@ func (dsd *DOMCSSStyleDeclaration) SetListStyle(listStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setListStyle:"), purego.NSString(listStyle))
 }
 
-// ListStyleImage wraps the corresponding Objective-C method.
+// ListStyleImage returns the list style image.
 func (dsd *DOMCSSStyleDeclaration) ListStyleImage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("listStyleImage"))
 	if _r == 0 {
@@ -983,7 +983,7 @@ func (dsd *DOMCSSStyleDeclaration) SetListStyleImage(listStyleImage string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setListStyleImage:"), purego.NSString(listStyleImage))
 }
 
-// ListStylePosition wraps the corresponding Objective-C method.
+// ListStylePosition returns the list style position.
 func (dsd *DOMCSSStyleDeclaration) ListStylePosition() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("listStylePosition"))
 	if _r == 0 {
@@ -997,7 +997,7 @@ func (dsd *DOMCSSStyleDeclaration) SetListStylePosition(listStylePosition string
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setListStylePosition:"), purego.NSString(listStylePosition))
 }
 
-// ListStyleType wraps the corresponding Objective-C method.
+// ListStyleType returns the list style type.
 func (dsd *DOMCSSStyleDeclaration) ListStyleType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("listStyleType"))
 	if _r == 0 {
@@ -1011,7 +1011,7 @@ func (dsd *DOMCSSStyleDeclaration) SetListStyleType(listStyleType string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setListStyleType:"), purego.NSString(listStyleType))
 }
 
-// Margin wraps the corresponding Objective-C method.
+// Margin returns the margin.
 func (dsd *DOMCSSStyleDeclaration) Margin() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("margin"))
 	if _r == 0 {
@@ -1025,7 +1025,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMargin(margin string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMargin:"), purego.NSString(margin))
 }
 
-// MarginTop wraps the corresponding Objective-C method.
+// MarginTop returns the margin top.
 func (dsd *DOMCSSStyleDeclaration) MarginTop() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("marginTop"))
 	if _r == 0 {
@@ -1039,7 +1039,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarginTop(marginTop string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarginTop:"), purego.NSString(marginTop))
 }
 
-// MarginRight wraps the corresponding Objective-C method.
+// MarginRight returns the margin right.
 func (dsd *DOMCSSStyleDeclaration) MarginRight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("marginRight"))
 	if _r == 0 {
@@ -1053,7 +1053,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarginRight(marginRight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarginRight:"), purego.NSString(marginRight))
 }
 
-// MarginBottom wraps the corresponding Objective-C method.
+// MarginBottom returns the margin bottom.
 func (dsd *DOMCSSStyleDeclaration) MarginBottom() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("marginBottom"))
 	if _r == 0 {
@@ -1067,7 +1067,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarginBottom(marginBottom string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarginBottom:"), purego.NSString(marginBottom))
 }
 
-// MarginLeft wraps the corresponding Objective-C method.
+// MarginLeft returns the margin left.
 func (dsd *DOMCSSStyleDeclaration) MarginLeft() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("marginLeft"))
 	if _r == 0 {
@@ -1081,7 +1081,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarginLeft(marginLeft string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarginLeft:"), purego.NSString(marginLeft))
 }
 
-// MarkerOffset wraps the corresponding Objective-C method.
+// MarkerOffset returns the marker offset.
 func (dsd *DOMCSSStyleDeclaration) MarkerOffset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("markerOffset"))
 	if _r == 0 {
@@ -1095,7 +1095,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarkerOffset(markerOffset string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarkerOffset:"), purego.NSString(markerOffset))
 }
 
-// Marks wraps the corresponding Objective-C method.
+// Marks returns the marks.
 func (dsd *DOMCSSStyleDeclaration) Marks() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("marks"))
 	if _r == 0 {
@@ -1109,7 +1109,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMarks(marks string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMarks:"), purego.NSString(marks))
 }
 
-// MaxHeight wraps the corresponding Objective-C method.
+// MaxHeight returns the max height.
 func (dsd *DOMCSSStyleDeclaration) MaxHeight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("maxHeight"))
 	if _r == 0 {
@@ -1123,7 +1123,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMaxHeight(maxHeight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMaxHeight:"), purego.NSString(maxHeight))
 }
 
-// MaxWidth wraps the corresponding Objective-C method.
+// MaxWidth returns the max width.
 func (dsd *DOMCSSStyleDeclaration) MaxWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("maxWidth"))
 	if _r == 0 {
@@ -1137,7 +1137,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMaxWidth(maxWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMaxWidth:"), purego.NSString(maxWidth))
 }
 
-// MinHeight wraps the corresponding Objective-C method.
+// MinHeight returns the min height.
 func (dsd *DOMCSSStyleDeclaration) MinHeight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("minHeight"))
 	if _r == 0 {
@@ -1151,7 +1151,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMinHeight(minHeight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMinHeight:"), purego.NSString(minHeight))
 }
 
-// MinWidth wraps the corresponding Objective-C method.
+// MinWidth returns the min width.
 func (dsd *DOMCSSStyleDeclaration) MinWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("minWidth"))
 	if _r == 0 {
@@ -1165,7 +1165,7 @@ func (dsd *DOMCSSStyleDeclaration) SetMinWidth(minWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setMinWidth:"), purego.NSString(minWidth))
 }
 
-// Orphans wraps the corresponding Objective-C method.
+// Orphans returns the orphans.
 func (dsd *DOMCSSStyleDeclaration) Orphans() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("orphans"))
 	if _r == 0 {
@@ -1179,7 +1179,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOrphans(orphans string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOrphans:"), purego.NSString(orphans))
 }
 
-// Outline wraps the corresponding Objective-C method.
+// Outline returns the outline.
 func (dsd *DOMCSSStyleDeclaration) Outline() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("outline"))
 	if _r == 0 {
@@ -1193,7 +1193,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOutline(outline string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOutline:"), purego.NSString(outline))
 }
 
-// OutlineColor wraps the corresponding Objective-C method.
+// OutlineColor returns the outline color.
 func (dsd *DOMCSSStyleDeclaration) OutlineColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("outlineColor"))
 	if _r == 0 {
@@ -1207,7 +1207,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOutlineColor(outlineColor string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOutlineColor:"), purego.NSString(outlineColor))
 }
 
-// OutlineStyle wraps the corresponding Objective-C method.
+// OutlineStyle returns the outline style.
 func (dsd *DOMCSSStyleDeclaration) OutlineStyle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("outlineStyle"))
 	if _r == 0 {
@@ -1221,7 +1221,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOutlineStyle(outlineStyle string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOutlineStyle:"), purego.NSString(outlineStyle))
 }
 
-// OutlineWidth wraps the corresponding Objective-C method.
+// OutlineWidth returns the outline width.
 func (dsd *DOMCSSStyleDeclaration) OutlineWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("outlineWidth"))
 	if _r == 0 {
@@ -1235,7 +1235,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOutlineWidth(outlineWidth string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOutlineWidth:"), purego.NSString(outlineWidth))
 }
 
-// Overflow wraps the corresponding Objective-C method.
+// Overflow returns the overflow.
 func (dsd *DOMCSSStyleDeclaration) Overflow() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("overflow"))
 	if _r == 0 {
@@ -1249,7 +1249,7 @@ func (dsd *DOMCSSStyleDeclaration) SetOverflow(overflow string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setOverflow:"), purego.NSString(overflow))
 }
 
-// Padding wraps the corresponding Objective-C method.
+// Padding returns the padding.
 func (dsd *DOMCSSStyleDeclaration) Padding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("padding"))
 	if _r == 0 {
@@ -1263,7 +1263,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPadding(padding string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPadding:"), purego.NSString(padding))
 }
 
-// PaddingTop wraps the corresponding Objective-C method.
+// PaddingTop returns the padding top.
 func (dsd *DOMCSSStyleDeclaration) PaddingTop() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("paddingTop"))
 	if _r == 0 {
@@ -1277,7 +1277,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPaddingTop(paddingTop string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPaddingTop:"), purego.NSString(paddingTop))
 }
 
-// PaddingRight wraps the corresponding Objective-C method.
+// PaddingRight returns the padding right.
 func (dsd *DOMCSSStyleDeclaration) PaddingRight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("paddingRight"))
 	if _r == 0 {
@@ -1291,7 +1291,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPaddingRight(paddingRight string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPaddingRight:"), purego.NSString(paddingRight))
 }
 
-// PaddingBottom wraps the corresponding Objective-C method.
+// PaddingBottom returns the padding bottom.
 func (dsd *DOMCSSStyleDeclaration) PaddingBottom() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("paddingBottom"))
 	if _r == 0 {
@@ -1305,7 +1305,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPaddingBottom(paddingBottom string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPaddingBottom:"), purego.NSString(paddingBottom))
 }
 
-// PaddingLeft wraps the corresponding Objective-C method.
+// PaddingLeft returns the padding left.
 func (dsd *DOMCSSStyleDeclaration) PaddingLeft() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("paddingLeft"))
 	if _r == 0 {
@@ -1319,7 +1319,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPaddingLeft(paddingLeft string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPaddingLeft:"), purego.NSString(paddingLeft))
 }
 
-// Page wraps the corresponding Objective-C method.
+// Page returns the page.
 func (dsd *DOMCSSStyleDeclaration) Page() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("page"))
 	if _r == 0 {
@@ -1333,7 +1333,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPage(page string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPage:"), purego.NSString(page))
 }
 
-// PageBreakAfter wraps the corresponding Objective-C method.
+// PageBreakAfter returns the page break after.
 func (dsd *DOMCSSStyleDeclaration) PageBreakAfter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pageBreakAfter"))
 	if _r == 0 {
@@ -1347,7 +1347,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPageBreakAfter(pageBreakAfter string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPageBreakAfter:"), purego.NSString(pageBreakAfter))
 }
 
-// PageBreakBefore wraps the corresponding Objective-C method.
+// PageBreakBefore returns the page break before.
 func (dsd *DOMCSSStyleDeclaration) PageBreakBefore() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pageBreakBefore"))
 	if _r == 0 {
@@ -1361,7 +1361,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPageBreakBefore(pageBreakBefore string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPageBreakBefore:"), purego.NSString(pageBreakBefore))
 }
 
-// PageBreakInside wraps the corresponding Objective-C method.
+// PageBreakInside returns the page break inside.
 func (dsd *DOMCSSStyleDeclaration) PageBreakInside() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pageBreakInside"))
 	if _r == 0 {
@@ -1375,7 +1375,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPageBreakInside(pageBreakInside string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPageBreakInside:"), purego.NSString(pageBreakInside))
 }
 
-// Pause wraps the corresponding Objective-C method.
+// Pause returns the pause.
 func (dsd *DOMCSSStyleDeclaration) Pause() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pause"))
 	if _r == 0 {
@@ -1389,7 +1389,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPause(pause string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPause:"), purego.NSString(pause))
 }
 
-// PauseAfter wraps the corresponding Objective-C method.
+// PauseAfter returns the pause after.
 func (dsd *DOMCSSStyleDeclaration) PauseAfter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pauseAfter"))
 	if _r == 0 {
@@ -1403,7 +1403,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPauseAfter(pauseAfter string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPauseAfter:"), purego.NSString(pauseAfter))
 }
 
-// PauseBefore wraps the corresponding Objective-C method.
+// PauseBefore returns the pause before.
 func (dsd *DOMCSSStyleDeclaration) PauseBefore() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pauseBefore"))
 	if _r == 0 {
@@ -1417,7 +1417,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPauseBefore(pauseBefore string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPauseBefore:"), purego.NSString(pauseBefore))
 }
 
-// Pitch wraps the corresponding Objective-C method.
+// Pitch returns the pitch.
 func (dsd *DOMCSSStyleDeclaration) Pitch() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pitch"))
 	if _r == 0 {
@@ -1431,7 +1431,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPitch(pitch string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPitch:"), purego.NSString(pitch))
 }
 
-// PitchRange wraps the corresponding Objective-C method.
+// PitchRange returns the pitch range.
 func (dsd *DOMCSSStyleDeclaration) PitchRange() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("pitchRange"))
 	if _r == 0 {
@@ -1445,7 +1445,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPitchRange(pitchRange string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPitchRange:"), purego.NSString(pitchRange))
 }
 
-// PlayDuring wraps the corresponding Objective-C method.
+// PlayDuring returns the play during.
 func (dsd *DOMCSSStyleDeclaration) PlayDuring() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("playDuring"))
 	if _r == 0 {
@@ -1459,7 +1459,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPlayDuring(playDuring string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPlayDuring:"), purego.NSString(playDuring))
 }
 
-// Position wraps the corresponding Objective-C method.
+// Position returns the position.
 func (dsd *DOMCSSStyleDeclaration) Position() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("position"))
 	if _r == 0 {
@@ -1473,7 +1473,7 @@ func (dsd *DOMCSSStyleDeclaration) SetPosition(position string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setPosition:"), purego.NSString(position))
 }
 
-// Quotes wraps the corresponding Objective-C method.
+// Quotes returns the quotes.
 func (dsd *DOMCSSStyleDeclaration) Quotes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("quotes"))
 	if _r == 0 {
@@ -1487,7 +1487,7 @@ func (dsd *DOMCSSStyleDeclaration) SetQuotes(quotes string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setQuotes:"), purego.NSString(quotes))
 }
 
-// Richness wraps the corresponding Objective-C method.
+// Richness returns the richness.
 func (dsd *DOMCSSStyleDeclaration) Richness() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("richness"))
 	if _r == 0 {
@@ -1501,7 +1501,7 @@ func (dsd *DOMCSSStyleDeclaration) SetRichness(richness string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setRichness:"), purego.NSString(richness))
 }
 
-// Right wraps the corresponding Objective-C method.
+// Right returns the right.
 func (dsd *DOMCSSStyleDeclaration) Right() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("right"))
 	if _r == 0 {
@@ -1515,7 +1515,7 @@ func (dsd *DOMCSSStyleDeclaration) SetRight(right string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setRight:"), purego.NSString(right))
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (dsd *DOMCSSStyleDeclaration) Size() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("size"))
 	if _r == 0 {
@@ -1529,7 +1529,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSize(size string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSize:"), purego.NSString(size))
 }
 
-// Speak wraps the corresponding Objective-C method.
+// Speak returns the speak.
 func (dsd *DOMCSSStyleDeclaration) Speak() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("speak"))
 	if _r == 0 {
@@ -1543,7 +1543,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSpeak(speak string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSpeak:"), purego.NSString(speak))
 }
 
-// SpeakHeader wraps the corresponding Objective-C method.
+// SpeakHeader returns the speak header.
 func (dsd *DOMCSSStyleDeclaration) SpeakHeader() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("speakHeader"))
 	if _r == 0 {
@@ -1557,7 +1557,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSpeakHeader(speakHeader string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSpeakHeader:"), purego.NSString(speakHeader))
 }
 
-// SpeakNumeral wraps the corresponding Objective-C method.
+// SpeakNumeral returns the speak numeral.
 func (dsd *DOMCSSStyleDeclaration) SpeakNumeral() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("speakNumeral"))
 	if _r == 0 {
@@ -1571,7 +1571,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSpeakNumeral(speakNumeral string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSpeakNumeral:"), purego.NSString(speakNumeral))
 }
 
-// SpeakPunctuation wraps the corresponding Objective-C method.
+// SpeakPunctuation returns the speak punctuation.
 func (dsd *DOMCSSStyleDeclaration) SpeakPunctuation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("speakPunctuation"))
 	if _r == 0 {
@@ -1585,7 +1585,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSpeakPunctuation(speakPunctuation string) 
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSpeakPunctuation:"), purego.NSString(speakPunctuation))
 }
 
-// SpeechRate wraps the corresponding Objective-C method.
+// SpeechRate returns the speech rate.
 func (dsd *DOMCSSStyleDeclaration) SpeechRate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("speechRate"))
 	if _r == 0 {
@@ -1599,7 +1599,7 @@ func (dsd *DOMCSSStyleDeclaration) SetSpeechRate(speechRate string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setSpeechRate:"), purego.NSString(speechRate))
 }
 
-// Stress wraps the corresponding Objective-C method.
+// Stress returns the stress.
 func (dsd *DOMCSSStyleDeclaration) Stress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("stress"))
 	if _r == 0 {
@@ -1613,7 +1613,7 @@ func (dsd *DOMCSSStyleDeclaration) SetStress(stress string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setStress:"), purego.NSString(stress))
 }
 
-// TableLayout wraps the corresponding Objective-C method.
+// TableLayout returns the table layout.
 func (dsd *DOMCSSStyleDeclaration) TableLayout() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("tableLayout"))
 	if _r == 0 {
@@ -1627,7 +1627,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTableLayout(tableLayout string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTableLayout:"), purego.NSString(tableLayout))
 }
 
-// TextAlign wraps the corresponding Objective-C method.
+// TextAlign returns the text align.
 func (dsd *DOMCSSStyleDeclaration) TextAlign() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("textAlign"))
 	if _r == 0 {
@@ -1641,7 +1641,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTextAlign(textAlign string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTextAlign:"), purego.NSString(textAlign))
 }
 
-// TextDecoration wraps the corresponding Objective-C method.
+// TextDecoration returns the text decoration.
 func (dsd *DOMCSSStyleDeclaration) TextDecoration() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("textDecoration"))
 	if _r == 0 {
@@ -1655,7 +1655,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTextDecoration(textDecoration string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTextDecoration:"), purego.NSString(textDecoration))
 }
 
-// TextIndent wraps the corresponding Objective-C method.
+// TextIndent returns the text indent.
 func (dsd *DOMCSSStyleDeclaration) TextIndent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("textIndent"))
 	if _r == 0 {
@@ -1669,7 +1669,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTextIndent(textIndent string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTextIndent:"), purego.NSString(textIndent))
 }
 
-// TextShadow wraps the corresponding Objective-C method.
+// TextShadow returns the text shadow.
 func (dsd *DOMCSSStyleDeclaration) TextShadow() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("textShadow"))
 	if _r == 0 {
@@ -1683,7 +1683,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTextShadow(textShadow string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTextShadow:"), purego.NSString(textShadow))
 }
 
-// TextTransform wraps the corresponding Objective-C method.
+// TextTransform returns the text transform.
 func (dsd *DOMCSSStyleDeclaration) TextTransform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("textTransform"))
 	if _r == 0 {
@@ -1697,7 +1697,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTextTransform(textTransform string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTextTransform:"), purego.NSString(textTransform))
 }
 
-// Top wraps the corresponding Objective-C method.
+// Top returns the top.
 func (dsd *DOMCSSStyleDeclaration) Top() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("top"))
 	if _r == 0 {
@@ -1711,7 +1711,7 @@ func (dsd *DOMCSSStyleDeclaration) SetTop(top string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setTop:"), purego.NSString(top))
 }
 
-// UnicodeBidi wraps the corresponding Objective-C method.
+// UnicodeBidi returns the unicode bidi.
 func (dsd *DOMCSSStyleDeclaration) UnicodeBidi() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("unicodeBidi"))
 	if _r == 0 {
@@ -1725,7 +1725,7 @@ func (dsd *DOMCSSStyleDeclaration) SetUnicodeBidi(unicodeBidi string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setUnicodeBidi:"), purego.NSString(unicodeBidi))
 }
 
-// VerticalAlign wraps the corresponding Objective-C method.
+// VerticalAlign returns the vertical align.
 func (dsd *DOMCSSStyleDeclaration) VerticalAlign() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("verticalAlign"))
 	if _r == 0 {
@@ -1739,7 +1739,7 @@ func (dsd *DOMCSSStyleDeclaration) SetVerticalAlign(verticalAlign string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setVerticalAlign:"), purego.NSString(verticalAlign))
 }
 
-// Visibility wraps the corresponding Objective-C method.
+// Visibility returns the visibility.
 func (dsd *DOMCSSStyleDeclaration) Visibility() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("visibility"))
 	if _r == 0 {
@@ -1753,7 +1753,7 @@ func (dsd *DOMCSSStyleDeclaration) SetVisibility(visibility string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setVisibility:"), purego.NSString(visibility))
 }
 
-// VoiceFamily wraps the corresponding Objective-C method.
+// VoiceFamily returns the voice family.
 func (dsd *DOMCSSStyleDeclaration) VoiceFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("voiceFamily"))
 	if _r == 0 {
@@ -1767,7 +1767,7 @@ func (dsd *DOMCSSStyleDeclaration) SetVoiceFamily(voiceFamily string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setVoiceFamily:"), purego.NSString(voiceFamily))
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (dsd *DOMCSSStyleDeclaration) Volume() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("volume"))
 	if _r == 0 {
@@ -1781,7 +1781,7 @@ func (dsd *DOMCSSStyleDeclaration) SetVolume(volume string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setVolume:"), purego.NSString(volume))
 }
 
-// WhiteSpace wraps the corresponding Objective-C method.
+// WhiteSpace returns the white space.
 func (dsd *DOMCSSStyleDeclaration) WhiteSpace() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("whiteSpace"))
 	if _r == 0 {
@@ -1795,7 +1795,7 @@ func (dsd *DOMCSSStyleDeclaration) SetWhiteSpace(whiteSpace string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setWhiteSpace:"), purego.NSString(whiteSpace))
 }
 
-// Widows wraps the corresponding Objective-C method.
+// Widows returns the widows.
 func (dsd *DOMCSSStyleDeclaration) Widows() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("widows"))
 	if _r == 0 {
@@ -1809,7 +1809,7 @@ func (dsd *DOMCSSStyleDeclaration) SetWidows(widows string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setWidows:"), purego.NSString(widows))
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (dsd *DOMCSSStyleDeclaration) Width() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("width"))
 	if _r == 0 {
@@ -1823,7 +1823,7 @@ func (dsd *DOMCSSStyleDeclaration) SetWidth(width string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setWidth:"), purego.NSString(width))
 }
 
-// WordSpacing wraps the corresponding Objective-C method.
+// WordSpacing returns the word spacing.
 func (dsd *DOMCSSStyleDeclaration) WordSpacing() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("wordSpacing"))
 	if _r == 0 {
@@ -1837,7 +1837,7 @@ func (dsd *DOMCSSStyleDeclaration) SetWordSpacing(wordSpacing string) {
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setWordSpacing:"), purego.NSString(wordSpacing))
 }
 
-// ZIndex wraps the corresponding Objective-C method.
+// ZIndex returns the z index.
 func (dsd *DOMCSSStyleDeclaration) ZIndex() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("zIndex"))
 	if _r == 0 {

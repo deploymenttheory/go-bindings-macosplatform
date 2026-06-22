@@ -70,7 +70,7 @@ func NewMTRTimeSynchronizationClusterSetTrustedTimeSourceParams() *MTRTimeSynchr
 	return mTRTimeSynchronizationClusterSetTrustedTimeSourceParamsAdopt(_id)
 }
 
-// WithTrustedTimeSource sets the property and returns the receiver so calls can be chained.
+// WithTrustedTimeSource sets the trusted time source.
 func (mtscsttsp *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) WithTrustedTimeSource(trustedTimeSource *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams {
 	objc.Send[objc.ID](objref.IDOf(mtscsttsp), objc.RegisterName("setTrustedTimeSource:"), objref.IDOf(trustedTimeSource))
 	return mtscsttsp
@@ -88,7 +88,7 @@ func (mtscsttsp *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) WithSe
 	return mtscsttsp
 }
 
-// TrustedTimeSource wraps the corresponding Objective-C method.
+// TrustedTimeSource returns the trusted time source.
 func (mtscsttsp *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams) TrustedTimeSource() *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsttsp), objc.RegisterName("trustedTimeSource"))
 	return MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructFromID(_r)

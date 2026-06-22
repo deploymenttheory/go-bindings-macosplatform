@@ -73,13 +73,13 @@ func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, ga
 	return airportGateAdopt(_id)
 }
 
-// Airport wraps the corresponding Objective-C method.
+// Airport returns the airport.
 func (ag *AirportGate) Airport() *Airport {
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("airport"))
 	return AirportFromID(_r)
 }
 
-// Terminal wraps the corresponding Objective-C method.
+// Terminal returns the terminal.
 func (ag *AirportGate) Terminal() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("terminal"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (ag *AirportGate) Terminal() string {
 	return purego.GoString(_r)
 }
 
-// Gate wraps the corresponding Objective-C method.
+// Gate returns the gate.
 func (ag *AirportGate) Gate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("gate"))
 	if _r == 0 {

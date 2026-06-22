@@ -52,8 +52,8 @@ func NewIOBluetoothDevice() *IOBluetoothDevice {
 	return iOBluetoothDeviceAdopt(_id)
 }
 
-// GetDeviceRef returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
-func (ibd *IOBluetoothDevice) GetDeviceRef() obj.Object {
+// DeviceRef returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
+func (ibd *IOBluetoothDevice) DeviceRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getDeviceRef"))
 	return obj.Wrap(_r)
 }
@@ -151,32 +151,32 @@ func (ibd *IOBluetoothDevice) GetAddressString() string {
 	return purego.GoString(_r)
 }
 
-// GetPageScanRepetitionMode get the value of the page scan repetition mode for the device.
-func (ibd *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
+// PageScanRepetitionMode get the value of the page scan repetition mode for the device.
+func (ibd *IOBluetoothDevice) PageScanRepetitionMode() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanRepetitionMode"))
 	return _r
 }
 
-// GetPageScanPeriodMode get the value of the page scan period mode for the device.
-func (ibd *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
+// PageScanPeriodMode get the value of the page scan period mode for the device.
+func (ibd *IOBluetoothDevice) PageScanPeriodMode() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanPeriodMode"))
 	return _r
 }
 
-// GetPageScanMode get the page scan mode for the device.
-func (ibd *IOBluetoothDevice) GetPageScanMode() uint8 {
+// PageScanMode get the page scan mode for the device.
+func (ibd *IOBluetoothDevice) PageScanMode() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getPageScanMode"))
 	return _r
 }
 
-// GetClockOffset get the clock offset value of the device.
-func (ibd *IOBluetoothDevice) GetClockOffset() uint16 {
+// ClockOffset get the clock offset value of the device.
+func (ibd *IOBluetoothDevice) ClockOffset() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(ibd), objc.RegisterName("getClockOffset"))
 	return _r
 }
 
-// GetLastInquiryUpdate get the date/time of the last time the device was returned during an inquiry.
-func (ibd *IOBluetoothDevice) GetLastInquiryUpdate() obj.Object {
+// LastInquiryUpdate get the date/time of the last time the device was returned during an inquiry.
+func (ibd *IOBluetoothDevice) LastInquiryUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getLastInquiryUpdate"))
 	return obj.Wrap(_r)
 }
@@ -253,14 +253,14 @@ func (ibd *IOBluetoothDevice) IsIncoming() bool {
 	return _r
 }
 
-// GetLinkType get the link type for the baseband connection.
-func (ibd *IOBluetoothDevice) GetLinkType() uint8 {
+// LinkType get the link type for the baseband connection.
+func (ibd *IOBluetoothDevice) LinkType() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getLinkType"))
 	return _r
 }
 
-// GetEncryptionMode get the encryption mode for the baseband connection.
-func (ibd *IOBluetoothDevice) GetEncryptionMode() uint8 {
+// EncryptionMode get the encryption mode for the baseband connection.
+func (ibd *IOBluetoothDevice) EncryptionMode() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibd), objc.RegisterName("getEncryptionMode"))
 	return _r
 }
@@ -277,14 +277,14 @@ func (ibd *IOBluetoothDevice) PerformSDPQueryUuids(target obj.Object, uuidArray 
 	return _r
 }
 
-// GetServices wraps the corresponding Objective-C method.
+// GetServices returns the get services.
 func (ibd *IOBluetoothDevice) GetServices() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getServices"))
 	return obj.Wrap(_r)
 }
 
-// GetLastServicesUpdate get the date/time of the last SDP query.
-func (ibd *IOBluetoothDevice) GetLastServicesUpdate() obj.Object {
+// LastServicesUpdate get the date/time of the last SDP query.
+func (ibd *IOBluetoothDevice) LastServicesUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getLastServicesUpdate"))
 	return obj.Wrap(_r)
 }
@@ -343,31 +343,31 @@ func (ibd *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDeleg
 	return _r
 }
 
-// ClassOfDevice wraps the corresponding Objective-C method.
+// ClassOfDevice returns the class of device.
 func (ibd *IOBluetoothDevice) ClassOfDevice() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("classOfDevice"))
 	return _r
 }
 
-// ServiceClassMajor wraps the corresponding Objective-C method.
+// ServiceClassMajor returns the service class major.
 func (ibd *IOBluetoothDevice) ServiceClassMajor() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("serviceClassMajor"))
 	return _r
 }
 
-// DeviceClassMajor wraps the corresponding Objective-C method.
+// DeviceClassMajor returns the device class major.
 func (ibd *IOBluetoothDevice) DeviceClassMajor() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("deviceClassMajor"))
 	return _r
 }
 
-// DeviceClassMinor wraps the corresponding Objective-C method.
+// DeviceClassMinor returns the device class minor.
 func (ibd *IOBluetoothDevice) DeviceClassMinor() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ibd), objc.RegisterName("deviceClassMinor"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ibd *IOBluetoothDevice) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("name"))
 	if _r == 0 {
@@ -376,7 +376,7 @@ func (ibd *IOBluetoothDevice) Name() string {
 	return purego.GoString(_r)
 }
 
-// NameOrAddress wraps the corresponding Objective-C method.
+// NameOrAddress returns the name or address.
 func (ibd *IOBluetoothDevice) NameOrAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("nameOrAddress"))
 	if _r == 0 {
@@ -385,13 +385,13 @@ func (ibd *IOBluetoothDevice) NameOrAddress() string {
 	return purego.GoString(_r)
 }
 
-// LastNameUpdate wraps the corresponding Objective-C method.
+// LastNameUpdate returns the last name update.
 func (ibd *IOBluetoothDevice) LastNameUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("lastNameUpdate"))
 	return obj.Wrap(_r)
 }
 
-// AddressString wraps the corresponding Objective-C method.
+// AddressString returns the address string.
 func (ibd *IOBluetoothDevice) AddressString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("addressString"))
 	if _r == 0 {
@@ -400,13 +400,13 @@ func (ibd *IOBluetoothDevice) AddressString() string {
 	return purego.GoString(_r)
 }
 
-// ConnectionHandle wraps the corresponding Objective-C method.
+// ConnectionHandle returns the connection handle.
 func (ibd *IOBluetoothDevice) ConnectionHandle() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(ibd), objc.RegisterName("connectionHandle"))
 	return _r
 }
 
-// Services wraps the corresponding Objective-C method.
+// Services returns the services.
 func (ibd *IOBluetoothDevice) Services() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("services"))
 	return obj.Wrap(_r)

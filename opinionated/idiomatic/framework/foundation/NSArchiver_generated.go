@@ -53,7 +53,7 @@ func NewArchiverForWritingWithMutableData(mdata *MutableData) *Archiver {
 	return archiverAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (a *Archiver) WithScriptingProperties(scriptingProperties obj.Object) *Archiver {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return a
@@ -78,7 +78,7 @@ func (a *Archiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Obje
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
-// ArchiverData wraps the corresponding Objective-C method.
+// ArchiverData returns the archiver data.
 func (a *Archiver) ArchiverData() *MutableData {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("archiverData"))
 	return MutableDataFromID(_r)

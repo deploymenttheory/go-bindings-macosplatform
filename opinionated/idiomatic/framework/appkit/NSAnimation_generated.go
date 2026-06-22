@@ -159,49 +159,49 @@ func (a *Animation) ClearStopAnimation() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("clearStopAnimation"))
 }
 
-// IsAnimating wraps the corresponding Objective-C method.
+// IsAnimating reports whether the object is animating.
 func (a *Animation) IsAnimating() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isAnimating"))
 	return _r
 }
 
-// CurrentProgress wraps the corresponding Objective-C method.
+// CurrentProgress returns the current progress.
 func (a *Animation) CurrentProgress() float32 {
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentProgress"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (a *Animation) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
-// AnimationBlockingMode wraps the corresponding Objective-C method.
+// AnimationBlockingMode returns the animation blocking mode.
 func (a *Animation) AnimationBlockingMode() AnimationBlockingMode {
 	_r := objc.Send[AnimationBlockingMode](objref.IDOf(a), objc.RegisterName("animationBlockingMode"))
 	return _r
 }
 
-// FrameRate wraps the corresponding Objective-C method.
+// FrameRate returns the frame rate.
 func (a *Animation) FrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("frameRate"))
 	return _r
 }
 
-// AnimationCurve wraps the corresponding Objective-C method.
+// AnimationCurve returns the animation curve.
 func (a *Animation) AnimationCurve() AnimationCurve {
 	_r := objc.Send[AnimationCurve](objref.IDOf(a), objc.RegisterName("animationCurve"))
 	return _r
 }
 
-// CurrentValue wraps the corresponding Objective-C method.
+// CurrentValue returns the current value.
 func (a *Animation) CurrentValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("currentValue"))
 	return _r
 }
 
-// ProgressMarks wraps the corresponding Objective-C method.
+// ProgressMarks returns the progress marks.
 //
 // ProgressMarks returns the collection as a Go slice.
 func (a *Animation) ProgressMarks() []obj.Object {
@@ -209,7 +209,7 @@ func (a *Animation) ProgressMarks() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RunLoopModesForAnimating wraps the corresponding Objective-C method.
+// RunLoopModesForAnimating returns the run loop modes for animating.
 //
 // RunLoopModesForAnimating returns the collection as a Go slice.
 func (a *Animation) RunLoopModesForAnimating() []obj.Object {

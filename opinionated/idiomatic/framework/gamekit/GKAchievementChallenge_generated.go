@@ -51,7 +51,7 @@ func NewAchievementChallenge() *AchievementChallenge {
 	return achievementChallengeAdopt(_id)
 }
 
-// Achievement wraps the corresponding Objective-C method.
+// Achievement returns the achievement.
 func (ac *AchievementChallenge) Achievement() *Achievement {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("achievement"))
 	return AchievementFromID(_r)

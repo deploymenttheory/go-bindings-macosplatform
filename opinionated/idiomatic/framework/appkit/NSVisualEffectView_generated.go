@@ -84,32 +84,32 @@ func (vev *VisualEffectView) WithEmphasized(emphasized bool) *VisualEffectView {
 	return vev
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (vev *VisualEffectView) WithSubviews(items ...ViewProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setSubviews:"), _arr)
 	return vev
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (vev *VisualEffectView) WithHidden(hidden bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHidden:"), hidden)
 	return vev
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (vev *VisualEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return vev
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (vev *VisualEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return vev
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (vev *VisualEffectView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return vev
@@ -121,19 +121,19 @@ func (vev *VisualEffectView) WithFrame(frame corefoundation.CGRect) *VisualEffec
 	return vev
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (vev *VisualEffectView) WithFrameRotation(frameRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return vev
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (vev *VisualEffectView) WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return vev
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (vev *VisualEffectView) WithBoundsRotation(boundsRotation float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return vev
@@ -145,7 +145,7 @@ func (vev *VisualEffectView) WithBounds(bounds corefoundation.CGRect) *VisualEff
 	return vev
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (vev *VisualEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return vev
@@ -157,148 +157,148 @@ func (vev *VisualEffectView) WithNeedsDisplay(needsDisplay bool) *VisualEffectVi
 	return vev
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (vev *VisualEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return vev
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (vev *VisualEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return vev
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (vev *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return vev
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (vev *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return vev
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (vev *VisualEffectView) WithWantsLayer(wantsLayer bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return vev
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (vev *VisualEffectView) WithLayer(layer obj.Object) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return vev
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (vev *VisualEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return vev
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (vev *VisualEffectView) WithNeedsLayout(needsLayout bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return vev
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (vev *VisualEffectView) WithAlphaValue(alphaValue float64) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return vev
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (vev *VisualEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return vev
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (vev *VisualEffectView) WithBackgroundFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return vev
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (vev *VisualEffectView) WithCompositingFilter(compositingFilter obj.Object) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return vev
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (vev *VisualEffectView) WithContentFilters(items ...obj.Object) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setContentFilters:"), _arr)
 	return vev
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (vev *VisualEffectView) WithShadow(shadow *Shadow) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return vev
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (vev *VisualEffectView) WithClipsToBounds(clipsToBounds bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return vev
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (vev *VisualEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return vev
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (vev *VisualEffectView) WithToolTip(toolTip string) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return vev
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (vev *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return vev
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (vev *VisualEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return vev
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (vev *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return vev
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (vev *VisualEffectView) WithFocusRingType(focusRingType FocusRingType) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return vev
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (vev *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return vev
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (vev *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return vev
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (vev *VisualEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return vev
@@ -310,49 +310,49 @@ func (vev *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompact
 	return vev
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (vev *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return vev
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (vev *VisualEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return vev
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (vev *VisualEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return vev
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (vev *VisualEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return vev
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (vev *VisualEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return vev
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (vev *VisualEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return vev
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (vev *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return vev
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (vev *VisualEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView {
 	objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return vev

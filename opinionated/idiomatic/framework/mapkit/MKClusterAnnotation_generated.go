@@ -85,7 +85,7 @@ func (ca *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
 	return ca
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (ca *ClusterAnnotation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("title"))
 	if _r == 0 {
@@ -94,7 +94,7 @@ func (ca *ClusterAnnotation) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (ca *ClusterAnnotation) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (ca *ClusterAnnotation) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// MemberAnnotations wraps the corresponding Objective-C method.
+// MemberAnnotations returns the member annotations.
 func (ca *ClusterAnnotation) MemberAnnotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("memberAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

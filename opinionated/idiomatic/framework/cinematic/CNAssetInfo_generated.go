@@ -69,13 +69,13 @@ func (ai *AssetInfo) String() string {
 	return rt.Description(objref.IDOf(ai))
 }
 
-// Asset wraps the corresponding Objective-C method.
+// Asset returns the asset.
 func (ai *AssetInfo) Asset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("asset"))
 	return obj.Wrap(_r)
 }
 
-// AllCinematicTracks wraps the corresponding Objective-C method.
+// AllCinematicTracks returns the all cinematic tracks.
 //
 // AllCinematicTracks returns the collection as a Go slice.
 func (ai *AssetInfo) AllCinematicTracks() []obj.Object {
@@ -83,19 +83,19 @@ func (ai *AssetInfo) AllCinematicTracks() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CinematicVideoTrack wraps the corresponding Objective-C method.
+// CinematicVideoTrack returns the cinematic video track.
 func (ai *AssetInfo) CinematicVideoTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicVideoTrack"))
 	return obj.Wrap(_r)
 }
 
-// CinematicDisparityTrack wraps the corresponding Objective-C method.
+// CinematicDisparityTrack returns the cinematic disparity track.
 func (ai *AssetInfo) CinematicDisparityTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicDisparityTrack"))
 	return obj.Wrap(_r)
 }
 
-// CinematicMetadataTrack wraps the corresponding Objective-C method.
+// CinematicMetadataTrack returns the cinematic metadata track.
 func (ai *AssetInfo) CinematicMetadataTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicMetadataTrack"))
 	return obj.Wrap(_r)

@@ -58,7 +58,7 @@ func (agt *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
 	return agt
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (agt *ActionGoTo) Destination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(agt), objc.RegisterName("destination"))
 	return DestinationFromID(_r)

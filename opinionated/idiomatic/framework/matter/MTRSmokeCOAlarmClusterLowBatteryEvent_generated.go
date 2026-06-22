@@ -70,13 +70,13 @@ func NewMTRSmokeCOAlarmClusterLowBatteryEvent() *MTRSmokeCOAlarmClusterLowBatter
 	return mTRSmokeCOAlarmClusterLowBatteryEventAdopt(_id)
 }
 
-// WithAlarmSeverityLevel sets the property and returns the receiver so calls can be chained.
+// WithAlarmSeverityLevel sets the alarm severity level.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterLowBatteryEvent {
 	objc.Send[objc.ID](objref.IDOf(mscaclbe), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 	return mscaclbe
 }
 
-// AlarmSeverityLevel wraps the corresponding Objective-C method.
+// AlarmSeverityLevel returns the alarm severity level.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) AlarmSeverityLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscaclbe), objc.RegisterName("alarmSeverityLevel"))
 	return obj.Wrap(_r)

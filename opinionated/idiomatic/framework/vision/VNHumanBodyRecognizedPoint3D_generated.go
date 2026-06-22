@@ -52,7 +52,7 @@ func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 	return humanBodyRecognizedPoint3DAdopt(_id)
 }
 
-// ParentJoint wraps the corresponding Objective-C method.
+// ParentJoint returns the parent joint.
 func (hbrpd *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hbrpd), objc.RegisterName("parentJoint"))
 	return obj.Wrap(_r)

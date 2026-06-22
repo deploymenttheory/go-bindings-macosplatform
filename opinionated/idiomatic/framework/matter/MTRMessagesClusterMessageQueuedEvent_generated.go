@@ -70,13 +70,13 @@ func NewMTRMessagesClusterMessageQueuedEvent() *MTRMessagesClusterMessageQueuedE
 	return mTRMessagesClusterMessageQueuedEventAdopt(_id)
 }
 
-// WithMessageID sets the property and returns the receiver so calls can be chained.
+// WithMessageID sets the message ID.
 func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageQueuedEvent {
 	objc.Send[objc.ID](objref.IDOf(mmcmqe), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return mmcmqe
 }
 
-// MessageID wraps the corresponding Objective-C method.
+// MessageID returns the message ID.
 func (mmcmqe *MTRMessagesClusterMessageQueuedEvent) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmqe), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)

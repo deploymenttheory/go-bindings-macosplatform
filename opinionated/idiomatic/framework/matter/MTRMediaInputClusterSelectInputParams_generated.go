@@ -70,7 +70,7 @@ func NewMTRMediaInputClusterSelectInputParams() *MTRMediaInputClusterSelectInput
 	return mTRMediaInputClusterSelectInputParamsAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (mmicsip *MTRMediaInputClusterSelectInputParams) WithIndex(index obj.Object) *MTRMediaInputClusterSelectInputParams {
 	objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmicsip
@@ -88,7 +88,7 @@ func (mmicsip *MTRMediaInputClusterSelectInputParams) WithServerSideProcessingTi
 	return mmicsip
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (mmicsip *MTRMediaInputClusterSelectInputParams) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmicsip), objc.RegisterName("index"))
 	return obj.Wrap(_r)

@@ -53,67 +53,67 @@ func NewMTRClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *MTRDevi
 	return mTRClusterWaterHeaterManagementAdopt(_id)
 }
 
-// ReadAttributeHeaterTypesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHeaterTypesWithParams reads attribute heater types with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeHeaterTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeHeatDemandWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHeatDemandWithParams reads attribute heat demand with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeHeatDemandWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeHeatDemandWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTankVolumeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTankVolumeWithParams reads attribute tank volume with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeTankVolumeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeTankVolumeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEstimatedHeatRequiredWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEstimatedHeatRequiredWithParams reads attribute estimated heat required with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeEstimatedHeatRequiredWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTankPercentageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTankPercentageWithParams reads attribute tank percentage with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeTankPercentageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeTankPercentageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBoostStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBoostStateWithParams reads attribute boost state with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeBoostStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeBoostStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

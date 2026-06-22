@@ -78,25 +78,25 @@ func NewMTRDiagnosticLogsClusterRetrieveLogsResponseParamsWithResponseValueError
 	return mTRDiagnosticLogsClusterRetrieveLogsResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithStatus(status obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcrlrp
 }
 
-// WithLogContent sets the property and returns the receiver so calls can be chained.
+// WithLogContent sets the log content.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithLogContent(logContent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setLogContent:"), objref.IDOf(logContent))
 	return mdlcrlrp
 }
 
-// WithUtcTimeStamp sets the property and returns the receiver so calls can be chained.
+// WithUtcTimeStamp sets the utc time stamp.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithUtcTimeStamp(utcTimeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setUtcTimeStamp:"), objref.IDOf(utcTimeStamp))
 	return mdlcrlrp
 }
 
-// WithTimeSinceBoot sets the property and returns the receiver so calls can be chained.
+// WithTimeSinceBoot sets the time since boot.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeSinceBoot(timeSinceBoot obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setTimeSinceBoot:"), objref.IDOf(timeSinceBoot))
 	return mdlcrlrp
@@ -108,37 +108,37 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimedInv
 	return mdlcrlrp
 }
 
-// WithContent sets the property and returns the receiver so calls can be chained.
+// WithContent sets the content.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithContent(content obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return mdlcrlrp
 }
 
-// WithTimeStamp sets the property and returns the receiver so calls can be chained.
+// WithTimeStamp sets the time stamp.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeStamp(timeStamp obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setTimeStamp:"), objref.IDOf(timeStamp))
 	return mdlcrlrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// LogContent wraps the corresponding Objective-C method.
+// LogContent returns the log content.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) LogContent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("logContent"))
 	return obj.Wrap(_r)
 }
 
-// UtcTimeStamp wraps the corresponding Objective-C method.
+// UtcTimeStamp returns the utc time stamp.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) UtcTimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("utcTimeStamp"))
 	return obj.Wrap(_r)
 }
 
-// TimeSinceBoot wraps the corresponding Objective-C method.
+// TimeSinceBoot returns the time since boot.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("timeSinceBoot"))
 	return obj.Wrap(_r)
@@ -150,13 +150,13 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeT
 	return obj.Wrap(_r)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Content() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("content"))
 	return obj.Wrap(_r)
 }
 
-// TimeStamp wraps the corresponding Objective-C method.
+// TimeStamp returns the time stamp.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("timeStamp"))
 	return obj.Wrap(_r)

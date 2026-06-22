@@ -180,25 +180,25 @@ func (tl *TiledLayer) WithContentsFormat(contentsFormat obj.Object) *TiledLayer 
 	return tl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (tl *TiledLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return tl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (tl *TiledLayer) WithToneMapMode(toneMapMode obj.Object) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return tl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (tl *TiledLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return tl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (tl *TiledLayer) WithContentsHeadroom(contentsHeadroom float64) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return tl
@@ -264,13 +264,13 @@ func (tl *TiledLayer) WithCornerRadius(cornerRadius float64) *TiledLayer {
 	return tl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (tl *TiledLayer) WithMaskedCorners(maskedCorners CornerMask) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return tl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (tl *TiledLayer) WithCornerCurve(cornerCurve obj.Object) *TiledLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return tl
@@ -379,19 +379,19 @@ func (tl *TiledLayer) WithConstraints(items ...*Constraint) *TiledLayer {
 	return tl
 }
 
-// LevelsOfDetail wraps the corresponding Objective-C method.
+// LevelsOfDetail returns the levels of detail.
 func (tl *TiledLayer) LevelsOfDetail() int {
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("levelsOfDetail"))
 	return _r
 }
 
-// LevelsOfDetailBias wraps the corresponding Objective-C method.
+// LevelsOfDetailBias returns the levels of detail bias.
 func (tl *TiledLayer) LevelsOfDetailBias() int {
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("levelsOfDetailBias"))
 	return _r
 }
 
-// TileSize wraps the corresponding Objective-C method.
+// TileSize returns the tile size.
 func (tl *TiledLayer) TileSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tl), objc.RegisterName("tileSize"))
 	return _r

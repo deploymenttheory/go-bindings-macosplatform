@@ -66,19 +66,19 @@ func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) String() 
 	return rt.Description(objref.IDOf(mutcteterp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutcteterp
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mutcteterp
 }
 
-// WithArg3 sets the property and returns the receiver so calls can be chained.
+// WithArg3 sets the arg3.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) WithArg3(arg3 obj.Object) *MTRUnitTestingClusterTestEmitTestEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return mutcteterp
@@ -96,19 +96,19 @@ func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) WithServe
 	return mutcteterp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
-// Arg2 wraps the corresponding Objective-C method.
+// Arg2 returns the arg2.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)
 }
 
-// Arg3 wraps the corresponding Objective-C method.
+// Arg3 returns the arg3.
 func (mutcteterp *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg3() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcteterp), objc.RegisterName("arg3"))
 	return obj.Wrap(_r)

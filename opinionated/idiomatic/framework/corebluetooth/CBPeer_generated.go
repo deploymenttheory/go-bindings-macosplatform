@@ -68,7 +68,7 @@ func (p *Peer) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (p *Peer) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

@@ -66,25 +66,25 @@ func (malcas *MTRApplicationLauncherClusterApplicationStruct) String() string {
 	return rt.Description(objref.IDOf(malcas))
 }
 
-// WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
+// WithCatalogVendorID sets the catalog vendor ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return malcas
 }
 
-// WithApplicationID sets the property and returns the receiver so calls can be chained.
+// WithApplicationID sets the application ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplicationStruct {
 	objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 	return malcas
 }
 
-// CatalogVendorID wraps the corresponding Objective-C method.
+// CatalogVendorID returns the catalog vendor ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("catalogVendorID"))
 	return obj.Wrap(_r)
 }
 
-// ApplicationID wraps the corresponding Objective-C method.
+// ApplicationID returns the application ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) ApplicationID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("applicationID"))
 	if _r == 0 {

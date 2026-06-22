@@ -43,25 +43,25 @@ func dOMCharacterDataAdopt(id objc.ID) *DOMCharacterData {
 	return x
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (dcd *DOMCharacterData) WithData(data string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setData:"), purego.NSString(data))
 	return dcd
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dcd *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dcd
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dcd *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dcd
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dcd *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dcd
@@ -76,27 +76,27 @@ func (dcd *DOMCharacterData) SubstringDataLength(offset int, length int) string 
 	return purego.GoString(_r)
 }
 
-// AppendData wraps the corresponding Objective-C method.
+// AppendData appends data.
 func (dcd *DOMCharacterData) AppendData(data string) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("appendData:"), purego.NSString(data))
 }
 
-// InsertDataData wraps the corresponding Objective-C method.
+// InsertDataData inserts data data.
 func (dcd *DOMCharacterData) InsertDataData(offset int, data string) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
 }
 
-// DeleteDataLength wraps the corresponding Objective-C method.
+// DeleteDataLength deletes data length.
 func (dcd *DOMCharacterData) DeleteDataLength(offset int, length int) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData:length:"), offset, length)
 }
 
-// ReplaceDataLengthData wraps the corresponding Objective-C method.
+// ReplaceDataLengthData replaces data length data.
 func (dcd *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (dcd *DOMCharacterData) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("data"))
 	if _r == 0 {
@@ -105,7 +105,7 @@ func (dcd *DOMCharacterData) Data() string {
 	return purego.GoString(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dcd *DOMCharacterData) Length() int {
 	_r := objc.Send[int](objref.IDOf(dcd), objc.RegisterName("length"))
 	return _r
@@ -120,17 +120,17 @@ func (dcd *DOMCharacterData) SubstringData(offset int, length int) string {
 	return purego.GoString(_r)
 }
 
-// InsertData wraps the corresponding Objective-C method.
+// InsertData inserts data.
 func (dcd *DOMCharacterData) InsertData(offset int, data string) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData::"), offset, purego.NSString(data))
 }
 
-// DeleteData wraps the corresponding Objective-C method.
+// DeleteData deletes data.
 func (dcd *DOMCharacterData) DeleteData(offset int, length int) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData::"), offset, length)
 }
 
-// ReplaceData wraps the corresponding Objective-C method.
+// ReplaceData replaces data.
 func (dcd *DOMCharacterData) ReplaceData(offset int, length int, data string) {
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
 }

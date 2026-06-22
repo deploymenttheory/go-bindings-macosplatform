@@ -78,25 +78,25 @@ func NewMTRRVCRunModeClusterChangeToModeResponseParamsWithResponseValueError(res
 	return mTRRVCRunModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mrmcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRVCRunModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return mrmcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (mrmcctmrp *MTRRVCRunModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

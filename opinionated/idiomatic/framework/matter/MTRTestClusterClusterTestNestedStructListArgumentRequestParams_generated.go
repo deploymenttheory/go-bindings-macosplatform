@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestNestedStructListArgumentRequestParams() *MTRTes
 	return mTRTestClusterClusterTestNestedStructListArgumentRequestParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtcctnslarp *MTRTestClusterClusterTestNestedStructListArgumentRequestParams) WithArg1(arg1 MTRUnitTestingClusterNestedStructListProvider) *MTRTestClusterClusterTestNestedStructListArgumentRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnslarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtcctnslarp

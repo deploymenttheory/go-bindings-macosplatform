@@ -51,18 +51,18 @@ func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *MTRD
 	return mTRClusterOtaSoftwareUpdateRequestorAdopt(_id)
 }
 
-// ReadAttributeDefaultOtaProvidersWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDefaultOtaProvidersWithParams reads attribute default ota providers with params.
 func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeDefaultOtaProvidersWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval writes attribute default ota providers with value expected value interval.
 func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams writes attribute default ota providers with value expected value interval params.
 func (mcosur *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOtaProvidersWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }

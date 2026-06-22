@@ -70,13 +70,13 @@ func NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams() *MTRDevice
 	return mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt(_id)
 }
 
-// WithForecastID sets the property and returns the receiver so calls can be chained.
+// WithForecastID sets the forecast ID.
 func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 	return mdemcmfrp
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcmfrp
@@ -94,13 +94,13 @@ func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Wi
 	return mdemcmfrp
 }
 
-// ForecastID wraps the corresponding Objective-C method.
+// ForecastID returns the forecast ID.
 func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ForecastID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("forecastID"))
 	return obj.Wrap(_r)
 }
 
-// SlotAdjustments wraps the corresponding Objective-C method.
+// SlotAdjustments returns the slot adjustments.
 func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("slotAdjustments"))
 	return obj.Wrap(_r)
@@ -111,7 +111,7 @@ func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Se
 	objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("setSlotAdjustments:"), objref.IDOf(slotAdjustments))
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcmfrp *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcmfrp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

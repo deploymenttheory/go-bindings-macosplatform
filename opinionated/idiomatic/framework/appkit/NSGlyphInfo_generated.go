@@ -72,13 +72,13 @@ func NewGlyphInfo() *GlyphInfo {
 	return glyphInfoAdopt(_id)
 }
 
-// GlyphID wraps the corresponding Objective-C method.
+// GlyphID returns the glyph ID.
 func (gi *GlyphInfo) GlyphID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(gi), objc.RegisterName("glyphID"))
 	return _r
 }
 
-// BaseString wraps the corresponding Objective-C method.
+// BaseString returns the base string.
 func (gi *GlyphInfo) BaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("baseString"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (gi *GlyphInfo) BaseString() string {
 	return purego.GoString(_r)
 }
 
-// GlyphName wraps the corresponding Objective-C method.
+// GlyphName returns the glyph name.
 func (gi *GlyphInfo) GlyphName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("glyphName"))
 	if _r == 0 {
@@ -96,13 +96,13 @@ func (gi *GlyphInfo) GlyphName() string {
 	return purego.GoString(_r)
 }
 
-// CharacterIdentifier wraps the corresponding Objective-C method.
+// CharacterIdentifier returns the character identifier.
 func (gi *GlyphInfo) CharacterIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(gi), objc.RegisterName("characterIdentifier"))
 	return _r
 }
 
-// CharacterCollection wraps the corresponding Objective-C method.
+// CharacterCollection returns the character collection.
 func (gi *GlyphInfo) CharacterCollection() CharacterCollection {
 	_r := objc.Send[CharacterCollection](objref.IDOf(gi), objc.RegisterName("characterCollection"))
 	return _r

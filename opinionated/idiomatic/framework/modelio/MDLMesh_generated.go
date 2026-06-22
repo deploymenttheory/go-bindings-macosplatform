@@ -166,7 +166,7 @@ func (m *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeN
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:"), purego.NSString(textureCoordinateAttributeName), purego.NSString(normalAttributeName), purego.NSString(tangentAttributeName))
 }
 
-// AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed wraps the corresponding Objective-C method.
+// AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed adds orth tan basis for texture coordinate attribute named normal attribute named tangent attribute named.
 func (m *Mesh) AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addOrthTanBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed:"), purego.NSString(textureCoordinateAttributeName), purego.NSString(normalAttributeName), purego.NSString(tangentAttributeName))
 }

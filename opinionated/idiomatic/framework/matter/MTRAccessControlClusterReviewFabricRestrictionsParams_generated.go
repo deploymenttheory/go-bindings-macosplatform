@@ -82,7 +82,7 @@ func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) WithServe
 	return maccrfrp
 }
 
-// Arl wraps the corresponding Objective-C method.
+// Arl returns the arl.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) Arl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("arl"))
 	return obj.Wrap(_r)

@@ -78,7 +78,7 @@ func (zc *ZoomControl) WithMapView(mapView *MapView) *ZoomControl {
 	return zc
 }
 
-// MapView wraps the corresponding Objective-C method.
+// MapView returns the map view.
 func (zc *ZoomControl) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(zc), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)

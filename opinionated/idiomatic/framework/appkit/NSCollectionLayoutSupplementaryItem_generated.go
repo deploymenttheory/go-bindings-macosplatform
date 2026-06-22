@@ -57,13 +57,13 @@ func (clsi *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *Coll
 	return clsi
 }
 
-// ZIndex wraps the corresponding Objective-C method.
+// ZIndex returns the z index.
 func (clsi *CollectionLayoutSupplementaryItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(clsi), objc.RegisterName("zIndex"))
 	return _r
 }
 
-// ElementKind wraps the corresponding Objective-C method.
+// ElementKind returns the element kind.
 func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("elementKind"))
 	if _r == 0 {
@@ -72,13 +72,13 @@ func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
 	return purego.GoString(_r)
 }
 
-// ContainerAnchor wraps the corresponding Objective-C method.
+// ContainerAnchor returns the container anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("containerAnchor"))
 	return CollectionLayoutAnchorFromID(_r)
 }
 
-// ItemAnchor wraps the corresponding Objective-C method.
+// ItemAnchor returns the item anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("itemAnchor"))
 	return CollectionLayoutAnchorFromID(_r)

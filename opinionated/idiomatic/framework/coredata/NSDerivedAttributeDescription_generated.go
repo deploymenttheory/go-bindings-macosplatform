@@ -154,7 +154,7 @@ func (dad *DerivedAttributeDescription) WithRenamingIdentifier(renamingIdentifie
 	return dad
 }
 
-// DerivationExpression wraps the corresponding Objective-C method.
+// DerivationExpression returns the derivation expression.
 func (dad *DerivedAttributeDescription) DerivationExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dad), objc.RegisterName("derivationExpression"))
 	return obj.Wrap(_r)

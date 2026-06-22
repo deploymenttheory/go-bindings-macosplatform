@@ -144,49 +144,49 @@ func (d *Drawer) Toggle(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("toggle:"), objref.IDOf(sender))
 }
 
-// ParentWindow wraps the corresponding Objective-C method.
+// ParentWindow returns the parent window.
 func (d *Drawer) ParentWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("parentWindow"))
 	return WindowFromID(_r)
 }
 
-// ContentView wraps the corresponding Objective-C method.
+// ContentView returns the content view.
 func (d *Drawer) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (d *Drawer) State() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("state"))
 	return _r
 }
 
-// ContentSize wraps the corresponding Objective-C method.
+// ContentSize returns the content size.
 func (d *Drawer) ContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("contentSize"))
 	return _r
 }
 
-// MinContentSize wraps the corresponding Objective-C method.
+// MinContentSize returns the min content size.
 func (d *Drawer) MinContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("minContentSize"))
 	return _r
 }
 
-// MaxContentSize wraps the corresponding Objective-C method.
+// MaxContentSize returns the max content size.
 func (d *Drawer) MaxContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(d), objc.RegisterName("maxContentSize"))
 	return _r
 }
 
-// LeadingOffset wraps the corresponding Objective-C method.
+// LeadingOffset returns the leading offset.
 func (d *Drawer) LeadingOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("leadingOffset"))
 	return _r
 }
 
-// TrailingOffset wraps the corresponding Objective-C method.
+// TrailingOffset returns the trailing offset.
 func (d *Drawer) TrailingOffset() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("trailingOffset"))
 	return _r

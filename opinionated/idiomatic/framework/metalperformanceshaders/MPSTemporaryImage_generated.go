@@ -63,7 +63,7 @@ func (ti *TemporaryImage) WithLabel(label string) *TemporaryImage {
 	return ti
 }
 
-// ReadCount wraps the corresponding Objective-C method.
+// ReadCount returns the read count.
 func (ti *TemporaryImage) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("readCount"))
 	return _r

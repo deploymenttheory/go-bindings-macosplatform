@@ -70,7 +70,7 @@ func NewMTRMediaPlaybackClusterSeekParams() *MTRMediaPlaybackClusterSeekParams {
 	return mTRMediaPlaybackClusterSeekParamsAdopt(_id)
 }
 
-// WithPosition sets the property and returns the receiver so calls can be chained.
+// WithPosition sets the position.
 func (mmpcsp *MTRMediaPlaybackClusterSeekParams) WithPosition(position obj.Object) *MTRMediaPlaybackClusterSeekParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return mmpcsp
@@ -88,7 +88,7 @@ func (mmpcsp *MTRMediaPlaybackClusterSeekParams) WithServerSideProcessingTimeout
 	return mmpcsp
 }
 
-// Position wraps the corresponding Objective-C method.
+// Position returns the position.
 func (mmpcsp *MTRMediaPlaybackClusterSeekParams) Position() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("position"))
 	return obj.Wrap(_r)

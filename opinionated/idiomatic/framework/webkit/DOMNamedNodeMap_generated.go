@@ -61,7 +61,7 @@ func (dnnm *DOMNamedNodeMap) SetNamedItem(node *DOMNode) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItem wraps the corresponding Objective-C method.
+// RemoveNamedItem removes named item.
 func (dnnm *DOMNamedNodeMap) RemoveNamedItem(name string) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
@@ -85,13 +85,13 @@ func (dnnm *DOMNamedNodeMap) SetNamedItemNS(node *DOMNode) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItemNSLocalName wraps the corresponding Objective-C method.
+// RemoveNamedItemNSLocalName removes named item ns local name.
 func (dnnm *DOMNamedNodeMap) RemoveNamedItemNSLocalName(namespaceURI string, localName string) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItemNS:localName:"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dnnm *DOMNamedNodeMap) Length() int {
 	_r := objc.Send[int](objref.IDOf(dnnm), objc.RegisterName("length"))
 	return _r
@@ -103,7 +103,7 @@ func (dnnm *DOMNamedNodeMap) GetNamedItemNS(namespaceURI string, localName strin
 	return DOMNodeFromID(_r)
 }
 
-// RemoveNamedItemNS wraps the corresponding Objective-C method.
+// RemoveNamedItemNS removes named item ns.
 func (dnnm *DOMNamedNodeMap) RemoveNamedItemNS(namespaceURI string, localName string) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dnnm), objc.RegisterName("removeNamedItemNS::"), purego.NSString(namespaceURI), purego.NSString(localName))
 	return DOMNodeFromID(_r)

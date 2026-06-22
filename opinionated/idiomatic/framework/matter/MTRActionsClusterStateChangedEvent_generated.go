@@ -70,38 +70,38 @@ func NewMTRActionsClusterStateChangedEvent() *MTRActionsClusterStateChangedEvent
 	return mTRActionsClusterStateChangedEventAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (macsce *MTRActionsClusterStateChangedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macsce
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (macsce *MTRActionsClusterStateChangedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macsce
 }
 
-// WithNewState sets the property and returns the receiver so calls can be chained.
+// WithNewState sets the new state.
 func (macsce *MTRActionsClusterStateChangedEvent) WithNewState(newState obj.Object) *MTRActionsClusterStateChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return macsce
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (macsce *MTRActionsClusterStateChangedEvent) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (macsce *MTRActionsClusterStateChangedEvent) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
-// GetNewState wraps the corresponding Objective-C method.
-func (macsce *MTRActionsClusterStateChangedEvent) GetNewState() obj.Object {
+// NewState returns the new state.
+func (macsce *MTRActionsClusterStateChangedEvent) NewState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("getNewState"))
 	return obj.Wrap(_r)
 }

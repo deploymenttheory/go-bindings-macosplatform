@@ -70,49 +70,49 @@ func NewMTRRefrigeratorAlarmClusterNotifyEvent() *MTRRefrigeratorAlarmClusterNot
 	return mTRRefrigeratorAlarmClusterNotifyEventAdopt(_id)
 }
 
-// WithActive sets the property and returns the receiver so calls can be chained.
+// WithActive sets the active.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithActive(active obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setActive:"), objref.IDOf(active))
 	return mracne
 }
 
-// WithInactive sets the property and returns the receiver so calls can be chained.
+// WithInactive sets the inactive.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithInactive(inactive obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setInactive:"), objref.IDOf(inactive))
 	return mracne
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithState(state obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setState:"), objref.IDOf(state))
 	return mracne
 }
 
-// WithMask sets the property and returns the receiver so calls can be chained.
+// WithMask sets the mask.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithMask(mask obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mracne
 }
 
-// Active wraps the corresponding Objective-C method.
+// Active returns the active.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Active() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("active"))
 	return obj.Wrap(_r)
 }
 
-// Inactive wraps the corresponding Objective-C method.
+// Inactive returns the inactive.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Inactive() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("inactive"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// Mask wraps the corresponding Objective-C method.
+// Mask returns the mask.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Mask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("mask"))
 	return obj.Wrap(_r)

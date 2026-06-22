@@ -68,7 +68,7 @@ func (ats *AssetTrackSegment) String() string {
 	return rt.Description(objref.IDOf(ats))
 }
 
-// IsEmpty wraps the corresponding Objective-C method.
+// IsEmpty reports whether the object is empty.
 func (ats *AssetTrackSegment) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(ats), objc.RegisterName("isEmpty"))
 	return _r

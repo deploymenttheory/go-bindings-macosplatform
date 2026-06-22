@@ -50,13 +50,13 @@ func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwar
 	return mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosurcvae
 }
 
-// WithProductID sets the property and returns the receiver so calls can be chained.
+// WithProductID sets the product ID.
 func (mosurcvae *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcvae), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mosurcvae

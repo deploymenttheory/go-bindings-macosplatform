@@ -79,7 +79,7 @@ func (mbcos *MTRBaseClusterOperationalState) PauseWithParamsCompletion(ctx conte
 	}
 }
 
-// PauseWithCompletion wraps the corresponding Objective-C method.
+// PauseWithCompletion pauses with completion.
 //
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) PauseWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -129,7 +129,7 @@ func (mbcos *MTRBaseClusterOperationalState) StopWithParamsCompletion(ctx contex
 	}
 }
 
-// StopWithCompletion wraps the corresponding Objective-C method.
+// StopWithCompletion stops with completion.
 //
 // StopWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) StopWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -179,7 +179,7 @@ func (mbcos *MTRBaseClusterOperationalState) StartWithParamsCompletion(ctx conte
 	}
 }
 
-// StartWithCompletion wraps the corresponding Objective-C method.
+// StartWithCompletion starts with completion.
 //
 // StartWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) StartWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -229,7 +229,7 @@ func (mbcos *MTRBaseClusterOperationalState) ResumeWithParamsCompletion(ctx cont
 	}
 }
 
-// ResumeWithCompletion wraps the corresponding Objective-C method.
+// ResumeWithCompletion resumes with completion.
 //
 // ResumeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Context) (result *MTROperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -254,7 +254,7 @@ func (mbcos *MTRBaseClusterOperationalState) ResumeWithCompletion(ctx context.Co
 	}
 }
 
-// ReadAttributePhaseListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhaseListWithCompletion reads attribute phase list with completion.
 //
 // ReadAttributePhaseListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributePhaseListWithPara
 	}
 }
 
-// ReadAttributeCurrentPhaseWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPhaseWithCompletion reads attribute current phase with completion.
 //
 // ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeCurrentPhaseWithP
 	}
 }
 
-// ReadAttributeCountdownTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCountdownTimeWithCompletion reads attribute countdown time with completion.
 //
 // ReadAttributeCountdownTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeCountdownTimeWith
 	}
 }
 
-// ReadAttributeOperationalStateListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateListWithCompletion reads attribute operational state list with completion.
 //
 // ReadAttributeOperationalStateListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateL
 	}
 }
 
-// ReadAttributeOperationalStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateWithCompletion reads attribute operational state with completion.
 //
 // ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalStateW
 	}
 }
 
-// ReadAttributeOperationalErrorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationalErrorWithCompletion reads attribute operational error with completion.
 //
 // ReadAttributeOperationalErrorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (result *MTROperationalStateClusterErrorStateStruct, err error) {
@@ -554,7 +554,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeOperationalErrorW
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -604,7 +604,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -654,7 +654,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -704,7 +704,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -754,7 +754,7 @@ func (mbcos *MTRBaseClusterOperationalState) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

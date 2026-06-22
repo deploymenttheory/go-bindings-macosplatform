@@ -80,7 +80,7 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source
 	return wKUserScriptAdopt(_id)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (wus *WKUserScript) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wus), objc.RegisterName("source"))
 	if _r == 0 {
@@ -89,13 +89,13 @@ func (wus *WKUserScript) Source() string {
 	return purego.GoString(_r)
 }
 
-// InjectionTime wraps the corresponding Objective-C method.
+// InjectionTime returns the injection time.
 func (wus *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
 	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(wus), objc.RegisterName("injectionTime"))
 	return _r
 }
 
-// IsForMainFrameOnly wraps the corresponding Objective-C method.
+// IsForMainFrameOnly reports whether the object is for main frame only.
 func (wus *WKUserScript) IsForMainFrameOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(wus), objc.RegisterName("isForMainFrameOnly"))
 	return _r

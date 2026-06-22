@@ -54,7 +54,7 @@ func NewMTRBaseClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device
 	return mTRBaseClusterOTASoftwareUpdateRequestorAdopt(_id)
 }
 
-// ReadAttributeDefaultOTAProvidersWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultOTAProvidersWithParamsCompletion reads attribute default ota providers with params completion.
 //
 // ReadAttributeDefaultOTAProvidersWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefau
 	}
 }
 
-// ReadAttributeUpdatePossibleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUpdatePossibleWithCompletion reads attribute update possible with completion.
 //
 // ReadAttributeUpdatePossibleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 	}
 }
 
-// ReadAttributeUpdateStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUpdateStateWithCompletion reads attribute update state with completion.
 //
 // ReadAttributeUpdateStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 	}
 }
 
-// ReadAttributeUpdateStateProgressWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUpdateStateProgressWithCompletion reads attribute update state progress with completion.
 //
 // ReadAttributeUpdateStateProgressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGener
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAccep
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttri
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

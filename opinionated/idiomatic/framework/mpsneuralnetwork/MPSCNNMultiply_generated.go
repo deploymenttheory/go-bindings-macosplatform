@@ -51,19 +51,19 @@ func NewCNNMultiply() *CNNMultiply {
 	return cNNMultiplyAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (cm *CNNMultiply) WithPrimaryScale(primaryScale float32) *CNNMultiply {
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return cm
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (cm *CNNMultiply) WithSecondaryScale(secondaryScale float32) *CNNMultiply {
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return cm
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (cm *CNNMultiply) WithBias(bias float32) *CNNMultiply {
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setBias:"), bias)
 	return cm

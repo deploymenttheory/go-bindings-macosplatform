@@ -70,7 +70,7 @@ func NewBarcodeEventSignatureRequest() *BarcodeEventSignatureRequest {
 	return barcodeEventSignatureRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier wraps the corresponding Objective-C method.
+// DeviceAccountIdentifier returns the device account identifier.
 func (besr *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (besr *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// TransactionIdentifier wraps the corresponding Objective-C method.
+// TransactionIdentifier returns the transaction identifier.
 func (besr *BarcodeEventSignatureRequest) TransactionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (besr *BarcodeEventSignatureRequest) TransactionIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// BarcodeIdentifier wraps the corresponding Objective-C method.
+// BarcodeIdentifier returns the barcode identifier.
 func (besr *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("barcodeIdentifier"))
 	if _r == 0 {
@@ -97,7 +97,7 @@ func (besr *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// RawMerchantName wraps the corresponding Objective-C method.
+// RawMerchantName returns the raw merchant name.
 func (besr *BarcodeEventSignatureRequest) RawMerchantName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("rawMerchantName"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (besr *BarcodeEventSignatureRequest) RawMerchantName() string {
 	return purego.GoString(_r)
 }
 
-// MerchantName wraps the corresponding Objective-C method.
+// MerchantName returns the merchant name.
 func (besr *BarcodeEventSignatureRequest) MerchantName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("merchantName"))
 	if _r == 0 {
@@ -115,13 +115,13 @@ func (besr *BarcodeEventSignatureRequest) MerchantName() string {
 	return purego.GoString(_r)
 }
 
-// TransactionDate wraps the corresponding Objective-C method.
+// TransactionDate returns the transaction date.
 func (besr *BarcodeEventSignatureRequest) TransactionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionDate"))
 	return obj.Wrap(_r)
 }
 
-// CurrencyCode wraps the corresponding Objective-C method.
+// CurrencyCode returns the currency code.
 func (besr *BarcodeEventSignatureRequest) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
@@ -130,13 +130,13 @@ func (besr *BarcodeEventSignatureRequest) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (besr *BarcodeEventSignatureRequest) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
-// TransactionStatus wraps the corresponding Objective-C method.
+// TransactionStatus returns the transaction status.
 func (besr *BarcodeEventSignatureRequest) TransactionStatus() string {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionStatus"))
 	if _r == 0 {
@@ -145,7 +145,7 @@ func (besr *BarcodeEventSignatureRequest) TransactionStatus() string {
 	return purego.GoString(_r)
 }
 
-// PartialSignature wraps the corresponding Objective-C method.
+// PartialSignature returns the partial signature.
 func (besr *BarcodeEventSignatureRequest) PartialSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("partialSignature"))
 	return obj.Wrap(_r)

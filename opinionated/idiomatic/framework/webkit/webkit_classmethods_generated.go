@@ -230,7 +230,7 @@ func CanShowMIMETypeAsHTML(mIMEType string) bool {
 	return _r
 }
 
-// MIMETypesShownAsHTML wraps the corresponding Objective-C method.
+// MIMETypesShownAsHTML returns the mime types shown as HTML.
 func MIMETypesShownAsHTML() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("MIMETypesShownAsHTML"))
 	return obj.Wrap(_r)

@@ -123,7 +123,7 @@ func DecisionApplyingActions(actions []*MessageAction) *MessageActionDecision {
 	return MessageActionDecisionFromID(_r)
 }
 
-// InvokeAgainWithBody wraps the corresponding Objective-C method.
+// InvokeAgainWithBody returns the invoke again with body.
 func InvokeAgainWithBody() *MessageActionDecision {
 	_r := objc.Send[objc.ID](objc.ID(_class("MEMessageActionDecision")), objc.RegisterName("invokeAgainWithBody"))
 	return MessageActionDecisionFromID(_r)

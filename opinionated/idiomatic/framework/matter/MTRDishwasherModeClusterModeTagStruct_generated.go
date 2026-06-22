@@ -70,25 +70,25 @@ func NewMTRDishwasherModeClusterModeTagStruct() *MTRDishwasherModeClusterModeTag
 	return mTRDishwasherModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDishwasherModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mdmcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDishwasherModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mdmcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

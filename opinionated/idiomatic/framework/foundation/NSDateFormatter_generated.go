@@ -53,229 +53,229 @@ func NewDateFormatterWithDateFormatAllowNaturalLanguage(format string, flag bool
 	return dateFormatterAdopt(_id)
 }
 
-// WithFormattingContext sets the property and returns the receiver so calls can be chained.
+// WithFormattingContext sets the formatting context.
 func (df *DateFormatter) WithFormattingContext(formattingContext FormattingContext) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return df
 }
 
-// WithDateFormat sets the property and returns the receiver so calls can be chained.
+// WithDateFormat sets the date format.
 func (df *DateFormatter) WithDateFormat(dateFormat StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDateFormat:"), objref.IDOf(dateFormat))
 	return df
 }
 
-// WithDateStyle sets the property and returns the receiver so calls can be chained.
+// WithDateStyle sets the date style.
 func (df *DateFormatter) WithDateStyle(dateStyle DateFormatterStyle) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDateStyle:"), dateStyle)
 	return df
 }
 
-// WithTimeStyle sets the property and returns the receiver so calls can be chained.
+// WithTimeStyle sets the time style.
 func (df *DateFormatter) WithTimeStyle(timeStyle DateFormatterStyle) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setTimeStyle:"), timeStyle)
 	return df
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (df *DateFormatter) WithLocale(locale *Locale) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return df
 }
 
-// WithGeneratesCalendarDates sets the property and returns the receiver so calls can be chained.
+// WithGeneratesCalendarDates sets the generates calendar dates.
 func (df *DateFormatter) WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setGeneratesCalendarDates:"), generatesCalendarDates)
 	return df
 }
 
-// WithFormatterBehavior sets the property and returns the receiver so calls can be chained.
+// WithFormatterBehavior sets the formatter behavior.
 func (df *DateFormatter) WithFormatterBehavior(formatterBehavior DateFormatterBehavior) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 	return df
 }
 
-// WithTimeZone sets the property and returns the receiver so calls can be chained.
+// WithTimeZone sets the time zone.
 func (df *DateFormatter) WithTimeZone(timeZone *TimeZone) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return df
 }
 
-// WithCalendar sets the property and returns the receiver so calls can be chained.
+// WithCalendar sets the calendar.
 func (df *DateFormatter) WithCalendar(calendar *Calendar) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return df
 }
 
-// WithLenient sets the property and returns the receiver so calls can be chained.
+// WithLenient sets the lenient.
 func (df *DateFormatter) WithLenient(lenient bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLenient:"), lenient)
 	return df
 }
 
-// WithTwoDigitStartDate sets the property and returns the receiver so calls can be chained.
+// WithTwoDigitStartDate sets the two digit start date.
 func (df *DateFormatter) WithTwoDigitStartDate(twoDigitStartDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 	return df
 }
 
-// WithDefaultDate sets the property and returns the receiver so calls can be chained.
+// WithDefaultDate sets the default date.
 func (df *DateFormatter) WithDefaultDate(defaultDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 	return df
 }
 
-// WithEraSymbols sets the property and returns the receiver so calls can be chained.
+// WithEraSymbols sets the era symbols.
 func (df *DateFormatter) WithEraSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setEraSymbols:"), _arr)
 	return df
 }
 
-// WithMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithMonthSymbols sets the month symbols.
 func (df *DateFormatter) WithMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setMonthSymbols:"), _arr)
 	return df
 }
 
-// WithShortMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithShortMonthSymbols sets the short month symbols.
 func (df *DateFormatter) WithShortMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortMonthSymbols:"), _arr)
 	return df
 }
 
-// WithWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithWeekdaySymbols sets the weekday symbols.
 func (df *DateFormatter) WithWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithShortWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithShortWeekdaySymbols sets the short weekday symbols.
 func (df *DateFormatter) WithShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithAMSymbol sets the property and returns the receiver so calls can be chained.
+// WithAMSymbol sets the am symbol.
 func (df *DateFormatter) WithAMSymbol(aMSymbol StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setAMSymbol:"), objref.IDOf(aMSymbol))
 	return df
 }
 
-// WithPMSymbol sets the property and returns the receiver so calls can be chained.
+// WithPMSymbol sets the pm symbol.
 func (df *DateFormatter) WithPMSymbol(pMSymbol StringProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setPMSymbol:"), objref.IDOf(pMSymbol))
 	return df
 }
 
-// WithLongEraSymbols sets the property and returns the receiver so calls can be chained.
+// WithLongEraSymbols sets the long era symbols.
 func (df *DateFormatter) WithLongEraSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLongEraSymbols:"), _arr)
 	return df
 }
 
-// WithVeryShortMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithVeryShortMonthSymbols sets the very short month symbols.
 func (df *DateFormatter) WithVeryShortMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setVeryShortMonthSymbols:"), _arr)
 	return df
 }
 
-// WithStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithStandaloneMonthSymbols sets the standalone month symbols.
 func (df *DateFormatter) WithStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setStandaloneMonthSymbols:"), _arr)
 	return df
 }
 
-// WithShortStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithShortStandaloneMonthSymbols sets the short standalone month symbols.
 func (df *DateFormatter) WithShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortStandaloneMonthSymbols:"), _arr)
 	return df
 }
 
-// WithVeryShortStandaloneMonthSymbols sets the property and returns the receiver so calls can be chained.
+// WithVeryShortStandaloneMonthSymbols sets the very short standalone month symbols.
 func (df *DateFormatter) WithVeryShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setVeryShortStandaloneMonthSymbols:"), _arr)
 	return df
 }
 
-// WithVeryShortWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithVeryShortWeekdaySymbols sets the very short weekday symbols.
 func (df *DateFormatter) WithVeryShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setVeryShortWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithStandaloneWeekdaySymbols sets the standalone weekday symbols.
 func (df *DateFormatter) WithStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setStandaloneWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithShortStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithShortStandaloneWeekdaySymbols sets the short standalone weekday symbols.
 func (df *DateFormatter) WithShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortStandaloneWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithVeryShortStandaloneWeekdaySymbols sets the property and returns the receiver so calls can be chained.
+// WithVeryShortStandaloneWeekdaySymbols sets the very short standalone weekday symbols.
 func (df *DateFormatter) WithVeryShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:"), _arr)
 	return df
 }
 
-// WithQuarterSymbols sets the property and returns the receiver so calls can be chained.
+// WithQuarterSymbols sets the quarter symbols.
 func (df *DateFormatter) WithQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setQuarterSymbols:"), _arr)
 	return df
 }
 
-// WithShortQuarterSymbols sets the property and returns the receiver so calls can be chained.
+// WithShortQuarterSymbols sets the short quarter symbols.
 func (df *DateFormatter) WithShortQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortQuarterSymbols:"), _arr)
 	return df
 }
 
-// WithStandaloneQuarterSymbols sets the property and returns the receiver so calls can be chained.
+// WithStandaloneQuarterSymbols sets the standalone quarter symbols.
 func (df *DateFormatter) WithStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setStandaloneQuarterSymbols:"), _arr)
 	return df
 }
 
-// WithShortStandaloneQuarterSymbols sets the property and returns the receiver so calls can be chained.
+// WithShortStandaloneQuarterSymbols sets the short standalone quarter symbols.
 func (df *DateFormatter) WithShortStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
 	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setShortStandaloneQuarterSymbols:"), _arr)
 	return df
 }
 
-// WithGregorianStartDate sets the property and returns the receiver so calls can be chained.
+// WithGregorianStartDate sets the gregorian start date.
 func (df *DateFormatter) WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 	return df
 }
 
-// WithDoesRelativeDateFormatting sets the property and returns the receiver so calls can be chained.
+// WithDoesRelativeDateFormatting sets the does relative date formatting.
 func (df *DateFormatter) WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
 	return df
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (df *DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return df
@@ -301,13 +301,13 @@ func (df *DateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate s
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocalizedDateFormatFromTemplate:"), purego.NSString(dateFormatTemplate))
 }
 
-// FormattingContext wraps the corresponding Objective-C method.
+// FormattingContext returns the formatting context.
 func (df *DateFormatter) FormattingContext() FormattingContext {
 	_r := objc.Send[FormattingContext](objref.IDOf(df), objc.RegisterName("formattingContext"))
 	return _r
 }
 
-// DateFormat wraps the corresponding Objective-C method.
+// DateFormat returns the date format.
 func (df *DateFormatter) DateFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("dateFormat"))
 	if _r == 0 {
@@ -316,19 +316,19 @@ func (df *DateFormatter) DateFormat() string {
 	return purego.GoString(_r)
 }
 
-// DateStyle wraps the corresponding Objective-C method.
+// DateStyle returns the date style.
 func (df *DateFormatter) DateStyle() DateFormatterStyle {
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(df), objc.RegisterName("dateStyle"))
 	return _r
 }
 
-// TimeStyle wraps the corresponding Objective-C method.
+// TimeStyle returns the time style.
 func (df *DateFormatter) TimeStyle() DateFormatterStyle {
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(df), objc.RegisterName("timeStyle"))
 	return _r
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (df *DateFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
@@ -340,43 +340,43 @@ func (df *DateFormatter) GeneratesCalendarDates() bool {
 	return _r
 }
 
-// FormatterBehavior wraps the corresponding Objective-C method.
+// FormatterBehavior returns the formatter behavior.
 func (df *DateFormatter) FormatterBehavior() DateFormatterBehavior {
 	_r := objc.Send[DateFormatterBehavior](objref.IDOf(df), objc.RegisterName("formatterBehavior"))
 	return _r
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (df *DateFormatter) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// Calendar wraps the corresponding Objective-C method.
+// Calendar returns the calendar.
 func (df *DateFormatter) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// IsLenient wraps the corresponding Objective-C method.
+// IsLenient reports whether the object is lenient.
 func (df *DateFormatter) IsLenient() bool {
 	_r := objc.Send[bool](objref.IDOf(df), objc.RegisterName("isLenient"))
 	return _r
 }
 
-// TwoDigitStartDate wraps the corresponding Objective-C method.
+// TwoDigitStartDate returns the two digit start date.
 func (df *DateFormatter) TwoDigitStartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("twoDigitStartDate"))
 	return DateFromID(_r)
 }
 
-// DefaultDate wraps the corresponding Objective-C method.
+// DefaultDate returns the default date.
 func (df *DateFormatter) DefaultDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("defaultDate"))
 	return DateFromID(_r)
 }
 
-// EraSymbols wraps the corresponding Objective-C method.
+// EraSymbols returns the era symbols.
 //
 // EraSymbols returns the collection as a Go slice.
 func (df *DateFormatter) EraSymbols() []string {
@@ -384,7 +384,7 @@ func (df *DateFormatter) EraSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MonthSymbols wraps the corresponding Objective-C method.
+// MonthSymbols returns the month symbols.
 //
 // MonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) MonthSymbols() []string {
@@ -392,7 +392,7 @@ func (df *DateFormatter) MonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortMonthSymbols wraps the corresponding Objective-C method.
+// ShortMonthSymbols returns the short month symbols.
 //
 // ShortMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortMonthSymbols() []string {
@@ -400,7 +400,7 @@ func (df *DateFormatter) ShortMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// WeekdaySymbols wraps the corresponding Objective-C method.
+// WeekdaySymbols returns the weekday symbols.
 //
 // WeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) WeekdaySymbols() []string {
@@ -408,7 +408,7 @@ func (df *DateFormatter) WeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortWeekdaySymbols wraps the corresponding Objective-C method.
+// ShortWeekdaySymbols returns the short weekday symbols.
 //
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortWeekdaySymbols() []string {
@@ -416,7 +416,7 @@ func (df *DateFormatter) ShortWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AMSymbol wraps the corresponding Objective-C method.
+// AMSymbol returns the am symbol.
 func (df *DateFormatter) AMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("AMSymbol"))
 	if _r == 0 {
@@ -425,7 +425,7 @@ func (df *DateFormatter) AMSymbol() string {
 	return purego.GoString(_r)
 }
 
-// PMSymbol wraps the corresponding Objective-C method.
+// PMSymbol returns the pm symbol.
 func (df *DateFormatter) PMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("PMSymbol"))
 	if _r == 0 {
@@ -434,7 +434,7 @@ func (df *DateFormatter) PMSymbol() string {
 	return purego.GoString(_r)
 }
 
-// LongEraSymbols wraps the corresponding Objective-C method.
+// LongEraSymbols returns the long era symbols.
 //
 // LongEraSymbols returns the collection as a Go slice.
 func (df *DateFormatter) LongEraSymbols() []string {
@@ -442,7 +442,7 @@ func (df *DateFormatter) LongEraSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortMonthSymbols wraps the corresponding Objective-C method.
+// VeryShortMonthSymbols returns the very short month symbols.
 //
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortMonthSymbols() []string {
@@ -450,7 +450,7 @@ func (df *DateFormatter) VeryShortMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneMonthSymbols wraps the corresponding Objective-C method.
+// StandaloneMonthSymbols returns the standalone month symbols.
 //
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneMonthSymbols() []string {
@@ -458,7 +458,7 @@ func (df *DateFormatter) StandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+// ShortStandaloneMonthSymbols returns the short standalone month symbols.
 //
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneMonthSymbols() []string {
@@ -466,7 +466,7 @@ func (df *DateFormatter) ShortStandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+// VeryShortStandaloneMonthSymbols returns the very short standalone month symbols.
 //
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
@@ -474,7 +474,7 @@ func (df *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortWeekdaySymbols wraps the corresponding Objective-C method.
+// VeryShortWeekdaySymbols returns the very short weekday symbols.
 //
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortWeekdaySymbols() []string {
@@ -482,7 +482,7 @@ func (df *DateFormatter) VeryShortWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// StandaloneWeekdaySymbols returns the standalone weekday symbols.
 //
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneWeekdaySymbols() []string {
@@ -490,7 +490,7 @@ func (df *DateFormatter) StandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// ShortStandaloneWeekdaySymbols returns the short standalone weekday symbols.
 //
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
@@ -498,7 +498,7 @@ func (df *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// VeryShortStandaloneWeekdaySymbols returns the very short standalone weekday symbols.
 //
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
@@ -506,7 +506,7 @@ func (df *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// QuarterSymbols wraps the corresponding Objective-C method.
+// QuarterSymbols returns the quarter symbols.
 //
 // QuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) QuarterSymbols() []string {
@@ -514,7 +514,7 @@ func (df *DateFormatter) QuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortQuarterSymbols wraps the corresponding Objective-C method.
+// ShortQuarterSymbols returns the short quarter symbols.
 //
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortQuarterSymbols() []string {
@@ -522,7 +522,7 @@ func (df *DateFormatter) ShortQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneQuarterSymbols wraps the corresponding Objective-C method.
+// StandaloneQuarterSymbols returns the standalone quarter symbols.
 //
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneQuarterSymbols() []string {
@@ -530,7 +530,7 @@ func (df *DateFormatter) StandaloneQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneQuarterSymbols wraps the corresponding Objective-C method.
+// ShortStandaloneQuarterSymbols returns the short standalone quarter symbols.
 //
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneQuarterSymbols() []string {
@@ -538,7 +538,7 @@ func (df *DateFormatter) ShortStandaloneQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// GregorianStartDate wraps the corresponding Objective-C method.
+// GregorianStartDate returns the gregorian start date.
 func (df *DateFormatter) GregorianStartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("gregorianStartDate"))
 	return DateFromID(_r)

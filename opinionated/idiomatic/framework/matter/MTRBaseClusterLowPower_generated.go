@@ -61,7 +61,7 @@ func NewMTRBaseClusterLowPowerWithDeviceEndpointQueue(device *MTRBaseDevice, end
 	return mTRBaseClusterLowPowerAdopt(_id)
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeGeneratedCommandListWithP
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeAcceptedCommandListWithPa
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeAttributeListWithParamsSu
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeFeatureMapWithParamsSubsc
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeClusterRevisionWithParams
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeGeneratedCommandListWithM
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeAcceptedCommandListWithMi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeAttributeListWithMinInter
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbclp *MTRBaseClusterLowPower) SubscribeAttributeFeatureMapWithMinInterval
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbclp *MTRBaseClusterLowPower) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

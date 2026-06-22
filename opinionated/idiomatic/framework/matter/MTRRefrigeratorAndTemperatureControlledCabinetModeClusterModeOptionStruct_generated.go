@@ -70,19 +70,19 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruc
 	return mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithLabel(label string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mratccmcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mratccmcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterMode
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (mratccmcmos *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

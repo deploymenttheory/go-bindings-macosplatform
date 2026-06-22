@@ -73,7 +73,7 @@ func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationD
 	return busTripAdopt(_id)
 }
 
-// Provider wraps the corresponding Objective-C method.
+// Provider returns the provider.
 func (bt *BusTrip) Provider() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (bt *BusTrip) Provider() string {
 	return purego.GoString(_r)
 }
 
-// BusName wraps the corresponding Objective-C method.
+// BusName returns the bus name.
 func (bt *BusTrip) BusName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busName"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (bt *BusTrip) BusName() string {
 	return purego.GoString(_r)
 }
 
-// BusNumber wraps the corresponding Objective-C method.
+// BusNumber returns the bus number.
 func (bt *BusTrip) BusNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busNumber"))
 	if _r == 0 {
@@ -100,19 +100,19 @@ func (bt *BusTrip) BusNumber() string {
 	return purego.GoString(_r)
 }
 
-// TripDuration wraps the corresponding Objective-C method.
+// TripDuration returns the trip duration.
 func (bt *BusTrip) TripDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureBusStopLocation wraps the corresponding Objective-C method.
+// DepartureBusStopLocation returns the departure bus stop location.
 func (bt *BusTrip) DepartureBusStopLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
-// DeparturePlatform wraps the corresponding Objective-C method.
+// DeparturePlatform returns the departure platform.
 func (bt *BusTrip) DeparturePlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
@@ -121,13 +121,13 @@ func (bt *BusTrip) DeparturePlatform() string {
 	return purego.GoString(_r)
 }
 
-// ArrivalBusStopLocation wraps the corresponding Objective-C method.
+// ArrivalBusStopLocation returns the arrival bus stop location.
 func (bt *BusTrip) ArrivalBusStopLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
-// ArrivalPlatform wraps the corresponding Objective-C method.
+// ArrivalPlatform returns the arrival platform.
 func (bt *BusTrip) ArrivalPlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {

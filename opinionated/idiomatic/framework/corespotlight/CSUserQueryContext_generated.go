@@ -120,19 +120,19 @@ func (uqc *UserQueryContext) DisableSemanticSearch() bool {
 	return _r
 }
 
-// MaxResultCount wraps the corresponding Objective-C method.
+// MaxResultCount returns the max result count.
 func (uqc *UserQueryContext) MaxResultCount() int {
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxResultCount"))
 	return _r
 }
 
-// MaxSuggestionCount wraps the corresponding Objective-C method.
+// MaxSuggestionCount returns the max suggestion count.
 func (uqc *UserQueryContext) MaxSuggestionCount() int {
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxSuggestionCount"))
 	return _r
 }
 
-// MaxRankedResultCount wraps the corresponding Objective-C method.
+// MaxRankedResultCount returns the max ranked result count.
 func (uqc *UserQueryContext) MaxRankedResultCount() int {
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxRankedResultCount"))
 	return _r

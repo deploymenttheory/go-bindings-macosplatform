@@ -71,7 +71,7 @@ func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string,
 	return decodedMessageBannerAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (dmb *DecodedMessageBanner) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("title"))
 	if _r == 0 {
@@ -80,7 +80,7 @@ func (dmb *DecodedMessageBanner) Title() string {
 	return purego.GoString(_r)
 }
 
-// PrimaryActionTitle wraps the corresponding Objective-C method.
+// PrimaryActionTitle returns the primary action title.
 func (dmb *DecodedMessageBanner) PrimaryActionTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("primaryActionTitle"))
 	if _r == 0 {
@@ -89,7 +89,7 @@ func (dmb *DecodedMessageBanner) PrimaryActionTitle() string {
 	return purego.GoString(_r)
 }
 
-// IsDismissable wraps the corresponding Objective-C method.
+// IsDismissable reports whether the object is dismissable.
 func (dmb *DecodedMessageBanner) IsDismissable() bool {
 	_r := objc.Send[bool](objref.IDOf(dmb), objc.RegisterName("isDismissable"))
 	return _r

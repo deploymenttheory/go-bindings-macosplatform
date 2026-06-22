@@ -70,19 +70,19 @@ func NewMTRElectricalMeasurementClusterGetMeasurementProfileCommandParams() *MTR
 	return mTRElectricalMeasurementClusterGetMeasurementProfileCommandParamsAdopt(_id)
 }
 
-// WithAttributeID sets the property and returns the receiver so calls can be chained.
+// WithAttributeID sets the attribute ID.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithAttributeID(attributeId obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setAttributeId:"), objref.IDOf(attributeId))
 	return memcgmpcp
 }
 
-// WithStartTime sets the property and returns the receiver so calls can be chained.
+// WithStartTime sets the start time.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithStartTime(startTime obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return memcgmpcp
 }
 
-// WithNumberOfIntervals sets the property and returns the receiver so calls can be chained.
+// WithNumberOfIntervals sets the number of intervals.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) WithNumberOfIntervals(numberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("setNumberOfIntervals:"), objref.IDOf(numberOfIntervals))
 	return memcgmpcp
@@ -100,19 +100,19 @@ func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandPara
 	return memcgmpcp
 }
 
-// AttributeID wraps the corresponding Objective-C method.
+// AttributeID returns the attribute ID.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) AttributeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("attributeId"))
 	return obj.Wrap(_r)
 }
 
-// StartTime wraps the corresponding Objective-C method.
+// StartTime returns the start time.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfIntervals wraps the corresponding Objective-C method.
+// NumberOfIntervals returns the number of intervals.
 func (memcgmpcp *MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams) NumberOfIntervals() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgmpcp), objc.RegisterName("numberOfIntervals"))
 	return obj.Wrap(_r)

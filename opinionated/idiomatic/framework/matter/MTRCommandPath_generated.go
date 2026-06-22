@@ -50,7 +50,7 @@ func NewMTRCommandPath() *MTRCommandPath {
 	return mTRCommandPathAdopt(_id)
 }
 
-// Command wraps the corresponding Objective-C method.
+// Command returns the command.
 func (mcp *MTRCommandPath) Command() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("command"))
 	return obj.Wrap(_r)

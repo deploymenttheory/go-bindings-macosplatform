@@ -70,31 +70,31 @@ func NewMTROperationalCredentialsClusterAddNOCParams() *MTROperationalCredential
 	return mTROperationalCredentialsClusterAddNOCParamsAdopt(_id)
 }
 
-// WithNocValue sets the property and returns the receiver so calls can be chained.
+// WithNocValue sets the noc value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
 	return moccanp
 }
 
-// WithIcacValue sets the property and returns the receiver so calls can be chained.
+// WithIcacValue sets the icac value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
 	return moccanp
 }
 
-// WithIpkValue sets the property and returns the receiver so calls can be chained.
+// WithIpkValue sets the ipk value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithIpkValue(ipkValue obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setIpkValue:"), objref.IDOf(ipkValue))
 	return moccanp
 }
 
-// WithCaseAdminSubject sets the property and returns the receiver so calls can be chained.
+// WithCaseAdminSubject sets the case admin subject.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithCaseAdminSubject(caseAdminSubject obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setCaseAdminSubject:"), objref.IDOf(caseAdminSubject))
 	return moccanp
 }
 
-// WithAdminVendorID sets the property and returns the receiver so calls can be chained.
+// WithAdminVendorID sets the admin vendor ID.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithAdminVendorID(adminVendorId obj.Object) *MTROperationalCredentialsClusterAddNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("setAdminVendorId:"), objref.IDOf(adminVendorId))
 	return moccanp
@@ -112,31 +112,31 @@ func (moccanp *MTROperationalCredentialsClusterAddNOCParams) WithServerSideProce
 	return moccanp
 }
 
-// NocValue wraps the corresponding Objective-C method.
+// NocValue returns the noc value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) NocValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("nocValue"))
 	return obj.Wrap(_r)
 }
 
-// IcacValue wraps the corresponding Objective-C method.
+// IcacValue returns the icac value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IcacValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("icacValue"))
 	return obj.Wrap(_r)
 }
 
-// IpkValue wraps the corresponding Objective-C method.
+// IpkValue returns the ipk value.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) IpkValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("ipkValue"))
 	return obj.Wrap(_r)
 }
 
-// CaseAdminSubject wraps the corresponding Objective-C method.
+// CaseAdminSubject returns the case admin subject.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) CaseAdminSubject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("caseAdminSubject"))
 	return obj.Wrap(_r)
 }
 
-// AdminVendorID wraps the corresponding Objective-C method.
+// AdminVendorID returns the admin vendor ID.
 func (moccanp *MTROperationalCredentialsClusterAddNOCParams) AdminVendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccanp), objc.RegisterName("adminVendorId"))
 	return obj.Wrap(_r)

@@ -70,7 +70,7 @@ func NewMTRPowerSourceClusterBatFaultChangeEvent() *MTRPowerSourceClusterBatFaul
 	return mTRPowerSourceClusterBatFaultChangeEventAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mpscbfce *MTRPowerSourceClusterBatFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mpscbfce *MTRPowerSourceClusterBatFaultChangeEvent) SetCurrent(current obj
 	objc.Send[objc.ID](objref.IDOf(mpscbfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mpscbfce *MTRPowerSourceClusterBatFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

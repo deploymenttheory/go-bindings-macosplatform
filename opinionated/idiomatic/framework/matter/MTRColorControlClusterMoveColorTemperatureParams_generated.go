@@ -70,37 +70,37 @@ func NewMTRColorControlClusterMoveColorTemperatureParams() *MTRColorControlClust
 	return mTRColorControlClusterMoveColorTemperatureParamsAdopt(_id)
 }
 
-// WithMoveMode sets the property and returns the receiver so calls can be chained.
+// WithMoveMode sets the move mode.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mcccmctp
 }
 
-// WithRate sets the property and returns the receiver so calls can be chained.
+// WithRate sets the rate.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithRate(rate obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mcccmctp
 }
 
-// WithColorTemperatureMinimumMireds sets the property and returns the receiver so calls can be chained.
+// WithColorTemperatureMinimumMireds sets the color temperature minimum mireds.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setColorTemperatureMinimumMireds:"), objref.IDOf(colorTemperatureMinimumMireds))
 	return mcccmctp
 }
 
-// WithColorTemperatureMaximumMireds sets the property and returns the receiver so calls can be chained.
+// WithColorTemperatureMaximumMireds sets the color temperature maximum mireds.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setColorTemperatureMaximumMireds:"), objref.IDOf(colorTemperatureMaximumMireds))
 	return mcccmctp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmctp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmctp
@@ -118,37 +118,37 @@ func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) WithServerSide
 	return mcccmctp
 }
 
-// MoveMode wraps the corresponding Objective-C method.
+// MoveMode returns the move mode.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) MoveMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) Rate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
 }
 
-// ColorTemperatureMinimumMireds wraps the corresponding Objective-C method.
+// ColorTemperatureMinimumMireds returns the color temperature minimum mireds.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) ColorTemperatureMinimumMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("colorTemperatureMinimumMireds"))
 	return obj.Wrap(_r)
 }
 
-// ColorTemperatureMaximumMireds wraps the corresponding Objective-C method.
+// ColorTemperatureMaximumMireds returns the color temperature maximum mireds.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) ColorTemperatureMaximumMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("colorTemperatureMaximumMireds"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccmctp *MTRColorControlClusterMoveColorTemperatureParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmctp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

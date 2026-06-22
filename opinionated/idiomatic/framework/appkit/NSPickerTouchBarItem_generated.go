@@ -52,55 +52,55 @@ func NewPickerTouchBarItem() *PickerTouchBarItem {
 	return pickerTouchBarItemAdopt(_id)
 }
 
-// WithControlRepresentation sets the property and returns the receiver so calls can be chained.
+// WithControlRepresentation sets the control representation.
 func (ptbi *PickerTouchBarItem) WithControlRepresentation(controlRepresentation PickerTouchBarItemControlRepresentation) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setControlRepresentation:"), controlRepresentation)
 	return ptbi
 }
 
-// WithCollapsedRepresentationLabel sets the property and returns the receiver so calls can be chained.
+// WithCollapsedRepresentationLabel sets the collapsed representation label.
 func (ptbi *PickerTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
 	return ptbi
 }
 
-// WithCollapsedRepresentationImage sets the property and returns the receiver so calls can be chained.
+// WithCollapsedRepresentationImage sets the collapsed representation image.
 func (ptbi *PickerTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
 	return ptbi
 }
 
-// WithSelectedIndex sets the property and returns the receiver so calls can be chained.
+// WithSelectedIndex sets the selected index.
 func (ptbi *PickerTouchBarItem) WithSelectedIndex(selectedIndex int) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return ptbi
 }
 
-// WithSelectionColor sets the property and returns the receiver so calls can be chained.
+// WithSelectionColor sets the selection color.
 func (ptbi *PickerTouchBarItem) WithSelectionColor(selectionColor *Color) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setSelectionColor:"), objref.IDOf(selectionColor))
 	return ptbi
 }
 
-// WithSelectionMode sets the property and returns the receiver so calls can be chained.
+// WithSelectionMode sets the selection mode.
 func (ptbi *PickerTouchBarItem) WithSelectionMode(selectionMode PickerTouchBarItemSelectionMode) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setSelectionMode:"), selectionMode)
 	return ptbi
 }
 
-// WithNumberOfOptions sets the property and returns the receiver so calls can be chained.
+// WithNumberOfOptions sets the number of options.
 func (ptbi *PickerTouchBarItem) WithNumberOfOptions(numberOfOptions int) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setNumberOfOptions:"), numberOfOptions)
 	return ptbi
 }
 
-// WithTarget sets the property and returns the receiver so calls can be chained.
+// WithTarget sets the target.
 func (ptbi *PickerTouchBarItem) WithTarget(target obj.Object) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return ptbi
 }
 
-// WithEnabled sets the property and returns the receiver so calls can be chained.
+// WithEnabled sets the enabled.
 func (ptbi *PickerTouchBarItem) WithEnabled(enabled bool) *PickerTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setEnabled:"), enabled)
 	return ptbi
@@ -154,13 +154,13 @@ func (ptbi *PickerTouchBarItem) IsEnabledAtIndex(index int) bool {
 	return _r
 }
 
-// ControlRepresentation wraps the corresponding Objective-C method.
+// ControlRepresentation returns the control representation.
 func (ptbi *PickerTouchBarItem) ControlRepresentation() PickerTouchBarItemControlRepresentation {
 	_r := objc.Send[PickerTouchBarItemControlRepresentation](objref.IDOf(ptbi), objc.RegisterName("controlRepresentation"))
 	return _r
 }
 
-// CollapsedRepresentationLabel wraps the corresponding Objective-C method.
+// CollapsedRepresentationLabel returns the collapsed representation label.
 func (ptbi *PickerTouchBarItem) CollapsedRepresentationLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationLabel"))
 	if _r == 0 {
@@ -169,43 +169,43 @@ func (ptbi *PickerTouchBarItem) CollapsedRepresentationLabel() string {
 	return purego.GoString(_r)
 }
 
-// CollapsedRepresentationImage wraps the corresponding Objective-C method.
+// CollapsedRepresentationImage returns the collapsed representation image.
 func (ptbi *PickerTouchBarItem) CollapsedRepresentationImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationImage"))
 	return ImageFromID(_r)
 }
 
-// SelectedIndex wraps the corresponding Objective-C method.
+// SelectedIndex returns the selected index.
 func (ptbi *PickerTouchBarItem) SelectedIndex() int {
 	_r := objc.Send[int](objref.IDOf(ptbi), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
-// SelectionColor wraps the corresponding Objective-C method.
+// SelectionColor returns the selection color.
 func (ptbi *PickerTouchBarItem) SelectionColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("selectionColor"))
 	return ColorFromID(_r)
 }
 
-// SelectionMode wraps the corresponding Objective-C method.
+// SelectionMode returns the selection mode.
 func (ptbi *PickerTouchBarItem) SelectionMode() PickerTouchBarItemSelectionMode {
 	_r := objc.Send[PickerTouchBarItemSelectionMode](objref.IDOf(ptbi), objc.RegisterName("selectionMode"))
 	return _r
 }
 
-// NumberOfOptions wraps the corresponding Objective-C method.
+// NumberOfOptions returns the number of options.
 func (ptbi *PickerTouchBarItem) NumberOfOptions() int {
 	_r := objc.Send[int](objref.IDOf(ptbi), objc.RegisterName("numberOfOptions"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (ptbi *PickerTouchBarItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ptbi *PickerTouchBarItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ptbi), objc.RegisterName("isEnabled"))
 	return _r

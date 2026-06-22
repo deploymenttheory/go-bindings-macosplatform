@@ -80,7 +80,7 @@ func NewURLConnectionWithRequestDelegate(request *URLRequest, delegate obj.Objec
 	return uRLConnectionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uc *URLConnection) WithScriptingProperties(scriptingProperties obj.Object) *URLConnection {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uc
@@ -111,13 +111,13 @@ func (uc *URLConnection) SetDelegateQueue(queue *OperationQueue) {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setDelegateQueue:"), objref.IDOf(queue))
 }
 
-// OriginalRequest wraps the corresponding Objective-C method.
+// OriginalRequest returns the original request.
 func (uc *URLConnection) OriginalRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
-// CurrentRequest wraps the corresponding Objective-C method.
+// CurrentRequest returns the current request.
 func (uc *URLConnection) CurrentRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("currentRequest"))
 	return URLRequestFromID(_r)

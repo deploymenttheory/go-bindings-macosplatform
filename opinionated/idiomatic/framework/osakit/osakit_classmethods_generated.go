@@ -12,7 +12,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// AvailableLanguages wraps the corresponding Objective-C method.
+// AvailableLanguages returns the available languages.
 //
 // AvailableLanguages returns the collection as a Go slice.
 func AvailableLanguages() []*Language {
@@ -32,7 +32,7 @@ func LanguageForScriptDataDescriptor(descriptor obj.Object) *Language {
 	return LanguageFromID(_r)
 }
 
-// DefaultLanguage wraps the corresponding Objective-C method.
+// DefaultLanguage returns the default language.
 func DefaultLanguage() *Language {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("defaultLanguage"))
 	return LanguageFromID(_r)

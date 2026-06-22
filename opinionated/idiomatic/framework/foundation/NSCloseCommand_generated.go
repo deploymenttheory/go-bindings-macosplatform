@@ -94,13 +94,13 @@ func (cc *CloseCommand) WithScriptErrorString(scriptErrorString StringProvider) 
 	return cc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cc *CloseCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloseCommand {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cc
 }
 
-// SaveOptions wraps the corresponding Objective-C method.
+// SaveOptions returns the save options.
 func (cc *CloseCommand) SaveOptions() SaveOptions {
 	_r := objc.Send[SaveOptions](objref.IDOf(cc), objc.RegisterName("saveOptions"))
 	return _r

@@ -72,7 +72,7 @@ func NewContactProperty() *ContactProperty {
 	return contactPropertyAdopt(_id)
 }
 
-// Contact wraps the corresponding Objective-C method.
+// Contact returns the contact.
 func (cp *ContactProperty) Contact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("contact"))
 	return ContactFromID(_r)

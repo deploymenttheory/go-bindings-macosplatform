@@ -106,7 +106,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) GetTargetsWithCompletion(ctx context.Cont
 	}
 }
 
-// ReadAttributeStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStateWithCompletion reads attribute state with completion.
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeStateWithParamsSubscrip
 	}
 }
 
-// ReadAttributeSupplyStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupplyStateWithCompletion reads attribute supply state with completion.
 //
 // ReadAttributeSupplyStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSupplyStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSupplyStateWithParamsSu
 	}
 }
 
-// ReadAttributeFaultStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFaultStateWithCompletion reads attribute fault state with completion.
 //
 // ReadAttributeFaultStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFaultStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFaultStateWithParamsSub
 	}
 }
 
-// ReadAttributeChargingEnabledUntilWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChargingEnabledUntilWithCompletion reads attribute charging enabled until with completion.
 //
 // ReadAttributeChargingEnabledUntilWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeChargingEnabledUntilWit
 	}
 }
 
-// ReadAttributeCircuitCapacityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCircuitCapacityWithCompletion reads attribute circuit capacity with completion.
 //
 // ReadAttributeCircuitCapacityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeCircuitCapacityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeCircuitCapacityWithPara
 	}
 }
 
-// ReadAttributeMinimumChargeCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinimumChargeCurrentWithCompletion reads attribute minimum charge current with completion.
 //
 // ReadAttributeMinimumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMinimumChargeCurrentWit
 	}
 }
 
-// ReadAttributeMaximumChargeCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaximumChargeCurrentWithCompletion reads attribute maximum charge current with completion.
 //
 // ReadAttributeMaximumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeMaximumChargeCurrentWit
 	}
 }
 
-// ReadAttributeUserMaximumChargeCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUserMaximumChargeCurrentWithCompletion reads attribute user maximum charge current with completion.
 //
 // ReadAttributeUserMaximumChargeCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeUserMaximumChargeCurren
 	}
 }
 
-// ReadAttributeRandomizationDelayWindowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRandomizationDelayWindowWithCompletion reads attribute randomization delay window with completion.
 //
 // ReadAttributeRandomizationDelayWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeRandomizationDelayWindo
 	}
 }
 
-// ReadAttributeNextChargeStartTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeStartTimeWithCompletion reads attribute next charge start time with completion.
 //
 // ReadAttributeNextChargeStartTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeStartTimeWith
 	}
 }
 
-// ReadAttributeNextChargeTargetTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeTargetTimeWithCompletion reads attribute next charge target time with completion.
 //
 // ReadAttributeNextChargeTargetTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -656,7 +656,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetTimeWit
 	}
 }
 
-// ReadAttributeNextChargeRequiredEnergyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeRequiredEnergyWithCompletion reads attribute next charge required energy with completion.
 //
 // ReadAttributeNextChargeRequiredEnergyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -706,7 +706,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeRequiredEnerg
 	}
 }
 
-// ReadAttributeNextChargeTargetSoCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeTargetSoCWithCompletion reads attribute next charge target so c with completion.
 //
 // ReadAttributeNextChargeTargetSoCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -756,7 +756,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeNextChargeTargetSoCWith
 	}
 }
 
-// ReadAttributeApproximateEVEfficiencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApproximateEVEfficiencyWithCompletion reads attribute approximate ev efficiency with completion.
 //
 // ReadAttributeApproximateEVEfficiencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -806,7 +806,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeApproximateEVEfficiency
 	}
 }
 
-// ReadAttributeSessionIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSessionIDWithCompletion reads attribute session ID with completion.
 //
 // ReadAttributeSessionIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -856,7 +856,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionIDWithParamsSubs
 	}
 }
 
-// ReadAttributeSessionDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSessionDurationWithCompletion reads attribute session duration with completion.
 //
 // ReadAttributeSessionDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -906,7 +906,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionDurationWithPara
 	}
 }
 
-// ReadAttributeSessionEnergyChargedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSessionEnergyChargedWithCompletion reads attribute session energy charged with completion.
 //
 // ReadAttributeSessionEnergyChargedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -956,7 +956,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeSessionEnergyChargedWit
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1006,7 +1006,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1056,7 +1056,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1106,7 +1106,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1156,7 +1156,7 @@ func (mbcee *MTRBaseClusterEnergyEVSE) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcee *MTRBaseClusterEnergyEVSE) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

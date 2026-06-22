@@ -112,7 +112,7 @@ func IsSuppressingAutomaticPassPresentation() bool {
 	return _r
 }
 
-// IsPaymentPassActivationAvailable wraps the corresponding Objective-C method.
+// IsPaymentPassActivationAvailable reports whether the object is payment pass activation available.
 func IsPaymentPassActivationAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("PKPassLibrary")), objc.RegisterName("isPaymentPassActivationAvailable"))
 	return _r

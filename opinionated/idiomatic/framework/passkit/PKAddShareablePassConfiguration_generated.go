@@ -63,13 +63,13 @@ func (aspc *AddShareablePassConfiguration) WithLocalizedDescription(localizedDes
 	return aspc
 }
 
-// PrimaryAction wraps the corresponding Objective-C method.
+// PrimaryAction returns the primary action.
 func (aspc *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfigurationPrimaryAction {
 	_r := objc.Send[AddShareablePassConfigurationPrimaryAction](objref.IDOf(aspc), objc.RegisterName("primaryAction"))
 	return _r
 }
 
-// CredentialsMetadata wraps the corresponding Objective-C method.
+// CredentialsMetadata returns the credentials metadata.
 //
 // CredentialsMetadata returns the collection as a Go slice.
 func (aspc *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
@@ -77,7 +77,7 @@ func (aspc *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePas
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareablePassMetadata { return ShareablePassMetadataFromID(_id) })
 }
 
-// ProvisioningPolicyIdentifier wraps the corresponding Objective-C method.
+// ProvisioningPolicyIdentifier returns the provisioning policy identifier.
 func (aspc *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("provisioningPolicyIdentifier"))
 	if _r == 0 {

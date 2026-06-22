@@ -149,19 +149,19 @@ func (po *PrintOperation) CleanUpOperation() {
 	objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("cleanUpOperation"))
 }
 
-// IsCopyingOperation wraps the corresponding Objective-C method.
+// IsCopyingOperation reports whether the object is copying operation.
 func (po *PrintOperation) IsCopyingOperation() bool {
 	_r := objc.Send[bool](objref.IDOf(po), objc.RegisterName("isCopyingOperation"))
 	return _r
 }
 
-// PreferredRenderingQuality wraps the corresponding Objective-C method.
+// PreferredRenderingQuality returns the preferred rendering quality.
 func (po *PrintOperation) PreferredRenderingQuality() PrintRenderingQuality {
 	_r := objc.Send[PrintRenderingQuality](objref.IDOf(po), objc.RegisterName("preferredRenderingQuality"))
 	return _r
 }
 
-// JobTitle wraps the corresponding Objective-C method.
+// JobTitle returns the job title.
 func (po *PrintOperation) JobTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("jobTitle"))
 	if _r == 0 {
@@ -182,13 +182,13 @@ func (po *PrintOperation) ShowsProgressPanel() bool {
 	return _r
 }
 
-// PrintPanel wraps the corresponding Objective-C method.
+// PrintPanel returns the print panel.
 func (po *PrintOperation) PrintPanel() *PrintPanel {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printPanel"))
 	return PrintPanelFromID(_r)
 }
 
-// PDFPanel wraps the corresponding Objective-C method.
+// PDFPanel returns the pdf panel.
 func (po *PrintOperation) PDFPanel() *PDFPanel {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("PDFPanel"))
 	return PDFPanelFromID(_r)
@@ -200,37 +200,37 @@ func (po *PrintOperation) CanSpawnSeparateThread() bool {
 	return _r
 }
 
-// PageOrder wraps the corresponding Objective-C method.
+// PageOrder returns the page order.
 func (po *PrintOperation) PageOrder() PrintingPageOrder {
 	_r := objc.Send[PrintingPageOrder](objref.IDOf(po), objc.RegisterName("pageOrder"))
 	return _r
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (po *PrintOperation) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// PrintInfo wraps the corresponding Objective-C method.
+// PrintInfo returns the print info.
 func (po *PrintOperation) PrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)
 }
 
-// Context wraps the corresponding Objective-C method.
+// Context returns the context.
 func (po *PrintOperation) Context() *GraphicsContext {
 	_r := objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("context"))
 	return GraphicsContextFromID(_r)
 }
 
-// PageRange wraps the corresponding Objective-C method.
+// PageRange returns the page range.
 func (po *PrintOperation) PageRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(po), objc.RegisterName("pageRange"))
 	return _r
 }
 
-// CurrentPage wraps the corresponding Objective-C method.
+// CurrentPage returns the current page.
 func (po *PrintOperation) CurrentPage() int {
 	_r := objc.Send[int](objref.IDOf(po), objc.RegisterName("currentPage"))
 	return _r

@@ -143,25 +143,25 @@ func (ogc *OpenGLContext) CreateTextureFromViewInternalFormat(target uint32, vie
 	objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("createTexture:fromView:internalFormat:"), target, objref.IDOf(view), format)
 }
 
-// PixelFormat wraps the corresponding Objective-C method.
+// PixelFormat returns the pixel format.
 func (ogc *OpenGLContext) PixelFormat() *OpenGLPixelFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("pixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (ogc *OpenGLContext) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// CurrentVirtualScreen wraps the corresponding Objective-C method.
+// CurrentVirtualScreen returns the current virtual screen.
 func (ogc *OpenGLContext) CurrentVirtualScreen() int32 {
 	_r := objc.Send[int32](objref.IDOf(ogc), objc.RegisterName("currentVirtualScreen"))
 	return _r
 }
 
-// CGLContextObj wraps the corresponding Objective-C method.
+// CGLContextObj returns the cgl context obj.
 func (ogc *OpenGLContext) CGLContextObj() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("CGLContextObj"))
 	return obj.Wrap(_r)

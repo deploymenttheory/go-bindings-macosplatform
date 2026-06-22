@@ -210,61 +210,61 @@ func (mo *ManagedObject) ValidateForUpdate() error {
 	return nil
 }
 
-// ManagedObjectContext wraps the corresponding Objective-C method.
+// ManagedObjectContext returns the managed object context.
 func (mo *ManagedObject) ManagedObjectContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (mo *ManagedObject) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// ObjectID wraps the corresponding Objective-C method.
+// ObjectID returns the object ID.
 func (mo *ManagedObject) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
-// IsInserted wraps the corresponding Objective-C method.
+// IsInserted reports whether the object is inserted.
 func (mo *ManagedObject) IsInserted() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isInserted"))
 	return _r
 }
 
-// IsUpdated wraps the corresponding Objective-C method.
+// IsUpdated reports whether the object is updated.
 func (mo *ManagedObject) IsUpdated() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isUpdated"))
 	return _r
 }
 
-// IsDeleted wraps the corresponding Objective-C method.
+// IsDeleted reports whether the object is deleted.
 func (mo *ManagedObject) IsDeleted() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isDeleted"))
 	return _r
 }
 
-// HasChanges wraps the corresponding Objective-C method.
+// HasChanges reports whether the object has changes.
 func (mo *ManagedObject) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("hasChanges"))
 	return _r
 }
 
-// HasPersistentChangedValues wraps the corresponding Objective-C method.
+// HasPersistentChangedValues reports whether the object has persistent changed values.
 func (mo *ManagedObject) HasPersistentChangedValues() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("hasPersistentChangedValues"))
 	return _r
 }
 
-// IsFault wraps the corresponding Objective-C method.
+// IsFault reports whether the object is fault.
 func (mo *ManagedObject) IsFault() bool {
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isFault"))
 	return _r
 }
 
-// FaultingState wraps the corresponding Objective-C method.
+// FaultingState returns the faulting state.
 func (mo *ManagedObject) FaultingState() int {
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("faultingState"))
 	return _r

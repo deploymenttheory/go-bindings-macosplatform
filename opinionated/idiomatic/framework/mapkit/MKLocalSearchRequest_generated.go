@@ -86,37 +86,37 @@ func NewLocalSearchRequestWithCompletion(completion *LocalSearchCompletion) *Loc
 	return localSearchRequestAdopt(_id)
 }
 
-// WithNaturalLanguageQuery sets the property and returns the receiver so calls can be chained.
+// WithNaturalLanguageQuery sets the natural language query.
 func (lsr *LocalSearchRequest) WithNaturalLanguageQuery(naturalLanguageQuery string) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setNaturalLanguageQuery:"), purego.NSString(naturalLanguageQuery))
 	return lsr
 }
 
-// WithRegionPriority sets the property and returns the receiver so calls can be chained.
+// WithRegionPriority sets the region priority.
 func (lsr *LocalSearchRequest) WithRegionPriority(regionPriority LocalSearchRegionPriority) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setRegionPriority:"), regionPriority)
 	return lsr
 }
 
-// WithResultTypes sets the property and returns the receiver so calls can be chained.
+// WithResultTypes sets the result types.
 func (lsr *LocalSearchRequest) WithResultTypes(resultTypes LocalSearchResultType) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setResultTypes:"), resultTypes)
 	return lsr
 }
 
-// WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter sets the point of interest filter.
 func (lsr *LocalSearchRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return lsr
 }
 
-// WithAddressFilter sets the property and returns the receiver so calls can be chained.
+// WithAddressFilter sets the address filter.
 func (lsr *LocalSearchRequest) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchRequest {
 	objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 	return lsr
 }
 
-// NaturalLanguageQuery wraps the corresponding Objective-C method.
+// NaturalLanguageQuery returns the natural language query.
 func (lsr *LocalSearchRequest) NaturalLanguageQuery() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("naturalLanguageQuery"))
 	if _r == 0 {
@@ -125,25 +125,25 @@ func (lsr *LocalSearchRequest) NaturalLanguageQuery() string {
 	return purego.GoString(_r)
 }
 
-// RegionPriority wraps the corresponding Objective-C method.
+// RegionPriority returns the region priority.
 func (lsr *LocalSearchRequest) RegionPriority() LocalSearchRegionPriority {
 	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(lsr), objc.RegisterName("regionPriority"))
 	return _r
 }
 
-// ResultTypes wraps the corresponding Objective-C method.
+// ResultTypes returns the result types.
 func (lsr *LocalSearchRequest) ResultTypes() LocalSearchResultType {
 	_r := objc.Send[LocalSearchResultType](objref.IDOf(lsr), objc.RegisterName("resultTypes"))
 	return _r
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (lsr *LocalSearchRequest) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// AddressFilter wraps the corresponding Objective-C method.
+// AddressFilter returns the address filter.
 func (lsr *LocalSearchRequest) AddressFilter() *AddressFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lsr), objc.RegisterName("addressFilter"))
 	return AddressFilterFromID(_r)

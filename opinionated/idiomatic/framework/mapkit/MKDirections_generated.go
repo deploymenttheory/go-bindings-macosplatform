@@ -78,7 +78,7 @@ func (d *Directions) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("cancel"))
 }
 
-// IsCalculating wraps the corresponding Objective-C method.
+// IsCalculating reports whether the object is calculating.
 func (d *Directions) IsCalculating() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isCalculating"))
 	return _r

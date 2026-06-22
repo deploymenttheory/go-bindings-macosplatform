@@ -84,7 +84,7 @@ func (piec *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Obje
 	return obj.Wrap(_r)
 }
 
-// ElementEnumerator wraps the corresponding Objective-C method.
+// ElementEnumerator returns the element enumerator.
 func (piec *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(piec), objc.RegisterName("elementEnumerator"))
 	return obj.Wrap(_r)

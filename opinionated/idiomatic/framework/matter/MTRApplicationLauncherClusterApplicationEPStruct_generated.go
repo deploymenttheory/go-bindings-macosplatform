@@ -66,25 +66,25 @@ func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) String() string
 	return rt.Description(objref.IDOf(malcaes))
 }
 
-// WithApplication sets the property and returns the receiver so calls can be chained.
+// WithApplication sets the application.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEPStruct {
 	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcaes
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEPStruct {
 	objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return malcaes
 }
 
-// Application wraps the corresponding Objective-C method.
+// Application returns the application.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (malcaes *MTRApplicationLauncherClusterApplicationEPStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malcaes), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)

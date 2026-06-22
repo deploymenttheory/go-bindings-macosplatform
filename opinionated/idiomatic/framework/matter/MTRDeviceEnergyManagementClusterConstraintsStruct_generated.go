@@ -70,61 +70,61 @@ func NewMTRDeviceEnergyManagementClusterConstraintsStruct() *MTRDeviceEnergyMana
 	return mTRDeviceEnergyManagementClusterConstraintsStructAdopt(_id)
 }
 
-// WithStartTime sets the property and returns the receiver so calls can be chained.
+// WithStartTime sets the start time.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mdemccs
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemccs
 }
 
-// WithNominalPower sets the property and returns the receiver so calls can be chained.
+// WithNominalPower sets the nominal power.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return mdemccs
 }
 
-// WithMaximumEnergy sets the property and returns the receiver so calls can be chained.
+// WithMaximumEnergy sets the maximum energy.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithMaximumEnergy(maximumEnergy obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setMaximumEnergy:"), objref.IDOf(maximumEnergy))
 	return mdemccs
 }
 
-// WithLoadControl sets the property and returns the receiver so calls can be chained.
+// WithLoadControl sets the load control.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithLoadControl(loadControl obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setLoadControl:"), objref.IDOf(loadControl))
 	return mdemccs
 }
 
-// StartTime wraps the corresponding Objective-C method.
+// StartTime returns the start time.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// NominalPower wraps the corresponding Objective-C method.
+// NominalPower returns the nominal power.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
 }
 
-// MaximumEnergy wraps the corresponding Objective-C method.
+// MaximumEnergy returns the maximum energy.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("maximumEnergy"))
 	return obj.Wrap(_r)
 }
 
-// LoadControl wraps the corresponding Objective-C method.
+// LoadControl returns the load control.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("loadControl"))
 	return obj.Wrap(_r)

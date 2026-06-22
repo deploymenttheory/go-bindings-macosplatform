@@ -52,7 +52,7 @@ func NewUnitFrequency() *UnitFrequency {
 	return unitFrequencyAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uf *UnitFrequency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFrequency {
 	objc.Send[objc.ID](objref.IDOf(uf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uf

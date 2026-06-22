@@ -75,7 +75,7 @@ func NewBezierPath() *BezierPath {
 	return bezierPathAdopt(_id)
 }
 
-// WithCGPath sets the property and returns the receiver so calls can be chained.
+// WithCGPath sets the cg path.
 func (bp *BezierPath) WithCGPath(cGPath obj.Object) *BezierPath {
 	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setCGPath:"), objref.IDOf(cGPath))
 	return bp
@@ -267,85 +267,85 @@ func (bp *BezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
 	return _r
 }
 
-// CGPath wraps the corresponding Objective-C method.
+// CGPath returns the cg path.
 func (bp *BezierPath) CGPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("CGPath"))
 	return obj.Wrap(_r)
 }
 
-// LineWidth wraps the corresponding Objective-C method.
+// LineWidth returns the line width.
 func (bp *BezierPath) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(bp), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// LineCapStyle wraps the corresponding Objective-C method.
+// LineCapStyle returns the line cap style.
 func (bp *BezierPath) LineCapStyle() LineCapStyle {
 	_r := objc.Send[LineCapStyle](objref.IDOf(bp), objc.RegisterName("lineCapStyle"))
 	return _r
 }
 
-// LineJoinStyle wraps the corresponding Objective-C method.
+// LineJoinStyle returns the line join style.
 func (bp *BezierPath) LineJoinStyle() LineJoinStyle {
 	_r := objc.Send[LineJoinStyle](objref.IDOf(bp), objc.RegisterName("lineJoinStyle"))
 	return _r
 }
 
-// WindingRule wraps the corresponding Objective-C method.
+// WindingRule returns the winding rule.
 func (bp *BezierPath) WindingRule() WindingRule {
 	_r := objc.Send[WindingRule](objref.IDOf(bp), objc.RegisterName("windingRule"))
 	return _r
 }
 
-// MiterLimit wraps the corresponding Objective-C method.
+// MiterLimit returns the miter limit.
 func (bp *BezierPath) MiterLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(bp), objc.RegisterName("miterLimit"))
 	return _r
 }
 
-// Flatness wraps the corresponding Objective-C method.
+// Flatness returns the flatness.
 func (bp *BezierPath) Flatness() float64 {
 	_r := objc.Send[float64](objref.IDOf(bp), objc.RegisterName("flatness"))
 	return _r
 }
 
-// BezierPathByFlatteningPath wraps the corresponding Objective-C method.
+// BezierPathByFlatteningPath returns the bezier path by flattening path.
 func (bp *BezierPath) BezierPathByFlatteningPath() *BezierPath {
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("bezierPathByFlatteningPath"))
 	return BezierPathFromID(_r)
 }
 
-// BezierPathByReversingPath wraps the corresponding Objective-C method.
+// BezierPathByReversingPath returns the bezier path by reversing path.
 func (bp *BezierPath) BezierPathByReversingPath() *BezierPath {
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("bezierPathByReversingPath"))
 	return BezierPathFromID(_r)
 }
 
-// IsEmpty wraps the corresponding Objective-C method.
+// IsEmpty reports whether the object is empty.
 func (bp *BezierPath) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(bp), objc.RegisterName("isEmpty"))
 	return _r
 }
 
-// CurrentPoint wraps the corresponding Objective-C method.
+// CurrentPoint returns the current point.
 func (bp *BezierPath) CurrentPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(bp), objc.RegisterName("currentPoint"))
 	return _r
 }
 
-// ControlPointBounds wraps the corresponding Objective-C method.
+// ControlPointBounds returns the control point bounds.
 func (bp *BezierPath) ControlPointBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(bp), objc.RegisterName("controlPointBounds"))
 	return _r
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (bp *BezierPath) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(bp), objc.RegisterName("bounds"))
 	return _r
 }
 
-// ElementCount wraps the corresponding Objective-C method.
+// ElementCount returns the element count.
 func (bp *BezierPath) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(bp), objc.RegisterName("elementCount"))
 	return _r

@@ -70,7 +70,7 @@ func NewMTRMediaPlaybackClusterSkipForwardParams() *MTRMediaPlaybackClusterSkipF
 	return mTRMediaPlaybackClusterSkipForwardParamsAdopt(_id)
 }
 
-// WithDeltaPositionMilliseconds sets the property and returns the receiver so calls can be chained.
+// WithDeltaPositionMilliseconds sets the delta position milliseconds.
 func (mmpcsfp *MTRMediaPlaybackClusterSkipForwardParams) WithDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object) *MTRMediaPlaybackClusterSkipForwardParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcsfp), objc.RegisterName("setDeltaPositionMilliseconds:"), objref.IDOf(deltaPositionMilliseconds))
 	return mmpcsfp
@@ -88,7 +88,7 @@ func (mmpcsfp *MTRMediaPlaybackClusterSkipForwardParams) WithServerSideProcessin
 	return mmpcsfp
 }
 
-// DeltaPositionMilliseconds wraps the corresponding Objective-C method.
+// DeltaPositionMilliseconds returns the delta position milliseconds.
 func (mmpcsfp *MTRMediaPlaybackClusterSkipForwardParams) DeltaPositionMilliseconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsfp), objc.RegisterName("deltaPositionMilliseconds"))
 	return obj.Wrap(_r)

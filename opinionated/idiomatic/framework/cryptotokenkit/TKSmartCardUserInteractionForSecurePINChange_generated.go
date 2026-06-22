@@ -101,7 +101,7 @@ func (scuifspc *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeo
 	return scuifspc
 }
 
-// PINConfirmation wraps the corresponding Objective-C method.
+// PINConfirmation returns the pin confirmation.
 func (scuifspc *SmartCardUserInteractionForSecurePINChange) PINConfirmation() SmartCardPINConfirmation {
 	_r := objc.Send[SmartCardPINConfirmation](objref.IDOf(scuifspc), objc.RegisterName("PINConfirmation"))
 	return _r

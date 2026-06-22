@@ -131,7 +131,7 @@ func NewDictionaryWithContentsOfURLError(url string) (result *Dictionary, err er
 	return dictionaryAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (d *Dictionary) WithScriptingProperties(scriptingProperties obj.Object) *Dictionary {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return d
@@ -149,7 +149,7 @@ func (d *Dictionary) KeyEnumerator() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (d *Dictionary) Count() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("count"))
 	return _r
@@ -243,19 +243,19 @@ func (d *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions
 	return obj.Wrap(_r)
 }
 
-// AllKeys wraps the corresponding Objective-C method.
+// AllKeys returns the all keys.
 func (d *Dictionary) AllKeys() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllValues wraps the corresponding Objective-C method.
+// AllValues returns the all values.
 func (d *Dictionary) AllValues() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DescriptionInStringsFileFormat wraps the corresponding Objective-C method.
+// DescriptionInStringsFileFormat returns the description in strings file format.
 func (d *Dictionary) DescriptionInStringsFileFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionInStringsFileFormat"))
 	if _r == 0 {

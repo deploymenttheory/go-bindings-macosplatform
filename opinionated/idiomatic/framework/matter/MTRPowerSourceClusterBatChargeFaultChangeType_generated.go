@@ -70,7 +70,7 @@ func NewMTRPowerSourceClusterBatChargeFaultChangeType() *MTRPowerSourceClusterBa
 	return mTRPowerSourceClusterBatChargeFaultChangeTypeAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mpscbcfct *MTRPowerSourceClusterBatChargeFaultChangeType) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbcfct), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mpscbcfct *MTRPowerSourceClusterBatChargeFaultChangeType) SetCurrent(curre
 	objc.Send[objc.ID](objref.IDOf(mpscbcfct), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mpscbcfct *MTRPowerSourceClusterBatChargeFaultChangeType) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscbcfct), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

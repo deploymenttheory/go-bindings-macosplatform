@@ -64,7 +64,7 @@ func (mpbe *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
 	return mpbe
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mpbe *MIDIPitchBendEvent) Value() int {
 	_r := objc.Send[int](objref.IDOf(mpbe), objc.RegisterName("value"))
 	return _r

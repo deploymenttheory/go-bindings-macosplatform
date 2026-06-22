@@ -81,7 +81,7 @@ func (fc *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvide
 	return fc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fc *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
 	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fc
@@ -126,7 +126,7 @@ func (fc *FileCoordinator) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("cancel"))
 }
 
-// PurposeIdentifier wraps the corresponding Objective-C method.
+// PurposeIdentifier returns the purpose identifier.
 func (fc *FileCoordinator) PurposeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("purposeIdentifier"))
 	if _r == 0 {

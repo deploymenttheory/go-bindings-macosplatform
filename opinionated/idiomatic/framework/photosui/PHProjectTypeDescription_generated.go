@@ -116,7 +116,7 @@ func (ptd *ProjectTypeDescription) LocalizedTitle() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedDescription wraps the corresponding Objective-C method.
+// LocalizedDescription returns the localized description.
 func (ptd *ProjectTypeDescription) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -125,7 +125,7 @@ func (ptd *ProjectTypeDescription) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedAttributedDescription wraps the corresponding Objective-C method.
+// LocalizedAttributedDescription returns the localized attributed description.
 func (ptd *ProjectTypeDescription) LocalizedAttributedDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ptd), objc.RegisterName("localizedAttributedDescription"))
 	return obj.Wrap(_r)

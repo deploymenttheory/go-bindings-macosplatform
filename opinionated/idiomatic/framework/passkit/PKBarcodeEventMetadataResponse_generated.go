@@ -71,13 +71,13 @@ func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation ob
 	return barcodeEventMetadataResponseAdopt(_id)
 }
 
-// WithPaymentInformation sets the property and returns the receiver so calls can be chained.
+// WithPaymentInformation sets the payment information.
 func (bemr *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
 	objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
 	return bemr
 }
 
-// PaymentInformation wraps the corresponding Objective-C method.
+// PaymentInformation returns the payment information.
 func (bemr *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("paymentInformation"))
 	return obj.Wrap(_r)

@@ -90,7 +90,7 @@ func (ar *AddressRepresentations) CityWithContextUsingStyle(style AddressReprese
 	return purego.GoString(_r)
 }
 
-// CityName wraps the corresponding Objective-C method.
+// CityName returns the city name.
 func (ar *AddressRepresentations) CityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityName"))
 	if _r == 0 {
@@ -99,7 +99,7 @@ func (ar *AddressRepresentations) CityName() string {
 	return purego.GoString(_r)
 }
 
-// CityWithContext wraps the corresponding Objective-C method.
+// CityWithContext returns the city with context.
 func (ar *AddressRepresentations) CityWithContext() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityWithContext"))
 	if _r == 0 {
@@ -108,7 +108,7 @@ func (ar *AddressRepresentations) CityWithContext() string {
 	return purego.GoString(_r)
 }
 
-// RegionName wraps the corresponding Objective-C method.
+// RegionName returns the region name.
 func (ar *AddressRepresentations) RegionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionName"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (ar *AddressRepresentations) RegionName() string {
 	return purego.GoString(_r)
 }
 
-// RegionCode wraps the corresponding Objective-C method.
+// RegionCode returns the region code.
 func (ar *AddressRepresentations) RegionCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionCode"))
 	if _r == 0 {

@@ -70,7 +70,7 @@ func NewMTRApplicationLauncherClusterHideAppParams() *MTRApplicationLauncherClus
 	return mTRApplicationLauncherClusterHideAppParamsAdopt(_id)
 }
 
-// WithApplication sets the property and returns the receiver so calls can be chained.
+// WithApplication sets the application.
 func (malchap *MTRApplicationLauncherClusterHideAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterHideAppParams {
 	objc.Send[objc.ID](objref.IDOf(malchap), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malchap
@@ -88,7 +88,7 @@ func (malchap *MTRApplicationLauncherClusterHideAppParams) WithServerSideProcess
 	return malchap
 }
 
-// Application wraps the corresponding Objective-C method.
+// Application returns the application.
 func (malchap *MTRApplicationLauncherClusterHideAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(malchap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)

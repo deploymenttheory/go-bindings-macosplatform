@@ -52,7 +52,7 @@ func NewDirectoryEnumerator() *DirectoryEnumerator {
 	return directoryEnumeratorAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (de *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return de
@@ -68,25 +68,25 @@ func (de *DirectoryEnumerator) SkipDescendants() {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendants"))
 }
 
-// FileAttributes wraps the corresponding Objective-C method.
+// FileAttributes returns the file attributes.
 func (de *DirectoryEnumerator) FileAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("fileAttributes"))
 	return obj.Wrap(_r)
 }
 
-// DirectoryAttributes wraps the corresponding Objective-C method.
+// DirectoryAttributes returns the directory attributes.
 func (de *DirectoryEnumerator) DirectoryAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("directoryAttributes"))
 	return obj.Wrap(_r)
 }
 
-// IsEnumeratingDirectoryPostOrder wraps the corresponding Objective-C method.
+// IsEnumeratingDirectoryPostOrder reports whether the object is enumerating directory post order.
 func (de *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
 	return _r
 }
 
-// Level wraps the corresponding Objective-C method.
+// Level returns the level.
 func (de *DirectoryEnumerator) Level() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("level"))
 	return _r

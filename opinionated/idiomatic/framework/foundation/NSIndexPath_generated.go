@@ -75,7 +75,7 @@ func NewIndexPathWithIndex(index int) *IndexPath {
 	return indexPathAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ip *IndexPath) WithScriptingProperties(scriptingProperties obj.Object) *IndexPath {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ip
@@ -105,7 +105,7 @@ func (ip *IndexPath) Compare(otherObject *IndexPath) ComparisonResult {
 	return _r
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (ip *IndexPath) Length() int {
 	_r := objc.Send[int](objref.IDOf(ip), objc.RegisterName("length"))
 	return _r

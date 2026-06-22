@@ -53,7 +53,7 @@ func NewReceiptRefreshRequestWithReceiptProperties(properties obj.Object) *Recei
 	return receiptRefreshRequestAdopt(_id)
 }
 
-// ReceiptProperties wraps the corresponding Objective-C method.
+// ReceiptProperties returns the receipt properties.
 func (rrr *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rrr), objc.RegisterName("receiptProperties"))
 	return obj.Wrap(_r)

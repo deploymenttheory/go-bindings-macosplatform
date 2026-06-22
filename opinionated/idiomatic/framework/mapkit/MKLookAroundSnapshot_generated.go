@@ -72,7 +72,7 @@ func NewLookAroundSnapshot() *LookAroundSnapshot {
 	return lookAroundSnapshotAdopt(_id)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (las *LookAroundSnapshot) Image() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("image"))
 	return obj.Wrap(_r)

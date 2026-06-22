@@ -58,7 +58,7 @@ func (spns *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameSer
 	return spns
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (spns *SocketPortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *SocketPortNameServer {
 	objc.Send[objc.ID](objref.IDOf(spns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return spns
@@ -76,7 +76,7 @@ func (spns *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *Por
 	return _r
 }
 
-// DefaultNameServerPortNumber wraps the corresponding Objective-C method.
+// DefaultNameServerPortNumber returns the default name server port number.
 func (spns *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(spns), objc.RegisterName("defaultNameServerPortNumber"))
 	return _r

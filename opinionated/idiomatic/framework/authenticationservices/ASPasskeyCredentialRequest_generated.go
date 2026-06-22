@@ -113,7 +113,7 @@ func (pcr *PasskeyCredentialRequest) SupportedAlgorithms() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ExcludedCredentials wraps the corresponding Objective-C method.
+// ExcludedCredentials returns the excluded credentials.
 //
 // ExcludedCredentials returns the collection as a Go slice.
 func (pcr *PasskeyCredentialRequest) ExcludedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {

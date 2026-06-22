@@ -82,7 +82,7 @@ func (meecstp *MTREnergyEVSEClusterSetTargetsParams) WithServerSideProcessingTim
 	return meecstp
 }
 
-// ChargingTargetSchedules wraps the corresponding Objective-C method.
+// ChargingTargetSchedules returns the charging target schedules.
 func (meecstp *MTREnergyEVSEClusterSetTargetsParams) ChargingTargetSchedules() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecstp), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)

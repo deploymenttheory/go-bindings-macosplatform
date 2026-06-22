@@ -88,7 +88,7 @@ func (sm *ShippingMethod) WithType(type_ PaymentSummaryItemType) *ShippingMethod
 	return sm
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (sm *ShippingMethod) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -97,7 +97,7 @@ func (sm *ShippingMethod) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Detail wraps the corresponding Objective-C method.
+// Detail returns the detail.
 func (sm *ShippingMethod) Detail() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("detail"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (sm *ShippingMethod) Detail() string {
 	return purego.GoString(_r)
 }
 
-// DateComponentsRange wraps the corresponding Objective-C method.
+// DateComponentsRange returns the date components range.
 func (sm *ShippingMethod) DateComponentsRange() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("dateComponentsRange"))
 	return DateComponentsRangeFromID(_r)

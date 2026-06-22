@@ -78,7 +78,7 @@ func NewMTRAttributeReportWithResponseValueError(responseValue obj.Object) (resu
 	return mTRAttributeReportAdopt(_id), nil
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (mar *MTRAttributeReport) Path() *MTRAttributePath {
 	_r := objc.Send[objc.ID](objref.IDOf(mar), objc.RegisterName("path"))
 	return MTRAttributePathFromID(_r)

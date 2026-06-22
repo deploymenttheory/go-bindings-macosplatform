@@ -78,19 +78,19 @@ func NewMTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsWithRe
 	return mTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsAdopt(_id), nil
 }
 
-// WithProfileCount sets the property and returns the receiver so calls can be chained.
+// WithProfileCount sets the profile count.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithProfileCount(profileCount obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("setProfileCount:"), objref.IDOf(profileCount))
 	return memcgpircp
 }
 
-// WithProfileIntervalPeriod sets the property and returns the receiver so calls can be chained.
+// WithProfileIntervalPeriod sets the profile interval period.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithProfileIntervalPeriod(profileIntervalPeriod obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("setProfileIntervalPeriod:"), objref.IDOf(profileIntervalPeriod))
 	return memcgpircp
 }
 
-// WithMaxNumberOfIntervals sets the property and returns the receiver so calls can be chained.
+// WithMaxNumberOfIntervals sets the max number of intervals.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) WithMaxNumberOfIntervals(maxNumberOfIntervals obj.Object) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams {
 	objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("setMaxNumberOfIntervals:"), objref.IDOf(maxNumberOfIntervals))
 	return memcgpircp
@@ -102,25 +102,25 @@ func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandPa
 	return memcgpircp
 }
 
-// ProfileCount wraps the corresponding Objective-C method.
+// ProfileCount returns the profile count.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("profileCount"))
 	return obj.Wrap(_r)
 }
 
-// ProfileIntervalPeriod wraps the corresponding Objective-C method.
+// ProfileIntervalPeriod returns the profile interval period.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileIntervalPeriod() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("profileIntervalPeriod"))
 	return obj.Wrap(_r)
 }
 
-// MaxNumberOfIntervals wraps the corresponding Objective-C method.
+// MaxNumberOfIntervals returns the max number of intervals.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) MaxNumberOfIntervals() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("maxNumberOfIntervals"))
 	return obj.Wrap(_r)
 }
 
-// ListOfAttributes wraps the corresponding Objective-C method.
+// ListOfAttributes returns the list of attributes.
 func (memcgpircp *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ListOfAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(memcgpircp), objc.RegisterName("listOfAttributes"))
 	return obj.Wrap(_r)

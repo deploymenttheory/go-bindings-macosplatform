@@ -68,7 +68,7 @@ func (f *Formatter) String() string {
 	return rt.Description(objref.IDOf(f))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (f *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return f

@@ -90,25 +90,25 @@ func (sec *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject
 	return sec
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sec *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sec
 }
 
-// TopLevelObject wraps the corresponding Objective-C method.
+// TopLevelObject returns the top level object.
 func (sec *ScriptExecutionContext) TopLevelObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("topLevelObject"))
 	return obj.Wrap(_r)
 }
 
-// ObjectBeingTested wraps the corresponding Objective-C method.
+// ObjectBeingTested returns the object being tested.
 func (sec *ScriptExecutionContext) ObjectBeingTested() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("objectBeingTested"))
 	return obj.Wrap(_r)
 }
 
-// RangeContainerObject wraps the corresponding Objective-C method.
+// RangeContainerObject returns the range container object.
 func (sec *ScriptExecutionContext) RangeContainerObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("rangeContainerObject"))
 	return obj.Wrap(_r)

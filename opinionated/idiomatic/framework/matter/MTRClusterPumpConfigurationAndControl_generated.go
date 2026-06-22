@@ -58,209 +58,209 @@ func NewMTRClusterPumpConfigurationAndControlWithDeviceEndpointQueue(device *MTR
 	return mTRClusterPumpConfigurationAndControlAdopt(_id)
 }
 
-// ReadAttributeMaxPressureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxPressureWithParams reads attribute max pressure with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxPressureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxPressureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxSpeedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxSpeedWithParams reads attribute max speed with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxFlowWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxFlowWithParams reads attribute max flow with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxFlowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxFlowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstPressureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinConstPressureWithParams reads attribute min const pressure with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstPressureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMinConstPressureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstPressureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstPressureWithParams reads attribute max const pressure with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstPressureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxConstPressureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinCompPressureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinCompPressureWithParams reads attribute min comp pressure with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMinCompPressureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMinCompPressureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxCompPressureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxCompPressureWithParams reads attribute max comp pressure with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxCompPressureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxCompPressureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstSpeedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinConstSpeedWithParams reads attribute min const speed with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMinConstSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstSpeedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstSpeedWithParams reads attribute max const speed with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxConstSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstFlowWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinConstFlowWithParams reads attribute min const flow with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstFlowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMinConstFlowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstFlowWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstFlowWithParams reads attribute max const flow with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstFlowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxConstFlowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinConstTempWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinConstTempWithParams reads attribute min const temp with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMinConstTempWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMinConstTempWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxConstTempWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstTempWithParams reads attribute max const temp with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeMaxConstTempWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeMaxConstTempWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePumpStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributePumpStatusWithParams reads attribute pump status with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributePumpStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributePumpStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEffectiveOperationModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveOperationModeWithParams reads attribute effective operation mode with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveOperationModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeEffectiveOperationModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEffectiveControlModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveControlModeWithParams reads attribute effective control mode with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeEffectiveControlModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeEffectiveControlModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCapacityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCapacityWithParams reads attribute capacity with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeCapacityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeCapacityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSpeedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSpeedWithParams reads attribute speed with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLifetimeRunningHoursWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeRunningHoursWithParams reads attribute lifetime running hours with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeRunningHoursWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeLifetimeRunningHoursWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval writes attribute lifetime running hours with value expected value interval.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams writes attribute lifetime running hours with value expected value interval params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeRunningHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeLifetimeRunningHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributePowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributePowerWithParams reads attribute power with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLifetimeEnergyConsumedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeEnergyConsumedWithParams reads attribute lifetime energy consumed with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeLifetimeEnergyConsumedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeLifetimeEnergyConsumedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval writes attribute lifetime energy consumed with value expected value interval.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams writes attribute lifetime energy consumed with value expected value interval params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeLifetimeEnergyConsumedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeLifetimeEnergyConsumedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeOperationModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationModeWithParams reads attribute operation mode with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeOperationModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeOperationModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeOperationModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeOperationModeWithValueExpectedValueInterval writes attribute operation mode with value expected value interval.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeOperationModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeOperationModeWithValueExpectedValueIntervalParams writes attribute operation mode with value expected value interval params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeOperationModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeControlModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeControlModeWithParams reads attribute control mode with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeControlModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeControlModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeControlModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeControlModeWithValueExpectedValueInterval writes attribute control mode with value expected value interval.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeControlModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeControlModeWithValueExpectedValueIntervalParams writes attribute control mode with value expected value interval params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) WriteAttributeControlModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("writeAttributeControlModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcpcac *MTRClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

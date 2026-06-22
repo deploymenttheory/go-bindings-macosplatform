@@ -117,37 +117,37 @@ func (ppl *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) 
 	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColorByTemperature:"), temperature)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (ppl *PhysicallyPlausibleLight) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// Lumens wraps the corresponding Objective-C method.
+// Lumens returns the lumens.
 func (ppl *PhysicallyPlausibleLight) Lumens() float32 {
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("lumens"))
 	return _r
 }
 
-// InnerConeAngle wraps the corresponding Objective-C method.
+// InnerConeAngle returns the inner cone angle.
 func (ppl *PhysicallyPlausibleLight) InnerConeAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("innerConeAngle"))
 	return _r
 }
 
-// OuterConeAngle wraps the corresponding Objective-C method.
+// OuterConeAngle returns the outer cone angle.
 func (ppl *PhysicallyPlausibleLight) OuterConeAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("outerConeAngle"))
 	return _r
 }
 
-// AttenuationStartDistance wraps the corresponding Objective-C method.
+// AttenuationStartDistance returns the attenuation start distance.
 func (ppl *PhysicallyPlausibleLight) AttenuationStartDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationStartDistance"))
 	return _r
 }
 
-// AttenuationEndDistance wraps the corresponding Objective-C method.
+// AttenuationEndDistance returns the attenuation end distance.
 func (ppl *PhysicallyPlausibleLight) AttenuationEndDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(ppl), objc.RegisterName("attenuationEndDistance"))
 	return _r

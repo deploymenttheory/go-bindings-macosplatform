@@ -72,25 +72,25 @@ func NewPayment() *Payment {
 	return paymentAdopt(_id)
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (p *Payment) Token() *PaymentToken {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("token"))
 	return PaymentTokenFromID(_r)
 }
 
-// BillingContact wraps the corresponding Objective-C method.
+// BillingContact returns the billing contact.
 func (p *Payment) BillingContact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("billingContact"))
 	return ContactFromID(_r)
 }
 
-// ShippingContact wraps the corresponding Objective-C method.
+// ShippingContact returns the shipping contact.
 func (p *Payment) ShippingContact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingContact"))
 	return ContactFromID(_r)
 }
 
-// ShippingMethod wraps the corresponding Objective-C method.
+// ShippingMethod returns the shipping method.
 func (p *Payment) ShippingMethod() *ShippingMethod {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingMethod"))
 	return ShippingMethodFromID(_r)

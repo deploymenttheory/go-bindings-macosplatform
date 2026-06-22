@@ -78,13 +78,13 @@ func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError(respo
 	return mTRChannelClusterChangeChannelResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithStatus(status obj.Object) *MTRChannelClusterChangeChannelResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mccccrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithData(data string) *MTRChannelClusterChangeChannelResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mccccrp
@@ -96,13 +96,13 @@ func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithTimedInvokeTime
 	return mccccrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("data"))
 	if _r == 0 {

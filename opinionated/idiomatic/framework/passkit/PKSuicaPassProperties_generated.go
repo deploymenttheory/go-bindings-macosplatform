@@ -57,19 +57,19 @@ func (spp *SuicaPassProperties) IsInShinkansenStation() bool {
 	return _r
 }
 
-// IsBalanceAllowedForCommute wraps the corresponding Objective-C method.
+// IsBalanceAllowedForCommute reports whether the object is balance allowed for commute.
 func (spp *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isBalanceAllowedForCommute"))
 	return _r
 }
 
-// IsLowBalanceGateNotificationEnabled wraps the corresponding Objective-C method.
+// IsLowBalanceGateNotificationEnabled reports whether the object is low balance gate notification enabled.
 func (spp *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
 	return _r
 }
 
-// IsGreenCarTicketUsed wraps the corresponding Objective-C method.
+// IsGreenCarTicketUsed reports whether the object is green car ticket used.
 func (spp *SuicaPassProperties) IsGreenCarTicketUsed() bool {
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isGreenCarTicketUsed"))
 	return _r

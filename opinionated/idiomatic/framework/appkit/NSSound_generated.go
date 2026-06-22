@@ -164,31 +164,31 @@ func (s *Sound) ChannelMapping() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (s *Sound) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// IsPlaying wraps the corresponding Objective-C method.
+// IsPlaying reports whether the object is playing.
 func (s *Sound) IsPlaying() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isPlaying"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (s *Sound) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("duration"))
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (s *Sound) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("volume"))
 	return _r
 }
 
-// CurrentTime wraps the corresponding Objective-C method.
+// CurrentTime returns the current time.
 func (s *Sound) CurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("currentTime"))
 	return _r
@@ -200,7 +200,7 @@ func (s *Sound) Loops() bool {
 	return _r
 }
 
-// PlaybackDeviceIdentifier wraps the corresponding Objective-C method.
+// PlaybackDeviceIdentifier returns the playback device identifier.
 func (s *Sound) PlaybackDeviceIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("playbackDeviceIdentifier"))
 	return obj.Wrap(_r)

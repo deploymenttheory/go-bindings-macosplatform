@@ -70,13 +70,13 @@ func NewMTRValveConfigurationAndControlClusterValveFaultEvent() *MTRValveConfigu
 	return mTRValveConfigurationAndControlClusterValveFaultEventAdopt(_id)
 }
 
-// WithValveFault sets the property and returns the receiver so calls can be chained.
+// WithValveFault sets the valve fault.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
 	return mvcaccvfe
 }
 
-// ValveFault wraps the corresponding Objective-C method.
+// ValveFault returns the valve fault.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("valveFault"))
 	return obj.Wrap(_r)

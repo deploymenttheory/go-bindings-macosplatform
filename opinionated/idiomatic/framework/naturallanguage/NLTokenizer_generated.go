@@ -103,7 +103,7 @@ func (t *Tokenizer) TokensForRange(range_ foundation.NSRange) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Unit wraps the corresponding Objective-C method.
+// Unit returns the unit.
 func (t *Tokenizer) Unit() TokenUnit {
 	_r := objc.Send[TokenUnit](objref.IDOf(t), objc.RegisterName("unit"))
 	return _r

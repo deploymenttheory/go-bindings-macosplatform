@@ -52,31 +52,31 @@ func NewMeasurementFormatter() *MeasurementFormatter {
 	return measurementFormatterAdopt(_id)
 }
 
-// WithUnitOptions sets the property and returns the receiver so calls can be chained.
+// WithUnitOptions sets the unit options.
 func (mf *MeasurementFormatter) WithUnitOptions(unitOptions MeasurementFormatterUnitOptions) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitOptions:"), unitOptions)
 	return mf
 }
 
-// WithUnitStyle sets the property and returns the receiver so calls can be chained.
+// WithUnitStyle sets the unit style.
 func (mf *MeasurementFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return mf
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (mf *MeasurementFormatter) WithLocale(locale *Locale) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return mf
 }
 
-// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the number formatter.
 func (mf *MeasurementFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return mf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mf *MeasurementFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MeasurementFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mf
@@ -100,25 +100,25 @@ func (mf *MeasurementFormatter) StringFromUnit(unit *Unit) string {
 	return purego.GoString(_r)
 }
 
-// UnitOptions wraps the corresponding Objective-C method.
+// UnitOptions returns the unit options.
 func (mf *MeasurementFormatter) UnitOptions() MeasurementFormatterUnitOptions {
 	_r := objc.Send[MeasurementFormatterUnitOptions](objref.IDOf(mf), objc.RegisterName("unitOptions"))
 	return _r
 }
 
-// UnitStyle wraps the corresponding Objective-C method.
+// UnitStyle returns the unit style.
 func (mf *MeasurementFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(mf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (mf *MeasurementFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// NumberFormatter wraps the corresponding Objective-C method.
+// NumberFormatter returns the number formatter.
 func (mf *MeasurementFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)

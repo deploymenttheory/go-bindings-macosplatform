@@ -72,13 +72,13 @@ func NewObjectChangeDetails() *ObjectChangeDetails {
 	return objectChangeDetailsAdopt(_id)
 }
 
-// ObjectBeforeChanges wraps the corresponding Objective-C method.
+// ObjectBeforeChanges returns the object before changes.
 func (ocd *ObjectChangeDetails) ObjectBeforeChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
-// ObjectAfterChanges wraps the corresponding Objective-C method.
+// ObjectAfterChanges returns the object after changes.
 func (ocd *ObjectChangeDetails) ObjectAfterChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("objectAfterChanges"))
 	return obj.Wrap(_r)

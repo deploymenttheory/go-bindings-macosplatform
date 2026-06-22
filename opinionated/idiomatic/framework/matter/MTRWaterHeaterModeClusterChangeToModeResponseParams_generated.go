@@ -78,25 +78,25 @@ func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueErro
 	return mTRWaterHeaterModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mwhmcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRWaterHeaterModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return mwhmcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (mwhmcctmrp *MTRWaterHeaterModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

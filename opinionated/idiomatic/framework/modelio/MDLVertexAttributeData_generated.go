@@ -72,7 +72,7 @@ func NewVertexAttributeData() *VertexAttributeData {
 	return vertexAttributeDataAdopt(_id)
 }
 
-// WithMap sets the property and returns the receiver so calls can be chained.
+// WithMap sets the map.
 func (vad *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setMap:"), objref.IDOf(map_))
 	return vad
@@ -90,31 +90,31 @@ func (vad *VertexAttributeData) WithFormat(format VertexFormat) *VertexAttribute
 	return vad
 }
 
-// WithBufferSize sets the property and returns the receiver so calls can be chained.
+// WithBufferSize sets the buffer size.
 func (vad *VertexAttributeData) WithBufferSize(bufferSize int) *VertexAttributeData {
 	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setBufferSize:"), bufferSize)
 	return vad
 }
 
-// Map wraps the corresponding Objective-C method.
+// Map returns the map.
 func (vad *VertexAttributeData) Map() *MeshBufferMap {
 	_r := objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("map"))
 	return MeshBufferMapFromID(_r)
 }
 
-// Stride wraps the corresponding Objective-C method.
+// Stride returns the stride.
 func (vad *VertexAttributeData) Stride() int {
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("stride"))
 	return _r
 }
 
-// Format wraps the corresponding Objective-C method.
+// Format returns the format.
 func (vad *VertexAttributeData) Format() VertexFormat {
 	_r := objc.Send[VertexFormat](objref.IDOf(vad), objc.RegisterName("format"))
 	return _r
 }
 
-// BufferSize wraps the corresponding Objective-C method.
+// BufferSize returns the buffer size.
 func (vad *VertexAttributeData) BufferSize() int {
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("bufferSize"))
 	return _r

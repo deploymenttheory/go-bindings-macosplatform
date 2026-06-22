@@ -103,7 +103,7 @@ func CriticalSoundNamedWithAudioVolume(name obj.Object, volume float32) *Notific
 	return NotificationSoundFromID(_r)
 }
 
-// DefaultSound wraps the corresponding Objective-C method.
+// DefaultSound returns the default sound.
 func DefaultSound() *NotificationSound {
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("defaultSound"))
 	return NotificationSoundFromID(_r)

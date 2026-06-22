@@ -115,7 +115,7 @@ func (pc *ProviderConfiguration) WithSupportsVideo(supportsVideo bool) *Provider
 	return pc
 }
 
-// WithSupportsAudioTranslation sets the property and returns the receiver so calls can be chained.
+// WithSupportsAudioTranslation sets the supports audio translation.
 func (pc *ProviderConfiguration) WithSupportsAudioTranslation(supportsAudioTranslation bool) *ProviderConfiguration {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportsAudioTranslation:"), supportsAudioTranslation)
 	return pc
@@ -145,19 +145,19 @@ func (pc *ProviderConfiguration) RingtoneSound() string {
 	return purego.GoString(_r)
 }
 
-// IconTemplateImageData wraps the corresponding Objective-C method.
+// IconTemplateImageData returns the icon template image data.
 func (pc *ProviderConfiguration) IconTemplateImageData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("iconTemplateImageData"))
 	return obj.Wrap(_r)
 }
 
-// MaximumCallGroups wraps the corresponding Objective-C method.
+// MaximumCallGroups returns the maximum call groups.
 func (pc *ProviderConfiguration) MaximumCallGroups() int {
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallGroups"))
 	return _r
 }
 
-// MaximumCallsPerCallGroup wraps the corresponding Objective-C method.
+// MaximumCallsPerCallGroup returns the maximum calls per call group.
 func (pc *ProviderConfiguration) MaximumCallsPerCallGroup() int {
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallsPerCallGroup"))
 	return _r
@@ -181,7 +181,7 @@ func (pc *ProviderConfiguration) SupportsAudioTranslation() bool {
 	return _r
 }
 
-// SupportedHandleTypes wraps the corresponding Objective-C method.
+// SupportedHandleTypes returns the supported handle types.
 func (pc *ProviderConfiguration) SupportedHandleTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("supportedHandleTypes"))
 	return obj.Wrap(_r)

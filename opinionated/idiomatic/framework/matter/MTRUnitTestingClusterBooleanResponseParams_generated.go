@@ -80,7 +80,7 @@ func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError(respons
 	return mTRUnitTestingClusterBooleanResponseParamsAdopt(_id), nil
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterBooleanResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mutcbrp
@@ -92,7 +92,7 @@ func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) WithTimedInvokeTimeou
 	return mutcbrp
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("value"))
 	return obj.Wrap(_r)

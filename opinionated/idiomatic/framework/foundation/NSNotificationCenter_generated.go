@@ -68,33 +68,33 @@ func (nc *NotificationCenter) String() string {
 	return rt.Description(objref.IDOf(nc))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (nc *NotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *NotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return nc
 }
 
-// PostNotification wraps the corresponding Objective-C method.
+// PostNotification posts notification.
 func (nc *NotificationCenter) PostNotification(notification *Notification) {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotification:"), objref.IDOf(notification))
 }
 
-// PostNotificationNameObject wraps the corresponding Objective-C method.
+// PostNotificationNameObject posts notification name object.
 func (nc *NotificationCenter) PostNotificationNameObject(aName *String, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
 }
 
-// PostNotificationNameObjectUserInfo wraps the corresponding Objective-C method.
+// PostNotificationNameObjectUserInfo posts notification name object user info.
 func (nc *NotificationCenter) PostNotificationNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("postNotificationName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
 }
 
-// RemoveObserver wraps the corresponding Objective-C method.
+// RemoveObserver removes observer.
 func (nc *NotificationCenter) RemoveObserver(observer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:"), objref.IDOf(observer))
 }
 
-// RemoveObserverNameObject wraps the corresponding Objective-C method.
+// RemoveObserverNameObject removes observer name object.
 func (nc *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName *String, anObject obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), objref.IDOf(aName), objref.IDOf(anObject))
 }

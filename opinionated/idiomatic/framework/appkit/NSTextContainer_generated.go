@@ -149,37 +149,37 @@ func (tc *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) 
 	return tc
 }
 
-// TextLayoutManager wraps the corresponding Objective-C method.
+// TextLayoutManager returns the text layout manager.
 func (tc *TextContainer) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (tc *TextContainer) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tc), objc.RegisterName("size"))
 	return _r
 }
 
-// LineBreakMode wraps the corresponding Objective-C method.
+// LineBreakMode returns the line break mode.
 func (tc *TextContainer) LineBreakMode() LineBreakMode {
 	_r := objc.Send[LineBreakMode](objref.IDOf(tc), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
-// LineFragmentPadding wraps the corresponding Objective-C method.
+// LineFragmentPadding returns the line fragment padding.
 func (tc *TextContainer) LineFragmentPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("lineFragmentPadding"))
 	return _r
 }
 
-// MaximumNumberOfLines wraps the corresponding Objective-C method.
+// MaximumNumberOfLines returns the maximum number of lines.
 func (tc *TextContainer) MaximumNumberOfLines() int {
 	_r := objc.Send[int](objref.IDOf(tc), objc.RegisterName("maximumNumberOfLines"))
 	return _r
 }
 
-// IsSimpleRectangularTextContainer wraps the corresponding Objective-C method.
+// IsSimpleRectangularTextContainer reports whether the object is simple rectangular text container.
 func (tc *TextContainer) IsSimpleRectangularTextContainer() bool {
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isSimpleRectangularTextContainer"))
 	return _r
@@ -197,7 +197,7 @@ func (tc *TextContainer) HeightTracksTextView() bool {
 	return _r
 }
 
-// LayoutManager wraps the corresponding Objective-C method.
+// LayoutManager returns the layout manager.
 func (tc *TextContainer) LayoutManager() *LayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("layoutManager"))
 	return LayoutManagerFromID(_r)
@@ -208,7 +208,7 @@ func (tc *TextContainer) ReplaceLayoutManager(newLayoutManager *LayoutManager) {
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("replaceLayoutManager:"), objref.IDOf(newLayoutManager))
 }
 
-// ExclusionPaths wraps the corresponding Objective-C method.
+// ExclusionPaths returns the exclusion paths.
 //
 // ExclusionPaths returns the collection as a Go slice.
 func (tc *TextContainer) ExclusionPaths() []*BezierPath {
@@ -216,7 +216,7 @@ func (tc *TextContainer) ExclusionPaths() []*BezierPath {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BezierPath { return BezierPathFromID(_id) })
 }
 
-// TextView wraps the corresponding Objective-C method.
+// TextView returns the text view.
 func (tc *TextContainer) TextView() *TextView {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textView"))
 	return TextViewFromID(_r)
@@ -228,7 +228,7 @@ func (tc *TextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
 	return _r
 }
 
-// ContainerSize wraps the corresponding Objective-C method.
+// ContainerSize returns the container size.
 func (tc *TextContainer) ContainerSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tc), objc.RegisterName("containerSize"))
 	return _r

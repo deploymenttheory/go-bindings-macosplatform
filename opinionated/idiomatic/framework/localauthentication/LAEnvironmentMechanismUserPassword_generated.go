@@ -49,7 +49,7 @@ func NewEnvironmentMechanismUserPassword() *EnvironmentMechanismUserPassword {
 	return environmentMechanismUserPasswordAdopt(_id)
 }
 
-// IsSet wraps the corresponding Objective-C method.
+// IsSet reports whether the object is set.
 func (emup *EnvironmentMechanismUserPassword) IsSet() bool {
 	_r := objc.Send[bool](objref.IDOf(emup), objc.RegisterName("isSet"))
 	return _r

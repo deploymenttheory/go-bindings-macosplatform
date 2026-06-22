@@ -70,13 +70,13 @@ func NewPassRelevantDate() *PassRelevantDate {
 	return passRelevantDateAdopt(_id)
 }
 
-// Interval wraps the corresponding Objective-C method.
+// Interval returns the interval.
 func (prd *PassRelevantDate) Interval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(prd), objc.RegisterName("interval"))
 	return obj.Wrap(_r)
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (prd *PassRelevantDate) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(prd), objc.RegisterName("date"))
 	return obj.Wrap(_r)

@@ -120,19 +120,19 @@ func (md *ModelDescription) ClassLabels() []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsUpdatable wraps the corresponding Objective-C method.
+// IsUpdatable reports whether the object is updatable.
 func (md *ModelDescription) IsUpdatable() bool {
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isUpdatable"))
 	return _r
 }
 
-// TrainingInputDescriptionsByName wraps the corresponding Objective-C method.
+// TrainingInputDescriptionsByName returns the training input descriptions by name.
 func (md *ModelDescription) TrainingInputDescriptionsByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("trainingInputDescriptionsByName"))
 	return obj.Wrap(_r)
 }
 
-// ParameterDescriptionsByKey wraps the corresponding Objective-C method.
+// ParameterDescriptionsByKey returns the parameter descriptions by key.
 func (md *ModelDescription) ParameterDescriptionsByKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("parameterDescriptionsByKey"))
 	return obj.Wrap(_r)

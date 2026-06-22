@@ -68,7 +68,7 @@ func (d *Definition) String() string {
 	return rt.Description(objref.IDOf(d))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (d *Definition) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("identifier"))
 	if _r == 0 {

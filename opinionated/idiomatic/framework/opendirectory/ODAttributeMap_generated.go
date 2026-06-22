@@ -70,19 +70,19 @@ func NewAttributeMap() *AttributeMap {
 	return attributeMapAdopt(_id)
 }
 
-// WithCustomQueryFunction sets the property and returns the receiver so calls can be chained.
+// WithCustomQueryFunction sets the custom query function.
 func (am *AttributeMap) WithCustomQueryFunction(customQueryFunction string) *AttributeMap {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setCustomQueryFunction:"), purego.NSString(customQueryFunction))
 	return am
 }
 
-// WithCustomTranslationFunction sets the property and returns the receiver so calls can be chained.
+// WithCustomTranslationFunction sets the custom translation function.
 func (am *AttributeMap) WithCustomTranslationFunction(customTranslationFunction string) *AttributeMap {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setCustomTranslationFunction:"), purego.NSString(customTranslationFunction))
 	return am
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (am *AttributeMap) WithValue(value string) *AttributeMap {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setValue:"), purego.NSString(value))
 	return am
@@ -98,7 +98,7 @@ func (am *AttributeMap) SetVariableSubstitution(variableSubstitution string) {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setVariableSubstitution:"), purego.NSString(variableSubstitution))
 }
 
-// CustomQueryFunction wraps the corresponding Objective-C method.
+// CustomQueryFunction returns the custom query function.
 func (am *AttributeMap) CustomQueryFunction() string {
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customQueryFunction"))
 	if _r == 0 {
@@ -107,7 +107,7 @@ func (am *AttributeMap) CustomQueryFunction() string {
 	return purego.GoString(_r)
 }
 
-// CustomTranslationFunction wraps the corresponding Objective-C method.
+// CustomTranslationFunction returns the custom translation function.
 func (am *AttributeMap) CustomTranslationFunction() string {
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customTranslationFunction"))
 	if _r == 0 {
@@ -116,7 +116,7 @@ func (am *AttributeMap) CustomTranslationFunction() string {
 	return purego.GoString(_r)
 }
 
-// CustomAttributes wraps the corresponding Objective-C method.
+// CustomAttributes returns the custom attributes.
 func (am *AttributeMap) CustomAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customAttributes"))
 	return obj.Wrap(_r)
@@ -127,7 +127,7 @@ func (am *AttributeMap) SetCustomAttributes(customAttributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setCustomAttributes:"), objref.IDOf(customAttributes))
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (am *AttributeMap) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("value"))
 	if _r == 0 {

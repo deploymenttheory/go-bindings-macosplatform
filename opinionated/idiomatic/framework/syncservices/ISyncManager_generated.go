@@ -70,7 +70,7 @@ func NewISyncManager() *ISyncManager {
 	return iSyncManagerAdopt(_id)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ism *ISyncManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ism), objc.RegisterName("isEnabled"))
 	return _r
@@ -82,24 +82,24 @@ func (ism *ISyncManager) ClientWithIdentifier(clientId string) *ISyncClient {
 	return ISyncClientFromID(_r)
 }
 
-// RegisterClientWithIdentifierDescriptionFilePath wraps the corresponding Objective-C method.
+// RegisterClientWithIdentifierDescriptionFilePath registers client with identifier description file path.
 func (ism *ISyncManager) RegisterClientWithIdentifierDescriptionFilePath(clientId string, descriptionFilePath string) *ISyncClient {
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:"), purego.NSString(clientId), purego.NSString(descriptionFilePath))
 	return ISyncClientFromID(_r)
 }
 
-// UnregisterClient wraps the corresponding Objective-C method.
+// UnregisterClient unregisters client.
 func (ism *ISyncManager) UnregisterClient(client *ISyncClient) {
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("unregisterClient:"), objref.IDOf(client))
 }
 
-// RegisterSchemaWithBundlePath wraps the corresponding Objective-C method.
+// RegisterSchemaWithBundlePath registers schema with bundle path.
 func (ism *ISyncManager) RegisterSchemaWithBundlePath(bundlePath string) bool {
 	_r := objc.Send[bool](objref.IDOf(ism), objc.RegisterName("registerSchemaWithBundlePath:"), purego.NSString(bundlePath))
 	return _r
 }
 
-// UnregisterSchemaWithName wraps the corresponding Objective-C method.
+// UnregisterSchemaWithName unregisters schema with name.
 func (ism *ISyncManager) UnregisterSchemaWithName(schemaName string) {
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("unregisterSchemaWithName:"), purego.NSString(schemaName))
 }
@@ -115,17 +115,17 @@ func (ism *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiers
 	return ISyncRecordSnapshotFromID(_r)
 }
 
-// AddRequestMode wraps the corresponding Objective-C method.
+// AddRequestMode adds request mode.
 func (ism *ISyncManager) AddRequestMode(mode string) {
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("addRequestMode:"), purego.NSString(mode))
 }
 
-// RemoveRequestMode wraps the corresponding Objective-C method.
+// RemoveRequestMode removes request mode.
 func (ism *ISyncManager) RemoveRequestMode(mode string) {
 	objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("removeRequestMode:"), purego.NSString(mode))
 }
 
-// RequestModes wraps the corresponding Objective-C method.
+// RequestModes returns the request modes.
 func (ism *ISyncManager) RequestModes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ism), objc.RegisterName("requestModes"))
 	return obj.Wrap(_r)

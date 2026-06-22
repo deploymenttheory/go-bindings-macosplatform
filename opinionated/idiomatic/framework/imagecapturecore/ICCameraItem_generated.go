@@ -178,13 +178,13 @@ func (ci *CameraItem) WasAddedAfterContentCatalogCompleted() bool {
 	return _r
 }
 
-// ThumbnailIfAvailable wraps the corresponding Objective-C method.
+// ThumbnailIfAvailable returns the thumbnail if available.
 func (ci *CameraItem) ThumbnailIfAvailable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("thumbnailIfAvailable"))
 	return obj.Wrap(_r)
 }
 
-// LargeThumbnailIfAvailable wraps the corresponding Objective-C method.
+// LargeThumbnailIfAvailable returns the large thumbnail if available.
 func (ci *CameraItem) LargeThumbnailIfAvailable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("largeThumbnailIfAvailable"))
 	return obj.Wrap(_r)

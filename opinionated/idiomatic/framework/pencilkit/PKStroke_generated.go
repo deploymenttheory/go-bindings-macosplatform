@@ -99,7 +99,7 @@ func (s *Stroke) Path() *StrokePath {
 	return StrokePathFromID(_r)
 }
 
-// Mask wraps the corresponding Objective-C method.
+// Mask returns the mask.
 func (s *Stroke) Mask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mask"))
 	return obj.Wrap(_r)

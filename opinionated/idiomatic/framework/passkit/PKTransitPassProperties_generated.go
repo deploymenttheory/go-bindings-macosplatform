@@ -46,13 +46,13 @@ func transitPassPropertiesAdopt(id objc.ID) *TransitPassProperties {
 	return x
 }
 
-// TransitBalance wraps the corresponding Objective-C method.
+// TransitBalance returns the transit balance.
 func (tpp *TransitPassProperties) TransitBalance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalance"))
 	return obj.Wrap(_r)
 }
 
-// TransitBalanceCurrencyCode wraps the corresponding Objective-C method.
+// TransitBalanceCurrencyCode returns the transit balance currency code.
 func (tpp *TransitPassProperties) TransitBalanceCurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalanceCurrencyCode"))
 	if _r == 0 {
@@ -61,7 +61,7 @@ func (tpp *TransitPassProperties) TransitBalanceCurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// IsInStation wraps the corresponding Objective-C method.
+// IsInStation reports whether the object is in station.
 func (tpp *TransitPassProperties) IsInStation() bool {
 	_r := objc.Send[bool](objref.IDOf(tpp), objc.RegisterName("isInStation"))
 	return _r

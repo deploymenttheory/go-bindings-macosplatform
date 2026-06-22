@@ -144,7 +144,7 @@ func (av *AttributionView) PreferredMaxLayoutWidth() float64 {
 	return _r
 }
 
-// HighlightMenu wraps the corresponding Objective-C method.
+// HighlightMenu returns the highlight menu.
 func (av *AttributionView) HighlightMenu() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("highlightMenu"))
 	return obj.Wrap(_r)
@@ -159,7 +159,7 @@ func (av *AttributionView) MenuTitleForHideAction() string {
 	return purego.GoString(_r)
 }
 
-// SupplementalMenu wraps the corresponding Objective-C method.
+// SupplementalMenu returns the supplemental menu.
 func (av *AttributionView) SupplementalMenu() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("supplementalMenu"))
 	return obj.Wrap(_r)

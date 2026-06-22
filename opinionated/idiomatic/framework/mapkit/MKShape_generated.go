@@ -80,7 +80,7 @@ func (s *Shape) WithSubtitle(subtitle string) *Shape {
 	return s
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (s *Shape) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {
@@ -89,7 +89,7 @@ func (s *Shape) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (s *Shape) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("subtitle"))
 	if _r == 0 {

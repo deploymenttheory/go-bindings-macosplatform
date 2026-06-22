@@ -67,7 +67,7 @@ func (pte *ProjectTextElement) AttributedText() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// TextElementType wraps the corresponding Objective-C method.
+// TextElementType returns the text element type.
 func (pte *ProjectTextElement) TextElementType() ProjectTextElementType {
 	_r := objc.Send[ProjectTextElementType](objref.IDOf(pte), objc.RegisterName("textElementType"))
 	return _r

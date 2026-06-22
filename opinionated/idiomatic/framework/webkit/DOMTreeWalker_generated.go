@@ -49,61 +49,61 @@ func NewDOMTreeWalker() *DOMTreeWalker {
 	return dOMTreeWalkerAdopt(_id)
 }
 
-// WithCurrentNode sets the property and returns the receiver so calls can be chained.
+// WithCurrentNode sets the current node.
 func (dtw *DOMTreeWalker) WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker {
 	objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("setCurrentNode:"), objref.IDOf(currentNode))
 	return dtw
 }
 
-// ParentNode wraps the corresponding Objective-C method.
+// ParentNode returns the parent node.
 func (dtw *DOMTreeWalker) ParentNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("parentNode"))
 	return DOMNodeFromID(_r)
 }
 
-// FirstChild wraps the corresponding Objective-C method.
+// FirstChild returns the first child.
 func (dtw *DOMTreeWalker) FirstChild() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("firstChild"))
 	return DOMNodeFromID(_r)
 }
 
-// LastChild wraps the corresponding Objective-C method.
+// LastChild returns the last child.
 func (dtw *DOMTreeWalker) LastChild() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("lastChild"))
 	return DOMNodeFromID(_r)
 }
 
-// PreviousSibling wraps the corresponding Objective-C method.
+// PreviousSibling returns the previous sibling.
 func (dtw *DOMTreeWalker) PreviousSibling() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("previousSibling"))
 	return DOMNodeFromID(_r)
 }
 
-// NextSibling wraps the corresponding Objective-C method.
+// NextSibling returns the next sibling.
 func (dtw *DOMTreeWalker) NextSibling() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("nextSibling"))
 	return DOMNodeFromID(_r)
 }
 
-// PreviousNode wraps the corresponding Objective-C method.
+// PreviousNode returns the previous node.
 func (dtw *DOMTreeWalker) PreviousNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
 }
 
-// NextNode wraps the corresponding Objective-C method.
+// NextNode returns the next node.
 func (dtw *DOMTreeWalker) NextNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
-// Root wraps the corresponding Objective-C method.
+// Root returns the root.
 func (dtw *DOMTreeWalker) Root() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
-// WhatToShow wraps the corresponding Objective-C method.
+// WhatToShow returns the what to show.
 func (dtw *DOMTreeWalker) WhatToShow() int {
 	_r := objc.Send[int](objref.IDOf(dtw), objc.RegisterName("whatToShow"))
 	return _r
@@ -115,7 +115,7 @@ func (dtw *DOMTreeWalker) ExpandEntityReferences() bool {
 	return _r
 }
 
-// CurrentNode wraps the corresponding Objective-C method.
+// CurrentNode returns the current node.
 func (dtw *DOMTreeWalker) CurrentNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("currentNode"))
 	return DOMNodeFromID(_r)

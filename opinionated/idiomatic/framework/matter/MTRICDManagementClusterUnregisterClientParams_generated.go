@@ -70,13 +70,13 @@ func NewMTRICDManagementClusterUnregisterClientParams() *MTRICDManagementCluster
 	return mTRICDManagementClusterUnregisterClientParamsAdopt(_id)
 }
 
-// WithCheckInNodeID sets the property and returns the receiver so calls can be chained.
+// WithCheckInNodeID sets the check in node ID.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcucp
 }
 
-// WithVerificationKey sets the property and returns the receiver so calls can be chained.
+// WithVerificationKey sets the verification key.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterUnregisterClientParams {
 	objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 	return mmcucp
@@ -94,13 +94,13 @@ func (mmcucp *MTRICDManagementClusterUnregisterClientParams) WithServerSideProce
 	return mmcucp
 }
 
-// CheckInNodeID wraps the corresponding Objective-C method.
+// CheckInNodeID returns the check in node ID.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) CheckInNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("checkInNodeID"))
 	return obj.Wrap(_r)
 }
 
-// VerificationKey wraps the corresponding Objective-C method.
+// VerificationKey returns the verification key.
 func (mmcucp *MTRICDManagementClusterUnregisterClientParams) VerificationKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcucp), objc.RegisterName("verificationKey"))
 	return obj.Wrap(_r)

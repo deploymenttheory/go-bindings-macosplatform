@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package corefoundation provides a fluent Go API over the macOS CoreFoundation framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package corefoundation

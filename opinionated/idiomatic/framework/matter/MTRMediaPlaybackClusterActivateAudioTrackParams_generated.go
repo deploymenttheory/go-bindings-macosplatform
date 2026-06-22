@@ -70,13 +70,13 @@ func NewMTRMediaPlaybackClusterActivateAudioTrackParams() *MTRMediaPlaybackClust
 	return mTRMediaPlaybackClusterActivateAudioTrackParamsAdopt(_id)
 }
 
-// WithTrackID sets the property and returns the receiver so calls can be chained.
+// WithTrackID sets the track ID.
 func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) WithTrackID(trackID string) *MTRMediaPlaybackClusterActivateAudioTrackParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcaatp), objc.RegisterName("setTrackID:"), purego.NSString(trackID))
 	return mmpcaatp
 }
 
-// WithAudioOutputIndex sets the property and returns the receiver so calls can be chained.
+// WithAudioOutputIndex sets the audio output index.
 func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) WithAudioOutputIndex(audioOutputIndex obj.Object) *MTRMediaPlaybackClusterActivateAudioTrackParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcaatp), objc.RegisterName("setAudioOutputIndex:"), objref.IDOf(audioOutputIndex))
 	return mmpcaatp
@@ -94,7 +94,7 @@ func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) WithServerSideP
 	return mmpcaatp
 }
 
-// TrackID wraps the corresponding Objective-C method.
+// TrackID returns the track ID.
 func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) TrackID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcaatp), objc.RegisterName("trackID"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) TrackID() strin
 	return purego.GoString(_r)
 }
 
-// AudioOutputIndex wraps the corresponding Objective-C method.
+// AudioOutputIndex returns the audio output index.
 func (mmpcaatp *MTRMediaPlaybackClusterActivateAudioTrackParams) AudioOutputIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcaatp), objc.RegisterName("audioOutputIndex"))
 	return obj.Wrap(_r)

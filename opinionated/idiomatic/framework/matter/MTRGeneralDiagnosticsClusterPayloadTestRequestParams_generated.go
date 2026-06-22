@@ -70,19 +70,19 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams() *MTRGeneralDiagno
 	return mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(_id)
 }
 
-// WithEnableKey sets the property and returns the receiver so calls can be chained.
+// WithEnableKey sets the enable key.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 	return mgdcptrp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithValue(value obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mgdcptrp
 }
 
-// WithCount sets the property and returns the receiver so calls can be chained.
+// WithCount sets the count.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithCount(count obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return mgdcptrp
@@ -100,20 +100,20 @@ func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServer
 	return mgdcptrp
 }
 
-// EnableKey wraps the corresponding Objective-C method.
+// EnableKey returns the enable key.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("enableKey"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// GetCount wraps the corresponding Objective-C method.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) GetCount() obj.Object {
+// Count returns the count.
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Count() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("getCount"))
 	return obj.Wrap(_r)
 }

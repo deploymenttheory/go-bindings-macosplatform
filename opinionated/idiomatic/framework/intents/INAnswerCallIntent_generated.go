@@ -56,19 +56,19 @@ func (aci *AnswerCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPh
 	return aci
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (aci *AnswerCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *AnswerCallIntent {
 	objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return aci
 }
 
-// AudioRoute wraps the corresponding Objective-C method.
+// AudioRoute returns the audio route.
 func (aci *AnswerCallIntent) AudioRoute() CallAudioRoute {
 	_r := objc.Send[CallAudioRoute](objref.IDOf(aci), objc.RegisterName("audioRoute"))
 	return _r
 }
 
-// CallIdentifier wraps the corresponding Objective-C method.
+// CallIdentifier returns the call identifier.
 func (aci *AnswerCallIntent) CallIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {

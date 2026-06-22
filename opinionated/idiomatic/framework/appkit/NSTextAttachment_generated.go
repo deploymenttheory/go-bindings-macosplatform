@@ -123,13 +123,13 @@ func (ta *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView 
 	return ta
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 func (ta *TextAttachment) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
-// FileType wraps the corresponding Objective-C method.
+// FileType returns the file type.
 func (ta *TextAttachment) FileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileType"))
 	if _r == 0 {
@@ -138,25 +138,25 @@ func (ta *TextAttachment) FileType() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (ta *TextAttachment) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (ta *TextAttachment) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("bounds"))
 	return _r
 }
 
-// FileWrapper wraps the corresponding Objective-C method.
+// FileWrapper returns the file wrapper.
 func (ta *TextAttachment) FileWrapper() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileWrapper"))
 	return obj.Wrap(_r)
 }
 
-// LineLayoutPadding wraps the corresponding Objective-C method.
+// LineLayoutPadding returns the line layout padding.
 func (ta *TextAttachment) LineLayoutPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(ta), objc.RegisterName("lineLayoutPadding"))
 	return _r

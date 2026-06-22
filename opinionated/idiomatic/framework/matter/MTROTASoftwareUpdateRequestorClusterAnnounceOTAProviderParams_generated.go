@@ -66,31 +66,31 @@ func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) 
 	return rt.Description(objref.IDOf(msurcaopp))
 }
 
-// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+// WithProviderNodeID sets the provider node ID.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return msurcaopp
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithVendorID(vendorID obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return msurcaopp
 }
 
-// WithAnnouncementReason sets the property and returns the receiver so calls can be chained.
+// WithAnnouncementReason sets the announcement reason.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithAnnouncementReason(announcementReason obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("setAnnouncementReason:"), objref.IDOf(announcementReason))
 	return msurcaopp
 }
 
-// WithMetadataForNode sets the property and returns the receiver so calls can be chained.
+// WithMetadataForNode sets the metadata for node.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithMetadataForNode(metadataForNode obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("setMetadataForNode:"), objref.IDOf(metadataForNode))
 	return msurcaopp
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams {
 	objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return msurcaopp
@@ -108,31 +108,31 @@ func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) 
 	return msurcaopp
 }
 
-// ProviderNodeID wraps the corresponding Objective-C method.
+// ProviderNodeID returns the provider node ID.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) ProviderNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("providerNodeID"))
 	return obj.Wrap(_r)
 }
 
-// VendorID wraps the corresponding Objective-C method.
+// VendorID returns the vendor ID.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// AnnouncementReason wraps the corresponding Objective-C method.
+// AnnouncementReason returns the announcement reason.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) AnnouncementReason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("announcementReason"))
 	return obj.Wrap(_r)
 }
 
-// MetadataForNode wraps the corresponding Objective-C method.
+// MetadataForNode returns the metadata for node.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) MetadataForNode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("metadataForNode"))
 	return obj.Wrap(_r)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (msurcaopp *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcaopp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)

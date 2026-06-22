@@ -73,7 +73,7 @@ func NewCallGroupWithGroupNameGroupID(groupName string, groupId string) *CallGro
 	return callGroupAdopt(_id)
 }
 
-// GroupName wraps the corresponding Objective-C method.
+// GroupName returns the group name.
 func (cg *CallGroup) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupName"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (cg *CallGroup) GroupName() string {
 	return purego.GoString(_r)
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (cg *CallGroup) GroupID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupId"))
 	if _r == 0 {

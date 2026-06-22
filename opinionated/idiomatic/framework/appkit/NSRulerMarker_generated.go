@@ -122,55 +122,55 @@ func (rm *RulerMarker) TrackMouseAdding(mouseDownEvent *Event, isAdding bool) bo
 	return _r
 }
 
-// Ruler wraps the corresponding Objective-C method.
+// Ruler returns the ruler.
 func (rm *RulerMarker) Ruler() *RulerView {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("ruler"))
 	return RulerViewFromID(_r)
 }
 
-// MarkerLocation wraps the corresponding Objective-C method.
+// MarkerLocation returns the marker location.
 func (rm *RulerMarker) MarkerLocation() float64 {
 	_r := objc.Send[float64](objref.IDOf(rm), objc.RegisterName("markerLocation"))
 	return _r
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (rm *RulerMarker) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// ImageOrigin wraps the corresponding Objective-C method.
+// ImageOrigin returns the image origin.
 func (rm *RulerMarker) ImageOrigin() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rm), objc.RegisterName("imageOrigin"))
 	return _r
 }
 
-// IsMovable wraps the corresponding Objective-C method.
+// IsMovable reports whether the object is movable.
 func (rm *RulerMarker) IsMovable() bool {
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isMovable"))
 	return _r
 }
 
-// IsRemovable wraps the corresponding Objective-C method.
+// IsRemovable reports whether the object is removable.
 func (rm *RulerMarker) IsRemovable() bool {
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isRemovable"))
 	return _r
 }
 
-// IsDragging wraps the corresponding Objective-C method.
+// IsDragging reports whether the object is dragging.
 func (rm *RulerMarker) IsDragging() bool {
 	_r := objc.Send[bool](objref.IDOf(rm), objc.RegisterName("isDragging"))
 	return _r
 }
 
-// ImageRectInRuler wraps the corresponding Objective-C method.
+// ImageRectInRuler returns the image rect in ruler.
 func (rm *RulerMarker) ImageRectInRuler() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(rm), objc.RegisterName("imageRectInRuler"))
 	return _r
 }
 
-// ThicknessRequiredInRuler wraps the corresponding Objective-C method.
+// ThicknessRequiredInRuler returns the thickness required in ruler.
 func (rm *RulerMarker) ThicknessRequiredInRuler() float64 {
 	_r := objc.Send[float64](objref.IDOf(rm), objc.RegisterName("thicknessRequiredInRuler"))
 	return _r

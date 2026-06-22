@@ -69,7 +69,7 @@ func (md *MutableData) WithLength(length int) *MutableData {
 	return md
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (md *MutableData) WithScriptingProperties(scriptingProperties obj.Object) *MutableData {
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return md

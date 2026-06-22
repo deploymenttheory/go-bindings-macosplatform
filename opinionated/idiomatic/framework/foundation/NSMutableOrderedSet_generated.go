@@ -66,7 +66,7 @@ func NewMutableOrderedSetWithCapacity(numItems int) *MutableOrderedSet {
 	return mutableOrderedSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mos *MutableOrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableOrderedSet {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mos
@@ -177,7 +177,7 @@ func (mos *MutableOrderedSet) UnionSet(other obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("unionSet:"), objref.IDOf(other))
 }
 
-// ApplyDifference wraps the corresponding Objective-C method.
+// ApplyDifference applies difference.
 func (mos *MutableOrderedSet) ApplyDifference(difference obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("applyDifference:"), objref.IDOf(difference))
 }

@@ -72,37 +72,37 @@ func NewPersistentHistoryChange() *PersistentHistoryChange {
 	return persistentHistoryChangeAdopt(_id)
 }
 
-// ChangeID wraps the corresponding Objective-C method.
+// ChangeID returns the change ID.
 func (phc *PersistentHistoryChange) ChangeID() int64 {
 	_r := objc.Send[int64](objref.IDOf(phc), objc.RegisterName("changeID"))
 	return _r
 }
 
-// ChangedObjectID wraps the corresponding Objective-C method.
+// ChangedObjectID returns the changed object ID.
 func (phc *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("changedObjectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
-// ChangeType wraps the corresponding Objective-C method.
+// ChangeType returns the change type.
 func (phc *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
 	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(phc), objc.RegisterName("changeType"))
 	return _r
 }
 
-// Tombstone wraps the corresponding Objective-C method.
+// Tombstone returns the tombstone.
 func (phc *PersistentHistoryChange) Tombstone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("tombstone"))
 	return obj.Wrap(_r)
 }
 
-// Transaction wraps the corresponding Objective-C method.
+// Transaction returns the transaction.
 func (phc *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("transaction"))
 	return PersistentHistoryTransactionFromID(_r)
 }
 
-// UpdatedProperties wraps the corresponding Objective-C method.
+// UpdatedProperties returns the updated properties.
 func (phc *PersistentHistoryChange) UpdatedProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("updatedProperties"))
 	return obj.Wrap(_r)

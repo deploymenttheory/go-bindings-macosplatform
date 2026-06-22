@@ -109,7 +109,7 @@ func (si *SearchableItem) WithUpdateListenerOptions(updateListenerOptions Search
 	return si
 }
 
-// UniqueIdentifier wraps the corresponding Objective-C method.
+// UniqueIdentifier returns the unique identifier.
 func (si *SearchableItem) UniqueIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (si *SearchableItem) UniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// DomainIdentifier wraps the corresponding Objective-C method.
+// DomainIdentifier returns the domain identifier.
 func (si *SearchableItem) DomainIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
@@ -127,25 +127,25 @@ func (si *SearchableItem) DomainIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ExpirationDate wraps the corresponding Objective-C method.
+// ExpirationDate returns the expiration date.
 func (si *SearchableItem) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// AttributeSet wraps the corresponding Objective-C method.
+// AttributeSet returns the attribute set.
 func (si *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributeSet"))
 	return SearchableItemAttributeSetFromID(_r)
 }
 
-// IsUpdate wraps the corresponding Objective-C method.
+// IsUpdate reports whether the object is update.
 func (si *SearchableItem) IsUpdate() bool {
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isUpdate"))
 	return _r
 }
 
-// UpdateListenerOptions wraps the corresponding Objective-C method.
+// UpdateListenerOptions returns the update listener options.
 func (si *SearchableItem) UpdateListenerOptions() SearchableItemUpdateListenerOptions {
 	_r := objc.Send[SearchableItemUpdateListenerOptions](objref.IDOf(si), objc.RegisterName("updateListenerOptions"))
 	return _r

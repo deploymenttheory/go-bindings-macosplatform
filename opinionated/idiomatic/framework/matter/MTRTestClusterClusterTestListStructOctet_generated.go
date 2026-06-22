@@ -50,13 +50,13 @@ func NewMTRTestClusterClusterTestListStructOctet() *MTRTestClusterClusterTestLis
 	return mTRTestClusterClusterTestListStructOctetAdopt(_id)
 }
 
-// WithMember1 sets the property and returns the receiver so calls can be chained.
+// WithMember1 sets the member1.
 func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRTestClusterClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return mtcctlso
 }
 
-// WithMember2 sets the property and returns the receiver so calls can be chained.
+// WithMember2 sets the member2.
 func (mtcctlso *MTRTestClusterClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRTestClusterClusterTestListStructOctet {
 	objc.Send[objc.ID](objref.IDOf(mtcctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 	return mtcctlso

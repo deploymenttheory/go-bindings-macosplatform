@@ -70,25 +70,25 @@ func NewMTRRVCOperationalStateClusterOperationalStateStruct() *MTRRVCOperational
 	return mTRRVCOperationalStateClusterOperationalStateStructAdopt(_id)
 }
 
-// WithOperationalStateID sets the property and returns the receiver so calls can be chained.
+// WithOperationalStateID sets the operational state ID.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateID(operationalStateID obj.Object) *MTRRVCOperationalStateClusterOperationalStateStruct {
 	objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("setOperationalStateID:"), objref.IDOf(operationalStateID))
 	return moscoss
 }
 
-// WithOperationalStateLabel sets the property and returns the receiver so calls can be chained.
+// WithOperationalStateLabel sets the operational state label.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct {
 	objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("setOperationalStateLabel:"), purego.NSString(operationalStateLabel))
 	return moscoss
 }
 
-// OperationalStateID wraps the corresponding Objective-C method.
+// OperationalStateID returns the operational state ID.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateID"))
 	return obj.Wrap(_r)
 }
 
-// OperationalStateLabel wraps the corresponding Objective-C method.
+// OperationalStateLabel returns the operational state label.
 func (moscoss *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(moscoss), objc.RegisterName("operationalStateLabel"))
 	if _r == 0 {

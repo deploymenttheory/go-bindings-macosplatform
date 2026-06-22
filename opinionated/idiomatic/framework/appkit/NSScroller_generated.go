@@ -216,38 +216,38 @@ func (s *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Sc
 	return s
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (s *Scroller) WithCell(cell CellProvider) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return s
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (s *Scroller) WithSubviews(items ...ViewProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
 	return s
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (s *Scroller) WithHidden(hidden bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
 	return s
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (s *Scroller) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return s
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (s *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return s
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (s *Scroller) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return s
@@ -259,19 +259,19 @@ func (s *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
 	return s
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (s *Scroller) WithFrameRotation(frameRotation float64) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return s
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (s *Scroller) WithFrameCenterRotation(frameCenterRotation float64) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return s
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (s *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return s
@@ -283,7 +283,7 @@ func (s *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
 	return s
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (s *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return s
@@ -295,148 +295,148 @@ func (s *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
 	return s
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (s *Scroller) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return s
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (s *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return s
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (s *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return s
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (s *Scroller) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return s
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (s *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return s
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (s *Scroller) WithLayer(layer obj.Object) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return s
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (s *Scroller) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return s
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (s *Scroller) WithNeedsLayout(needsLayout bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return s
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (s *Scroller) WithAlphaValue(alphaValue float64) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return s
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (s *Scroller) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return s
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (s *Scroller) WithBackgroundFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return s
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (s *Scroller) WithCompositingFilter(compositingFilter obj.Object) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return s
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (s *Scroller) WithContentFilters(items ...obj.Object) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
 	return s
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (s *Scroller) WithShadow(shadow *Shadow) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return s
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (s *Scroller) WithClipsToBounds(clipsToBounds bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return s
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (s *Scroller) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return s
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (s *Scroller) WithToolTip(toolTip string) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return s
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (s *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return s
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (s *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return s
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (s *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return s
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (s *Scroller) WithFocusRingType(focusRingType FocusRingType) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return s
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (s *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return s
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (s *Scroller) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return s
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (s *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return s
@@ -448,49 +448,49 @@ func (s *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 	return s
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return s
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (s *Scroller) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return s
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (s *Scroller) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return s
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (s *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return s
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (s *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return s
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (s *Scroller) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return s
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (s *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return s
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (s *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return s
@@ -552,31 +552,31 @@ func (s *Scroller) TrackKnob(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackKnob:"), objref.IDOf(event))
 }
 
-// ScrollerStyle wraps the corresponding Objective-C method.
+// ScrollerStyle returns the scroller style.
 func (s *Scroller) ScrollerStyle() ScrollerStyle {
 	_r := objc.Send[ScrollerStyle](objref.IDOf(s), objc.RegisterName("scrollerStyle"))
 	return _r
 }
 
-// KnobStyle wraps the corresponding Objective-C method.
+// KnobStyle returns the knob style.
 func (s *Scroller) KnobStyle() ScrollerKnobStyle {
 	_r := objc.Send[ScrollerKnobStyle](objref.IDOf(s), objc.RegisterName("knobStyle"))
 	return _r
 }
 
-// UsableParts wraps the corresponding Objective-C method.
+// UsableParts returns the usable parts.
 func (s *Scroller) UsableParts() UsableScrollerParts {
 	_r := objc.Send[UsableScrollerParts](objref.IDOf(s), objc.RegisterName("usableParts"))
 	return _r
 }
 
-// HitPart wraps the corresponding Objective-C method.
+// HitPart returns the hit part.
 func (s *Scroller) HitPart() ScrollerPart {
 	_r := objc.Send[ScrollerPart](objref.IDOf(s), objc.RegisterName("hitPart"))
 	return _r
 }
 
-// KnobProportion wraps the corresponding Objective-C method.
+// KnobProportion returns the knob proportion.
 func (s *Scroller) KnobProportion() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobProportion"))
 	return _r
@@ -607,13 +607,13 @@ func (s *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
 }
 
-// ArrowsPosition wraps the corresponding Objective-C method.
+// ArrowsPosition returns the arrows position.
 func (s *Scroller) ArrowsPosition() ScrollArrowPosition {
 	_r := objc.Send[ScrollArrowPosition](objref.IDOf(s), objc.RegisterName("arrowsPosition"))
 	return _r
 }
 
-// ControlTint wraps the corresponding Objective-C method.
+// ControlTint returns the control tint.
 func (s *Scroller) ControlTint() ControlTint {
 	_r := objc.Send[ControlTint](objref.IDOf(s), objc.RegisterName("controlTint"))
 	return _r

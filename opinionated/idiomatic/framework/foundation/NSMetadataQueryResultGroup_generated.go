@@ -72,7 +72,7 @@ func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
 	return metadataQueryResultGroupAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mqrg *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryResultGroup {
 	objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mqrg
@@ -84,7 +84,7 @@ func (mqrg *MetadataQueryResultGroup) ResultAtIndex(idx int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Attribute wraps the corresponding Objective-C method.
+// Attribute returns the attribute.
 func (mqrg *MetadataQueryResultGroup) Attribute() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("attribute"))
 	if _r == 0 {
@@ -93,13 +93,13 @@ func (mqrg *MetadataQueryResultGroup) Attribute() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mqrg *MetadataQueryResultGroup) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Subgroups wraps the corresponding Objective-C method.
+// Subgroups returns the subgroups.
 //
 // Subgroups returns the collection as a Go slice.
 func (mqrg *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
@@ -107,13 +107,13 @@ func (mqrg *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataQueryResultGroup { return MetadataQueryResultGroupFromID(_id) })
 }
 
-// ResultCount wraps the corresponding Objective-C method.
+// ResultCount returns the result count.
 func (mqrg *MetadataQueryResultGroup) ResultCount() int {
 	_r := objc.Send[int](objref.IDOf(mqrg), objc.RegisterName("resultCount"))
 	return _r
 }
 
-// Results wraps the corresponding Objective-C method.
+// Results returns the results.
 func (mqrg *MetadataQueryResultGroup) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mqrg), objc.RegisterName("results"))
 	return obj.Wrap(_r)

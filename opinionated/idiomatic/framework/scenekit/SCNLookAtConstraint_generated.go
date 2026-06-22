@@ -81,7 +81,7 @@ func (lac *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint
 	return lac
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (lac *LookAtConstraint) Target() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(lac), objc.RegisterName("target"))
 	return NodeFromID(_r)

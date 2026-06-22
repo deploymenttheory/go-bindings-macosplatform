@@ -89,7 +89,7 @@ func (netns *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *N
 	return netns
 }
 
-// EthernetAddress wraps the corresponding Objective-C method.
+// EthernetAddress returns the ethernet address.
 func (netns *NEEthernetTunnelNetworkSettings) EthernetAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("ethernetAddress"))
 	if _r == 0 {

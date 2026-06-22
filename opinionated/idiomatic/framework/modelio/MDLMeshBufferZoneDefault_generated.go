@@ -72,7 +72,7 @@ func NewMeshBufferZoneDefault() *MeshBufferZoneDefault {
 	return meshBufferZoneDefaultAdopt(_id)
 }
 
-// Capacity wraps the corresponding Objective-C method.
+// Capacity returns the capacity.
 func (mbzd *MeshBufferZoneDefault) Capacity() int {
 	_r := objc.Send[int](objref.IDOf(mbzd), objc.RegisterName("capacity"))
 	return _r

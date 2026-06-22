@@ -56,7 +56,7 @@ func (mdcp *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended 
 	return mdcp
 }
 
-// UniqueIdentifier wraps the corresponding Objective-C method.
+// UniqueIdentifier returns the unique identifier.
 func (mdcp *MTRXPCDeviceControllerParameters) UniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)

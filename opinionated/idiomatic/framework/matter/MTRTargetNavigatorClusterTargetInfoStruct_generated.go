@@ -66,25 +66,25 @@ func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) String() string {
 	return rt.Description(objref.IDOf(mtnctis))
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return mtnctis
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtnctis
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("name"))
 	if _r == 0 {

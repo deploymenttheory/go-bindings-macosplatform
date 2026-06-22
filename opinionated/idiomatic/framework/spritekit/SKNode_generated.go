@@ -396,7 +396,7 @@ func (n *Node) IsEqualToNode(node *Node) bool {
 	return _r
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (n *Node) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(n), objc.RegisterName("frame"))
 	return _r
@@ -529,13 +529,13 @@ func (n *Node) AccessibilityHitTest(point corefoundation.CGPoint) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// IsAccessibilityElement wraps the corresponding Objective-C method.
+// IsAccessibilityElement reports whether the object is accessibility element.
 func (n *Node) IsAccessibilityElement() bool {
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isAccessibilityElement"))
 	return _r
 }
 
-// AccessibilityRole wraps the corresponding Objective-C method.
+// AccessibilityRole returns the accessibility role.
 func (n *Node) AccessibilityRole() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityRole"))
 	if _r == 0 {
@@ -544,7 +544,7 @@ func (n *Node) AccessibilityRole() string {
 	return purego.GoString(_r)
 }
 
-// AccessibilityRoleDescription wraps the corresponding Objective-C method.
+// AccessibilityRoleDescription returns the accessibility role description.
 func (n *Node) AccessibilityRoleDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityRoleDescription"))
 	if _r == 0 {
@@ -553,7 +553,7 @@ func (n *Node) AccessibilityRoleDescription() string {
 	return purego.GoString(_r)
 }
 
-// AccessibilitySubrole wraps the corresponding Objective-C method.
+// AccessibilitySubrole returns the accessibility subrole.
 func (n *Node) AccessibilitySubrole() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilitySubrole"))
 	if _r == 0 {
@@ -562,19 +562,19 @@ func (n *Node) AccessibilitySubrole() string {
 	return purego.GoString(_r)
 }
 
-// AccessibilityFrame wraps the corresponding Objective-C method.
+// AccessibilityFrame returns the accessibility frame.
 func (n *Node) AccessibilityFrame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(n), objc.RegisterName("accessibilityFrame"))
 	return _r
 }
 
-// AccessibilityParent wraps the corresponding Objective-C method.
+// AccessibilityParent returns the accessibility parent.
 func (n *Node) AccessibilityParent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityParent"))
 	return obj.Wrap(_r)
 }
 
-// AccessibilityChildren wraps the corresponding Objective-C method.
+// AccessibilityChildren returns the accessibility children.
 func (n *Node) AccessibilityChildren() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityChildren"))
 	return obj.Wrap(_r)
@@ -585,7 +585,7 @@ func (n *Node) SetAccessibilityChildren(accessibilityChildren obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setAccessibilityChildren:"), objref.IDOf(accessibilityChildren))
 }
 
-// AccessibilityHelp wraps the corresponding Objective-C method.
+// AccessibilityHelp returns the accessibility help.
 func (n *Node) AccessibilityHelp() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityHelp"))
 	if _r == 0 {
@@ -594,7 +594,7 @@ func (n *Node) AccessibilityHelp() string {
 	return purego.GoString(_r)
 }
 
-// AccessibilityLabel wraps the corresponding Objective-C method.
+// AccessibilityLabel returns the accessibility label.
 func (n *Node) AccessibilityLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("accessibilityLabel"))
 	if _r == 0 {
@@ -603,7 +603,7 @@ func (n *Node) AccessibilityLabel() string {
 	return purego.GoString(_r)
 }
 
-// IsAccessibilityEnabled wraps the corresponding Objective-C method.
+// IsAccessibilityEnabled reports whether the object is accessibility enabled.
 func (n *Node) IsAccessibilityEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isAccessibilityEnabled"))
 	return _r

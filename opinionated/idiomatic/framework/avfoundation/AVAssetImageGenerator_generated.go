@@ -109,7 +109,7 @@ func (aig *AssetImageGenerator) CancelAllCGImageGeneration() {
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("cancelAllCGImageGeneration"))
 }
 
-// Asset wraps the corresponding Objective-C method.
+// Asset returns the asset.
 func (aig *AssetImageGenerator) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("asset"))
 	return AssetFromID(_r)
@@ -121,13 +121,13 @@ func (aig *AssetImageGenerator) AppliesPreferredTrackTransform() bool {
 	return _r
 }
 
-// MaximumSize wraps the corresponding Objective-C method.
+// MaximumSize returns the maximum size.
 func (aig *AssetImageGenerator) MaximumSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(aig), objc.RegisterName("maximumSize"))
 	return _r
 }
 
-// ApertureMode wraps the corresponding Objective-C method.
+// ApertureMode returns the aperture mode.
 func (aig *AssetImageGenerator) ApertureMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("apertureMode"))
 	return obj.Wrap(_r)

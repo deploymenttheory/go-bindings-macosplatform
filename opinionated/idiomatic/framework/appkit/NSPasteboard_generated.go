@@ -204,13 +204,13 @@ func (p *Pasteboard) DetectPatternsForPatterns(ctx context.Context, patterns obj
 	}
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (p *Pasteboard) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// ChangeCount wraps the corresponding Objective-C method.
+// ChangeCount returns the change count.
 func (p *Pasteboard) ChangeCount() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("changeCount"))
 	return _r
@@ -222,7 +222,7 @@ func (p *Pasteboard) AccessBehavior() PasteboardAccessBehavior {
 	return _r
 }
 
-// PasteboardItems wraps the corresponding Objective-C method.
+// PasteboardItems returns the pasteboard items.
 //
 // PasteboardItems returns the collection as a Go slice.
 func (p *Pasteboard) PasteboardItems() []*PasteboardItem {
@@ -230,7 +230,7 @@ func (p *Pasteboard) PasteboardItems() []*PasteboardItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PasteboardItem { return PasteboardItemFromID(_id) })
 }
 
-// Types wraps the corresponding Objective-C method.
+// Types returns the types.
 //
 // Types returns the collection as a Go slice.
 func (p *Pasteboard) Types() []obj.Object {

@@ -88,25 +88,25 @@ func (tbi *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *Tou
 	return tbi
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (tbi *TouchBarItem) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// VisibilityPriority wraps the corresponding Objective-C method.
+// VisibilityPriority returns the visibility priority.
 func (tbi *TouchBarItem) VisibilityPriority() float32 {
 	_r := objc.Send[float32](objref.IDOf(tbi), objc.RegisterName("visibilityPriority"))
 	return _r
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (tbi *TouchBarItem) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// ViewController wraps the corresponding Objective-C method.
+// ViewController returns the view controller.
 func (tbi *TouchBarItem) ViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("viewController"))
 	return ViewControllerFromID(_r)
@@ -121,7 +121,7 @@ func (tbi *TouchBarItem) CustomizationLabel() string {
 	return purego.GoString(_r)
 }
 
-// IsVisible wraps the corresponding Objective-C method.
+// IsVisible reports whether the object is visible.
 func (tbi *TouchBarItem) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(tbi), objc.RegisterName("isVisible"))
 	return _r

@@ -54,7 +54,7 @@ func NewMTRBaseClusterBasicInformationWithDeviceEndpointIDQueue(device *MTRBaseD
 	return mTRBaseClusterBasicInformationAdopt(_id)
 }
 
-// ReadAttributeDataModelRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDataModelRevisionWithCompletion reads attribute data model revision with completion.
 //
 // ReadAttributeDataModelRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeDataModelRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeDataModelRevision
 	}
 }
 
-// ReadAttributeVendorNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorNameWithCompletion reads attribute vendor name with completion.
 //
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeVendorNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -154,7 +154,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeVendorNameWithPar
 	}
 }
 
-// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithCompletion reads attribute vendor ID with completion.
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeVendorIDWithParam
 	}
 }
 
-// ReadAttributeProductNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductNameWithCompletion reads attribute product name with completion.
 //
 // ReadAttributeProductNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeProductNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -254,7 +254,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeProductNameWithPa
 	}
 }
 
-// ReadAttributeProductIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductIDWithCompletion reads attribute product ID with completion.
 //
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeProductIDWithPara
 	}
 }
 
-// ReadAttributeNodeLabelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNodeLabelWithCompletion reads attribute node label with completion.
 //
 // ReadAttributeNodeLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeNodeLabelWithCompletion(ctx context.Context) (result string, err error) {
@@ -354,7 +354,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeNodeLabelWithPara
 	}
 }
 
-// ReadAttributeLocationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocationWithCompletion reads attribute location with completion.
 //
 // ReadAttributeLocationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeLocationWithCompletion(ctx context.Context) (result string, err error) {
@@ -404,7 +404,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeLocationWithParam
 	}
 }
 
-// ReadAttributeHardwareVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionWithCompletion reads attribute hardware version with completion.
 //
 // ReadAttributeHardwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeHardwareVersionWi
 	}
 }
 
-// ReadAttributeHardwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionStringWithCompletion reads attribute hardware version string with completion.
 //
 // ReadAttributeHardwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -504,7 +504,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeHardwareVersionSt
 	}
 }
 
-// ReadAttributeSoftwareVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionWithCompletion reads attribute software version with completion.
 //
 // ReadAttributeSoftwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeSoftwareVersionWi
 	}
 }
 
-// ReadAttributeSoftwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionStringWithCompletion reads attribute software version string with completion.
 //
 // ReadAttributeSoftwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -604,7 +604,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeSoftwareVersionSt
 	}
 }
 
-// ReadAttributeManufacturingDateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeManufacturingDateWithCompletion reads attribute manufacturing date with completion.
 //
 // ReadAttributeManufacturingDateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (result string, err error) {
@@ -654,7 +654,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeManufacturingDate
 	}
 }
 
-// ReadAttributePartNumberWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartNumberWithCompletion reads attribute part number with completion.
 //
 // ReadAttributePartNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributePartNumberWithCompletion(ctx context.Context) (result string, err error) {
@@ -704,7 +704,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributePartNumberWithPar
 	}
 }
 
-// ReadAttributeProductURLWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductURLWithCompletion reads attribute product URL with completion.
 //
 // ReadAttributeProductURLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeProductURLWithCompletion(ctx context.Context) (result string, err error) {
@@ -754,7 +754,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeProductURLWithPar
 	}
 }
 
-// ReadAttributeProductLabelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductLabelWithCompletion reads attribute product label with completion.
 //
 // ReadAttributeProductLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeProductLabelWithCompletion(ctx context.Context) (result string, err error) {
@@ -804,7 +804,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeProductLabelWithP
 	}
 }
 
-// ReadAttributeSerialNumberWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSerialNumberWithCompletion reads attribute serial number with completion.
 //
 // ReadAttributeSerialNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeSerialNumberWithCompletion(ctx context.Context) (result string, err error) {
@@ -854,7 +854,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeSerialNumberWithP
 	}
 }
 
-// ReadAttributeLocalConfigDisabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocalConfigDisabledWithCompletion reads attribute local config disabled with completion.
 //
 // ReadAttributeLocalConfigDisabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeLocalConfigDisabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -904,7 +904,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeLocalConfigDisabl
 	}
 }
 
-// ReadAttributeReachableWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReachableWithCompletion reads attribute reachable with completion.
 //
 // ReadAttributeReachableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -954,7 +954,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeReachableWithPara
 	}
 }
 
-// ReadAttributeUniqueIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUniqueIDWithCompletion reads attribute unique ID with completion.
 //
 // ReadAttributeUniqueIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeUniqueIDWithCompletion(ctx context.Context) (result string, err error) {
@@ -1004,7 +1004,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeUniqueIDWithParam
 	}
 }
 
-// ReadAttributeCapabilityMinimaWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCapabilityMinimaWithCompletion reads attribute capability minima with completion.
 //
 // ReadAttributeCapabilityMinimaWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeCapabilityMinimaWithCompletion(ctx context.Context) (result *MTRBasicInformationClusterCapabilityMinimaStruct, err error) {
@@ -1054,7 +1054,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeCapabilityMinimaW
 	}
 }
 
-// ReadAttributeProductAppearanceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductAppearanceWithCompletion reads attribute product appearance with completion.
 //
 // ReadAttributeProductAppearanceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (result *MTRBasicInformationClusterProductAppearanceStruct, err error) {
@@ -1104,7 +1104,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeProductAppearance
 	}
 }
 
-// ReadAttributeSpecificationVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpecificationVersionWithCompletion reads attribute specification version with completion.
 //
 // ReadAttributeSpecificationVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeSpecificationVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1154,7 +1154,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeSpecificationVers
 	}
 }
 
-// ReadAttributeMaxPathsPerInvokeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxPathsPerInvokeWithCompletion reads attribute max paths per invoke with completion.
 //
 // ReadAttributeMaxPathsPerInvokeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeMaxPathsPerInvokeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1204,7 +1204,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeMaxPathsPerInvoke
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1254,7 +1254,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1304,7 +1304,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1354,7 +1354,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1404,7 +1404,7 @@ func (mbcbi *MTRBaseClusterBasicInformation) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbi *MTRBaseClusterBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

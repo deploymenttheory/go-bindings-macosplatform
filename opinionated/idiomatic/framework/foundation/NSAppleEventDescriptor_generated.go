@@ -89,7 +89,7 @@ func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransac
 	return appleEventDescriptorAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (aed *AppleEventDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventDescriptor {
 	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return aed
@@ -176,49 +176,49 @@ func (aed *AppleEventDescriptor) CoerceToDescriptorType(descriptorType int) *App
 	return AppleEventDescriptorFromID(_r)
 }
 
-// DescriptorType wraps the corresponding Objective-C method.
+// DescriptorType returns the descriptor type.
 func (aed *AppleEventDescriptor) DescriptorType() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("descriptorType"))
 	return _r
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (aed *AppleEventDescriptor) Data() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("data"))
 	return DataFromID(_r)
 }
 
-// BooleanValue wraps the corresponding Objective-C method.
+// BooleanValue returns the boolean value.
 func (aed *AppleEventDescriptor) BooleanValue() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(aed), objc.RegisterName("booleanValue"))
 	return _r
 }
 
-// EnumCodeValue wraps the corresponding Objective-C method.
+// EnumCodeValue returns the enum code value.
 func (aed *AppleEventDescriptor) EnumCodeValue() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("enumCodeValue"))
 	return _r
 }
 
-// Int32Value wraps the corresponding Objective-C method.
+// Int32Value returns the int32 value.
 func (aed *AppleEventDescriptor) Int32Value() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("int32Value"))
 	return _r
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (aed *AppleEventDescriptor) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(aed), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// TypeCodeValue wraps the corresponding Objective-C method.
+// TypeCodeValue returns the type code value.
 func (aed *AppleEventDescriptor) TypeCodeValue() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("typeCodeValue"))
 	return _r
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (aed *AppleEventDescriptor) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -227,49 +227,49 @@ func (aed *AppleEventDescriptor) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// DateValue wraps the corresponding Objective-C method.
+// DateValue returns the date value.
 func (aed *AppleEventDescriptor) DateValue() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("dateValue"))
 	return DateFromID(_r)
 }
 
-// FileURLValue wraps the corresponding Objective-C method.
+// FileURLValue returns the file URL value.
 func (aed *AppleEventDescriptor) FileURLValue() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("fileURLValue"))
 	return URLFromID(_r)
 }
 
-// EventClass wraps the corresponding Objective-C method.
+// EventClass returns the event class.
 func (aed *AppleEventDescriptor) EventClass() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventClass"))
 	return _r
 }
 
-// EventID wraps the corresponding Objective-C method.
+// EventID returns the event ID.
 func (aed *AppleEventDescriptor) EventID() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventID"))
 	return _r
 }
 
-// ReturnID wraps the corresponding Objective-C method.
+// ReturnID returns the return ID.
 func (aed *AppleEventDescriptor) ReturnID() int16 {
 	_r := objc.Send[int16](objref.IDOf(aed), objc.RegisterName("returnID"))
 	return _r
 }
 
-// TransactionID wraps the corresponding Objective-C method.
+// TransactionID returns the transaction ID.
 func (aed *AppleEventDescriptor) TransactionID() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("transactionID"))
 	return _r
 }
 
-// IsRecordDescriptor wraps the corresponding Objective-C method.
+// IsRecordDescriptor reports whether the object is record descriptor.
 func (aed *AppleEventDescriptor) IsRecordDescriptor() bool {
 	_r := objc.Send[bool](objref.IDOf(aed), objc.RegisterName("isRecordDescriptor"))
 	return _r
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (aed *AppleEventDescriptor) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("numberOfItems"))
 	return _r

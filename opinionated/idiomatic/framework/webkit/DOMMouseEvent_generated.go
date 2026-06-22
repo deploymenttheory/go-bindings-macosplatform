@@ -43,37 +43,37 @@ func dOMMouseEventAdopt(id objc.ID) *DOMMouseEvent {
 	return x
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (dme *DOMMouseEvent) WithReturnValue(returnValue bool) *DOMMouseEvent {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setReturnValue:"), returnValue)
 	return dme
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (dme *DOMMouseEvent) WithCancelBubble(cancelBubble bool) *DOMMouseEvent {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return dme
 }
 
-// ScreenX wraps the corresponding Objective-C method.
+// ScreenX returns the screen x.
 func (dme *DOMMouseEvent) ScreenX() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenX"))
 	return _r
 }
 
-// ScreenY wraps the corresponding Objective-C method.
+// ScreenY returns the screen y.
 func (dme *DOMMouseEvent) ScreenY() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("screenY"))
 	return _r
 }
 
-// ClientX wraps the corresponding Objective-C method.
+// ClientX returns the client x.
 func (dme *DOMMouseEvent) ClientX() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientX"))
 	return _r
 }
 
-// ClientY wraps the corresponding Objective-C method.
+// ClientY returns the client y.
 func (dme *DOMMouseEvent) ClientY() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("clientY"))
 	return _r
@@ -103,43 +103,43 @@ func (dme *DOMMouseEvent) MetaKey() bool {
 	return _r
 }
 
-// Button wraps the corresponding Objective-C method.
+// Button returns the button.
 func (dme *DOMMouseEvent) Button() int16 {
 	_r := objc.Send[int16](objref.IDOf(dme), objc.RegisterName("button"))
 	return _r
 }
 
-// OffsetX wraps the corresponding Objective-C method.
+// OffsetX returns the offset x.
 func (dme *DOMMouseEvent) OffsetX() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetX"))
 	return _r
 }
 
-// OffsetY wraps the corresponding Objective-C method.
+// OffsetY returns the offset y.
 func (dme *DOMMouseEvent) OffsetY() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("offsetY"))
 	return _r
 }
 
-// X wraps the corresponding Objective-C method.
+// X returns the x.
 func (dme *DOMMouseEvent) X() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("x"))
 	return _r
 }
 
-// Y wraps the corresponding Objective-C method.
+// Y returns the y.
 func (dme *DOMMouseEvent) Y() int {
 	_r := objc.Send[int](objref.IDOf(dme), objc.RegisterName("y"))
 	return _r
 }
 
-// FromElement wraps the corresponding Objective-C method.
+// FromElement returns the from element.
 func (dme *DOMMouseEvent) FromElement() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("fromElement"))
 	return DOMNodeFromID(_r)
 }
 
-// ToElement wraps the corresponding Objective-C method.
+// ToElement returns the to element.
 func (dme *DOMMouseEvent) ToElement() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("toElement"))
 	return DOMNodeFromID(_r)

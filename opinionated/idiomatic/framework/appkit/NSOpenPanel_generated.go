@@ -604,25 +604,25 @@ func (op *OpenPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel 
 	return op
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (op *OpenPanel) WithAutodisplay(autodisplay bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return op
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (op *OpenPanel) WithOneShot(oneShot bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setOneShot:"), oneShot)
 	return op
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (op *OpenPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return op
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (op *OpenPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPanel {
 	objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return op
@@ -664,7 +664,7 @@ func (op *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
 	return op
 }
 
-// URLs wraps the corresponding Objective-C method.
+// URLs returns the ur ls.
 //
 // URLs returns the collection as a Go slice.
 func (op *OpenPanel) URLs() []obj.Object {
@@ -708,25 +708,25 @@ func (op *OpenPanel) CanDownloadUbiquitousContents() bool {
 	return _r
 }
 
-// IsAccessoryViewDisclosed wraps the corresponding Objective-C method.
+// IsAccessoryViewDisclosed reports whether the object is accessory view disclosed.
 func (op *OpenPanel) IsAccessoryViewDisclosed() bool {
 	_r := objc.Send[bool](objref.IDOf(op), objc.RegisterName("isAccessoryViewDisclosed"))
 	return _r
 }
 
-// Filenames wraps the corresponding Objective-C method.
+// Filenames returns the filenames.
 func (op *OpenPanel) Filenames() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(op), objc.RegisterName("filenames"))
 	return obj.Wrap(_r)
 }
 
-// RunModalForDirectoryFileTypes wraps the corresponding Objective-C method.
+// RunModalForDirectoryFileTypes runs modal for directory file types.
 func (op *OpenPanel) RunModalForDirectoryFileTypes(path string, name string, fileTypes obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(op), objc.RegisterName("runModalForDirectory:file:types:"), purego.NSString(path), purego.NSString(name), objref.IDOf(fileTypes))
 	return _r
 }
 
-// RunModalForTypes wraps the corresponding Objective-C method.
+// RunModalForTypes runs modal for types.
 func (op *OpenPanel) RunModalForTypes(fileTypes obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(op), objc.RegisterName("runModalForTypes:"), objref.IDOf(fileTypes))
 	return _r

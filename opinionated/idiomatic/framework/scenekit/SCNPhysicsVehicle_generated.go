@@ -66,13 +66,13 @@ func (pv *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index 
 	objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("applyBrakingForce:forWheelAtIndex:"), value, index)
 }
 
-// SpeedInKilometersPerHour wraps the corresponding Objective-C method.
+// SpeedInKilometersPerHour returns the speed in kilometers per hour.
 func (pv *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
 	_r := objc.Send[float64](objref.IDOf(pv), objc.RegisterName("speedInKilometersPerHour"))
 	return _r
 }
 
-// Wheels wraps the corresponding Objective-C method.
+// Wheels returns the wheels.
 //
 // Wheels returns the collection as a Go slice.
 func (pv *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
@@ -80,7 +80,7 @@ func (pv *PhysicsVehicle) Wheels() []*PhysicsVehicleWheel {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsVehicleWheel { return PhysicsVehicleWheelFromID(_id) })
 }
 
-// ChassisBody wraps the corresponding Objective-C method.
+// ChassisBody returns the chassis body.
 func (pv *PhysicsVehicle) ChassisBody() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("chassisBody"))
 	return PhysicsBodyFromID(_r)

@@ -127,49 +127,49 @@ func NewCalRecurrenceRuleYearlyRecurrenceWithIntervalForDayOfTheWeekForWeekOfThe
 	return calRecurrenceRuleAdopt(_id)
 }
 
-// RecurrenceEnd wraps the corresponding Objective-C method.
+// RecurrenceEnd returns the recurrence end.
 func (crr *CalRecurrenceRule) RecurrenceEnd() *CalRecurrenceEnd {
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("recurrenceEnd"))
 	return CalRecurrenceEndFromID(_r)
 }
 
-// RecurrenceType wraps the corresponding Objective-C method.
+// RecurrenceType returns the recurrence type.
 func (crr *CalRecurrenceRule) RecurrenceType() CalRecurrenceType {
 	_r := objc.Send[CalRecurrenceType](objref.IDOf(crr), objc.RegisterName("recurrenceType"))
 	return _r
 }
 
-// RecurrenceInterval wraps the corresponding Objective-C method.
+// RecurrenceInterval returns the recurrence interval.
 func (crr *CalRecurrenceRule) RecurrenceInterval() int {
 	_r := objc.Send[int](objref.IDOf(crr), objc.RegisterName("recurrenceInterval"))
 	return _r
 }
 
-// FirstDayOfTheWeek wraps the corresponding Objective-C method.
+// FirstDayOfTheWeek returns the first day of the week.
 func (crr *CalRecurrenceRule) FirstDayOfTheWeek() int {
 	_r := objc.Send[int](objref.IDOf(crr), objc.RegisterName("firstDayOfTheWeek"))
 	return _r
 }
 
-// DaysOfTheWeek wraps the corresponding Objective-C method.
+// DaysOfTheWeek returns the days of the week.
 func (crr *CalRecurrenceRule) DaysOfTheWeek() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("daysOfTheWeek"))
 	return obj.Wrap(_r)
 }
 
-// DaysOfTheMonth wraps the corresponding Objective-C method.
+// DaysOfTheMonth returns the days of the month.
 func (crr *CalRecurrenceRule) DaysOfTheMonth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("daysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
-// NthWeekDaysOfTheMonth wraps the corresponding Objective-C method.
+// NthWeekDaysOfTheMonth returns the nth week days of the month.
 func (crr *CalRecurrenceRule) NthWeekDaysOfTheMonth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("nthWeekDaysOfTheMonth"))
 	return obj.Wrap(_r)
 }
 
-// MonthsOfTheYear wraps the corresponding Objective-C method.
+// MonthsOfTheYear returns the months of the year.
 func (crr *CalRecurrenceRule) MonthsOfTheYear() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(crr), objc.RegisterName("monthsOfTheYear"))
 	return obj.Wrap(_r)

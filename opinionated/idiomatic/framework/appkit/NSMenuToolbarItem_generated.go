@@ -131,7 +131,7 @@ func (mti *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
 	return mti
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (mti *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return mti
@@ -191,7 +191,7 @@ func (mti *MenuToolbarItem) WithAutovalidates(autovalidates bool) *MenuToolbarIt
 	return mti
 }
 
-// Menu wraps the corresponding Objective-C method.
+// Menu returns the menu.
 func (mti *MenuToolbarItem) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("menu"))
 	return MenuFromID(_r)

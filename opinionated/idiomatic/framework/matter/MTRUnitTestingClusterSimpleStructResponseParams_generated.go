@@ -80,7 +80,7 @@ func NewMTRUnitTestingClusterSimpleStructResponseParamsWithResponseValueError(re
 	return mTRUnitTestingClusterSimpleStructResponseParamsAdopt(_id), nil
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutcssrp *MTRUnitTestingClusterSimpleStructResponseParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutcssrp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutcssrp
@@ -92,7 +92,7 @@ func (mutcssrp *MTRUnitTestingClusterSimpleStructResponseParams) WithTimedInvoke
 	return mutcssrp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutcssrp *MTRUnitTestingClusterSimpleStructResponseParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcssrp), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)

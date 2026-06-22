@@ -73,7 +73,7 @@ func NewContactRelationWithName(name string) *ContactRelation {
 	return contactRelationAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (cr *ContactRelation) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("name"))
 	if _r == 0 {

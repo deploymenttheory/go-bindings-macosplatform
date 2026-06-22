@@ -117,7 +117,7 @@ func (uico *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *U
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// IsEmpty wraps the corresponding Objective-C method.
+// IsEmpty reports whether the object is empty.
 func (uico *UserInterfaceCompressionOptions) IsEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("isEmpty"))
 	return _r

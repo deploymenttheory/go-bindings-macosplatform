@@ -71,13 +71,13 @@ func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallba
 	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
 }
 
-// WithCancelHandler sets the property and returns the receiver so calls can be chained.
+// WithCancelHandler sets the cancel handler.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
 	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("setCancelHandler:"), cancelHandler)
 	return macqwi
 }
 
-// EndWork wraps the corresponding Objective-C method.
+// EndWork ends work.
 func (macqwi *MTRAsyncCallbackQueueWorkItem) EndWork() {
 	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("endWork"))
 }

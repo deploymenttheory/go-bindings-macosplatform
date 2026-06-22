@@ -81,7 +81,7 @@ func (pa *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 	return pa
 }
 
-// KeyPath wraps the corresponding Objective-C method.
+// KeyPath returns the key path.
 func (pa *PropertyAnimation) KeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("keyPath"))
 	if _r == 0 {
@@ -90,19 +90,19 @@ func (pa *PropertyAnimation) KeyPath() string {
 	return purego.GoString(_r)
 }
 
-// IsAdditive wraps the corresponding Objective-C method.
+// IsAdditive reports whether the object is additive.
 func (pa *PropertyAnimation) IsAdditive() bool {
 	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isAdditive"))
 	return _r
 }
 
-// IsCumulative wraps the corresponding Objective-C method.
+// IsCumulative reports whether the object is cumulative.
 func (pa *PropertyAnimation) IsCumulative() bool {
 	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isCumulative"))
 	return _r
 }
 
-// ValueFunction wraps the corresponding Objective-C method.
+// ValueFunction returns the value function.
 func (pa *PropertyAnimation) ValueFunction() *ValueFunction {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("valueFunction"))
 	return ValueFunctionFromID(_r)

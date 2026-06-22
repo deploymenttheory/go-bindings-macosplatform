@@ -112,7 +112,7 @@ func (fpd *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier
 	return fpd
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (fpd *FetchedPropertyDescription) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)

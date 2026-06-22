@@ -81,7 +81,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeSupportedModesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedModesWithCompletion reads attribute supported modes with completion.
 //
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -131,7 +131,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeCurrentModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentModeWithCompletion reads attribute current mode with completion.
 //
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -181,7 +181,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -231,7 +231,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -281,7 +281,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -331,7 +331,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -381,7 +381,7 @@ func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) 
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcratccm *MTRBaseClusterRefrigeratorAndTemperatureControlledCabinetMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

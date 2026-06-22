@@ -120,31 +120,31 @@ func (pf *PhysicsField) WithCategoryBitMask(categoryBitMask int) *PhysicsField {
 	return pf
 }
 
-// Strength wraps the corresponding Objective-C method.
+// Strength returns the strength.
 func (pf *PhysicsField) Strength() float64 {
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("strength"))
 	return _r
 }
 
-// FalloffExponent wraps the corresponding Objective-C method.
+// FalloffExponent returns the falloff exponent.
 func (pf *PhysicsField) FalloffExponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("falloffExponent"))
 	return _r
 }
 
-// MinimumDistance wraps the corresponding Objective-C method.
+// MinimumDistance returns the minimum distance.
 func (pf *PhysicsField) MinimumDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("minimumDistance"))
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (pf *PhysicsField) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("isActive"))
 	return _r
 }
 
-// IsExclusive wraps the corresponding Objective-C method.
+// IsExclusive reports whether the object is exclusive.
 func (pf *PhysicsField) IsExclusive() bool {
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("isExclusive"))
 	return _r
@@ -156,7 +156,7 @@ func (pf *PhysicsField) UsesEllipsoidalExtent() bool {
 	return _r
 }
 
-// Scope wraps the corresponding Objective-C method.
+// Scope returns the scope.
 func (pf *PhysicsField) Scope() PhysicsFieldScope {
 	_r := objc.Send[PhysicsFieldScope](objref.IDOf(pf), objc.RegisterName("scope"))
 	return _r

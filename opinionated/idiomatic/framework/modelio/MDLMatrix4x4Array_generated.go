@@ -76,13 +76,13 @@ func (ma *Matrix4x4Array) Clear() {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("clear"))
 }
 
-// ElementCount wraps the corresponding Objective-C method.
+// ElementCount returns the element count.
 func (ma *Matrix4x4Array) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("elementCount"))
 	return _r
 }
 
-// Precision wraps the corresponding Objective-C method.
+// Precision returns the precision.
 func (ma *Matrix4x4Array) Precision() DataPrecision {
 	_r := objc.Send[DataPrecision](objref.IDOf(ma), objc.RegisterName("precision"))
 	return _r

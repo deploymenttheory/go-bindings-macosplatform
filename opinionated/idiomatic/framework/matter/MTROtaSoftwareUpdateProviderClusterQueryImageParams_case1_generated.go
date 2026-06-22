@@ -50,43 +50,43 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageParams() *MTROtaSoftwareUpd
 	return mTROtaSoftwareUpdateProviderClusterQueryImageParamsAdopt(_id)
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithVendorID(vendorID obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mosupcqip
 }
 
-// WithProductID sets the property and returns the receiver so calls can be chained.
+// WithProductID sets the product ID.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mosupcqip
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosupcqip
 }
 
-// WithHardwareVersion sets the property and returns the receiver so calls can be chained.
+// WithHardwareVersion sets the hardware version.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithHardwareVersion(hardwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setHardwareVersion:"), objref.IDOf(hardwareVersion))
 	return mosupcqip
 }
 
-// WithLocation sets the property and returns the receiver so calls can be chained.
+// WithLocation sets the location.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithLocation(location string) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setLocation:"), purego.NSString(location))
 	return mosupcqip
 }
 
-// WithRequestorCanConsent sets the property and returns the receiver so calls can be chained.
+// WithRequestorCanConsent sets the requestor can consent.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithRequestorCanConsent(requestorCanConsent obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setRequestorCanConsent:"), objref.IDOf(requestorCanConsent))
 	return mosupcqip
 }
 
-// WithMetadataForProvider sets the property and returns the receiver so calls can be chained.
+// WithMetadataForProvider sets the metadata for provider.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithMetadataForProvider(metadataForProvider obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setMetadataForProvider:"), objref.IDOf(metadataForProvider))
 	return mosupcqip

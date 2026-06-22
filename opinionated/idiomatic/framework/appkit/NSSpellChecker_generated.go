@@ -136,7 +136,7 @@ func (sc *SpellChecker) RequestCheckingOfStringRangeTypesOptionsInSpellDocumentW
 	return _r
 }
 
-// RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler wraps the corresponding Objective-C method.
+// RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler requests candidates for selected range in string types options in spell document with tag completion handler.
 func (sc *SpellChecker) RequestCandidatesForSelectedRangeInStringTypesOptionsInSpellDocumentWithTagCompletionHandler(selectedRange foundation.NSRange, stringToCheck string, checkingTypes uint64, options obj.Object, tag int, completionHandler func(int, obj.Object)) int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("requestCandidatesForSelectedRange:inString:types:options:inSpellDocumentWithTag:completionHandler:"), selectedRange, purego.NSString(stringToCheck), checkingTypes, objref.IDOf(options), tag, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 objc.ID) { completionHandler(_b0, obj.Wrap(_b1)) }))
 	return _r
@@ -302,37 +302,37 @@ func (sc *SpellChecker) SetLanguage(language string) bool {
 	return _r
 }
 
-// UserReplacementsDictionary wraps the corresponding Objective-C method.
+// UserReplacementsDictionary returns the user replacements dictionary.
 func (sc *SpellChecker) UserReplacementsDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("userReplacementsDictionary"))
 	return obj.Wrap(_r)
 }
 
-// SpellingPanel wraps the corresponding Objective-C method.
+// SpellingPanel returns the spelling panel.
 func (sc *SpellChecker) SpellingPanel() *Panel {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("spellingPanel"))
 	return PanelFromID(_r)
 }
 
-// AccessoryView wraps the corresponding Objective-C method.
+// AccessoryView returns the accessory view.
 func (sc *SpellChecker) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
-// SubstitutionsPanel wraps the corresponding Objective-C method.
+// SubstitutionsPanel returns the substitutions panel.
 func (sc *SpellChecker) SubstitutionsPanel() *Panel {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("substitutionsPanel"))
 	return PanelFromID(_r)
 }
 
-// SubstitutionsPanelAccessoryViewController wraps the corresponding Objective-C method.
+// SubstitutionsPanelAccessoryViewController returns the substitutions panel accessory view controller.
 func (sc *SpellChecker) SubstitutionsPanelAccessoryViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("substitutionsPanelAccessoryViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// AvailableLanguages wraps the corresponding Objective-C method.
+// AvailableLanguages returns the available languages.
 //
 // AvailableLanguages returns the collection as a Go slice.
 func (sc *SpellChecker) AvailableLanguages() []string {
@@ -340,7 +340,7 @@ func (sc *SpellChecker) AvailableLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// UserPreferredLanguages wraps the corresponding Objective-C method.
+// UserPreferredLanguages returns the user preferred languages.
 //
 // UserPreferredLanguages returns the collection as a Go slice.
 func (sc *SpellChecker) UserPreferredLanguages() []string {

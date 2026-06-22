@@ -70,13 +70,13 @@ func NewMTROperationalCredentialsClusterCSRRequestParams() *MTROperationalCreden
 	return mTROperationalCredentialsClusterCSRRequestParamsAdopt(_id)
 }
 
-// WithCsrNonce sets the property and returns the receiver so calls can be chained.
+// WithCsrNonce sets the csr nonce.
 func (mocccrp *MTROperationalCredentialsClusterCSRRequestParams) WithCsrNonce(csrNonce obj.Object) *MTROperationalCredentialsClusterCSRRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setCsrNonce:"), objref.IDOf(csrNonce))
 	return mocccrp
 }
 
-// WithIsForUpdateNOC sets the property and returns the receiver so calls can be chained.
+// WithIsForUpdateNOC sets the is for update noc.
 func (mocccrp *MTROperationalCredentialsClusterCSRRequestParams) WithIsForUpdateNOC(isForUpdateNOC obj.Object) *MTROperationalCredentialsClusterCSRRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("setIsForUpdateNOC:"), objref.IDOf(isForUpdateNOC))
 	return mocccrp
@@ -94,13 +94,13 @@ func (mocccrp *MTROperationalCredentialsClusterCSRRequestParams) WithServerSideP
 	return mocccrp
 }
 
-// CsrNonce wraps the corresponding Objective-C method.
+// CsrNonce returns the csr nonce.
 func (mocccrp *MTROperationalCredentialsClusterCSRRequestParams) CsrNonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("csrNonce"))
 	return obj.Wrap(_r)
 }
 
-// IsForUpdateNOC wraps the corresponding Objective-C method.
+// IsForUpdateNOC returns the is for update noc.
 func (mocccrp *MTROperationalCredentialsClusterCSRRequestParams) IsForUpdateNOC() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocccrp), objc.RegisterName("isForUpdateNOC"))
 	return obj.Wrap(_r)

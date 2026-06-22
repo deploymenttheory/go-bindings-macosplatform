@@ -84,13 +84,13 @@ func (vro *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOption
 	return vro
 }
 
-// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
+// IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (vro *VideoRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(vro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
-// DeliveryMode wraps the corresponding Objective-C method.
+// DeliveryMode returns the delivery mode.
 func (vro *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
 	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(vro), objc.RegisterName("deliveryMode"))
 	return _r

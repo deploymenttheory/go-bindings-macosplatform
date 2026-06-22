@@ -104,19 +104,19 @@ func (cls *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayo
 	return cls
 }
 
-// InterGroupSpacing wraps the corresponding Objective-C method.
+// InterGroupSpacing returns the inter group spacing.
 func (cls *CollectionLayoutSection) InterGroupSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("interGroupSpacing"))
 	return _r
 }
 
-// OrthogonalScrollingBehavior wraps the corresponding Objective-C method.
+// OrthogonalScrollingBehavior returns the orthogonal scrolling behavior.
 func (cls *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
 	_r := objc.Send[CollectionLayoutSectionOrthogonalScrollingBehavior](objref.IDOf(cls), objc.RegisterName("orthogonalScrollingBehavior"))
 	return _r
 }
 
-// BoundarySupplementaryItems wraps the corresponding Objective-C method.
+// BoundarySupplementaryItems returns the boundary supplementary items.
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
@@ -132,7 +132,7 @@ func (cls *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
 	return _r
 }
 
-// DecorationItems wraps the corresponding Objective-C method.
+// DecorationItems returns the decoration items.
 //
 // DecorationItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) DecorationItems() []*CollectionLayoutDecorationItem {

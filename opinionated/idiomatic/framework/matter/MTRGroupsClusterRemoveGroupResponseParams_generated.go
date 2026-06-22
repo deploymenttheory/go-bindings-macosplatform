@@ -78,13 +78,13 @@ func NewMTRGroupsClusterRemoveGroupResponseParamsWithResponseValueError(response
 	return mTRGroupsClusterRemoveGroupResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithStatus(status obj.Object) *MTRGroupsClusterRemoveGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mgcrgrp
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterRemoveGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcrgrp
@@ -96,13 +96,13 @@ func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) WithTimedInvokeTimeout
 	return mgcrgrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgcrgrp *MTRGroupsClusterRemoveGroupResponseParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgrp), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)

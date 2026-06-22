@@ -151,25 +151,25 @@ func (e *Embedding) NeighborsForVectorMaximumCountMaximumDistanceDistanceType(ve
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Dimension wraps the corresponding Objective-C method.
+// Dimension returns the dimension.
 func (e *Embedding) Dimension() int {
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("dimension"))
 	return _r
 }
 
-// VocabularySize wraps the corresponding Objective-C method.
+// VocabularySize returns the vocabulary size.
 func (e *Embedding) VocabularySize() int {
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vocabularySize"))
 	return _r
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (e *Embedding) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
-// Revision wraps the corresponding Objective-C method.
+// Revision returns the revision.
 func (e *Embedding) Revision() int {
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("revision"))
 	return _r

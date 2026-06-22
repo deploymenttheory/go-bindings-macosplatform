@@ -70,19 +70,19 @@ func NewMTRAccountLoginClusterLoginParams() *MTRAccountLoginClusterLoginParams {
 	return mTRAccountLoginClusterLoginParamsAdopt(_id)
 }
 
-// WithTempAccountIdentifier sets the property and returns the receiver so calls can be chained.
+// WithTempAccountIdentifier sets the temp account identifier.
 func (malclp *MTRAccountLoginClusterLoginParams) WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
 	return malclp
 }
 
-// WithSetupPIN sets the property and returns the receiver so calls can be chained.
+// WithSetupPIN sets the setup pin.
 func (malclp *MTRAccountLoginClusterLoginParams) WithSetupPIN(setupPIN string) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
 	return malclp
 }
 
-// WithNode sets the property and returns the receiver so calls can be chained.
+// WithNode sets the node.
 func (malclp *MTRAccountLoginClusterLoginParams) WithNode(node obj.Object) *MTRAccountLoginClusterLoginParams {
 	objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return malclp
@@ -100,7 +100,7 @@ func (malclp *MTRAccountLoginClusterLoginParams) WithServerSideProcessingTimeout
 	return malclp
 }
 
-// TempAccountIdentifier wraps the corresponding Objective-C method.
+// TempAccountIdentifier returns the temp account identifier.
 func (malclp *MTRAccountLoginClusterLoginParams) TempAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("tempAccountIdentifier"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (malclp *MTRAccountLoginClusterLoginParams) TempAccountIdentifier() string 
 	return purego.GoString(_r)
 }
 
-// SetupPIN wraps the corresponding Objective-C method.
+// SetupPIN returns the setup pin.
 func (malclp *MTRAccountLoginClusterLoginParams) SetupPIN() string {
 	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("setupPIN"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (malclp *MTRAccountLoginClusterLoginParams) SetupPIN() string {
 	return purego.GoString(_r)
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (malclp *MTRAccountLoginClusterLoginParams) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malclp), objc.RegisterName("node"))
 	return obj.Wrap(_r)

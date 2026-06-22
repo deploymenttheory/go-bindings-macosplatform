@@ -80,13 +80,13 @@ func NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValueError(re
 	return mTRContentLauncherClusterLauncherResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithStatus(status obj.Object) *MTRContentLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mclclrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithData(data string) *MTRContentLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mclclrp
@@ -98,13 +98,13 @@ func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithTimedInvokeT
 	return mclclrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("data"))
 	if _r == 0 {

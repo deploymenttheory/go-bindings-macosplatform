@@ -78,8 +78,8 @@ func (bdsc *BluetoothDeviceSelectorController) RunModal() int {
 	return _r
 }
 
-// GetResults returns the result of the user’s selection.
-func (bdsc *BluetoothDeviceSelectorController) GetResults() obj.Object {
+// Results returns the result of the user’s selection.
+func (bdsc *BluetoothDeviceSelectorController) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getResults"))
 	return obj.Wrap(_r)
 }
@@ -89,8 +89,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetOptions(options uint32) {
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setOptions:"), options)
 }
 
-// GetOptions returns the option bits that control the panel’s behavior.
-func (bdsc *BluetoothDeviceSelectorController) GetOptions() uint32 {
+// Options returns the option bits that control the panel’s behavior.
+func (bdsc *BluetoothDeviceSelectorController) Options() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(bdsc), objc.RegisterName("getOptions"))
 	return _r
 }
@@ -115,8 +115,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
-// GetTitle returns the title of the device selector panel.
-func (bdsc *BluetoothDeviceSelectorController) GetTitle() string {
+// Title returns the title of the device selector panel.
+func (bdsc *BluetoothDeviceSelectorController) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
@@ -129,8 +129,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetHeader(headerText string) {
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setHeader:"), purego.NSString(headerText))
 }
 
-// GetHeader returns the header text that appears in the device selector panel.
-func (bdsc *BluetoothDeviceSelectorController) GetHeader() string {
+// Header returns the header text that appears in the device selector panel.
+func (bdsc *BluetoothDeviceSelectorController) Header() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getHeader"))
 	if _r == 0 {
 		return ""
@@ -143,8 +143,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetDescriptionText(descriptionTex
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 }
 
-// GetDescriptionText returns the description text that appears in the device selector panel.
-func (bdsc *BluetoothDeviceSelectorController) GetDescriptionText() string {
+// DescriptionText returns the description text that appears in the device selector panel.
+func (bdsc *BluetoothDeviceSelectorController) DescriptionText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getDescriptionText"))
 	if _r == 0 {
 		return ""
@@ -157,8 +157,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 }
 
-// GetPrompt returns the title of the default/select button in the device selector panel.
-func (bdsc *BluetoothDeviceSelectorController) GetPrompt() string {
+// Prompt returns the title of the default/select button in the device selector panel.
+func (bdsc *BluetoothDeviceSelectorController) Prompt() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getPrompt"))
 	if _r == 0 {
 		return ""
@@ -171,8 +171,8 @@ func (bdsc *BluetoothDeviceSelectorController) SetCancel(prompt string) {
 	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setCancel:"), purego.NSString(prompt))
 }
 
-// GetCancel returns the title of the default/cancel button in the device selector panel.
-func (bdsc *BluetoothDeviceSelectorController) GetCancel() string {
+// Cancel returns the title of the default/cancel button in the device selector panel.
+func (bdsc *BluetoothDeviceSelectorController) Cancel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getCancel"))
 	if _r == 0 {
 		return ""

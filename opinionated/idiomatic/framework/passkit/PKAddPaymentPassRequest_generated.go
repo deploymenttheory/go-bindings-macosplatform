@@ -90,31 +90,31 @@ func (appr *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey obj
 	return appr
 }
 
-// WithWrappedKey sets the property and returns the receiver so calls can be chained.
+// WithWrappedKey sets the wrapped key.
 func (appr *AddPaymentPassRequest) WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest {
 	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
 	return appr
 }
 
-// EncryptedPassData wraps the corresponding Objective-C method.
+// EncryptedPassData returns the encrypted pass data.
 func (appr *AddPaymentPassRequest) EncryptedPassData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("encryptedPassData"))
 	return obj.Wrap(_r)
 }
 
-// ActivationData wraps the corresponding Objective-C method.
+// ActivationData returns the activation data.
 func (appr *AddPaymentPassRequest) ActivationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("activationData"))
 	return obj.Wrap(_r)
 }
 
-// EphemeralPublicKey wraps the corresponding Objective-C method.
+// EphemeralPublicKey returns the ephemeral public key.
 func (appr *AddPaymentPassRequest) EphemeralPublicKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("ephemeralPublicKey"))
 	return obj.Wrap(_r)
 }
 
-// WrappedKey wraps the corresponding Objective-C method.
+// WrappedKey returns the wrapped key.
 func (appr *AddPaymentPassRequest) WrappedKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("wrappedKey"))
 	return obj.Wrap(_r)

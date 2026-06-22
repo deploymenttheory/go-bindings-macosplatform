@@ -66,25 +66,25 @@ func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) String() string {
 	return rt.Description(objref.IDOf(mmpcpps))
 }
 
-// WithUpdatedAt sets the property and returns the receiver so calls can be chained.
+// WithUpdatedAt sets the updated at.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return mmpcpps
 }
 
-// WithPosition sets the property and returns the receiver so calls can be chained.
+// WithPosition sets the position.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPositionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return mmpcpps
 }
 
-// UpdatedAt wraps the corresponding Objective-C method.
+// UpdatedAt returns the updated at.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("updatedAt"))
 	return obj.Wrap(_r)
 }
 
-// Position wraps the corresponding Objective-C method.
+// Position returns the position.
 func (mmpcpps *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcpps), objc.RegisterName("position"))
 	return obj.Wrap(_r)

@@ -51,13 +51,13 @@ func NewChangeHistoryAddMemberToGroupEvent() *ChangeHistoryAddMemberToGroupEvent
 	return changeHistoryAddMemberToGroupEventAdopt(_id)
 }
 
-// Member wraps the corresponding Objective-C method.
+// Member returns the member.
 func (chamtge *ChangeHistoryAddMemberToGroupEvent) Member() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(chamtge), objc.RegisterName("member"))
 	return ContactFromID(_r)
 }
 
-// Group wraps the corresponding Objective-C method.
+// Group returns the group.
 func (chamtge *ChangeHistoryAddMemberToGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(chamtge), objc.RegisterName("group"))
 	return GroupFromID(_r)

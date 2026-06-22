@@ -225,7 +225,7 @@ func (pb *PhysicsBody) AllContactedBodies() []*PhysicsBody {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsBody { return PhysicsBodyFromID(_id) })
 }
 
-// IsDynamic wraps the corresponding Objective-C method.
+// IsDynamic reports whether the object is dynamic.
 func (pb *PhysicsBody) IsDynamic() bool {
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isDynamic"))
 	return _r
@@ -333,7 +333,7 @@ func (pb *PhysicsBody) ContactTestBitMask() uint32 {
 	return _r
 }
 
-// Joints wraps the corresponding Objective-C method.
+// Joints returns the joints.
 //
 // Joints returns the collection as a Go slice.
 func (pb *PhysicsBody) Joints() []*PhysicsJoint {
@@ -347,13 +347,13 @@ func (pb *PhysicsBody) Node() *Node {
 	return NodeFromID(_r)
 }
 
-// Velocity wraps the corresponding Objective-C method.
+// Velocity returns the velocity.
 func (pb *PhysicsBody) Velocity() corefoundation.CGVector {
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pb), objc.RegisterName("velocity"))
 	return _r
 }
 
-// AngularVelocity wraps the corresponding Objective-C method.
+// AngularVelocity returns the angular velocity.
 func (pb *PhysicsBody) AngularVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularVelocity"))
 	return _r

@@ -146,7 +146,7 @@ func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *Data, baseURL st
 	return uRLAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (u *URL) WithScriptingProperties(scriptingProperties obj.Object) *URL {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return u
@@ -236,13 +236,13 @@ func (u *URL) StopAccessingSecurityScopedResource() {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("stopAccessingSecurityScopedResource"))
 }
 
-// DataRepresentation wraps the corresponding Objective-C method.
+// DataRepresentation returns the data representation.
 func (u *URL) DataRepresentation() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("dataRepresentation"))
 	return DataFromID(_r)
 }
 
-// AbsoluteString wraps the corresponding Objective-C method.
+// AbsoluteString returns the absolute string.
 func (u *URL) AbsoluteString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("absoluteString"))
 	if _r == 0 {
@@ -251,7 +251,7 @@ func (u *URL) AbsoluteString() string {
 	return purego.GoString(_r)
 }
 
-// RelativeString wraps the corresponding Objective-C method.
+// RelativeString returns the relative string.
 func (u *URL) RelativeString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("relativeString"))
 	if _r == 0 {
@@ -260,19 +260,19 @@ func (u *URL) RelativeString() string {
 	return purego.GoString(_r)
 }
 
-// BaseURL wraps the corresponding Objective-C method.
+// BaseURL returns the base URL.
 func (u *URL) BaseURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("baseURL"))
 	return URLFromID(_r)
 }
 
-// AbsoluteURL wraps the corresponding Objective-C method.
+// AbsoluteURL returns the absolute URL.
 func (u *URL) AbsoluteURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("absoluteURL"))
 	return URLFromID(_r)
 }
 
-// Scheme wraps the corresponding Objective-C method.
+// Scheme returns the scheme.
 func (u *URL) Scheme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("scheme"))
 	if _r == 0 {
@@ -281,7 +281,7 @@ func (u *URL) Scheme() string {
 	return purego.GoString(_r)
 }
 
-// ResourceSpecifier wraps the corresponding Objective-C method.
+// ResourceSpecifier returns the resource specifier.
 func (u *URL) ResourceSpecifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("resourceSpecifier"))
 	if _r == 0 {
@@ -290,7 +290,7 @@ func (u *URL) ResourceSpecifier() string {
 	return purego.GoString(_r)
 }
 
-// Host wraps the corresponding Objective-C method.
+// Host returns the host.
 func (u *URL) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("host"))
 	if _r == 0 {
@@ -299,13 +299,13 @@ func (u *URL) Host() string {
 	return purego.GoString(_r)
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (u *URL) Port() *Number {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("port"))
 	return NumberFromID(_r)
 }
 
-// User wraps the corresponding Objective-C method.
+// User returns the user.
 func (u *URL) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("user"))
 	if _r == 0 {
@@ -314,7 +314,7 @@ func (u *URL) User() string {
 	return purego.GoString(_r)
 }
 
-// Password wraps the corresponding Objective-C method.
+// Password returns the password.
 func (u *URL) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("password"))
 	if _r == 0 {
@@ -323,7 +323,7 @@ func (u *URL) Password() string {
 	return purego.GoString(_r)
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (u *URL) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("path"))
 	if _r == 0 {
@@ -332,7 +332,7 @@ func (u *URL) Path() string {
 	return purego.GoString(_r)
 }
 
-// Fragment wraps the corresponding Objective-C method.
+// Fragment returns the fragment.
 func (u *URL) Fragment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("fragment"))
 	if _r == 0 {
@@ -341,7 +341,7 @@ func (u *URL) Fragment() string {
 	return purego.GoString(_r)
 }
 
-// ParameterString wraps the corresponding Objective-C method.
+// ParameterString returns the parameter string.
 func (u *URL) ParameterString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("parameterString"))
 	if _r == 0 {
@@ -350,7 +350,7 @@ func (u *URL) ParameterString() string {
 	return purego.GoString(_r)
 }
 
-// Query wraps the corresponding Objective-C method.
+// Query returns the query.
 func (u *URL) Query() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("query"))
 	if _r == 0 {
@@ -359,7 +359,7 @@ func (u *URL) Query() string {
 	return purego.GoString(_r)
 }
 
-// RelativePath wraps the corresponding Objective-C method.
+// RelativePath returns the relative path.
 func (u *URL) RelativePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("relativePath"))
 	if _r == 0 {
@@ -368,25 +368,25 @@ func (u *URL) RelativePath() string {
 	return purego.GoString(_r)
 }
 
-// HasDirectoryPath wraps the corresponding Objective-C method.
+// HasDirectoryPath reports whether the object has directory path.
 func (u *URL) HasDirectoryPath() bool {
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("hasDirectoryPath"))
 	return _r
 }
 
-// IsFileURL wraps the corresponding Objective-C method.
+// IsFileURL reports whether the object is file URL.
 func (u *URL) IsFileURL() bool {
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isFileURL"))
 	return _r
 }
 
-// StandardizedURL wraps the corresponding Objective-C method.
+// StandardizedURL returns the standardized URL.
 func (u *URL) StandardizedURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("standardizedURL"))
 	return URLFromID(_r)
 }
 
-// FilePathURL wraps the corresponding Objective-C method.
+// FilePathURL returns the file path URL.
 func (u *URL) FilePathURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("filePathURL"))
 	return URLFromID(_r)
@@ -444,7 +444,7 @@ func (u *URL) CheckResourceIsReachableAndReturnError() error {
 	return nil
 }
 
-// PathComponents wraps the corresponding Objective-C method.
+// PathComponents returns the path components.
 //
 // PathComponents returns the collection as a Go slice.
 func (u *URL) PathComponents() []string {
@@ -452,7 +452,7 @@ func (u *URL) PathComponents() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LastPathComponent wraps the corresponding Objective-C method.
+// LastPathComponent returns the last path component.
 func (u *URL) LastPathComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("lastPathComponent"))
 	if _r == 0 {
@@ -461,7 +461,7 @@ func (u *URL) LastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// PathExtension wraps the corresponding Objective-C method.
+// PathExtension returns the path extension.
 func (u *URL) PathExtension() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("pathExtension"))
 	if _r == 0 {
@@ -470,25 +470,25 @@ func (u *URL) PathExtension() string {
 	return purego.GoString(_r)
 }
 
-// URLByDeletingLastPathComponent wraps the corresponding Objective-C method.
+// URLByDeletingLastPathComponent returns the URL by deleting last path component.
 func (u *URL) URLByDeletingLastPathComponent() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByDeletingLastPathComponent"))
 	return URLFromID(_r)
 }
 
-// URLByDeletingPathExtension wraps the corresponding Objective-C method.
+// URLByDeletingPathExtension returns the URL by deleting path extension.
 func (u *URL) URLByDeletingPathExtension() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByDeletingPathExtension"))
 	return URLFromID(_r)
 }
 
-// URLByStandardizingPath wraps the corresponding Objective-C method.
+// URLByStandardizingPath returns the URL by standardizing path.
 func (u *URL) URLByStandardizingPath() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByStandardizingPath"))
 	return URLFromID(_r)
 }
 
-// URLByResolvingSymlinksInPath wraps the corresponding Objective-C method.
+// URLByResolvingSymlinksInPath returns the URL by resolving symlinks in path.
 func (u *URL) URLByResolvingSymlinksInPath() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("URLByResolvingSymlinksInPath"))
 	return URLFromID(_r)

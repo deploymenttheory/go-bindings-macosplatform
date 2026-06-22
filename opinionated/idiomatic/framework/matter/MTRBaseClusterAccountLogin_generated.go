@@ -86,7 +86,7 @@ func (mbcal *MTRBaseClusterAccountLogin) GetSetupPINWithParamsCompletion(ctx con
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -136,7 +136,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeAttributeListWithPara
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeFeatureMapWithParamsS
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcal *MTRBaseClusterAccountLogin) GetSetupPINWithParams(ctx context.Conte
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeAttributeListWithMinI
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcal *MTRBaseClusterAccountLogin) SubscribeAttributeFeatureMapWithMinInte
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterAccountLogin) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

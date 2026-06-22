@@ -78,7 +78,7 @@ func (av *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
 	return av
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (av *AttributeValue) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("floatValue"))
 	return _r

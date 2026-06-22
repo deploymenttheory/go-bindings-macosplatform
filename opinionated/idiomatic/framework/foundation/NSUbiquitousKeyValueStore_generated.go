@@ -72,7 +72,7 @@ func NewUbiquitousKeyValueStore() *UbiquitousKeyValueStore {
 	return ubiquitousKeyValueStoreAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ukvs *UbiquitousKeyValueStore) WithScriptingProperties(scriptingProperties obj.Object) *UbiquitousKeyValueStore {
 	objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ukvs
@@ -180,7 +180,7 @@ func (ukvs *UbiquitousKeyValueStore) Synchronize() bool {
 	return _r
 }
 
-// DictionaryRepresentation wraps the corresponding Objective-C method.
+// DictionaryRepresentation returns the dictionary representation.
 func (ukvs *UbiquitousKeyValueStore) DictionaryRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ukvs), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)

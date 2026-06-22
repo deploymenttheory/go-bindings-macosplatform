@@ -46,7 +46,7 @@ func ConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(ctx context
 	}
 }
 
-// CheckForSupport wraps the corresponding Objective-C method.
+// CheckForSupport returns the check for support.
 func CheckForSupport() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_r := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("checkForSupport"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
@@ -58,13 +58,13 @@ func AuthorizationProviderWithIdentityProviderURL(url string) *AuthorizationSing
 	return AuthorizationSingleSignOnProviderFromID(_r)
 }
 
-// IsDeviceConfiguredForPasskeys wraps the corresponding Objective-C method.
+// IsDeviceConfiguredForPasskeys reports whether the object is device configured for passkeys.
 func IsDeviceConfiguredForPasskeys() bool {
 	_r := objc.Send[bool](objc.ID(_class("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("isDeviceConfiguredForPasskeys"))
 	return _r
 }
 
-// SharedStore wraps the corresponding Objective-C method.
+// SharedStore returns the shared store.
 func SharedStore() *CredentialIdentityStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("ASCredentialIdentityStore")), objc.RegisterName("sharedStore"))
 	return CredentialIdentityStoreFromID(_r)
@@ -173,7 +173,7 @@ func CallbackWithHTTPSHostPath(host string, path string) *WebAuthenticationSessi
 	return WebAuthenticationSessionCallbackFromID(_r)
 }
 
-// SharedManager wraps the corresponding Objective-C method.
+// SharedManager returns the shared manager.
 func SharedManager() *WebAuthenticationSessionWebBrowserSessionManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionWebBrowserSessionManager")), objc.RegisterName("sharedManager"))
 	return WebAuthenticationSessionWebBrowserSessionManagerFromID(_r)

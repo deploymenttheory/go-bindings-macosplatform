@@ -71,7 +71,7 @@ func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 	return languageInstanceAdopt(_id)
 }
 
-// WithDefaultTarget sets the property and returns the receiver so calls can be chained.
+// WithDefaultTarget sets the default target.
 func (li *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
 	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
 	return li
@@ -83,13 +83,13 @@ func (li *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Ob
 	return obj.Wrap(_r)
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (li *LanguageInstance) Language() *Language {
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
-// DefaultTarget wraps the corresponding Objective-C method.
+// DefaultTarget returns the default target.
 func (li *LanguageInstance) DefaultTarget() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("defaultTarget"))
 	return obj.Wrap(_r)

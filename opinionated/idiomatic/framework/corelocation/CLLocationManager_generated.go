@@ -75,7 +75,7 @@ func NewLocationManager() *LocationManager {
 	return locationManagerAdopt(_id)
 }
 
-// WithPurpose sets the property and returns the receiver so calls can be chained.
+// WithPurpose sets the purpose.
 func (lm *LocationManager) WithPurpose(purpose string) *LocationManager {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setPurpose:"), purego.NSString(purpose))
 	return lm
@@ -174,27 +174,27 @@ func (lm *LocationManager) StopMonitoringSignificantLocationChanges() {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringSignificantLocationChanges"))
 }
 
-// StopMonitoringForRegion wraps the corresponding Objective-C method.
+// StopMonitoringForRegion stops monitoring for region.
 func (lm *LocationManager) StopMonitoringForRegion(region *Region) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopMonitoringForRegion:"), objref.IDOf(region))
 }
 
-// StartMonitoringForRegion wraps the corresponding Objective-C method.
+// StartMonitoringForRegion starts monitoring for region.
 func (lm *LocationManager) StartMonitoringForRegion(region *Region) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startMonitoringForRegion:"), objref.IDOf(region))
 }
 
-// RequestStateForRegion wraps the corresponding Objective-C method.
+// RequestStateForRegion requests state for region.
 func (lm *LocationManager) RequestStateForRegion(region *Region) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("requestStateForRegion:"), objref.IDOf(region))
 }
 
-// StartRangingBeaconsInRegion wraps the corresponding Objective-C method.
+// StartRangingBeaconsInRegion starts ranging beacons in region.
 func (lm *LocationManager) StartRangingBeaconsInRegion(region *BeaconRegion) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("startRangingBeaconsInRegion:"), objref.IDOf(region))
 }
 
-// StopRangingBeaconsInRegion wraps the corresponding Objective-C method.
+// StopRangingBeaconsInRegion stops ranging beacons in region.
 func (lm *LocationManager) StopRangingBeaconsInRegion(region *BeaconRegion) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("stopRangingBeaconsInRegion:"), objref.IDOf(region))
 }
@@ -214,19 +214,19 @@ func (lm *LocationManager) DisallowDeferredLocationUpdates() {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("disallowDeferredLocationUpdates"))
 }
 
-// AuthorizationStatus wraps the corresponding Objective-C method.
+// AuthorizationStatus returns the authorization status.
 func (lm *LocationManager) AuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(lm), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// AccuracyAuthorization wraps the corresponding Objective-C method.
+// AccuracyAuthorization returns the accuracy authorization.
 func (lm *LocationManager) AccuracyAuthorization() AccuracyAuthorization {
 	_r := objc.Send[AccuracyAuthorization](objref.IDOf(lm), objc.RegisterName("accuracyAuthorization"))
 	return _r
 }
 
-// IsAuthorizedForWidgetUpdates wraps the corresponding Objective-C method.
+// IsAuthorizedForWidgetUpdates reports whether the object is authorized for widget updates.
 func (lm *LocationManager) IsAuthorizedForWidgetUpdates() bool {
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("isAuthorizedForWidgetUpdates"))
 	return _r
@@ -238,7 +238,7 @@ func (lm *LocationManager) LocationServicesEnabled() bool {
 	return _r
 }
 
-// Purpose wraps the corresponding Objective-C method.
+// Purpose returns the purpose.
 func (lm *LocationManager) Purpose() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("purpose"))
 	if _r == 0 {
@@ -247,7 +247,7 @@ func (lm *LocationManager) Purpose() string {
 	return purego.GoString(_r)
 }
 
-// ActivityType wraps the corresponding Objective-C method.
+// ActivityType returns the activity type.
 func (lm *LocationManager) ActivityType() ActivityType {
 	_r := objc.Send[ActivityType](objref.IDOf(lm), objc.RegisterName("activityType"))
 	return _r
@@ -271,31 +271,31 @@ func (lm *LocationManager) HeadingAvailable() bool {
 	return _r
 }
 
-// HeadingOrientation wraps the corresponding Objective-C method.
+// HeadingOrientation returns the heading orientation.
 func (lm *LocationManager) HeadingOrientation() DeviceOrientation {
 	_r := objc.Send[DeviceOrientation](objref.IDOf(lm), objc.RegisterName("headingOrientation"))
 	return _r
 }
 
-// Heading wraps the corresponding Objective-C method.
+// Heading returns the heading.
 func (lm *LocationManager) Heading() *Heading {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("heading"))
 	return HeadingFromID(_r)
 }
 
-// MonitoredRegions wraps the corresponding Objective-C method.
+// MonitoredRegions returns the monitored regions.
 func (lm *LocationManager) MonitoredRegions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("monitoredRegions"))
 	return obj.Wrap(_r)
 }
 
-// RangedRegions wraps the corresponding Objective-C method.
+// RangedRegions returns the ranged regions.
 func (lm *LocationManager) RangedRegions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("rangedRegions"))
 	return obj.Wrap(_r)
 }
 
-// RangedBeaconConstraints wraps the corresponding Objective-C method.
+// RangedBeaconConstraints returns the ranged beacon constraints.
 func (lm *LocationManager) RangedBeaconConstraints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("rangedBeaconConstraints"))
 	return obj.Wrap(_r)

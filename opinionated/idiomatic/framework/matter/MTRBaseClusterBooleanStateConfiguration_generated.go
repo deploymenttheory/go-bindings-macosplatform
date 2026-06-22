@@ -54,7 +54,7 @@ func NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device 
 	return mTRBaseClusterBooleanStateConfigurationAdopt(_id)
 }
 
-// ReadAttributeCurrentSensitivityLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentSensitivityLevelWithCompletion reads attribute current sensitivity level with completion.
 //
 // ReadAttributeCurrentSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeCurrentSensitivityLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeCurrent
 	}
 }
 
-// ReadAttributeSupportedSensitivityLevelsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedSensitivityLevelsWithCompletion reads attribute supported sensitivity levels with completion.
 //
 // ReadAttributeSupportedSensitivityLevelsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeSupportedSensitivityLevelsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeSupport
 	}
 }
 
-// ReadAttributeDefaultSensitivityLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultSensitivityLevelWithCompletion reads attribute default sensitivity level with completion.
 //
 // ReadAttributeDefaultSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeDefaultSensitivityLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeDefault
 	}
 }
 
-// ReadAttributeAlarmsActiveWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAlarmsActiveWithCompletion reads attribute alarms active with completion.
 //
 // ReadAttributeAlarmsActiveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAlarmsActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsA
 	}
 }
 
-// ReadAttributeAlarmsSuppressedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAlarmsSuppressedWithCompletion reads attribute alarms suppressed with completion.
 //
 // ReadAttributeAlarmsSuppressedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAlarmsSuppressedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsS
 	}
 }
 
-// ReadAttributeAlarmsEnabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAlarmsEnabledWithCompletion reads attribute alarms enabled with completion.
 //
 // ReadAttributeAlarmsEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAlarmsEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsE
 	}
 }
 
-// ReadAttributeAlarmsSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAlarmsSupportedWithCompletion reads attribute alarms supported with completion.
 //
 // ReadAttributeAlarmsSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAlarmsSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsS
 	}
 }
 
-// ReadAttributeSensorFaultWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSensorFaultWithCompletion reads attribute sensor fault with completion.
 //
 // ReadAttributeSensorFaultWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeSensorFaultWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeSensorF
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeGenerat
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAccepte
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -604,7 +604,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAttribu
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -654,7 +654,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeFeature
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

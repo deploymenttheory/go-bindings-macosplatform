@@ -70,13 +70,13 @@ func NewMTROccupancySensingClusterOccupancyChangedEvent() *MTROccupancySensingCl
 	return mTROccupancySensingClusterOccupancyChangedEventAdopt(_id)
 }
 
-// WithOccupancy sets the property and returns the receiver so calls can be chained.
+// WithOccupancy sets the occupancy.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) WithOccupancy(occupancy obj.Object) *MTROccupancySensingClusterOccupancyChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("setOccupancy:"), objref.IDOf(occupancy))
 	return moscoce
 }
 
-// Occupancy wraps the corresponding Objective-C method.
+// Occupancy returns the occupancy.
 func (moscoce *MTROccupancySensingClusterOccupancyChangedEvent) Occupancy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moscoce), objc.RegisterName("occupancy"))
 	return obj.Wrap(_r)

@@ -365,19 +365,19 @@ func (bc *BrowserCell) Set() {
 	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("set"))
 }
 
-// IsLeaf wraps the corresponding Objective-C method.
+// IsLeaf reports whether the object is leaf.
 func (bc *BrowserCell) IsLeaf() bool {
 	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLeaf"))
 	return _r
 }
 
-// IsLoaded wraps the corresponding Objective-C method.
+// IsLoaded reports whether the object is loaded.
 func (bc *BrowserCell) IsLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isLoaded"))
 	return _r
 }
 
-// AlternateImage wraps the corresponding Objective-C method.
+// AlternateImage returns the alternate image.
 func (bc *BrowserCell) AlternateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)

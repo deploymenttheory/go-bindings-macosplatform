@@ -70,13 +70,13 @@ func NewMTRColorControlClusterStopMoveStepParams() *MTRColorControlClusterStopMo
 	return mTRColorControlClusterStopMoveStepParamsAdopt(_id)
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStopMoveStepParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccsmsp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStopMoveStepParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccsmsp
@@ -94,13 +94,13 @@ func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) WithServerSideProcessi
 	return mcccsmsp
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccsmsp *MTRColorControlClusterStopMoveStepParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsmsp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

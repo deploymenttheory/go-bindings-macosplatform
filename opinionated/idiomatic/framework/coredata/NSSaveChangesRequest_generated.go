@@ -60,25 +60,25 @@ func (scr *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvid
 	return scr
 }
 
-// InsertedObjects wraps the corresponding Objective-C method.
+// InsertedObjects returns the inserted objects.
 func (scr *SaveChangesRequest) InsertedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("insertedObjects"))
 	return obj.Wrap(_r)
 }
 
-// UpdatedObjects wraps the corresponding Objective-C method.
+// UpdatedObjects returns the updated objects.
 func (scr *SaveChangesRequest) UpdatedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("updatedObjects"))
 	return obj.Wrap(_r)
 }
 
-// DeletedObjects wraps the corresponding Objective-C method.
+// DeletedObjects returns the deleted objects.
 func (scr *SaveChangesRequest) DeletedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("deletedObjects"))
 	return obj.Wrap(_r)
 }
 
-// LockedObjects wraps the corresponding Objective-C method.
+// LockedObjects returns the locked objects.
 func (scr *SaveChangesRequest) LockedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("lockedObjects"))
 	return obj.Wrap(_r)

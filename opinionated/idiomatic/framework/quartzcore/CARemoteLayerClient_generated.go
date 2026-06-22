@@ -84,13 +84,13 @@ func (rlc *RemoteLayerClient) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("invalidate"))
 }
 
-// ClientID wraps the corresponding Objective-C method.
+// ClientID returns the client ID.
 func (rlc *RemoteLayerClient) ClientID() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(rlc), objc.RegisterName("clientId"))
 	return _r
 }
 
-// Layer wraps the corresponding Objective-C method.
+// Layer returns the layer.
 func (rlc *RemoteLayerClient) Layer() *Layer {
 	_r := objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("layer"))
 	return LayerFromID(_r)

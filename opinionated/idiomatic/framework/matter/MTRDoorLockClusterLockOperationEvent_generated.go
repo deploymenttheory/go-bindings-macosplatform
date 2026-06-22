@@ -70,67 +70,67 @@ func NewMTRDoorLockClusterLockOperationEvent() *MTRDoorLockClusterLockOperationE
 	return mTRDoorLockClusterLockOperationEventAdopt(_id)
 }
 
-// WithLockOperationType sets the property and returns the receiver so calls can be chained.
+// WithLockOperationType sets the lock operation type.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) WithLockOperationType(lockOperationType obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("setLockOperationType:"), objref.IDOf(lockOperationType))
 	return mdlcloe
 }
 
-// WithOperationSource sets the property and returns the receiver so calls can be chained.
+// WithOperationSource sets the operation source.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) WithOperationSource(operationSource obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("setOperationSource:"), objref.IDOf(operationSource))
 	return mdlcloe
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcloe
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) WithFabricIndex(fabricIndex obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mdlcloe
 }
 
-// WithSourceNode sets the property and returns the receiver so calls can be chained.
+// WithSourceNode sets the source node.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) WithSourceNode(sourceNode obj.Object) *MTRDoorLockClusterLockOperationEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("setSourceNode:"), objref.IDOf(sourceNode))
 	return mdlcloe
 }
 
-// LockOperationType wraps the corresponding Objective-C method.
+// LockOperationType returns the lock operation type.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) LockOperationType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("lockOperationType"))
 	return obj.Wrap(_r)
 }
 
-// OperationSource wraps the corresponding Objective-C method.
+// OperationSource returns the operation source.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) OperationSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("operationSource"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// SourceNode wraps the corresponding Objective-C method.
+// SourceNode returns the source node.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) SourceNode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("sourceNode"))
 	return obj.Wrap(_r)
 }
 
-// Credentials wraps the corresponding Objective-C method.
+// Credentials returns the credentials.
 func (mdlcloe *MTRDoorLockClusterLockOperationEvent) Credentials() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcloe), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)

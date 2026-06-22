@@ -51,13 +51,13 @@ func NewChangeHistoryAddContactEvent() *ChangeHistoryAddContactEvent {
 	return changeHistoryAddContactEventAdopt(_id)
 }
 
-// Contact wraps the corresponding Objective-C method.
+// Contact returns the contact.
 func (chace *ChangeHistoryAddContactEvent) Contact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(chace), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
 
-// ContainerIdentifier wraps the corresponding Objective-C method.
+// ContainerIdentifier returns the container identifier.
 func (chace *ChangeHistoryAddContactEvent) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(chace), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {

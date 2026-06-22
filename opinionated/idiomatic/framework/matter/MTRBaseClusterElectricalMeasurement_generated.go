@@ -61,7 +61,7 @@ func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointQueue(device *MTRBa
 	return mTRBaseClusterElectricalMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasurementTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementTypeWithCompletion reads attribute measurement type with completion.
 //
 // ReadAttributeMeasurementTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementT
 	}
 }
 
-// ReadAttributeDcVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageWithCompletion reads attribute dc voltage with completion.
 //
 // ReadAttributeDcVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWit
 	}
 }
 
-// ReadAttributeDcVoltageMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMinWithCompletion reads attribute dc voltage min with completion.
 //
 // ReadAttributeDcVoltageMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMin
 	}
 }
 
-// ReadAttributeDcVoltageMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMaxWithCompletion reads attribute dc voltage max with completion.
 //
 // ReadAttributeDcVoltageMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMax
 	}
 }
 
-// ReadAttributeDcCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentWithCompletion reads attribute dc current with completion.
 //
 // ReadAttributeDcCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWit
 	}
 }
 
-// ReadAttributeDcCurrentMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMinWithCompletion reads attribute dc current min with completion.
 //
 // ReadAttributeDcCurrentMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMin
 	}
 }
 
-// ReadAttributeDcCurrentMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMaxWithCompletion reads attribute dc current max with completion.
 //
 // ReadAttributeDcCurrentMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMax
 	}
 }
 
-// ReadAttributeDcPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerWithCompletion reads attribute dc power with completion.
 //
 // ReadAttributeDcPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithP
 	}
 }
 
-// ReadAttributeDcPowerMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMinWithCompletion reads attribute dc power min with completion.
 //
 // ReadAttributeDcPowerMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWi
 	}
 }
 
-// ReadAttributeDcPowerMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMaxWithCompletion reads attribute dc power max with completion.
 //
 // ReadAttributeDcPowerMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWi
 	}
 }
 
-// ReadAttributeDcVoltageMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMultiplierWithCompletion reads attribute dc voltage multiplier with completion.
 //
 // ReadAttributeDcVoltageMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMul
 	}
 }
 
-// ReadAttributeDcVoltageDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageDivisorWithCompletion reads attribute dc voltage divisor with completion.
 //
 // ReadAttributeDcVoltageDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDiv
 	}
 }
 
-// ReadAttributeDcCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMultiplierWithCompletion reads attribute dc current multiplier with completion.
 //
 // ReadAttributeDcCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMul
 	}
 }
 
-// ReadAttributeDcCurrentDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentDivisorWithCompletion reads attribute dc current divisor with completion.
 //
 // ReadAttributeDcCurrentDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDiv
 	}
 }
 
-// ReadAttributeDcPowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMultiplierWithCompletion reads attribute dc power multiplier with completion.
 //
 // ReadAttributeDcPowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMulti
 	}
 }
 
-// ReadAttributeDcPowerDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerDivisorWithCompletion reads attribute dc power divisor with completion.
 //
 // ReadAttributeDcPowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivis
 	}
 }
 
-// ReadAttributeAcFrequencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyWithCompletion reads attribute ac frequency with completion.
 //
 // ReadAttributeAcFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyW
 	}
 }
 
-// ReadAttributeAcFrequencyMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMinWithCompletion reads attribute ac frequency min with completion.
 //
 // ReadAttributeAcFrequencyMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeAcFrequencyMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMaxWithCompletion reads attribute ac frequency max with completion.
 //
 // ReadAttributeAcFrequencyMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeNeutralCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNeutralCurrentWithCompletion reads attribute neutral current with completion.
 //
 // ReadAttributeNeutralCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurre
 	}
 }
 
-// ReadAttributeTotalActivePowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTotalActivePowerWithCompletion reads attribute total active power with completion.
 //
 // ReadAttributeTotalActivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActiveP
 	}
 }
 
-// ReadAttributeTotalReactivePowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTotalReactivePowerWithCompletion reads attribute total reactive power with completion.
 //
 // ReadAttributeTotalReactivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactiv
 	}
 }
 
-// ReadAttributeTotalApparentPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTotalApparentPowerWithCompletion reads attribute total apparent power with completion.
 //
 // ReadAttributeTotalApparentPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparen
 	}
 }
 
-// ReadAttributeMeasured1stHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured1stHarmonicCurrentWithCompletion reads attribute measured1st harmonic current with completion.
 //
 // ReadAttributeMeasured1stHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stH
 	}
 }
 
-// ReadAttributeMeasured3rdHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured3rdHarmonicCurrentWithCompletion reads attribute measured3rd harmonic current with completion.
 //
 // ReadAttributeMeasured3rdHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdH
 	}
 }
 
-// ReadAttributeMeasured5thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured5thHarmonicCurrentWithCompletion reads attribute measured5th harmonic current with completion.
 //
 // ReadAttributeMeasured5thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thH
 	}
 }
 
-// ReadAttributeMeasured7thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured7thHarmonicCurrentWithCompletion reads attribute measured7th harmonic current with completion.
 //
 // ReadAttributeMeasured7thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thH
 	}
 }
 
-// ReadAttributeMeasured9thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured9thHarmonicCurrentWithCompletion reads attribute measured9th harmonic current with completion.
 //
 // ReadAttributeMeasured9thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thH
 	}
 }
 
-// ReadAttributeMeasured11thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasured11thHarmonicCurrentWithCompletion reads attribute measured11th harmonic current with completion.
 //
 // ReadAttributeMeasured11thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11th
 	}
 }
 
-// ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion reads attribute measured phase1st harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion reads attribute measured phase3rd harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion reads attribute measured phase5th harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion reads attribute measured phase7th harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion reads attribute measured phase9th harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion reads attribute measured phase11th harmonic current with completion.
 //
 // ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeAcFrequencyMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMultiplierWithCompletion reads attribute ac frequency multiplier with completion.
 //
 // ReadAttributeAcFrequencyMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeAcFrequencyDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyDivisorWithCompletion reads attribute ac frequency divisor with completion.
 //
 // ReadAttributeAcFrequencyDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyD
 	}
 }
 
-// ReadAttributePowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerMultiplierWithCompletion reads attribute power multiplier with completion.
 //
 // ReadAttributePowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultipl
 	}
 }
 
-// ReadAttributePowerDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerDivisorWithCompletion reads attribute power divisor with completion.
 //
 // ReadAttributePowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisor
 	}
 }
 
-// ReadAttributeHarmonicCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHarmonicCurrentMultiplierWithCompletion reads attribute harmonic current multiplier with completion.
 //
 // ReadAttributeHarmonicCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurr
 	}
 }
 
-// ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion reads attribute phase harmonic current multiplier with completion.
 //
 // ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmoni
 	}
 }
 
-// ReadAttributeInstantaneousVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousVoltageWithCompletion reads attribute instantaneous voltage with completion.
 //
 // ReadAttributeInstantaneousVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousLineCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousLineCurrentWithCompletion reads attribute instantaneous line current with completion.
 //
 // ReadAttributeInstantaneousLineCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousActiveCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousActiveCurrentWithCompletion reads attribute instantaneous active current with completion.
 //
 // ReadAttributeInstantaneousActiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousReactiveCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousReactiveCurrentWithCompletion reads attribute instantaneous reactive current with completion.
 //
 // ReadAttributeInstantaneousReactiveCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousPowerWithCompletion reads attribute instantaneous power with completion.
 //
 // ReadAttributeInstantaneousPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeRmsVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageWithCompletion reads attribute rms voltage with completion.
 //
 // ReadAttributeRmsVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWi
 	}
 }
 
-// ReadAttributeRmsVoltageMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMinWithCompletion reads attribute rms voltage min with completion.
 //
 // ReadAttributeRmsVoltageMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMaxWithCompletion reads attribute rms voltage max with completion.
 //
 // ReadAttributeRmsVoltageMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentWithCompletion reads attribute rms current with completion.
 //
 // ReadAttributeRmsCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWi
 	}
 }
 
-// ReadAttributeRmsCurrentMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMinWithCompletion reads attribute rms current min with completion.
 //
 // ReadAttributeRmsCurrentMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMaxWithCompletion reads attribute rms current max with completion.
 //
 // ReadAttributeRmsCurrentMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerWithCompletion reads attribute active power with completion.
 //
 // ReadAttributeActivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerW
 	}
 }
 
-// ReadAttributeActivePowerMinWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMinWithCompletion reads attribute active power min with completion.
 //
 // ReadAttributeActivePowerMinWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMaxWithCompletion reads attribute active power max with completion.
 //
 // ReadAttributeActivePowerMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerWithCompletion reads attribute reactive power with completion.
 //
 // ReadAttributeReactivePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerWithCompletion reads attribute apparent power with completion.
 //
 // ReadAttributeApparentPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2911,7 +2911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorWithCompletion reads attribute power factor with completion.
 //
 // ReadAttributePowerFactorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorW
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion reads attribute average rms voltage measurement period with completion.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3011,7 +3011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounterWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounterWithCompletion reads attribute average rms under voltage counter with completion.
 //
 // ReadAttributeAverageRmsUnderVoltageCounterWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3061,7 +3061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion reads attribute rms extreme over voltage period with completion.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion reads attribute rms extreme under voltage period with completion.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3161,7 +3161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriodWithCompletion reads attribute rms voltage sag period with completion.
 //
 // ReadAttributeRmsVoltageSagPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriodWithCompletion reads attribute rms voltage swell period with completion.
 //
 // ReadAttributeRmsVoltageSwellPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3261,7 +3261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeAcVoltageMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageMultiplierWithCompletion reads attribute ac voltage multiplier with completion.
 //
 // ReadAttributeAcVoltageMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMul
 	}
 }
 
-// ReadAttributeAcVoltageDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageDivisorWithCompletion reads attribute ac voltage divisor with completion.
 //
 // ReadAttributeAcVoltageDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3361,7 +3361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDiv
 	}
 }
 
-// ReadAttributeAcCurrentMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentMultiplierWithCompletion reads attribute ac current multiplier with completion.
 //
 // ReadAttributeAcCurrentMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3411,7 +3411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMul
 	}
 }
 
-// ReadAttributeAcCurrentDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentDivisorWithCompletion reads attribute ac current divisor with completion.
 //
 // ReadAttributeAcCurrentDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3461,7 +3461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDiv
 	}
 }
 
-// ReadAttributeAcPowerMultiplierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcPowerMultiplierWithCompletion reads attribute ac power multiplier with completion.
 //
 // ReadAttributeAcPowerMultiplierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3511,7 +3511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMulti
 	}
 }
 
-// ReadAttributeAcPowerDivisorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcPowerDivisorWithCompletion reads attribute ac power divisor with completion.
 //
 // ReadAttributeAcPowerDivisorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3561,7 +3561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivis
 	}
 }
 
-// ReadAttributeOverloadAlarmsMaskWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOverloadAlarmsMaskWithCompletion reads attribute overload alarms mask with completion.
 //
 // ReadAttributeOverloadAlarmsMaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3611,7 +3611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlar
 	}
 }
 
-// ReadAttributeVoltageOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVoltageOverloadWithCompletion reads attribute voltage overload with completion.
 //
 // ReadAttributeVoltageOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3661,7 +3661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverl
 	}
 }
 
-// ReadAttributeCurrentOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentOverloadWithCompletion reads attribute current overload with completion.
 //
 // ReadAttributeCurrentOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3711,7 +3711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverl
 	}
 }
 
-// ReadAttributeAcOverloadAlarmsMaskWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcOverloadAlarmsMaskWithCompletion reads attribute ac overload alarms mask with completion.
 //
 // ReadAttributeAcOverloadAlarmsMaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3761,7 +3761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAl
 	}
 }
 
-// ReadAttributeAcVoltageOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageOverloadWithCompletion reads attribute ac voltage overload with completion.
 //
 // ReadAttributeAcVoltageOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3811,7 +3811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOve
 	}
 }
 
-// ReadAttributeAcCurrentOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentOverloadWithCompletion reads attribute ac current overload with completion.
 //
 // ReadAttributeAcCurrentOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3861,7 +3861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOve
 	}
 }
 
-// ReadAttributeAcActivePowerOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcActivePowerOverloadWithCompletion reads attribute ac active power overload with completion.
 //
 // ReadAttributeAcActivePowerOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3911,7 +3911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowe
 	}
 }
 
-// ReadAttributeAcReactivePowerOverloadWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcReactivePowerOverloadWithCompletion reads attribute ac reactive power overload with completion.
 //
 // ReadAttributeAcReactivePowerOverloadWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3961,7 +3961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltageWithCompletion reads attribute average rms over voltage with completion.
 //
 // ReadAttributeAverageRmsOverVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4011,7 +4011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageWithCompletion reads attribute average rms under voltage with completion.
 //
 // ReadAttributeAverageRmsUnderVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4061,7 +4061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltageWithCompletion reads attribute rms extreme over voltage with completion.
 //
 // ReadAttributeRmsExtremeOverVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4111,7 +4111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltageWithCompletion reads attribute rms extreme under voltage with completion.
 //
 // ReadAttributeRmsExtremeUnderVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4161,7 +4161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagWithCompletion reads attribute rms voltage sag with completion.
 //
 // ReadAttributeRmsVoltageSagWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4211,7 +4211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellWithCompletion reads attribute rms voltage swell with completion.
 //
 // ReadAttributeRmsVoltageSwellWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4261,7 +4261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeLineCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLineCurrentPhaseBWithCompletion reads attribute line current phase b with completion.
 //
 // ReadAttributeLineCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4311,7 +4311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 	}
 }
 
-// ReadAttributeActiveCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveCurrentPhaseBWithCompletion reads attribute active current phase b with completion.
 //
 // ReadAttributeActiveCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4361,7 +4361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 	}
 }
 
-// ReadAttributeReactiveCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReactiveCurrentPhaseBWithCompletion reads attribute reactive current phase b with completion.
 //
 // ReadAttributeReactiveCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4411,7 +4411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 	}
 }
 
-// ReadAttributeRmsVoltagePhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltagePhaseBWithCompletion reads attribute rms voltage phase b with completion.
 //
 // ReadAttributeRmsVoltagePhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4461,7 +4461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 	}
 }
 
-// ReadAttributeRmsVoltageMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMinPhaseBWithCompletion reads attribute rms voltage min phase b with completion.
 //
 // ReadAttributeRmsVoltageMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4511,7 +4511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMaxPhaseBWithCompletion reads attribute rms voltage max phase b with completion.
 //
 // ReadAttributeRmsVoltageMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4561,7 +4561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrentPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentPhaseBWithCompletion reads attribute rms current phase b with completion.
 //
 // ReadAttributeRmsCurrentPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4611,7 +4611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 	}
 }
 
-// ReadAttributeRmsCurrentMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMinPhaseBWithCompletion reads attribute rms current min phase b with completion.
 //
 // ReadAttributeRmsCurrentMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4661,7 +4661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMaxPhaseBWithCompletion reads attribute rms current max phase b with completion.
 //
 // ReadAttributeRmsCurrentMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4711,7 +4711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerPhaseBWithCompletion reads attribute active power phase b with completion.
 //
 // ReadAttributeActivePowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4761,7 +4761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 	}
 }
 
-// ReadAttributeActivePowerMinPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMinPhaseBWithCompletion reads attribute active power min phase b with completion.
 //
 // ReadAttributeActivePowerMinPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4811,7 +4811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMaxPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMaxPhaseBWithCompletion reads attribute active power max phase b with completion.
 //
 // ReadAttributeActivePowerMaxPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4861,7 +4861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerPhaseBWithCompletion reads attribute reactive power phase b with completion.
 //
 // ReadAttributeReactivePowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4911,7 +4911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPowerPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerPhaseBWithCompletion reads attribute apparent power phase b with completion.
 //
 // ReadAttributeApparentPowerPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4961,7 +4961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactorPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorPhaseBWithCompletion reads attribute power factor phase b with completion.
 //
 // ReadAttributePowerFactorPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5011,7 +5011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion reads attribute average rms voltage measurement period phase b with completion.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5061,7 +5061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion reads attribute average rms over voltage counter phase b with completion.
 //
 // ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5111,7 +5111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion reads attribute average rms under voltage counter phase b with completion.
 //
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5161,7 +5161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion reads attribute rms extreme over voltage period phase b with completion.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5211,7 +5211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion reads attribute rms extreme under voltage period phase b with completion.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5261,7 +5261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion reads attribute rms voltage sag period phase b with completion.
 //
 // ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5311,7 +5311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion reads attribute rms voltage swell period phase b with completion.
 //
 // ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5361,7 +5361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeLineCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLineCurrentPhaseCWithCompletion reads attribute line current phase c with completion.
 //
 // ReadAttributeLineCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5411,7 +5411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 	}
 }
 
-// ReadAttributeActiveCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveCurrentPhaseCWithCompletion reads attribute active current phase c with completion.
 //
 // ReadAttributeActiveCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5461,7 +5461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 	}
 }
 
-// ReadAttributeReactiveCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReactiveCurrentPhaseCWithCompletion reads attribute reactive current phase c with completion.
 //
 // ReadAttributeReactiveCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5511,7 +5511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 	}
 }
 
-// ReadAttributeRmsVoltagePhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltagePhaseCWithCompletion reads attribute rms voltage phase c with completion.
 //
 // ReadAttributeRmsVoltagePhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5561,7 +5561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 	}
 }
 
-// ReadAttributeRmsVoltageMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMinPhaseCWithCompletion reads attribute rms voltage min phase c with completion.
 //
 // ReadAttributeRmsVoltageMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5611,7 +5611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMaxPhaseCWithCompletion reads attribute rms voltage max phase c with completion.
 //
 // ReadAttributeRmsVoltageMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5661,7 +5661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrentPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentPhaseCWithCompletion reads attribute rms current phase c with completion.
 //
 // ReadAttributeRmsCurrentPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5711,7 +5711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 	}
 }
 
-// ReadAttributeRmsCurrentMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMinPhaseCWithCompletion reads attribute rms current min phase c with completion.
 //
 // ReadAttributeRmsCurrentMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5761,7 +5761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMaxPhaseCWithCompletion reads attribute rms current max phase c with completion.
 //
 // ReadAttributeRmsCurrentMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5811,7 +5811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerPhaseCWithCompletion reads attribute active power phase c with completion.
 //
 // ReadAttributeActivePowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5861,7 +5861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 	}
 }
 
-// ReadAttributeActivePowerMinPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMinPhaseCWithCompletion reads attribute active power min phase c with completion.
 //
 // ReadAttributeActivePowerMinPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5911,7 +5911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMaxPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMaxPhaseCWithCompletion reads attribute active power max phase c with completion.
 //
 // ReadAttributeActivePowerMaxPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -5961,7 +5961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerPhaseCWithCompletion reads attribute reactive power phase c with completion.
 //
 // ReadAttributeReactivePowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6011,7 +6011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPowerPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerPhaseCWithCompletion reads attribute apparent power phase c with completion.
 //
 // ReadAttributeApparentPowerPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6061,7 +6061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactorPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorPhaseCWithCompletion reads attribute power factor phase c with completion.
 //
 // ReadAttributePowerFactorPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6111,7 +6111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion reads attribute average rms voltage measurement period phase c with completion.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6161,7 +6161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion reads attribute average rms over voltage counter phase c with completion.
 //
 // ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6211,7 +6211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion reads attribute average rms under voltage counter phase c with completion.
 //
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6261,7 +6261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion reads attribute rms extreme over voltage period phase c with completion.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6311,7 +6311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion reads attribute rms extreme under voltage period phase c with completion.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6361,7 +6361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion reads attribute rms voltage sag period phase c with completion.
 //
 // ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6411,7 +6411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion reads attribute rms voltage swell period phase c with completion.
 //
 // ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6461,7 +6461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6511,7 +6511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCom
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6561,7 +6561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedComm
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6611,7 +6611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeLis
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6661,7 +6661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWi
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -6711,7 +6711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeClusterRevis
 	}
 }
 
-// ReadAttributeMeasurementType wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementType reads attribute measurement type.
 //
 // ReadAttributeMeasurementType blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasurementType(ctx context.Context) (result obj.Object, err error) {
@@ -6761,7 +6761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasurementT
 	}
 }
 
-// ReadAttributeDcVoltage wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltage reads attribute dc voltage.
 //
 // ReadAttributeDcVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -6811,7 +6811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageWit
 	}
 }
 
-// ReadAttributeDcVoltageMin wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMin reads attribute dc voltage min.
 //
 // ReadAttributeDcVoltageMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMin(ctx context.Context) (result obj.Object, err error) {
@@ -6861,7 +6861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMin
 	}
 }
 
-// ReadAttributeDcVoltageMax wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMax reads attribute dc voltage max.
 //
 // ReadAttributeDcVoltageMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMax(ctx context.Context) (result obj.Object, err error) {
@@ -6911,7 +6911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMax
 	}
 }
 
-// ReadAttributeDcCurrent wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrent reads attribute dc current.
 //
 // ReadAttributeDcCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -6961,7 +6961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentWit
 	}
 }
 
-// ReadAttributeDcCurrentMin wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMin reads attribute dc current min.
 //
 // ReadAttributeDcCurrentMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMin(ctx context.Context) (result obj.Object, err error) {
@@ -7011,7 +7011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMin
 	}
 }
 
-// ReadAttributeDcCurrentMax wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMax reads attribute dc current max.
 //
 // ReadAttributeDcCurrentMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMax(ctx context.Context) (result obj.Object, err error) {
@@ -7061,7 +7061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMax
 	}
 }
 
-// ReadAttributeDcPower wraps the corresponding Objective-C method.
+// ReadAttributeDcPower reads attribute dc power.
 //
 // ReadAttributeDcPower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPower(ctx context.Context) (result obj.Object, err error) {
@@ -7111,7 +7111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerWithM
 	}
 }
 
-// ReadAttributeDcPowerMin wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMin reads attribute dc power min.
 //
 // ReadAttributeDcPowerMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMin(ctx context.Context) (result obj.Object, err error) {
@@ -7161,7 +7161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMinWi
 	}
 }
 
-// ReadAttributeDcPowerMax wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMax reads attribute dc power max.
 //
 // ReadAttributeDcPowerMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMax(ctx context.Context) (result obj.Object, err error) {
@@ -7211,7 +7211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMaxWi
 	}
 }
 
-// ReadAttributeDcVoltageMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageMultiplier reads attribute dc voltage multiplier.
 //
 // ReadAttributeDcVoltageMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -7261,7 +7261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageMul
 	}
 }
 
-// ReadAttributeDcVoltageDivisor wraps the corresponding Objective-C method.
+// ReadAttributeDcVoltageDivisor reads attribute dc voltage divisor.
 //
 // ReadAttributeDcVoltageDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcVoltageDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -7311,7 +7311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcVoltageDiv
 	}
 }
 
-// ReadAttributeDcCurrentMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentMultiplier reads attribute dc current multiplier.
 //
 // ReadAttributeDcCurrentMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -7361,7 +7361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentMul
 	}
 }
 
-// ReadAttributeDcCurrentDivisor wraps the corresponding Objective-C method.
+// ReadAttributeDcCurrentDivisor reads attribute dc current divisor.
 //
 // ReadAttributeDcCurrentDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcCurrentDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -7411,7 +7411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcCurrentDiv
 	}
 }
 
-// ReadAttributeDcPowerMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerMultiplier reads attribute dc power multiplier.
 //
 // ReadAttributeDcPowerMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -7461,7 +7461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerMulti
 	}
 }
 
-// ReadAttributeDcPowerDivisor wraps the corresponding Objective-C method.
+// ReadAttributeDcPowerDivisor reads attribute dc power divisor.
 //
 // ReadAttributeDcPowerDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeDcPowerDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -7511,7 +7511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeDcPowerDivis
 	}
 }
 
-// ReadAttributeAcFrequency wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequency reads attribute ac frequency.
 //
 // ReadAttributeAcFrequency blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequency(ctx context.Context) (result obj.Object, err error) {
@@ -7561,7 +7561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyW
 	}
 }
 
-// ReadAttributeAcFrequencyMin wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMin reads attribute ac frequency min.
 //
 // ReadAttributeAcFrequencyMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMin(ctx context.Context) (result obj.Object, err error) {
@@ -7611,7 +7611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeAcFrequencyMax wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMax reads attribute ac frequency max.
 //
 // ReadAttributeAcFrequencyMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMax(ctx context.Context) (result obj.Object, err error) {
@@ -7661,7 +7661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeNeutralCurrent wraps the corresponding Objective-C method.
+// ReadAttributeNeutralCurrent reads attribute neutral current.
 //
 // ReadAttributeNeutralCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeNeutralCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -7711,7 +7711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeNeutralCurre
 	}
 }
 
-// ReadAttributeTotalActivePower wraps the corresponding Objective-C method.
+// ReadAttributeTotalActivePower reads attribute total active power.
 //
 // ReadAttributeTotalActivePower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalActivePower(ctx context.Context) (result obj.Object, err error) {
@@ -7761,7 +7761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalActiveP
 	}
 }
 
-// ReadAttributeTotalReactivePower wraps the corresponding Objective-C method.
+// ReadAttributeTotalReactivePower reads attribute total reactive power.
 //
 // ReadAttributeTotalReactivePower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalReactivePower(ctx context.Context) (result obj.Object, err error) {
@@ -7811,7 +7811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalReactiv
 	}
 }
 
-// ReadAttributeTotalApparentPower wraps the corresponding Objective-C method.
+// ReadAttributeTotalApparentPower reads attribute total apparent power.
 //
 // ReadAttributeTotalApparentPower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeTotalApparentPower(ctx context.Context) (result obj.Object, err error) {
@@ -7861,7 +7861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeTotalApparen
 	}
 }
 
-// ReadAttributeMeasured1stHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured1stHarmonicCurrent reads attribute measured1st harmonic current.
 //
 // ReadAttributeMeasured1stHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -7911,7 +7911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured1stH
 	}
 }
 
-// ReadAttributeMeasured3rdHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured3rdHarmonicCurrent reads attribute measured3rd harmonic current.
 //
 // ReadAttributeMeasured3rdHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -7961,7 +7961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured3rdH
 	}
 }
 
-// ReadAttributeMeasured5thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured5thHarmonicCurrent reads attribute measured5th harmonic current.
 //
 // ReadAttributeMeasured5thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8011,7 +8011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured5thH
 	}
 }
 
-// ReadAttributeMeasured7thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured7thHarmonicCurrent reads attribute measured7th harmonic current.
 //
 // ReadAttributeMeasured7thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8061,7 +8061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured7thH
 	}
 }
 
-// ReadAttributeMeasured9thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured9thHarmonicCurrent reads attribute measured9th harmonic current.
 //
 // ReadAttributeMeasured9thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8111,7 +8111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured9thH
 	}
 }
 
-// ReadAttributeMeasured11thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasured11thHarmonicCurrent reads attribute measured11th harmonic current.
 //
 // ReadAttributeMeasured11thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8161,7 +8161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasured11th
 	}
 }
 
-// ReadAttributeMeasuredPhase1stHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase1stHarmonicCurrent reads attribute measured phase1st harmonic current.
 //
 // ReadAttributeMeasuredPhase1stHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8211,7 +8211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase3rdHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase3rdHarmonicCurrent reads attribute measured phase3rd harmonic current.
 //
 // ReadAttributeMeasuredPhase3rdHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8261,7 +8261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase5thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase5thHarmonicCurrent reads attribute measured phase5th harmonic current.
 //
 // ReadAttributeMeasuredPhase5thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8311,7 +8311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase7thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase7thHarmonicCurrent reads attribute measured phase7th harmonic current.
 //
 // ReadAttributeMeasuredPhase7thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8361,7 +8361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase9thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase9thHarmonicCurrent reads attribute measured phase9th harmonic current.
 //
 // ReadAttributeMeasuredPhase9thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8411,7 +8411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeMeasuredPhase11thHarmonicCurrent wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredPhase11thHarmonicCurrent reads attribute measured phase11th harmonic current.
 //
 // ReadAttributeMeasuredPhase11thHarmonicCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8461,7 +8461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeMeasuredPhas
 	}
 }
 
-// ReadAttributeAcFrequencyMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyMultiplier reads attribute ac frequency multiplier.
 //
 // ReadAttributeAcFrequencyMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -8511,7 +8511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyM
 	}
 }
 
-// ReadAttributeAcFrequencyDivisor wraps the corresponding Objective-C method.
+// ReadAttributeAcFrequencyDivisor reads attribute ac frequency divisor.
 //
 // ReadAttributeAcFrequencyDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -8561,7 +8561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcFrequencyD
 	}
 }
 
-// ReadAttributePowerMultiplier wraps the corresponding Objective-C method.
+// ReadAttributePowerMultiplier reads attribute power multiplier.
 //
 // ReadAttributePowerMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -8611,7 +8611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerMultipl
 	}
 }
 
-// ReadAttributePowerDivisor wraps the corresponding Objective-C method.
+// ReadAttributePowerDivisor reads attribute power divisor.
 //
 // ReadAttributePowerDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -8661,7 +8661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerDivisor
 	}
 }
 
-// ReadAttributeHarmonicCurrentMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeHarmonicCurrentMultiplier reads attribute harmonic current multiplier.
 //
 // ReadAttributeHarmonicCurrentMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -8711,7 +8711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeHarmonicCurr
 	}
 }
 
-// ReadAttributePhaseHarmonicCurrentMultiplier wraps the corresponding Objective-C method.
+// ReadAttributePhaseHarmonicCurrentMultiplier reads attribute phase harmonic current multiplier.
 //
 // ReadAttributePhaseHarmonicCurrentMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -8761,7 +8761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePhaseHarmoni
 	}
 }
 
-// ReadAttributeInstantaneousVoltage wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousVoltage reads attribute instantaneous voltage.
 //
 // ReadAttributeInstantaneousVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -8811,7 +8811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousLineCurrent wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousLineCurrent reads attribute instantaneous line current.
 //
 // ReadAttributeInstantaneousLineCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8861,7 +8861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousActiveCurrent wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousActiveCurrent reads attribute instantaneous active current.
 //
 // ReadAttributeInstantaneousActiveCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8911,7 +8911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousReactiveCurrent wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousReactiveCurrent reads attribute instantaneous reactive current.
 //
 // ReadAttributeInstantaneousReactiveCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -8961,7 +8961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeInstantaneousPower wraps the corresponding Objective-C method.
+// ReadAttributeInstantaneousPower reads attribute instantaneous power.
 //
 // ReadAttributeInstantaneousPower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeInstantaneousPower(ctx context.Context) (result obj.Object, err error) {
@@ -9011,7 +9011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeInstantaneou
 	}
 }
 
-// ReadAttributeRmsVoltage wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltage reads attribute rms voltage.
 //
 // ReadAttributeRmsVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -9061,7 +9061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageWi
 	}
 }
 
-// ReadAttributeRmsVoltageMin wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMin reads attribute rms voltage min.
 //
 // ReadAttributeRmsVoltageMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMin(ctx context.Context) (result obj.Object, err error) {
@@ -9111,7 +9111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMax wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMax reads attribute rms voltage max.
 //
 // ReadAttributeRmsVoltageMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMax(ctx context.Context) (result obj.Object, err error) {
@@ -9161,7 +9161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrent wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrent reads attribute rms current.
 //
 // ReadAttributeRmsCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -9211,7 +9211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentWi
 	}
 }
 
-// ReadAttributeRmsCurrentMin wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMin reads attribute rms current min.
 //
 // ReadAttributeRmsCurrentMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMin(ctx context.Context) (result obj.Object, err error) {
@@ -9261,7 +9261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMax wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMax reads attribute rms current max.
 //
 // ReadAttributeRmsCurrentMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMax(ctx context.Context) (result obj.Object, err error) {
@@ -9311,7 +9311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePower wraps the corresponding Objective-C method.
+// ReadAttributeActivePower reads attribute active power.
 //
 // ReadAttributeActivePower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePower(ctx context.Context) (result obj.Object, err error) {
@@ -9361,7 +9361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerW
 	}
 }
 
-// ReadAttributeActivePowerMin wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMin reads attribute active power min.
 //
 // ReadAttributeActivePowerMin blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMin(ctx context.Context) (result obj.Object, err error) {
@@ -9411,7 +9411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMax wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMax reads attribute active power max.
 //
 // ReadAttributeActivePowerMax blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMax(ctx context.Context) (result obj.Object, err error) {
@@ -9461,7 +9461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePower wraps the corresponding Objective-C method.
+// ReadAttributeReactivePower reads attribute reactive power.
 //
 // ReadAttributeReactivePower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePower(ctx context.Context) (result obj.Object, err error) {
@@ -9511,7 +9511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPower wraps the corresponding Objective-C method.
+// ReadAttributeApparentPower reads attribute apparent power.
 //
 // ReadAttributeApparentPower blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPower(ctx context.Context) (result obj.Object, err error) {
@@ -9561,7 +9561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactor wraps the corresponding Objective-C method.
+// ReadAttributePowerFactor reads attribute power factor.
 //
 // ReadAttributePowerFactor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactor(ctx context.Context) (result obj.Object, err error) {
@@ -9611,7 +9611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorW
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriod wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriod reads attribute average rms voltage measurement period.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriod(ctx context.Context) (result obj.Object, err error) {
@@ -9661,7 +9661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounter wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounter reads attribute average rms under voltage counter.
 //
 // ReadAttributeAverageRmsUnderVoltageCounter blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounter(ctx context.Context) (result obj.Object, err error) {
@@ -9711,7 +9711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriod wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriod reads attribute rms extreme over voltage period.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriod blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriod(ctx context.Context) (result obj.Object, err error) {
@@ -9761,7 +9761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriod wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriod reads attribute rms extreme under voltage period.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriod blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriod(ctx context.Context) (result obj.Object, err error) {
@@ -9811,7 +9811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriod wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriod reads attribute rms voltage sag period.
 //
 // ReadAttributeRmsVoltageSagPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriod(ctx context.Context) (result obj.Object, err error) {
@@ -9861,7 +9861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriod wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriod reads attribute rms voltage swell period.
 //
 // ReadAttributeRmsVoltageSwellPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriod(ctx context.Context) (result obj.Object, err error) {
@@ -9911,7 +9911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeAcVoltageMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageMultiplier reads attribute ac voltage multiplier.
 //
 // ReadAttributeAcVoltageMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -9961,7 +9961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageMul
 	}
 }
 
-// ReadAttributeAcVoltageDivisor wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageDivisor reads attribute ac voltage divisor.
 //
 // ReadAttributeAcVoltageDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -10011,7 +10011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageDiv
 	}
 }
 
-// ReadAttributeAcCurrentMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentMultiplier reads attribute ac current multiplier.
 //
 // ReadAttributeAcCurrentMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -10061,7 +10061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentMul
 	}
 }
 
-// ReadAttributeAcCurrentDivisor wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentDivisor reads attribute ac current divisor.
 //
 // ReadAttributeAcCurrentDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -10111,7 +10111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentDiv
 	}
 }
 
-// ReadAttributeAcPowerMultiplier wraps the corresponding Objective-C method.
+// ReadAttributeAcPowerMultiplier reads attribute ac power multiplier.
 //
 // ReadAttributeAcPowerMultiplier blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerMultiplier(ctx context.Context) (result obj.Object, err error) {
@@ -10161,7 +10161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerMulti
 	}
 }
 
-// ReadAttributeAcPowerDivisor wraps the corresponding Objective-C method.
+// ReadAttributeAcPowerDivisor reads attribute ac power divisor.
 //
 // ReadAttributeAcPowerDivisor blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcPowerDivisor(ctx context.Context) (result obj.Object, err error) {
@@ -10211,7 +10211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcPowerDivis
 	}
 }
 
-// ReadAttributeOverloadAlarmsMask wraps the corresponding Objective-C method.
+// ReadAttributeOverloadAlarmsMask reads attribute overload alarms mask.
 //
 // ReadAttributeOverloadAlarmsMask blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMask(ctx context.Context) (result obj.Object, err error) {
@@ -10261,7 +10261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeOverloadAlar
 	}
 }
 
-// ReadAttributeVoltageOverload wraps the corresponding Objective-C method.
+// ReadAttributeVoltageOverload reads attribute voltage overload.
 //
 // ReadAttributeVoltageOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeVoltageOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10311,7 +10311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeVoltageOverl
 	}
 }
 
-// ReadAttributeCurrentOverload wraps the corresponding Objective-C method.
+// ReadAttributeCurrentOverload reads attribute current overload.
 //
 // ReadAttributeCurrentOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeCurrentOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10361,7 +10361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeCurrentOverl
 	}
 }
 
-// ReadAttributeAcOverloadAlarmsMask wraps the corresponding Objective-C method.
+// ReadAttributeAcOverloadAlarmsMask reads attribute ac overload alarms mask.
 //
 // ReadAttributeAcOverloadAlarmsMask blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMask(ctx context.Context) (result obj.Object, err error) {
@@ -10411,7 +10411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcOverloadAl
 	}
 }
 
-// ReadAttributeAcVoltageOverload wraps the corresponding Objective-C method.
+// ReadAttributeAcVoltageOverload reads attribute ac voltage overload.
 //
 // ReadAttributeAcVoltageOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcVoltageOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10461,7 +10461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcVoltageOve
 	}
 }
 
-// ReadAttributeAcCurrentOverload wraps the corresponding Objective-C method.
+// ReadAttributeAcCurrentOverload reads attribute ac current overload.
 //
 // ReadAttributeAcCurrentOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcCurrentOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10511,7 +10511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcCurrentOve
 	}
 }
 
-// ReadAttributeAcActivePowerOverload wraps the corresponding Objective-C method.
+// ReadAttributeAcActivePowerOverload reads attribute ac active power overload.
 //
 // ReadAttributeAcActivePowerOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcActivePowerOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10561,7 +10561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcActivePowe
 	}
 }
 
-// ReadAttributeAcReactivePowerOverload wraps the corresponding Objective-C method.
+// ReadAttributeAcReactivePowerOverload reads attribute ac reactive power overload.
 //
 // ReadAttributeAcReactivePowerOverload blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverload(ctx context.Context) (result obj.Object, err error) {
@@ -10611,7 +10611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcReactivePo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltage wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltage reads attribute average rms over voltage.
 //
 // ReadAttributeAverageRmsOverVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -10661,7 +10661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltage wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltage reads attribute average rms under voltage.
 //
 // ReadAttributeAverageRmsUnderVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -10711,7 +10711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltage wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltage reads attribute rms extreme over voltage.
 //
 // ReadAttributeRmsExtremeOverVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -10761,7 +10761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltage wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltage reads attribute rms extreme under voltage.
 //
 // ReadAttributeRmsExtremeUnderVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -10811,7 +10811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSag wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSag reads attribute rms voltage sag.
 //
 // ReadAttributeRmsVoltageSag blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSag(ctx context.Context) (result obj.Object, err error) {
@@ -10861,7 +10861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwell wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwell reads attribute rms voltage swell.
 //
 // ReadAttributeRmsVoltageSwell blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwell(ctx context.Context) (result obj.Object, err error) {
@@ -10911,7 +10911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeLineCurrentPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeLineCurrentPhaseB reads attribute line current phase b.
 //
 // ReadAttributeLineCurrentPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -10961,7 +10961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 	}
 }
 
-// ReadAttributeActiveCurrentPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeActiveCurrentPhaseB reads attribute active current phase b.
 //
 // ReadAttributeActiveCurrentPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11011,7 +11011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 	}
 }
 
-// ReadAttributeReactiveCurrentPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeReactiveCurrentPhaseB reads attribute reactive current phase b.
 //
 // ReadAttributeReactiveCurrentPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11061,7 +11061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 	}
 }
 
-// ReadAttributeRmsVoltagePhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltagePhaseB reads attribute rms voltage phase b.
 //
 // ReadAttributeRmsVoltagePhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11111,7 +11111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 	}
 }
 
-// ReadAttributeRmsVoltageMinPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMinPhaseB reads attribute rms voltage min phase b.
 //
 // ReadAttributeRmsVoltageMinPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11161,7 +11161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMaxPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMaxPhaseB reads attribute rms voltage max phase b.
 //
 // ReadAttributeRmsVoltageMaxPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11211,7 +11211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrentPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentPhaseB reads attribute rms current phase b.
 //
 // ReadAttributeRmsCurrentPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11261,7 +11261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 	}
 }
 
-// ReadAttributeRmsCurrentMinPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMinPhaseB reads attribute rms current min phase b.
 //
 // ReadAttributeRmsCurrentMinPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11311,7 +11311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMaxPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMaxPhaseB reads attribute rms current max phase b.
 //
 // ReadAttributeRmsCurrentMaxPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11361,7 +11361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePowerPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerPhaseB reads attribute active power phase b.
 //
 // ReadAttributeActivePowerPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11411,7 +11411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 	}
 }
 
-// ReadAttributeActivePowerMinPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMinPhaseB reads attribute active power min phase b.
 //
 // ReadAttributeActivePowerMinPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11461,7 +11461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMaxPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMaxPhaseB reads attribute active power max phase b.
 //
 // ReadAttributeActivePowerMaxPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11511,7 +11511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePowerPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerPhaseB reads attribute reactive power phase b.
 //
 // ReadAttributeReactivePowerPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11561,7 +11561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPowerPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerPhaseB reads attribute apparent power phase b.
 //
 // ReadAttributeApparentPowerPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11611,7 +11611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactorPhaseB wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorPhaseB reads attribute power factor phase b.
 //
 // ReadAttributePowerFactorPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11661,7 +11661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB reads attribute average rms voltage measurement period phase b.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11711,7 +11711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltageCounterPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltageCounterPhaseB reads attribute average rms over voltage counter phase b.
 //
 // ReadAttributeAverageRmsOverVoltageCounterPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11761,7 +11761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounterPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseB reads attribute average rms under voltage counter phase b.
 //
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11811,7 +11811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriodPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseB reads attribute rms extreme over voltage period phase b.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11861,7 +11861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB reads attribute rms extreme under voltage period phase b.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11911,7 +11911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriodPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriodPhaseB reads attribute rms voltage sag period phase b.
 //
 // ReadAttributeRmsVoltageSagPeriodPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -11961,7 +11961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriodPhaseB wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriodPhaseB reads attribute rms voltage swell period phase b.
 //
 // ReadAttributeRmsVoltageSwellPeriodPhaseB blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseB(ctx context.Context) (result obj.Object, err error) {
@@ -12011,7 +12011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeLineCurrentPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeLineCurrentPhaseC reads attribute line current phase c.
 //
 // ReadAttributeLineCurrentPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12061,7 +12061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeLineCurrentP
 	}
 }
 
-// ReadAttributeActiveCurrentPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeActiveCurrentPhaseC reads attribute active current phase c.
 //
 // ReadAttributeActiveCurrentPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12111,7 +12111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActiveCurren
 	}
 }
 
-// ReadAttributeReactiveCurrentPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeReactiveCurrentPhaseC reads attribute reactive current phase c.
 //
 // ReadAttributeReactiveCurrentPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12161,7 +12161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactiveCurr
 	}
 }
 
-// ReadAttributeRmsVoltagePhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltagePhaseC reads attribute rms voltage phase c.
 //
 // ReadAttributeRmsVoltagePhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12211,7 +12211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltagePh
 	}
 }
 
-// ReadAttributeRmsVoltageMinPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMinPhaseC reads attribute rms voltage min phase c.
 //
 // ReadAttributeRmsVoltageMinPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12261,7 +12261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMi
 	}
 }
 
-// ReadAttributeRmsVoltageMaxPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageMaxPhaseC reads attribute rms voltage max phase c.
 //
 // ReadAttributeRmsVoltageMaxPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12311,7 +12311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageMa
 	}
 }
 
-// ReadAttributeRmsCurrentPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentPhaseC reads attribute rms current phase c.
 //
 // ReadAttributeRmsCurrentPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12361,7 +12361,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentPh
 	}
 }
 
-// ReadAttributeRmsCurrentMinPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMinPhaseC reads attribute rms current min phase c.
 //
 // ReadAttributeRmsCurrentMinPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12411,7 +12411,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMi
 	}
 }
 
-// ReadAttributeRmsCurrentMaxPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsCurrentMaxPhaseC reads attribute rms current max phase c.
 //
 // ReadAttributeRmsCurrentMaxPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12461,7 +12461,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsCurrentMa
 	}
 }
 
-// ReadAttributeActivePowerPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerPhaseC reads attribute active power phase c.
 //
 // ReadAttributeActivePowerPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12511,7 +12511,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerP
 	}
 }
 
-// ReadAttributeActivePowerMinPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMinPhaseC reads attribute active power min phase c.
 //
 // ReadAttributeActivePowerMinPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12561,7 +12561,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeActivePowerMaxPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerMaxPhaseC reads attribute active power max phase c.
 //
 // ReadAttributeActivePowerMaxPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12611,7 +12611,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeActivePowerM
 	}
 }
 
-// ReadAttributeReactivePowerPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerPhaseC reads attribute reactive power phase c.
 //
 // ReadAttributeReactivePowerPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12661,7 +12661,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeReactivePowe
 	}
 }
 
-// ReadAttributeApparentPowerPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerPhaseC reads attribute apparent power phase c.
 //
 // ReadAttributeApparentPowerPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12711,7 +12711,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeApparentPowe
 	}
 }
 
-// ReadAttributePowerFactorPhaseC wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorPhaseC reads attribute power factor phase c.
 //
 // ReadAttributePowerFactorPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributePowerFactorPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12761,7 +12761,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributePowerFactorP
 	}
 }
 
-// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC reads attribute average rms voltage measurement period phase c.
 //
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12811,7 +12811,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsVo
 	}
 }
 
-// ReadAttributeAverageRmsOverVoltageCounterPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsOverVoltageCounterPhaseC reads attribute average rms over voltage counter phase c.
 //
 // ReadAttributeAverageRmsOverVoltageCounterPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12861,7 +12861,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsOv
 	}
 }
 
-// ReadAttributeAverageRmsUnderVoltageCounterPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeAverageRmsUnderVoltageCounterPhaseC reads attribute average rms under voltage counter phase c.
 //
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12911,7 +12911,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAverageRmsUn
 	}
 }
 
-// ReadAttributeRmsExtremeOverVoltagePeriodPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeOverVoltagePeriodPhaseC reads attribute rms extreme over voltage period phase c.
 //
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -12961,7 +12961,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeOv
 	}
 }
 
-// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC reads attribute rms extreme under voltage period phase c.
 //
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -13011,7 +13011,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsExtremeUn
 	}
 }
 
-// ReadAttributeRmsVoltageSagPeriodPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSagPeriodPhaseC reads attribute rms voltage sag period phase c.
 //
 // ReadAttributeRmsVoltageSagPeriodPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -13061,7 +13061,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSa
 	}
 }
 
-// ReadAttributeRmsVoltageSwellPeriodPhaseC wraps the corresponding Objective-C method.
+// ReadAttributeRmsVoltageSwellPeriodPhaseC reads attribute rms voltage swell period phase c.
 //
 // ReadAttributeRmsVoltageSwellPeriodPhaseC blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseC(ctx context.Context) (result obj.Object, err error) {
@@ -13111,7 +13111,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeRmsVoltageSw
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -13161,7 +13161,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeGeneratedCom
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -13211,7 +13211,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAcceptedComm
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -13261,7 +13261,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeAttributeLis
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -13311,7 +13311,7 @@ func (mbcem *MTRBaseClusterElectricalMeasurement) SubscribeAttributeFeatureMapWi
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcem *MTRBaseClusterElectricalMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

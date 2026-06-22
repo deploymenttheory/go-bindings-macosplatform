@@ -72,43 +72,43 @@ func NewBeacon() *Beacon {
 	return beaconAdopt(_id)
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (b *Beacon) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (b *Beacon) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// ProximityUUID wraps the corresponding Objective-C method.
+// ProximityUUID returns the proximity UUID.
 func (b *Beacon) ProximityUUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("proximityUUID"))
 	return obj.Wrap(_r)
 }
 
-// Major wraps the corresponding Objective-C method.
+// Major returns the major.
 func (b *Beacon) Major() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
-// Minor wraps the corresponding Objective-C method.
+// Minor returns the minor.
 func (b *Beacon) Minor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
 }
 
-// Proximity wraps the corresponding Objective-C method.
+// Proximity returns the proximity.
 func (b *Beacon) Proximity() Proximity {
 	_r := objc.Send[Proximity](objref.IDOf(b), objc.RegisterName("proximity"))
 	return _r
 }
 
-// Rssi wraps the corresponding Objective-C method.
+// Rssi returns the rssi.
 func (b *Beacon) Rssi() int {
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("rssi"))
 	return _r

@@ -78,13 +78,13 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestResponseParamsWithResponseValueEr
 	return mTRGeneralDiagnosticsClusterPayloadTestResponseParamsAdopt(_id), nil
 }
 
-// WithPayload sets the property and returns the receiver so calls can be chained.
+// WithPayload sets the payload.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) WithPayload(payload obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setPayload:"), objref.IDOf(payload))
 	return mgdcptrp
 }
 
-// Payload wraps the corresponding Objective-C method.
+// Payload returns the payload.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestResponseParams) Payload() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("payload"))
 	return obj.Wrap(_r)

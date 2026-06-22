@@ -51,7 +51,7 @@ func NewChangePlaybackPositionCommandEvent() *ChangePlaybackPositionCommandEvent
 	return changePlaybackPositionCommandEventAdopt(_id)
 }
 
-// PositionTime wraps the corresponding Objective-C method.
+// PositionTime returns the position time.
 func (cppce *ChangePlaybackPositionCommandEvent) PositionTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(cppce), objc.RegisterName("positionTime"))
 	return _r

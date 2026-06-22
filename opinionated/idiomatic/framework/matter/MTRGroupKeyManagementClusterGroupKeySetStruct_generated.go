@@ -70,97 +70,97 @@ func NewMTRGroupKeyManagementClusterGroupKeySetStruct() *MTRGroupKeyManagementCl
 	return mTRGroupKeyManagementClusterGroupKeySetStructAdopt(_id)
 }
 
-// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+// WithGroupKeySetID sets the group key set ID.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcgkss
 }
 
-// WithGroupKeySecurityPolicy sets the property and returns the receiver so calls can be chained.
+// WithGroupKeySecurityPolicy sets the group key security policy.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setGroupKeySecurityPolicy:"), objref.IDOf(groupKeySecurityPolicy))
 	return mgkmcgkss
 }
 
-// WithEpochKey0 sets the property and returns the receiver so calls can be chained.
+// WithEpochKey0 sets the epoch key0.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey0(epochKey0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey0:"), objref.IDOf(epochKey0))
 	return mgkmcgkss
 }
 
-// WithEpochStartTime0 sets the property and returns the receiver so calls can be chained.
+// WithEpochStartTime0 sets the epoch start time0.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime0(epochStartTime0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime0:"), objref.IDOf(epochStartTime0))
 	return mgkmcgkss
 }
 
-// WithEpochKey1 sets the property and returns the receiver so calls can be chained.
+// WithEpochKey1 sets the epoch key1.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey1(epochKey1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey1:"), objref.IDOf(epochKey1))
 	return mgkmcgkss
 }
 
-// WithEpochStartTime1 sets the property and returns the receiver so calls can be chained.
+// WithEpochStartTime1 sets the epoch start time1.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime1(epochStartTime1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime1:"), objref.IDOf(epochStartTime1))
 	return mgkmcgkss
 }
 
-// WithEpochKey2 sets the property and returns the receiver so calls can be chained.
+// WithEpochKey2 sets the epoch key2.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey2(epochKey2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey2:"), objref.IDOf(epochKey2))
 	return mgkmcgkss
 }
 
-// WithEpochStartTime2 sets the property and returns the receiver so calls can be chained.
+// WithEpochStartTime2 sets the epoch start time2.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime2(epochStartTime2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime2:"), objref.IDOf(epochStartTime2))
 	return mgkmcgkss
 }
 
-// GroupKeySetID wraps the corresponding Objective-C method.
+// GroupKeySetID returns the group key set ID.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("groupKeySetID"))
 	return obj.Wrap(_r)
 }
 
-// GroupKeySecurityPolicy wraps the corresponding Objective-C method.
+// GroupKeySecurityPolicy returns the group key security policy.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("groupKeySecurityPolicy"))
 	return obj.Wrap(_r)
 }
 
-// EpochKey0 wraps the corresponding Objective-C method.
+// EpochKey0 returns the epoch key0.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey0"))
 	return obj.Wrap(_r)
 }
 
-// EpochStartTime0 wraps the corresponding Objective-C method.
+// EpochStartTime0 returns the epoch start time0.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime0"))
 	return obj.Wrap(_r)
 }
 
-// EpochKey1 wraps the corresponding Objective-C method.
+// EpochKey1 returns the epoch key1.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey1"))
 	return obj.Wrap(_r)
 }
 
-// EpochStartTime1 wraps the corresponding Objective-C method.
+// EpochStartTime1 returns the epoch start time1.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime1"))
 	return obj.Wrap(_r)
 }
 
-// EpochKey2 wraps the corresponding Objective-C method.
+// EpochKey2 returns the epoch key2.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey2"))
 	return obj.Wrap(_r)
 }
 
-// EpochStartTime2 wraps the corresponding Objective-C method.
+// EpochStartTime2 returns the epoch start time2.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime2"))
 	return obj.Wrap(_r)

@@ -80,7 +80,7 @@ func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials 
 	return shapeAdopt(_id)
 }
 
-// Elements wraps the corresponding Objective-C method.
+// Elements returns the elements.
 //
 // Elements returns the collection as a Go slice.
 func (s *Shape) Elements() []*ShapeElement {

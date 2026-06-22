@@ -70,19 +70,19 @@ func NewMTREnergyEVSEModeClusterModeOptionStruct() *MTREnergyEVSEModeClusterMode
 	return mTREnergyEVSEModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) WithLabel(label string) *MTREnergyEVSEModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return meemcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTREnergyEVSEModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return meemcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

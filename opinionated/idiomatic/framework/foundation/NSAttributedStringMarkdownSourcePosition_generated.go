@@ -73,31 +73,31 @@ func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEnd
 	return attributedStringMarkdownSourcePositionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (asmsp *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition {
 	objc.Send[objc.ID](objref.IDOf(asmsp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return asmsp
 }
 
-// StartLine wraps the corresponding Objective-C method.
+// StartLine returns the start line.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartLine() int {
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startLine"))
 	return _r
 }
 
-// StartColumn wraps the corresponding Objective-C method.
+// StartColumn returns the start column.
 func (asmsp *AttributedStringMarkdownSourcePosition) StartColumn() int {
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startColumn"))
 	return _r
 }
 
-// EndLine wraps the corresponding Objective-C method.
+// EndLine returns the end line.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndLine() int {
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endLine"))
 	return _r
 }
 
-// EndColumn wraps the corresponding Objective-C method.
+// EndColumn returns the end column.
 func (asmsp *AttributedStringMarkdownSourcePosition) EndColumn() int {
 	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endColumn"))
 	return _r

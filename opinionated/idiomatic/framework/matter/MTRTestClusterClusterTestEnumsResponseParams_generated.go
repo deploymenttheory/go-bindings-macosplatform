@@ -50,13 +50,13 @@ func NewMTRTestClusterClusterTestEnumsResponseParams() *MTRTestClusterClusterTes
 	return mTRTestClusterClusterTestEnumsResponseParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtccterp *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtccterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtccterp
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mtccterp *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEnumsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtccterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mtccterp

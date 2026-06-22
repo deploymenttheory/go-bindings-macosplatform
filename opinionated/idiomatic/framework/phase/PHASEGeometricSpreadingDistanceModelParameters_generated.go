@@ -63,7 +63,7 @@ func (gsdmp *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fa
 	return gsdmp
 }
 
-// RolloffFactor wraps the corresponding Objective-C method.
+// RolloffFactor returns the rolloff factor.
 func (gsdmp *GeometricSpreadingDistanceModelParameters) RolloffFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(gsdmp), objc.RegisterName("rolloffFactor"))
 	return _r

@@ -105,7 +105,7 @@ func (cvl *CollectionViewLayout) RegisterNibForDecorationViewOfKind(nib *Nib, el
 	objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("registerNib:forDecorationViewOfKind:"), objref.IDOf(nib), objref.IDOf(elementKind))
 }
 
-// CollectionView wraps the corresponding Objective-C method.
+// CollectionView returns the collection view.
 func (cvl *CollectionViewLayout) CollectionView() *CollectionView {
 	_r := objc.Send[objc.ID](objref.IDOf(cvl), objc.RegisterName("collectionView"))
 	return CollectionViewFromID(_r)
@@ -188,7 +188,7 @@ func (cvl *CollectionViewLayout) TargetContentOffsetForProposedContentOffset(pro
 	return _r
 }
 
-// CollectionViewContentSize wraps the corresponding Objective-C method.
+// CollectionViewContentSize returns the collection view content size.
 func (cvl *CollectionViewLayout) CollectionViewContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvl), objc.RegisterName("collectionViewContentSize"))
 	return _r

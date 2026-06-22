@@ -104,19 +104,19 @@ func (pi *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
 	return pi
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (pi *PDFInfo) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// IsFileExtensionHidden wraps the corresponding Objective-C method.
+// IsFileExtensionHidden reports whether the object is file extension hidden.
 func (pi *PDFInfo) IsFileExtensionHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isFileExtensionHidden"))
 	return _r
 }
 
-// TagNames wraps the corresponding Objective-C method.
+// TagNames returns the tag names.
 //
 // TagNames returns the collection as a Go slice.
 func (pi *PDFInfo) TagNames() []string {
@@ -124,19 +124,19 @@ func (pi *PDFInfo) TagNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Orientation wraps the corresponding Objective-C method.
+// Orientation returns the orientation.
 func (pi *PDFInfo) Orientation() PaperOrientation {
 	_r := objc.Send[PaperOrientation](objref.IDOf(pi), objc.RegisterName("orientation"))
 	return _r
 }
 
-// PaperSize wraps the corresponding Objective-C method.
+// PaperSize returns the paper size.
 func (pi *PDFInfo) PaperSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("paperSize"))
 	return _r
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (pi *PDFInfo) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)

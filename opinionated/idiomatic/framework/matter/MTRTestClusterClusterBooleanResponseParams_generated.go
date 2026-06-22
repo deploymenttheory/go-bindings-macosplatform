@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterBooleanResponseParams() *MTRTestClusterClusterBoole
 	return mTRTestClusterClusterBooleanResponseParamsAdopt(_id)
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mtccbrp *MTRTestClusterClusterBooleanResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterBooleanResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtccbrp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mtccbrp

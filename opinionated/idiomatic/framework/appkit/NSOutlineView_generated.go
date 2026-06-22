@@ -391,38 +391,38 @@ func (ov *OutlineView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 	return ov
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (ov *OutlineView) WithCell(cell CellProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return ov
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (ov *OutlineView) WithSubviews(items ...ViewProvider) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setSubviews:"), _arr)
 	return ov
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (ov *OutlineView) WithHidden(hidden bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setHidden:"), hidden)
 	return ov
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (ov *OutlineView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return ov
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (ov *OutlineView) WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return ov
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (ov *OutlineView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return ov
@@ -434,19 +434,19 @@ func (ov *OutlineView) WithFrame(frame corefoundation.CGRect) *OutlineView {
 	return ov
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (ov *OutlineView) WithFrameRotation(frameRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return ov
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (ov *OutlineView) WithFrameCenterRotation(frameCenterRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return ov
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (ov *OutlineView) WithBoundsRotation(boundsRotation float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return ov
@@ -458,7 +458,7 @@ func (ov *OutlineView) WithBounds(bounds corefoundation.CGRect) *OutlineView {
 	return ov
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (ov *OutlineView) WithCanDrawConcurrently(canDrawConcurrently bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return ov
@@ -470,148 +470,148 @@ func (ov *OutlineView) WithNeedsDisplay(needsDisplay bool) *OutlineView {
 	return ov
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (ov *OutlineView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return ov
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (ov *OutlineView) WithWantsRestingTouches(wantsRestingTouches bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return ov
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (ov *OutlineView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return ov
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (ov *OutlineView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return ov
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (ov *OutlineView) WithWantsLayer(wantsLayer bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return ov
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (ov *OutlineView) WithLayer(layer obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return ov
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (ov *OutlineView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return ov
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (ov *OutlineView) WithNeedsLayout(needsLayout bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return ov
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (ov *OutlineView) WithAlphaValue(alphaValue float64) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return ov
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (ov *OutlineView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return ov
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (ov *OutlineView) WithBackgroundFilters(items ...obj.Object) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return ov
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (ov *OutlineView) WithCompositingFilter(compositingFilter obj.Object) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return ov
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (ov *OutlineView) WithContentFilters(items ...obj.Object) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setContentFilters:"), _arr)
 	return ov
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (ov *OutlineView) WithShadow(shadow *Shadow) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return ov
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (ov *OutlineView) WithClipsToBounds(clipsToBounds bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return ov
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (ov *OutlineView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return ov
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (ov *OutlineView) WithToolTip(toolTip string) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return ov
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (ov *OutlineView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return ov
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (ov *OutlineView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return ov
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (ov *OutlineView) WithNextKeyView(nextKeyView ViewProvider) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return ov
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (ov *OutlineView) WithFocusRingType(focusRingType FocusRingType) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return ov
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (ov *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return ov
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (ov *OutlineView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return ov
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (ov *OutlineView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return ov
@@ -623,49 +623,49 @@ func (ov *OutlineView) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 	return ov
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ov *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return ov
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (ov *OutlineView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return ov
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (ov *OutlineView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return ov
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (ov *OutlineView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return ov
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (ov *OutlineView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return ov
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (ov *OutlineView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return ov
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (ov *OutlineView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return ov
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (ov *OutlineView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OutlineView {
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return ov
@@ -817,13 +817,13 @@ func (ov *OutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, old
 	objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("moveItemAtIndex:inParent:toIndex:inParent:"), fromIndex, objref.IDOf(oldParent), toIndex, objref.IDOf(newParent))
 }
 
-// OutlineTableColumn wraps the corresponding Objective-C method.
+// OutlineTableColumn returns the outline table column.
 func (ov *OutlineView) OutlineTableColumn() *TableColumn {
 	_r := objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("outlineTableColumn"))
 	return TableColumnFromID(_r)
 }
 
-// IndentationPerLevel wraps the corresponding Objective-C method.
+// IndentationPerLevel returns the indentation per level.
 func (ov *OutlineView) IndentationPerLevel() float64 {
 	_r := objc.Send[float64](objref.IDOf(ov), objc.RegisterName("indentationPerLevel"))
 	return _r

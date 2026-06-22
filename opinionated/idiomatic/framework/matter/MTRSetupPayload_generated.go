@@ -94,31 +94,31 @@ func (msp *MTRSetupPayload) WithSubPayloads(items ...*MTRSetupPayload) *MTRSetup
 	return msp
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (msp *MTRSetupPayload) WithVendorID(vendorID obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return msp
 }
 
-// WithProductID sets the property and returns the receiver so calls can be chained.
+// WithProductID sets the product ID.
 func (msp *MTRSetupPayload) WithProductID(productID obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return msp
 }
 
-// WithCommissioningFlow sets the property and returns the receiver so calls can be chained.
+// WithCommissioningFlow sets the commissioning flow.
 func (msp *MTRSetupPayload) WithCommissioningFlow(commissioningFlow MTRCommissioningFlow) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setCommissioningFlow:"), commissioningFlow)
 	return msp
 }
 
-// WithDiscoveryCapabilities sets the property and returns the receiver so calls can be chained.
+// WithDiscoveryCapabilities sets the discovery capabilities.
 func (msp *MTRSetupPayload) WithDiscoveryCapabilities(discoveryCapabilities MTRDiscoveryCapabilities) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setDiscoveryCapabilities:"), discoveryCapabilities)
 	return msp
 }
 
-// WithDiscriminator sets the property and returns the receiver so calls can be chained.
+// WithDiscriminator sets the discriminator.
 func (msp *MTRSetupPayload) WithDiscriminator(discriminator obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return msp
@@ -130,7 +130,7 @@ func (msp *MTRSetupPayload) WithHasShortDiscriminator(hasShortDiscriminator bool
 	return msp
 }
 
-// WithSetupPasscode sets the property and returns the receiver so calls can be chained.
+// WithSetupPasscode sets the setup passcode.
 func (msp *MTRSetupPayload) WithSetupPasscode(setupPasscode obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setSetupPasscode:"), objref.IDOf(setupPasscode))
 	return msp
@@ -142,13 +142,13 @@ func (msp *MTRSetupPayload) WithSerialNumber(serialNumber string) *MTRSetupPaylo
 	return msp
 }
 
-// WithRendezvousInformation sets the property and returns the receiver so calls can be chained.
+// WithRendezvousInformation sets the rendezvous information.
 func (msp *MTRSetupPayload) WithRendezvousInformation(rendezvousInformation obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setRendezvousInformation:"), objref.IDOf(rendezvousInformation))
 	return msp
 }
 
-// WithSetUpPINCode sets the property and returns the receiver so calls can be chained.
+// WithSetUpPINCode sets the set up pin code.
 func (msp *MTRSetupPayload) WithSetUpPINCode(setUpPINCode obj.Object) *MTRSetupPayload {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setSetUpPINCode:"), objref.IDOf(setUpPINCode))
 	return msp
@@ -202,31 +202,31 @@ func (msp *MTRSetupPayload) SubPayloads() []*MTRSetupPayload {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRSetupPayload { return MTRSetupPayloadFromID(_id) })
 }
 
-// VendorID wraps the corresponding Objective-C method.
+// VendorID returns the vendor ID.
 func (msp *MTRSetupPayload) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// ProductID wraps the corresponding Objective-C method.
+// ProductID returns the product ID.
 func (msp *MTRSetupPayload) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// CommissioningFlow wraps the corresponding Objective-C method.
+// CommissioningFlow returns the commissioning flow.
 func (msp *MTRSetupPayload) CommissioningFlow() MTRCommissioningFlow {
 	_r := objc.Send[MTRCommissioningFlow](objref.IDOf(msp), objc.RegisterName("commissioningFlow"))
 	return _r
 }
 
-// DiscoveryCapabilities wraps the corresponding Objective-C method.
+// DiscoveryCapabilities returns the discovery capabilities.
 func (msp *MTRSetupPayload) DiscoveryCapabilities() MTRDiscoveryCapabilities {
 	_r := objc.Send[MTRDiscoveryCapabilities](objref.IDOf(msp), objc.RegisterName("discoveryCapabilities"))
 	return _r
 }
 
-// Discriminator wraps the corresponding Objective-C method.
+// Discriminator returns the discriminator.
 func (msp *MTRSetupPayload) Discriminator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
@@ -238,7 +238,7 @@ func (msp *MTRSetupPayload) HasShortDiscriminator() bool {
 	return _r
 }
 
-// SetupPasscode wraps the corresponding Objective-C method.
+// SetupPasscode returns the setup passcode.
 func (msp *MTRSetupPayload) SetupPasscode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setupPasscode"))
 	return obj.Wrap(_r)
@@ -274,7 +274,7 @@ func (msp *MTRSetupPayload) QrCodeString2() (result string, err error) {
 	return purego.GoString(_r), nil
 }
 
-// GetAllOptionalVendorData wraps the corresponding Objective-C method.
+// GetAllOptionalVendorData returns the get all optional vendor data.
 //
 // GetAllOptionalVendorData returns the collection as a Go slice.
 func (msp *MTRSetupPayload) GetAllOptionalVendorData() (result []*MTROptionalQRCodeInfo, err error) {
@@ -286,13 +286,13 @@ func (msp *MTRSetupPayload) GetAllOptionalVendorData() (result []*MTROptionalQRC
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTROptionalQRCodeInfo { return MTROptionalQRCodeInfoFromID(_id) }), nil
 }
 
-// RendezvousInformation wraps the corresponding Objective-C method.
+// RendezvousInformation returns the rendezvous information.
 func (msp *MTRSetupPayload) RendezvousInformation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("rendezvousInformation"))
 	return obj.Wrap(_r)
 }
 
-// SetUpPINCode wraps the corresponding Objective-C method.
+// SetUpPINCode returns the set up pin code.
 func (msp *MTRSetupPayload) SetUpPINCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setUpPINCode"))
 	return obj.Wrap(_r)

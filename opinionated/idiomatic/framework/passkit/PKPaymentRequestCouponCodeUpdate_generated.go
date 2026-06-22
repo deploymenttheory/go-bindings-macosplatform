@@ -101,7 +101,7 @@ func (prccu *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferred
 	return prccu
 }
 
-// Errors wraps the corresponding Objective-C method.
+// Errors returns the errors.
 func (prccu *PaymentRequestCouponCodeUpdate) Errors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

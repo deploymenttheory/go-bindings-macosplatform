@@ -334,19 +334,19 @@ func (ic *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
 	return ic
 }
 
-// ImageAlignment wraps the corresponding Objective-C method.
+// ImageAlignment returns the image alignment.
 func (ic *ImageCell) ImageAlignment() ImageAlignment {
 	_r := objc.Send[ImageAlignment](objref.IDOf(ic), objc.RegisterName("imageAlignment"))
 	return _r
 }
 
-// ImageScaling wraps the corresponding Objective-C method.
+// ImageScaling returns the image scaling.
 func (ic *ImageCell) ImageScaling() ImageScaling {
 	_r := objc.Send[ImageScaling](objref.IDOf(ic), objc.RegisterName("imageScaling"))
 	return _r
 }
 
-// ImageFrameStyle wraps the corresponding Objective-C method.
+// ImageFrameStyle returns the image frame style.
 func (ic *ImageCell) ImageFrameStyle() ImageFrameStyle {
 	_r := objc.Send[ImageFrameStyle](objref.IDOf(ic), objc.RegisterName("imageFrameStyle"))
 	return _r

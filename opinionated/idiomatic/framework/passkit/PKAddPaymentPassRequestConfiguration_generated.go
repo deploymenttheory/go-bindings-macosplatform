@@ -116,7 +116,7 @@ func (apprc *AddPaymentPassRequestConfiguration) WithPaymentNetwork(paymentNetwo
 	return apprc
 }
 
-// WithProductIdentifiers sets the property and returns the receiver so calls can be chained.
+// WithProductIdentifiers sets the product identifiers.
 func (apprc *AddPaymentPassRequestConfiguration) WithProductIdentifiers(productIdentifiers obj.Object) *AddPaymentPassRequestConfiguration {
 	objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("setProductIdentifiers:"), objref.IDOf(productIdentifiers))
 	return apprc
@@ -128,19 +128,19 @@ func (apprc *AddPaymentPassRequestConfiguration) WithRequiresFelicaSecureElement
 	return apprc
 }
 
-// EncryptionScheme wraps the corresponding Objective-C method.
+// EncryptionScheme returns the encryption scheme.
 func (apprc *AddPaymentPassRequestConfiguration) EncryptionScheme() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("encryptionScheme"))
 	return obj.Wrap(_r)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (apprc *AddPaymentPassRequestConfiguration) Style() AddPaymentPassStyle {
 	_r := objc.Send[AddPaymentPassStyle](objref.IDOf(apprc), objc.RegisterName("style"))
 	return _r
 }
 
-// CardholderName wraps the corresponding Objective-C method.
+// CardholderName returns the cardholder name.
 func (apprc *AddPaymentPassRequestConfiguration) CardholderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("cardholderName"))
 	if _r == 0 {
@@ -149,7 +149,7 @@ func (apprc *AddPaymentPassRequestConfiguration) CardholderName() string {
 	return purego.GoString(_r)
 }
 
-// PrimaryAccountSuffix wraps the corresponding Objective-C method.
+// PrimaryAccountSuffix returns the primary account suffix.
 func (apprc *AddPaymentPassRequestConfiguration) PrimaryAccountSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("primaryAccountSuffix"))
 	if _r == 0 {
@@ -158,7 +158,7 @@ func (apprc *AddPaymentPassRequestConfiguration) PrimaryAccountSuffix() string {
 	return purego.GoString(_r)
 }
 
-// CardDetails wraps the corresponding Objective-C method.
+// CardDetails returns the card details.
 //
 // CardDetails returns the collection as a Go slice.
 func (apprc *AddPaymentPassRequestConfiguration) CardDetails() []*LabeledValue {
@@ -166,7 +166,7 @@ func (apprc *AddPaymentPassRequestConfiguration) CardDetails() []*LabeledValue {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LabeledValue { return LabeledValueFromID(_id) })
 }
 
-// LocalizedDescription wraps the corresponding Objective-C method.
+// LocalizedDescription returns the localized description.
 func (apprc *AddPaymentPassRequestConfiguration) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -175,7 +175,7 @@ func (apprc *AddPaymentPassRequestConfiguration) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// PrimaryAccountIdentifier wraps the corresponding Objective-C method.
+// PrimaryAccountIdentifier returns the primary account identifier.
 func (apprc *AddPaymentPassRequestConfiguration) PrimaryAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("primaryAccountIdentifier"))
 	if _r == 0 {
@@ -184,13 +184,13 @@ func (apprc *AddPaymentPassRequestConfiguration) PrimaryAccountIdentifier() stri
 	return purego.GoString(_r)
 }
 
-// PaymentNetwork wraps the corresponding Objective-C method.
+// PaymentNetwork returns the payment network.
 func (apprc *AddPaymentPassRequestConfiguration) PaymentNetwork() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("paymentNetwork"))
 	return obj.Wrap(_r)
 }
 
-// ProductIdentifiers wraps the corresponding Objective-C method.
+// ProductIdentifiers returns the product identifiers.
 func (apprc *AddPaymentPassRequestConfiguration) ProductIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apprc), objc.RegisterName("productIdentifiers"))
 	return obj.Wrap(_r)

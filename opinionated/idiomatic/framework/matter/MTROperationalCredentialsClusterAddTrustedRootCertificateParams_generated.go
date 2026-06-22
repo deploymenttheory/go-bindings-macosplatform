@@ -70,7 +70,7 @@ func NewMTROperationalCredentialsClusterAddTrustedRootCertificateParams() *MTROp
 	return mTROperationalCredentialsClusterAddTrustedRootCertificateParamsAdopt(_id)
 }
 
-// WithRootCACertificate sets the property and returns the receiver so calls can be chained.
+// WithRootCACertificate sets the root ca certificate.
 func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCACertificate(rootCACertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
 	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setRootCACertificate:"), objref.IDOf(rootCACertificate))
 	return moccatrcp
@@ -88,13 +88,13 @@ func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
 	return moccatrcp
 }
 
-// WithRootCertificate sets the property and returns the receiver so calls can be chained.
+// WithRootCertificate sets the root certificate.
 func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
 	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 	return moccatrcp
 }
 
-// RootCACertificate wraps the corresponding Objective-C method.
+// RootCACertificate returns the root ca certificate.
 func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCACertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("rootCACertificate"))
 	return obj.Wrap(_r)
@@ -112,7 +112,7 @@ func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
 	return obj.Wrap(_r)
 }
 
-// RootCertificate wraps the corresponding Objective-C method.
+// RootCertificate returns the root certificate.
 func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)

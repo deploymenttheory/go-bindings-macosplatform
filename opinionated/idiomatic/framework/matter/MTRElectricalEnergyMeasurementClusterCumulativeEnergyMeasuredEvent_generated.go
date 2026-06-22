@@ -70,25 +70,25 @@ func NewMTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent() *MT
 	return mTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEventAdopt(_id)
 }
 
-// WithEnergyImported sets the property and returns the receiver so calls can be chained.
+// WithEnergyImported sets the energy imported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyImported(energyImported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
 	objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("setEnergyImported:"), objref.IDOf(energyImported))
 	return meemcceme
 }
 
-// WithEnergyExported sets the property and returns the receiver so calls can be chained.
+// WithEnergyExported sets the energy exported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) WithEnergyExported(energyExported *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent {
 	objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("setEnergyExported:"), objref.IDOf(energyExported))
 	return meemcceme
 }
 
-// EnergyImported wraps the corresponding Objective-C method.
+// EnergyImported returns the energy imported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("energyImported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)
 }
 
-// EnergyExported wraps the corresponding Objective-C method.
+// EnergyExported returns the energy exported.
 func (meemcceme *MTRElectricalEnergyMeasurementClusterCumulativeEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcceme), objc.RegisterName("energyExported"))
 	return MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructFromID(_r)

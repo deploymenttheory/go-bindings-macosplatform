@@ -13,13 +13,13 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// FilterIncludingAll wraps the corresponding Objective-C method.
+// FilterIncludingAll returns the filter including all.
 func FilterIncludingAll() *AddressFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterIncludingAll"))
 	return AddressFilterFromID(_r)
 }
 
-// FilterExcludingAll wraps the corresponding Objective-C method.
+// FilterExcludingAll returns the filter excluding all.
 func FilterExcludingAll() *AddressFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("filterExcludingAll"))
 	return AddressFilterFromID(_r)
@@ -84,13 +84,13 @@ func SheetPresentedFromViewController(viewController obj.Object) *MapItemDetailS
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// Callout wraps the corresponding Objective-C method.
+// Callout returns the callout.
 func Callout() *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("callout"))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
 
-// OpenInMaps wraps the corresponding Objective-C method.
+// OpenInMaps returns the open in maps.
 func OpenInMaps() *MapItemDetailSelectionAccessoryPresentationStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("openInMaps"))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
@@ -120,13 +120,13 @@ func PitchControlWithMapView(mapView *MapView) *PitchControl {
 	return PitchControlFromID(_r)
 }
 
-// FilterIncludingAllCategories wraps the corresponding Objective-C method.
+// FilterIncludingAllCategories returns the filter including all categories.
 func FilterIncludingAllCategories() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterIncludingAllCategories"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// FilterExcludingAllCategories wraps the corresponding Objective-C method.
+// FilterExcludingAllCategories returns the filter excluding all categories.
 func FilterExcludingAllCategories() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("filterExcludingAllCategories"))
 	return PointOfInterestFilterFromID(_r)

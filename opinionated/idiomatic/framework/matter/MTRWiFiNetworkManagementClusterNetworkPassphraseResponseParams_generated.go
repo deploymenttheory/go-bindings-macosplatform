@@ -78,13 +78,13 @@ func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithRespon
 	return mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(_id), nil
 }
 
-// WithPassphrase sets the property and returns the receiver so calls can be chained.
+// WithPassphrase sets the passphrase.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
 	return mwfnmcnprp
 }
 
-// Passphrase wraps the corresponding Objective-C method.
+// Passphrase returns the passphrase.
 func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("passphrase"))
 	return obj.Wrap(_r)

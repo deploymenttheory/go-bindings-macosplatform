@@ -73,19 +73,19 @@ func NewTimerWithFireDateIntervalRepeatsBlock(date *Date, interval float64, repe
 	return timerAdopt(_id)
 }
 
-// WithFireDate sets the property and returns the receiver so calls can be chained.
+// WithFireDate sets the fire date.
 func (t *Timer) WithFireDate(fireDate DateProvider) *Timer {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 	return t
 }
 
-// WithTolerance sets the property and returns the receiver so calls can be chained.
+// WithTolerance sets the tolerance.
 func (t *Timer) WithTolerance(tolerance float64) *Timer {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTolerance:"), tolerance)
 	return t
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (t *Timer) WithScriptingProperties(scriptingProperties obj.Object) *Timer {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return t
@@ -101,31 +101,31 @@ func (t *Timer) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("invalidate"))
 }
 
-// FireDate wraps the corresponding Objective-C method.
+// FireDate returns the fire date.
 func (t *Timer) FireDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fireDate"))
 	return DateFromID(_r)
 }
 
-// TimeInterval wraps the corresponding Objective-C method.
+// TimeInterval returns the time interval.
 func (t *Timer) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("timeInterval"))
 	return _r
 }
 
-// Tolerance wraps the corresponding Objective-C method.
+// Tolerance returns the tolerance.
 func (t *Timer) Tolerance() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("tolerance"))
 	return _r
 }
 
-// IsValid wraps the corresponding Objective-C method.
+// IsValid reports whether the object is valid.
 func (t *Timer) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isValid"))
 	return _r
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (t *Timer) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

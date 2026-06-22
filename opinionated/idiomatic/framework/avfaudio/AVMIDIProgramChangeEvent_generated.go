@@ -64,7 +64,7 @@ func (mpce *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeE
 	return mpce
 }
 
-// ProgramNumber wraps the corresponding Objective-C method.
+// ProgramNumber returns the program number.
 func (mpce *MIDIProgramChangeEvent) ProgramNumber() int {
 	_r := objc.Send[int](objref.IDOf(mpce), objc.RegisterName("programNumber"))
 	return _r

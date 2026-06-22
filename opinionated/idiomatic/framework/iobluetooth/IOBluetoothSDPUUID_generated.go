@@ -80,8 +80,8 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	return iOBluetoothSDPUUIDAdopt(_id)
 }
 
-// GetSDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
-func (ibs *IOBluetoothSDPUUID) GetSDPUUIDRef() obj.Object {
+// SDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
+func (ibs *IOBluetoothSDPUUID) SDPUUIDRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getSDPUUIDRef"))
 	return obj.Wrap(_r)
 }

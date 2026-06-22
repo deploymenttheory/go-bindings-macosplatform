@@ -80,7 +80,7 @@ func NewAffineTransformWithTransform(transform *AffineTransform) *AffineTransfor
 	return affineTransformAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (at *AffineTransform) WithScriptingProperties(scriptingProperties obj.Object) *AffineTransform {
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return at

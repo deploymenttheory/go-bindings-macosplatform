@@ -379,19 +379,19 @@ func (fc *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
 	return _r
 }
 
-// TitleWidth2 wraps the corresponding Objective-C method.
+// TitleWidth2 returns the title width2.
 func (fc *FormCell) TitleWidth2() float64 {
 	_r := objc.Send[float64](objref.IDOf(fc), objc.RegisterName("titleWidth"))
 	return _r
 }
 
-// TitleFont wraps the corresponding Objective-C method.
+// TitleFont returns the title font.
 func (fc *FormCell) TitleFont() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("titleFont"))
 	return FontFromID(_r)
 }
 
-// PlaceholderString wraps the corresponding Objective-C method.
+// PlaceholderString returns the placeholder string.
 func (fc *FormCell) PlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
@@ -400,31 +400,31 @@ func (fc *FormCell) PlaceholderString() string {
 	return purego.GoString(_r)
 }
 
-// PlaceholderAttributedString wraps the corresponding Objective-C method.
+// PlaceholderAttributedString returns the placeholder attributed string.
 func (fc *FormCell) PlaceholderAttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
 
-// TitleAlignment wraps the corresponding Objective-C method.
+// TitleAlignment returns the title alignment.
 func (fc *FormCell) TitleAlignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(fc), objc.RegisterName("titleAlignment"))
 	return _r
 }
 
-// TitleBaseWritingDirection wraps the corresponding Objective-C method.
+// TitleBaseWritingDirection returns the title base writing direction.
 func (fc *FormCell) TitleBaseWritingDirection() WritingDirection {
 	_r := objc.Send[WritingDirection](objref.IDOf(fc), objc.RegisterName("titleBaseWritingDirection"))
 	return _r
 }
 
-// PreferredTextFieldWidth wraps the corresponding Objective-C method.
+// PreferredTextFieldWidth returns the preferred text field width.
 func (fc *FormCell) PreferredTextFieldWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(fc), objc.RegisterName("preferredTextFieldWidth"))
 	return _r
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (fc *FormCell) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)

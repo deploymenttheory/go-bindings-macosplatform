@@ -72,7 +72,7 @@ func NewAssertionHandler() *AssertionHandler {
 	return assertionHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ah *AssertionHandler) WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler {
 	objc.Send[objc.ID](objref.IDOf(ah), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ah

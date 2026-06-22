@@ -72,7 +72,7 @@ func NewWKContentRuleList() *WKContentRuleList {
 	return wKContentRuleListAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (wcrl *WKContentRuleList) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wcrl), objc.RegisterName("identifier"))
 	if _r == 0 {

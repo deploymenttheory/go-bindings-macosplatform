@@ -72,13 +72,13 @@ func NewImageSize() *ImageSize {
 	return imageSizeAdopt(_id)
 }
 
-// PixelsWide wraps the corresponding Objective-C method.
+// PixelsWide returns the pixels wide.
 func (is *ImageSize) PixelsWide() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
-// PixelsHigh wraps the corresponding Objective-C method.
+// PixelsHigh returns the pixels high.
 func (is *ImageSize) PixelsHigh() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsHigh"))
 	return _r

@@ -78,32 +78,32 @@ func (sv *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitVie
 	return sv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (sv *SplitView) WithSubviews(items ...ViewProvider) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
 	return sv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (sv *SplitView) WithHidden(hidden bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
 	return sv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sv *SplitView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return sv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (sv *SplitView) WithAutoresizesSubviews(autoresizesSubviews bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return sv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (sv *SplitView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return sv
@@ -115,19 +115,19 @@ func (sv *SplitView) WithFrame(frame corefoundation.CGRect) *SplitView {
 	return sv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (sv *SplitView) WithFrameRotation(frameRotation float64) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return sv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (sv *SplitView) WithFrameCenterRotation(frameCenterRotation float64) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return sv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (sv *SplitView) WithBoundsRotation(boundsRotation float64) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return sv
@@ -139,7 +139,7 @@ func (sv *SplitView) WithBounds(bounds corefoundation.CGRect) *SplitView {
 	return sv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (sv *SplitView) WithCanDrawConcurrently(canDrawConcurrently bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return sv
@@ -151,148 +151,148 @@ func (sv *SplitView) WithNeedsDisplay(needsDisplay bool) *SplitView {
 	return sv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (sv *SplitView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return sv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (sv *SplitView) WithWantsRestingTouches(wantsRestingTouches bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return sv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sv *SplitView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return sv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (sv *SplitView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return sv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (sv *SplitView) WithWantsLayer(wantsLayer bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return sv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (sv *SplitView) WithLayer(layer obj.Object) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return sv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sv *SplitView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return sv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (sv *SplitView) WithNeedsLayout(needsLayout bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return sv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (sv *SplitView) WithAlphaValue(alphaValue float64) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return sv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sv *SplitView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return sv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (sv *SplitView) WithBackgroundFilters(items ...obj.Object) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return sv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (sv *SplitView) WithCompositingFilter(compositingFilter obj.Object) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (sv *SplitView) WithContentFilters(items ...obj.Object) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
 	return sv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (sv *SplitView) WithShadow(shadow *Shadow) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return sv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (sv *SplitView) WithClipsToBounds(clipsToBounds bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return sv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sv *SplitView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return sv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (sv *SplitView) WithToolTip(toolTip string) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return sv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sv *SplitView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return sv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (sv *SplitView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return sv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (sv *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return sv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (sv *SplitView) WithFocusRingType(focusRingType FocusRingType) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return sv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (sv *SplitView) WithGestureRecognizers(items ...GestureRecognizerProvider) *SplitView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return sv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (sv *SplitView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return sv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sv *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return sv
@@ -304,49 +304,49 @@ func (sv *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 	return sv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return sv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (sv *SplitView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return sv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sv *SplitView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return sv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sv *SplitView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return sv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sv *SplitView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return sv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sv *SplitView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return sv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sv *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return sv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (sv *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return sv
@@ -420,31 +420,31 @@ func (sv *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subvi
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHoldingPriority:forSubviewAtIndex:"), priority, subviewIndex)
 }
 
-// IsVertical wraps the corresponding Objective-C method.
+// IsVertical reports whether the object is vertical.
 func (sv *SplitView) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("isVertical"))
 	return _r
 }
 
-// DividerStyle wraps the corresponding Objective-C method.
+// DividerStyle returns the divider style.
 func (sv *SplitView) DividerStyle() SplitViewDividerStyle {
 	_r := objc.Send[SplitViewDividerStyle](objref.IDOf(sv), objc.RegisterName("dividerStyle"))
 	return _r
 }
 
-// AutosaveName wraps the corresponding Objective-C method.
+// AutosaveName returns the autosave name.
 func (sv *SplitView) AutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("autosaveName"))
 	return obj.Wrap(_r)
 }
 
-// DividerColor wraps the corresponding Objective-C method.
+// DividerColor returns the divider color.
 func (sv *SplitView) DividerColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("dividerColor"))
 	return ColorFromID(_r)
 }
 
-// DividerThickness wraps the corresponding Objective-C method.
+// DividerThickness returns the divider thickness.
 func (sv *SplitView) DividerThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(sv), objc.RegisterName("dividerThickness"))
 	return _r

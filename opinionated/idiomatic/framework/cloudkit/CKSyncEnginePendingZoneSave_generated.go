@@ -52,7 +52,7 @@ func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZo
 	return syncEnginePendingZoneSaveAdopt(_id)
 }
 
-// Zone wraps the corresponding Objective-C method.
+// Zone returns the zone.
 func (sepzs *SyncEnginePendingZoneSave) Zone() *RecordZone {
 	_r := objc.Send[objc.ID](objref.IDOf(sepzs), objc.RegisterName("zone"))
 	return RecordZoneFromID(_r)

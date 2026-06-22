@@ -87,7 +87,7 @@ func (fv *FileVersion) WithDiscardable(discardable bool) *FileVersion {
 	return fv
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fv *FileVersion) WithScriptingProperties(scriptingProperties obj.Object) *FileVersion {
 	objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fv
@@ -115,13 +115,13 @@ func (fv *FileVersion) RemoveAndReturnError() error {
 	return nil
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (fv *FileVersion) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (fv *FileVersion) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -130,7 +130,7 @@ func (fv *FileVersion) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedNameOfSavingComputer wraps the corresponding Objective-C method.
+// LocalizedNameOfSavingComputer returns the localized name of saving computer.
 func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
@@ -139,43 +139,43 @@ func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
 	return purego.GoString(_r)
 }
 
-// OriginatorNameComponents wraps the corresponding Objective-C method.
+// OriginatorNameComponents returns the originator name components.
 func (fv *FileVersion) OriginatorNameComponents() *PersonNameComponents {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("originatorNameComponents"))
 	return PersonNameComponentsFromID(_r)
 }
 
-// ModificationDate wraps the corresponding Objective-C method.
+// ModificationDate returns the modification date.
 func (fv *FileVersion) ModificationDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("modificationDate"))
 	return DateFromID(_r)
 }
 
-// IsConflict wraps the corresponding Objective-C method.
+// IsConflict reports whether the object is conflict.
 func (fv *FileVersion) IsConflict() bool {
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isConflict"))
 	return _r
 }
 
-// IsResolved wraps the corresponding Objective-C method.
+// IsResolved reports whether the object is resolved.
 func (fv *FileVersion) IsResolved() bool {
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isResolved"))
 	return _r
 }
 
-// IsDiscardable wraps the corresponding Objective-C method.
+// IsDiscardable reports whether the object is discardable.
 func (fv *FileVersion) IsDiscardable() bool {
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isDiscardable"))
 	return _r
 }
 
-// HasLocalContents wraps the corresponding Objective-C method.
+// HasLocalContents reports whether the object has local contents.
 func (fv *FileVersion) HasLocalContents() bool {
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasLocalContents"))
 	return _r
 }
 
-// HasThumbnail wraps the corresponding Objective-C method.
+// HasThumbnail reports whether the object has thumbnail.
 func (fv *FileVersion) HasThumbnail() bool {
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasThumbnail"))
 	return _r

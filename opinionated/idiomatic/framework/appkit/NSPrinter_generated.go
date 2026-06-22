@@ -79,7 +79,7 @@ func (p *Printer) PageSizeForPaper(paperName obj.Object) corefoundation.CGSize {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (p *Printer) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,19 +88,19 @@ func (p *Printer) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (p *Printer) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// LanguageLevel wraps the corresponding Objective-C method.
+// LanguageLevel returns the language level.
 func (p *Printer) LanguageLevel() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("languageLevel"))
 	return _r
 }
 
-// DeviceDescription wraps the corresponding Objective-C method.
+// DeviceDescription returns the device description.
 func (p *Printer) DeviceDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)

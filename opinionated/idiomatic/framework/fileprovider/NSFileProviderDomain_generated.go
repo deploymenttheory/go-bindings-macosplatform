@@ -173,7 +173,7 @@ func (fpd *FileProviderDomain) SupportsSyncingTrash() bool {
 	return _r
 }
 
-// VolumeUUID wraps the corresponding Objective-C method.
+// VolumeUUID returns the volume UUID.
 func (fpd *FileProviderDomain) VolumeUUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("volumeUUID"))
 	return obj.Wrap(_r)

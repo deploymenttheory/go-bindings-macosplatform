@@ -116,25 +116,25 @@ func (ptbi *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() 
 	return GestureRecognizerFromID(_r)
 }
 
-// PopoverTouchBar wraps the corresponding Objective-C method.
+// PopoverTouchBar returns the popover touch bar.
 func (ptbi *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("popoverTouchBar"))
 	return TouchBarFromID(_r)
 }
 
-// CollapsedRepresentation wraps the corresponding Objective-C method.
+// CollapsedRepresentation returns the collapsed representation.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentation() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentation"))
 	return ViewFromID(_r)
 }
 
-// CollapsedRepresentationImage wraps the corresponding Objective-C method.
+// CollapsedRepresentationImage returns the collapsed representation image.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationImage"))
 	return ImageFromID(_r)
 }
 
-// CollapsedRepresentationLabel wraps the corresponding Objective-C method.
+// CollapsedRepresentationLabel returns the collapsed representation label.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationLabel"))
 	if _r == 0 {
@@ -143,7 +143,7 @@ func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
 	return purego.GoString(_r)
 }
 
-// PressAndHoldTouchBar wraps the corresponding Objective-C method.
+// PressAndHoldTouchBar returns the press and hold touch bar.
 func (ptbi *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("pressAndHoldTouchBar"))
 	return TouchBarFromID(_r)

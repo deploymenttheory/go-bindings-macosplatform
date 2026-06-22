@@ -73,7 +73,7 @@ func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *Di
 	return distanceModelFadeOutParametersAdopt(_id)
 }
 
-// CullDistance wraps the corresponding Objective-C method.
+// CullDistance returns the cull distance.
 func (dmfop *DistanceModelFadeOutParameters) CullDistance() float64 {
 	_r := objc.Send[float64](objref.IDOf(dmfop), objc.RegisterName("cullDistance"))
 	return _r

@@ -80,7 +80,7 @@ func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunction
 	return mapTableAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mt *MapTable) WithScriptingProperties(scriptingProperties obj.Object) *MapTable {
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mt
@@ -125,19 +125,19 @@ func (mt *MapTable) DictionaryRepresentation() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// KeyPointerFunctions wraps the corresponding Objective-C method.
+// KeyPointerFunctions returns the key pointer functions.
 func (mt *MapTable) KeyPointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("keyPointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// ValuePointerFunctions wraps the corresponding Objective-C method.
+// ValuePointerFunctions returns the value pointer functions.
 func (mt *MapTable) ValuePointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("valuePointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (mt *MapTable) Count() int {
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("count"))
 	return _r

@@ -216,25 +216,25 @@ func (ml *MetalLayer) WithContentsFormat(contentsFormat obj.Object) *MetalLayer 
 	return ml
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (ml *MetalLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return ml
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (ml *MetalLayer) WithToneMapMode(toneMapMode obj.Object) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return ml
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (ml *MetalLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return ml
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (ml *MetalLayer) WithContentsHeadroom(contentsHeadroom float64) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return ml
@@ -300,13 +300,13 @@ func (ml *MetalLayer) WithCornerRadius(cornerRadius float64) *MetalLayer {
 	return ml
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (ml *MetalLayer) WithMaskedCorners(maskedCorners CornerMask) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return ml
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (ml *MetalLayer) WithCornerCurve(cornerCurve obj.Object) *MetalLayer {
 	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return ml
@@ -421,13 +421,13 @@ func (ml *MetalLayer) FramebufferOnly() bool {
 	return _r
 }
 
-// DrawableSize wraps the corresponding Objective-C method.
+// DrawableSize returns the drawable size.
 func (ml *MetalLayer) DrawableSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ml), objc.RegisterName("drawableSize"))
 	return _r
 }
 
-// MaximumDrawableCount wraps the corresponding Objective-C method.
+// MaximumDrawableCount returns the maximum drawable count.
 func (ml *MetalLayer) MaximumDrawableCount() int {
 	_r := objc.Send[int](objref.IDOf(ml), objc.RegisterName("maximumDrawableCount"))
 	return _r
@@ -439,13 +439,13 @@ func (ml *MetalLayer) PresentsWithTransaction() bool {
 	return _r
 }
 
-// Colorspace wraps the corresponding Objective-C method.
+// Colorspace returns the colorspace.
 func (ml *MetalLayer) Colorspace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)
 }
 
-// EDRMetadata wraps the corresponding Objective-C method.
+// EDRMetadata returns the edr metadata.
 func (ml *MetalLayer) EDRMetadata() *EDRMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("EDRMetadata"))
 	return EDRMetadataFromID(_r)
@@ -463,7 +463,7 @@ func (ml *MetalLayer) AllowsNextDrawableTimeout() bool {
 	return _r
 }
 
-// DeveloperHUDProperties wraps the corresponding Objective-C method.
+// DeveloperHUDProperties returns the developer hud properties.
 func (ml *MetalLayer) DeveloperHUDProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("developerHUDProperties"))
 	return obj.Wrap(_r)

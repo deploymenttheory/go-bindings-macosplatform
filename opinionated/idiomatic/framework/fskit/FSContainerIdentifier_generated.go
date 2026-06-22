@@ -64,7 +64,7 @@ func (ci *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIde
 	return ci
 }
 
-// VolumeIdentifier wraps the corresponding Objective-C method.
+// VolumeIdentifier returns the volume identifier.
 func (ci *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("volumeIdentifier"))
 	return VolumeIdentifierFromID(_r)

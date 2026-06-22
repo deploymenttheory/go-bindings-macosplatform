@@ -53,13 +53,13 @@ func NewImageLaplacianPyramidSubtract() *ImageLaplacianPyramidSubtract {
 	return imageLaplacianPyramidSubtractAdopt(_id)
 }
 
-// WithLaplacianBias sets the property and returns the receiver so calls can be chained.
+// WithLaplacianBias sets the laplacian bias.
 func (ilps *ImageLaplacianPyramidSubtract) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract {
 	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return ilps
 }
 
-// WithLaplacianScale sets the property and returns the receiver so calls can be chained.
+// WithLaplacianScale sets the laplacian scale.
 func (ilps *ImageLaplacianPyramidSubtract) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract {
 	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 	return ilps

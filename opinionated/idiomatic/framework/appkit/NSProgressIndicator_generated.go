@@ -120,32 +120,32 @@ func (pi *ProgressIndicator) WithControlTint(controlTint ControlTint) *ProgressI
 	return pi
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (pi *ProgressIndicator) WithSubviews(items ...ViewProvider) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSubviews:"), _arr)
 	return pi
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (pi *ProgressIndicator) WithHidden(hidden bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHidden:"), hidden)
 	return pi
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (pi *ProgressIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return pi
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (pi *ProgressIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return pi
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (pi *ProgressIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return pi
@@ -157,19 +157,19 @@ func (pi *ProgressIndicator) WithFrame(frame corefoundation.CGRect) *ProgressInd
 	return pi
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (pi *ProgressIndicator) WithFrameRotation(frameRotation float64) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return pi
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (pi *ProgressIndicator) WithFrameCenterRotation(frameCenterRotation float64) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return pi
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (pi *ProgressIndicator) WithBoundsRotation(boundsRotation float64) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return pi
@@ -181,7 +181,7 @@ func (pi *ProgressIndicator) WithBounds(bounds corefoundation.CGRect) *ProgressI
 	return pi
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (pi *ProgressIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return pi
@@ -193,148 +193,148 @@ func (pi *ProgressIndicator) WithNeedsDisplay(needsDisplay bool) *ProgressIndica
 	return pi
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (pi *ProgressIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return pi
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (pi *ProgressIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return pi
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (pi *ProgressIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return pi
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (pi *ProgressIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return pi
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (pi *ProgressIndicator) WithWantsLayer(wantsLayer bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return pi
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (pi *ProgressIndicator) WithLayer(layer obj.Object) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return pi
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (pi *ProgressIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return pi
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (pi *ProgressIndicator) WithNeedsLayout(needsLayout bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return pi
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (pi *ProgressIndicator) WithAlphaValue(alphaValue float64) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return pi
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (pi *ProgressIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return pi
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (pi *ProgressIndicator) WithBackgroundFilters(items ...obj.Object) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return pi
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (pi *ProgressIndicator) WithCompositingFilter(compositingFilter obj.Object) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return pi
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (pi *ProgressIndicator) WithContentFilters(items ...obj.Object) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setContentFilters:"), _arr)
 	return pi
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (pi *ProgressIndicator) WithShadow(shadow *Shadow) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return pi
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (pi *ProgressIndicator) WithClipsToBounds(clipsToBounds bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return pi
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (pi *ProgressIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return pi
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (pi *ProgressIndicator) WithToolTip(toolTip string) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return pi
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (pi *ProgressIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return pi
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (pi *ProgressIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return pi
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (pi *ProgressIndicator) WithNextKeyView(nextKeyView ViewProvider) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return pi
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (pi *ProgressIndicator) WithFocusRingType(focusRingType FocusRingType) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return pi
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (pi *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return pi
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (pi *ProgressIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return pi
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (pi *ProgressIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return pi
@@ -346,49 +346,49 @@ func (pi *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompact
 	return pi
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pi *ProgressIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return pi
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (pi *ProgressIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return pi
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (pi *ProgressIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return pi
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (pi *ProgressIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return pi
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (pi *ProgressIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return pi
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (pi *ProgressIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return pi
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (pi *ProgressIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return pi
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (pi *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ProgressIndicator {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return pi
@@ -438,37 +438,37 @@ func (pi *ProgressIndicator) SizeToFit() {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sizeToFit"))
 }
 
-// IsIndeterminate wraps the corresponding Objective-C method.
+// IsIndeterminate reports whether the object is indeterminate.
 func (pi *ProgressIndicator) IsIndeterminate() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isIndeterminate"))
 	return _r
 }
 
-// ControlSize wraps the corresponding Objective-C method.
+// ControlSize returns the control size.
 func (pi *ProgressIndicator) ControlSize() ControlSize {
 	_r := objc.Send[ControlSize](objref.IDOf(pi), objc.RegisterName("controlSize"))
 	return _r
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (pi *ProgressIndicator) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// MinValue wraps the corresponding Objective-C method.
+// MinValue returns the min value.
 func (pi *ProgressIndicator) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue wraps the corresponding Objective-C method.
+// MaxValue returns the max value.
 func (pi *ProgressIndicator) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// ObservedProgress wraps the corresponding Objective-C method.
+// ObservedProgress returns the observed progress.
 func (pi *ProgressIndicator) ObservedProgress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("observedProgress"))
 	return obj.Wrap(_r)
@@ -480,13 +480,13 @@ func (pi *ProgressIndicator) UsesThreadedAnimation() bool {
 	return _r
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (pi *ProgressIndicator) Style() ProgressIndicatorStyle {
 	_r := objc.Send[ProgressIndicatorStyle](objref.IDOf(pi), objc.RegisterName("style"))
 	return _r
 }
 
-// IsDisplayedWhenStopped wraps the corresponding Objective-C method.
+// IsDisplayedWhenStopped reports whether the object is displayed when stopped.
 func (pi *ProgressIndicator) IsDisplayedWhenStopped() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isDisplayedWhenStopped"))
 	return _r
@@ -508,13 +508,13 @@ func (pi *ProgressIndicator) Animate(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("animate:"), objref.IDOf(sender))
 }
 
-// IsBezeled wraps the corresponding Objective-C method.
+// IsBezeled reports whether the object is bezeled.
 func (pi *ProgressIndicator) IsBezeled() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isBezeled"))
 	return _r
 }
 
-// ControlTint wraps the corresponding Objective-C method.
+// ControlTint returns the control tint.
 func (pi *ProgressIndicator) ControlTint() ControlTint {
 	_r := objc.Send[ControlTint](objref.IDOf(pi), objc.RegisterName("controlTint"))
 	return _r

@@ -112,55 +112,55 @@ func (cl *CNNYOLOLoss) ScaleXY() float32 {
 	return _r
 }
 
-// ScaleWH wraps the corresponding Objective-C method.
+// ScaleWH returns the scale wh.
 func (cl *CNNYOLOLoss) ScaleWH() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleWH"))
 	return _r
 }
 
-// ScaleNoObject wraps the corresponding Objective-C method.
+// ScaleNoObject returns the scale no object.
 func (cl *CNNYOLOLoss) ScaleNoObject() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleNoObject"))
 	return _r
 }
 
-// ScaleObject wraps the corresponding Objective-C method.
+// ScaleObject returns the scale object.
 func (cl *CNNYOLOLoss) ScaleObject() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleObject"))
 	return _r
 }
 
-// ScaleClass wraps the corresponding Objective-C method.
+// ScaleClass returns the scale class.
 func (cl *CNNYOLOLoss) ScaleClass() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleClass"))
 	return _r
 }
 
-// MinIOUForObjectPresence wraps the corresponding Objective-C method.
+// MinIOUForObjectPresence returns the min iou for object presence.
 func (cl *CNNYOLOLoss) MinIOUForObjectPresence() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("minIOUForObjectPresence"))
 	return _r
 }
 
-// MaxIOUForObjectAbsence wraps the corresponding Objective-C method.
+// MaxIOUForObjectAbsence returns the max iou for object absence.
 func (cl *CNNYOLOLoss) MaxIOUForObjectAbsence() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("maxIOUForObjectAbsence"))
 	return _r
 }
 
-// ReductionType wraps the corresponding Objective-C method.
+// ReductionType returns the reduction type.
 func (cl *CNNYOLOLoss) ReductionType() CNNReductionType {
 	_r := objc.Send[CNNReductionType](objref.IDOf(cl), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// NumberOfAnchorBoxes wraps the corresponding Objective-C method.
+// NumberOfAnchorBoxes returns the number of anchor boxes.
 func (cl *CNNYOLOLoss) NumberOfAnchorBoxes() int {
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("numberOfAnchorBoxes"))
 	return _r
 }
 
-// AnchorBoxes wraps the corresponding Objective-C method.
+// AnchorBoxes returns the anchor boxes.
 func (cl *CNNYOLOLoss) AnchorBoxes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("anchorBoxes"))
 	return obj.Wrap(_r)

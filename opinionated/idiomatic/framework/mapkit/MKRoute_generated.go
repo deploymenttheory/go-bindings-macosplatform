@@ -72,7 +72,7 @@ func NewRoute() *Route {
 	return routeAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (r *Route) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (r *Route) Name() string {
 	return purego.GoString(_r)
 }
 
-// AdvisoryNotices wraps the corresponding Objective-C method.
+// AdvisoryNotices returns the advisory notices.
 //
 // AdvisoryNotices returns the collection as a Go slice.
 func (r *Route) AdvisoryNotices() []string {
@@ -89,25 +89,25 @@ func (r *Route) AdvisoryNotices() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ExpectedTravelTime wraps the corresponding Objective-C method.
+// ExpectedTravelTime returns the expected travel time.
 func (r *Route) ExpectedTravelTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
-// TransportType wraps the corresponding Objective-C method.
+// TransportType returns the transport type.
 func (r *Route) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(r), objc.RegisterName("transportType"))
 	return _r
 }
 
-// Polyline wraps the corresponding Objective-C method.
+// Polyline returns the polyline.
 func (r *Route) Polyline() *Polyline {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
-// Steps wraps the corresponding Objective-C method.
+// Steps returns the steps.
 //
 // Steps returns the collection as a Go slice.
 func (r *Route) Steps() []*RouteStep {
@@ -115,13 +115,13 @@ func (r *Route) Steps() []*RouteStep {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RouteStep { return RouteStepFromID(_id) })
 }
 
-// HasTolls wraps the corresponding Objective-C method.
+// HasTolls reports whether the object has tolls.
 func (r *Route) HasTolls() bool {
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasTolls"))
 	return _r
 }
 
-// HasHighways wraps the corresponding Objective-C method.
+// HasHighways reports whether the object has highways.
 func (r *Route) HasHighways() bool {
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasHighways"))
 	return _r

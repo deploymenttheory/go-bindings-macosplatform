@@ -58,7 +58,7 @@ func (aidm *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverE
 	return aidm
 }
 
-// Preview wraps the corresponding Objective-C method.
+// Preview returns the preview.
 func (aidm *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
 	_r := objc.Send[objc.ID](objref.IDOf(aidm), objc.RegisterName("preview"))
 	return AddPassMetadataPreviewFromID(_r)

@@ -45,13 +45,13 @@ func movieTrackAdopt(id objc.ID) *MovieTrack {
 	return x
 }
 
-// AlternateGroupID wraps the corresponding Objective-C method.
+// AlternateGroupID returns the alternate group ID.
 func (mt *MovieTrack) AlternateGroupID() int {
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("alternateGroupID"))
 	return _r
 }
 
-// MediaDataStorage wraps the corresponding Objective-C method.
+// MediaDataStorage returns the media data storage.
 func (mt *MovieTrack) MediaDataStorage() *MediaDataStorage {
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("mediaDataStorage"))
 	return MediaDataStorageFromID(_r)

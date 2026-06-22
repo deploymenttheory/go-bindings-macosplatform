@@ -311,13 +311,13 @@ func (cd *CaptureDevice) ActiveInputSource() *CaptureDeviceInputSource {
 	return CaptureDeviceInputSourceFromID(_r)
 }
 
-// Position wraps the corresponding Objective-C method.
+// Position returns the position.
 func (cd *CaptureDevice) Position() CaptureDevicePosition {
 	_r := objc.Send[CaptureDevicePosition](objref.IDOf(cd), objc.RegisterName("position"))
 	return _r
 }
 
-// DeviceType wraps the corresponding Objective-C method.
+// DeviceType returns the device type.
 func (cd *CaptureDevice) DeviceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("deviceType"))
 	return obj.Wrap(_r)
@@ -620,7 +620,7 @@ func (cd *CaptureDevice) TransportControlsSpeed() float32 {
 	return _r
 }
 
-// ActiveColorSpace wraps the corresponding Objective-C method.
+// ActiveColorSpace returns the active color space.
 func (cd *CaptureDevice) ActiveColorSpace() CaptureColorSpace {
 	_r := objc.Send[CaptureColorSpace](objref.IDOf(cd), objc.RegisterName("activeColorSpace"))
 	return _r
@@ -675,25 +675,25 @@ func (cd *CaptureDevice) IsBackgroundReplacementActive() bool {
 	return _r
 }
 
-// IsContinuityCamera wraps the corresponding Objective-C method.
+// IsContinuityCamera reports whether the object is continuity camera.
 func (cd *CaptureDevice) IsContinuityCamera() bool {
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isContinuityCamera"))
 	return _r
 }
 
-// CompanionDeskViewCamera wraps the corresponding Objective-C method.
+// CompanionDeskViewCamera returns the companion desk view camera.
 func (cd *CaptureDevice) CompanionDeskViewCamera() *CaptureDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("companionDeskViewCamera"))
 	return CaptureDeviceFromID(_r)
 }
 
-// SpatialCaptureDiscomfortReasons wraps the corresponding Objective-C method.
+// SpatialCaptureDiscomfortReasons returns the spatial capture discomfort reasons.
 func (cd *CaptureDevice) SpatialCaptureDiscomfortReasons() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("spatialCaptureDiscomfortReasons"))
 	return obj.Wrap(_r)
 }
 
-// CinematicVideoCaptureSceneMonitoringStatuses wraps the corresponding Objective-C method.
+// CinematicVideoCaptureSceneMonitoringStatuses returns the cinematic video capture scene monitoring statuses.
 func (cd *CaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cinematicVideoCaptureSceneMonitoringStatuses"))
 	return obj.Wrap(_r)
@@ -711,7 +711,7 @@ func (cd *CaptureDevice) DynamicDimensions() coremedia.CMVideoDimensions {
 	return _r
 }
 
-// SmartFramingMonitor wraps the corresponding Objective-C method.
+// SmartFramingMonitor returns the smart framing monitor.
 func (cd *CaptureDevice) SmartFramingMonitor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("smartFramingMonitor"))
 	return obj.Wrap(_r)

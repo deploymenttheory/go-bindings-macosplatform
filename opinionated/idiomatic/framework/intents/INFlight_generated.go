@@ -73,13 +73,13 @@ func NewFlightWithAirlineFlightNumberBoardingTimeFlightDurationDepartureAirportG
 	return flightAdopt(_id)
 }
 
-// Airline wraps the corresponding Objective-C method.
+// Airline returns the airline.
 func (f *Flight) Airline() *Airline {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("airline"))
 	return AirlineFromID(_r)
 }
 
-// FlightNumber wraps the corresponding Objective-C method.
+// FlightNumber returns the flight number.
 func (f *Flight) FlightNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("flightNumber"))
 	if _r == 0 {
@@ -88,25 +88,25 @@ func (f *Flight) FlightNumber() string {
 	return purego.GoString(_r)
 }
 
-// BoardingTime wraps the corresponding Objective-C method.
+// BoardingTime returns the boarding time.
 func (f *Flight) BoardingTime() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("boardingTime"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// FlightDuration wraps the corresponding Objective-C method.
+// FlightDuration returns the flight duration.
 func (f *Flight) FlightDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("flightDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureAirportGate wraps the corresponding Objective-C method.
+// DepartureAirportGate returns the departure airport gate.
 func (f *Flight) DepartureAirportGate() *AirportGate {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("departureAirportGate"))
 	return AirportGateFromID(_r)
 }
 
-// ArrivalAirportGate wraps the corresponding Objective-C method.
+// ArrivalAirportGate returns the arrival airport gate.
 func (f *Flight) ArrivalAirportGate() *AirportGate {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("arrivalAirportGate"))
 	return AirportGateFromID(_r)

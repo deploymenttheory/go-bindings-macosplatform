@@ -51,7 +51,7 @@ func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZo
 	return syncEngineWillFetchRecordZoneChangesEventAdopt(_id)
 }
 
-// ZoneID wraps the corresponding Objective-C method.
+// ZoneID returns the zone ID.
 func (sewfrzce *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
 	_r := objc.Send[objc.ID](objref.IDOf(sewfrzce), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)

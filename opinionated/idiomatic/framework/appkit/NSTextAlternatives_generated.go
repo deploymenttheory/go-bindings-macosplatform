@@ -78,7 +78,7 @@ func (ta *TextAlternatives) NoteSelectedAlternativeString(alternativeString stri
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("noteSelectedAlternativeString:"), purego.NSString(alternativeString))
 }
 
-// PrimaryString wraps the corresponding Objective-C method.
+// PrimaryString returns the primary string.
 func (ta *TextAlternatives) PrimaryString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("primaryString"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (ta *TextAlternatives) PrimaryString() string {
 	return purego.GoString(_r)
 }
 
-// AlternativeStrings wraps the corresponding Objective-C method.
+// AlternativeStrings returns the alternative strings.
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (ta *TextAlternatives) AlternativeStrings() []string {

@@ -49,115 +49,115 @@ func NewDOMHTMLTableCaptionElement() *DOMHTMLTableCaptionElement {
 	return dOMHTMLTableCaptionElementAdopt(_id)
 }
 
-// WithAlign sets the property and returns the receiver so calls can be chained.
+// WithAlign sets the align.
 func (dtce *DOMHTMLTableCaptionElement) WithAlign(align string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return dtce
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dtce *DOMHTMLTableCaptionElement) WithTitle(title string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dtce
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dtce *DOMHTMLTableCaptionElement) WithLang(lang string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dtce
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dtce *DOMHTMLTableCaptionElement) WithDir(dir string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dtce
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dtce *DOMHTMLTableCaptionElement) WithTabIndex(tabIndex int) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dtce
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dtce *DOMHTMLTableCaptionElement) WithAccessKey(accessKey string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dtce
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dtce *DOMHTMLTableCaptionElement) WithInnerText(innerText string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dtce
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dtce *DOMHTMLTableCaptionElement) WithOuterText(outerText string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dtce
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dtce *DOMHTMLTableCaptionElement) WithContentEditable(contentEditable string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dtce
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dtce *DOMHTMLTableCaptionElement) WithIDName(idName string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dtce
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dtce *DOMHTMLTableCaptionElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dtce
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dtce *DOMHTMLTableCaptionElement) WithScrollTop(scrollTop int) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dtce
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dtce *DOMHTMLTableCaptionElement) WithInnerHTML(innerHTML string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dtce
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dtce *DOMHTMLTableCaptionElement) WithOuterHTML(outerHTML string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dtce
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dtce *DOMHTMLTableCaptionElement) WithClassName(className string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dtce
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dtce *DOMHTMLTableCaptionElement) WithNodeValue(nodeValue string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dtce
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dtce *DOMHTMLTableCaptionElement) WithPrefix(prefix string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dtce
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dtce *DOMHTMLTableCaptionElement) WithTextContent(textContent string) *DOMHTMLTableCaptionElement {
 	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dtce
 }
 
-// Align wraps the corresponding Objective-C method.
+// Align returns the align.
 func (dtce *DOMHTMLTableCaptionElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("align"))
 	if _r == 0 {

@@ -54,7 +54,7 @@ func NewMTRBaseClusterBasicWithDeviceEndpointQueue(device *MTRBaseDevice, endpoi
 	return mTRBaseClusterBasicAdopt(_id)
 }
 
-// ReadAttributeDataModelRevision wraps the corresponding Objective-C method.
+// ReadAttributeDataModelRevision reads attribute data model revision.
 //
 // ReadAttributeDataModelRevision blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeDataModelRevision(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeDataModelRevisionWithMinInter
 	}
 }
 
-// ReadAttributeVendorName wraps the corresponding Objective-C method.
+// ReadAttributeVendorName reads attribute vendor name.
 //
 // ReadAttributeVendorName blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeVendorName(ctx context.Context) (result string, err error) {
@@ -154,7 +154,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeVendorNameWithMinIntervalMaxI
 	}
 }
 
-// ReadAttributeVendorID wraps the corresponding Objective-C method.
+// ReadAttributeVendorID reads attribute vendor ID.
 //
 // ReadAttributeVendorID blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeVendorID(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeVendorIDWithMinIntervalMaxInt
 	}
 }
 
-// ReadAttributeProductName wraps the corresponding Objective-C method.
+// ReadAttributeProductName reads attribute product name.
 //
 // ReadAttributeProductName blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeProductName(ctx context.Context) (result string, err error) {
@@ -254,7 +254,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeProductNameWithMinIntervalMax
 	}
 }
 
-// ReadAttributeProductID wraps the corresponding Objective-C method.
+// ReadAttributeProductID reads attribute product ID.
 //
 // ReadAttributeProductID blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeProductID(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeProductIDWithMinIntervalMaxIn
 	}
 }
 
-// ReadAttributeNodeLabel wraps the corresponding Objective-C method.
+// ReadAttributeNodeLabel reads attribute node label.
 //
 // ReadAttributeNodeLabel blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeNodeLabel(ctx context.Context) (result string, err error) {
@@ -354,7 +354,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeNodeLabelWithMinIntervalMaxIn
 	}
 }
 
-// ReadAttributeLocation wraps the corresponding Objective-C method.
+// ReadAttributeLocation reads attribute location.
 //
 // ReadAttributeLocation blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeLocation(ctx context.Context) (result string, err error) {
@@ -404,7 +404,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeLocationWithMinIntervalMaxInt
 	}
 }
 
-// ReadAttributeHardwareVersion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersion reads attribute hardware version.
 //
 // ReadAttributeHardwareVersion blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeHardwareVersion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeHardwareVersionWithMinInterva
 	}
 }
 
-// ReadAttributeHardwareVersionString wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionString reads attribute hardware version string.
 //
 // ReadAttributeHardwareVersionString blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeHardwareVersionString(ctx context.Context) (result string, err error) {
@@ -504,7 +504,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeHardwareVersionStringWithMinI
 	}
 }
 
-// ReadAttributeSoftwareVersion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersion reads attribute software version.
 //
 // ReadAttributeSoftwareVersion blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeSoftwareVersion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeSoftwareVersionWithMinInterva
 	}
 }
 
-// ReadAttributeSoftwareVersionString wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionString reads attribute software version string.
 //
 // ReadAttributeSoftwareVersionString blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeSoftwareVersionString(ctx context.Context) (result string, err error) {
@@ -604,7 +604,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeSoftwareVersionStringWithMinI
 	}
 }
 
-// ReadAttributeManufacturingDate wraps the corresponding Objective-C method.
+// ReadAttributeManufacturingDate reads attribute manufacturing date.
 //
 // ReadAttributeManufacturingDate blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeManufacturingDate(ctx context.Context) (result string, err error) {
@@ -654,7 +654,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeManufacturingDateWithMinInter
 	}
 }
 
-// ReadAttributePartNumber wraps the corresponding Objective-C method.
+// ReadAttributePartNumber reads attribute part number.
 //
 // ReadAttributePartNumber blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributePartNumber(ctx context.Context) (result string, err error) {
@@ -704,7 +704,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributePartNumberWithMinIntervalMaxI
 	}
 }
 
-// ReadAttributeProductURL wraps the corresponding Objective-C method.
+// ReadAttributeProductURL reads attribute product URL.
 //
 // ReadAttributeProductURL blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeProductURL(ctx context.Context) (result string, err error) {
@@ -754,7 +754,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeProductURLWithMinIntervalMaxI
 	}
 }
 
-// ReadAttributeProductLabel wraps the corresponding Objective-C method.
+// ReadAttributeProductLabel reads attribute product label.
 //
 // ReadAttributeProductLabel blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeProductLabel(ctx context.Context) (result string, err error) {
@@ -804,7 +804,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeProductLabelWithMinIntervalMa
 	}
 }
 
-// ReadAttributeSerialNumber wraps the corresponding Objective-C method.
+// ReadAttributeSerialNumber reads attribute serial number.
 //
 // ReadAttributeSerialNumber blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeSerialNumber(ctx context.Context) (result string, err error) {
@@ -854,7 +854,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeSerialNumberWithMinIntervalMa
 	}
 }
 
-// ReadAttributeLocalConfigDisabled wraps the corresponding Objective-C method.
+// ReadAttributeLocalConfigDisabled reads attribute local config disabled.
 //
 // ReadAttributeLocalConfigDisabled blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeLocalConfigDisabled(ctx context.Context) (result obj.Object, err error) {
@@ -904,7 +904,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeLocalConfigDisabledWithMinInt
 	}
 }
 
-// ReadAttributeReachable wraps the corresponding Objective-C method.
+// ReadAttributeReachable reads attribute reachable.
 //
 // ReadAttributeReachable blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeReachable(ctx context.Context) (result obj.Object, err error) {
@@ -954,7 +954,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeReachableWithMinIntervalMaxIn
 	}
 }
 
-// ReadAttributeUniqueID wraps the corresponding Objective-C method.
+// ReadAttributeUniqueID reads attribute unique ID.
 //
 // ReadAttributeUniqueID blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeUniqueID(ctx context.Context) (result string, err error) {
@@ -1004,7 +1004,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeUniqueIDWithMinIntervalMaxInt
 	}
 }
 
-// ReadAttributeCapabilityMinima wraps the corresponding Objective-C method.
+// ReadAttributeCapabilityMinima reads attribute capability minima.
 //
 // ReadAttributeCapabilityMinima blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeCapabilityMinima(ctx context.Context) (result *MTRBasicClusterCapabilityMinimaStruct, err error) {
@@ -1054,7 +1054,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeCapabilityMinimaWithMinInterv
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1104,7 +1104,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeGeneratedCommandListWithMinIn
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1154,7 +1154,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeAcceptedCommandListWithMinInt
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1204,7 +1204,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeAttributeListWithMinIntervalM
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1254,7 +1254,7 @@ func (mbcb *MTRBaseClusterBasic) SubscribeAttributeFeatureMapWithMinIntervalMaxI
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcb *MTRBaseClusterBasic) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

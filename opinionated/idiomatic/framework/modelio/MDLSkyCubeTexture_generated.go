@@ -64,7 +64,7 @@ func (sct *SkyCubeTexture) WithSunElevation(sunElevation float32) *SkyCubeTextur
 	return sct
 }
 
-// WithSunAzimuth sets the property and returns the receiver so calls can be chained.
+// WithSunAzimuth sets the sun azimuth.
 func (sct *SkyCubeTexture) WithSunAzimuth(sunAzimuth float32) *SkyCubeTexture {
 	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setSunAzimuth:"), sunAzimuth)
 	return sct
@@ -141,73 +141,73 @@ func (sct *SkyCubeTexture) UpdateTexture() {
 	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("updateTexture"))
 }
 
-// Turbidity wraps the corresponding Objective-C method.
+// Turbidity returns the turbidity.
 func (sct *SkyCubeTexture) Turbidity() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("turbidity"))
 	return _r
 }
 
-// SunElevation wraps the corresponding Objective-C method.
+// SunElevation returns the sun elevation.
 func (sct *SkyCubeTexture) SunElevation() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("sunElevation"))
 	return _r
 }
 
-// SunAzimuth wraps the corresponding Objective-C method.
+// SunAzimuth returns the sun azimuth.
 func (sct *SkyCubeTexture) SunAzimuth() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("sunAzimuth"))
 	return _r
 }
 
-// UpperAtmosphereScattering wraps the corresponding Objective-C method.
+// UpperAtmosphereScattering returns the upper atmosphere scattering.
 func (sct *SkyCubeTexture) UpperAtmosphereScattering() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("upperAtmosphereScattering"))
 	return _r
 }
 
-// GroundAlbedo wraps the corresponding Objective-C method.
+// GroundAlbedo returns the ground albedo.
 func (sct *SkyCubeTexture) GroundAlbedo() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("groundAlbedo"))
 	return _r
 }
 
-// HorizonElevation wraps the corresponding Objective-C method.
+// HorizonElevation returns the horizon elevation.
 func (sct *SkyCubeTexture) HorizonElevation() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("horizonElevation"))
 	return _r
 }
 
-// GroundColor wraps the corresponding Objective-C method.
+// GroundColor returns the ground color.
 func (sct *SkyCubeTexture) GroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("groundColor"))
 	return obj.Wrap(_r)
 }
 
-// Gamma wraps the corresponding Objective-C method.
+// Gamma returns the gamma.
 func (sct *SkyCubeTexture) Gamma() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("gamma"))
 	return _r
 }
 
-// Exposure wraps the corresponding Objective-C method.
+// Exposure returns the exposure.
 func (sct *SkyCubeTexture) Exposure() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("exposure"))
 	return _r
 }
 
-// Brightness wraps the corresponding Objective-C method.
+// Brightness returns the brightness.
 func (sct *SkyCubeTexture) Brightness() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("brightness"))
 	return _r
 }
 
-// Contrast wraps the corresponding Objective-C method.
+// Contrast returns the contrast.
 func (sct *SkyCubeTexture) Contrast() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("contrast"))
 	return _r
 }
 
-// Saturation wraps the corresponding Objective-C method.
+// Saturation returns the saturation.
 func (sct *SkyCubeTexture) Saturation() float32 {
 	_r := objc.Send[float32](objref.IDOf(sct), objc.RegisterName("saturation"))
 	return _r

@@ -72,19 +72,19 @@ func NewPhysicsShape() *PhysicsShape {
 	return physicsShapeAdopt(_id)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (ps *PhysicsShape) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// SourceObject wraps the corresponding Objective-C method.
+// SourceObject returns the source object.
 func (ps *PhysicsShape) SourceObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("sourceObject"))
 	return obj.Wrap(_r)
 }
 
-// Transforms wraps the corresponding Objective-C method.
+// Transforms returns the transforms.
 //
 // Transforms returns the collection as a Go slice.
 func (ps *PhysicsShape) Transforms() []obj.Object {

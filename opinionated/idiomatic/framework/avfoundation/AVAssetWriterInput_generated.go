@@ -258,7 +258,7 @@ func (awi *AssetWriterInput) Transform() corefoundation.CGAffineTransform {
 	return _r
 }
 
-// PreferredVolume wraps the corresponding Objective-C method.
+// PreferredVolume returns the preferred volume.
 func (awi *AssetWriterInput) PreferredVolume() float32 {
 	_r := objc.Send[float32](objref.IDOf(awi), objc.RegisterName("preferredVolume"))
 	return _r

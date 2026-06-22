@@ -71,13 +71,13 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLoca
 	return dOMKeyboardEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (dke *DOMKeyboardEvent) WithReturnValue(returnValue bool) *DOMKeyboardEvent {
 	objc.Send[objc.ID](objref.IDOf(dke), objc.RegisterName("setReturnValue:"), returnValue)
 	return dke
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (dke *DOMKeyboardEvent) WithCancelBubble(cancelBubble bool) *DOMKeyboardEvent {
 	objc.Send[objc.ID](objref.IDOf(dke), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return dke
@@ -89,7 +89,7 @@ func (dke *DOMKeyboardEvent) GetModifierState(keyIdentifierArg string) bool {
 	return _r
 }
 
-// KeyIdentifier wraps the corresponding Objective-C method.
+// KeyIdentifier returns the key identifier.
 func (dke *DOMKeyboardEvent) KeyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dke), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
@@ -98,13 +98,13 @@ func (dke *DOMKeyboardEvent) KeyIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (dke *DOMKeyboardEvent) Location() int {
 	_r := objc.Send[int](objref.IDOf(dke), objc.RegisterName("location"))
 	return _r
 }
 
-// KeyLocation wraps the corresponding Objective-C method.
+// KeyLocation returns the key location.
 func (dke *DOMKeyboardEvent) KeyLocation() int {
 	_r := objc.Send[int](objref.IDOf(dke), objc.RegisterName("keyLocation"))
 	return _r

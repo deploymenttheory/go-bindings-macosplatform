@@ -70,31 +70,31 @@ func NewMTRLevelControlClusterStepWithOnOffParams() *MTRLevelControlClusterStepW
 	return mTRLevelControlClusterStepWithOnOffParamsAdopt(_id)
 }
 
-// WithStepMode sets the property and returns the receiver so calls can be chained.
+// WithStepMode sets the step mode.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithStepMode(stepMode obj.Object) *MTRLevelControlClusterStepWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return mlccswoop
 }
 
-// WithStepSize sets the property and returns the receiver so calls can be chained.
+// WithStepSize sets the step size.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithStepSize(stepSize obj.Object) *MTRLevelControlClusterStepWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return mlccswoop
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithTransitionTime(transitionTime obj.Object) *MTRLevelControlClusterStepWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mlccswoop
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStepWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccswoop
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStepWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccswoop
@@ -112,31 +112,31 @@ func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) WithServerSideProces
 	return mlccswoop
 }
 
-// StepMode wraps the corresponding Objective-C method.
+// StepMode returns the step mode.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) StepMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("stepMode"))
 	return obj.Wrap(_r)
 }
 
-// StepSize wraps the corresponding Objective-C method.
+// StepSize returns the step size.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) StepSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("stepSize"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mlccswoop *MTRLevelControlClusterStepWithOnOffParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccswoop), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

@@ -73,13 +73,13 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationInputWithSupportReq
 	return authorizationPublicKeyCredentialLargeBlobRegistrationInputAdopt(_id)
 }
 
-// WithSupportRequirement sets the property and returns the receiver so calls can be chained.
+// WithSupportRequirement sets the support requirement.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) WithSupportRequirement(supportRequirement AuthorizationPublicKeyCredentialLargeBlobSupportRequirement) *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	objc.Send[objc.ID](objref.IDOf(apkclbri), objc.RegisterName("setSupportRequirement:"), supportRequirement)
 	return apkclbri
 }
 
-// SupportRequirement wraps the corresponding Objective-C method.
+// SupportRequirement returns the support requirement.
 func (apkclbri *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) SupportRequirement() AuthorizationPublicKeyCredentialLargeBlobSupportRequirement {
 	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobSupportRequirement](objref.IDOf(apkclbri), objc.RegisterName("supportRequirement"))
 	return _r

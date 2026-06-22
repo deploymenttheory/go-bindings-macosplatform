@@ -73,13 +73,13 @@ func NewMaterialPropertyNodeWithInputsOutputsEvaluationFunction(inputs []*Materi
 	return materialPropertyNodeAdopt(_id)
 }
 
-// WithEvaluationFunction sets the property and returns the receiver so calls can be chained.
+// WithEvaluationFunction sets the evaluation function.
 func (mpn *MaterialPropertyNode) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyNode {
 	objc.Send[objc.ID](objref.IDOf(mpn), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
 	return mpn
 }
 
-// Inputs wraps the corresponding Objective-C method.
+// Inputs returns the inputs.
 //
 // Inputs returns the collection as a Go slice.
 func (mpn *MaterialPropertyNode) Inputs() []*MaterialProperty {
@@ -87,7 +87,7 @@ func (mpn *MaterialPropertyNode) Inputs() []*MaterialProperty {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
 
-// Outputs wraps the corresponding Objective-C method.
+// Outputs returns the outputs.
 //
 // Outputs returns the collection as a Go slice.
 func (mpn *MaterialPropertyNode) Outputs() []*MaterialProperty {

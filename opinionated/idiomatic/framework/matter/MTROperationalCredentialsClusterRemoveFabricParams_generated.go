@@ -70,7 +70,7 @@ func NewMTROperationalCredentialsClusterRemoveFabricParams() *MTROperationalCred
 	return mTROperationalCredentialsClusterRemoveFabricParamsAdopt(_id)
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
 	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccrfp
@@ -88,7 +88,7 @@ func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSid
 	return moccrfp
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

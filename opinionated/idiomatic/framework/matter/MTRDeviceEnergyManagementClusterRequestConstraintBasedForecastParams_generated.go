@@ -70,7 +70,7 @@ func NewMTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams() *
 	return mTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsAdopt(_id)
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcrcbfp
@@ -88,7 +88,7 @@ func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecast
 	return mdemcrcbfp
 }
 
-// Constraints wraps the corresponding Objective-C method.
+// Constraints returns the constraints.
 func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Constraints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("constraints"))
 	return obj.Wrap(_r)
@@ -99,7 +99,7 @@ func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecast
 	objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcrcbfp *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcrcbfp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

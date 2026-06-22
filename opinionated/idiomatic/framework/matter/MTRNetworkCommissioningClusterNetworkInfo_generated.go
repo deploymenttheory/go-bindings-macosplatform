@@ -50,13 +50,13 @@ func NewMTRNetworkCommissioningClusterNetworkInfo() *MTRNetworkCommissioningClus
 	return mTRNetworkCommissioningClusterNetworkInfoAdopt(_id)
 }
 
-// WithNetworkID sets the property and returns the receiver so calls can be chained.
+// WithNetworkID sets the network ID.
 func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
 	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return mnccni
 }
 
-// WithConnected sets the property and returns the receiver so calls can be chained.
+// WithConnected sets the connected.
 func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
 	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 	return mnccni

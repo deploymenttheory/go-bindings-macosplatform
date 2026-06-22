@@ -70,37 +70,37 @@ func NewMTROperationalCredentialsClusterNOCStruct() *MTROperationalCredentialsCl
 	return mTROperationalCredentialsClusterNOCStructAdopt(_id)
 }
 
-// WithNoc sets the property and returns the receiver so calls can be chained.
+// WithNoc sets the noc.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct {
 	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setNoc:"), objref.IDOf(noc))
 	return moccns
 }
 
-// WithIcac sets the property and returns the receiver so calls can be chained.
+// WithIcac sets the icac.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct {
 	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setIcac:"), objref.IDOf(icac))
 	return moccns
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct {
 	objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccns
 }
 
-// Noc wraps the corresponding Objective-C method.
+// Noc returns the noc.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) Noc() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("noc"))
 	return obj.Wrap(_r)
 }
 
-// Icac wraps the corresponding Objective-C method.
+// Icac returns the icac.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) Icac() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("icac"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (moccns *MTROperationalCredentialsClusterNOCStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccns), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

@@ -74,25 +74,25 @@ func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, opt
 	return trackingAreaAdopt(_id)
 }
 
-// Rect wraps the corresponding Objective-C method.
+// Rect returns the rect.
 func (ta *TrackingArea) Rect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("rect"))
 	return _r
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (ta *TrackingArea) Options() TrackingAreaOptions {
 	_r := objc.Send[TrackingAreaOptions](objref.IDOf(ta), objc.RegisterName("options"))
 	return _r
 }
 
-// Owner wraps the corresponding Objective-C method.
+// Owner returns the owner.
 func (ta *TrackingArea) Owner() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (ta *TrackingArea) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

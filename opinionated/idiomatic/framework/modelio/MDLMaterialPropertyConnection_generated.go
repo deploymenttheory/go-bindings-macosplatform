@@ -71,13 +71,13 @@ func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, inpu
 	return materialPropertyConnectionAdopt(_id)
 }
 
-// Output wraps the corresponding Objective-C method.
+// Output returns the output.
 func (mpc *MaterialPropertyConnection) Output() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("output"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Input wraps the corresponding Objective-C method.
+// Input returns the input.
 func (mpc *MaterialPropertyConnection) Input() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("input"))
 	return MaterialPropertyFromID(_r)

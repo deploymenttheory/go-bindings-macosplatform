@@ -73,7 +73,7 @@ func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 	return oneTimeCodeCredentialAdopt(_id)
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (otcc *OneTimeCodeCredential) Code() string {
 	_r := objc.Send[objc.ID](objref.IDOf(otcc), objc.RegisterName("code"))
 	if _r == 0 {

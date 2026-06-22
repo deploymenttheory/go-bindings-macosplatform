@@ -51,49 +51,49 @@ func NewNNAdditionGradientNode() *NNAdditionGradientNode {
 	return nNAdditionGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nagn *NNAdditionGradientNode) WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nagn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nagn *NNAdditionGradientNode) WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nagn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nagn *NNAdditionGradientNode) WithBias(bias float32) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setBias:"), bias)
 	return nagn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nagn *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nagn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nagn *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nagn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nagn *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nagn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nagn *NNAdditionGradientNode) WithMinimumValue(minimumValue float32) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nagn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nagn *NNAdditionGradientNode) WithMaximumValue(maximumValue float32) *NNAdditionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nagn

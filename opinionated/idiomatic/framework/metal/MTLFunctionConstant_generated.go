@@ -72,7 +72,7 @@ func NewFunctionConstant() *FunctionConstant {
 	return functionConstantAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (fc *FunctionConstant) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,13 +81,13 @@ func (fc *FunctionConstant) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (fc *FunctionConstant) Type() DataType {
 	_r := objc.Send[DataType](objref.IDOf(fc), objc.RegisterName("type"))
 	return _r
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (fc *FunctionConstant) Index() int {
 	_r := objc.Send[int](objref.IDOf(fc), objc.RegisterName("index"))
 	return _r

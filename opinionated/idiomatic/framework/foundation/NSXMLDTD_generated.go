@@ -88,7 +88,7 @@ func (x *XMLDTD) WithURI(uRI StringProvider) *XMLDTD {
 	return x
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (x *XMLDTD) WithScriptingProperties(scriptingProperties obj.Object) *XMLDTD {
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x

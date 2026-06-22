@@ -51,7 +51,7 @@ func NewChangeHistoryDeleteContactEvent() *ChangeHistoryDeleteContactEvent {
 	return changeHistoryDeleteContactEventAdopt(_id)
 }
 
-// ContactIdentifier wraps the corresponding Objective-C method.
+// ContactIdentifier returns the contact identifier.
 func (chdce *ChangeHistoryDeleteContactEvent) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(chdce), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {

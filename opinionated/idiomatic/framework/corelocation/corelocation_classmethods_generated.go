@@ -49,7 +49,7 @@ func IsRangingAvailable() bool {
 	return _r
 }
 
-// CLLocationManagerAuthorizationStatus wraps the corresponding Objective-C method.
+// CLLocationManagerAuthorizationStatus returns the cl location manager authorization status.
 func CLLocationManagerAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("CLLocationManager")), objc.RegisterName("authorizationStatus"))
 	return _r
@@ -73,7 +73,7 @@ func LiveUpdaterWithConfigurationQueueHandler(configuration LiveUpdateConfigurat
 	return LocationUpdaterFromID(_r)
 }
 
-// RequestMonitorWithConfigurationCompletion wraps the corresponding Objective-C method.
+// RequestMonitorWithConfigurationCompletion requests monitor with configuration completion.
 //
 // RequestMonitorWithConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *MonitorConfiguration) (result *Monitor, err error) {

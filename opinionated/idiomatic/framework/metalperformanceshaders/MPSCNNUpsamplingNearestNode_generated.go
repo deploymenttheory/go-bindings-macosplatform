@@ -59,13 +59,13 @@ func (cunn *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNear
 	return cunn
 }
 
-// ScaleFactorX wraps the corresponding Objective-C method.
+// ScaleFactorX returns the scale factor x.
 func (cunn *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
-// ScaleFactorY wraps the corresponding Objective-C method.
+// ScaleFactorY returns the scale factor y.
 func (cunn *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorY"))
 	return _r

@@ -52,13 +52,13 @@ func NewProjectMapElement() *ProjectMapElement {
 	return projectMapElementAdopt(_id)
 }
 
-// Pitch wraps the corresponding Objective-C method.
+// Pitch returns the pitch.
 func (pme *ProjectMapElement) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(pme), objc.RegisterName("pitch"))
 	return _r
 }
 
-// Annotations wraps the corresponding Objective-C method.
+// Annotations returns the annotations.
 func (pme *ProjectMapElement) Annotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pme), objc.RegisterName("annotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

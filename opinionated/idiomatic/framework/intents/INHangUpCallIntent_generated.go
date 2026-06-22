@@ -56,13 +56,13 @@ func (huci *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 	return huci
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (huci *HangUpCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent {
 	objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return huci
 }
 
-// CallIdentifier wraps the corresponding Objective-C method.
+// CallIdentifier returns the call identifier.
 func (huci *HangUpCallIntent) CallIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {

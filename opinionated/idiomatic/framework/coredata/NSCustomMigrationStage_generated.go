@@ -58,13 +58,13 @@ func (cms *CustomMigrationStage) WithLabel(label string) *CustomMigrationStage {
 	return cms
 }
 
-// CurrentModel wraps the corresponding Objective-C method.
+// CurrentModel returns the current model.
 func (cms *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
 	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("currentModel"))
 	return ManagedObjectModelReferenceFromID(_r)
 }
 
-// NextModel wraps the corresponding Objective-C method.
+// NextModel returns the next model.
 func (cms *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
 	_r := objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("nextModel"))
 	return ManagedObjectModelReferenceFromID(_r)

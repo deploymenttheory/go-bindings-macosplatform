@@ -68,7 +68,7 @@ func (nc *NotificationContent) String() string {
 	return rt.Description(objref.IDOf(nc))
 }
 
-// Attachments wraps the corresponding Objective-C method.
+// Attachments returns the attachments.
 //
 // Attachments returns the collection as a Go slice.
 func (nc *NotificationContent) Attachments() []*NotificationAttachment {
@@ -76,13 +76,13 @@ func (nc *NotificationContent) Attachments() []*NotificationAttachment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAttachment { return NotificationAttachmentFromID(_id) })
 }
 
-// Badge wraps the corresponding Objective-C method.
+// Badge returns the badge.
 func (nc *NotificationContent) Badge() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("badge"))
 	return obj.Wrap(_r)
 }
 
-// Body wraps the corresponding Objective-C method.
+// Body returns the body.
 func (nc *NotificationContent) Body() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("body"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (nc *NotificationContent) Body() string {
 	return purego.GoString(_r)
 }
 
-// CategoryIdentifier wraps the corresponding Objective-C method.
+// CategoryIdentifier returns the category identifier.
 func (nc *NotificationContent) CategoryIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("categoryIdentifier"))
 	if _r == 0 {
@@ -100,7 +100,7 @@ func (nc *NotificationContent) CategoryIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (nc *NotificationContent) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (nc *NotificationContent) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// ThreadIdentifier wraps the corresponding Objective-C method.
+// ThreadIdentifier returns the thread identifier.
 func (nc *NotificationContent) ThreadIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("threadIdentifier"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (nc *NotificationContent) ThreadIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (nc *NotificationContent) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("title"))
 	if _r == 0 {
@@ -127,7 +127,7 @@ func (nc *NotificationContent) Title() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (nc *NotificationContent) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
@@ -148,7 +148,7 @@ func (nc *NotificationContent) SummaryArgumentCount() int {
 	return _r
 }
 
-// TargetContentIdentifier wraps the corresponding Objective-C method.
+// TargetContentIdentifier returns the target content identifier.
 func (nc *NotificationContent) TargetContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("targetContentIdentifier"))
 	if _r == 0 {
@@ -157,19 +157,19 @@ func (nc *NotificationContent) TargetContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// InterruptionLevel wraps the corresponding Objective-C method.
+// InterruptionLevel returns the interruption level.
 func (nc *NotificationContent) InterruptionLevel() NotificationInterruptionLevel {
 	_r := objc.Send[NotificationInterruptionLevel](objref.IDOf(nc), objc.RegisterName("interruptionLevel"))
 	return _r
 }
 
-// RelevanceScore wraps the corresponding Objective-C method.
+// RelevanceScore returns the relevance score.
 func (nc *NotificationContent) RelevanceScore() float64 {
 	_r := objc.Send[float64](objref.IDOf(nc), objc.RegisterName("relevanceScore"))
 	return _r
 }
 
-// FilterCriteria wraps the corresponding Objective-C method.
+// FilterCriteria returns the filter criteria.
 func (nc *NotificationContent) FilterCriteria() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("filterCriteria"))
 	if _r == 0 {

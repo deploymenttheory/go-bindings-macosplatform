@@ -69,7 +69,7 @@ func (pjl *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
 	return pjl
 }
 
-// MaxLength wraps the corresponding Objective-C method.
+// MaxLength returns the max length.
 func (pjl *PhysicsJointLimit) MaxLength() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjl), objc.RegisterName("maxLength"))
 	return _r

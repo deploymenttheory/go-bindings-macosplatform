@@ -70,13 +70,13 @@ func NewMTRGeneralCommissioningClusterArmFailSafeParams() *MTRGeneralCommissioni
 	return mTRGeneralCommissioningClusterArmFailSafeParamsAdopt(_id)
 }
 
-// WithExpiryLengthSeconds sets the property and returns the receiver so calls can be chained.
+// WithExpiryLengthSeconds sets the expiry length seconds.
 func (mgccafsp *MTRGeneralCommissioningClusterArmFailSafeParams) WithExpiryLengthSeconds(expiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(mgccafsp), objc.RegisterName("setExpiryLengthSeconds:"), objref.IDOf(expiryLengthSeconds))
 	return mgccafsp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mgccafsp *MTRGeneralCommissioningClusterArmFailSafeParams) WithBreadcrumb(breadcrumb obj.Object) *MTRGeneralCommissioningClusterArmFailSafeParams {
 	objc.Send[objc.ID](objref.IDOf(mgccafsp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mgccafsp
@@ -94,13 +94,13 @@ func (mgccafsp *MTRGeneralCommissioningClusterArmFailSafeParams) WithServerSideP
 	return mgccafsp
 }
 
-// ExpiryLengthSeconds wraps the corresponding Objective-C method.
+// ExpiryLengthSeconds returns the expiry length seconds.
 func (mgccafsp *MTRGeneralCommissioningClusterArmFailSafeParams) ExpiryLengthSeconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccafsp), objc.RegisterName("expiryLengthSeconds"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mgccafsp *MTRGeneralCommissioningClusterArmFailSafeParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccafsp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

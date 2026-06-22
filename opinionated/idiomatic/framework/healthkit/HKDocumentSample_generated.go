@@ -45,7 +45,7 @@ func documentSampleAdopt(id objc.ID) *DocumentSample {
 	return x
 }
 
-// DocumentType wraps the corresponding Objective-C method.
+// DocumentType returns the document type.
 func (ds *DocumentSample) DocumentType() *DocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("documentType"))
 	return DocumentTypeFromID(_r)

@@ -87,13 +87,13 @@ func (pjs *PhysicsJointSliding) ShouldEnableLimits() bool {
 	return _r
 }
 
-// LowerDistanceLimit wraps the corresponding Objective-C method.
+// LowerDistanceLimit returns the lower distance limit.
 func (pjs *PhysicsJointSliding) LowerDistanceLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("lowerDistanceLimit"))
 	return _r
 }
 
-// UpperDistanceLimit wraps the corresponding Objective-C method.
+// UpperDistanceLimit returns the upper distance limit.
 func (pjs *PhysicsJointSliding) UpperDistanceLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("upperDistanceLimit"))
 	return _r

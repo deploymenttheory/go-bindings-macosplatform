@@ -70,7 +70,7 @@ func NewCompositionParameterView() *CompositionParameterView {
 	return compositionParameterViewAdopt(_id)
 }
 
-// HasParameters wraps the corresponding Objective-C method.
+// HasParameters reports whether the object has parameters.
 func (cpv *CompositionParameterView) HasParameters() bool {
 	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("hasParameters"))
 	return _r
@@ -81,7 +81,7 @@ func (cpv *CompositionParameterView) SetBackgroundColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (cpv *CompositionParameterView) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
@@ -103,7 +103,7 @@ func (cpv *CompositionParameterView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (cpv *CompositionParameterView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

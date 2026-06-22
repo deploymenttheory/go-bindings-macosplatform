@@ -70,31 +70,31 @@ func NewMTRColorControlClusterMoveToColorParams() *MTRColorControlClusterMoveToC
 	return mTRColorControlClusterMoveToColorParamsAdopt(_id)
 }
 
-// WithColorX sets the property and returns the receiver so calls can be chained.
+// WithColorX sets the color x.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithColorX(colorX obj.Object) *MTRColorControlClusterMoveToColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("setColorX:"), objref.IDOf(colorX))
 	return mcccmtcp
 }
 
-// WithColorY sets the property and returns the receiver so calls can be chained.
+// WithColorY sets the color y.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithColorY(colorY obj.Object) *MTRColorControlClusterMoveToColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("setColorY:"), objref.IDOf(colorY))
 	return mcccmtcp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccmtcp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmtcp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmtcp
@@ -112,31 +112,31 @@ func (mcccmtcp *MTRColorControlClusterMoveToColorParams) WithServerSideProcessin
 	return mcccmtcp
 }
 
-// ColorX wraps the corresponding Objective-C method.
+// ColorX returns the color x.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) ColorX() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("colorX"))
 	return obj.Wrap(_r)
 }
 
-// ColorY wraps the corresponding Objective-C method.
+// ColorY returns the color y.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) ColorY() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("colorY"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccmtcp *MTRColorControlClusterMoveToColorParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtcp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

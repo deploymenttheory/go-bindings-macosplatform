@@ -72,7 +72,7 @@ func NewMultiArrayConstraint() *MultiArrayConstraint {
 	return multiArrayConstraintAdopt(_id)
 }
 
-// Shape wraps the corresponding Objective-C method.
+// Shape returns the shape.
 //
 // Shape returns the collection as a Go slice.
 func (mac *MultiArrayConstraint) Shape() []obj.Object {
@@ -80,13 +80,13 @@ func (mac *MultiArrayConstraint) Shape() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DataType wraps the corresponding Objective-C method.
+// DataType returns the data type.
 func (mac *MultiArrayConstraint) DataType() MultiArrayDataType {
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(mac), objc.RegisterName("dataType"))
 	return _r
 }
 
-// ShapeConstraint wraps the corresponding Objective-C method.
+// ShapeConstraint returns the shape constraint.
 func (mac *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(mac), objc.RegisterName("shapeConstraint"))
 	return MultiArrayShapeConstraintFromID(_r)

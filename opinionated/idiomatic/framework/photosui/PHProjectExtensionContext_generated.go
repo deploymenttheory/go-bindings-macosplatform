@@ -83,13 +83,13 @@ func (pec *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(
 	return obj.Wrap(_r)
 }
 
-// PhotoLibrary wraps the corresponding Objective-C method.
+// PhotoLibrary returns the photo library.
 func (pec *ProjectExtensionContext) PhotoLibrary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("photoLibrary"))
 	return obj.Wrap(_r)
 }
 
-// Project wraps the corresponding Objective-C method.
+// Project returns the project.
 func (pec *ProjectExtensionContext) Project() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("project"))
 	return obj.Wrap(_r)

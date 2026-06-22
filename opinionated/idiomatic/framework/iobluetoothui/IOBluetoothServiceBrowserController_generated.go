@@ -95,14 +95,14 @@ func (bsbc *BluetoothServiceBrowserController) RunModal() int {
 	return _r
 }
 
-// GetResults returns the result of the user’s selection.
-func (bsbc *BluetoothServiceBrowserController) GetResults() obj.Object {
+// Results returns the result of the user’s selection.
+func (bsbc *BluetoothServiceBrowserController) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("getResults"))
 	return obj.Wrap(_r)
 }
 
-// GetOptions returns the option bits that control the panel’s behavior.
-func (bsbc *BluetoothServiceBrowserController) GetOptions() uint32 {
+// Options returns the option bits that control the panel’s behavior.
+func (bsbc *BluetoothServiceBrowserController) Options() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(bsbc), objc.RegisterName("getOptions"))
 	return _r
 }
@@ -127,8 +127,8 @@ func (bsbc *BluetoothServiceBrowserController) SetTitle(windowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
-// GetTitle returns the title of the device selector panel.
-func (bsbc *BluetoothServiceBrowserController) GetTitle() string {
+// Title returns the title of the device selector panel.
+func (bsbc *BluetoothServiceBrowserController) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
@@ -141,8 +141,8 @@ func (bsbc *BluetoothServiceBrowserController) SetDescriptionText(descriptionTex
 	objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 }
 
-// GetDescriptionText returns the description text that appears in the device selector panel.
-func (bsbc *BluetoothServiceBrowserController) GetDescriptionText() string {
+// DescriptionText returns the description text that appears in the device selector panel.
+func (bsbc *BluetoothServiceBrowserController) DescriptionText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("getDescriptionText"))
 	if _r == 0 {
 		return ""
@@ -155,8 +155,8 @@ func (bsbc *BluetoothServiceBrowserController) SetPrompt(prompt string) {
 	objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 }
 
-// GetPrompt returns the title of the default/select button in the device selector panel.
-func (bsbc *BluetoothServiceBrowserController) GetPrompt() string {
+// Prompt returns the title of the default/select button in the device selector panel.
+func (bsbc *BluetoothServiceBrowserController) Prompt() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("getPrompt"))
 	if _r == 0 {
 		return ""

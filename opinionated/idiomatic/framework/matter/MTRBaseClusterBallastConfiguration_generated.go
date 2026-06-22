@@ -61,7 +61,7 @@ func NewMTRBaseClusterBallastConfigurationWithDeviceEndpointQueue(device *MTRBas
 	return mTRBaseClusterBallastConfigurationAdopt(_id)
 }
 
-// ReadAttributePhysicalMinLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMinLevelWithCompletion reads attribute physical min level with completion.
 //
 // ReadAttributePhysicalMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLe
 	}
 }
 
-// ReadAttributePhysicalMaxLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMaxLevelWithCompletion reads attribute physical max level with completion.
 //
 // ReadAttributePhysicalMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLe
 	}
 }
 
-// ReadAttributeBallastStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBallastStatusWithCompletion reads attribute ballast status with completion.
 //
 // ReadAttributeBallastStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatus
 	}
 }
 
-// ReadAttributeMinLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinLevelWithCompletion reads attribute min level with completion.
 //
 // ReadAttributeMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithP
 	}
 }
 
-// ReadAttributeMaxLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxLevelWithCompletion reads attribute max level with completion.
 //
 // ReadAttributeMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithP
 	}
 }
 
-// ReadAttributeIntrinsicBallastFactorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeIntrinsicBallastFactorWithCompletion reads attribute intrinsic ballast factor with completion.
 //
 // ReadAttributeIntrinsicBallastFactorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBall
 	}
 }
 
-// ReadAttributeBallastFactorAdjustmentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBallastFactorAdjustmentWithCompletion reads attribute ballast factor adjustment with completion.
 //
 // ReadAttributeBallastFactorAdjustmentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactor
 	}
 }
 
-// ReadAttributeLampQuantityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampQuantityWithCompletion reads attribute lamp quantity with completion.
 //
 // ReadAttributeLampQuantityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityW
 	}
 }
 
-// ReadAttributeLampTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampTypeWithCompletion reads attribute lamp type with completion.
 //
 // ReadAttributeLampTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampTypeWithCompletion(ctx context.Context) (result string, err error) {
@@ -511,7 +511,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithP
 	}
 }
 
-// ReadAttributeLampManufacturerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampManufacturerWithCompletion reads attribute lamp manufacturer with completion.
 //
 // ReadAttributeLampManufacturerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturerWithCompletion(ctx context.Context) (result string, err error) {
@@ -561,7 +561,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufactu
 	}
 }
 
-// ReadAttributeLampRatedHoursWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampRatedHoursWithCompletion reads attribute lamp rated hours with completion.
 //
 // ReadAttributeLampRatedHoursWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHour
 	}
 }
 
-// ReadAttributeLampBurnHoursWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHoursWithCompletion reads attribute lamp burn hours with completion.
 //
 // ReadAttributeLampBurnHoursWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 	}
 }
 
-// ReadAttributeLampAlarmModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampAlarmModeWithCompletion reads attribute lamp alarm mode with completion.
 //
 // ReadAttributeLampAlarmModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmMode
 	}
 }
 
-// ReadAttributeLampBurnHoursTripPointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHoursTripPointWithCompletion reads attribute lamp burn hours trip point with completion.
 //
 // ReadAttributeLampBurnHoursTripPointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeClusterRevisi
 	}
 }
 
-// ReadAttributePhysicalMinLevel wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMinLevel reads attribute physical min level.
 //
 // ReadAttributePhysicalMinLevel blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMinLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMinLe
 	}
 }
 
-// ReadAttributePhysicalMaxLevel wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMaxLevel reads attribute physical max level.
 //
 // ReadAttributePhysicalMaxLevel blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributePhysicalMaxLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributePhysicalMaxLe
 	}
 }
 
-// ReadAttributeBallastStatus wraps the corresponding Objective-C method.
+// ReadAttributeBallastStatus reads attribute ballast status.
 //
 // ReadAttributeBallastStatus blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastStatus
 	}
 }
 
-// ReadAttributeMinLevel wraps the corresponding Objective-C method.
+// ReadAttributeMinLevel reads attribute min level.
 //
 // ReadAttributeMinLevel blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMinLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMinLevelWithM
 	}
 }
 
-// ReadAttributeMaxLevel wraps the corresponding Objective-C method.
+// ReadAttributeMaxLevel reads attribute max level.
 //
 // ReadAttributeMaxLevel blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeMaxLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeMaxLevelWithM
 	}
 }
 
-// ReadAttributeIntrinsicBalanceFactor wraps the corresponding Objective-C method.
+// ReadAttributeIntrinsicBalanceFactor reads attribute intrinsic balance factor.
 //
 // ReadAttributeIntrinsicBalanceFactor blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactor(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeIntrinsicBala
 	}
 }
 
-// ReadAttributeBallastFactorAdjustment wraps the corresponding Objective-C method.
+// ReadAttributeBallastFactorAdjustment reads attribute ballast factor adjustment.
 //
 // ReadAttributeBallastFactorAdjustment blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeBallastFactorAdjustment(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeBallastFactor
 	}
 }
 
-// ReadAttributeLampQuantity wraps the corresponding Objective-C method.
+// ReadAttributeLampQuantity reads attribute lamp quantity.
 //
 // ReadAttributeLampQuantity blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampQuantity(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampQuantityW
 	}
 }
 
-// ReadAttributeLampType wraps the corresponding Objective-C method.
+// ReadAttributeLampType reads attribute lamp type.
 //
 // ReadAttributeLampType blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampType(ctx context.Context) (result string, err error) {
@@ -1461,7 +1461,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampTypeWithM
 	}
 }
 
-// ReadAttributeLampManufacturer wraps the corresponding Objective-C method.
+// ReadAttributeLampManufacturer reads attribute lamp manufacturer.
 //
 // ReadAttributeLampManufacturer blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampManufacturer(ctx context.Context) (result string, err error) {
@@ -1511,7 +1511,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampManufactu
 	}
 }
 
-// ReadAttributeLampRatedHours wraps the corresponding Objective-C method.
+// ReadAttributeLampRatedHours reads attribute lamp rated hours.
 //
 // ReadAttributeLampRatedHours blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampRatedHours(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampRatedHour
 	}
 }
 
-// ReadAttributeLampBurnHours wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHours reads attribute lamp burn hours.
 //
 // ReadAttributeLampBurnHours blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHours(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 	}
 }
 
-// ReadAttributeLampAlarmMode wraps the corresponding Objective-C method.
+// ReadAttributeLampAlarmMode reads attribute lamp alarm mode.
 //
 // ReadAttributeLampAlarmMode blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampAlarmMode(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampAlarmMode
 	}
 }
 
-// ReadAttributeLampBurnHoursTripPoint wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHoursTripPoint reads attribute lamp burn hours trip point.
 //
 // ReadAttributeLampBurnHoursTripPoint blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPoint(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeLampBurnHours
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcbc *MTRBaseClusterBallastConfiguration) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBallastConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

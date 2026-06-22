@@ -74,24 +74,24 @@ func NewTableViewDiffableDataSource() *TableViewDiffableDataSource {
 	return tableViewDiffableDataSourceAdopt(_id)
 }
 
-// WithDefaultRowAnimation sets the property and returns the receiver so calls can be chained.
+// WithDefaultRowAnimation sets the default row animation.
 func (tvdds *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource {
 	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
 	return tvdds
 }
 
-// Snapshot wraps the corresponding Objective-C method.
+// Snapshot returns the snapshot.
 func (tvdds *TableViewDiffableDataSource) Snapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
-// ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
+// ApplySnapshotAnimatingDifferences applies snapshot animating differences.
 func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
 	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
-// ApplySnapshotAnimatingDifferencesCompletion wraps the corresponding Objective-C method.
+// ApplySnapshotAnimatingDifferencesCompletion applies snapshot animating differences completion.
 //
 // ApplySnapshotAnimatingDifferencesCompletion blocks until the operation completes or ctx is cancelled.
 func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error {
@@ -132,7 +132,7 @@ func (tvdds *TableViewDiffableDataSource) RowForSectionIdentifier(identifier obj
 	return _r
 }
 
-// DefaultRowAnimation wraps the corresponding Objective-C method.
+// DefaultRowAnimation returns the default row animation.
 func (tvdds *TableViewDiffableDataSource) DefaultRowAnimation() TableViewAnimationOptions {
 	_r := objc.Send[TableViewAnimationOptions](objref.IDOf(tvdds), objc.RegisterName("defaultRowAnimation"))
 	return _r

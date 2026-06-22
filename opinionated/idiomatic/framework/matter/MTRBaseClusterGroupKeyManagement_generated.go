@@ -136,7 +136,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithCompleti
 	}
 }
 
-// ReadAttributeGroupKeyMapWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGroupKeyMapWithParamsCompletion reads attribute group key map with params completion.
 //
 // ReadAttributeGroupKeyMapWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 	}
 }
 
-// ReadAttributeGroupTableWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGroupTableWithParamsCompletion reads attribute group table with params completion.
 //
 // ReadAttributeGroupTableWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 	}
 }
 
-// ReadAttributeMaxGroupsPerFabricWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupsPerFabricWithCompletion reads attribute max groups per fabric with completion.
 //
 // ReadAttributeMaxGroupsPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 	}
 }
 
-// ReadAttributeMaxGroupKeysPerFabricWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupKeysPerFabricWithCompletion reads attribute max group keys per fabric with completion.
 //
 // ReadAttributeMaxGroupKeysPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -436,7 +436,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -486,7 +486,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -536,7 +536,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) KeySetReadAllIndicesWithParams(c
 	}
 }
 
-// ReadAttributeGroupKeyMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGroupKeyMapWithParams reads attribute group key map with params.
 //
 // ReadAttributeGroupKeyMapWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupKeyMapWit
 	}
 }
 
-// ReadAttributeGroupTableWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGroupTableWithParams reads attribute group table with params.
 //
 // ReadAttributeGroupTableWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -736,7 +736,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGroupTableWith
 	}
 }
 
-// ReadAttributeMaxGroupsPerFabric wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupsPerFabric reads attribute max groups per fabric.
 //
 // ReadAttributeMaxGroupsPerFabric blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabric(ctx context.Context) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupsPerFa
 	}
 }
 
-// ReadAttributeMaxGroupKeysPerFabric wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupKeysPerFabric reads attribute max group keys per fabric.
 //
 // ReadAttributeMaxGroupKeysPerFabric blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabric(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeMaxGroupKeysPe
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -986,7 +986,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1036,7 +1036,7 @@ func (mbcgkm *MTRBaseClusterGroupKeyManagement) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcgkm *MTRBaseClusterGroupKeyManagement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

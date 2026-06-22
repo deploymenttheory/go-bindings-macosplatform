@@ -75,31 +75,31 @@ func (acr *AssetChangeRequest) RevertAssetContentToOriginal() {
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("revertAssetContentToOriginal"))
 }
 
-// PlaceholderForCreatedAsset wraps the corresponding Objective-C method.
+// PlaceholderForCreatedAsset returns the placeholder for created asset.
 func (acr *AssetChangeRequest) PlaceholderForCreatedAsset() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("placeholderForCreatedAsset"))
 	return ObjectPlaceholderFromID(_r)
 }
 
-// CreationDate wraps the corresponding Objective-C method.
+// CreationDate returns the creation date.
 func (acr *AssetChangeRequest) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// IsFavorite wraps the corresponding Objective-C method.
+// IsFavorite reports whether the object is favorite.
 func (acr *AssetChangeRequest) IsFavorite() bool {
 	_r := objc.Send[bool](objref.IDOf(acr), objc.RegisterName("isFavorite"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (acr *AssetChangeRequest) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(acr), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// ContentEditingOutput wraps the corresponding Objective-C method.
+// ContentEditingOutput returns the content editing output.
 func (acr *AssetChangeRequest) ContentEditingOutput() *ContentEditingOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("contentEditingOutput"))
 	return ContentEditingOutputFromID(_r)

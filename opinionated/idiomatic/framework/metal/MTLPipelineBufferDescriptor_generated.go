@@ -78,7 +78,7 @@ func (pbd *PipelineBufferDescriptor) WithMutability(mutability Mutability) *Pipe
 	return pbd
 }
 
-// Mutability wraps the corresponding Objective-C method.
+// Mutability returns the mutability.
 func (pbd *PipelineBufferDescriptor) Mutability() Mutability {
 	_r := objc.Send[Mutability](objref.IDOf(pbd), objc.RegisterName("mutability"))
 	return _r

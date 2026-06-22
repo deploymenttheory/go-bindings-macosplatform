@@ -72,7 +72,7 @@ func NewGeoJSONFeature() *GeoJSONFeature {
 	return geoJSONFeatureAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (gjf *GeoJSONFeature) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,13 +81,13 @@ func (gjf *GeoJSONFeature) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Properties wraps the corresponding Objective-C method.
+// Properties returns the properties.
 func (gjf *GeoJSONFeature) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Geometry wraps the corresponding Objective-C method.
+// Geometry returns the geometry.
 //
 // Geometry returns the collection as a Go slice.
 func (gjf *GeoJSONFeature) Geometry() []*Shape {

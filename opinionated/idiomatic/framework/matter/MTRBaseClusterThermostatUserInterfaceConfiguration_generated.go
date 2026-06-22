@@ -61,7 +61,7 @@ func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueu
 	return mTRBaseClusterThermostatUserInterfaceConfigurationAdopt(_id)
 }
 
-// ReadAttributeTemperatureDisplayModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureDisplayModeWithCompletion reads attribute temperature display mode with completion.
 //
 // ReadAttributeTemperatureDisplayModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeKeypadLockoutWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeKeypadLockoutWithCompletion reads attribute keypad lockout with completion.
 //
 // ReadAttributeKeypadLockoutWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeScheduleProgrammingVisibilityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScheduleProgrammingVisibilityWithCompletion reads attribute schedule programming visibility with completion.
 //
 // ReadAttributeScheduleProgrammingVisibilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeTemperatureDisplayMode wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureDisplayMode reads attribute temperature display mode.
 //
 // ReadAttributeTemperatureDisplayMode blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayMode(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeKeypadLockout wraps the corresponding Objective-C method.
+// ReadAttributeKeypadLockout reads attribute keypad lockout.
 //
 // ReadAttributeKeypadLockout blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockout(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeScheduleProgrammingVisibility wraps the corresponding Objective-C method.
+// ReadAttributeScheduleProgrammingVisibility reads attribute schedule programming visibility.
 //
 // ReadAttributeScheduleProgrammingVisibility blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibility(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

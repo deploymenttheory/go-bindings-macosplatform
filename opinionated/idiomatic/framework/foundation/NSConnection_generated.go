@@ -97,7 +97,7 @@ func (c *Connection) WithIndependentConversationQueueing(independentConversation
 	return c
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (c *Connection) WithScriptingProperties(scriptingProperties obj.Object) *Connection {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
@@ -155,25 +155,25 @@ func (c *Connection) DispatchWithComponents(components obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dispatchWithComponents:"), objref.IDOf(components))
 }
 
-// Statistics wraps the corresponding Objective-C method.
+// Statistics returns the statistics.
 func (c *Connection) Statistics() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("statistics"))
 	return obj.Wrap(_r)
 }
 
-// RequestTimeout wraps the corresponding Objective-C method.
+// RequestTimeout returns the request timeout.
 func (c *Connection) RequestTimeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("requestTimeout"))
 	return _r
 }
 
-// ReplyTimeout wraps the corresponding Objective-C method.
+// ReplyTimeout returns the reply timeout.
 func (c *Connection) ReplyTimeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("replyTimeout"))
 	return _r
 }
 
-// RootObject wraps the corresponding Objective-C method.
+// RootObject returns the root object.
 func (c *Connection) RootObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootObject"))
 	return obj.Wrap(_r)
@@ -185,19 +185,19 @@ func (c *Connection) IndependentConversationQueueing() bool {
 	return _r
 }
 
-// IsValid wraps the corresponding Objective-C method.
+// IsValid reports whether the object is valid.
 func (c *Connection) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isValid"))
 	return _r
 }
 
-// RootProxy wraps the corresponding Objective-C method.
+// RootProxy returns the root proxy.
 func (c *Connection) RootProxy() *DistantObject {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootProxy"))
 	return DistantObjectFromID(_r)
 }
 
-// RequestModes wraps the corresponding Objective-C method.
+// RequestModes returns the request modes.
 //
 // RequestModes returns the collection as a Go slice.
 func (c *Connection) RequestModes() []string {
@@ -205,13 +205,13 @@ func (c *Connection) RequestModes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SendPort wraps the corresponding Objective-C method.
+// SendPort returns the send port.
 func (c *Connection) SendPort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
-// ReceivePort wraps the corresponding Objective-C method.
+// ReceivePort returns the receive port.
 func (c *Connection) ReceivePort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
@@ -223,13 +223,13 @@ func (c *Connection) MultipleThreadsEnabled() bool {
 	return _r
 }
 
-// RemoteObjects wraps the corresponding Objective-C method.
+// RemoteObjects returns the remote objects.
 func (c *Connection) RemoteObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("remoteObjects"))
 	return obj.Wrap(_r)
 }
 
-// LocalObjects wraps the corresponding Objective-C method.
+// LocalObjects returns the local objects.
 func (c *Connection) LocalObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localObjects"))
 	return obj.Wrap(_r)

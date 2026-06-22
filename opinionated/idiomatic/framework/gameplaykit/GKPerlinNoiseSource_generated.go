@@ -82,7 +82,7 @@ func (pns *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
 	return pns
 }
 
-// Persistence wraps the corresponding Objective-C method.
+// Persistence returns the persistence.
 func (pns *PerlinNoiseSource) Persistence() float64 {
 	_r := objc.Send[float64](objref.IDOf(pns), objc.RegisterName("persistence"))
 	return _r

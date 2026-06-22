@@ -130,7 +130,7 @@ func (t *Tagger) GazetteersForTagScheme(tagScheme obj.Object) []*Gazetteer {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Gazetteer { return GazetteerFromID(_id) })
 }
 
-// TagSchemes wraps the corresponding Objective-C method.
+// TagSchemes returns the tag schemes.
 //
 // TagSchemes returns the collection as a Go slice.
 func (t *Tagger) TagSchemes() []obj.Object {
@@ -138,7 +138,7 @@ func (t *Tagger) TagSchemes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DominantLanguage wraps the corresponding Objective-C method.
+// DominantLanguage returns the dominant language.
 func (t *Tagger) DominantLanguage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("dominantLanguage"))
 	return obj.Wrap(_r)

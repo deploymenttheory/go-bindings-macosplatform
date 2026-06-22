@@ -346,19 +346,19 @@ func (sc *StepperCell) WithControlTint(controlTint ControlTint) *StepperCell {
 	return sc
 }
 
-// MinValue wraps the corresponding Objective-C method.
+// MinValue returns the min value.
 func (sc *StepperCell) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue wraps the corresponding Objective-C method.
+// MaxValue returns the max value.
 func (sc *StepperCell) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// Increment wraps the corresponding Objective-C method.
+// Increment returns the increment.
 func (sc *StepperCell) Increment() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("increment"))
 	return _r

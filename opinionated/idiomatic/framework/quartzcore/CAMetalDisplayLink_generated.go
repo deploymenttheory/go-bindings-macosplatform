@@ -100,13 +100,13 @@ func (mdl *MetalDisplayLink) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("invalidate"))
 }
 
-// PreferredFrameLatency wraps the corresponding Objective-C method.
+// PreferredFrameLatency returns the preferred frame latency.
 func (mdl *MetalDisplayLink) PreferredFrameLatency() float32 {
 	_r := objc.Send[float32](objref.IDOf(mdl), objc.RegisterName("preferredFrameLatency"))
 	return _r
 }
 
-// IsPaused wraps the corresponding Objective-C method.
+// IsPaused reports whether the object is paused.
 func (mdl *MetalDisplayLink) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(mdl), objc.RegisterName("isPaused"))
 	return _r

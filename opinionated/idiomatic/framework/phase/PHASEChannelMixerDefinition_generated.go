@@ -72,7 +72,7 @@ func (cmd *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParam
 	return cmd
 }
 
-// InputChannelLayout wraps the corresponding Objective-C method.
+// InputChannelLayout returns the input channel layout.
 func (cmd *ChannelMixerDefinition) InputChannelLayout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cmd), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)

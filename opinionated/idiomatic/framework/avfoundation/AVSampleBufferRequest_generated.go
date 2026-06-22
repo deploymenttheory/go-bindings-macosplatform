@@ -103,37 +103,37 @@ func (sbr *SampleBufferRequest) WithMode(mode SampleBufferRequestMode) *SampleBu
 	return sbr
 }
 
-// StartCursor wraps the corresponding Objective-C method.
+// StartCursor returns the start cursor.
 func (sbr *SampleBufferRequest) StartCursor() *SampleCursor {
 	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("startCursor"))
 	return SampleCursorFromID(_r)
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (sbr *SampleBufferRequest) Direction() SampleBufferRequestDirection {
 	_r := objc.Send[SampleBufferRequestDirection](objref.IDOf(sbr), objc.RegisterName("direction"))
 	return _r
 }
 
-// LimitCursor wraps the corresponding Objective-C method.
+// LimitCursor returns the limit cursor.
 func (sbr *SampleBufferRequest) LimitCursor() *SampleCursor {
 	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("limitCursor"))
 	return SampleCursorFromID(_r)
 }
 
-// PreferredMinSampleCount wraps the corresponding Objective-C method.
+// PreferredMinSampleCount returns the preferred min sample count.
 func (sbr *SampleBufferRequest) PreferredMinSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("preferredMinSampleCount"))
 	return _r
 }
 
-// MaxSampleCount wraps the corresponding Objective-C method.
+// MaxSampleCount returns the max sample count.
 func (sbr *SampleBufferRequest) MaxSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("maxSampleCount"))
 	return _r
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (sbr *SampleBufferRequest) Mode() SampleBufferRequestMode {
 	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(sbr), objc.RegisterName("mode"))
 	return _r

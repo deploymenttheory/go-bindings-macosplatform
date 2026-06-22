@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterSimpleStructResponseParams() *MTRTestClusterCluster
 	return mTRTestClusterClusterSimpleStructResponseParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtccssrp *MTRTestClusterClusterSimpleStructResponseParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterSimpleStructResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtccssrp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtccssrp

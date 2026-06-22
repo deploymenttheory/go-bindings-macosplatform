@@ -96,7 +96,7 @@ func (arco *AssetResourceCreationOptions) WithShouldMoveFile(shouldMoveFile bool
 	return arco
 }
 
-// OriginalFilename wraps the corresponding Objective-C method.
+// OriginalFilename returns the original filename.
 func (arco *AssetResourceCreationOptions) OriginalFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("originalFilename"))
 	if _r == 0 {
@@ -111,7 +111,7 @@ func (arco *AssetResourceCreationOptions) ContentType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// UniformTypeIdentifier wraps the corresponding Objective-C method.
+// UniformTypeIdentifier returns the uniform type identifier.
 func (arco *AssetResourceCreationOptions) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(arco), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {

@@ -74,7 +74,7 @@ func (ms *MigrationStage) WithLabel(label string) *MigrationStage {
 	return ms
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (ms *MigrationStage) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("label"))
 	if _r == 0 {

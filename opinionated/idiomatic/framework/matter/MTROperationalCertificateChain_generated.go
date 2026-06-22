@@ -71,7 +71,7 @@ func NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCert
 	return mTROperationalCertificateChainAdopt(_id)
 }
 
-// WithOperationalCertificate sets the property and returns the receiver so calls can be chained.
+// WithOperationalCertificate sets the operational certificate.
 func (mocc *MTROperationalCertificateChain) WithOperationalCertificate(operationalCertificate obj.Object) *MTROperationalCertificateChain {
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setOperationalCertificate:"), objref.IDOf(operationalCertificate))
 	return mocc
@@ -83,7 +83,7 @@ func (mocc *MTROperationalCertificateChain) WithIntermediateCertificate(intermed
 	return mocc
 }
 
-// WithRootCertificate sets the property and returns the receiver so calls can be chained.
+// WithRootCertificate sets the root certificate.
 func (mocc *MTROperationalCertificateChain) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCertificateChain {
 	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
 	return mocc
@@ -95,7 +95,7 @@ func (mocc *MTROperationalCertificateChain) WithAdminSubject(adminSubject obj.Ob
 	return mocc
 }
 
-// OperationalCertificate wraps the corresponding Objective-C method.
+// OperationalCertificate returns the operational certificate.
 func (mocc *MTROperationalCertificateChain) OperationalCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("operationalCertificate"))
 	return obj.Wrap(_r)
@@ -107,7 +107,7 @@ func (mocc *MTROperationalCertificateChain) IntermediateCertificate() obj.Object
 	return obj.Wrap(_r)
 }
 
-// RootCertificate wraps the corresponding Objective-C method.
+// RootCertificate returns the root certificate.
 func (mocc *MTROperationalCertificateChain) RootCertificate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)

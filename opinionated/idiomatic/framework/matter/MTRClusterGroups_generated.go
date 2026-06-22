@@ -61,7 +61,7 @@ func NewMTRClusterGroupsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint
 	return mTRClusterGroupsAdopt(_id)
 }
 
-// AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion adds group with params expected values expected value interval completion.
 //
 // AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
@@ -136,7 +136,7 @@ func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedV
 	}
 }
 
-// RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion removes group with params expected values expected value interval completion.
 //
 // RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
@@ -161,43 +161,43 @@ func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInt
 	}
 }
 
-// ReadAttributeNameSupportWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNameSupportWithParams reads attribute name support with params.
 func (mcg *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeNameSupportWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcg *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcg *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcg *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcg *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcg *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcg), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// AddGroupWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// AddGroupWithParamsExpectedValuesExpectedValueInterval adds group with params expected values expected value interval.
 //
 // AddGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
@@ -272,7 +272,7 @@ func (mcg *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedV
 	}
 }
 
-// RemoveGroupWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// RemoveGroupWithParamsExpectedValuesExpectedValueInterval removes group with params expected values expected value interval.
 //
 // RemoveGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcg *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {

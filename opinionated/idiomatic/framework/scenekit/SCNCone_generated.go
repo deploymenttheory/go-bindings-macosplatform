@@ -107,7 +107,7 @@ func (c *Cone) WithLevelsOfDetail(items ...*LevelOfDetail) *Cone {
 	return c
 }
 
-// WithTessellator sets the property and returns the receiver so calls can be chained.
+// WithTessellator sets the tessellator.
 func (c *Cone) WithTessellator(tessellator *GeometryTessellator) *Cone {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return c

@@ -131,37 +131,37 @@ func (opr *OverlayPathRenderer) FillPathInContext(path obj.Object, context_ obj.
 	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillPath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
 }
 
-// FillColor wraps the corresponding Objective-C method.
+// FillColor returns the fill color.
 func (opr *OverlayPathRenderer) FillColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
 }
 
-// StrokeColor wraps the corresponding Objective-C method.
+// StrokeColor returns the stroke color.
 func (opr *OverlayPathRenderer) StrokeColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
 }
 
-// LineWidth wraps the corresponding Objective-C method.
+// LineWidth returns the line width.
 func (opr *OverlayPathRenderer) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// MiterLimit wraps the corresponding Objective-C method.
+// MiterLimit returns the miter limit.
 func (opr *OverlayPathRenderer) MiterLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("miterLimit"))
 	return _r
 }
 
-// LineDashPhase wraps the corresponding Objective-C method.
+// LineDashPhase returns the line dash phase.
 func (opr *OverlayPathRenderer) LineDashPhase() float64 {
 	_r := objc.Send[float64](objref.IDOf(opr), objc.RegisterName("lineDashPhase"))
 	return _r
 }
 
-// LineDashPattern wraps the corresponding Objective-C method.
+// LineDashPattern returns the line dash pattern.
 //
 // LineDashPattern returns the collection as a Go slice.
 func (opr *OverlayPathRenderer) LineDashPattern() []obj.Object {
@@ -175,7 +175,7 @@ func (opr *OverlayPathRenderer) ShouldRasterize() bool {
 	return _r
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (opr *OverlayPathRenderer) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("path"))
 	return obj.Wrap(_r)

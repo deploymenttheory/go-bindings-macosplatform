@@ -83,13 +83,13 @@ func (sb *StatusBar) RemoveStatusItem(item *StatusItem) {
 	objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("removeStatusItem:"), objref.IDOf(item))
 }
 
-// IsVertical wraps the corresponding Objective-C method.
+// IsVertical reports whether the object is vertical.
 func (sb *StatusBar) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(sb), objc.RegisterName("isVertical"))
 	return _r
 }
 
-// Thickness wraps the corresponding Objective-C method.
+// Thickness returns the thickness.
 func (sb *StatusBar) Thickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(sb), objc.RegisterName("thickness"))
 	return _r

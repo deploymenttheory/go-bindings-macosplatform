@@ -313,13 +313,13 @@ func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
 }
 
-// Page wraps the corresponding Objective-C method.
+// Page returns the page.
 func (a *Annotation) Page() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (a *Annotation) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("type"))
 	if _r == 0 {
@@ -328,7 +328,7 @@ func (a *Annotation) Type() string {
 	return purego.GoString(_r)
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (a *Annotation) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(a), objc.RegisterName("bounds"))
 	return _r
@@ -346,24 +346,24 @@ func (a *Annotation) ShouldPrint() bool {
 	return _r
 }
 
-// HasAppearanceStream wraps the corresponding Objective-C method.
+// HasAppearanceStream reports whether the object has appearance stream.
 func (a *Annotation) HasAppearanceStream() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasAppearanceStream"))
 	return _r
 }
 
-// IsHighlighted wraps the corresponding Objective-C method.
+// IsHighlighted reports whether the object is highlighted.
 func (a *Annotation) IsHighlighted() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
-// RemoveAllAppearanceStreams wraps the corresponding Objective-C method.
+// RemoveAllAppearanceStreams removes all appearance streams.
 func (a *Annotation) RemoveAllAppearanceStreams() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeAllAppearanceStreams"))
 }
 
-// DrawWithBox wraps the corresponding Objective-C method.
+// DrawWithBox draws with box.
 func (a *Annotation) DrawWithBox(box DisplayBox) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:"), box)
 }
@@ -378,55 +378,55 @@ func (a *Annotation) RemoveBezierPath(path obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeBezierPath:"), objref.IDOf(path))
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (a *Annotation) Font() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("font"))
 	return obj.Wrap(_r)
 }
 
-// FontColor wraps the corresponding Objective-C method.
+// FontColor returns the font color.
 func (a *Annotation) FontColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fontColor"))
 	return obj.Wrap(_r)
 }
 
-// InteriorColor wraps the corresponding Objective-C method.
+// InteriorColor returns the interior color.
 func (a *Annotation) InteriorColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("interiorColor"))
 	return obj.Wrap(_r)
 }
 
-// StartPoint wraps the corresponding Objective-C method.
+// StartPoint returns the start point.
 func (a *Annotation) StartPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("startPoint"))
 	return _r
 }
 
-// EndPoint wraps the corresponding Objective-C method.
+// EndPoint returns the end point.
 func (a *Annotation) EndPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("endPoint"))
 	return _r
 }
 
-// StartLineStyle wraps the corresponding Objective-C method.
+// StartLineStyle returns the start line style.
 func (a *Annotation) StartLineStyle() LineStyle {
 	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("startLineStyle"))
 	return _r
 }
 
-// EndLineStyle wraps the corresponding Objective-C method.
+// EndLineStyle returns the end line style.
 func (a *Annotation) EndLineStyle() LineStyle {
 	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("endLineStyle"))
 	return _r
 }
 
-// IconType wraps the corresponding Objective-C method.
+// IconType returns the icon type.
 func (a *Annotation) IconType() TextAnnotationIconType {
 	_r := objc.Send[TextAnnotationIconType](objref.IDOf(a), objc.RegisterName("iconType"))
 	return _r
 }
 
-// QuadrilateralPoints wraps the corresponding Objective-C method.
+// QuadrilateralPoints returns the quadrilateral points.
 //
 // QuadrilateralPoints returns the collection as a Go slice.
 func (a *Annotation) QuadrilateralPoints() []obj.Object {
@@ -434,13 +434,13 @@ func (a *Annotation) QuadrilateralPoints() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// MarkupType wraps the corresponding Objective-C method.
+// MarkupType returns the markup type.
 func (a *Annotation) MarkupType() MarkupType {
 	_r := objc.Send[MarkupType](objref.IDOf(a), objc.RegisterName("markupType"))
 	return _r
 }
 
-// WidgetFieldType wraps the corresponding Objective-C method.
+// WidgetFieldType returns the widget field type.
 func (a *Annotation) WidgetFieldType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetFieldType"))
 	if _r == 0 {
@@ -454,43 +454,43 @@ func (a *Annotation) SetWidgetFieldType(widgetFieldType string) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), purego.NSString(widgetFieldType))
 }
 
-// WidgetControlType wraps the corresponding Objective-C method.
+// WidgetControlType returns the widget control type.
 func (a *Annotation) WidgetControlType() WidgetControlType {
 	_r := objc.Send[WidgetControlType](objref.IDOf(a), objc.RegisterName("widgetControlType"))
 	return _r
 }
 
-// IsMultiline wraps the corresponding Objective-C method.
+// IsMultiline reports whether the object is multiline.
 func (a *Annotation) IsMultiline() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isMultiline"))
 	return _r
 }
 
-// IsActivatableTextField wraps the corresponding Objective-C method.
+// IsActivatableTextField reports whether the object is activatable text field.
 func (a *Annotation) IsActivatableTextField() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActivatableTextField"))
 	return _r
 }
 
-// IsPasswordField wraps the corresponding Objective-C method.
+// IsPasswordField reports whether the object is password field.
 func (a *Annotation) IsPasswordField() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isPasswordField"))
 	return _r
 }
 
-// HasComb wraps the corresponding Objective-C method.
+// HasComb reports whether the object has comb.
 func (a *Annotation) HasComb() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasComb"))
 	return _r
 }
 
-// MaximumLength wraps the corresponding Objective-C method.
+// MaximumLength returns the maximum length.
 func (a *Annotation) MaximumLength() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("maximumLength"))
 	return _r
 }
 
-// WidgetStringValue wraps the corresponding Objective-C method.
+// WidgetStringValue returns the widget string value.
 func (a *Annotation) WidgetStringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetStringValue"))
 	if _r == 0 {
@@ -499,7 +499,7 @@ func (a *Annotation) WidgetStringValue() string {
 	return purego.GoString(_r)
 }
 
-// WidgetDefaultStringValue wraps the corresponding Objective-C method.
+// WidgetDefaultStringValue returns the widget default string value.
 func (a *Annotation) WidgetDefaultStringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetDefaultStringValue"))
 	if _r == 0 {
@@ -520,19 +520,19 @@ func (a *Annotation) RadiosInUnison() bool {
 	return _r
 }
 
-// IsReadOnly wraps the corresponding Objective-C method.
+// IsReadOnly reports whether the object is read only.
 func (a *Annotation) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// IsListChoice wraps the corresponding Objective-C method.
+// IsListChoice reports whether the object is list choice.
 func (a *Annotation) IsListChoice() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isListChoice"))
 	return _r
 }
 
-// Choices wraps the corresponding Objective-C method.
+// Choices returns the choices.
 //
 // Choices returns the collection as a Go slice.
 func (a *Annotation) Choices() []string {
@@ -540,7 +540,7 @@ func (a *Annotation) Choices() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Values wraps the corresponding Objective-C method.
+// Values returns the values.
 //
 // Values returns the collection as a Go slice.
 func (a *Annotation) Values() []string {
@@ -548,13 +548,13 @@ func (a *Annotation) Values() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ButtonWidgetState wraps the corresponding Objective-C method.
+// ButtonWidgetState returns the button widget state.
 func (a *Annotation) ButtonWidgetState() WidgetCellState {
 	_r := objc.Send[WidgetCellState](objref.IDOf(a), objc.RegisterName("buttonWidgetState"))
 	return _r
 }
 
-// ButtonWidgetStateString wraps the corresponding Objective-C method.
+// ButtonWidgetStateString returns the button widget state string.
 func (a *Annotation) ButtonWidgetStateString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("buttonWidgetStateString"))
 	if _r == 0 {
@@ -563,13 +563,13 @@ func (a *Annotation) ButtonWidgetStateString() string {
 	return purego.GoString(_r)
 }
 
-// IsOpen wraps the corresponding Objective-C method.
+// IsOpen reports whether the object is open.
 func (a *Annotation) IsOpen() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isOpen"))
 	return _r
 }
 
-// Paths wraps the corresponding Objective-C method.
+// Paths returns the paths.
 //
 // Paths returns the collection as a Go slice.
 func (a *Annotation) Paths() []obj.Object {
@@ -577,19 +577,19 @@ func (a *Annotation) Paths() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (a *Annotation) Destination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (a *Annotation) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// FieldName wraps the corresponding Objective-C method.
+// FieldName returns the field name.
 func (a *Annotation) FieldName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fieldName"))
 	if _r == 0 {
@@ -598,7 +598,7 @@ func (a *Annotation) FieldName() string {
 	return purego.GoString(_r)
 }
 
-// Caption wraps the corresponding Objective-C method.
+// Caption returns the caption.
 func (a *Annotation) Caption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("caption"))
 	if _r == 0 {
@@ -607,13 +607,13 @@ func (a *Annotation) Caption() string {
 	return purego.GoString(_r)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (a *Annotation) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// StampName wraps the corresponding Objective-C method.
+// StampName returns the stamp name.
 func (a *Annotation) StampName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stampName"))
 	if _r == 0 {

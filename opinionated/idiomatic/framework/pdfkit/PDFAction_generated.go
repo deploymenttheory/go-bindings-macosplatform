@@ -68,7 +68,7 @@ func (a *Action) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (a *Action) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("type"))
 	if _r == 0 {

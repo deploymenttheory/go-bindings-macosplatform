@@ -143,13 +143,13 @@ func (mcp *MTRCommissioningParameters) WithForceThreadScan(forceThreadScan bool)
 	return mcp
 }
 
-// WithCSRNonce sets the property and returns the receiver so calls can be chained.
+// WithCSRNonce sets the csr nonce.
 func (mcp *MTRCommissioningParameters) WithCSRNonce(cSRNonce obj.Object) *MTRCommissioningParameters {
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setCSRNonce:"), objref.IDOf(cSRNonce))
 	return mcp
 }
 
-// WithFailSafeExpiryTimeoutSecs sets the property and returns the receiver so calls can be chained.
+// WithFailSafeExpiryTimeoutSecs sets the fail safe expiry timeout secs.
 func (mcp *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object) *MTRCommissioningParameters {
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setFailSafeExpiryTimeoutSecs:"), objref.IDOf(failSafeExpiryTimeoutSecs))
 	return mcp
@@ -232,13 +232,13 @@ func (mcp *MTRCommissioningParameters) ForceThreadScan() bool {
 	return _r
 }
 
-// CSRNonce wraps the corresponding Objective-C method.
+// CSRNonce returns the csr nonce.
 func (mcp *MTRCommissioningParameters) CSRNonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("CSRNonce"))
 	return obj.Wrap(_r)
 }
 
-// FailSafeExpiryTimeoutSecs wraps the corresponding Objective-C method.
+// FailSafeExpiryTimeoutSecs returns the fail safe expiry timeout secs.
 func (mcp *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("failSafeExpiryTimeoutSecs"))
 	return obj.Wrap(_r)

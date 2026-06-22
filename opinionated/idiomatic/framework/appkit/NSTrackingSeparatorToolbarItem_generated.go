@@ -131,7 +131,7 @@ func (tsti *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingS
 	return tsti
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (tsti *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *TrackingSeparatorToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(tsti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return tsti

@@ -66,13 +66,13 @@ func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) String() string {
 	return rt.Description(objref.IDOf(mutctaap))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
 	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctaap
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestAddArgumentsParams {
 	objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mutctaap
@@ -90,13 +90,13 @@ func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) WithServerSideProce
 	return mutctaap
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
-// Arg2 wraps the corresponding Objective-C method.
+// Arg2 returns the arg2.
 func (mutctaap *MTRUnitTestingClusterTestAddArgumentsParams) Arg2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctaap), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)

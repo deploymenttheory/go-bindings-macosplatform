@@ -51,19 +51,19 @@ func NewImageDivide() *ImageDivide {
 	return imageDivideAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (id_ *ImageDivide) WithPrimaryScale(primaryScale float32) *ImageDivide {
 	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return id_
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (id_ *ImageDivide) WithSecondaryScale(secondaryScale float32) *ImageDivide {
 	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return id_
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (id_ *ImageDivide) WithBias(bias float32) *ImageDivide {
 	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setBias:"), bias)
 	return id_

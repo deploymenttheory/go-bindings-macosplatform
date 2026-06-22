@@ -68,13 +68,13 @@ func (accr *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes
 	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
 }
 
-// PlaceholderForCreatedAssetCollection wraps the corresponding Objective-C method.
+// PlaceholderForCreatedAssetCollection returns the placeholder for created asset collection.
 func (accr *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("placeholderForCreatedAssetCollection"))
 	return ObjectPlaceholderFromID(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (accr *AssetCollectionChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("title"))
 	if _r == 0 {

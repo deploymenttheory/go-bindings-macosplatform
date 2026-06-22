@@ -70,19 +70,19 @@ func NewMTRGeneralCommissioningClusterSetRegulatoryConfigParams() *MTRGeneralCom
 	return mTRGeneralCommissioningClusterSetRegulatoryConfigParamsAdopt(_id)
 }
 
-// WithNewRegulatoryConfig sets the property and returns the receiver so calls can be chained.
+// WithNewRegulatoryConfig sets the new regulatory config.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithNewRegulatoryConfig(newRegulatoryConfig obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setNewRegulatoryConfig:"), objref.IDOf(newRegulatoryConfig))
 	return mgccsrcp
 }
 
-// WithCountryCode sets the property and returns the receiver so calls can be chained.
+// WithCountryCode sets the country code.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithCountryCode(countryCode string) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
 	return mgccsrcp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithBreadcrumb(breadcrumb obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mgccsrcp
@@ -100,13 +100,13 @@ func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithSer
 	return mgccsrcp
 }
 
-// GetNewRegulatoryConfig wraps the corresponding Objective-C method.
-func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) GetNewRegulatoryConfig() obj.Object {
+// NewRegulatoryConfig returns the new regulatory config.
+func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) NewRegulatoryConfig() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("getNewRegulatoryConfig"))
 	return obj.Wrap(_r)
 }
 
-// CountryCode wraps the corresponding Objective-C method.
+// CountryCode returns the country code.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Country
 	return purego.GoString(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

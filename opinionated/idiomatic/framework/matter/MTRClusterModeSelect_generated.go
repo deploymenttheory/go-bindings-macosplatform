@@ -58,87 +58,87 @@ func NewMTRClusterModeSelectWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 	return mTRClusterModeSelectAdopt(_id)
 }
 
-// ReadAttributeDescriptionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDescriptionWithParams reads attribute description with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeStandardNamespaceWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStandardNamespaceWithParams reads attribute standard namespace with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeStandardNamespaceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeStandardNamespaceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedModesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedModesWithParams reads attribute supported modes with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentModeWithParams reads attribute current mode with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeStartUpModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStartUpModeWithParams reads attribute start up mode with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeStartUpModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeStartUpModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeStartUpModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeStartUpModeWithValueExpectedValueInterval writes attribute start up mode with value expected value interval.
 func (mcms *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeStartUpModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeStartUpModeWithValueExpectedValueIntervalParams writes attribute start up mode with value expected value interval params.
 func (mcms *MTRClusterModeSelect) WriteAttributeStartUpModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("writeAttributeStartUpModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeOnModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOnModeWithParams reads attribute on mode with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeOnModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeOnModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeOnModeWithValueExpectedValueInterval writes attribute on mode with value expected value interval.
 func (mcms *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeOnModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeOnModeWithValueExpectedValueIntervalParams writes attribute on mode with value expected value interval params.
 func (mcms *MTRClusterModeSelect) WriteAttributeOnModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("writeAttributeOnModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcms *MTRClusterModeSelect) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcms), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

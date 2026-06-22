@@ -49,25 +49,25 @@ func NewDOMRect() *DOMRect {
 	return dOMRectAdopt(_id)
 }
 
-// Top wraps the corresponding Objective-C method.
+// Top returns the top.
 func (dr *DOMRect) Top() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("top"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Right wraps the corresponding Objective-C method.
+// Right returns the right.
 func (dr *DOMRect) Right() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("right"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Bottom wraps the corresponding Objective-C method.
+// Bottom returns the bottom.
 func (dr *DOMRect) Bottom() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("bottom"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Left wraps the corresponding Objective-C method.
+// Left returns the left.
 func (dr *DOMRect) Left() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("left"))
 	return DOMCSSPrimitiveValueFromID(_r)

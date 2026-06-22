@@ -163,7 +163,7 @@ func (ua *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProv
 	return ua
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ua *UserActivity) WithScriptingProperties(scriptingProperties obj.Object) *UserActivity {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ua
@@ -189,7 +189,7 @@ func (ua *UserActivity) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("invalidate"))
 }
 
-// ActivityType wraps the corresponding Objective-C method.
+// ActivityType returns the activity type.
 func (ua *UserActivity) ActivityType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("activityType"))
 	if _r == 0 {
@@ -198,7 +198,7 @@ func (ua *UserActivity) ActivityType() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (ua *UserActivity) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("title"))
 	if _r == 0 {
@@ -207,13 +207,13 @@ func (ua *UserActivity) Title() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (ua *UserActivity) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// RequiredUserInfoKeys wraps the corresponding Objective-C method.
+// RequiredUserInfoKeys returns the required user info keys.
 func (ua *UserActivity) RequiredUserInfoKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("requiredUserInfoKeys"))
 	return obj.Wrap(_r)
@@ -225,25 +225,25 @@ func (ua *UserActivity) NeedsSave() bool {
 	return _r
 }
 
-// WebpageURL wraps the corresponding Objective-C method.
+// WebpageURL returns the webpage URL.
 func (ua *UserActivity) WebpageURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("webpageURL"))
 	return URLFromID(_r)
 }
 
-// ReferrerURL wraps the corresponding Objective-C method.
+// ReferrerURL returns the referrer URL.
 func (ua *UserActivity) ReferrerURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("referrerURL"))
 	return URLFromID(_r)
 }
 
-// ExpirationDate wraps the corresponding Objective-C method.
+// ExpirationDate returns the expiration date.
 func (ua *UserActivity) ExpirationDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("expirationDate"))
 	return DateFromID(_r)
 }
 
-// Keywords wraps the corresponding Objective-C method.
+// Keywords returns the keywords.
 func (ua *UserActivity) Keywords() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("keywords"))
 	return obj.Wrap(_r)
@@ -255,7 +255,7 @@ func (ua *UserActivity) SupportsContinuationStreams() bool {
 	return _r
 }
 
-// TargetContentIdentifier wraps the corresponding Objective-C method.
+// TargetContentIdentifier returns the target content identifier.
 func (ua *UserActivity) TargetContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("targetContentIdentifier"))
 	if _r == 0 {
@@ -264,25 +264,25 @@ func (ua *UserActivity) TargetContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// IsEligibleForHandoff wraps the corresponding Objective-C method.
+// IsEligibleForHandoff reports whether the object is eligible for handoff.
 func (ua *UserActivity) IsEligibleForHandoff() bool {
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForHandoff"))
 	return _r
 }
 
-// IsEligibleForSearch wraps the corresponding Objective-C method.
+// IsEligibleForSearch reports whether the object is eligible for search.
 func (ua *UserActivity) IsEligibleForSearch() bool {
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForSearch"))
 	return _r
 }
 
-// IsEligibleForPublicIndexing wraps the corresponding Objective-C method.
+// IsEligibleForPublicIndexing reports whether the object is eligible for public indexing.
 func (ua *UserActivity) IsEligibleForPublicIndexing() bool {
 	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForPublicIndexing"))
 	return _r
 }
 
-// PersistentIdentifier wraps the corresponding Objective-C method.
+// PersistentIdentifier returns the persistent identifier.
 func (ua *UserActivity) PersistentIdentifier() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("persistentIdentifier"))
 	return StringFromID(_r)

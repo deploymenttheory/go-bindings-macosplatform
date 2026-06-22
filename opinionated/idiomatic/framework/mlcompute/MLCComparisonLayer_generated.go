@@ -63,7 +63,7 @@ func (cl *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Comp
 	return cl
 }
 
-// Operation wraps the corresponding Objective-C method.
+// Operation returns the operation.
 func (cl *ComparisonLayer) Operation() ComparisonOperation {
 	_r := objc.Send[ComparisonOperation](objref.IDOf(cl), objc.RegisterName("operation"))
 	return _r

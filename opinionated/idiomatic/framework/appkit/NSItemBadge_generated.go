@@ -70,7 +70,7 @@ func NewItemBadge() *ItemBadge {
 	return itemBadgeAdopt(_id)
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (ib *ItemBadge) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ib), objc.RegisterName("text"))
 	if _r == 0 {

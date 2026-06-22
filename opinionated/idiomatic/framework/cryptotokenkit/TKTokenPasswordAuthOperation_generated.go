@@ -57,7 +57,7 @@ func (tpao *TokenPasswordAuthOperation) WithPassword(password string) *TokenPass
 	return tpao
 }
 
-// Password wraps the corresponding Objective-C method.
+// Password returns the password.
 func (tpao *TokenPasswordAuthOperation) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tpao), objc.RegisterName("password"))
 	if _r == 0 {

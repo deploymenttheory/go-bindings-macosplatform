@@ -52,7 +52,7 @@ func NewXPCCoder() *XPCCoder {
 	return xPCCoderAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xc *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xc
@@ -69,7 +69,7 @@ func (xc *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *O
 	return ObjectFromID(_r)
 }
 
-// Connection wraps the corresponding Objective-C method.
+// Connection returns the connection.
 func (xc *XPCCoder) Connection() *XPCConnection {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("connection"))
 	return XPCConnectionFromID(_r)

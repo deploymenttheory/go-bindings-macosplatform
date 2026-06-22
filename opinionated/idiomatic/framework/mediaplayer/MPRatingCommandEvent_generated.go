@@ -51,7 +51,7 @@ func NewRatingCommandEvent() *RatingCommandEvent {
 	return ratingCommandEventAdopt(_id)
 }
 
-// Rating wraps the corresponding Objective-C method.
+// Rating returns the rating.
 func (rce *RatingCommandEvent) Rating() float32 {
 	_r := objc.Send[float32](objref.IDOf(rce), objc.RegisterName("rating"))
 	return _r

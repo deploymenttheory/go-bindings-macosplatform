@@ -49,121 +49,121 @@ func NewDOMHTMLLegendElement() *DOMHTMLLegendElement {
 	return dOMHTMLLegendElementAdopt(_id)
 }
 
-// WithAlign sets the property and returns the receiver so calls can be chained.
+// WithAlign sets the align.
 func (dle *DOMHTMLLegendElement) WithAlign(align string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return dle
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dle *DOMHTMLLegendElement) WithTitle(title string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dle
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dle *DOMHTMLLegendElement) WithLang(lang string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dle
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dle *DOMHTMLLegendElement) WithDir(dir string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dle
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dle *DOMHTMLLegendElement) WithTabIndex(tabIndex int) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dle
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dle *DOMHTMLLegendElement) WithAccessKey(accessKey string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dle
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dle *DOMHTMLLegendElement) WithInnerText(innerText string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dle
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dle *DOMHTMLLegendElement) WithOuterText(outerText string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dle
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dle *DOMHTMLLegendElement) WithContentEditable(contentEditable string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dle
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dle *DOMHTMLLegendElement) WithIDName(idName string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dle
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dle *DOMHTMLLegendElement) WithScrollLeft(scrollLeft int) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dle
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dle *DOMHTMLLegendElement) WithScrollTop(scrollTop int) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dle
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dle *DOMHTMLLegendElement) WithInnerHTML(innerHTML string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dle
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dle *DOMHTMLLegendElement) WithOuterHTML(outerHTML string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dle
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dle *DOMHTMLLegendElement) WithClassName(className string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dle
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dle *DOMHTMLLegendElement) WithNodeValue(nodeValue string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dle
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dle *DOMHTMLLegendElement) WithPrefix(prefix string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dle
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dle *DOMHTMLLegendElement) WithTextContent(textContent string) *DOMHTMLLegendElement {
 	objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dle
 }
 
-// Form wraps the corresponding Objective-C method.
+// Form returns the form.
 func (dle *DOMHTMLLegendElement) Form() *DOMHTMLFormElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
-// Align wraps the corresponding Objective-C method.
+// Align returns the align.
 func (dle *DOMHTMLLegendElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("align"))
 	if _r == 0 {

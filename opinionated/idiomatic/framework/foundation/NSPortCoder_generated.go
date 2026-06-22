@@ -53,7 +53,7 @@ func NewPortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port,
 	return portCoderAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pc *PortCoder) WithScriptingProperties(scriptingProperties obj.Object) *PortCoder {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pc

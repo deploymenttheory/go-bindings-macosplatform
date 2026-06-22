@@ -66,7 +66,7 @@ func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestPar
 	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctetfserp
@@ -84,7 +84,7 @@ func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestPar
 	return mutctetfserp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)

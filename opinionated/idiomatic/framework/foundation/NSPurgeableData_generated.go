@@ -58,7 +58,7 @@ func (pd *PurgeableData) WithLength(length int) *PurgeableData {
 	return pd
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pd *PurgeableData) WithScriptingProperties(scriptingProperties obj.Object) *PurgeableData {
 	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pd

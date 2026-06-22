@@ -61,25 +61,25 @@ func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservati
 	return lodgingReservationAdopt(_id)
 }
 
-// LodgingBusinessLocation wraps the corresponding Objective-C method.
+// LodgingBusinessLocation returns the lodging business location.
 func (lr *LodgingReservation) LodgingBusinessLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("lodgingBusinessLocation"))
 	return obj.Wrap(_r)
 }
 
-// ReservationDuration wraps the corresponding Objective-C method.
+// ReservationDuration returns the reservation duration.
 func (lr *LodgingReservation) ReservationDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// NumberOfAdults wraps the corresponding Objective-C method.
+// NumberOfAdults returns the number of adults.
 func (lr *LodgingReservation) NumberOfAdults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfAdults"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfChildren wraps the corresponding Objective-C method.
+// NumberOfChildren returns the number of children.
 func (lr *LodgingReservation) NumberOfChildren() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfChildren"))
 	return obj.Wrap(_r)

@@ -73,7 +73,7 @@ func NewCalCalendarStore() *CalCalendarStore {
 	return calCalendarStoreAdopt(_id)
 }
 
-// Calendars wraps the corresponding Objective-C method.
+// Calendars returns the calendars.
 func (ccs *CalCalendarStore) Calendars() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("calendars"))
 	return obj.Wrap(_r)
@@ -85,7 +85,7 @@ func (ccs *CalCalendarStore) CalendarWithUID(uID string) *CalCalendar {
 	return CalCalendarFromID(_r)
 }
 
-// SaveCalendar wraps the corresponding Objective-C method.
+// SaveCalendar saves calendar.
 func (ccs *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
@@ -95,7 +95,7 @@ func (ccs *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
 	return nil
 }
 
-// RemoveCalendar wraps the corresponding Objective-C method.
+// RemoveCalendar removes calendar.
 func (ccs *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
@@ -129,7 +129,7 @@ func (ccs *CalCalendarStore) TaskWithUID(uid string) *CalTask {
 	return CalTaskFromID(_r)
 }
 
-// SaveEventSpan wraps the corresponding Objective-C method.
+// SaveEventSpan saves event span.
 func (ccs *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -139,7 +139,7 @@ func (ccs *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error 
 	return nil
 }
 
-// RemoveEventSpan wraps the corresponding Objective-C method.
+// RemoveEventSpan removes event span.
 func (ccs *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
@@ -149,7 +149,7 @@ func (ccs *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) erro
 	return nil
 }
 
-// SaveTask wraps the corresponding Objective-C method.
+// SaveTask saves task.
 func (ccs *CalCalendarStore) SaveTask(task *CalTask) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
@@ -159,7 +159,7 @@ func (ccs *CalCalendarStore) SaveTask(task *CalTask) error {
 	return nil
 }
 
-// RemoveTask wraps the corresponding Objective-C method.
+// RemoveTask removes task.
 func (ccs *CalCalendarStore) RemoveTask(task *CalTask) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))

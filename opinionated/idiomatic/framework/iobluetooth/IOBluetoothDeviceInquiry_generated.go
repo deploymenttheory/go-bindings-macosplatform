@@ -73,7 +73,7 @@ func NewIOBluetoothDeviceInquiryWithDelegate(delegate obj.Object) *IOBluetoothDe
 	return iOBluetoothDeviceInquiryAdopt(_id)
 }
 
-// WithDelegate sets the property and returns the receiver so calls can be chained.
+// WithDelegate sets the delegate.
 func (ibdi *IOBluetoothDeviceInquiry) WithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
 	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibdi
@@ -125,19 +125,19 @@ func (ibdi *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDevi
 	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setSearchCriteria:majorDeviceClass:minorDeviceClass:"), inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (ibdi *IOBluetoothDeviceInquiry) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// InquiryLength wraps the corresponding Objective-C method.
+// InquiryLength returns the inquiry length.
 func (ibdi *IOBluetoothDeviceInquiry) InquiryLength() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibdi), objc.RegisterName("inquiryLength"))
 	return _r
 }
 
-// SearchType wraps the corresponding Objective-C method.
+// SearchType returns the search type.
 func (ibdi *IOBluetoothDeviceInquiry) SearchType() int {
 	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("searchType"))
 	return _r

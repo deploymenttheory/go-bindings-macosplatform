@@ -68,7 +68,7 @@ func (sdc *StorageDeviceConfiguration) String() string {
 	return rt.Description(objref.IDOf(sdc))
 }
 
-// Attachment wraps the corresponding Objective-C method.
+// Attachment returns the attachment.
 func (sdc *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(sdc), objc.RegisterName("attachment"))
 	return StorageDeviceAttachmentFromID(_r)

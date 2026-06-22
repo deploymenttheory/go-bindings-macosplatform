@@ -72,37 +72,37 @@ func NewETAResponse() *ETAResponse {
 	return eTAResponseAdopt(_id)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (er *ETAResponse) Source() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (er *ETAResponse) Destination() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
-// ExpectedTravelTime wraps the corresponding Objective-C method.
+// ExpectedTravelTime returns the expected travel time.
 func (er *ETAResponse) ExpectedTravelTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(er), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
-// ExpectedArrivalDate wraps the corresponding Objective-C method.
+// ExpectedArrivalDate returns the expected arrival date.
 func (er *ETAResponse) ExpectedArrivalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedArrivalDate"))
 	return obj.Wrap(_r)
 }
 
-// ExpectedDepartureDate wraps the corresponding Objective-C method.
+// ExpectedDepartureDate returns the expected departure date.
 func (er *ETAResponse) ExpectedDepartureDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(er), objc.RegisterName("expectedDepartureDate"))
 	return obj.Wrap(_r)
 }
 
-// TransportType wraps the corresponding Objective-C method.
+// TransportType returns the transport type.
 func (er *ETAResponse) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(er), objc.RegisterName("transportType"))
 	return _r

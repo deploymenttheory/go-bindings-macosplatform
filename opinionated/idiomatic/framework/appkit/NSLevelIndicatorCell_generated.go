@@ -378,49 +378,49 @@ func (lic *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
 	return _r
 }
 
-// LevelIndicatorStyle wraps the corresponding Objective-C method.
+// LevelIndicatorStyle returns the level indicator style.
 func (lic *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
 	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(lic), objc.RegisterName("levelIndicatorStyle"))
 	return _r
 }
 
-// MinValue wraps the corresponding Objective-C method.
+// MinValue returns the min value.
 func (lic *LevelIndicatorCell) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue wraps the corresponding Objective-C method.
+// MaxValue returns the max value.
 func (lic *LevelIndicatorCell) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// WarningValue wraps the corresponding Objective-C method.
+// WarningValue returns the warning value.
 func (lic *LevelIndicatorCell) WarningValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("warningValue"))
 	return _r
 }
 
-// CriticalValue wraps the corresponding Objective-C method.
+// CriticalValue returns the critical value.
 func (lic *LevelIndicatorCell) CriticalValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("criticalValue"))
 	return _r
 }
 
-// TickMarkPosition wraps the corresponding Objective-C method.
+// TickMarkPosition returns the tick mark position.
 func (lic *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
 	_r := objc.Send[TickMarkPosition](objref.IDOf(lic), objc.RegisterName("tickMarkPosition"))
 	return _r
 }
 
-// NumberOfTickMarks wraps the corresponding Objective-C method.
+// NumberOfTickMarks returns the number of tick marks.
 func (lic *LevelIndicatorCell) NumberOfTickMarks() int {
 	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfTickMarks"))
 	return _r
 }
 
-// NumberOfMajorTickMarks wraps the corresponding Objective-C method.
+// NumberOfMajorTickMarks returns the number of major tick marks.
 func (lic *LevelIndicatorCell) NumberOfMajorTickMarks() int {
 	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfMajorTickMarks"))
 	return _r

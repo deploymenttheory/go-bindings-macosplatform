@@ -68,13 +68,13 @@ func (r *Reservation) String() string {
 	return rt.Description(objref.IDOf(r))
 }
 
-// ItemReference wraps the corresponding Objective-C method.
+// ItemReference returns the item reference.
 func (r *Reservation) ItemReference() *SpeakableString {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("itemReference"))
 	return SpeakableStringFromID(_r)
 }
 
-// ReservationNumber wraps the corresponding Objective-C method.
+// ReservationNumber returns the reservation number.
 func (r *Reservation) ReservationNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationNumber"))
 	if _r == 0 {
@@ -83,19 +83,19 @@ func (r *Reservation) ReservationNumber() string {
 	return purego.GoString(_r)
 }
 
-// BookingTime wraps the corresponding Objective-C method.
+// BookingTime returns the booking time.
 func (r *Reservation) BookingTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("bookingTime"))
 	return obj.Wrap(_r)
 }
 
-// ReservationStatus wraps the corresponding Objective-C method.
+// ReservationStatus returns the reservation status.
 func (r *Reservation) ReservationStatus() ReservationStatus {
 	_r := objc.Send[ReservationStatus](objref.IDOf(r), objc.RegisterName("reservationStatus"))
 	return _r
 }
 
-// ReservationHolderName wraps the corresponding Objective-C method.
+// ReservationHolderName returns the reservation holder name.
 func (r *Reservation) ReservationHolderName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationHolderName"))
 	if _r == 0 {
@@ -104,7 +104,7 @@ func (r *Reservation) ReservationHolderName() string {
 	return purego.GoString(_r)
 }
 
-// Actions wraps the corresponding Objective-C method.
+// Actions returns the actions.
 //
 // Actions returns the collection as a Go slice.
 func (r *Reservation) Actions() []*ReservationAction {
@@ -112,7 +112,7 @@ func (r *Reservation) Actions() []*ReservationAction {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ReservationAction { return ReservationActionFromID(_id) })
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (r *Reservation) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

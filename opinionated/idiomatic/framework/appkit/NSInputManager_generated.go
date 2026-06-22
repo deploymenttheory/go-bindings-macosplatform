@@ -72,7 +72,7 @@ func NewInputManagerWithNameHost(inputServerName string, hostName string) *Input
 	return inputManagerAdopt(_id)
 }
 
-// LocalizedInputManagerName wraps the corresponding Objective-C method.
+// LocalizedInputManagerName returns the localized input manager name.
 func (im *InputManager) LocalizedInputManagerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("localizedInputManagerName"))
 	if _r == 0 {
@@ -97,7 +97,7 @@ func (im *InputManager) WantsToInterpretAllKeystrokes() bool {
 	return _r
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (im *InputManager) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("language"))
 	if _r == 0 {
@@ -106,13 +106,13 @@ func (im *InputManager) Language() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (im *InputManager) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// Server wraps the corresponding Objective-C method.
+// Server returns the server.
 func (im *InputManager) Server() *InputServer {
 	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("server"))
 	return InputServerFromID(_r)

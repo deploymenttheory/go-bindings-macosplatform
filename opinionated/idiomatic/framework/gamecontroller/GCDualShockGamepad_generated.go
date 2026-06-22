@@ -64,13 +64,13 @@ func (dsg *DualShockGamepad) TouchpadButton() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// TouchpadPrimary wraps the corresponding Objective-C method.
+// TouchpadPrimary returns the touchpad primary.
 func (dsg *DualShockGamepad) TouchpadPrimary() *ControllerDirectionPad {
 	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadPrimary"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// TouchpadSecondary wraps the corresponding Objective-C method.
+// TouchpadSecondary returns the touchpad secondary.
 func (dsg *DualShockGamepad) TouchpadSecondary() *ControllerDirectionPad {
 	_r := objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("touchpadSecondary"))
 	return ControllerDirectionPadFromID(_r)

@@ -79,7 +79,7 @@ func (vbl *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
 	return vbl
 }
 
-// Stride wraps the corresponding Objective-C method.
+// Stride returns the stride.
 func (vbl *VertexBufferLayout) Stride() int {
 	_r := objc.Send[int](objref.IDOf(vbl), objc.RegisterName("stride"))
 	return _r

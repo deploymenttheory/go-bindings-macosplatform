@@ -95,13 +95,13 @@ func (ss *SpeechSynthesizer) ContinueSpeaking() bool {
 	return _r
 }
 
-// IsSpeaking wraps the corresponding Objective-C method.
+// IsSpeaking reports whether the object is speaking.
 func (ss *SpeechSynthesizer) IsSpeaking() bool {
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
-// IsPaused wraps the corresponding Objective-C method.
+// IsPaused reports whether the object is paused.
 func (ss *SpeechSynthesizer) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isPaused"))
 	return _r

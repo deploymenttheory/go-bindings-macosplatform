@@ -150,25 +150,25 @@ func (wv *WebView) WithMainFrameURL(mainFrameURL string) *WebView {
 	return wv
 }
 
-// WithEditable sets the property and returns the receiver so calls can be chained.
+// WithEditable sets the editable.
 func (wv *WebView) WithEditable(editable bool) *WebView {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setEditable:"), editable)
 	return wv
 }
 
-// WithTypingStyle sets the property and returns the receiver so calls can be chained.
+// WithTypingStyle sets the typing style.
 func (wv *WebView) WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setTypingStyle:"), objref.IDOf(typingStyle))
 	return wv
 }
 
-// WithSmartInsertDeleteEnabled sets the property and returns the receiver so calls can be chained.
+// WithSmartInsertDeleteEnabled sets the smart insert delete enabled.
 func (wv *WebView) WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *WebView {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setSmartInsertDeleteEnabled:"), smartInsertDeleteEnabled)
 	return wv
 }
 
-// WithContinuousSpellCheckingEnabled sets the property and returns the receiver so calls can be chained.
+// WithContinuousSpellCheckingEnabled sets the continuous spell checking enabled.
 func (wv *WebView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *WebView {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setContinuousSpellCheckingEnabled:"), continuousSpellCheckingEnabled)
 	return wv
@@ -431,7 +431,7 @@ func (wv *WebView) TakeStringURLFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("takeStringURLFrom:"), objref.IDOf(sender))
 }
 
-// StopLoading wraps the corresponding Objective-C method.
+// StopLoading stops loading.
 func (wv *WebView) StopLoading(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
 }
@@ -441,7 +441,7 @@ func (wv *WebView) Reload(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reload:"), objref.IDOf(sender))
 }
 
-// ReloadFromOrigin wraps the corresponding Objective-C method.
+// ReloadFromOrigin reloads from origin.
 func (wv *WebView) ReloadFromOrigin(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
 }
@@ -456,27 +456,27 @@ func (wv *WebView) GoForward2(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("goForward:"), objref.IDOf(sender))
 }
 
-// MakeTextLarger wraps the corresponding Objective-C method.
+// MakeTextLarger makes text larger.
 func (wv *WebView) MakeTextLarger(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextLarger:"), objref.IDOf(sender))
 }
 
-// MakeTextSmaller wraps the corresponding Objective-C method.
+// MakeTextSmaller makes text smaller.
 func (wv *WebView) MakeTextSmaller(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextSmaller:"), objref.IDOf(sender))
 }
 
-// MakeTextStandardSize wraps the corresponding Objective-C method.
+// MakeTextStandardSize makes text standard size.
 func (wv *WebView) MakeTextStandardSize(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextStandardSize:"), objref.IDOf(sender))
 }
 
-// ToggleContinuousSpellChecking wraps the corresponding Objective-C method.
+// ToggleContinuousSpellChecking toggles continuous spell checking.
 func (wv *WebView) ToggleContinuousSpellChecking(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
 }
 
-// ToggleSmartInsertDelete wraps the corresponding Objective-C method.
+// ToggleSmartInsertDelete toggles smart insert delete.
 func (wv *WebView) ToggleSmartInsertDelete(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
 }
@@ -529,7 +529,7 @@ func (wv *WebView) StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration
 	return DOMCSSStyleDeclarationFromID(_r)
 }
 
-// SelectedDOMRange wraps the corresponding Objective-C method.
+// SelectedDOMRange returns the selected dom range.
 func (wv *WebView) SelectedDOMRange() *DOMRange {
 	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectedDOMRange"))
 	return DOMRangeFromID(_r)
@@ -541,13 +541,13 @@ func (wv *WebView) MaintainsInactiveSelection() bool {
 	return _r
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (wv *WebView) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// TypingStyle wraps the corresponding Objective-C method.
+// TypingStyle returns the typing style.
 func (wv *WebView) TypingStyle() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("typingStyle"))
 	return DOMCSSStyleDeclarationFromID(_r)
@@ -559,44 +559,44 @@ func (wv *WebView) SmartInsertDeleteEnabled() bool {
 	return _r
 }
 
-// IsContinuousSpellCheckingEnabled wraps the corresponding Objective-C method.
+// IsContinuousSpellCheckingEnabled reports whether the object is continuous spell checking enabled.
 func (wv *WebView) IsContinuousSpellCheckingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("isContinuousSpellCheckingEnabled"))
 	return _r
 }
 
-// SpellCheckerDocumentTag wraps the corresponding Objective-C method.
+// SpellCheckerDocumentTag returns the spell checker document tag.
 func (wv *WebView) SpellCheckerDocumentTag() int {
 	_r := objc.Send[int](objref.IDOf(wv), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r
 }
 
-// ReplaceSelectionWithNode wraps the corresponding Objective-C method.
+// ReplaceSelectionWithNode replaces selection with node.
 func (wv *WebView) ReplaceSelectionWithNode(node *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithNode:"), objref.IDOf(node))
 }
 
-// ReplaceSelectionWithText wraps the corresponding Objective-C method.
+// ReplaceSelectionWithText replaces selection with text.
 func (wv *WebView) ReplaceSelectionWithText(text string) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithText:"), purego.NSString(text))
 }
 
-// ReplaceSelectionWithMarkupString wraps the corresponding Objective-C method.
+// ReplaceSelectionWithMarkupString replaces selection with markup string.
 func (wv *WebView) ReplaceSelectionWithMarkupString(markupString string) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithMarkupString:"), purego.NSString(markupString))
 }
 
-// ReplaceSelectionWithArchive wraps the corresponding Objective-C method.
+// ReplaceSelectionWithArchive replaces selection with archive.
 func (wv *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithArchive:"), objref.IDOf(archive))
 }
 
-// DeleteSelection wraps the corresponding Objective-C method.
+// DeleteSelection deletes selection.
 func (wv *WebView) DeleteSelection() {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("deleteSelection"))
 }
 
-// ApplyStyle wraps the corresponding Objective-C method.
+// ApplyStyle applies style.
 func (wv *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("applyStyle:"), objref.IDOf(style))
 }
@@ -616,7 +616,7 @@ func (wv *WebView) Paste(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("paste:"), objref.IDOf(sender))
 }
 
-// CopyFont wraps the corresponding Objective-C method.
+// CopyFont copies font.
 func (wv *WebView) CopyFont(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("copyFont:"), objref.IDOf(sender))
 }
@@ -686,47 +686,47 @@ func (wv *WebView) CheckSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
-// ShowGuessPanel wraps the corresponding Objective-C method.
+// ShowGuessPanel shows guess panel.
 func (wv *WebView) ShowGuessPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
 
-// PerformFindPanelAction wraps the corresponding Objective-C method.
+// PerformFindPanelAction performs find panel action.
 func (wv *WebView) PerformFindPanelAction(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
 }
 
-// StartSpeaking wraps the corresponding Objective-C method.
+// StartSpeaking starts speaking.
 func (wv *WebView) StartSpeaking(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
 }
 
-// StopSpeaking wraps the corresponding Objective-C method.
+// StopSpeaking stops speaking.
 func (wv *WebView) StopSpeaking(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
 }
 
-// MoveToBeginningOfSentence wraps the corresponding Objective-C method.
+// MoveToBeginningOfSentence moves to beginning of sentence.
 func (wv *WebView) MoveToBeginningOfSentence(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentence:"), objref.IDOf(sender))
 }
 
-// MoveToBeginningOfSentenceAndModifySelection wraps the corresponding Objective-C method.
+// MoveToBeginningOfSentenceAndModifySelection moves to beginning of sentence and modify selection.
 func (wv *WebView) MoveToBeginningOfSentenceAndModifySelection(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:"), objref.IDOf(sender))
 }
 
-// MoveToEndOfSentence wraps the corresponding Objective-C method.
+// MoveToEndOfSentence moves to end of sentence.
 func (wv *WebView) MoveToEndOfSentence(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentence:"), objref.IDOf(sender))
 }
 
-// MoveToEndOfSentenceAndModifySelection wraps the corresponding Objective-C method.
+// MoveToEndOfSentenceAndModifySelection moves to end of sentence and modify selection.
 func (wv *WebView) MoveToEndOfSentenceAndModifySelection(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentenceAndModifySelection:"), objref.IDOf(sender))
 }
 
-// SelectSentence wraps the corresponding Objective-C method.
+// SelectSentence selects sentence.
 func (wv *WebView) SelectSentence(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectSentence:"), objref.IDOf(sender))
 }

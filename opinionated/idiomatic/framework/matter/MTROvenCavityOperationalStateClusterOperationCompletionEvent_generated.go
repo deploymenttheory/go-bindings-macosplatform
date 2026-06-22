@@ -70,37 +70,37 @@ func NewMTROvenCavityOperationalStateClusterOperationCompletionEvent() *MTROvenC
 	return mTROvenCavityOperationalStateClusterOperationCompletionEventAdopt(_id)
 }
 
-// WithCompletionErrorCode sets the property and returns the receiver so calls can be chained.
+// WithCompletionErrorCode sets the completion error code.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithCompletionErrorCode(completionErrorCode obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setCompletionErrorCode:"), objref.IDOf(completionErrorCode))
 	return mocoscoce
 }
 
-// WithTotalOperationalTime sets the property and returns the receiver so calls can be chained.
+// WithTotalOperationalTime sets the total operational time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return mocoscoce
 }
 
-// WithPausedTime sets the property and returns the receiver so calls can be chained.
+// WithPausedTime sets the paused time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) WithPausedTime(pausedTime obj.Object) *MTROvenCavityOperationalStateClusterOperationCompletionEvent {
 	objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("setPausedTime:"), objref.IDOf(pausedTime))
 	return mocoscoce
 }
 
-// CompletionErrorCode wraps the corresponding Objective-C method.
+// CompletionErrorCode returns the completion error code.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) CompletionErrorCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("completionErrorCode"))
 	return obj.Wrap(_r)
 }
 
-// TotalOperationalTime wraps the corresponding Objective-C method.
+// TotalOperationalTime returns the total operational time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) TotalOperationalTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("totalOperationalTime"))
 	return obj.Wrap(_r)
 }
 
-// PausedTime wraps the corresponding Objective-C method.
+// PausedTime returns the paused time.
 func (mocoscoce *MTROvenCavityOperationalStateClusterOperationCompletionEvent) PausedTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoce), objc.RegisterName("pausedTime"))
 	return obj.Wrap(_r)

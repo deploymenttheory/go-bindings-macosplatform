@@ -72,7 +72,7 @@ func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
 	return speechSynthesisVoiceAdopt(_id)
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (ssv *SpeechSynthesisVoice) Language() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("language"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (ssv *SpeechSynthesisVoice) Language() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (ssv *SpeechSynthesisVoice) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -90,7 +90,7 @@ func (ssv *SpeechSynthesisVoice) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ssv *SpeechSynthesisVoice) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("name"))
 	if _r == 0 {
@@ -99,25 +99,25 @@ func (ssv *SpeechSynthesisVoice) Name() string {
 	return purego.GoString(_r)
 }
 
-// Quality wraps the corresponding Objective-C method.
+// Quality returns the quality.
 func (ssv *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
 	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(ssv), objc.RegisterName("quality"))
 	return _r
 }
 
-// Gender wraps the corresponding Objective-C method.
+// Gender returns the gender.
 func (ssv *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
 	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(ssv), objc.RegisterName("gender"))
 	return _r
 }
 
-// AudioFileSettings wraps the corresponding Objective-C method.
+// AudioFileSettings returns the audio file settings.
 func (ssv *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("audioFileSettings"))
 	return obj.Wrap(_r)
 }
 
-// VoiceTraits wraps the corresponding Objective-C method.
+// VoiceTraits returns the voice traits.
 func (ssv *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
 	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(ssv), objc.RegisterName("voiceTraits"))
 	return _r

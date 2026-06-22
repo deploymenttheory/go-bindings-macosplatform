@@ -57,7 +57,7 @@ func (epm *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPrope
 	return epm
 }
 
-// Shininess wraps the corresponding Objective-C method.
+// Shininess returns the shininess.
 func (epm *EffectPropertyMaterial) Shininess() float32 {
 	_r := objc.Send[float32](objref.IDOf(epm), objc.RegisterName("shininess"))
 	return _r

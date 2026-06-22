@@ -66,25 +66,25 @@ func (mclcps *MTRContentLauncherClusterParameterStruct) String() string {
 	return rt.Description(objref.IDOf(mclcps))
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (mclcps *MTRContentLauncherClusterParameterStruct) WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mclcps
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mclcps *MTRContentLauncherClusterParameterStruct) WithValue(value string) *MTRContentLauncherClusterParameterStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setValue:"), purego.NSString(value))
 	return mclcps
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (mclcps *MTRContentLauncherClusterParameterStruct) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mclcps *MTRContentLauncherClusterParameterStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("value"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (mclcps *MTRContentLauncherClusterParameterStruct) Value() string {
 	return purego.GoString(_r)
 }
 
-// ExternalIDList wraps the corresponding Objective-C method.
+// ExternalIDList returns the external ID list.
 func (mclcps *MTRContentLauncherClusterParameterStruct) ExternalIDList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("externalIDList"))
 	return obj.Wrap(_r)

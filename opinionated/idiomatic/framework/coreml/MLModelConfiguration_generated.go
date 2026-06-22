@@ -117,7 +117,7 @@ func (mc *ModelConfiguration) ModelDisplayName() string {
 	return purego.GoString(_r)
 }
 
-// ComputeUnits wraps the corresponding Objective-C method.
+// ComputeUnits returns the compute units.
 func (mc *ModelConfiguration) ComputeUnits() ComputeUnits {
 	_r := objc.Send[ComputeUnits](objref.IDOf(mc), objc.RegisterName("computeUnits"))
 	return _r
@@ -135,13 +135,13 @@ func (mc *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
 	return _r
 }
 
-// Parameters wraps the corresponding Objective-C method.
+// Parameters returns the parameters.
 func (mc *ModelConfiguration) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
 
-// FunctionName wraps the corresponding Objective-C method.
+// FunctionName returns the function name.
 func (mc *ModelConfiguration) FunctionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("functionName"))
 	if _r == 0 {

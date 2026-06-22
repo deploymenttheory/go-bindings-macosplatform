@@ -66,7 +66,7 @@ func (mrp *MTRReadParams) String() string {
 	return rt.Description(objref.IDOf(mrp))
 }
 
-// WithFilterByFabric sets the property and returns the receiver so calls can be chained.
+// WithFilterByFabric sets the filter by fabric.
 func (mrp *MTRReadParams) WithFilterByFabric(filterByFabric bool) *MTRReadParams {
 	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setFilterByFabric:"), filterByFabric)
 	return mrp
@@ -84,7 +84,7 @@ func (mrp *MTRReadParams) WithAssumeUnknownAttributesReportable(assumeUnknownAtt
 	return mrp
 }
 
-// WithFabricFiltered sets the property and returns the receiver so calls can be chained.
+// WithFabricFiltered sets the fabric filtered.
 func (mrp *MTRReadParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRReadParams {
 	objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
 	return mrp
@@ -108,7 +108,7 @@ func (mrp *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
 	return _r
 }
 
-// FabricFiltered wraps the corresponding Objective-C method.
+// FabricFiltered returns the fabric filtered.
 func (mrp *MTRReadParams) FabricFiltered() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrp), objc.RegisterName("fabricFiltered"))
 	return obj.Wrap(_r)

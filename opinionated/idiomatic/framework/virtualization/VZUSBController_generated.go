@@ -68,7 +68,7 @@ func (uc *USBController) String() string {
 	return rt.Description(objref.IDOf(uc))
 }
 
-// USBDevices wraps the corresponding Objective-C method.
+// USBDevices returns the USB devices.
 func (uc *USBController) USBDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

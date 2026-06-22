@@ -66,43 +66,43 @@ func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) String() string
 	return rt.Description(objref.IDOf(msdctms))
 }
 
-// WithID sets the property and returns the receiver so calls can be chained.
+// WithID sets the ID.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return msdctms
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setName:"), purego.NSString(name))
 	return msdctms
 }
 
-// WithStackFreeCurrent sets the property and returns the receiver so calls can be chained.
+// WithStackFreeCurrent sets the stack free current.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 	return msdctms
 }
 
-// WithStackFreeMinimum sets the property and returns the receiver so calls can be chained.
+// WithStackFreeMinimum sets the stack free minimum.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 	return msdctms
 }
 
-// WithStackSize sets the property and returns the receiver so calls can be chained.
+// WithStackSize sets the stack size.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 	return msdctms
 }
 
-// ID wraps the corresponding Objective-C method.
+// ID returns the ID.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) ID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("id"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("name"))
 	if _r == 0 {
@@ -111,19 +111,19 @@ func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// StackFreeCurrent wraps the corresponding Objective-C method.
+// StackFreeCurrent returns the stack free current.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackFreeCurrent"))
 	return obj.Wrap(_r)
 }
 
-// StackFreeMinimum wraps the corresponding Objective-C method.
+// StackFreeMinimum returns the stack free minimum.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackFreeMinimum"))
 	return obj.Wrap(_r)
 }
 
-// StackSize wraps the corresponding Objective-C method.
+// StackSize returns the stack size.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackSize"))
 	return obj.Wrap(_r)

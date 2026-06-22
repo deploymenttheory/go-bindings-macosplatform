@@ -70,7 +70,7 @@ func NewMTRLaundryWasherModeClusterChangeToModeParams() *MTRLaundryWasherModeClu
 	return mTRLaundryWasherModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mlwmcctmp
@@ -88,8 +88,8 @@ func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) WithServerSidePr
 	return mlwmcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

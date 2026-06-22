@@ -51,7 +51,7 @@ func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
 	return changePlaybackRateCommandEventAdopt(_id)
 }
 
-// PlaybackRate wraps the corresponding Objective-C method.
+// PlaybackRate returns the playback rate.
 func (cprce *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(cprce), objc.RegisterName("playbackRate"))
 	return _r

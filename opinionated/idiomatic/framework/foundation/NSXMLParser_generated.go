@@ -87,37 +87,37 @@ func NewXMLParserWithStream(stream *InputStream) *XMLParser {
 	return xMLParserAdopt(_id)
 }
 
-// WithShouldProcessNamespaces sets the property and returns the receiver so calls can be chained.
+// WithShouldProcessNamespaces sets the should process namespaces.
 func (xp *XMLParser) WithShouldProcessNamespaces(shouldProcessNamespaces bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldProcessNamespaces:"), shouldProcessNamespaces)
 	return xp
 }
 
-// WithShouldReportNamespacePrefixes sets the property and returns the receiver so calls can be chained.
+// WithShouldReportNamespacePrefixes sets the should report namespace prefixes.
 func (xp *XMLParser) WithShouldReportNamespacePrefixes(shouldReportNamespacePrefixes bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldReportNamespacePrefixes:"), shouldReportNamespacePrefixes)
 	return xp
 }
 
-// WithExternalEntityResolvingPolicy sets the property and returns the receiver so calls can be chained.
+// WithExternalEntityResolvingPolicy sets the external entity resolving policy.
 func (xp *XMLParser) WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy XMLParserExternalEntityResolvingPolicy) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setExternalEntityResolvingPolicy:"), externalEntityResolvingPolicy)
 	return xp
 }
 
-// WithAllowedExternalEntityURLs sets the property and returns the receiver so calls can be chained.
+// WithAllowedExternalEntityURLs sets the allowed external entity ur ls.
 func (xp *XMLParser) WithAllowedExternalEntityURLs(allowedExternalEntityURLs obj.Object) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setAllowedExternalEntityURLs:"), objref.IDOf(allowedExternalEntityURLs))
 	return xp
 }
 
-// WithShouldResolveExternalEntities sets the property and returns the receiver so calls can be chained.
+// WithShouldResolveExternalEntities sets the should resolve external entities.
 func (xp *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setShouldResolveExternalEntities:"), shouldResolveExternalEntities)
 	return xp
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xp *XMLParser) WithScriptingProperties(scriptingProperties obj.Object) *XMLParser {
 	objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xp
@@ -146,13 +146,13 @@ func (xp *XMLParser) ShouldReportNamespacePrefixes() bool {
 	return _r
 }
 
-// ExternalEntityResolvingPolicy wraps the corresponding Objective-C method.
+// ExternalEntityResolvingPolicy returns the external entity resolving policy.
 func (xp *XMLParser) ExternalEntityResolvingPolicy() XMLParserExternalEntityResolvingPolicy {
 	_r := objc.Send[XMLParserExternalEntityResolvingPolicy](objref.IDOf(xp), objc.RegisterName("externalEntityResolvingPolicy"))
 	return _r
 }
 
-// AllowedExternalEntityURLs wraps the corresponding Objective-C method.
+// AllowedExternalEntityURLs returns the allowed external entity ur ls.
 func (xp *XMLParser) AllowedExternalEntityURLs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("allowedExternalEntityURLs"))
 	return obj.Wrap(_r)
@@ -164,7 +164,7 @@ func (xp *XMLParser) ShouldResolveExternalEntities() bool {
 	return _r
 }
 
-// PublicID wraps the corresponding Objective-C method.
+// PublicID returns the public ID.
 func (xp *XMLParser) PublicID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("publicID"))
 	if _r == 0 {
@@ -173,7 +173,7 @@ func (xp *XMLParser) PublicID() string {
 	return purego.GoString(_r)
 }
 
-// SystemID wraps the corresponding Objective-C method.
+// SystemID returns the system ID.
 func (xp *XMLParser) SystemID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(xp), objc.RegisterName("systemID"))
 	if _r == 0 {
@@ -182,13 +182,13 @@ func (xp *XMLParser) SystemID() string {
 	return purego.GoString(_r)
 }
 
-// LineNumber wraps the corresponding Objective-C method.
+// LineNumber returns the line number.
 func (xp *XMLParser) LineNumber() int {
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("lineNumber"))
 	return _r
 }
 
-// ColumnNumber wraps the corresponding Objective-C method.
+// ColumnNumber returns the column number.
 func (xp *XMLParser) ColumnNumber() int {
 	_r := objc.Send[int](objref.IDOf(xp), objc.RegisterName("columnNumber"))
 	return _r

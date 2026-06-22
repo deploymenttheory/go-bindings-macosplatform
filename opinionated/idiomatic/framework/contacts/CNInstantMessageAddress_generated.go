@@ -73,7 +73,7 @@ func NewInstantMessageAddressWithUsernameService(username string, service string
 	return instantMessageAddressAdopt(_id)
 }
 
-// Username wraps the corresponding Objective-C method.
+// Username returns the username.
 func (ima *InstantMessageAddress) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ima), objc.RegisterName("username"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (ima *InstantMessageAddress) Username() string {
 	return purego.GoString(_r)
 }
 
-// Service wraps the corresponding Objective-C method.
+// Service returns the service.
 func (ima *InstantMessageAddress) Service() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ima), objc.RegisterName("service"))
 	if _r == 0 {

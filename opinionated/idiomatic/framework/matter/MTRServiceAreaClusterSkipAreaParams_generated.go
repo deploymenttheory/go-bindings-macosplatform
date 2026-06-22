@@ -70,7 +70,7 @@ func NewMTRServiceAreaClusterSkipAreaParams() *MTRServiceAreaClusterSkipAreaPara
 	return mTRServiceAreaClusterSkipAreaParamsAdopt(_id)
 }
 
-// WithSkippedArea sets the property and returns the receiver so calls can be chained.
+// WithSkippedArea sets the skipped area.
 func (msacsap *MTRServiceAreaClusterSkipAreaParams) WithSkippedArea(skippedArea obj.Object) *MTRServiceAreaClusterSkipAreaParams {
 	objc.Send[objc.ID](objref.IDOf(msacsap), objc.RegisterName("setSkippedArea:"), objref.IDOf(skippedArea))
 	return msacsap
@@ -88,7 +88,7 @@ func (msacsap *MTRServiceAreaClusterSkipAreaParams) WithServerSideProcessingTime
 	return msacsap
 }
 
-// SkippedArea wraps the corresponding Objective-C method.
+// SkippedArea returns the skipped area.
 func (msacsap *MTRServiceAreaClusterSkipAreaParams) SkippedArea() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacsap), objc.RegisterName("skippedArea"))
 	return obj.Wrap(_r)

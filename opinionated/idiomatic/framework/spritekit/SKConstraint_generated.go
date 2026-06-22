@@ -90,7 +90,7 @@ func (c *Constraint) Enabled() bool {
 	return _r
 }
 
-// ReferenceNode wraps the corresponding Objective-C method.
+// ReferenceNode returns the reference node.
 func (c *Constraint) ReferenceNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("referenceNode"))
 	return NodeFromID(_r)

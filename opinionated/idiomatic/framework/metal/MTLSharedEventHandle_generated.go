@@ -72,7 +72,7 @@ func NewSharedEventHandle() *SharedEventHandle {
 	return sharedEventHandleAdopt(_id)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (seh *SharedEventHandle) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(seh), objc.RegisterName("label"))
 	if _r == 0 {

@@ -63,7 +63,7 @@ func (p *Polygon) WithSubtitle(subtitle string) *Polygon {
 	return p
 }
 
-// InteriorPolygons wraps the corresponding Objective-C method.
+// InteriorPolygons returns the interior polygons.
 //
 // InteriorPolygons returns the collection as a Go slice.
 func (p *Polygon) InteriorPolygons() []*Polygon {

@@ -80,7 +80,7 @@ func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiVal
 	return customAttributeKeyAdopt(_id)
 }
 
-// KeyName wraps the corresponding Objective-C method.
+// KeyName returns the key name.
 func (cak *CustomAttributeKey) KeyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cak), objc.RegisterName("keyName"))
 	if _r == 0 {
@@ -89,25 +89,25 @@ func (cak *CustomAttributeKey) KeyName() string {
 	return purego.GoString(_r)
 }
 
-// IsSearchable wraps the corresponding Objective-C method.
+// IsSearchable reports whether the object is searchable.
 func (cak *CustomAttributeKey) IsSearchable() bool {
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchable"))
 	return _r
 }
 
-// IsSearchableByDefault wraps the corresponding Objective-C method.
+// IsSearchableByDefault reports whether the object is searchable by default.
 func (cak *CustomAttributeKey) IsSearchableByDefault() bool {
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isSearchableByDefault"))
 	return _r
 }
 
-// IsUnique wraps the corresponding Objective-C method.
+// IsUnique reports whether the object is unique.
 func (cak *CustomAttributeKey) IsUnique() bool {
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isUnique"))
 	return _r
 }
 
-// IsMultiValued wraps the corresponding Objective-C method.
+// IsMultiValued reports whether the object is multi valued.
 func (cak *CustomAttributeKey) IsMultiValued() bool {
 	_r := objc.Send[bool](objref.IDOf(cak), objc.RegisterName("isMultiValued"))
 	return _r

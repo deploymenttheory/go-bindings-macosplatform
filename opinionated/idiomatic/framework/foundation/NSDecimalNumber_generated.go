@@ -67,7 +67,7 @@ func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *De
 	return decimalNumberAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dn *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
 	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dn

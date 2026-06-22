@@ -72,17 +72,17 @@ func NewMonitor() *Monitor {
 	return monitorAdopt(_id)
 }
 
-// AddConditionForMonitoringIdentifier wraps the corresponding Objective-C method.
+// AddConditionForMonitoringIdentifier adds condition for monitoring identifier.
 func (m *Monitor) AddConditionForMonitoringIdentifier(condition *Condition, identifier string) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addConditionForMonitoring:identifier:"), objref.IDOf(condition), purego.NSString(identifier))
 }
 
-// AddConditionForMonitoringIdentifierAssumedState wraps the corresponding Objective-C method.
+// AddConditionForMonitoringIdentifierAssumedState adds condition for monitoring identifier assumed state.
 func (m *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *Condition, identifier string, state MonitoringState) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("addConditionForMonitoring:identifier:assumedState:"), objref.IDOf(condition), purego.NSString(identifier), state)
 }
 
-// RemoveConditionFromMonitoringWithIdentifier wraps the corresponding Objective-C method.
+// RemoveConditionFromMonitoringWithIdentifier removes condition from monitoring with identifier.
 func (m *Monitor) RemoveConditionFromMonitoringWithIdentifier(identifier string) {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeConditionFromMonitoringWithIdentifier:"), purego.NSString(identifier))
 }
@@ -93,7 +93,7 @@ func (m *Monitor) MonitoringRecordForIdentifier(identifier string) *MonitoringRe
 	return MonitoringRecordFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (m *Monitor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (m *Monitor) Name() string {
 	return purego.GoString(_r)
 }
 
-// MonitoredIdentifiers wraps the corresponding Objective-C method.
+// MonitoredIdentifiers returns the monitored identifiers.
 //
 // MonitoredIdentifiers returns the collection as a Go slice.
 func (m *Monitor) MonitoredIdentifiers() []string {

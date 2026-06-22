@@ -119,37 +119,37 @@ func (i *Interaction) DonateInteractionWithCompletion(ctx context.Context) error
 	}
 }
 
-// Intent wraps the corresponding Objective-C method.
+// Intent returns the intent.
 func (i *Interaction) Intent() *Intent {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intent"))
 	return IntentFromID(_r)
 }
 
-// IntentResponse wraps the corresponding Objective-C method.
+// IntentResponse returns the intent response.
 func (i *Interaction) IntentResponse() *IntentResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("intentResponse"))
 	return IntentResponseFromID(_r)
 }
 
-// IntentHandlingStatus wraps the corresponding Objective-C method.
+// IntentHandlingStatus returns the intent handling status.
 func (i *Interaction) IntentHandlingStatus() IntentHandlingStatus {
 	_r := objc.Send[IntentHandlingStatus](objref.IDOf(i), objc.RegisterName("intentHandlingStatus"))
 	return _r
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (i *Interaction) Direction() InteractionDirection {
 	_r := objc.Send[InteractionDirection](objref.IDOf(i), objc.RegisterName("direction"))
 	return _r
 }
 
-// DateInterval wraps the corresponding Objective-C method.
+// DateInterval returns the date interval.
 func (i *Interaction) DateInterval() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("dateInterval"))
 	return obj.Wrap(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (i *Interaction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -158,7 +158,7 @@ func (i *Interaction) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// GroupIdentifier wraps the corresponding Objective-C method.
+// GroupIdentifier returns the group identifier.
 func (i *Interaction) GroupIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {

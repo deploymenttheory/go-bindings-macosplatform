@@ -143,7 +143,7 @@ func (ts *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("ensureAttributesAreFixedInRange:"), range_)
 }
 
-// LayoutManagers wraps the corresponding Objective-C method.
+// LayoutManagers returns the layout managers.
 //
 // LayoutManagers returns the collection as a Go slice.
 func (ts *TextStorage) LayoutManagers() []*LayoutManager {
@@ -151,19 +151,19 @@ func (ts *TextStorage) LayoutManagers() []*LayoutManager {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutManager { return LayoutManagerFromID(_id) })
 }
 
-// EditedMask wraps the corresponding Objective-C method.
+// EditedMask returns the edited mask.
 func (ts *TextStorage) EditedMask() TextStorageEditActions {
 	_r := objc.Send[TextStorageEditActions](objref.IDOf(ts), objc.RegisterName("editedMask"))
 	return _r
 }
 
-// EditedRange wraps the corresponding Objective-C method.
+// EditedRange returns the edited range.
 func (ts *TextStorage) EditedRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("editedRange"))
 	return _r
 }
 
-// ChangeInLength wraps the corresponding Objective-C method.
+// ChangeInLength returns the change in length.
 func (ts *TextStorage) ChangeInLength() int {
 	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("changeInLength"))
 	return _r
@@ -175,7 +175,7 @@ func (ts *TextStorage) FixesAttributesLazily() bool {
 	return _r
 }
 
-// AttributeRuns wraps the corresponding Objective-C method.
+// AttributeRuns returns the attribute runs.
 //
 // AttributeRuns returns the collection as a Go slice.
 func (ts *TextStorage) AttributeRuns() []*TextStorage {
@@ -183,7 +183,7 @@ func (ts *TextStorage) AttributeRuns() []*TextStorage {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
 }
 
-// Paragraphs wraps the corresponding Objective-C method.
+// Paragraphs returns the paragraphs.
 //
 // Paragraphs returns the collection as a Go slice.
 func (ts *TextStorage) Paragraphs() []*TextStorage {
@@ -191,7 +191,7 @@ func (ts *TextStorage) Paragraphs() []*TextStorage {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
 }
 
-// Words wraps the corresponding Objective-C method.
+// Words returns the words.
 //
 // Words returns the collection as a Go slice.
 func (ts *TextStorage) Words() []*TextStorage {
@@ -199,7 +199,7 @@ func (ts *TextStorage) Words() []*TextStorage {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
 }
 
-// Characters wraps the corresponding Objective-C method.
+// Characters returns the characters.
 //
 // Characters returns the collection as a Go slice.
 func (ts *TextStorage) Characters() []*TextStorage {
@@ -207,13 +207,13 @@ func (ts *TextStorage) Characters() []*TextStorage {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (ts *TextStorage) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// ForegroundColor wraps the corresponding Objective-C method.
+// ForegroundColor returns the foreground color.
 func (ts *TextStorage) ForegroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("foregroundColor"))
 	return ColorFromID(_r)

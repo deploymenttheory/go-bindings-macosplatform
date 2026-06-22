@@ -73,43 +73,43 @@ func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *
 	return portMessageAdopt(_id)
 }
 
-// WithMsgid sets the property and returns the receiver so calls can be chained.
+// WithMsgid sets the msgid.
 func (pm *PortMessage) WithMsgid(msgid uint32) *PortMessage {
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setMsgid:"), msgid)
 	return pm
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pm *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pm
 }
 
-// SendBeforeDate wraps the corresponding Objective-C method.
+// SendBeforeDate sends before date.
 func (pm *PortMessage) SendBeforeDate(date *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
 	return _r
 }
 
-// Components wraps the corresponding Objective-C method.
+// Components returns the components.
 func (pm *PortMessage) Components() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
-// ReceivePort wraps the corresponding Objective-C method.
+// ReceivePort returns the receive port.
 func (pm *PortMessage) ReceivePort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
-// SendPort wraps the corresponding Objective-C method.
+// SendPort returns the send port.
 func (pm *PortMessage) SendPort() *Port {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
-// Msgid wraps the corresponding Objective-C method.
+// Msgid returns the msgid.
 func (pm *PortMessage) Msgid() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(pm), objc.RegisterName("msgid"))
 	return _r

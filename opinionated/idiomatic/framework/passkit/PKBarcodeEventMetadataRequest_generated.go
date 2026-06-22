@@ -70,7 +70,7 @@ func NewBarcodeEventMetadataRequest() *BarcodeEventMetadataRequest {
 	return barcodeEventMetadataRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier wraps the corresponding Objective-C method.
+// DeviceAccountIdentifier returns the device account identifier.
 func (bemr *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (bemr *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// LastUsedBarcodeIdentifier wraps the corresponding Objective-C method.
+// LastUsedBarcodeIdentifier returns the last used barcode identifier.
 func (bemr *BarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bemr), objc.RegisterName("lastUsedBarcodeIdentifier"))
 	if _r == 0 {

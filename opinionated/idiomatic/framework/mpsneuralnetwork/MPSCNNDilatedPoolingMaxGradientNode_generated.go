@@ -56,13 +56,13 @@ func (cdpmgn *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDila
 	return cdpmgn
 }
 
-// DilationRateX wraps the corresponding Objective-C method.
+// DilationRateX returns the dilation rate x.
 func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
 	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
-// DilationRateY wraps the corresponding Objective-C method.
+// DilationRateY returns the dilation rate y.
 func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
 	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateY"))
 	return _r

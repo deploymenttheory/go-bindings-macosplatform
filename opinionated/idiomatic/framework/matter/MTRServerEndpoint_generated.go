@@ -87,13 +87,13 @@ func (mse *MTRServerEndpoint) AddServerCluster(serverCluster *MTRServerCluster) 
 	return _r
 }
 
-// EndpointID wraps the corresponding Objective-C method.
+// EndpointID returns the endpoint ID.
 func (mse *MTRServerEndpoint) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
 
-// DeviceTypes wraps the corresponding Objective-C method.
+// DeviceTypes returns the device types.
 //
 // DeviceTypes returns the collection as a Go slice.
 func (mse *MTRServerEndpoint) DeviceTypes() []*MTRDeviceTypeRevision {

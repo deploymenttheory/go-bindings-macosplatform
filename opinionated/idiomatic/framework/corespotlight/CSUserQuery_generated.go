@@ -82,7 +82,7 @@ func (uq *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionT
 	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
-// FoundSuggestionCount wraps the corresponding Objective-C method.
+// FoundSuggestionCount returns the found suggestion count.
 func (uq *UserQuery) FoundSuggestionCount() int {
 	_r := objc.Send[int](objref.IDOf(uq), objc.RegisterName("foundSuggestionCount"))
 	return _r

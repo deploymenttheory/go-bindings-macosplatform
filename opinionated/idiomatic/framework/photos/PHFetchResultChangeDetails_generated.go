@@ -77,61 +77,61 @@ func (frcd *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int))
 	objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
 }
 
-// FetchResultBeforeChanges wraps the corresponding Objective-C method.
+// FetchResultBeforeChanges returns the fetch result before changes.
 func (frcd *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
-// FetchResultAfterChanges wraps the corresponding Objective-C method.
+// FetchResultAfterChanges returns the fetch result after changes.
 func (frcd *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultAfterChanges"))
 	return obj.Wrap(_r)
 }
 
-// HasIncrementalChanges wraps the corresponding Objective-C method.
+// HasIncrementalChanges reports whether the object has incremental changes.
 func (frcd *FetchResultChangeDetails) HasIncrementalChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasIncrementalChanges"))
 	return _r
 }
 
-// RemovedIndexes wraps the corresponding Objective-C method.
+// RemovedIndexes returns the removed indexes.
 func (frcd *FetchResultChangeDetails) RemovedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedIndexes"))
 	return obj.Wrap(_r)
 }
 
-// RemovedObjects wraps the corresponding Objective-C method.
+// RemovedObjects returns the removed objects.
 func (frcd *FetchResultChangeDetails) RemovedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// InsertedIndexes wraps the corresponding Objective-C method.
+// InsertedIndexes returns the inserted indexes.
 func (frcd *FetchResultChangeDetails) InsertedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedIndexes"))
 	return obj.Wrap(_r)
 }
 
-// InsertedObjects wraps the corresponding Objective-C method.
+// InsertedObjects returns the inserted objects.
 func (frcd *FetchResultChangeDetails) InsertedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ChangedIndexes wraps the corresponding Objective-C method.
+// ChangedIndexes returns the changed indexes.
 func (frcd *FetchResultChangeDetails) ChangedIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedIndexes"))
 	return obj.Wrap(_r)
 }
 
-// ChangedObjects wraps the corresponding Objective-C method.
+// ChangedObjects returns the changed objects.
 func (frcd *FetchResultChangeDetails) ChangedObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// HasMoves wraps the corresponding Objective-C method.
+// HasMoves reports whether the object has moves.
 func (frcd *FetchResultChangeDetails) HasMoves() bool {
 	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasMoves"))
 	return _r

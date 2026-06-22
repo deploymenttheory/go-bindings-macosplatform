@@ -79,13 +79,13 @@ func (hep *HapticEventParameter) WithValue(value float32) *HapticEventParameter 
 	return hep
 }
 
-// ParameterID wraps the corresponding Objective-C method.
+// ParameterID returns the parameter ID.
 func (hep *HapticEventParameter) ParameterID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hep), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (hep *HapticEventParameter) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(hep), objc.RegisterName("value"))
 	return _r

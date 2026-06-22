@@ -78,13 +78,13 @@ func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithRes
 	return mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt(_id), nil
 }
 
-// WithErrorCode sets the property and returns the receiver so calls can be chained.
+// WithErrorCode sets the error code.
 func (mgccccrp *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgccccrp), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 	return mgccccrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (mgccccrp *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithDebugText(debugText string) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgccccrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return mgccccrp
@@ -96,13 +96,13 @@ func (mgccccrp *MTRGeneralCommissioningClusterCommissioningCompleteResponseParam
 	return mgccccrp
 }
 
-// ErrorCode wraps the corresponding Objective-C method.
+// ErrorCode returns the error code.
 func (mgccccrp *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ErrorCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccccrp), objc.RegisterName("errorCode"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (mgccccrp *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccccrp), objc.RegisterName("debugText"))
 	if _r == 0 {

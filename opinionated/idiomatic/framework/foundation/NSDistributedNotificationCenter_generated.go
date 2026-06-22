@@ -52,24 +52,24 @@ func NewDistributedNotificationCenter() *DistributedNotificationCenter {
 	return distributedNotificationCenterAdopt(_id)
 }
 
-// WithSuspended sets the property and returns the receiver so calls can be chained.
+// WithSuspended sets the suspended.
 func (dnc *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setSuspended:"), suspended)
 	return dnc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dnc *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dnc
 }
 
-// PostNotificationNameObjectUserInfoDeliverImmediately wraps the corresponding Objective-C method.
+// PostNotificationNameObjectUserInfoDeliverImmediately posts notification name object user info deliver immediately.
 func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
-// PostNotificationNameObjectUserInfoOptions wraps the corresponding Objective-C method.
+// PostNotificationNameObjectUserInfoOptions posts notification name object user info options.
 func (dnc *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
 	objc.Send[objc.ID](objref.IDOf(dnc), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }

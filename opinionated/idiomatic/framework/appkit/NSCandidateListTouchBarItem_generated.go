@@ -99,13 +99,13 @@ func (cltbi *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(ca
 	objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("setCandidates:forSelectedRange:inString:"), purego.SliceToNSArray(candidates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), selectedRange, purego.NSString(originalString))
 }
 
-// Client wraps the corresponding Objective-C method.
+// Client returns the client.
 func (cltbi *CandidateListTouchBarItem) Client() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("client"))
 	return ViewFromID(_r)
 }
 
-// IsCollapsed wraps the corresponding Objective-C method.
+// IsCollapsed reports whether the object is collapsed.
 func (cltbi *CandidateListTouchBarItem) IsCollapsed() bool {
 	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCollapsed"))
 	return _r
@@ -117,7 +117,7 @@ func (cltbi *CandidateListTouchBarItem) AllowsCollapsing() bool {
 	return _r
 }
 
-// IsCandidateListVisible wraps the corresponding Objective-C method.
+// IsCandidateListVisible reports whether the object is candidate list visible.
 func (cltbi *CandidateListTouchBarItem) IsCandidateListVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(cltbi), objc.RegisterName("isCandidateListVisible"))
 	return _r
@@ -129,7 +129,7 @@ func (cltbi *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool 
 	return _r
 }
 
-// Candidates wraps the corresponding Objective-C method.
+// Candidates returns the candidates.
 func (cltbi *CandidateListTouchBarItem) Candidates() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cltbi), objc.RegisterName("candidates"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

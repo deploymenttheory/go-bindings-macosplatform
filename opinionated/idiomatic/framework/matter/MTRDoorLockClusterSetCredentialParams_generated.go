@@ -70,37 +70,37 @@ func NewMTRDoorLockClusterSetCredentialParams() *MTRDoorLockClusterSetCredential
 	return mTRDoorLockClusterSetCredentialParamsAdopt(_id)
 }
 
-// WithOperationType sets the property and returns the receiver so calls can be chained.
+// WithOperationType sets the operation type.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithOperationType(operationType obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setOperationType:"), objref.IDOf(operationType))
 	return mdlcscp
 }
 
-// WithCredential sets the property and returns the receiver so calls can be chained.
+// WithCredential sets the credential.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 	return mdlcscp
 }
 
-// WithCredentialData sets the property and returns the receiver so calls can be chained.
+// WithCredentialData sets the credential data.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithCredentialData(credentialData obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setCredentialData:"), objref.IDOf(credentialData))
 	return mdlcscp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcscp
 }
 
-// WithUserStatus sets the property and returns the receiver so calls can be chained.
+// WithUserStatus sets the user status.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return mdlcscp
 }
 
-// WithUserType sets the property and returns the receiver so calls can be chained.
+// WithUserType sets the user type.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithUserType(userType obj.Object) *MTRDoorLockClusterSetCredentialParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return mdlcscp
@@ -118,37 +118,37 @@ func (mdlcscp *MTRDoorLockClusterSetCredentialParams) WithServerSideProcessingTi
 	return mdlcscp
 }
 
-// OperationType wraps the corresponding Objective-C method.
+// OperationType returns the operation type.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) OperationType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("operationType"))
 	return obj.Wrap(_r)
 }
 
-// Credential wraps the corresponding Objective-C method.
+// Credential returns the credential.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("credential"))
 	return MTRDoorLockClusterCredentialStructFromID(_r)
 }
 
-// CredentialData wraps the corresponding Objective-C method.
+// CredentialData returns the credential data.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) CredentialData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("credentialData"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserStatus wraps the corresponding Objective-C method.
+// UserStatus returns the user status.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) UserStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("userStatus"))
 	return obj.Wrap(_r)
 }
 
-// UserType wraps the corresponding Objective-C method.
+// UserType returns the user type.
 func (mdlcscp *MTRDoorLockClusterSetCredentialParams) UserType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscp), objc.RegisterName("userType"))
 	return obj.Wrap(_r)

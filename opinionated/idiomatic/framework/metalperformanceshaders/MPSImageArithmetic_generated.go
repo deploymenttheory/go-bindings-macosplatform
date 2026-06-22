@@ -47,19 +47,19 @@ func imageArithmeticAdopt(id objc.ID) *ImageArithmetic {
 	return x
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (ia *ImageArithmetic) WithPrimaryScale(primaryScale float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return ia
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (ia *ImageArithmetic) WithSecondaryScale(secondaryScale float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return ia
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (ia *ImageArithmetic) WithBias(bias float32) *ImageArithmetic {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setBias:"), bias)
 	return ia
@@ -113,19 +113,19 @@ func (ia *ImageArithmetic) WithLabel(label string) *ImageArithmetic {
 	return ia
 }
 
-// PrimaryScale wraps the corresponding Objective-C method.
+// PrimaryScale returns the primary scale.
 func (ia *ImageArithmetic) PrimaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("primaryScale"))
 	return _r
 }
 
-// SecondaryScale wraps the corresponding Objective-C method.
+// SecondaryScale returns the secondary scale.
 func (ia *ImageArithmetic) SecondaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// Bias wraps the corresponding Objective-C method.
+// Bias returns the bias.
 func (ia *ImageArithmetic) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(ia), objc.RegisterName("bias"))
 	return _r

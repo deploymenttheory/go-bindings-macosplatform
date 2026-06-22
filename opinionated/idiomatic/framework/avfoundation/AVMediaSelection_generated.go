@@ -80,7 +80,7 @@ func (ms *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMedia
 	return _r
 }
 
-// Asset wraps the corresponding Objective-C method.
+// Asset returns the asset.
 func (ms *MediaSelection) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("asset"))
 	return AssetFromID(_r)

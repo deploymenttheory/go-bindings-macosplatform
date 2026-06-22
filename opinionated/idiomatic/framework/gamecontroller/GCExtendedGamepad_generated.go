@@ -81,19 +81,19 @@ func (eg *ExtendedGamepad) ButtonA() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonB wraps the corresponding Objective-C method.
+// ButtonB returns the button b.
 func (eg *ExtendedGamepad) ButtonB() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonX wraps the corresponding Objective-C method.
+// ButtonX returns the button x.
 func (eg *ExtendedGamepad) ButtonX() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonY wraps the corresponding Objective-C method.
+// ButtonY returns the button y.
 func (eg *ExtendedGamepad) ButtonY() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
@@ -147,7 +147,7 @@ func (eg *ExtendedGamepad) LeftTrigger() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// RightTrigger wraps the corresponding Objective-C method.
+// RightTrigger returns the right trigger.
 func (eg *ExtendedGamepad) RightTrigger() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightTrigger"))
 	return ControllerButtonInputFromID(_r)
@@ -159,7 +159,7 @@ func (eg *ExtendedGamepad) LeftThumbstickButton() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// RightThumbstickButton wraps the corresponding Objective-C method.
+// RightThumbstickButton returns the right thumbstick button.
 func (eg *ExtendedGamepad) RightThumbstickButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightThumbstickButton"))
 	return ControllerButtonInputFromID(_r)

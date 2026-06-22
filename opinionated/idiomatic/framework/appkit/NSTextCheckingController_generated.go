@@ -71,7 +71,7 @@ func NewTextCheckingController() *TextCheckingController {
 	return textCheckingControllerAdopt(_id)
 }
 
-// WithSpellCheckerDocumentTag sets the property and returns the receiver so calls can be chained.
+// WithSpellCheckerDocumentTag sets the spell checker document tag.
 func (tcc *TextCheckingController) WithSpellCheckerDocumentTag(spellCheckerDocumentTag int) *TextCheckingController {
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("setSpellCheckerDocumentTag:"), spellCheckerDocumentTag)
 	return tcc
@@ -127,7 +127,7 @@ func (tcc *TextCheckingController) CheckSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
-// ShowGuessPanel wraps the corresponding Objective-C method.
+// ShowGuessPanel shows guess panel.
 func (tcc *TextCheckingController) ShowGuessPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
@@ -142,12 +142,12 @@ func (tcc *TextCheckingController) IgnoreSpelling(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("ignoreSpelling:"), objref.IDOf(sender))
 }
 
-// UpdateCandidates wraps the corresponding Objective-C method.
+// UpdateCandidates updates candidates.
 func (tcc *TextCheckingController) UpdateCandidates() {
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("updateCandidates"))
 }
 
-// ValidAnnotations wraps the corresponding Objective-C method.
+// ValidAnnotations returns the valid annotations.
 //
 // ValidAnnotations returns the collection as a Go slice.
 func (tcc *TextCheckingController) ValidAnnotations() []obj.Object {
@@ -155,7 +155,7 @@ func (tcc *TextCheckingController) ValidAnnotations() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SpellCheckerDocumentTag wraps the corresponding Objective-C method.
+// SpellCheckerDocumentTag returns the spell checker document tag.
 func (tcc *TextCheckingController) SpellCheckerDocumentTag() int {
 	_r := objc.Send[int](objref.IDOf(tcc), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r

@@ -50,37 +50,37 @@ func NewMTROperationalCredentialsClusterFabricDescriptor() *MTROperationalCreden
 	return mTROperationalCredentialsClusterFabricDescriptorAdopt(_id)
 }
 
-// WithRootPublicKey sets the property and returns the receiver so calls can be chained.
+// WithRootPublicKey sets the root public key.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithRootPublicKey(rootPublicKey obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setRootPublicKey:"), objref.IDOf(rootPublicKey))
 	return moccfd
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithVendorID(vendorID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return moccfd
 }
 
-// WithFabricID sets the property and returns the receiver so calls can be chained.
+// WithFabricID sets the fabric ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithFabricID(fabricID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setFabricID:"), objref.IDOf(fabricID))
 	return moccfd
 }
 
-// WithNodeID sets the property and returns the receiver so calls can be chained.
+// WithNodeID sets the node ID.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithNodeID(nodeID obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setNodeID:"), objref.IDOf(nodeID))
 	return moccfd
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return moccfd
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (moccfd *MTROperationalCredentialsClusterFabricDescriptor) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterFabricDescriptor {
 	objc.Send[objc.ID](objref.IDOf(moccfd), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccfd

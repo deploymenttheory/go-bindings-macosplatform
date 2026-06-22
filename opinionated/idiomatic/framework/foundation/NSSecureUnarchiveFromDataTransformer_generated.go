@@ -52,7 +52,7 @@ func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer
 	return secureUnarchiveFromDataTransformerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sufdt *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
 	objc.Send[objc.ID](objref.IDOf(sufdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sufdt

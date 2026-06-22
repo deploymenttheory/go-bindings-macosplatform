@@ -51,67 +51,67 @@ func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *M
 	return mTRClusterElectricalEnergyMeasurementAdopt(_id)
 }
 
-// ReadAttributeAccuracyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAccuracyWithParams reads attribute accuracy with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAccuracyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCumulativeEnergyImportedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyImportedWithParams reads attribute cumulative energy imported with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyImportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyImportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCumulativeEnergyExportedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyExportedWithParams reads attribute cumulative energy exported with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyExportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyExportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePeriodicEnergyImportedWithParams wraps the corresponding Objective-C method.
+// ReadAttributePeriodicEnergyImportedWithParams reads attribute periodic energy imported with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyImportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributePeriodicEnergyImportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePeriodicEnergyExportedWithParams wraps the corresponding Objective-C method.
+// ReadAttributePeriodicEnergyExportedWithParams reads attribute periodic energy exported with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributePeriodicEnergyExportedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributePeriodicEnergyExportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCumulativeEnergyResetWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCumulativeEnergyResetWithParams reads attribute cumulative energy reset with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeCumulativeEnergyResetWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeCumulativeEnergyResetWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mceem *MTRClusterElectricalEnergyMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mceem), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

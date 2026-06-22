@@ -137,7 +137,7 @@ func (psd *PersistentStoreDescription) SetValueForPragmaNamed(value obj.Object, 
 	objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("setValue:forPragmaNamed:"), objref.IDOf(value), purego.NSString(name))
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (psd *PersistentStoreDescription) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("type"))
 	if _r == 0 {
@@ -146,7 +146,7 @@ func (psd *PersistentStoreDescription) Type() string {
 	return purego.GoString(_r)
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (psd *PersistentStoreDescription) Configuration() string {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("configuration"))
 	if _r == 0 {
@@ -155,31 +155,31 @@ func (psd *PersistentStoreDescription) Configuration() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (psd *PersistentStoreDescription) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (psd *PersistentStoreDescription) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// IsReadOnly wraps the corresponding Objective-C method.
+// IsReadOnly reports whether the object is read only.
 func (psd *PersistentStoreDescription) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(psd), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// Timeout wraps the corresponding Objective-C method.
+// Timeout returns the timeout.
 func (psd *PersistentStoreDescription) Timeout() float64 {
 	_r := objc.Send[float64](objref.IDOf(psd), objc.RegisterName("timeout"))
 	return _r
 }
 
-// SqlitePragmas wraps the corresponding Objective-C method.
+// SqlitePragmas returns the sqlite pragmas.
 func (psd *PersistentStoreDescription) SqlitePragmas() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("sqlitePragmas"))
 	return obj.Wrap(_r)
@@ -203,7 +203,7 @@ func (psd *PersistentStoreDescription) ShouldInferMappingModelAutomatically() bo
 	return _r
 }
 
-// CloudKitContainerOptions wraps the corresponding Objective-C method.
+// CloudKitContainerOptions returns the cloud kit container options.
 func (psd *PersistentStoreDescription) CloudKitContainerOptions() *PersistentCloudKitContainerOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(psd), objc.RegisterName("cloudKitContainerOptions"))
 	return PersistentCloudKitContainerOptionsFromID(_r)

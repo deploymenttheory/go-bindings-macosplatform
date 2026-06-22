@@ -66,37 +66,37 @@ func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) String() string {
 	return rt.Description(objref.IDOf(mtsctzs))
 }
 
-// WithOffset sets the property and returns the receiver so calls can be chained.
+// WithOffset sets the offset.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtsctzs
 }
 
-// WithValidAt sets the property and returns the receiver so calls can be chained.
+// WithValidAt sets the valid at.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 	return mtsctzs
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStruct {
 	objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtsctzs
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) Offset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("offset"))
 	return obj.Wrap(_r)
 }
 
-// ValidAt wraps the corresponding Objective-C method.
+// ValidAt returns the valid at.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) ValidAt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("validAt"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mtsctzs *MTRTimeSynchronizationClusterTimeZoneStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzs), objc.RegisterName("name"))
 	if _r == 0 {

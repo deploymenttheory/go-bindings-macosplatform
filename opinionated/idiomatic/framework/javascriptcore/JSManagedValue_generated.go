@@ -73,7 +73,7 @@ func NewManagedValueWithValue(value *Value) *ManagedValue {
 	return managedValueAdopt(_id)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mv *ManagedValue) Value() *Value {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("value"))
 	return ValueFromID(_r)

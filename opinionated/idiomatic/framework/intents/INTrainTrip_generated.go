@@ -73,7 +73,7 @@ func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLoc
 	return trainTripAdopt(_id)
 }
 
-// Provider wraps the corresponding Objective-C method.
+// Provider returns the provider.
 func (tt *TrainTrip) Provider() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("provider"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (tt *TrainTrip) Provider() string {
 	return purego.GoString(_r)
 }
 
-// TrainName wraps the corresponding Objective-C method.
+// TrainName returns the train name.
 func (tt *TrainTrip) TrainName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainName"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (tt *TrainTrip) TrainName() string {
 	return purego.GoString(_r)
 }
 
-// TrainNumber wraps the corresponding Objective-C method.
+// TrainNumber returns the train number.
 func (tt *TrainTrip) TrainNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainNumber"))
 	if _r == 0 {
@@ -100,19 +100,19 @@ func (tt *TrainTrip) TrainNumber() string {
 	return purego.GoString(_r)
 }
 
-// TripDuration wraps the corresponding Objective-C method.
+// TripDuration returns the trip duration.
 func (tt *TrainTrip) TripDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureStationLocation wraps the corresponding Objective-C method.
+// DepartureStationLocation returns the departure station location.
 func (tt *TrainTrip) DepartureStationLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departureStationLocation"))
 	return obj.Wrap(_r)
 }
 
-// DeparturePlatform wraps the corresponding Objective-C method.
+// DeparturePlatform returns the departure platform.
 func (tt *TrainTrip) DeparturePlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
@@ -121,13 +121,13 @@ func (tt *TrainTrip) DeparturePlatform() string {
 	return purego.GoString(_r)
 }
 
-// ArrivalStationLocation wraps the corresponding Objective-C method.
+// ArrivalStationLocation returns the arrival station location.
 func (tt *TrainTrip) ArrivalStationLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalStationLocation"))
 	return obj.Wrap(_r)
 }
 
-// ArrivalPlatform wraps the corresponding Objective-C method.
+// ArrivalPlatform returns the arrival platform.
 func (tt *TrainTrip) ArrivalPlatform() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {

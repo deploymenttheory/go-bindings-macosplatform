@@ -64,7 +64,7 @@ func (mcpe *MIDIChannelPressureEvent) WithChannel(channel int) *MIDIChannelPress
 	return mcpe
 }
 
-// Pressure wraps the corresponding Objective-C method.
+// Pressure returns the pressure.
 func (mcpe *MIDIChannelPressureEvent) Pressure() int {
 	_r := objc.Send[int](objref.IDOf(mcpe), objc.RegisterName("pressure"))
 	return _r

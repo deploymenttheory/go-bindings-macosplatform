@@ -78,19 +78,19 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 	return uRLSessionWebSocketMessageAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uswsm *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage {
 	objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uswsm
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (uswsm *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
 	_r := objc.Send[URLSessionWebSocketMessageType](objref.IDOf(uswsm), objc.RegisterName("type"))
 	return _r
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (uswsm *URLSessionWebSocketMessage) Data() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("data"))
 	return DataFromID(_r)

@@ -70,19 +70,19 @@ func NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams() *MTRNetwork
 	return mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(_id)
 }
 
-// WithSsid sets the property and returns the receiver so calls can be chained.
+// WithSsid sets the ssid.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return mnccaouwfnp
 }
 
-// WithCredentials sets the property and returns the receiver so calls can be chained.
+// WithCredentials sets the credentials.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 	return mnccaouwfnp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccaouwfnp
@@ -100,19 +100,19 @@ func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) W
 	return mnccaouwfnp
 }
 
-// Ssid wraps the corresponding Objective-C method.
+// Ssid returns the ssid.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("ssid"))
 	return obj.Wrap(_r)
 }
 
-// Credentials wraps the corresponding Objective-C method.
+// Credentials returns the credentials.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

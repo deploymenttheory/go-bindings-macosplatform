@@ -70,7 +70,7 @@ func NewMTRDishwasherAlarmClusterResetParams() *MTRDishwasherAlarmClusterResetPa
 	return mTRDishwasherAlarmClusterResetParamsAdopt(_id)
 }
 
-// WithAlarms sets the property and returns the receiver so calls can be chained.
+// WithAlarms sets the alarms.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) WithAlarms(alarms obj.Object) *MTRDishwasherAlarmClusterResetParams {
 	objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("setAlarms:"), objref.IDOf(alarms))
 	return mdacrp
@@ -88,7 +88,7 @@ func (mdacrp *MTRDishwasherAlarmClusterResetParams) WithServerSideProcessingTime
 	return mdacrp
 }
 
-// Alarms wraps the corresponding Objective-C method.
+// Alarms returns the alarms.
 func (mdacrp *MTRDishwasherAlarmClusterResetParams) Alarms() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacrp), objc.RegisterName("alarms"))
 	return obj.Wrap(_r)

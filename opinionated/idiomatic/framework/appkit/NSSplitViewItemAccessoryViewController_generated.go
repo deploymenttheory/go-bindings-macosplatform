@@ -100,7 +100,7 @@ func (sviavc *SplitViewItemAccessoryViewController) WithChildViewControllers(ite
 	return sviavc
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (sviavc *SplitViewItemAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *SplitViewItemAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(sviavc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return sviavc

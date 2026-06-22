@@ -68,7 +68,7 @@ func (na *NotificationAction) String() string {
 	return rt.Description(objref.IDOf(na))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (na *NotificationAction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -77,7 +77,7 @@ func (na *NotificationAction) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (na *NotificationAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("title"))
 	if _r == 0 {
@@ -86,13 +86,13 @@ func (na *NotificationAction) Title() string {
 	return purego.GoString(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (na *NotificationAction) Options() NotificationActionOptions {
 	_r := objc.Send[NotificationActionOptions](objref.IDOf(na), objc.RegisterName("options"))
 	return _r
 }
 
-// Icon wraps the corresponding Objective-C method.
+// Icon returns the icon.
 func (na *NotificationAction) Icon() *NotificationActionIcon {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("icon"))
 	return NotificationActionIconFromID(_r)

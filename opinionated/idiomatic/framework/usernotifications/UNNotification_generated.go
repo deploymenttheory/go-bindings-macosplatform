@@ -72,13 +72,13 @@ func NewNotification() *Notification {
 	return notificationAdopt(_id)
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (n *Notification) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Request wraps the corresponding Objective-C method.
+// Request returns the request.
 func (n *Notification) Request() *NotificationRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("request"))
 	return NotificationRequestFromID(_r)

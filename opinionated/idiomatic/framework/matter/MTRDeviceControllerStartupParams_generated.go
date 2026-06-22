@@ -82,7 +82,7 @@ func (mdcsp *MTRDeviceControllerStartupParams) WithNodeID(nodeID obj.Object) *MT
 	return mdcsp
 }
 
-// WithCaseAuthenticatedTags sets the property and returns the receiver so calls can be chained.
+// WithCaseAuthenticatedTags sets the case authenticated tags.
 func (mdcsp *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthenticatedTags obj.Object) *MTRDeviceControllerStartupParams {
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setCaseAuthenticatedTags:"), objref.IDOf(caseAuthenticatedTags))
 	return mdcsp
@@ -100,7 +100,7 @@ func (mdcsp *MTRDeviceControllerStartupParams) WithIntermediateCertificate(inter
 	return mdcsp
 }
 
-// WithOperationalCertificateIssuerQueue sets the property and returns the receiver so calls can be chained.
+// WithOperationalCertificateIssuerQueue sets the operational certificate issuer queue.
 func (mdcsp *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue obj.Object) *MTRDeviceControllerStartupParams {
 	objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("setOperationalCertificateIssuerQueue:"), objref.IDOf(operationalCertificateIssuerQueue))
 	return mdcsp
@@ -130,7 +130,7 @@ func (mdcsp *MTRDeviceControllerStartupParams) NodeID() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CaseAuthenticatedTags wraps the corresponding Objective-C method.
+// CaseAuthenticatedTags returns the case authenticated tags.
 func (mdcsp *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("caseAuthenticatedTags"))
 	return obj.Wrap(_r)
@@ -154,7 +154,7 @@ func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificate() obj.Obje
 	return obj.Wrap(_r)
 }
 
-// OperationalCertificateIssuerQueue wraps the corresponding Objective-C method.
+// OperationalCertificateIssuerQueue returns the operational certificate issuer queue.
 func (mdcsp *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdcsp), objc.RegisterName("operationalCertificateIssuerQueue"))
 	return obj.Wrap(_r)

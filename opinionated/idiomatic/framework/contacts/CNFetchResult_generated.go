@@ -72,13 +72,13 @@ func NewFetchResult() *FetchResult {
 	return fetchResultAdopt(_id)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (fr *FetchResult) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// CurrentHistoryToken wraps the corresponding Objective-C method.
+// CurrentHistoryToken returns the current history token.
 func (fr *FetchResult) CurrentHistoryToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("currentHistoryToken"))
 	return obj.Wrap(_r)

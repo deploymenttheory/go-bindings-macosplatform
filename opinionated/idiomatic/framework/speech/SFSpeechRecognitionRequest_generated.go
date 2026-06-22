@@ -105,7 +105,7 @@ func (srr *SpeechRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *
 	return srr
 }
 
-// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
+// WithCustomizedLanguageModel sets the customized language model.
 func (srr *SpeechRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return srr
@@ -152,7 +152,7 @@ func (srr *SpeechRecognitionRequest) AddsPunctuation() bool {
 	return _r
 }
 
-// CustomizedLanguageModel wraps the corresponding Objective-C method.
+// CustomizedLanguageModel returns the customized language model.
 func (srr *SpeechRecognitionRequest) CustomizedLanguageModel() *SpeechLanguageModelConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("customizedLanguageModel"))
 	return SpeechLanguageModelConfigurationFromID(_r)

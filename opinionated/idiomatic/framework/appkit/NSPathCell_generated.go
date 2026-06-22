@@ -384,19 +384,19 @@ func (pc *PathCell) MouseExitedWithFrameInView(event *Event, frame corefoundatio
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
 }
 
-// PathStyle wraps the corresponding Objective-C method.
+// PathStyle returns the path style.
 func (pc *PathCell) PathStyle() PathStyle {
 	_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
 	return _r
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (pc *PathCell) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// AllowedTypes wraps the corresponding Objective-C method.
+// AllowedTypes returns the allowed types.
 //
 // AllowedTypes returns the collection as a Go slice.
 func (pc *PathCell) AllowedTypes() []string {
@@ -404,7 +404,7 @@ func (pc *PathCell) AllowedTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PathComponentCells wraps the corresponding Objective-C method.
+// PathComponentCells returns the path component cells.
 //
 // PathComponentCells returns the collection as a Go slice.
 func (pc *PathCell) PathComponentCells() []*PathComponentCell {
@@ -412,19 +412,19 @@ func (pc *PathCell) PathComponentCells() []*PathComponentCell {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
 }
 
-// ClickedPathComponentCell wraps the corresponding Objective-C method.
+// ClickedPathComponentCell returns the clicked path component cell.
 func (pc *PathCell) ClickedPathComponentCell() *PathComponentCell {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
 	return PathComponentCellFromID(_r)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (pc *PathCell) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// PlaceholderString wraps the corresponding Objective-C method.
+// PlaceholderString returns the placeholder string.
 func (pc *PathCell) PlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
@@ -433,7 +433,7 @@ func (pc *PathCell) PlaceholderString() string {
 	return purego.GoString(_r)
 }
 
-// PlaceholderAttributedString wraps the corresponding Objective-C method.
+// PlaceholderAttributedString returns the placeholder attributed string.
 func (pc *PathCell) PlaceholderAttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)

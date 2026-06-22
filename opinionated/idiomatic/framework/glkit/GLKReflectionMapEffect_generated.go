@@ -88,7 +88,7 @@ func (rme *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
 	return rme
 }
 
-// TextureCubeMap wraps the corresponding Objective-C method.
+// TextureCubeMap returns the texture cube map.
 func (rme *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
 	_r := objc.Send[objc.ID](objref.IDOf(rme), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)

@@ -97,7 +97,7 @@ func (wtc *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOp
 	return wtc
 }
 
-// WithIncludesTextListMarkers sets the property and returns the receiver so calls can be chained.
+// WithIncludesTextListMarkers sets the includes text list markers.
 func (wtc *WritingToolsCoordinator) WithIncludesTextListMarkers(includesTextListMarkers bool) *WritingToolsCoordinator {
 	objc.Send[objc.ID](objref.IDOf(wtc), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 	return wtc

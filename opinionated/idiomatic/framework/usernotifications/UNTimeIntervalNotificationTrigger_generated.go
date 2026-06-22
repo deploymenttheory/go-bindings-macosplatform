@@ -58,7 +58,7 @@ func (tint *TimeIntervalNotificationTrigger) NextTriggerDate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// TimeInterval wraps the corresponding Objective-C method.
+// TimeInterval returns the time interval.
 func (tint *TimeIntervalNotificationTrigger) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(tint), objc.RegisterName("timeInterval"))
 	return _r

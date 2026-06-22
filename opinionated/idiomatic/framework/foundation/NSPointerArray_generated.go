@@ -86,7 +86,7 @@ func (pa *PointerArray) WithCount(count int) *PointerArray {
 	return pa
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pa *PointerArray) WithScriptingProperties(scriptingProperties obj.Object) *PointerArray {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pa
@@ -102,19 +102,19 @@ func (pa *PointerArray) Compact() {
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("compact"))
 }
 
-// PointerFunctions wraps the corresponding Objective-C method.
+// PointerFunctions returns the pointer functions.
 func (pa *PointerArray) PointerFunctions() *PointerFunctions {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (pa *PointerArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(pa), objc.RegisterName("count"))
 	return _r
 }
 
-// AllObjects wraps the corresponding Objective-C method.
+// AllObjects returns the all objects.
 func (pa *PointerArray) AllObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("allObjects"))
 	return obj.Wrap(_r)

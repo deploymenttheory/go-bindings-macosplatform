@@ -72,7 +72,7 @@ func NewAppleEventManager() *AppleEventManager {
 	return appleEventManagerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (aem *AppleEventManager) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventManager {
 	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return aem
@@ -111,13 +111,13 @@ func (aem *AppleEventManager) ResumeWithSuspensionID(suspensionID obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID))
 }
 
-// CurrentAppleEvent wraps the corresponding Objective-C method.
+// CurrentAppleEvent returns the current apple event.
 func (aem *AppleEventManager) CurrentAppleEvent() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentAppleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// CurrentReplyAppleEvent wraps the corresponding Objective-C method.
+// CurrentReplyAppleEvent returns the current reply apple event.
 func (aem *AppleEventManager) CurrentReplyAppleEvent() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentReplyAppleEvent"))
 	return AppleEventDescriptorFromID(_r)

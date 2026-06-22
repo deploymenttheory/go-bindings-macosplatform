@@ -102,7 +102,7 @@ func (sbar *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioR
 	return sbar
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (sbar *SampleBufferAudioRenderer) Status() QueuedSampleBufferRenderingStatus {
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbar), objc.RegisterName("status"))
 	return _r
@@ -129,13 +129,13 @@ func (sbar *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() Audio
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (sbar *SampleBufferAudioRenderer) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(sbar), objc.RegisterName("volume"))
 	return _r
 }
 
-// IsMuted wraps the corresponding Objective-C method.
+// IsMuted reports whether the object is muted.
 func (sbar *SampleBufferAudioRenderer) IsMuted() bool {
 	_r := objc.Send[bool](objref.IDOf(sbar), objc.RegisterName("isMuted"))
 	return _r

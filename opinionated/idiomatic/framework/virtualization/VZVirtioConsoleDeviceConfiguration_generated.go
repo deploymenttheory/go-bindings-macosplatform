@@ -51,7 +51,7 @@ func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
 	return virtioConsoleDeviceConfigurationAdopt(_id)
 }
 
-// Ports wraps the corresponding Objective-C method.
+// Ports returns the ports.
 func (vcdc *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
 	_r := objc.Send[objc.ID](objref.IDOf(vcdc), objc.RegisterName("ports"))
 	return VirtioConsolePortConfigurationArrayFromID(_r)

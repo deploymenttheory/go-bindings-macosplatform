@@ -63,7 +63,7 @@ func (aidc *AddIdentityDocumentConfiguration) WithLocalizedDescription(localized
 	return aidc
 }
 
-// Metadata wraps the corresponding Objective-C method.
+// Metadata returns the metadata.
 func (aidc *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(aidc), objc.RegisterName("metadata"))
 	return IdentityDocumentMetadataFromID(_r)

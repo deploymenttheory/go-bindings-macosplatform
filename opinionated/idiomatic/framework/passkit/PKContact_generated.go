@@ -102,25 +102,25 @@ func (c *Contact) WithSupplementarySubLocality(supplementarySubLocality string) 
 	return c
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (c *Contact) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// PostalAddress wraps the corresponding Objective-C method.
+// PostalAddress returns the postal address.
 func (c *Contact) PostalAddress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
 }
 
-// PhoneNumber wraps the corresponding Objective-C method.
+// PhoneNumber returns the phone number.
 func (c *Contact) PhoneNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneNumber"))
 	return obj.Wrap(_r)
 }
 
-// EmailAddress wraps the corresponding Objective-C method.
+// EmailAddress returns the email address.
 func (c *Contact) EmailAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("emailAddress"))
 	if _r == 0 {
@@ -129,7 +129,7 @@ func (c *Contact) EmailAddress() string {
 	return purego.GoString(_r)
 }
 
-// SupplementarySubLocality wraps the corresponding Objective-C method.
+// SupplementarySubLocality returns the supplementary sub locality.
 func (c *Contact) SupplementarySubLocality() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("supplementarySubLocality"))
 	if _r == 0 {

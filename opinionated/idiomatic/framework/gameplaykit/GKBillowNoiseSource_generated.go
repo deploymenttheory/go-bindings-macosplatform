@@ -82,7 +82,7 @@ func (bns *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
 	return bns
 }
 
-// Persistence wraps the corresponding Objective-C method.
+// Persistence returns the persistence.
 func (bns *BillowNoiseSource) Persistence() float64 {
 	_r := objc.Send[float64](objref.IDOf(bns), objc.RegisterName("persistence"))
 	return _r

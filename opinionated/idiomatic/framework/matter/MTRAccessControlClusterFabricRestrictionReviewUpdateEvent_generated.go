@@ -70,31 +70,31 @@ func NewMTRAccessControlClusterFabricRestrictionReviewUpdateEvent() *MTRAccessCo
 	return mTRAccessControlClusterFabricRestrictionReviewUpdateEventAdopt(_id)
 }
 
-// WithToken sets the property and returns the receiver so calls can be chained.
+// WithToken sets the token.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithToken(token obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
 	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return maccfrrue
 }
 
-// WithInstruction sets the property and returns the receiver so calls can be chained.
+// WithInstruction sets the instruction.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithInstruction(instruction string) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
 	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setInstruction:"), purego.NSString(instruction))
 	return maccfrrue
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
 	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccfrrue
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("token"))
 	return obj.Wrap(_r)
 }
 
-// Instruction wraps the corresponding Objective-C method.
+// Instruction returns the instruction.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() string {
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("instruction"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Inst
 	return purego.GoString(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

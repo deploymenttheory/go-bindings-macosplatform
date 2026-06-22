@@ -709,7 +709,7 @@ func (d *Document) RelinquishPresentedItemToWriter(writer func(func())) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("relinquishPresentedItemToWriter:"), objc.NewBlock(func(_ objc.Block, _b0 func()) { writer(_b0) }))
 }
 
-// SavePresentedItemChanges wraps the corresponding Objective-C method.
+// SavePresentedItemChanges saves presented item changes.
 //
 // SavePresentedItemChanges blocks until the operation completes or ctx is cancelled.
 func (d *Document) SavePresentedItemChanges(ctx context.Context) error {
@@ -777,7 +777,7 @@ func (d *Document) PresentedItemDidResolveConflictVersion(version obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("presentedItemDidResolveConflictVersion:"), objref.IDOf(version))
 }
 
-// FileType wraps the corresponding Objective-C method.
+// FileType returns the file type.
 func (d *Document) FileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileType"))
 	if _r == 0 {
@@ -786,25 +786,25 @@ func (d *Document) FileType() string {
 	return purego.GoString(_r)
 }
 
-// FileURL wraps the corresponding Objective-C method.
+// FileURL returns the file URL.
 func (d *Document) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
 
-// FileModificationDate wraps the corresponding Objective-C method.
+// FileModificationDate returns the file modification date.
 func (d *Document) FileModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileModificationDate"))
 	return obj.Wrap(_r)
 }
 
-// IsDraft wraps the corresponding Objective-C method.
+// IsDraft reports whether the object is draft.
 func (d *Document) IsDraft() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDraft"))
 	return _r
 }
 
-// IsEntireFileLoaded wraps the corresponding Objective-C method.
+// IsEntireFileLoaded reports whether the object is entire file loaded.
 func (d *Document) IsEntireFileLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEntireFileLoaded"))
 	return _r
@@ -822,7 +822,7 @@ func (d *Document) KeepBackupFile() bool {
 	return _r
 }
 
-// BackupFileURL wraps the corresponding Objective-C method.
+// BackupFileURL returns the backup file URL.
 func (d *Document) BackupFileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("backupFileURL"))
 	return obj.Wrap(_r)
@@ -840,7 +840,7 @@ func (d *Document) FileNameExtensionWasHiddenInLastRunSavePanel() bool {
 	return _r
 }
 
-// FileTypeFromLastRunSavePanel wraps the corresponding Objective-C method.
+// FileTypeFromLastRunSavePanel returns the file type from last run save panel.
 func (d *Document) FileTypeFromLastRunSavePanel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileTypeFromLastRunSavePanel"))
 	if _r == 0 {
@@ -849,19 +849,19 @@ func (d *Document) FileTypeFromLastRunSavePanel() string {
 	return purego.GoString(_r)
 }
 
-// HasUnautosavedChanges wraps the corresponding Objective-C method.
+// HasUnautosavedChanges reports whether the object has unautosaved changes.
 func (d *Document) HasUnautosavedChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUnautosavedChanges"))
 	return _r
 }
 
-// IsBrowsingVersions wraps the corresponding Objective-C method.
+// IsBrowsingVersions reports whether the object is browsing versions.
 func (d *Document) IsBrowsingVersions() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isBrowsingVersions"))
 	return _r
 }
 
-// AutosavingFileType wraps the corresponding Objective-C method.
+// AutosavingFileType returns the autosaving file type.
 func (d *Document) AutosavingFileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("autosavingFileType"))
 	if _r == 0 {
@@ -870,25 +870,25 @@ func (d *Document) AutosavingFileType() string {
 	return purego.GoString(_r)
 }
 
-// AutosavedContentsFileURL wraps the corresponding Objective-C method.
+// AutosavedContentsFileURL returns the autosaved contents file URL.
 func (d *Document) AutosavedContentsFileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("autosavedContentsFileURL"))
 	return obj.Wrap(_r)
 }
 
-// IsLocked wraps the corresponding Objective-C method.
+// IsLocked reports whether the object is locked.
 func (d *Document) IsLocked() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isLocked"))
 	return _r
 }
 
-// PrintInfo wraps the corresponding Objective-C method.
+// PrintInfo returns the print info.
 func (d *Document) PrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)
 }
 
-// PDFPrintOperation wraps the corresponding Objective-C method.
+// PDFPrintOperation returns the pdf print operation.
 func (d *Document) PDFPrintOperation() *PrintOperation {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("PDFPrintOperation"))
 	return PrintOperationFromID(_r)
@@ -900,7 +900,7 @@ func (d *Document) AllowsDocumentSharing() bool {
 	return _r
 }
 
-// PreviewRepresentableActivityItems wraps the corresponding Objective-C method.
+// PreviewRepresentableActivityItems returns the preview representable activity items.
 func (d *Document) PreviewRepresentableActivityItems() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("previewRepresentableActivityItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -911,37 +911,37 @@ func (d *Document) SetPreviewRepresentableActivityItems(previewRepresentableActi
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// IsDocumentEdited wraps the corresponding Objective-C method.
+// IsDocumentEdited reports whether the object is document edited.
 func (d *Document) IsDocumentEdited() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isDocumentEdited"))
 	return _r
 }
 
-// IsInViewingMode wraps the corresponding Objective-C method.
+// IsInViewingMode reports whether the object is in viewing mode.
 func (d *Document) IsInViewingMode() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isInViewingMode"))
 	return _r
 }
 
-// UndoManager wraps the corresponding Objective-C method.
+// UndoManager returns the undo manager.
 func (d *Document) UndoManager() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("undoManager"))
 	return obj.Wrap(_r)
 }
 
-// HasUndoManager wraps the corresponding Objective-C method.
+// HasUndoManager reports whether the object has undo manager.
 func (d *Document) HasUndoManager() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasUndoManager"))
 	return _r
 }
 
-// WindowNibName wraps the corresponding Objective-C method.
+// WindowNibName returns the window nib name.
 func (d *Document) WindowNibName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowNibName"))
 	return obj.Wrap(_r)
 }
 
-// WindowControllers wraps the corresponding Objective-C method.
+// WindowControllers returns the window controllers.
 //
 // WindowControllers returns the collection as a Go slice.
 func (d *Document) WindowControllers() []*WindowController {
@@ -949,7 +949,7 @@ func (d *Document) WindowControllers() []*WindowController {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WindowController { return WindowControllerFromID(_id) })
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (d *Document) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -958,19 +958,19 @@ func (d *Document) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// WindowForSheet wraps the corresponding Objective-C method.
+// WindowForSheet returns the window for sheet.
 func (d *Document) WindowForSheet() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("windowForSheet"))
 	return WindowFromID(_r)
 }
 
-// PresentedItemURL wraps the corresponding Objective-C method.
+// PresentedItemURL returns the presented item URL.
 func (d *Document) PresentedItemURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("presentedItemURL"))
 	return obj.Wrap(_r)
 }
 
-// ObservedPresentedItemUbiquityAttributes wraps the corresponding Objective-C method.
+// ObservedPresentedItemUbiquityAttributes returns the observed presented item ubiquity attributes.
 func (d *Document) ObservedPresentedItemUbiquityAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("observedPresentedItemUbiquityAttributes"))
 	return obj.Wrap(_r)
@@ -988,7 +988,7 @@ func (d *Document) FileAttributesToWriteToFileOfTypeSaveOperation(fullDocumentPa
 	return obj.Wrap(_r)
 }
 
-// FileName wraps the corresponding Objective-C method.
+// FileName returns the file name.
 func (d *Document) FileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileName"))
 	if _r == 0 {
@@ -1003,13 +1003,13 @@ func (d *Document) FileWrapperRepresentationOfType(type_ string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// LoadDataRepresentationOfType wraps the corresponding Objective-C method.
+// LoadDataRepresentationOfType loads data representation of type.
 func (d *Document) LoadDataRepresentationOfType(data obj.Object, type_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadDataRepresentation:ofType:"), objref.IDOf(data), purego.NSString(type_))
 	return _r
 }
 
-// LoadFileWrapperRepresentationOfType wraps the corresponding Objective-C method.
+// LoadFileWrapperRepresentationOfType loads file wrapper representation of type.
 func (d *Document) LoadFileWrapperRepresentationOfType(wrapper obj.Object, type_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("loadFileWrapperRepresentation:ofType:"), objref.IDOf(wrapper), purego.NSString(type_))
 	return _r
@@ -1020,7 +1020,7 @@ func (d *Document) PrintShowingPrintPanel(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("printShowingPrintPanel:"), flag)
 }
 
-// ReadFromFileOfType wraps the corresponding Objective-C method.
+// ReadFromFileOfType reads from file of type.
 func (d *Document) ReadFromFileOfType(fileName string, type_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("readFromFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
 	return _r
@@ -1038,7 +1038,7 @@ func (d *Document) RevertToSavedFromURLOfType(url string, type_ string) bool {
 	return _r
 }
 
-// RunModalPageLayoutWithPrintInfo wraps the corresponding Objective-C method.
+// RunModalPageLayoutWithPrintInfo runs modal page layout with print info.
 func (d *Document) RunModalPageLayoutWithPrintInfo(printInfo *PrintInfo) int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("runModalPageLayoutWithPrintInfo:"), objref.IDOf(printInfo))
 	return _r
@@ -1049,19 +1049,19 @@ func (d *Document) SetFileName(fileName string) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setFileName:"), purego.NSString(fileName))
 }
 
-// WriteToFileOfType wraps the corresponding Objective-C method.
+// WriteToFileOfType writes to file of type.
 func (d *Document) WriteToFileOfType(fileName string, type_ string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:"), purego.NSString(fileName), purego.NSString(type_))
 	return _r
 }
 
-// WriteToFileOfTypeOriginalFileSaveOperation wraps the corresponding Objective-C method.
+// WriteToFileOfTypeOriginalFileSaveOperation writes to file of type original file save operation.
 func (d *Document) WriteToFileOfTypeOriginalFileSaveOperation(fullDocumentPath string, documentTypeName string, fullOriginalDocumentPath string, saveOperationType SaveOperationType) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:ofType:originalFile:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), purego.NSString(fullOriginalDocumentPath), saveOperationType)
 	return _r
 }
 
-// WriteWithBackupToFileOfTypeSaveOperation wraps the corresponding Objective-C method.
+// WriteWithBackupToFileOfTypeSaveOperation writes with backup to file of type save operation.
 func (d *Document) WriteWithBackupToFileOfTypeSaveOperation(fullDocumentPath string, documentTypeName string, saveOperationType SaveOperationType) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeWithBackupToFile:ofType:saveOperation:"), purego.NSString(fullDocumentPath), purego.NSString(documentTypeName), saveOperationType)
 	return _r
@@ -1078,7 +1078,7 @@ func (d *Document) UpdateUserActivityState(activity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("updateUserActivityState:"), objref.IDOf(activity))
 }
 
-// UserActivity wraps the corresponding Objective-C method.
+// UserActivity returns the user activity.
 func (d *Document) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
@@ -1102,7 +1102,7 @@ func (d *Document) HandlePrintScriptCommand(command obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// LastComponentOfFileName wraps the corresponding Objective-C method.
+// LastComponentOfFileName returns the last component of file name.
 func (d *Document) LastComponentOfFileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("lastComponentOfFileName"))
 	if _r == 0 {

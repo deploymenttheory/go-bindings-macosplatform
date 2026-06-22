@@ -123,7 +123,7 @@ func (mps *MutableParagraphStyle) WithHyphenationFactor(hyphenationFactor float3
 	return mps
 }
 
-// WithUsesDefaultHyphenation sets the property and returns the receiver so calls can be chained.
+// WithUsesDefaultHyphenation sets the uses default hyphenation.
 func (mps *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle {
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
 	return mps

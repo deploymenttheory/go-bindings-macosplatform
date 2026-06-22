@@ -51,7 +51,7 @@ func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIden
 	return signedPersonIdentityProofAdopt(_id)
 }
 
-// SignatureData wraps the corresponding Objective-C method.
+// SignatureData returns the signature data.
 func (spip *SignedPersonIdentityProof) SignatureData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(spip), objc.RegisterName("signatureData"))
 	return obj.Wrap(_r)

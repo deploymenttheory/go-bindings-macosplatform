@@ -72,19 +72,19 @@ func NewMediaGroup() *MediaGroup {
 	return mediaGroupAdopt(_id)
 }
 
-// MediaLibrary wraps the corresponding Objective-C method.
+// MediaLibrary returns the media library.
 func (mg *MediaGroup) MediaLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
-// Parent wraps the corresponding Objective-C method.
+// Parent returns the parent.
 func (mg *MediaGroup) Parent() *MediaGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("parent"))
 	return MediaGroupFromID(_r)
 }
 
-// MediaSourceIdentifier wraps the corresponding Objective-C method.
+// MediaSourceIdentifier returns the media source identifier.
 func (mg *MediaGroup) MediaSourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (mg *MediaGroup) MediaSourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mg *MediaGroup) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("name"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (mg *MediaGroup) Name() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (mg *MediaGroup) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -111,7 +111,7 @@ func (mg *MediaGroup) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// TypeIdentifier wraps the corresponding Objective-C method.
+// TypeIdentifier returns the type identifier.
 func (mg *MediaGroup) TypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
@@ -120,13 +120,13 @@ func (mg *MediaGroup) TypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (mg *MediaGroup) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// ChildGroups wraps the corresponding Objective-C method.
+// ChildGroups returns the child groups.
 //
 // ChildGroups returns the collection as a Go slice.
 func (mg *MediaGroup) ChildGroups() []*MediaGroup {
@@ -134,25 +134,25 @@ func (mg *MediaGroup) ChildGroups() []*MediaGroup {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (mg *MediaGroup) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// ModificationDate wraps the corresponding Objective-C method.
+// ModificationDate returns the modification date.
 func (mg *MediaGroup) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)
 }
 
-// IconImage wraps the corresponding Objective-C method.
+// IconImage returns the icon image.
 func (mg *MediaGroup) IconImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("iconImage"))
 	return obj.Wrap(_r)
 }
 
-// MediaObjects wraps the corresponding Objective-C method.
+// MediaObjects returns the media objects.
 //
 // MediaObjects returns the collection as a Go slice.
 func (mg *MediaGroup) MediaObjects() []*MediaObject {

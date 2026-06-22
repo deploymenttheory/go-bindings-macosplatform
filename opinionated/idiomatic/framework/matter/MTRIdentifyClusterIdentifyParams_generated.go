@@ -70,7 +70,7 @@ func NewMTRIdentifyClusterIdentifyParams() *MTRIdentifyClusterIdentifyParams {
 	return mTRIdentifyClusterIdentifyParamsAdopt(_id)
 }
 
-// WithIdentifyTime sets the property and returns the receiver so calls can be chained.
+// WithIdentifyTime sets the identify time.
 func (micip *MTRIdentifyClusterIdentifyParams) WithIdentifyTime(identifyTime obj.Object) *MTRIdentifyClusterIdentifyParams {
 	objc.Send[objc.ID](objref.IDOf(micip), objc.RegisterName("setIdentifyTime:"), objref.IDOf(identifyTime))
 	return micip
@@ -88,7 +88,7 @@ func (micip *MTRIdentifyClusterIdentifyParams) WithServerSideProcessingTimeout(s
 	return micip
 }
 
-// IdentifyTime wraps the corresponding Objective-C method.
+// IdentifyTime returns the identify time.
 func (micip *MTRIdentifyClusterIdentifyParams) IdentifyTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(micip), objc.RegisterName("identifyTime"))
 	return obj.Wrap(_r)

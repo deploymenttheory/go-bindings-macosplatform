@@ -73,13 +73,13 @@ func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateCom
 	return dateComponentsRangeAdopt(_id)
 }
 
-// StartDateComponents wraps the corresponding Objective-C method.
+// StartDateComponents returns the start date components.
 func (dcr *DateComponentsRange) StartDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("startDateComponents"))
 	return obj.Wrap(_r)
 }
 
-// EndDateComponents wraps the corresponding Objective-C method.
+// EndDateComponents returns the end date components.
 func (dcr *DateComponentsRange) EndDateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dcr), objc.RegisterName("endDateComponents"))
 	return obj.Wrap(_r)

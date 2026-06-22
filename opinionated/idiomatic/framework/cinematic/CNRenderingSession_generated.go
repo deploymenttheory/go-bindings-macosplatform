@@ -73,19 +73,19 @@ func NewRenderingSession() *RenderingSession {
 	return renderingSessionAdopt(_id)
 }
 
-// SessionAttributes wraps the corresponding Objective-C method.
+// SessionAttributes returns the session attributes.
 func (rs *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("sessionAttributes"))
 	return RenderingSessionAttributesFromID(_r)
 }
 
-// PreferredTransform wraps the corresponding Objective-C method.
+// PreferredTransform returns the preferred transform.
 func (rs *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(rs), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
-// Quality wraps the corresponding Objective-C method.
+// Quality returns the quality.
 func (rs *RenderingSession) Quality() RenderingQuality {
 	_r := objc.Send[RenderingQuality](objref.IDOf(rs), objc.RegisterName("quality"))
 	return _r

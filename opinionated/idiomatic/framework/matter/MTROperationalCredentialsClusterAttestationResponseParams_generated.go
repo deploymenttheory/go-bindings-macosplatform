@@ -78,13 +78,13 @@ func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseVal
 	return mTROperationalCredentialsClusterAttestationResponseParamsAdopt(_id), nil
 }
 
-// WithAttestationElements sets the property and returns the receiver so calls can be chained.
+// WithAttestationElements sets the attestation elements.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationElements(attestationElements obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationElements:"), objref.IDOf(attestationElements))
 	return moccarp
 }
 
-// WithAttestationSignature sets the property and returns the receiver so calls can be chained.
+// WithAttestationSignature sets the attestation signature.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
 	return moccarp
@@ -96,19 +96,19 @@ func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithTi
 	return moccarp
 }
 
-// WithSignature sets the property and returns the receiver so calls can be chained.
+// WithSignature sets the signature.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) WithSignature(signature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setSignature:"), objref.IDOf(signature))
 	return moccarp
 }
 
-// AttestationElements wraps the corresponding Objective-C method.
+// AttestationElements returns the attestation elements.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationElements"))
 	return obj.Wrap(_r)
 }
 
-// AttestationSignature wraps the corresponding Objective-C method.
+// AttestationSignature returns the attestation signature.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationSignature"))
 	return obj.Wrap(_r)
@@ -120,7 +120,7 @@ func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) TimedI
 	return obj.Wrap(_r)
 }
 
-// Signature wraps the corresponding Objective-C method.
+// Signature returns the signature.
 func (moccarp *MTROperationalCredentialsClusterAttestationResponseParams) Signature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("signature"))
 	return obj.Wrap(_r)

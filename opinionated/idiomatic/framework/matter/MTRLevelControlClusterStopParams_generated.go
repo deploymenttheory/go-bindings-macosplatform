@@ -70,13 +70,13 @@ func NewMTRLevelControlClusterStopParams() *MTRLevelControlClusterStopParams {
 	return mTRLevelControlClusterStopParamsAdopt(_id)
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mlccsp *MTRLevelControlClusterStopParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStopParams {
 	objc.Send[objc.ID](objref.IDOf(mlccsp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccsp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mlccsp *MTRLevelControlClusterStopParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStopParams {
 	objc.Send[objc.ID](objref.IDOf(mlccsp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccsp
@@ -94,13 +94,13 @@ func (mlccsp *MTRLevelControlClusterStopParams) WithServerSideProcessingTimeout(
 	return mlccsp
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mlccsp *MTRLevelControlClusterStopParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccsp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mlccsp *MTRLevelControlClusterStopParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccsp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

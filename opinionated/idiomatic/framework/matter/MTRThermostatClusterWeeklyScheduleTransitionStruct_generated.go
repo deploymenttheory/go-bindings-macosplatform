@@ -66,37 +66,37 @@ func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) String() stri
 	return rt.Description(objref.IDOf(mtcwsts))
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtcwsts
 }
 
-// WithHeatSetpoint sets the property and returns the receiver so calls can be chained.
+// WithHeatSetpoint sets the heat setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 	return mtcwsts
 }
 
-// WithCoolSetpoint sets the property and returns the receiver so calls can be chained.
+// WithCoolSetpoint sets the cool setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
 	return mtcwsts
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// HeatSetpoint wraps the corresponding Objective-C method.
+// HeatSetpoint returns the heat setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("heatSetpoint"))
 	return obj.Wrap(_r)
 }
 
-// CoolSetpoint wraps the corresponding Objective-C method.
+// CoolSetpoint returns the cool setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("coolSetpoint"))
 	return obj.Wrap(_r)

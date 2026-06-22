@@ -52,7 +52,7 @@ func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) 
 	return videoProcessorTimeIntervalCadenceAdopt(_id)
 }
 
-// TimeInterval wraps the corresponding Objective-C method.
+// TimeInterval returns the time interval.
 func (vptic *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(vptic), objc.RegisterName("timeInterval"))
 	return _r

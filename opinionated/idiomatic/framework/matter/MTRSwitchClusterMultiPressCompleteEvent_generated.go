@@ -70,37 +70,37 @@ func NewMTRSwitchClusterMultiPressCompleteEvent() *MTRSwitchClusterMultiPressCom
 	return mTRSwitchClusterMultiPressCompleteEventAdopt(_id)
 }
 
-// WithPreviousPosition sets the property and returns the receiver so calls can be chained.
+// WithPreviousPosition sets the previous position.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 	return mscmpce
 }
 
-// WithNewPosition sets the property and returns the receiver so calls can be chained.
+// WithNewPosition sets the new position.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscmpce
 }
 
-// WithTotalNumberOfPressesCounted sets the property and returns the receiver so calls can be chained.
+// WithTotalNumberOfPressesCounted sets the total number of presses counted.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithTotalNumberOfPressesCounted(totalNumberOfPressesCounted obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setTotalNumberOfPressesCounted:"), objref.IDOf(totalNumberOfPressesCounted))
 	return mscmpce
 }
 
-// PreviousPosition wraps the corresponding Objective-C method.
+// PreviousPosition returns the previous position.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) PreviousPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("previousPosition"))
 	return obj.Wrap(_r)
 }
 
-// GetNewPosition wraps the corresponding Objective-C method.
-func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) GetNewPosition() obj.Object {
+// NewPosition returns the new position.
+func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) NewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
 
-// TotalNumberOfPressesCounted wraps the corresponding Objective-C method.
+// TotalNumberOfPressesCounted returns the total number of presses counted.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) TotalNumberOfPressesCounted() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("totalNumberOfPressesCounted"))
 	return obj.Wrap(_r)

@@ -138,7 +138,7 @@ func (mt *MusicTrack) DestinationAudioUnit() *AudioUnit {
 	return AudioUnitFromID(_r)
 }
 
-// DestinationMIDIEndpoint wraps the corresponding Objective-C method.
+// DestinationMIDIEndpoint returns the destination midi endpoint.
 func (mt *MusicTrack) DestinationMIDIEndpoint() int {
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("destinationMIDIEndpoint"))
 	return _r

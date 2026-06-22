@@ -45,7 +45,7 @@ func metadataBodyObjectAdopt(id objc.ID) *MetadataBodyObject {
 	return x
 }
 
-// BodyID wraps the corresponding Objective-C method.
+// BodyID returns the body ID.
 func (mbo *MetadataBodyObject) BodyID() int {
 	_r := objc.Send[int](objref.IDOf(mbo), objc.RegisterName("bodyID"))
 	return _r

@@ -52,31 +52,31 @@ func NewButtonTouchBarItem() *ButtonTouchBarItem {
 	return buttonTouchBarItemAdopt(_id)
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (btbi *ButtonTouchBarItem) WithTitle(title string) *ButtonTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return btbi
 }
 
-// WithImage sets the property and returns the receiver so calls can be chained.
+// WithImage sets the image.
 func (btbi *ButtonTouchBarItem) WithImage(image *Image) *ButtonTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return btbi
 }
 
-// WithBezelColor sets the property and returns the receiver so calls can be chained.
+// WithBezelColor sets the bezel color.
 func (btbi *ButtonTouchBarItem) WithBezelColor(bezelColor *Color) *ButtonTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	return btbi
 }
 
-// WithTarget sets the property and returns the receiver so calls can be chained.
+// WithTarget sets the target.
 func (btbi *ButtonTouchBarItem) WithTarget(target obj.Object) *ButtonTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return btbi
 }
 
-// WithEnabled sets the property and returns the receiver so calls can be chained.
+// WithEnabled sets the enabled.
 func (btbi *ButtonTouchBarItem) WithEnabled(enabled bool) *ButtonTouchBarItem {
 	objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("setEnabled:"), enabled)
 	return btbi
@@ -94,7 +94,7 @@ func (btbi *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float3
 	return btbi
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (btbi *ButtonTouchBarItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("title"))
 	if _r == 0 {
@@ -103,25 +103,25 @@ func (btbi *ButtonTouchBarItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (btbi *ButtonTouchBarItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// BezelColor wraps the corresponding Objective-C method.
+// BezelColor returns the bezel color.
 func (btbi *ButtonTouchBarItem) BezelColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("bezelColor"))
 	return ColorFromID(_r)
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (btbi *ButtonTouchBarItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(btbi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (btbi *ButtonTouchBarItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(btbi), objc.RegisterName("isEnabled"))
 	return _r

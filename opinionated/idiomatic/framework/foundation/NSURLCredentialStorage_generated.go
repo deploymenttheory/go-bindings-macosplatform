@@ -74,7 +74,7 @@ func NewURLCredentialStorage() *URLCredentialStorage {
 	return uRLCredentialStorageAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ucs *URLCredentialStorage) WithScriptingProperties(scriptingProperties obj.Object) *URLCredentialStorage {
 	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ucs
@@ -128,7 +128,7 @@ func (ucs *URLCredentialStorage) SetCredentialForProtectionSpaceTask(credential 
 	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setCredential:forProtectionSpace:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(task))
 }
 
-// RemoveCredentialForProtectionSpaceOptionsTask wraps the corresponding Objective-C method.
+// RemoveCredentialForProtectionSpaceOptionsTask removes credential for protection space options task.
 func (ucs *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptionsTask(credential *URLCredential, protectionSpace *URLProtectionSpace, options obj.Object, task *URLSessionTask) {
 	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("removeCredential:forProtectionSpace:options:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(options), objref.IDOf(task))
 }

@@ -51,7 +51,7 @@ func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
 	return changeHistoryUpdateGroupEventAdopt(_id)
 }
 
-// Group wraps the corresponding Objective-C method.
+// Group returns the group.
 func (chuge *ChangeHistoryUpdateGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(chuge), objc.RegisterName("group"))
 	return GroupFromID(_r)

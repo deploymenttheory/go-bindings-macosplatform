@@ -70,19 +70,19 @@ func (cvtl *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) 
 	return _r
 }
 
-// TransitionProgress wraps the corresponding Objective-C method.
+// TransitionProgress returns the transition progress.
 func (cvtl *CollectionViewTransitionLayout) TransitionProgress() float64 {
 	_r := objc.Send[float64](objref.IDOf(cvtl), objc.RegisterName("transitionProgress"))
 	return _r
 }
 
-// CurrentLayout wraps the corresponding Objective-C method.
+// CurrentLayout returns the current layout.
 func (cvtl *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("currentLayout"))
 	return CollectionViewLayoutFromID(_r)
 }
 
-// NextLayout wraps the corresponding Objective-C method.
+// NextLayout returns the next layout.
 func (cvtl *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("nextLayout"))
 	return CollectionViewLayoutFromID(_r)

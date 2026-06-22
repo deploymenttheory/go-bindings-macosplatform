@@ -18,7 +18,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedTypesetter wraps the corresponding Objective-C method.
+// SharedTypesetter returns the shared typesetter.
 func SharedTypesetter() *ATSTypesetter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSATSTypesetter")), objc.RegisterName("sharedTypesetter"))
 	return ATSTypesetterFromID(_r)
@@ -30,7 +30,7 @@ func AccessibilityElementWithRoleFrameLabelParent(role obj.Object, frame corefou
 	return obj.Wrap(_r)
 }
 
-// ContentType wraps the corresponding Objective-C method.
+// ContentType returns the content type.
 func ContentType() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
@@ -42,7 +42,7 @@ func AlertWithMessageTextDefaultButtonAlternateButtonOtherButtonInformativeTextW
 	return AlertFromID(_r)
 }
 
-// InputEventMask wraps the corresponding Objective-C method.
+// InputEventMask returns the input event mask.
 func InputEventMask() EventMask {
 	_r := objc.Send[EventMask](objc.ID(_class("NSAlignmentFeedbackFilter")), objc.RegisterName("inputEventMask"))
 	return _r
@@ -99,7 +99,7 @@ func EndGrouping() {
 	objc.Send[objc.ID](objc.ID(_class("NSAnimationContext")), objc.RegisterName("endGrouping"))
 }
 
-// CurrentContext wraps the corresponding Objective-C method.
+// CurrentContext returns the current context.
 func CurrentContext() *AnimationContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAnimationContext")), objc.RegisterName("currentContext"))
 	return AnimationContextFromID(_r)
@@ -111,7 +111,7 @@ func AppearanceNamed(name obj.Object) *Appearance {
 	return AppearanceFromID(_r)
 }
 
-// CurrentAppearance wraps the corresponding Objective-C method.
+// CurrentAppearance returns the current appearance.
 func CurrentAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("currentAppearance"))
 	return AppearanceFromID(_r)
@@ -122,13 +122,13 @@ func SetCurrentAppearance(currentAppearance *Appearance) {
 	objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("setCurrentAppearance:"), objref.IDOf(currentAppearance))
 }
 
-// CurrentDrawingAppearance wraps the corresponding Objective-C method.
+// CurrentDrawingAppearance returns the current drawing appearance.
 func CurrentDrawingAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("currentDrawingAppearance"))
 	return AppearanceFromID(_r)
 }
 
-// SharedApplication wraps the corresponding Objective-C method.
+// SharedApplication returns the shared application.
 func SharedApplication() *Application {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSApplication")), objc.RegisterName("sharedApplication"))
 	return ApplicationFromID(_r)
@@ -189,7 +189,7 @@ func DrawPackedGlyphsAtPoint(packedGlyphs string, point corefoundation.CGPoint) 
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("drawPackedGlyphs:atPoint:"), packedGlyphs, point)
 }
 
-// DefaultMiterLimit wraps the corresponding Objective-C method.
+// DefaultMiterLimit returns the default miter limit.
 func DefaultMiterLimit() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultMiterLimit"))
 	return _r
@@ -200,7 +200,7 @@ func SetDefaultMiterLimit(defaultMiterLimit float64) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultMiterLimit:"), defaultMiterLimit)
 }
 
-// DefaultFlatness wraps the corresponding Objective-C method.
+// DefaultFlatness returns the default flatness.
 func DefaultFlatness() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultFlatness"))
 	return _r
@@ -211,7 +211,7 @@ func SetDefaultFlatness(defaultFlatness float64) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultFlatness:"), defaultFlatness)
 }
 
-// DefaultWindingRule wraps the corresponding Objective-C method.
+// DefaultWindingRule returns the default winding rule.
 func DefaultWindingRule() WindingRule {
 	_r := objc.Send[WindingRule](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultWindingRule"))
 	return _r
@@ -222,7 +222,7 @@ func SetDefaultWindingRule(defaultWindingRule WindingRule) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultWindingRule:"), defaultWindingRule)
 }
 
-// DefaultLineCapStyle wraps the corresponding Objective-C method.
+// DefaultLineCapStyle returns the default line cap style.
 func DefaultLineCapStyle() LineCapStyle {
 	_r := objc.Send[LineCapStyle](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultLineCapStyle"))
 	return _r
@@ -233,7 +233,7 @@ func SetDefaultLineCapStyle(defaultLineCapStyle LineCapStyle) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultLineCapStyle:"), defaultLineCapStyle)
 }
 
-// DefaultLineJoinStyle wraps the corresponding Objective-C method.
+// DefaultLineJoinStyle returns the default line join style.
 func DefaultLineJoinStyle() LineJoinStyle {
 	_r := objc.Send[LineJoinStyle](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultLineJoinStyle"))
 	return _r
@@ -244,7 +244,7 @@ func SetDefaultLineJoinStyle(defaultLineJoinStyle LineJoinStyle) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultLineJoinStyle:"), defaultLineJoinStyle)
 }
 
-// DefaultLineWidth wraps the corresponding Objective-C method.
+// DefaultLineWidth returns the default line width.
 func DefaultLineWidth() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSBezierPath")), objc.RegisterName("defaultLineWidth"))
 	return _r
@@ -255,19 +255,19 @@ func SetDefaultLineWidth(defaultLineWidth float64) {
 	objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("setDefaultLineWidth:"), defaultLineWidth)
 }
 
-// MultipleValuesSelectionMarker wraps the corresponding Objective-C method.
+// MultipleValuesSelectionMarker returns the multiple values selection marker.
 func MultipleValuesSelectionMarker() *BindingSelectionMarker {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBindingSelectionMarker")), objc.RegisterName("multipleValuesSelectionMarker"))
 	return BindingSelectionMarkerFromID(_r)
 }
 
-// NoSelectionMarker wraps the corresponding Objective-C method.
+// NoSelectionMarker returns the no selection marker.
 func NoSelectionMarker() *BindingSelectionMarker {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBindingSelectionMarker")), objc.RegisterName("noSelectionMarker"))
 	return BindingSelectionMarkerFromID(_r)
 }
 
-// NotApplicableSelectionMarker wraps the corresponding Objective-C method.
+// NotApplicableSelectionMarker returns the not applicable selection marker.
 func NotApplicableSelectionMarker() *BindingSelectionMarker {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBindingSelectionMarker")), objc.RegisterName("notApplicableSelectionMarker"))
 	return BindingSelectionMarkerFromID(_r)
@@ -325,13 +325,13 @@ func RemoveSavedColumnsWithAutosaveName(name obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSBrowser")), objc.RegisterName("removeSavedColumnsWithAutosaveName:"), objref.IDOf(name))
 }
 
-// BranchImage wraps the corresponding Objective-C method.
+// BranchImage returns the branch image.
 func BranchImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("branchImage"))
 	return ImageFromID(_r)
 }
 
-// HighlightedBranchImage wraps the corresponding Objective-C method.
+// HighlightedBranchImage returns the highlighted branch image.
 func HighlightedBranchImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("highlightedBranchImage"))
 	return ImageFromID(_r)
@@ -358,13 +358,13 @@ func PrefersTrackingUntilMouseUp() bool {
 	return _r
 }
 
-// DefaultMenu wraps the corresponding Objective-C method.
+// DefaultMenu returns the default menu.
 func DefaultMenu() *Menu {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCell")), objc.RegisterName("defaultMenu"))
 	return MenuFromID(_r)
 }
 
-// DefaultFocusRingType wraps the corresponding Objective-C method.
+// DefaultFocusRingType returns the default focus ring type.
 func DefaultFocusRingType() FocusRingType {
 	_r := objc.Send[FocusRingType](objc.ID(_class("NSCell")), objc.RegisterName("defaultFocusRingType"))
 	return _r
@@ -690,205 +690,205 @@ func ColorWithCGColor(cgColor obj.Object) *Color {
 	return ColorFromID(_r)
 }
 
-// BlackColor wraps the corresponding Objective-C method.
+// BlackColor returns the black color.
 func BlackColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("blackColor"))
 	return ColorFromID(_r)
 }
 
-// DarkGrayColor wraps the corresponding Objective-C method.
+// DarkGrayColor returns the dark gray color.
 func DarkGrayColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("darkGrayColor"))
 	return ColorFromID(_r)
 }
 
-// LightGrayColor wraps the corresponding Objective-C method.
+// LightGrayColor returns the light gray color.
 func LightGrayColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("lightGrayColor"))
 	return ColorFromID(_r)
 }
 
-// WhiteColor wraps the corresponding Objective-C method.
+// WhiteColor returns the white color.
 func WhiteColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("whiteColor"))
 	return ColorFromID(_r)
 }
 
-// GrayColor wraps the corresponding Objective-C method.
+// GrayColor returns the gray color.
 func GrayColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("grayColor"))
 	return ColorFromID(_r)
 }
 
-// RedColor wraps the corresponding Objective-C method.
+// RedColor returns the red color.
 func RedColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("redColor"))
 	return ColorFromID(_r)
 }
 
-// GreenColor wraps the corresponding Objective-C method.
+// GreenColor returns the green color.
 func GreenColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("greenColor"))
 	return ColorFromID(_r)
 }
 
-// BlueColor wraps the corresponding Objective-C method.
+// BlueColor returns the blue color.
 func BlueColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("blueColor"))
 	return ColorFromID(_r)
 }
 
-// CyanColor wraps the corresponding Objective-C method.
+// CyanColor returns the cyan color.
 func CyanColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("cyanColor"))
 	return ColorFromID(_r)
 }
 
-// YellowColor wraps the corresponding Objective-C method.
+// YellowColor returns the yellow color.
 func YellowColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("yellowColor"))
 	return ColorFromID(_r)
 }
 
-// MagentaColor wraps the corresponding Objective-C method.
+// MagentaColor returns the magenta color.
 func MagentaColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("magentaColor"))
 	return ColorFromID(_r)
 }
 
-// OrangeColor wraps the corresponding Objective-C method.
+// OrangeColor returns the orange color.
 func OrangeColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("orangeColor"))
 	return ColorFromID(_r)
 }
 
-// PurpleColor wraps the corresponding Objective-C method.
+// PurpleColor returns the purple color.
 func PurpleColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("purpleColor"))
 	return ColorFromID(_r)
 }
 
-// BrownColor wraps the corresponding Objective-C method.
+// BrownColor returns the brown color.
 func BrownColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("brownColor"))
 	return ColorFromID(_r)
 }
 
-// ClearColor wraps the corresponding Objective-C method.
+// ClearColor returns the clear color.
 func ClearColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("clearColor"))
 	return ColorFromID(_r)
 }
 
-// LabelColor wraps the corresponding Objective-C method.
+// LabelColor returns the label color.
 func LabelColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("labelColor"))
 	return ColorFromID(_r)
 }
 
-// SecondaryLabelColor wraps the corresponding Objective-C method.
+// SecondaryLabelColor returns the secondary label color.
 func SecondaryLabelColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("secondaryLabelColor"))
 	return ColorFromID(_r)
 }
 
-// TertiaryLabelColor wraps the corresponding Objective-C method.
+// TertiaryLabelColor returns the tertiary label color.
 func TertiaryLabelColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("tertiaryLabelColor"))
 	return ColorFromID(_r)
 }
 
-// QuaternaryLabelColor wraps the corresponding Objective-C method.
+// QuaternaryLabelColor returns the quaternary label color.
 func QuaternaryLabelColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("quaternaryLabelColor"))
 	return ColorFromID(_r)
 }
 
-// QuinaryLabelColor wraps the corresponding Objective-C method.
+// QuinaryLabelColor returns the quinary label color.
 func QuinaryLabelColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("quinaryLabelColor"))
 	return ColorFromID(_r)
 }
 
-// LinkColor wraps the corresponding Objective-C method.
+// LinkColor returns the link color.
 func LinkColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("linkColor"))
 	return ColorFromID(_r)
 }
 
-// PlaceholderTextColor wraps the corresponding Objective-C method.
+// PlaceholderTextColor returns the placeholder text color.
 func PlaceholderTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("placeholderTextColor"))
 	return ColorFromID(_r)
 }
 
-// WindowFrameTextColor wraps the corresponding Objective-C method.
+// WindowFrameTextColor returns the window frame text color.
 func WindowFrameTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("windowFrameTextColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedMenuItemTextColor wraps the corresponding Objective-C method.
+// SelectedMenuItemTextColor returns the selected menu item text color.
 func SelectedMenuItemTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedMenuItemTextColor"))
 	return ColorFromID(_r)
 }
 
-// AlternateSelectedControlTextColor wraps the corresponding Objective-C method.
+// AlternateSelectedControlTextColor returns the alternate selected control text color.
 func AlternateSelectedControlTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("alternateSelectedControlTextColor"))
 	return ColorFromID(_r)
 }
 
-// HeaderTextColor wraps the corresponding Objective-C method.
+// HeaderTextColor returns the header text color.
 func HeaderTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("headerTextColor"))
 	return ColorFromID(_r)
 }
 
-// SeparatorColor wraps the corresponding Objective-C method.
+// SeparatorColor returns the separator color.
 func SeparatorColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("separatorColor"))
 	return ColorFromID(_r)
 }
 
-// GridColor wraps the corresponding Objective-C method.
+// GridColor returns the grid color.
 func GridColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("gridColor"))
 	return ColorFromID(_r)
 }
 
-// WindowBackgroundColor wraps the corresponding Objective-C method.
+// WindowBackgroundColor returns the window background color.
 func WindowBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("windowBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// UnderPageBackgroundColor wraps the corresponding Objective-C method.
+// UnderPageBackgroundColor returns the under page background color.
 func UnderPageBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("underPageBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// ControlBackgroundColor wraps the corresponding Objective-C method.
+// ControlBackgroundColor returns the control background color.
 func ControlBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedContentBackgroundColor wraps the corresponding Objective-C method.
+// SelectedContentBackgroundColor returns the selected content background color.
 func SelectedContentBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedContentBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// UnemphasizedSelectedContentBackgroundColor wraps the corresponding Objective-C method.
+// UnemphasizedSelectedContentBackgroundColor returns the unemphasized selected content background color.
 func UnemphasizedSelectedContentBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("unemphasizedSelectedContentBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// AlternatingContentBackgroundColors wraps the corresponding Objective-C method.
+// AlternatingContentBackgroundColors returns the alternating content background colors.
 //
 // AlternatingContentBackgroundColors returns the collection as a Go slice.
 func AlternatingContentBackgroundColors() []*Color {
@@ -896,169 +896,169 @@ func AlternatingContentBackgroundColors() []*Color {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
-// FindHighlightColor wraps the corresponding Objective-C method.
+// FindHighlightColor returns the find highlight color.
 func FindHighlightColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("findHighlightColor"))
 	return ColorFromID(_r)
 }
 
-// TextColor wraps the corresponding Objective-C method.
+// TextColor returns the text color.
 func TextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// TextBackgroundColor wraps the corresponding Objective-C method.
+// TextBackgroundColor returns the text background color.
 func TextBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("textBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// TextInsertionPointColor wraps the corresponding Objective-C method.
+// TextInsertionPointColor returns the text insertion point color.
 func TextInsertionPointColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("textInsertionPointColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedTextColor wraps the corresponding Objective-C method.
+// SelectedTextColor returns the selected text color.
 func SelectedTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedTextColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedTextBackgroundColor wraps the corresponding Objective-C method.
+// SelectedTextBackgroundColor returns the selected text background color.
 func SelectedTextBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedTextBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// UnemphasizedSelectedTextBackgroundColor wraps the corresponding Objective-C method.
+// UnemphasizedSelectedTextBackgroundColor returns the unemphasized selected text background color.
 func UnemphasizedSelectedTextBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("unemphasizedSelectedTextBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// UnemphasizedSelectedTextColor wraps the corresponding Objective-C method.
+// UnemphasizedSelectedTextColor returns the unemphasized selected text color.
 func UnemphasizedSelectedTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("unemphasizedSelectedTextColor"))
 	return ColorFromID(_r)
 }
 
-// ControlColor wraps the corresponding Objective-C method.
+// ControlColor returns the control color.
 func ControlColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlColor"))
 	return ColorFromID(_r)
 }
 
-// ControlTextColor wraps the corresponding Objective-C method.
+// ControlTextColor returns the control text color.
 func ControlTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("controlTextColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedControlColor wraps the corresponding Objective-C method.
+// SelectedControlColor returns the selected control color.
 func SelectedControlColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedControlColor"))
 	return ColorFromID(_r)
 }
 
-// SelectedControlTextColor wraps the corresponding Objective-C method.
+// SelectedControlTextColor returns the selected control text color.
 func SelectedControlTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("selectedControlTextColor"))
 	return ColorFromID(_r)
 }
 
-// DisabledControlTextColor wraps the corresponding Objective-C method.
+// DisabledControlTextColor returns the disabled control text color.
 func DisabledControlTextColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("disabledControlTextColor"))
 	return ColorFromID(_r)
 }
 
-// KeyboardFocusIndicatorColor wraps the corresponding Objective-C method.
+// KeyboardFocusIndicatorColor returns the keyboard focus indicator color.
 func KeyboardFocusIndicatorColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("keyboardFocusIndicatorColor"))
 	return ColorFromID(_r)
 }
 
-// ScrubberTexturedBackgroundColor wraps the corresponding Objective-C method.
+// ScrubberTexturedBackgroundColor returns the scrubber textured background color.
 func ScrubberTexturedBackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("scrubberTexturedBackgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SystemRedColor wraps the corresponding Objective-C method.
+// SystemRedColor returns the system red color.
 func SystemRedColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemRedColor"))
 	return ColorFromID(_r)
 }
 
-// SystemGreenColor wraps the corresponding Objective-C method.
+// SystemGreenColor returns the system green color.
 func SystemGreenColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemGreenColor"))
 	return ColorFromID(_r)
 }
 
-// SystemBlueColor wraps the corresponding Objective-C method.
+// SystemBlueColor returns the system blue color.
 func SystemBlueColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemBlueColor"))
 	return ColorFromID(_r)
 }
 
-// SystemOrangeColor wraps the corresponding Objective-C method.
+// SystemOrangeColor returns the system orange color.
 func SystemOrangeColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemOrangeColor"))
 	return ColorFromID(_r)
 }
 
-// SystemYellowColor wraps the corresponding Objective-C method.
+// SystemYellowColor returns the system yellow color.
 func SystemYellowColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemYellowColor"))
 	return ColorFromID(_r)
 }
 
-// SystemBrownColor wraps the corresponding Objective-C method.
+// SystemBrownColor returns the system brown color.
 func SystemBrownColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemBrownColor"))
 	return ColorFromID(_r)
 }
 
-// SystemPinkColor wraps the corresponding Objective-C method.
+// SystemPinkColor returns the system pink color.
 func SystemPinkColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemPinkColor"))
 	return ColorFromID(_r)
 }
 
-// SystemPurpleColor wraps the corresponding Objective-C method.
+// SystemPurpleColor returns the system purple color.
 func SystemPurpleColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemPurpleColor"))
 	return ColorFromID(_r)
 }
 
-// SystemGrayColor wraps the corresponding Objective-C method.
+// SystemGrayColor returns the system gray color.
 func SystemGrayColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemGrayColor"))
 	return ColorFromID(_r)
 }
 
-// SystemTealColor wraps the corresponding Objective-C method.
+// SystemTealColor returns the system teal color.
 func SystemTealColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemTealColor"))
 	return ColorFromID(_r)
 }
 
-// SystemIndigoColor wraps the corresponding Objective-C method.
+// SystemIndigoColor returns the system indigo color.
 func SystemIndigoColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemIndigoColor"))
 	return ColorFromID(_r)
 }
 
-// SystemMintColor wraps the corresponding Objective-C method.
+// SystemMintColor returns the system mint color.
 func SystemMintColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemMintColor"))
 	return ColorFromID(_r)
 }
 
-// SystemCyanColor wraps the corresponding Objective-C method.
+// SystemCyanColor returns the system cyan color.
 func SystemCyanColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("systemCyanColor"))
 	return ColorFromID(_r)
@@ -1100,19 +1100,19 @@ func ControlAccentColor() *Color {
 	return ColorFromID(_r)
 }
 
-// CurrentControlTint wraps the corresponding Objective-C method.
+// CurrentControlTint returns the current control tint.
 func CurrentControlTint() ControlTint {
 	_r := objc.Send[ControlTint](objc.ID(_class("NSColor")), objc.RegisterName("currentControlTint"))
 	return _r
 }
 
-// HighlightColor wraps the corresponding Objective-C method.
+// HighlightColor returns the highlight color.
 func HighlightColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("highlightColor"))
 	return ColorFromID(_r)
 }
 
-// ShadowColor wraps the corresponding Objective-C method.
+// ShadowColor returns the shadow color.
 func ShadowColor() *Color {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("shadowColor"))
 	return ColorFromID(_r)
@@ -1201,7 +1201,7 @@ func ColorListNamed(name obj.Object) *ColorList {
 	return ColorListFromID(_r)
 }
 
-// AvailableColorLists wraps the corresponding Objective-C method.
+// AvailableColorLists returns the available color lists.
 //
 // AvailableColorLists returns the collection as a Go slice.
 func AvailableColorLists() []*ColorList {
@@ -1225,7 +1225,7 @@ func SetPickerMode(mode ColorPanelMode) {
 	objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("setPickerMode:"), mode)
 }
 
-// SharedColorPanel wraps the corresponding Objective-C method.
+// SharedColorPanel returns the shared color panel.
 func SharedColorPanel() *ColorPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorPanel")), objc.RegisterName("sharedColorPanel"))
 	return ColorPanelFromID(_r)
@@ -1267,73 +1267,73 @@ func AvailableColorSpacesWithModel(model ColorSpaceModel) []*ColorSpace {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ColorSpace { return ColorSpaceFromID(_id) })
 }
 
-// SRGBColorSpace wraps the corresponding Objective-C method.
+// SRGBColorSpace returns the srgb color space.
 func SRGBColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("sRGBColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// GenericGamma22GrayColorSpace wraps the corresponding Objective-C method.
+// GenericGamma22GrayColorSpace returns the generic gamma22 gray color space.
 func GenericGamma22GrayColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("genericGamma22GrayColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// ExtendedSRGBColorSpace wraps the corresponding Objective-C method.
+// ExtendedSRGBColorSpace returns the extended srgb color space.
 func ExtendedSRGBColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("extendedSRGBColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// ExtendedGenericGamma22GrayColorSpace wraps the corresponding Objective-C method.
+// ExtendedGenericGamma22GrayColorSpace returns the extended generic gamma22 gray color space.
 func ExtendedGenericGamma22GrayColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("extendedGenericGamma22GrayColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// DisplayP3ColorSpace wraps the corresponding Objective-C method.
+// DisplayP3ColorSpace returns the display p3 color space.
 func DisplayP3ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("displayP3ColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// AdobeRGB1998ColorSpace wraps the corresponding Objective-C method.
+// AdobeRGB1998ColorSpace returns the adobe rgb1998 color space.
 func AdobeRGB1998ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("adobeRGB1998ColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// GenericRGBColorSpace wraps the corresponding Objective-C method.
+// GenericRGBColorSpace returns the generic rgb color space.
 func GenericRGBColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("genericRGBColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// GenericGrayColorSpace wraps the corresponding Objective-C method.
+// GenericGrayColorSpace returns the generic gray color space.
 func GenericGrayColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("genericGrayColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// GenericCMYKColorSpace wraps the corresponding Objective-C method.
+// GenericCMYKColorSpace returns the generic cmyk color space.
 func GenericCMYKColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("genericCMYKColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// DeviceRGBColorSpace wraps the corresponding Objective-C method.
+// DeviceRGBColorSpace returns the device rgb color space.
 func DeviceRGBColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("deviceRGBColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// DeviceGrayColorSpace wraps the corresponding Objective-C method.
+// DeviceGrayColorSpace returns the device gray color space.
 func DeviceGrayColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("deviceGrayColorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// DeviceCMYKColorSpace wraps the corresponding Objective-C method.
+// DeviceCMYKColorSpace returns the device cmyk color space.
 func DeviceCMYKColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("deviceCMYKColorSpace"))
 	return ColorSpaceFromID(_r)
@@ -1395,67 +1395,67 @@ func ArrowCursor() *Cursor {
 	return CursorFromID(_r)
 }
 
-// CrosshairCursor wraps the corresponding Objective-C method.
+// CrosshairCursor returns the crosshair cursor.
 func CrosshairCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("crosshairCursor"))
 	return CursorFromID(_r)
 }
 
-// DisappearingItemCursor wraps the corresponding Objective-C method.
+// DisappearingItemCursor returns the disappearing item cursor.
 func DisappearingItemCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("disappearingItemCursor"))
 	return CursorFromID(_r)
 }
 
-// OperationNotAllowedCursor wraps the corresponding Objective-C method.
+// OperationNotAllowedCursor returns the operation not allowed cursor.
 func OperationNotAllowedCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("operationNotAllowedCursor"))
 	return CursorFromID(_r)
 }
 
-// DragLinkCursor wraps the corresponding Objective-C method.
+// DragLinkCursor returns the drag link cursor.
 func DragLinkCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("dragLinkCursor"))
 	return CursorFromID(_r)
 }
 
-// DragCopyCursor wraps the corresponding Objective-C method.
+// DragCopyCursor returns the drag copy cursor.
 func DragCopyCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("dragCopyCursor"))
 	return CursorFromID(_r)
 }
 
-// ContextualMenuCursor wraps the corresponding Objective-C method.
+// ContextualMenuCursor returns the contextual menu cursor.
 func ContextualMenuCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("contextualMenuCursor"))
 	return CursorFromID(_r)
 }
 
-// PointingHandCursor wraps the corresponding Objective-C method.
+// PointingHandCursor returns the pointing hand cursor.
 func PointingHandCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("pointingHandCursor"))
 	return CursorFromID(_r)
 }
 
-// ClosedHandCursor wraps the corresponding Objective-C method.
+// ClosedHandCursor returns the closed hand cursor.
 func ClosedHandCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("closedHandCursor"))
 	return CursorFromID(_r)
 }
 
-// OpenHandCursor wraps the corresponding Objective-C method.
+// OpenHandCursor returns the open hand cursor.
 func OpenHandCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("openHandCursor"))
 	return CursorFromID(_r)
 }
 
-// IBeamCursor wraps the corresponding Objective-C method.
+// IBeamCursor returns the i beam cursor.
 func IBeamCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("IBeamCursor"))
 	return CursorFromID(_r)
 }
 
-// IBeamCursorForVerticalLayout wraps the corresponding Objective-C method.
+// IBeamCursorForVerticalLayout returns the i beam cursor for vertical layout.
 func IBeamCursorForVerticalLayout() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("IBeamCursorForVerticalLayout"))
 	return CursorFromID(_r)
@@ -1491,37 +1491,37 @@ func CurrentSystemCursor() *Cursor {
 	return CursorFromID(_r)
 }
 
-// ResizeLeftCursor wraps the corresponding Objective-C method.
+// ResizeLeftCursor returns the resize left cursor.
 func ResizeLeftCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeLeftCursor"))
 	return CursorFromID(_r)
 }
 
-// ResizeRightCursor wraps the corresponding Objective-C method.
+// ResizeRightCursor returns the resize right cursor.
 func ResizeRightCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeRightCursor"))
 	return CursorFromID(_r)
 }
 
-// ResizeLeftRightCursor wraps the corresponding Objective-C method.
+// ResizeLeftRightCursor returns the resize left right cursor.
 func ResizeLeftRightCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeLeftRightCursor"))
 	return CursorFromID(_r)
 }
 
-// ResizeUpCursor wraps the corresponding Objective-C method.
+// ResizeUpCursor returns the resize up cursor.
 func ResizeUpCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeUpCursor"))
 	return CursorFromID(_r)
 }
 
-// ResizeDownCursor wraps the corresponding Objective-C method.
+// ResizeDownCursor returns the resize down cursor.
 func ResizeDownCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeDownCursor"))
 	return CursorFromID(_r)
 }
 
-// ResizeUpDownCursor wraps the corresponding Objective-C method.
+// ResizeUpDownCursor returns the resize up down cursor.
 func ResizeUpDownCursor() *Cursor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCursor")), objc.RegisterName("resizeUpDownCursor"))
 	return CursorFromID(_r)
@@ -1557,7 +1557,7 @@ func AutosavesDrafts() bool {
 	return _r
 }
 
-// ReadableTypes wraps the corresponding Objective-C method.
+// ReadableTypes returns the readable types.
 //
 // ReadableTypes returns the collection as a Go slice.
 func ReadableTypes() []string {
@@ -1565,7 +1565,7 @@ func ReadableTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// WritableTypes wraps the corresponding Objective-C method.
+// WritableTypes returns the writable types.
 //
 // WritableTypes returns the collection as a Go slice.
 func WritableTypes() []string {
@@ -1585,7 +1585,7 @@ func AllowedClassesForRestorableStateKeyPath(keyPath string) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RestorableStateKeyPaths wraps the corresponding Objective-C method.
+// RestorableStateKeyPaths returns the restorable state key paths.
 //
 // RestorableStateKeyPaths returns the collection as a Go slice.
 func RestorableStateKeyPaths() []string {
@@ -1593,7 +1593,7 @@ func RestorableStateKeyPaths() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SharedDocumentController wraps the corresponding Objective-C method.
+// SharedDocumentController returns the shared document controller.
 func SharedDocumentController() *DocumentController {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDocumentController")), objc.RegisterName("sharedDocumentController"))
 	return DocumentControllerFromID(_r)
@@ -1656,7 +1656,7 @@ func RemoveMonitor(eventMonitor obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("removeMonitor:"), objref.IDOf(eventMonitor))
 }
 
-// IsMouseCoalescingEnabled wraps the corresponding Objective-C method.
+// IsMouseCoalescingEnabled reports whether the object is mouse coalescing enabled.
 func IsMouseCoalescingEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSEvent")), objc.RegisterName("isMouseCoalescingEnabled"))
 	return _r
@@ -1667,49 +1667,49 @@ func SetMouseCoalescingEnabled(mouseCoalescingEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("setMouseCoalescingEnabled:"), mouseCoalescingEnabled)
 }
 
-// IsSwipeTrackingFromScrollEventsEnabled wraps the corresponding Objective-C method.
+// IsSwipeTrackingFromScrollEventsEnabled reports whether the object is swipe tracking from scroll events enabled.
 func IsSwipeTrackingFromScrollEventsEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSEvent")), objc.RegisterName("isSwipeTrackingFromScrollEventsEnabled"))
 	return _r
 }
 
-// MouseLocation wraps the corresponding Objective-C method.
+// MouseLocation returns the mouse location.
 func MouseLocation() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objc.ID(_class("NSEvent")), objc.RegisterName("mouseLocation"))
 	return _r
 }
 
-// ModifierFlagsClass wraps the corresponding Objective-C method.
+// ModifierFlagsClass returns the modifier flags class.
 func ModifierFlagsClass() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objc.ID(_class("NSEvent")), objc.RegisterName("modifierFlags"))
 	return _r
 }
 
-// PressedMouseButtons wraps the corresponding Objective-C method.
+// PressedMouseButtons returns the pressed mouse buttons.
 func PressedMouseButtons() int {
 	_r := objc.Send[int](objc.ID(_class("NSEvent")), objc.RegisterName("pressedMouseButtons"))
 	return _r
 }
 
-// DoubleClickInterval wraps the corresponding Objective-C method.
+// DoubleClickInterval returns the double click interval.
 func DoubleClickInterval() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSEvent")), objc.RegisterName("doubleClickInterval"))
 	return _r
 }
 
-// KeyRepeatDelay wraps the corresponding Objective-C method.
+// KeyRepeatDelay returns the key repeat delay.
 func KeyRepeatDelay() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSEvent")), objc.RegisterName("keyRepeatDelay"))
 	return _r
 }
 
-// KeyRepeatInterval wraps the corresponding Objective-C method.
+// KeyRepeatInterval returns the key repeat interval.
 func KeyRepeatInterval() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSEvent")), objc.RegisterName("keyRepeatInterval"))
 	return _r
 }
 
-// ReadableDraggedTypes wraps the corresponding Objective-C method.
+// ReadableDraggedTypes returns the readable dragged types.
 //
 // ReadableDraggedTypes returns the collection as a Go slice.
 func ReadableDraggedTypes() []string {
@@ -1855,19 +1855,19 @@ func SystemFontSizeForControlSize(controlSize ControlSize) float64 {
 	return _r
 }
 
-// SystemFontSize wraps the corresponding Objective-C method.
+// SystemFontSize returns the system font size.
 func SystemFontSize() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("systemFontSize"))
 	return _r
 }
 
-// SmallSystemFontSize wraps the corresponding Objective-C method.
+// SmallSystemFontSize returns the small system font size.
 func SmallSystemFontSize() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("smallSystemFontSize"))
 	return _r
 }
 
-// LabelFontSize wraps the corresponding Objective-C method.
+// LabelFontSize returns the label font size.
 func LabelFontSize() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSFont")), objc.RegisterName("labelFontSize"))
 	return _r
@@ -1933,13 +1933,13 @@ func FontCollectionWithNameVisibility(name obj.Object, visibility FontCollection
 	return FontCollectionFromID(_r)
 }
 
-// FontCollectionWithAllAvailableDescriptors wraps the corresponding Objective-C method.
+// FontCollectionWithAllAvailableDescriptors returns the font collection with all available descriptors.
 func FontCollectionWithAllAvailableDescriptors() *FontCollection {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontCollection")), objc.RegisterName("fontCollectionWithAllAvailableDescriptors"))
 	return FontCollectionFromID(_r)
 }
 
-// AllFontCollectionNames wraps the corresponding Objective-C method.
+// AllFontCollectionNames returns the all font collection names.
 //
 // AllFontCollectionNames returns the collection as a Go slice.
 func AllFontCollectionNames() []obj.Object {
@@ -1971,13 +1971,13 @@ func PreferredFontDescriptorForTextStyleOptions(style obj.Object, options obj.Ob
 	return FontDescriptorFromID(_r)
 }
 
-// SharedFontManager wraps the corresponding Objective-C method.
+// SharedFontManager returns the shared font manager.
 func SharedFontManager() *FontManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontManager")), objc.RegisterName("sharedFontManager"))
 	return FontManagerFromID(_r)
 }
 
-// SharedFontPanel wraps the corresponding Objective-C method.
+// SharedFontPanel returns the shared font panel.
 func SharedFontPanel() *FontPanel {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFontPanel")), objc.RegisterName("sharedFontPanel"))
 	return FontPanelFromID(_r)
@@ -1989,7 +1989,7 @@ func SharedFontPanelExists() bool {
 	return _r
 }
 
-// SharedGlyphGenerator wraps the corresponding Objective-C method.
+// SharedGlyphGenerator returns the shared glyph generator.
 func SharedGlyphGenerator() *GlyphGenerator {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGlyphGenerator")), objc.RegisterName("sharedGlyphGenerator"))
 	return GlyphGeneratorFromID(_r)
@@ -2053,7 +2053,7 @@ func RestoreGraphicsState() {
 	objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("restoreGraphicsState"))
 }
 
-// NSGraphicsContextCurrentContext wraps the corresponding Objective-C method.
+// NSGraphicsContextCurrentContext returns the ns graphics context current context.
 func NSGraphicsContextCurrentContext() *GraphicsContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("currentContext"))
 	return GraphicsContextFromID(_r)
@@ -2075,7 +2075,7 @@ func GraphicsContextWithWindow(window *Window) *GraphicsContext {
 	return GraphicsContextFromID(_r)
 }
 
-// EmptyContentView wraps the corresponding Objective-C method.
+// EmptyContentView returns the empty content view.
 func EmptyContentView() *View {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSGridCell")), objc.RegisterName("emptyContentView"))
 	return ViewFromID(_r)
@@ -2111,13 +2111,13 @@ func AlertStyleGroupItemWithIdentifier(identifier obj.Object) *GroupTouchBarItem
 	return GroupTouchBarItemFromID(_r)
 }
 
-// SharedHelpManager wraps the corresponding Objective-C method.
+// SharedHelpManager returns the shared help manager.
 func SharedHelpManager() *HelpManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHelpManager")), objc.RegisterName("sharedHelpManager"))
 	return HelpManagerFromID(_r)
 }
 
-// IsContextHelpModeActive wraps the corresponding Objective-C method.
+// IsContextHelpModeActive reports whether the object is context help mode active.
 func IsContextHelpModeActive() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSHelpManager")), objc.RegisterName("isContextHelpModeActive"))
 	return _r
@@ -2164,7 +2164,7 @@ func CanInitWithPasteboard(pasteboard *Pasteboard) bool {
 	return _r
 }
 
-// ImageTypes wraps the corresponding Objective-C method.
+// ImageTypes returns the image types.
 //
 // ImageTypes returns the collection as a Go slice.
 func ImageTypes() []string {
@@ -2172,7 +2172,7 @@ func ImageTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ImageUnfilteredTypes wraps the corresponding Objective-C method.
+// ImageUnfilteredTypes returns the image unfiltered types.
 //
 // ImageUnfilteredTypes returns the collection as a Go slice.
 func ImageUnfilteredTypes() []string {
@@ -2180,7 +2180,7 @@ func ImageUnfilteredTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ImageUnfilteredFileTypes wraps the corresponding Objective-C method.
+// ImageUnfilteredFileTypes returns the image unfiltered file types.
 //
 // ImageUnfilteredFileTypes returns the collection as a Go slice.
 func ImageUnfilteredFileTypes() []string {
@@ -2188,7 +2188,7 @@ func ImageUnfilteredFileTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ImageUnfilteredPasteboardTypes wraps the corresponding Objective-C method.
+// ImageUnfilteredPasteboardTypes returns the image unfiltered pasteboard types.
 //
 // ImageUnfilteredPasteboardTypes returns the collection as a Go slice.
 func ImageUnfilteredPasteboardTypes() []obj.Object {
@@ -2196,7 +2196,7 @@ func ImageUnfilteredPasteboardTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ImageFileTypes wraps the corresponding Objective-C method.
+// ImageFileTypes returns the image file types.
 //
 // ImageFileTypes returns the collection as a Go slice.
 func ImageFileTypes() []string {
@@ -2204,7 +2204,7 @@ func ImageFileTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ImagePasteboardTypes wraps the corresponding Objective-C method.
+// ImagePasteboardTypes returns the image pasteboard types.
 //
 // ImagePasteboardTypes returns the collection as a Go slice.
 func ImagePasteboardTypes() []obj.Object {
@@ -2292,13 +2292,13 @@ func ImageRepWithPasteboard(pasteboard *Pasteboard) *ImageRep {
 	return ImageRepFromID(_r)
 }
 
-// RegisteredImageRepClasses wraps the corresponding Objective-C method.
+// RegisteredImageRepClasses returns the registered image rep classes.
 func RegisteredImageRepClasses() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSImageRep")), objc.RegisterName("registeredImageRepClasses"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSImageRepImageUnfilteredTypes wraps the corresponding Objective-C method.
+// NSImageRepImageUnfilteredTypes returns the ns image rep image unfiltered types.
 //
 // NSImageRepImageUnfilteredTypes returns the collection as a Go slice.
 func NSImageRepImageUnfilteredTypes() []string {
@@ -2306,7 +2306,7 @@ func NSImageRepImageUnfilteredTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NSImageRepImageTypes wraps the corresponding Objective-C method.
+// NSImageRepImageTypes returns the ns image rep image types.
 //
 // NSImageRepImageTypes returns the collection as a Go slice.
 func NSImageRepImageTypes() []string {
@@ -2403,7 +2403,7 @@ func SetDefaultPreferredImageDynamicRange(defaultPreferredImageDynamicRange Imag
 	objc.Send[objc.ID](objc.ID(_class("NSImageView")), objc.RegisterName("setDefaultPreferredImageDynamicRange:"), defaultPreferredImageDynamicRange)
 }
 
-// CurrentInputManager wraps the corresponding Objective-C method.
+// CurrentInputManager returns the current input manager.
 func CurrentInputManager() *InputManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInputManager")), objc.RegisterName("currentInputManager"))
 	return InputManagerFromID(_r)
@@ -2459,7 +2459,7 @@ func DeactivateConstraints(constraints []*LayoutConstraint) {
 	objc.Send[objc.ID](objc.ID(_class("NSLayoutConstraint")), objc.RegisterName("deactivateConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SharedMediaLibraryBrowserController wraps the corresponding Objective-C method.
+// SharedMediaLibraryBrowserController returns the shared media library browser controller.
 func SharedMediaLibraryBrowserController() *MediaLibraryBrowserController {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMediaLibraryBrowserController")), objc.RegisterName("sharedMediaLibraryBrowserController"))
 	return MediaLibraryBrowserControllerFromID(_r)
@@ -2571,7 +2571,7 @@ func NSMutableFontCollectionFontCollectionWithNameVisibility(name obj.Object, vi
 	return MutableFontCollectionFromID(_r)
 }
 
-// NSMutableFontCollectionFontCollectionWithAllAvailableDescriptors wraps the corresponding Objective-C method.
+// NSMutableFontCollectionFontCollectionWithAllAvailableDescriptors returns the ns mutable font collection font collection with all available descriptors.
 func NSMutableFontCollectionFontCollectionWithAllAvailableDescriptors() *MutableFontCollection {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableFontCollection")), objc.RegisterName("fontCollectionWithAllAvailableDescriptors"))
 	return MutableFontCollectionFromID(_r)
@@ -2582,7 +2582,7 @@ func ClearCurrentContext() {
 	objc.Send[objc.ID](objc.ID(_class("NSOpenGLContext")), objc.RegisterName("clearCurrentContext"))
 }
 
-// NSOpenGLContextCurrentContext wraps the corresponding Objective-C method.
+// NSOpenGLContextCurrentContext returns the ns open gl context current context.
 func NSOpenGLContextCurrentContext() *OpenGLContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOpenGLContext")), objc.RegisterName("currentContext"))
 	return OpenGLContextFromID(_r)
@@ -2630,7 +2630,7 @@ func DefaultWritingDirectionForLanguage(languageName string) WritingDirection {
 	return _r
 }
 
-// DefaultParagraphStyle wraps the corresponding Objective-C method.
+// DefaultParagraphStyle returns the default paragraph style.
 func DefaultParagraphStyle() *ParagraphStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSParagraphStyle")), objc.RegisterName("defaultParagraphStyle"))
 	return ParagraphStyleFromID(_r)
@@ -2648,7 +2648,7 @@ func PasteboardWithUniqueName() *Pasteboard {
 	return PasteboardFromID(_r)
 }
 
-// GeneralPasteboard wraps the corresponding Objective-C method.
+// GeneralPasteboard returns the general pasteboard.
 func GeneralPasteboard() *Pasteboard {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPasteboard")), objc.RegisterName("generalPasteboard"))
 	return PasteboardFromID(_r)
@@ -2702,7 +2702,7 @@ func TemplatesWithAttributeKeyPathsInEntityDescription(keyPaths []string, entity
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
 }
 
-// SharedPrintInfo wraps the corresponding Objective-C method.
+// SharedPrintInfo returns the shared print info.
 func SharedPrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintInfo")), objc.RegisterName("sharedPrintInfo"))
 	return PrintInfoFromID(_r)
@@ -2713,7 +2713,7 @@ func SetSharedPrintInfo(sharedPrintInfo *PrintInfo) {
 	objc.Send[objc.ID](objc.ID(_class("NSPrintInfo")), objc.RegisterName("setSharedPrintInfo:"), objref.IDOf(sharedPrintInfo))
 }
 
-// DefaultPrinter wraps the corresponding Objective-C method.
+// DefaultPrinter returns the default printer.
 func DefaultPrinter() *Printer {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintInfo")), objc.RegisterName("defaultPrinter"))
 	return PrinterFromID(_r)
@@ -2778,7 +2778,7 @@ func EPSOperationWithViewInsideRectToData(view *View, rect corefoundation.CGRect
 	return PrintOperationFromID(_r)
 }
 
-// CurrentOperation wraps the corresponding Objective-C method.
+// CurrentOperation returns the current operation.
 func CurrentOperation() *PrintOperation {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPrintOperation")), objc.RegisterName("currentOperation"))
 	return PrintOperationFromID(_r)
@@ -2807,7 +2807,7 @@ func PrinterWithType(type_ obj.Object) *Printer {
 	return PrinterFromID(_r)
 }
 
-// PrinterNames wraps the corresponding Objective-C method.
+// PrinterNames returns the printer names.
 //
 // PrinterNames returns the collection as a Go slice.
 func PrinterNames() []string {
@@ -2815,7 +2815,7 @@ func PrinterNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PrinterTypes wraps the corresponding Objective-C method.
+// PrinterTypes returns the printer types.
 //
 // PrinterTypes returns the collection as a Go slice.
 func PrinterTypes() []obj.Object {
@@ -2835,7 +2835,7 @@ func NSResponderAllowedClassesForRestorableStateKeyPath(keyPath string) []obj.Ob
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// NSResponderRestorableStateKeyPaths wraps the corresponding Objective-C method.
+// NSResponderRestorableStateKeyPaths returns the ns responder restorable state key paths.
 //
 // NSResponderRestorableStateKeyPaths returns the collection as a Go slice.
 func NSResponderRestorableStateKeyPaths() []string {
@@ -2865,7 +2865,7 @@ func TerminateAutomaticallyTerminableApplications() {
 	objc.Send[objc.ID](objc.ID(_class("NSRunningApplication")), objc.RegisterName("terminateAutomaticallyTerminableApplications"))
 }
 
-// CurrentApplication wraps the corresponding Objective-C method.
+// CurrentApplication returns the current application.
 func CurrentApplication() *RunningApplication {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRunningApplication")), objc.RegisterName("currentApplication"))
 	return RunningApplicationFromID(_r)
@@ -2877,7 +2877,7 @@ func NSSavePanelSavePanel() *SavePanel {
 	return SavePanelFromID(_r)
 }
 
-// Screens wraps the corresponding Objective-C method.
+// Screens returns the screens.
 //
 // Screens returns the collection as a Go slice.
 func Screens() []*Screen {
@@ -2885,13 +2885,13 @@ func Screens() []*Screen {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Screen { return ScreenFromID(_id) })
 }
 
-// MainScreen wraps the corresponding Objective-C method.
+// MainScreen returns the main screen.
 func MainScreen() *Screen {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScreen")), objc.RegisterName("mainScreen"))
 	return ScreenFromID(_r)
 }
 
-// DeepestScreen wraps the corresponding Objective-C method.
+// DeepestScreen returns the deepest screen.
 func DeepestScreen() *Screen {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScreen")), objc.RegisterName("deepestScreen"))
 	return ScreenFromID(_r)
@@ -2939,13 +2939,13 @@ func ScrollerWidthForControlSizeScrollerStyle(controlSize ControlSize, scrollerS
 	return _r
 }
 
-// IsCompatibleWithOverlayScrollers wraps the corresponding Objective-C method.
+// IsCompatibleWithOverlayScrollers reports whether the object is compatible with overlay scrollers.
 func IsCompatibleWithOverlayScrollers() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSScroller")), objc.RegisterName("isCompatibleWithOverlayScrollers"))
 	return _r
 }
 
-// PreferredScrollerStyle wraps the corresponding Objective-C method.
+// PreferredScrollerStyle returns the preferred scroller style.
 func PreferredScrollerStyle() ScrollerStyle {
 	_r := objc.Send[ScrollerStyle](objc.ID(_class("NSScroller")), objc.RegisterName("preferredScrollerStyle"))
 	return _r
@@ -2969,13 +2969,13 @@ func LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes {
 	return ScrubberLayoutAttributesFromID(_r)
 }
 
-// OutlineOverlayStyle wraps the corresponding Objective-C method.
+// OutlineOverlayStyle returns the outline overlay style.
 func OutlineOverlayStyle() *ScrubberSelectionStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("outlineOverlayStyle"))
 	return ScrubberSelectionStyleFromID(_r)
 }
 
-// RoundedBackgroundStyle wraps the corresponding Objective-C method.
+// RoundedBackgroundStyle returns the rounded background style.
 func RoundedBackgroundStyle() *ScrubberSelectionStyle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScrubberSelectionStyle")), objc.RegisterName("roundedBackgroundStyle"))
 	return ScrubberSelectionStyleFromID(_r)
@@ -3041,7 +3041,7 @@ func NSSoundCanInitWithPasteboard(pasteboard *Pasteboard) bool {
 	return _r
 }
 
-// SoundUnfilteredTypes wraps the corresponding Objective-C method.
+// SoundUnfilteredTypes returns the sound unfiltered types.
 //
 // SoundUnfilteredTypes returns the collection as a Go slice.
 func SoundUnfilteredTypes() []string {
@@ -3067,19 +3067,19 @@ func AttributesForVoice(voice obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// IsAnyApplicationSpeaking wraps the corresponding Objective-C method.
+// IsAnyApplicationSpeaking reports whether the object is any application speaking.
 func IsAnyApplicationSpeaking() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpeechSynthesizer")), objc.RegisterName("isAnyApplicationSpeaking"))
 	return _r
 }
 
-// DefaultVoice wraps the corresponding Objective-C method.
+// DefaultVoice returns the default voice.
 func DefaultVoice() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSpeechSynthesizer")), objc.RegisterName("defaultVoice"))
 	return obj.Wrap(_r)
 }
 
-// AvailableVoices wraps the corresponding Objective-C method.
+// AvailableVoices returns the available voices.
 //
 // AvailableVoices returns the collection as a Go slice.
 func AvailableVoices() []obj.Object {
@@ -3093,7 +3093,7 @@ func UniqueSpellDocumentTag() int {
 	return _r
 }
 
-// SharedSpellChecker wraps the corresponding Objective-C method.
+// SharedSpellChecker returns the shared spell checker.
 func SharedSpellChecker() *SpellChecker {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSpellChecker")), objc.RegisterName("sharedSpellChecker"))
 	return SpellCheckerFromID(_r)
@@ -3105,49 +3105,49 @@ func SharedSpellCheckerExists() bool {
 	return _r
 }
 
-// IsAutomaticTextReplacementEnabled wraps the corresponding Objective-C method.
+// IsAutomaticTextReplacementEnabled reports whether the object is automatic text replacement enabled.
 func IsAutomaticTextReplacementEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticTextReplacementEnabled"))
 	return _r
 }
 
-// IsAutomaticSpellingCorrectionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticSpellingCorrectionEnabled reports whether the object is automatic spelling correction enabled.
 func IsAutomaticSpellingCorrectionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticSpellingCorrectionEnabled"))
 	return _r
 }
 
-// IsAutomaticQuoteSubstitutionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticQuoteSubstitutionEnabled reports whether the object is automatic quote substitution enabled.
 func IsAutomaticQuoteSubstitutionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticQuoteSubstitutionEnabled"))
 	return _r
 }
 
-// IsAutomaticDashSubstitutionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticDashSubstitutionEnabled reports whether the object is automatic dash substitution enabled.
 func IsAutomaticDashSubstitutionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticDashSubstitutionEnabled"))
 	return _r
 }
 
-// IsAutomaticCapitalizationEnabled wraps the corresponding Objective-C method.
+// IsAutomaticCapitalizationEnabled reports whether the object is automatic capitalization enabled.
 func IsAutomaticCapitalizationEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticCapitalizationEnabled"))
 	return _r
 }
 
-// IsAutomaticPeriodSubstitutionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticPeriodSubstitutionEnabled reports whether the object is automatic period substitution enabled.
 func IsAutomaticPeriodSubstitutionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticPeriodSubstitutionEnabled"))
 	return _r
 }
 
-// IsAutomaticTextCompletionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticTextCompletionEnabled reports whether the object is automatic text completion enabled.
 func IsAutomaticTextCompletionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticTextCompletionEnabled"))
 	return _r
 }
 
-// IsAutomaticInlinePredictionEnabled wraps the corresponding Objective-C method.
+// IsAutomaticInlinePredictionEnabled reports whether the object is automatic inline prediction enabled.
 func IsAutomaticInlinePredictionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSSpellChecker")), objc.RegisterName("isAutomaticInlinePredictionEnabled"))
 	return _r
@@ -3183,7 +3183,7 @@ func StackViewWithViews(views []*View) *StackView {
 	return StackViewFromID(_r)
 }
 
-// SystemStatusBar wraps the corresponding Objective-C method.
+// SystemStatusBar returns the system status bar.
 func SystemStatusBar() *StatusBar {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSStatusBar")), objc.RegisterName("systemStatusBar"))
 	return StatusBarFromID(_r)
@@ -3201,7 +3201,7 @@ func StoryboardWithNameBundle(name obj.Object, storyboardBundleOrNil obj.Object)
 	return StoryboardFromID(_r)
 }
 
-// MainStoryboard wraps the corresponding Objective-C method.
+// MainStoryboard returns the main storyboard.
 func MainStoryboard() *Storyboard {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSStoryboard")), objc.RegisterName("mainStoryboard"))
 	return StoryboardFromID(_r)
@@ -3263,13 +3263,13 @@ func LocalizedNameForInputSource(inputSourceIdentifier obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// CurrentInputContext wraps the corresponding Objective-C method.
+// CurrentInputContext returns the current input context.
 func CurrentInputContext() *TextInputContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextInputContext")), objc.RegisterName("currentInputContext"))
 	return TextInputContextFromID(_r)
 }
 
-// LinkRenderingAttributes wraps the corresponding Objective-C method.
+// LinkRenderingAttributes returns the link rendering attributes.
 func LinkRenderingAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutManager")), objc.RegisterName("linkRenderingAttributes"))
 	return obj.Wrap(_r)
@@ -3316,25 +3316,25 @@ func RegisterForServices() {
 	objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("registerForServices"))
 }
 
-// ScrollableTextView wraps the corresponding Objective-C method.
+// ScrollableTextView returns the scrollable text view.
 func ScrollableTextView() *ScrollView {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("scrollableTextView"))
 	return ScrollViewFromID(_r)
 }
 
-// FieldEditor wraps the corresponding Objective-C method.
+// FieldEditor returns the field editor.
 func FieldEditor() *TextView {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("fieldEditor"))
 	return TextViewFromID(_r)
 }
 
-// ScrollableDocumentContentTextView wraps the corresponding Objective-C method.
+// ScrollableDocumentContentTextView returns the scrollable document content text view.
 func ScrollableDocumentContentTextView() *ScrollView {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("scrollableDocumentContentTextView"))
 	return ScrollViewFromID(_r)
 }
 
-// ScrollablePlainDocumentContentTextView wraps the corresponding Objective-C method.
+// ScrollablePlainDocumentContentTextView returns the scrollable plain document content text view.
 func ScrollablePlainDocumentContentTextView() *ScrollView {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTextView")), objc.RegisterName("scrollablePlainDocumentContentTextView"))
 	return ScrollViewFromID(_r)
@@ -3364,31 +3364,31 @@ func MonochromeTintConfiguration() *TintConfiguration {
 	return TintConfigurationFromID(_r)
 }
 
-// DefaultCompletionDelay wraps the corresponding Objective-C method.
+// DefaultCompletionDelay returns the default completion delay.
 func DefaultCompletionDelay() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSTokenField")), objc.RegisterName("defaultCompletionDelay"))
 	return _r
 }
 
-// DefaultTokenizingCharacterSet wraps the corresponding Objective-C method.
+// DefaultTokenizingCharacterSet returns the default tokenizing character set.
 func DefaultTokenizingCharacterSet() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTokenField")), objc.RegisterName("defaultTokenizingCharacterSet"))
 	return obj.Wrap(_r)
 }
 
-// NSTokenFieldCellDefaultCompletionDelay wraps the corresponding Objective-C method.
+// NSTokenFieldCellDefaultCompletionDelay returns the ns token field cell default completion delay.
 func NSTokenFieldCellDefaultCompletionDelay() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("defaultCompletionDelay"))
 	return _r
 }
 
-// NSTokenFieldCellDefaultTokenizingCharacterSet wraps the corresponding Objective-C method.
+// NSTokenFieldCellDefaultTokenizingCharacterSet returns the ns token field cell default tokenizing character set.
 func NSTokenFieldCellDefaultTokenizingCharacterSet() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTokenFieldCell")), objc.RegisterName("defaultTokenizingCharacterSet"))
 	return obj.Wrap(_r)
 }
 
-// IsAutomaticCustomizeTouchBarMenuItemEnabled wraps the corresponding Objective-C method.
+// IsAutomaticCustomizeTouchBarMenuItemEnabled reports whether the object is automatic customize touch bar menu item enabled.
 func IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSTouchBar")), objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled"))
 	return _r
@@ -3424,73 +3424,73 @@ func SharedSystemTypesetterForBehavior(behavior TypesetterBehavior) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SharedSystemTypesetter wraps the corresponding Objective-C method.
+// SharedSystemTypesetter returns the shared system typesetter.
 func SharedSystemTypesetter() *Typesetter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTypesetter")), objc.RegisterName("sharedSystemTypesetter"))
 	return TypesetterFromID(_r)
 }
 
-// DefaultTypesetterBehavior wraps the corresponding Objective-C method.
+// DefaultTypesetterBehavior returns the default typesetter behavior.
 func DefaultTypesetterBehavior() TypesetterBehavior {
 	_r := objc.Send[TypesetterBehavior](objc.ID(_class("NSTypesetter")), objc.RegisterName("defaultTypesetterBehavior"))
 	return _r
 }
 
-// SharedUserDefaultsController wraps the corresponding Objective-C method.
+// SharedUserDefaultsController returns the shared user defaults controller.
 func SharedUserDefaultsController() *UserDefaultsController {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("sharedUserDefaultsController"))
 	return UserDefaultsControllerFromID(_r)
 }
 
-// HideImagesOption wraps the corresponding Objective-C method.
+// HideImagesOption returns the hide images option.
 func HideImagesOption() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("hideImagesOption"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// HideTextOption wraps the corresponding Objective-C method.
+// HideTextOption returns the hide text option.
 func HideTextOption() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("hideTextOption"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// ReduceMetricsOption wraps the corresponding Objective-C method.
+// ReduceMetricsOption returns the reduce metrics option.
 func ReduceMetricsOption() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("reduceMetricsOption"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// BreakEqualWidthsOption wraps the corresponding Objective-C method.
+// BreakEqualWidthsOption returns the break equal widths option.
 func BreakEqualWidthsOption() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("breakEqualWidthsOption"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// StandardOptions wraps the corresponding Objective-C method.
+// StandardOptions returns the standard options.
 func StandardOptions() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserInterfaceCompressionOptions")), objc.RegisterName("standardOptions"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// FocusView wraps the corresponding Objective-C method.
+// FocusView returns the focus view.
 func FocusView() *View {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSView")), objc.RegisterName("focusView"))
 	return ViewFromID(_r)
 }
 
-// NSViewDefaultMenu wraps the corresponding Objective-C method.
+// NSViewDefaultMenu returns the ns view default menu.
 func NSViewDefaultMenu() *Menu {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSView")), objc.RegisterName("defaultMenu"))
 	return MenuFromID(_r)
 }
 
-// IsCompatibleWithResponsiveScrolling wraps the corresponding Objective-C method.
+// IsCompatibleWithResponsiveScrolling reports whether the object is compatible with responsive scrolling.
 func IsCompatibleWithResponsiveScrolling() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSView")), objc.RegisterName("isCompatibleWithResponsiveScrolling"))
 	return _r
 }
 
-// NSViewDefaultFocusRingType wraps the corresponding Objective-C method.
+// NSViewDefaultFocusRingType returns the ns view default focus ring type.
 func NSViewDefaultFocusRingType() FocusRingType {
 	_r := objc.Send[FocusRingType](objc.ID(_class("NSView")), objc.RegisterName("defaultFocusRingType"))
 	return _r
@@ -3561,7 +3561,7 @@ func WindowWithContentViewController(contentViewController *ViewController) *Win
 	return WindowFromID(_r)
 }
 
-// DefaultDepthLimit wraps the corresponding Objective-C method.
+// DefaultDepthLimit returns the default depth limit.
 func DefaultDepthLimit() WindowDepth {
 	_r := objc.Send[WindowDepth](objc.ID(_class("NSWindow")), objc.RegisterName("defaultDepthLimit"))
 	return _r
@@ -3589,7 +3589,7 @@ func MenuChanged(menu *Menu) {
 	objc.Send[objc.ID](objc.ID(_class("NSWindow")), objc.RegisterName("menuChanged:"), objref.IDOf(menu))
 }
 
-// SharedWorkspace wraps the corresponding Objective-C method.
+// SharedWorkspace returns the shared workspace.
 func SharedWorkspace() *Workspace {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSWorkspace")), objc.RegisterName("sharedWorkspace"))
 	return WorkspaceFromID(_r)

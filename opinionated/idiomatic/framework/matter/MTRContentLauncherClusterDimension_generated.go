@@ -50,19 +50,19 @@ func NewMTRContentLauncherClusterDimension() *MTRContentLauncherClusterDimension
 	return mTRContentLauncherClusterDimensionAdopt(_id)
 }
 
-// WithWidth sets the property and returns the receiver so calls can be chained.
+// WithWidth sets the width.
 func (mclcd *MTRContentLauncherClusterDimension) WithWidth(width obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return mclcd
 }
 
-// WithHeight sets the property and returns the receiver so calls can be chained.
+// WithHeight sets the height.
 func (mclcd *MTRContentLauncherClusterDimension) WithHeight(height obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return mclcd
 }
 
-// WithMetric sets the property and returns the receiver so calls can be chained.
+// WithMetric sets the metric.
 func (mclcd *MTRContentLauncherClusterDimension) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimension {
 	objc.Send[objc.ID](objref.IDOf(mclcd), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return mclcd

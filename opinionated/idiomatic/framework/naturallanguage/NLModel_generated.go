@@ -99,7 +99,7 @@ func (m *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens []string, m
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (m *Model) Configuration() *ModelConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("configuration"))
 	return ModelConfigurationFromID(_r)

@@ -82,19 +82,19 @@ func (ct *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *Checkerb
 	return ct
 }
 
-// Divisions wraps the corresponding Objective-C method.
+// Divisions returns the divisions.
 func (ct *CheckerboardTexture) Divisions() float32 {
 	_r := objc.Send[float32](objref.IDOf(ct), objc.RegisterName("divisions"))
 	return _r
 }
 
-// Color1 wraps the corresponding Objective-C method.
+// Color1 returns the color1.
 func (ct *CheckerboardTexture) Color1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color1"))
 	return obj.Wrap(_r)
 }
 
-// Color2 wraps the corresponding Objective-C method.
+// Color2 returns the color2.
 func (ct *CheckerboardTexture) Color2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color2"))
 	return obj.Wrap(_r)

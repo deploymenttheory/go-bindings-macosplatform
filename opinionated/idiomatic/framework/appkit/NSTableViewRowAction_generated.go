@@ -84,19 +84,19 @@ func (tvra *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *Tab
 	return tvra
 }
 
-// WithImage sets the property and returns the receiver so calls can be chained.
+// WithImage sets the image.
 func (tvra *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
 	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return tvra
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (tvra *TableViewRowAction) Style() TableViewRowActionStyle {
 	_r := objc.Send[TableViewRowActionStyle](objref.IDOf(tvra), objc.RegisterName("style"))
 	return _r
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (tvra *TableViewRowAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("title"))
 	if _r == 0 {
@@ -105,13 +105,13 @@ func (tvra *TableViewRowAction) Title() string {
 	return purego.GoString(_r)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (tvra *TableViewRowAction) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (tvra *TableViewRowAction) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("image"))
 	return ImageFromID(_r)

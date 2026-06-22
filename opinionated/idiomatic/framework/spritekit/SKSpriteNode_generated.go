@@ -328,13 +328,13 @@ func (sn *SpriteNode) LightingBitMask() uint32 {
 	return _r
 }
 
-// ShadowCastBitMask wraps the corresponding Objective-C method.
+// ShadowCastBitMask returns the shadow cast bit mask.
 func (sn *SpriteNode) ShadowCastBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowCastBitMask"))
 	return _r
 }
 
-// ShadowedBitMask wraps the corresponding Objective-C method.
+// ShadowedBitMask returns the shadowed bit mask.
 func (sn *SpriteNode) ShadowedBitMask() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(sn), objc.RegisterName("shadowedBitMask"))
 	return _r
@@ -376,7 +376,7 @@ func (sn *SpriteNode) Size() corefoundation.CGSize {
 	return _r
 }
 
-// Shader wraps the corresponding Objective-C method.
+// Shader returns the shader.
 func (sn *SpriteNode) Shader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("shader"))
 	return ShaderFromID(_r)

@@ -106,7 +106,7 @@ func (las *LookAroundSnapshotter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("cancel"))
 }
 
-// IsLoading wraps the corresponding Objective-C method.
+// IsLoading reports whether the object is loading.
 func (las *LookAroundSnapshotter) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(las), objc.RegisterName("isLoading"))
 	return _r

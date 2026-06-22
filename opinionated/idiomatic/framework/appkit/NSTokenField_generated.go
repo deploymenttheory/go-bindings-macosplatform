@@ -156,26 +156,26 @@ func (tf *TokenField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy)
 	return tf
 }
 
-// WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingTools sets the allows writing tools.
 func (tf *TokenField) WithAllowsWritingTools(allowsWritingTools bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return tf
 }
 
-// WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (tf *TokenField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return tf
 }
 
-// WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderStrings sets the placeholder strings.
 func (tf *TokenField) WithPlaceholderStrings(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return tf
 }
 
-// WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (tf *TokenField) WithPlaceholderAttributedStrings(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
@@ -344,38 +344,38 @@ func (tf *TokenField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) 
 	return tf
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (tf *TokenField) WithCell(cell CellProvider) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return tf
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (tf *TokenField) WithSubviews(items ...ViewProvider) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSubviews:"), _arr)
 	return tf
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (tf *TokenField) WithHidden(hidden bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHidden:"), hidden)
 	return tf
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tf *TokenField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return tf
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (tf *TokenField) WithAutoresizesSubviews(autoresizesSubviews bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return tf
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (tf *TokenField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return tf
@@ -387,19 +387,19 @@ func (tf *TokenField) WithFrame(frame corefoundation.CGRect) *TokenField {
 	return tf
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (tf *TokenField) WithFrameRotation(frameRotation float64) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return tf
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (tf *TokenField) WithFrameCenterRotation(frameCenterRotation float64) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return tf
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (tf *TokenField) WithBoundsRotation(boundsRotation float64) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return tf
@@ -411,7 +411,7 @@ func (tf *TokenField) WithBounds(bounds corefoundation.CGRect) *TokenField {
 	return tf
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (tf *TokenField) WithCanDrawConcurrently(canDrawConcurrently bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return tf
@@ -423,148 +423,148 @@ func (tf *TokenField) WithNeedsDisplay(needsDisplay bool) *TokenField {
 	return tf
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (tf *TokenField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return tf
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (tf *TokenField) WithWantsRestingTouches(wantsRestingTouches bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return tf
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tf *TokenField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return tf
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (tf *TokenField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return tf
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (tf *TokenField) WithWantsLayer(wantsLayer bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return tf
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (tf *TokenField) WithLayer(layer obj.Object) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return tf
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tf *TokenField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return tf
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (tf *TokenField) WithNeedsLayout(needsLayout bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return tf
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (tf *TokenField) WithAlphaValue(alphaValue float64) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return tf
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tf *TokenField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return tf
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (tf *TokenField) WithBackgroundFilters(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return tf
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (tf *TokenField) WithCompositingFilter(compositingFilter obj.Object) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return tf
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (tf *TokenField) WithContentFilters(items ...obj.Object) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setContentFilters:"), _arr)
 	return tf
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (tf *TokenField) WithShadow(shadow *Shadow) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return tf
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (tf *TokenField) WithClipsToBounds(clipsToBounds bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return tf
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tf *TokenField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return tf
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (tf *TokenField) WithToolTip(toolTip string) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return tf
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tf *TokenField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return tf
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (tf *TokenField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return tf
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (tf *TokenField) WithNextKeyView(nextKeyView ViewProvider) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return tf
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (tf *TokenField) WithFocusRingType(focusRingType FocusRingType) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return tf
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (tf *TokenField) WithGestureRecognizers(items ...GestureRecognizerProvider) *TokenField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return tf
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (tf *TokenField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return tf
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tf *TokenField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return tf
@@ -576,49 +576,49 @@ func (tf *TokenField) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 	return tf
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tf *TokenField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return tf
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (tf *TokenField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return tf
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tf *TokenField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return tf
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tf *TokenField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return tf
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tf *TokenField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return tf
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tf *TokenField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return tf
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tf *TokenField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return tf
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (tf *TokenField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TokenField {
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return tf
@@ -648,19 +648,19 @@ func (tf *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
 	return tf
 }
 
-// TokenStyle wraps the corresponding Objective-C method.
+// TokenStyle returns the token style.
 func (tf *TokenField) TokenStyle() TokenStyle {
 	_r := objc.Send[TokenStyle](objref.IDOf(tf), objc.RegisterName("tokenStyle"))
 	return _r
 }
 
-// CompletionDelay wraps the corresponding Objective-C method.
+// CompletionDelay returns the completion delay.
 func (tf *TokenField) CompletionDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(tf), objc.RegisterName("completionDelay"))
 	return _r
 }
 
-// TokenizingCharacterSet wraps the corresponding Objective-C method.
+// TokenizingCharacterSet returns the tokenizing character set.
 func (tf *TokenField) TokenizingCharacterSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("tokenizingCharacterSet"))
 	return obj.Wrap(_r)

@@ -69,25 +69,25 @@ func (cns *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
 	return cns
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (cns *CoherentNoiseSource) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r
 }
 
-// OctaveCount wraps the corresponding Objective-C method.
+// OctaveCount returns the octave count.
 func (cns *CoherentNoiseSource) OctaveCount() int {
 	_r := objc.Send[int](objref.IDOf(cns), objc.RegisterName("octaveCount"))
 	return _r
 }
 
-// Lacunarity wraps the corresponding Objective-C method.
+// Lacunarity returns the lacunarity.
 func (cns *CoherentNoiseSource) Lacunarity() float64 {
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("lacunarity"))
 	return _r
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func (cns *CoherentNoiseSource) Seed() int32 {
 	_r := objc.Send[int32](objref.IDOf(cns), objc.RegisterName("seed"))
 	return _r

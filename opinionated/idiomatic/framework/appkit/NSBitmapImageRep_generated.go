@@ -211,61 +211,61 @@ func (bir *BitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace *Col
 	return BitmapImageRepFromID(_r)
 }
 
-// IsPlanar wraps the corresponding Objective-C method.
+// IsPlanar reports whether the object is planar.
 func (bir *BitmapImageRep) IsPlanar() bool {
 	_r := objc.Send[bool](objref.IDOf(bir), objc.RegisterName("isPlanar"))
 	return _r
 }
 
-// SamplesPerPixel wraps the corresponding Objective-C method.
+// SamplesPerPixel returns the samples per pixel.
 func (bir *BitmapImageRep) SamplesPerPixel() int {
 	_r := objc.Send[int](objref.IDOf(bir), objc.RegisterName("samplesPerPixel"))
 	return _r
 }
 
-// BitsPerPixel wraps the corresponding Objective-C method.
+// BitsPerPixel returns the bits per pixel.
 func (bir *BitmapImageRep) BitsPerPixel() int {
 	_r := objc.Send[int](objref.IDOf(bir), objc.RegisterName("bitsPerPixel"))
 	return _r
 }
 
-// BytesPerRow wraps the corresponding Objective-C method.
+// BytesPerRow returns the bytes per row.
 func (bir *BitmapImageRep) BytesPerRow() int {
 	_r := objc.Send[int](objref.IDOf(bir), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
-// BytesPerPlane wraps the corresponding Objective-C method.
+// BytesPerPlane returns the bytes per plane.
 func (bir *BitmapImageRep) BytesPerPlane() int {
 	_r := objc.Send[int](objref.IDOf(bir), objc.RegisterName("bytesPerPlane"))
 	return _r
 }
 
-// NumberOfPlanes wraps the corresponding Objective-C method.
+// NumberOfPlanes returns the number of planes.
 func (bir *BitmapImageRep) NumberOfPlanes() int {
 	_r := objc.Send[int](objref.IDOf(bir), objc.RegisterName("numberOfPlanes"))
 	return _r
 }
 
-// BitmapFormat wraps the corresponding Objective-C method.
+// BitmapFormat returns the bitmap format.
 func (bir *BitmapImageRep) BitmapFormat() BitmapFormat {
 	_r := objc.Send[BitmapFormat](objref.IDOf(bir), objc.RegisterName("bitmapFormat"))
 	return _r
 }
 
-// TIFFRepresentation wraps the corresponding Objective-C method.
+// TIFFRepresentation returns the tiff representation.
 func (bir *BitmapImageRep) TIFFRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("TIFFRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// CGImage wraps the corresponding Objective-C method.
+// CGImage returns the cg image.
 func (bir *BitmapImageRep) CGImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (bir *BitmapImageRep) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)

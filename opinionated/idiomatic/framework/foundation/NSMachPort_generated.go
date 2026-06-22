@@ -60,13 +60,13 @@ func NewMachPortWithMachPortOptions(machPort uint32, f MachPortOptions) *MachPor
 	return machPortAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mp *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mp
 }
 
-// MachPort wraps the corresponding Objective-C method.
+// MachPort returns the mach port.
 func (mp *MachPort) MachPort() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(mp), objc.RegisterName("machPort"))
 	return _r

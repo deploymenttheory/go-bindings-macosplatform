@@ -68,37 +68,37 @@ func (o *Operation) String() string {
 	return rt.Description(objref.IDOf(o))
 }
 
-// WithQueuePriority sets the property and returns the receiver so calls can be chained.
+// WithQueuePriority sets the queue priority.
 func (o *Operation) WithQueuePriority(queuePriority OperationQueuePriority) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return o
 }
 
-// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
+// WithCompletionBlock sets the completion block.
 func (o *Operation) WithCompletionBlock(completionBlock func()) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return o
 }
 
-// WithThreadPriority sets the property and returns the receiver so calls can be chained.
+// WithThreadPriority sets the thread priority.
 func (o *Operation) WithThreadPriority(threadPriority float64) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return o
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (o *Operation) WithQualityOfService(qualityOfService QualityOfService) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return o
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (o *Operation) WithName(name StringProvider) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setName:"), objref.IDOf(name))
 	return o
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (o *Operation) WithScriptingProperties(scriptingProperties obj.Object) *Operation {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return o
@@ -119,12 +119,12 @@ func (o *Operation) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("cancel"))
 }
 
-// AddDependency wraps the corresponding Objective-C method.
+// AddDependency adds dependency.
 func (o *Operation) AddDependency(op *Operation) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addDependency:"), objref.IDOf(op))
 }
 
-// RemoveDependency wraps the corresponding Objective-C method.
+// RemoveDependency removes dependency.
 func (o *Operation) RemoveDependency(op *Operation) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeDependency:"), objref.IDOf(op))
 }
@@ -134,43 +134,43 @@ func (o *Operation) WaitUntilFinished() {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("waitUntilFinished"))
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (o *Operation) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsExecuting wraps the corresponding Objective-C method.
+// IsExecuting reports whether the object is executing.
 func (o *Operation) IsExecuting() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isExecuting"))
 	return _r
 }
 
-// IsFinished wraps the corresponding Objective-C method.
+// IsFinished reports whether the object is finished.
 func (o *Operation) IsFinished() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isFinished"))
 	return _r
 }
 
-// IsConcurrent wraps the corresponding Objective-C method.
+// IsConcurrent reports whether the object is concurrent.
 func (o *Operation) IsConcurrent() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isConcurrent"))
 	return _r
 }
 
-// IsAsynchronous wraps the corresponding Objective-C method.
+// IsAsynchronous reports whether the object is asynchronous.
 func (o *Operation) IsAsynchronous() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
-// IsReady wraps the corresponding Objective-C method.
+// IsReady reports whether the object is ready.
 func (o *Operation) IsReady() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isReady"))
 	return _r
 }
 
-// Dependencies wraps the corresponding Objective-C method.
+// Dependencies returns the dependencies.
 //
 // Dependencies returns the collection as a Go slice.
 func (o *Operation) Dependencies() []*Operation {
@@ -178,25 +178,25 @@ func (o *Operation) Dependencies() []*Operation {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
-// QueuePriority wraps the corresponding Objective-C method.
+// QueuePriority returns the queue priority.
 func (o *Operation) QueuePriority() OperationQueuePriority {
 	_r := objc.Send[OperationQueuePriority](objref.IDOf(o), objc.RegisterName("queuePriority"))
 	return _r
 }
 
-// ThreadPriority wraps the corresponding Objective-C method.
+// ThreadPriority returns the thread priority.
 func (o *Operation) ThreadPriority() float64 {
 	_r := objc.Send[float64](objref.IDOf(o), objc.RegisterName("threadPriority"))
 	return _r
 }
 
-// QualityOfService wraps the corresponding Objective-C method.
+// QualityOfService returns the quality of service.
 func (o *Operation) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(o), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (o *Operation) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("name"))
 	if _r == 0 {

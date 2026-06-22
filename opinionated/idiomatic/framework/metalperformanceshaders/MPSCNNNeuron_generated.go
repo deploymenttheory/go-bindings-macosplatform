@@ -84,25 +84,25 @@ func (cn *CNNNeuron) WithLabel(label string) *CNNNeuron {
 	return cn
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (cn *CNNNeuron) A() float32 {
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("a"))
 	return _r
 }
 
-// B wraps the corresponding Objective-C method.
+// B returns the b.
 func (cn *CNNNeuron) B() float32 {
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("b"))
 	return _r
 }
 
-// C wraps the corresponding Objective-C method.
+// C returns the c.
 func (cn *CNNNeuron) C() float32 {
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("c"))
 	return _r
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (cn *CNNNeuron) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("data"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewHost() *Host {
 	return hostAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (h *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
 	objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return h
@@ -84,7 +84,7 @@ func (h *Host) IsEqualToHost(aHost *Host) bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (h *Host) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("name"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (h *Host) Name() string {
 	return purego.GoString(_r)
 }
 
-// Names wraps the corresponding Objective-C method.
+// Names returns the names.
 //
 // Names returns the collection as a Go slice.
 func (h *Host) Names() []string {
@@ -101,7 +101,7 @@ func (h *Host) Names() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Address wraps the corresponding Objective-C method.
+// Address returns the address.
 func (h *Host) Address() string {
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("address"))
 	if _r == 0 {
@@ -110,7 +110,7 @@ func (h *Host) Address() string {
 	return purego.GoString(_r)
 }
 
-// Addresses wraps the corresponding Objective-C method.
+// Addresses returns the addresses.
 //
 // Addresses returns the collection as a Go slice.
 func (h *Host) Addresses() []string {
@@ -118,7 +118,7 @@ func (h *Host) Addresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (h *Host) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("localizedName"))
 	if _r == 0 {

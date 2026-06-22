@@ -70,7 +70,7 @@ func NewMTRApplicationLauncherClusterStopAppParams() *MTRApplicationLauncherClus
 	return mTRApplicationLauncherClusterStopAppParamsAdopt(_id)
 }
 
-// WithApplication sets the property and returns the receiver so calls can be chained.
+// WithApplication sets the application.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterStopAppParams {
 	objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcsap
@@ -88,7 +88,7 @@ func (malcsap *MTRApplicationLauncherClusterStopAppParams) WithServerSideProcess
 	return malcsap
 }
 
-// Application wraps the corresponding Objective-C method.
+// Application returns the application.
 func (malcsap *MTRApplicationLauncherClusterStopAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(malcsap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)

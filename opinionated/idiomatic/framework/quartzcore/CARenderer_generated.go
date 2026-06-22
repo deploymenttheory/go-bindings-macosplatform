@@ -112,13 +112,13 @@ func (r *Renderer) EndFrame() {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("endFrame"))
 }
 
-// Layer wraps the corresponding Objective-C method.
+// Layer returns the layer.
 func (r *Renderer) Layer() *Layer {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (r *Renderer) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(r), objc.RegisterName("bounds"))
 	return _r

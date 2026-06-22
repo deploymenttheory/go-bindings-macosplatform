@@ -70,31 +70,31 @@ func NewMTRColorControlClusterStepSaturationParams() *MTRColorControlClusterStep
 	return mTRColorControlClusterStepSaturationParamsAdopt(_id)
 }
 
-// WithStepMode sets the property and returns the receiver so calls can be chained.
+// WithStepMode sets the step mode.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) WithStepMode(stepMode obj.Object) *MTRColorControlClusterStepSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return mcccssp
 }
 
-// WithStepSize sets the property and returns the receiver so calls can be chained.
+// WithStepSize sets the step size.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) WithStepSize(stepSize obj.Object) *MTRColorControlClusterStepSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return mcccssp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccssp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccssp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccssp
@@ -112,31 +112,31 @@ func (mcccssp *MTRColorControlClusterStepSaturationParams) WithServerSideProcess
 	return mcccssp
 }
 
-// StepMode wraps the corresponding Objective-C method.
+// StepMode returns the step mode.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) StepMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("stepMode"))
 	return obj.Wrap(_r)
 }
 
-// StepSize wraps the corresponding Objective-C method.
+// StepSize returns the step size.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) StepSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("stepSize"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccssp *MTRColorControlClusterStepSaturationParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccssp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

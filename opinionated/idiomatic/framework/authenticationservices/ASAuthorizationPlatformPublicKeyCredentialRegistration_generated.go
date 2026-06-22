@@ -72,19 +72,19 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistration() *AuthorizationPla
 	return authorizationPlatformPublicKeyCredentialRegistrationAdopt(_id)
 }
 
-// Attachment wraps the corresponding Objective-C method.
+// Attachment returns the attachment.
 func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() AuthorizationPublicKeyCredentialAttachment {
 	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(appkcr), objc.RegisterName("attachment"))
 	return _r
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcr), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)

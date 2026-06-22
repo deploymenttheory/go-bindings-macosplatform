@@ -66,7 +66,7 @@ func (o *Object) String() string {
 	return rt.Description(objref.IDOf(o))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (o *Object) WithScriptingProperties(scriptingProperties obj.Object) *Object {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return o
@@ -82,13 +82,13 @@ func (o *Object) Finalize() {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("finalize"))
 }
 
-// Copy wraps the corresponding Objective-C method.
+// Copy returns the copy.
 func (o *Object) Copy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copy"))
 	return obj.Wrap(_r)
 }
 
-// MutableCopy wraps the corresponding Objective-C method.
+// MutableCopy returns the mutable copy.
 func (o *Object) MutableCopy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("mutableCopy"))
 	return obj.Wrap(_r)
@@ -111,7 +111,7 @@ func (o *Object) AwakeAfterUsingCoder(coder *Coder) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// AutoContentAccessingProxy wraps the corresponding Objective-C method.
+// AutoContentAccessingProxy returns the auto content accessing proxy.
 func (o *Object) AutoContentAccessingProxy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("autoContentAccessingProxy"))
 	return obj.Wrap(_r)
@@ -281,7 +281,7 @@ func (o *Object) TakeValuesFromDictionary(properties obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("takeValuesFromDictionary:"), objref.IDOf(properties))
 }
 
-// RemoveObserverForKeyPath wraps the corresponding Objective-C method.
+// RemoveObserverForKeyPath removes observer for key path.
 func (o *Object) RemoveObserverForKeyPath(observer *Object, keyPath string) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeObserver:forKeyPath:"), objref.IDOf(observer), purego.NSString(keyPath))
 }
@@ -348,13 +348,13 @@ func (o *Object) InverseForRelationshipKey(relationshipKey string) string {
 	return purego.GoString(_r)
 }
 
-// ClassDescription wraps the corresponding Objective-C method.
+// ClassDescription returns the class description.
 func (o *Object) ClassDescription() *ClassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("classDescription"))
 	return ClassDescriptionFromID(_r)
 }
 
-// AttributeKeys wraps the corresponding Objective-C method.
+// AttributeKeys returns the attribute keys.
 //
 // AttributeKeys returns the collection as a Go slice.
 func (o *Object) AttributeKeys() []string {
@@ -362,7 +362,7 @@ func (o *Object) AttributeKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ToOneRelationshipKeys wraps the corresponding Objective-C method.
+// ToOneRelationshipKeys returns the to one relationship keys.
 //
 // ToOneRelationshipKeys returns the collection as a Go slice.
 func (o *Object) ToOneRelationshipKeys() []string {
@@ -370,7 +370,7 @@ func (o *Object) ToOneRelationshipKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ToManyRelationshipKeys wraps the corresponding Objective-C method.
+// ToManyRelationshipKeys returns the to many relationship keys.
 //
 // ToManyRelationshipKeys returns the collection as a Go slice.
 func (o *Object) ToManyRelationshipKeys() []string {
@@ -384,25 +384,25 @@ func (o *Object) ScriptingValueForSpecifier(objectSpecifier *ScriptObjectSpecifi
 	return obj.Wrap(_r)
 }
 
-// CopyScriptingValueForKeyWithProperties wraps the corresponding Objective-C method.
+// CopyScriptingValueForKeyWithProperties copies scripting value for key with properties.
 func (o *Object) CopyScriptingValueForKeyWithProperties(value obj.Object, key string, properties obj.Object) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("copyScriptingValue:forKey:withProperties:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(properties))
 	return obj.Wrap(_r)
 }
 
-// ScriptingProperties wraps the corresponding Objective-C method.
+// ScriptingProperties returns the scripting properties.
 func (o *Object) ScriptingProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("scriptingProperties"))
 	return obj.Wrap(_r)
 }
 
-// ClassCode wraps the corresponding Objective-C method.
+// ClassCode returns the class code.
 func (o *Object) ClassCode() int {
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("classCode"))
 	return _r
 }
 
-// ClassName wraps the corresponding Objective-C method.
+// ClassName returns the class name.
 func (o *Object) ClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("className"))
 	if _r == 0 {
@@ -429,22 +429,22 @@ func (o *Object) ValueWithUniqueIDInPropertyWithKey(uniqueID obj.Object, key str
 	return obj.Wrap(_r)
 }
 
-// InsertValueAtIndexInPropertyWithKey wraps the corresponding Objective-C method.
+// InsertValueAtIndexInPropertyWithKey inserts value at index in property with key.
 func (o *Object) InsertValueAtIndexInPropertyWithKey(value obj.Object, index int, key string) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:atIndex:inPropertyWithKey:"), objref.IDOf(value), index, purego.NSString(key))
 }
 
-// RemoveValueAtIndexFromPropertyWithKey wraps the corresponding Objective-C method.
+// RemoveValueAtIndexFromPropertyWithKey removes value at index from property with key.
 func (o *Object) RemoveValueAtIndexFromPropertyWithKey(index int, key string) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeValueAtIndex:fromPropertyWithKey:"), index, purego.NSString(key))
 }
 
-// ReplaceValueAtIndexInPropertyWithKeyWithValue wraps the corresponding Objective-C method.
+// ReplaceValueAtIndexInPropertyWithKeyWithValue replaces value at index in property with key with value.
 func (o *Object) ReplaceValueAtIndexInPropertyWithKeyWithValue(index int, key string, value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("replaceValueAtIndex:inPropertyWithKey:withValue:"), index, purego.NSString(key), objref.IDOf(value))
 }
 
-// InsertValueInPropertyWithKey wraps the corresponding Objective-C method.
+// InsertValueInPropertyWithKey inserts value in property with key.
 func (o *Object) InsertValueInPropertyWithKey(value obj.Object, key string) {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertValue:inPropertyWithKey:"), objref.IDOf(value), purego.NSString(key))
 }
@@ -461,7 +461,7 @@ func (o *Object) IndicesOfObjectsByEvaluatingObjectSpecifier(specifier *ScriptOb
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// ObjectSpecifier wraps the corresponding Objective-C method.
+// ObjectSpecifier returns the object specifier.
 func (o *Object) ObjectSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("objectSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

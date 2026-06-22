@@ -102,13 +102,13 @@ func (ia *ImageAccumulator) Clear() {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("clear"))
 }
 
-// Extent wraps the corresponding Objective-C method.
+// Extent returns the extent.
 func (ia *ImageAccumulator) Extent() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ia), objc.RegisterName("extent"))
 	return _r
 }
 
-// Format wraps the corresponding Objective-C method.
+// Format returns the format.
 func (ia *ImageAccumulator) Format() int {
 	_r := objc.Send[int](objref.IDOf(ia), objc.RegisterName("format"))
 	return _r

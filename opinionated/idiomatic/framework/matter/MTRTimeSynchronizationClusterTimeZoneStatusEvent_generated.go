@@ -70,25 +70,25 @@ func NewMTRTimeSynchronizationClusterTimeZoneStatusEvent() *MTRTimeSynchronizati
 	return mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt(_id)
 }
 
-// WithOffset sets the property and returns the receiver so calls can be chained.
+// WithOffset sets the offset.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtsctzse
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtsctzse
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("offset"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("name"))
 	if _r == 0 {

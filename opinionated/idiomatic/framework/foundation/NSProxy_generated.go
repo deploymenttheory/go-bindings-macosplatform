@@ -83,7 +83,7 @@ func (p *Proxy) Finalize() {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("finalize"))
 }
 
-// DebugDescription wraps the corresponding Objective-C method.
+// DebugDescription returns the debug description.
 func (p *Proxy) DebugDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("debugDescription"))
 	if _r == 0 {

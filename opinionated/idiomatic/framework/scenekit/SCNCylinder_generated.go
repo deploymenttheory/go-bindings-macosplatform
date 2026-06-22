@@ -101,7 +101,7 @@ func (c *Cylinder) WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder {
 	return c
 }
 
-// WithTessellator sets the property and returns the receiver so calls can be chained.
+// WithTessellator sets the tessellator.
 func (c *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return c

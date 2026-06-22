@@ -56,7 +56,7 @@ func NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue(device *MTRBas
 	return mTRBaseClusterTemperatureControlAdopt(_id)
 }
 
-// ReadAttributeTemperatureSetpointWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointWithCompletion reads attribute temperature setpoint with completion.
 //
 // ReadAttributeTemperatureSetpointWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeTemperatureSetpointWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeTemperatureSetp
 	}
 }
 
-// ReadAttributeMinTemperatureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinTemperatureWithCompletion reads attribute min temperature with completion.
 //
 // ReadAttributeMinTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeMinTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeMinTemperatureW
 	}
 }
 
-// ReadAttributeMaxTemperatureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxTemperatureWithCompletion reads attribute max temperature with completion.
 //
 // ReadAttributeMaxTemperatureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeMaxTemperatureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeMaxTemperatureW
 	}
 }
 
-// ReadAttributeStepWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStepWithCompletion reads attribute step with completion.
 //
 // ReadAttributeStepWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeStepWithParamsS
 	}
 }
 
-// ReadAttributeSelectedTemperatureLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSelectedTemperatureLevelWithCompletion reads attribute selected temperature level with completion.
 //
 // ReadAttributeSelectedTemperatureLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeSelectedTempera
 	}
 }
 
-// ReadAttributeSupportedTemperatureLevelsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedTemperatureLevelsWithCompletion reads attribute supported temperature levels with completion.
 //
 // ReadAttributeSupportedTemperatureLevelsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeSupportedTemper
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeGeneratedComman
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeAcceptedCommand
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeAttributeListWi
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbctc *MTRBaseClusterTemperatureControl) SubscribeAttributeFeatureMapWithP
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTemperatureControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

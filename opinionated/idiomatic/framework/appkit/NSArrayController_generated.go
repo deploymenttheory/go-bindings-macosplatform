@@ -246,7 +246,7 @@ func (ac *ArrayController) AutomaticallyRearrangesObjects() bool {
 	return _r
 }
 
-// AutomaticRearrangementKeyPaths wraps the corresponding Objective-C method.
+// AutomaticRearrangementKeyPaths returns the automatic rearrangement key paths.
 //
 // AutomaticRearrangementKeyPaths returns the collection as a Go slice.
 func (ac *ArrayController) AutomaticRearrangementKeyPaths() []string {
@@ -254,7 +254,7 @@ func (ac *ArrayController) AutomaticRearrangementKeyPaths() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SortDescriptors wraps the corresponding Objective-C method.
+// SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (ac *ArrayController) SortDescriptors() []obj.Object {
@@ -262,7 +262,7 @@ func (ac *ArrayController) SortDescriptors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FilterPredicate wraps the corresponding Objective-C method.
+// FilterPredicate returns the filter predicate.
 func (ac *ArrayController) FilterPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("filterPredicate"))
 	return obj.Wrap(_r)
@@ -274,7 +274,7 @@ func (ac *ArrayController) ClearsFilterPredicateOnInsertion() bool {
 	return _r
 }
 
-// ArrangedObjects wraps the corresponding Objective-C method.
+// ArrangedObjects returns the arranged objects.
 func (ac *ArrayController) ArrangedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("arrangedObjects"))
 	return obj.Wrap(_r)
@@ -304,13 +304,13 @@ func (ac *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
 	return _r
 }
 
-// SelectionIndexes wraps the corresponding Objective-C method.
+// SelectionIndexes returns the selection indexes.
 func (ac *ArrayController) SelectionIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("selectionIndexes"))
 	return obj.Wrap(_r)
 }
 
-// SelectionIndex wraps the corresponding Objective-C method.
+// SelectionIndex returns the selection index.
 func (ac *ArrayController) SelectionIndex() int {
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("selectionIndex"))
 	return _r

@@ -476,31 +476,31 @@ func (bc *ButtonCell) DrawTitleWithFrameInView(title obj.Object, frame corefound
 	return _r
 }
 
-// BezelStyle wraps the corresponding Objective-C method.
+// BezelStyle returns the bezel style.
 func (bc *ButtonCell) BezelStyle() BezelStyle {
 	_r := objc.Send[BezelStyle](objref.IDOf(bc), objc.RegisterName("bezelStyle"))
 	return _r
 }
 
-// HighlightsBy wraps the corresponding Objective-C method.
+// HighlightsBy returns the highlights by.
 func (bc *ButtonCell) HighlightsBy() CellStyleMask {
 	_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("highlightsBy"))
 	return _r
 }
 
-// ShowsStateBy wraps the corresponding Objective-C method.
+// ShowsStateBy returns the shows state by.
 func (bc *ButtonCell) ShowsStateBy() CellStyleMask {
 	_r := objc.Send[CellStyleMask](objref.IDOf(bc), objc.RegisterName("showsStateBy"))
 	return _r
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (bc *ButtonCell) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// AlternateTitle wraps the corresponding Objective-C method.
+// AlternateTitle returns the alternate title.
 func (bc *ButtonCell) AlternateTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateTitle"))
 	if _r == 0 {
@@ -509,37 +509,37 @@ func (bc *ButtonCell) AlternateTitle() string {
 	return purego.GoString(_r)
 }
 
-// AttributedAlternateTitle wraps the corresponding Objective-C method.
+// AttributedAlternateTitle returns the attributed alternate title.
 func (bc *ButtonCell) AttributedAlternateTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("attributedAlternateTitle"))
 	return obj.Wrap(_r)
 }
 
-// AlternateImage wraps the corresponding Objective-C method.
+// AlternateImage returns the alternate image.
 func (bc *ButtonCell) AlternateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
-// ImagePosition wraps the corresponding Objective-C method.
+// ImagePosition returns the image position.
 func (bc *ButtonCell) ImagePosition() CellImagePosition {
 	_r := objc.Send[CellImagePosition](objref.IDOf(bc), objc.RegisterName("imagePosition"))
 	return _r
 }
 
-// ImageScaling wraps the corresponding Objective-C method.
+// ImageScaling returns the image scaling.
 func (bc *ButtonCell) ImageScaling() ImageScaling {
 	_r := objc.Send[ImageScaling](objref.IDOf(bc), objc.RegisterName("imageScaling"))
 	return _r
 }
 
-// KeyEquivalentModifierMask wraps the corresponding Objective-C method.
+// KeyEquivalentModifierMask returns the key equivalent modifier mask.
 func (bc *ButtonCell) KeyEquivalentModifierMask() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objref.IDOf(bc), objc.RegisterName("keyEquivalentModifierMask"))
 	return _r
 }
 
-// IsTransparent wraps the corresponding Objective-C method.
+// IsTransparent reports whether the object is transparent.
 func (bc *ButtonCell) IsTransparent() bool {
 	_r := objc.Send[bool](objref.IDOf(bc), objc.RegisterName("isTransparent"))
 	return _r
@@ -557,13 +557,13 @@ func (bc *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
 	return _r
 }
 
-// Sound wraps the corresponding Objective-C method.
+// Sound returns the sound.
 func (bc *ButtonCell) Sound() *Sound {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("sound"))
 	return SoundFromID(_r)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (bc *ButtonCell) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
@@ -599,13 +599,13 @@ func (bc *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64
 	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setKeyEquivalentFont:size:"), purego.NSString(fontName), fontSize)
 }
 
-// GradientType wraps the corresponding Objective-C method.
+// GradientType returns the gradient type.
 func (bc *ButtonCell) GradientType() GradientType {
 	_r := objc.Send[GradientType](objref.IDOf(bc), objc.RegisterName("gradientType"))
 	return _r
 }
 
-// KeyEquivalentFont wraps the corresponding Objective-C method.
+// KeyEquivalentFont returns the key equivalent font.
 func (bc *ButtonCell) KeyEquivalentFont() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("keyEquivalentFont"))
 	return FontFromID(_r)

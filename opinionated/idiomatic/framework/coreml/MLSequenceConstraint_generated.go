@@ -73,13 +73,13 @@ func NewSequenceConstraint() *SequenceConstraint {
 	return sequenceConstraintAdopt(_id)
 }
 
-// ValueDescription wraps the corresponding Objective-C method.
+// ValueDescription returns the value description.
 func (sc *SequenceConstraint) ValueDescription() *FeatureDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("valueDescription"))
 	return FeatureDescriptionFromID(_r)
 }
 
-// CountRange wraps the corresponding Objective-C method.
+// CountRange returns the count range.
 func (sc *SequenceConstraint) CountRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(sc), objc.RegisterName("countRange"))
 	return _r

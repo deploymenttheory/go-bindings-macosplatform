@@ -59,7 +59,7 @@ func NewFixedDetectionTrackWithOriginalDetection(originalDetection *Detection) *
 	return fixedDetectionTrackAdopt(_id)
 }
 
-// FocusDisparity wraps the corresponding Objective-C method.
+// FocusDisparity returns the focus disparity.
 func (fdt *FixedDetectionTrack) FocusDisparity() float32 {
 	_r := objc.Send[float32](objref.IDOf(fdt), objc.RegisterName("focusDisparity"))
 	return _r

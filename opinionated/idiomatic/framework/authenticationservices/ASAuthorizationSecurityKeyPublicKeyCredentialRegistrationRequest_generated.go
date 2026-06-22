@@ -72,7 +72,7 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 	return askpkcrr
 }
 
-// WithPrf sets the property and returns the receiver so calls can be chained.
+// WithPrf sets the prf.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return askpkcrr
@@ -104,7 +104,7 @@ func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) 
 	return obj.Wrap(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (askpkcrr *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcrr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)

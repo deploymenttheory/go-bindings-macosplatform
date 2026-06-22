@@ -70,7 +70,7 @@ func NewMTRAccountLoginClusterGetSetupPINParams() *MTRAccountLoginClusterGetSetu
 	return mTRAccountLoginClusterGetSetupPINParamsAdopt(_id)
 }
 
-// WithTempAccountIdentifier sets the property and returns the receiver so calls can be chained.
+// WithTempAccountIdentifier sets the temp account identifier.
 func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) WithTempAccountIdentifier(tempAccountIdentifier string) *MTRAccountLoginClusterGetSetupPINParams {
 	objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("setTempAccountIdentifier:"), purego.NSString(tempAccountIdentifier))
 	return malcgspp
@@ -88,7 +88,7 @@ func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) WithServerSideProcessin
 	return malcgspp
 }
 
-// TempAccountIdentifier wraps the corresponding Objective-C method.
+// TempAccountIdentifier returns the temp account identifier.
 func (malcgspp *MTRAccountLoginClusterGetSetupPINParams) TempAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(malcgspp), objc.RegisterName("tempAccountIdentifier"))
 	if _r == 0 {

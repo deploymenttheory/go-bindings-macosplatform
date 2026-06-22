@@ -70,7 +70,7 @@ func NewMTRDoorLockClusterUnlockDoorParams() *MTRDoorLockClusterUnlockDoorParams
 	return mTRDoorLockClusterUnlockDoorParamsAdopt(_id)
 }
 
-// WithPinCode sets the property and returns the receiver so calls can be chained.
+// WithPinCode sets the pin code.
 func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) WithPinCode(pinCode obj.Object) *MTRDoorLockClusterUnlockDoorParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
 	return mdlcudp
@@ -88,7 +88,7 @@ func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) WithServerSideProcessingTimeo
 	return mdlcudp
 }
 
-// PinCode wraps the corresponding Objective-C method.
+// PinCode returns the pin code.
 func (mdlcudp *MTRDoorLockClusterUnlockDoorParams) PinCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcudp), objc.RegisterName("pinCode"))
 	return obj.Wrap(_r)

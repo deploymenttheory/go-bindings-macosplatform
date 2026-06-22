@@ -88,19 +88,19 @@ func (rpsi *RecurringPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) 
 	return rpsi
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (rpsi *RecurringPaymentSummaryItem) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// IntervalCount wraps the corresponding Objective-C method.
+// IntervalCount returns the interval count.
 func (rpsi *RecurringPaymentSummaryItem) IntervalCount() int {
 	_r := objc.Send[int](objref.IDOf(rpsi), objc.RegisterName("intervalCount"))
 	return _r
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (rpsi *RecurringPaymentSummaryItem) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpsi), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)

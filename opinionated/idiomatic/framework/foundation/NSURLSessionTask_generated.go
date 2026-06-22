@@ -68,43 +68,43 @@ func (ust *URLSessionTask) String() string {
 	return rt.Description(objref.IDOf(ust))
 }
 
-// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the earliest begin date.
 func (ust *URLSessionTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return ust
 }
 
-// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
 func (ust *URLSessionTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return ust
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
 func (ust *URLSessionTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return ust
 }
 
-// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+// WithTaskDescription sets the task description.
 func (ust *URLSessionTask) WithTaskDescription(taskDescription StringProvider) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return ust
 }
 
-// WithPriority sets the property and returns the receiver so calls can be chained.
+// WithPriority sets the priority.
 func (ust *URLSessionTask) WithPriority(priority float32) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setPriority:"), priority)
 	return ust
 }
 
-// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (ust *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return ust
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ust *URLSessionTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ust
@@ -125,79 +125,79 @@ func (ust *URLSessionTask) Resume() {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("resume"))
 }
 
-// TaskIdentifier wraps the corresponding Objective-C method.
+// TaskIdentifier returns the task identifier.
 func (ust *URLSessionTask) TaskIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(ust), objc.RegisterName("taskIdentifier"))
 	return _r
 }
 
-// OriginalRequest wraps the corresponding Objective-C method.
+// OriginalRequest returns the original request.
 func (ust *URLSessionTask) OriginalRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("originalRequest"))
 	return URLRequestFromID(_r)
 }
 
-// CurrentRequest wraps the corresponding Objective-C method.
+// CurrentRequest returns the current request.
 func (ust *URLSessionTask) CurrentRequest() *URLRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("currentRequest"))
 	return URLRequestFromID(_r)
 }
 
-// Response wraps the corresponding Objective-C method.
+// Response returns the response.
 func (ust *URLSessionTask) Response() *URLResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("response"))
 	return URLResponseFromID(_r)
 }
 
-// Progress wraps the corresponding Objective-C method.
+// Progress returns the progress.
 func (ust *URLSessionTask) Progress() *Progress {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("progress"))
 	return ProgressFromID(_r)
 }
 
-// EarliestBeginDate wraps the corresponding Objective-C method.
+// EarliestBeginDate returns the earliest begin date.
 func (ust *URLSessionTask) EarliestBeginDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("earliestBeginDate"))
 	return DateFromID(_r)
 }
 
-// CountOfBytesClientExpectsToSend wraps the corresponding Objective-C method.
+// CountOfBytesClientExpectsToSend returns the count of bytes client expects to send.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToSend() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToSend"))
 	return _r
 }
 
-// CountOfBytesClientExpectsToReceive wraps the corresponding Objective-C method.
+// CountOfBytesClientExpectsToReceive returns the count of bytes client expects to receive.
 func (ust *URLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesClientExpectsToReceive"))
 	return _r
 }
 
-// CountOfBytesSent wraps the corresponding Objective-C method.
+// CountOfBytesSent returns the count of bytes sent.
 func (ust *URLSessionTask) CountOfBytesSent() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesSent"))
 	return _r
 }
 
-// CountOfBytesReceived wraps the corresponding Objective-C method.
+// CountOfBytesReceived returns the count of bytes received.
 func (ust *URLSessionTask) CountOfBytesReceived() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesReceived"))
 	return _r
 }
 
-// CountOfBytesExpectedToSend wraps the corresponding Objective-C method.
+// CountOfBytesExpectedToSend returns the count of bytes expected to send.
 func (ust *URLSessionTask) CountOfBytesExpectedToSend() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToSend"))
 	return _r
 }
 
-// CountOfBytesExpectedToReceive wraps the corresponding Objective-C method.
+// CountOfBytesExpectedToReceive returns the count of bytes expected to receive.
 func (ust *URLSessionTask) CountOfBytesExpectedToReceive() int64 {
 	_r := objc.Send[int64](objref.IDOf(ust), objc.RegisterName("countOfBytesExpectedToReceive"))
 	return _r
 }
 
-// TaskDescription wraps the corresponding Objective-C method.
+// TaskDescription returns the task description.
 func (ust *URLSessionTask) TaskDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("taskDescription"))
 	if _r == 0 {
@@ -206,13 +206,13 @@ func (ust *URLSessionTask) TaskDescription() string {
 	return purego.GoString(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (ust *URLSessionTask) State() URLSessionTaskState {
 	_r := objc.Send[URLSessionTaskState](objref.IDOf(ust), objc.RegisterName("state"))
 	return _r
 }
 
-// Priority wraps the corresponding Objective-C method.
+// Priority returns the priority.
 func (ust *URLSessionTask) Priority() float32 {
 	_r := objc.Send[float32](objref.IDOf(ust), objc.RegisterName("priority"))
 	return _r

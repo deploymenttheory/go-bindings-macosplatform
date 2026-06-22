@@ -104,7 +104,7 @@ func (la *LayoutAnchor) ConstraintLessThanOrEqualToAnchorConstant(anchor obj.Obj
 	return LayoutConstraintFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (la *LayoutAnchor) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("name"))
 	if _r == 0 {
@@ -113,19 +113,19 @@ func (la *LayoutAnchor) Name() string {
 	return purego.GoString(_r)
 }
 
-// Item wraps the corresponding Objective-C method.
+// Item returns the item.
 func (la *LayoutAnchor) Item() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
-// HasAmbiguousLayout wraps the corresponding Objective-C method.
+// HasAmbiguousLayout reports whether the object has ambiguous layout.
 func (la *LayoutAnchor) HasAmbiguousLayout() bool {
 	_r := objc.Send[bool](objref.IDOf(la), objc.RegisterName("hasAmbiguousLayout"))
 	return _r
 }
 
-// ConstraintsAffectingLayout wraps the corresponding Objective-C method.
+// ConstraintsAffectingLayout returns the constraints affecting layout.
 //
 // ConstraintsAffectingLayout returns the collection as a Go slice.
 func (la *LayoutAnchor) ConstraintsAffectingLayout() []*LayoutConstraint {

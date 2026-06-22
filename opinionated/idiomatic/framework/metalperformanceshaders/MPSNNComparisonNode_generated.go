@@ -51,67 +51,67 @@ func NewNNComparisonNode() *NNComparisonNode {
 	return nNComparisonNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (ncn *NNComparisonNode) WithPrimaryScale(primaryScale float32) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return ncn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (ncn *NNComparisonNode) WithSecondaryScale(secondaryScale float32) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return ncn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (ncn *NNComparisonNode) WithBias(bias float32) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setBias:"), bias)
 	return ncn
 }
 
-// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the primary stride in pixels x.
 func (ncn *NNComparisonNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return ncn
 }
 
-// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the primary stride in pixels y.
 func (ncn *NNComparisonNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return ncn
 }
 
-// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the primary stride in feature channels.
 func (ncn *NNComparisonNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return ncn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (ncn *NNComparisonNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return ncn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (ncn *NNComparisonNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return ncn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (ncn *NNComparisonNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return ncn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (ncn *NNComparisonNode) WithMinimumValue(minimumValue float32) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return ncn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (ncn *NNComparisonNode) WithMaximumValue(maximumValue float32) *NNComparisonNode {
 	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return ncn

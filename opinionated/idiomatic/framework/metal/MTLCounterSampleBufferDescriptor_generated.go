@@ -90,7 +90,7 @@ func (csbd *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *Cou
 	return csbd
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (csbd *CounterSampleBufferDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(csbd), objc.RegisterName("label"))
 	if _r == 0 {
@@ -99,13 +99,13 @@ func (csbd *CounterSampleBufferDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
-// StorageMode wraps the corresponding Objective-C method.
+// StorageMode returns the storage mode.
 func (csbd *CounterSampleBufferDescriptor) StorageMode() StorageMode {
 	_r := objc.Send[StorageMode](objref.IDOf(csbd), objc.RegisterName("storageMode"))
 	return _r
 }
 
-// SampleCount wraps the corresponding Objective-C method.
+// SampleCount returns the sample count.
 func (csbd *CounterSampleBufferDescriptor) SampleCount() int {
 	_r := objc.Send[int](objref.IDOf(csbd), objc.RegisterName("sampleCount"))
 	return _r

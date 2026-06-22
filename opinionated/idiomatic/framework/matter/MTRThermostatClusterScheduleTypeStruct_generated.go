@@ -70,37 +70,37 @@ func NewMTRThermostatClusterScheduleTypeStruct() *MTRThermostatClusterScheduleTy
 	return mTRThermostatClusterScheduleTypeStructAdopt(_id)
 }
 
-// WithSystemMode sets the property and returns the receiver so calls can be chained.
+// WithSystemMode sets the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcsts
 }
 
-// WithNumberOfSchedules sets the property and returns the receiver so calls can be chained.
+// WithNumberOfSchedules sets the number of schedules.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithNumberOfSchedules(numberOfSchedules obj.Object) *MTRThermostatClusterScheduleTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setNumberOfSchedules:"), objref.IDOf(numberOfSchedules))
 	return mtcsts
 }
 
-// WithScheduleTypeFeatures sets the property and returns the receiver so calls can be chained.
+// WithScheduleTypeFeatures sets the schedule type features.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) WithScheduleTypeFeatures(scheduleTypeFeatures obj.Object) *MTRThermostatClusterScheduleTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setScheduleTypeFeatures:"), objref.IDOf(scheduleTypeFeatures))
 	return mtcsts
 }
 
-// SystemMode wraps the corresponding Objective-C method.
+// SystemMode returns the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) SystemMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("systemMode"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfSchedules wraps the corresponding Objective-C method.
+// NumberOfSchedules returns the number of schedules.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) NumberOfSchedules() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("numberOfSchedules"))
 	return obj.Wrap(_r)
 }
 
-// ScheduleTypeFeatures wraps the corresponding Objective-C method.
+// ScheduleTypeFeatures returns the schedule type features.
 func (mtcsts *MTRThermostatClusterScheduleTypeStruct) ScheduleTypeFeatures() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("scheduleTypeFeatures"))
 	return obj.Wrap(_r)

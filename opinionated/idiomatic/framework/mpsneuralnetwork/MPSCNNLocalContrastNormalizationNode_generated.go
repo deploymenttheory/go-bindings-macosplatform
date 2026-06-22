@@ -57,31 +57,31 @@ func NewCNNLocalContrastNormalizationNodeWithSource(sourceNode *NNImageNode) *CN
 	return cNNLocalContrastNormalizationNodeAdopt(_id)
 }
 
-// WithPm sets the property and returns the receiver so calls can be chained.
+// WithPm sets the pm.
 func (clcnn *CNNLocalContrastNormalizationNode) WithPm(pm float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(clcnn), objc.RegisterName("setPm:"), pm)
 	return clcnn
 }
 
-// WithPs sets the property and returns the receiver so calls can be chained.
+// WithPs sets the ps.
 func (clcnn *CNNLocalContrastNormalizationNode) WithPs(ps float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(clcnn), objc.RegisterName("setPs:"), ps)
 	return clcnn
 }
 
-// WithP0 sets the property and returns the receiver so calls can be chained.
+// WithP0 sets the p0.
 func (clcnn *CNNLocalContrastNormalizationNode) WithP0(p0 float32) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(clcnn), objc.RegisterName("setP0:"), p0)
 	return clcnn
 }
 
-// WithKernelWidth sets the property and returns the receiver so calls can be chained.
+// WithKernelWidth sets the kernel width.
 func (clcnn *CNNLocalContrastNormalizationNode) WithKernelWidth(kernelWidth int) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(clcnn), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return clcnn
 }
 
-// WithKernelHeight sets the property and returns the receiver so calls can be chained.
+// WithKernelHeight sets the kernel height.
 func (clcnn *CNNLocalContrastNormalizationNode) WithKernelHeight(kernelHeight int) *CNNLocalContrastNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(clcnn), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return clcnn
@@ -111,31 +111,31 @@ func (clcnn *CNNLocalContrastNormalizationNode) WithLabel(label string) *CNNLoca
 	return clcnn
 }
 
-// Pm wraps the corresponding Objective-C method.
+// Pm returns the pm.
 func (clcnn *CNNLocalContrastNormalizationNode) Pm() float32 {
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("pm"))
 	return _r
 }
 
-// Ps wraps the corresponding Objective-C method.
+// Ps returns the ps.
 func (clcnn *CNNLocalContrastNormalizationNode) Ps() float32 {
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("ps"))
 	return _r
 }
 
-// P0 wraps the corresponding Objective-C method.
+// P0 returns the p0.
 func (clcnn *CNNLocalContrastNormalizationNode) P0() float32 {
 	_r := objc.Send[float32](objref.IDOf(clcnn), objc.RegisterName("p0"))
 	return _r
 }
 
-// KernelWidth wraps the corresponding Objective-C method.
+// KernelWidth returns the kernel width.
 func (clcnn *CNNLocalContrastNormalizationNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(clcnn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight wraps the corresponding Objective-C method.
+// KernelHeight returns the kernel height.
 func (clcnn *CNNLocalContrastNormalizationNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(clcnn), objc.RegisterName("kernelHeight"))
 	return _r

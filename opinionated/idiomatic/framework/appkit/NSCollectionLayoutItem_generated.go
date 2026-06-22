@@ -74,19 +74,19 @@ func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEd
 	return cli
 }
 
-// EdgeSpacing wraps the corresponding Objective-C method.
+// EdgeSpacing returns the edge spacing.
 func (cli *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("edgeSpacing"))
 	return CollectionLayoutEdgeSpacingFromID(_r)
 }
 
-// LayoutSize wraps the corresponding Objective-C method.
+// LayoutSize returns the layout size.
 func (cli *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
 	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("layoutSize"))
 	return CollectionLayoutSizeFromID(_r)
 }
 
-// SupplementaryItems wraps the corresponding Objective-C method.
+// SupplementaryItems returns the supplementary items.
 //
 // SupplementaryItems returns the collection as a Go slice.
 func (cli *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {

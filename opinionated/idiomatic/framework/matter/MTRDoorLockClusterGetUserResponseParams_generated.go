@@ -78,55 +78,55 @@ func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError(responseVa
 	return mTRDoorLockClusterGetUserResponseParamsAdopt(_id), nil
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgurp
 }
 
-// WithUserName sets the property and returns the receiver so calls can be chained.
+// WithUserName sets the user name.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserName(userName string) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserName:"), purego.NSString(userName))
 	return mdlcgurp
 }
 
-// WithUserUniqueID sets the property and returns the receiver so calls can be chained.
+// WithUserUniqueID sets the user unique ID.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 	return mdlcgurp
 }
 
-// WithUserStatus sets the property and returns the receiver so calls can be chained.
+// WithUserStatus sets the user status.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return mdlcgurp
 }
 
-// WithUserType sets the property and returns the receiver so calls can be chained.
+// WithUserType sets the user type.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserType(userType obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return mdlcgurp
 }
 
-// WithCredentialRule sets the property and returns the receiver so calls can be chained.
+// WithCredentialRule sets the credential rule.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 	return mdlcgurp
 }
 
-// WithCreatorFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithCreatorFabricIndex sets the creator fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 	return mdlcgurp
 }
 
-// WithLastModifiedFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithLastModifiedFabricIndex sets the last modified fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 	return mdlcgurp
 }
 
-// WithNextUserIndex sets the property and returns the receiver so calls can be chained.
+// WithNextUserIndex sets the next user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithNextUserIndex(nextUserIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setNextUserIndex:"), objref.IDOf(nextUserIndex))
 	return mdlcgurp
@@ -138,13 +138,13 @@ func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithTimedInvokeTimeoutM
 	return mdlcgurp
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserName wraps the corresponding Objective-C method.
+// UserName returns the user name.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userName"))
 	if _r == 0 {
@@ -153,31 +153,31 @@ func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserName() string {
 	return purego.GoString(_r)
 }
 
-// UserUniqueID wraps the corresponding Objective-C method.
+// UserUniqueID returns the user unique ID.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userUniqueID"))
 	return obj.Wrap(_r)
 }
 
-// UserStatus wraps the corresponding Objective-C method.
+// UserStatus returns the user status.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userStatus"))
 	return obj.Wrap(_r)
 }
 
-// UserType wraps the corresponding Objective-C method.
+// UserType returns the user type.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userType"))
 	return obj.Wrap(_r)
 }
 
-// CredentialRule wraps the corresponding Objective-C method.
+// CredentialRule returns the credential rule.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CredentialRule() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("credentialRule"))
 	return obj.Wrap(_r)
 }
 
-// Credentials wraps the corresponding Objective-C method.
+// Credentials returns the credentials.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) Credentials() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
@@ -188,19 +188,19 @@ func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credenti
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
 
-// CreatorFabricIndex wraps the corresponding Objective-C method.
+// CreatorFabricIndex returns the creator fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("creatorFabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// LastModifiedFabricIndex wraps the corresponding Objective-C method.
+// LastModifiedFabricIndex returns the last modified fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("lastModifiedFabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// NextUserIndex wraps the corresponding Objective-C method.
+// NextUserIndex returns the next user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("nextUserIndex"))
 	return obj.Wrap(_r)

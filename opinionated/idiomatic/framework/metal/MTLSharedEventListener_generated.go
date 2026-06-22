@@ -79,7 +79,7 @@ func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEv
 	return sharedEventListenerAdopt(_id)
 }
 
-// DispatchQueue wraps the corresponding Objective-C method.
+// DispatchQueue returns the dispatch queue.
 func (sel *SharedEventListener) DispatchQueue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sel), objc.RegisterName("dispatchQueue"))
 	return obj.Wrap(_r)

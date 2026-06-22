@@ -80,25 +80,25 @@ func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
 	return textTabAdopt(_id)
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (tt *TextTab) Location() float64 {
 	_r := objc.Send[float64](objref.IDOf(tt), objc.RegisterName("location"))
 	return _r
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (tt *TextTab) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (tt *TextTab) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(tt), objc.RegisterName("alignment"))
 	return _r
 }
 
-// TabStopType wraps the corresponding Objective-C method.
+// TabStopType returns the tab stop type.
 func (tt *TextTab) TabStopType() TextTabType {
 	_r := objc.Send[TextTabType](objref.IDOf(tt), objc.RegisterName("tabStopType"))
 	return _r

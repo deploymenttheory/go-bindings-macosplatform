@@ -78,7 +78,7 @@ func (ka *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *Ke
 	return ka
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ka *KeyedArchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver {
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ka
@@ -89,7 +89,7 @@ func (ka *KeyedArchiver) FinishEncoding() {
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("finishEncoding"))
 }
 
-// OutputFormat wraps the corresponding Objective-C method.
+// OutputFormat returns the output format.
 func (ka *KeyedArchiver) OutputFormat() PropertyListFormat {
 	_r := objc.Send[PropertyListFormat](objref.IDOf(ka), objc.RegisterName("outputFormat"))
 	return _r

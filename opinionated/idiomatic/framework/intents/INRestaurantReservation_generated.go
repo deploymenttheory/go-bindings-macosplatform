@@ -61,19 +61,19 @@ func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReserv
 	return restaurantReservationAdopt(_id)
 }
 
-// ReservationDuration wraps the corresponding Objective-C method.
+// ReservationDuration returns the reservation duration.
 func (rr *RestaurantReservation) ReservationDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// PartySize wraps the corresponding Objective-C method.
+// PartySize returns the party size.
 func (rr *RestaurantReservation) PartySize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("partySize"))
 	return obj.Wrap(_r)
 }
 
-// RestaurantLocation wraps the corresponding Objective-C method.
+// RestaurantLocation returns the restaurant location.
 func (rr *RestaurantReservation) RestaurantLocation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("restaurantLocation"))
 	return obj.Wrap(_r)

@@ -43,7 +43,7 @@ func mTRGenericClusterAdopt(id objc.ID) *MTRGenericCluster {
 	return x
 }
 
-// Device wraps the corresponding Objective-C method.
+// Device returns the device.
 func (mgc *MTRGenericCluster) Device() *MTRDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(mgc), objc.RegisterName("device"))
 	return MTRDeviceFromID(_r)

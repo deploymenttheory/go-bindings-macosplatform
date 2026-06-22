@@ -70,25 +70,25 @@ func NewMTRBridgedDeviceBasicInformationClusterProductAppearanceStruct() *MTRBri
 	return mTRBridgedDeviceBasicInformationClusterProductAppearanceStructAdopt(_id)
 }
 
-// WithFinish sets the property and returns the receiver so calls can be chained.
+// WithFinish sets the finish.
 func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 	return mbdbicpas
 }
 
-// WithPrimaryColor sets the property and returns the receiver so calls can be chained.
+// WithPrimaryColor sets the primary color.
 func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct {
 	objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 	return mbdbicpas
 }
 
-// Finish wraps the corresponding Objective-C method.
+// Finish returns the finish.
 func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("finish"))
 	return obj.Wrap(_r)
 }
 
-// PrimaryColor wraps the corresponding Objective-C method.
+// PrimaryColor returns the primary color.
 func (mbdbicpas *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicpas), objc.RegisterName("primaryColor"))
 	return obj.Wrap(_r)

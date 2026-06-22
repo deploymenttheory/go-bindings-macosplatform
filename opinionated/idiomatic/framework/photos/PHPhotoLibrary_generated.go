@@ -95,7 +95,7 @@ func (pl *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentC
 	return PersistentChangeFetchResultFromID(_r), nil
 }
 
-// CurrentChangeToken wraps the corresponding Objective-C method.
+// CurrentChangeToken returns the current change token.
 func (pl *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("currentChangeToken"))
 	return PersistentChangeTokenFromID(_r)

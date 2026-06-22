@@ -78,25 +78,25 @@ func NewMTRLaundryWasherModeClusterChangeToModeResponseParamsWithResponseValueEr
 	return mTRLaundryWasherModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mlwmcctmrp *MTRLaundryWasherModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRLaundryWasherModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mlwmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mlwmcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (mlwmcctmrp *MTRLaundryWasherModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRLaundryWasherModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mlwmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return mlwmcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mlwmcctmrp *MTRLaundryWasherModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (mlwmcctmrp *MTRLaundryWasherModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

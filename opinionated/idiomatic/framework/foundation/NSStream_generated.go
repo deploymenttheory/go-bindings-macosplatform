@@ -68,7 +68,7 @@ func (s *Stream) String() string {
 	return rt.Description(objref.IDOf(s))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (s *Stream) WithScriptingProperties(scriptingProperties obj.Object) *Stream {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return s
@@ -101,12 +101,12 @@ func (s *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
+// RemoveFromRunLoopForMode removes from run loop for mode.
 func (s *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// StreamStatus wraps the corresponding Objective-C method.
+// StreamStatus returns the stream status.
 func (s *Stream) StreamStatus() StreamStatus {
 	_r := objc.Send[StreamStatus](objref.IDOf(s), objc.RegisterName("streamStatus"))
 	return _r

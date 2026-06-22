@@ -201,13 +201,13 @@ func (sc *StereoscopicCamera) InterPupillaryDistance() float32 {
 	return _r
 }
 
-// LeftVergence wraps the corresponding Objective-C method.
+// LeftVergence returns the left vergence.
 func (sc *StereoscopicCamera) LeftVergence() float32 {
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("leftVergence"))
 	return _r
 }
 
-// RightVergence wraps the corresponding Objective-C method.
+// RightVergence returns the right vergence.
 func (sc *StereoscopicCamera) RightVergence() float32 {
 	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("rightVergence"))
 	return _r

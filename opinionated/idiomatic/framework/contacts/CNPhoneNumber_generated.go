@@ -79,7 +79,7 @@ func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
 	return phoneNumberAdopt(_id)
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (pn *PhoneNumber) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("stringValue"))
 	if _r == 0 {

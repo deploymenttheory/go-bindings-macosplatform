@@ -70,73 +70,73 @@ func NewMTRThermostatClusterScheduleTransitionStruct() *MTRThermostatClusterSche
 	return mTRThermostatClusterScheduleTransitionStructAdopt(_id)
 }
 
-// WithDayOfWeek sets the property and returns the receiver so calls can be chained.
+// WithDayOfWeek sets the day of week.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithDayOfWeek(dayOfWeek obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setDayOfWeek:"), objref.IDOf(dayOfWeek))
 	return mtcsts
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtcsts
 }
 
-// WithPresetHandle sets the property and returns the receiver so calls can be chained.
+// WithPresetHandle sets the preset handle.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
 	return mtcsts
 }
 
-// WithSystemMode sets the property and returns the receiver so calls can be chained.
+// WithSystemMode sets the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithSystemMode(systemMode obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setSystemMode:"), objref.IDOf(systemMode))
 	return mtcsts
 }
 
-// WithCoolingSetpoint sets the property and returns the receiver so calls can be chained.
+// WithCoolingSetpoint sets the cooling setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
 	return mtcsts
 }
 
-// WithHeatingSetpoint sets the property and returns the receiver so calls can be chained.
+// WithHeatingSetpoint sets the heating setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterScheduleTransitionStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
 	return mtcsts
 }
 
-// DayOfWeek wraps the corresponding Objective-C method.
+// DayOfWeek returns the day of week.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) DayOfWeek() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("dayOfWeek"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// PresetHandle wraps the corresponding Objective-C method.
+// PresetHandle returns the preset handle.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) PresetHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)
 }
 
-// SystemMode wraps the corresponding Objective-C method.
+// SystemMode returns the system mode.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) SystemMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("systemMode"))
 	return obj.Wrap(_r)
 }
 
-// CoolingSetpoint wraps the corresponding Objective-C method.
+// CoolingSetpoint returns the cooling setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) CoolingSetpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("coolingSetpoint"))
 	return obj.Wrap(_r)
 }
 
-// HeatingSetpoint wraps the corresponding Objective-C method.
+// HeatingSetpoint returns the heating setpoint.
 func (mtcsts *MTRThermostatClusterScheduleTransitionStruct) HeatingSetpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsts), objc.RegisterName("heatingSetpoint"))
 	return obj.Wrap(_r)

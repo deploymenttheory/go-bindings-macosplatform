@@ -57,7 +57,7 @@ func (st *StructType) MemberByName(name string) *StructMember {
 	return StructMemberFromID(_r)
 }
 
-// Members wraps the corresponding Objective-C method.
+// Members returns the members.
 //
 // Members returns the collection as a Go slice.
 func (st *StructType) Members() []*StructMember {

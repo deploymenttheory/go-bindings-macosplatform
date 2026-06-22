@@ -52,7 +52,7 @@ func NewUnitVolume() *UnitVolume {
 	return unitVolumeAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uv *UnitVolume) WithScriptingProperties(scriptingProperties obj.Object) *UnitVolume {
 	objc.Send[objc.ID](objref.IDOf(uv), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uv

@@ -72,19 +72,19 @@ func NewFetchRequestExpression() *FetchRequestExpression {
 	return fetchRequestExpressionAdopt(_id)
 }
 
-// RequestExpression wraps the corresponding Objective-C method.
+// RequestExpression returns the request expression.
 func (fre *FetchRequestExpression) RequestExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("requestExpression"))
 	return obj.Wrap(_r)
 }
 
-// ContextExpression wraps the corresponding Objective-C method.
+// ContextExpression returns the context expression.
 func (fre *FetchRequestExpression) ContextExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("contextExpression"))
 	return obj.Wrap(_r)
 }
 
-// IsCountOnlyRequest wraps the corresponding Objective-C method.
+// IsCountOnlyRequest reports whether the object is count only request.
 func (fre *FetchRequestExpression) IsCountOnlyRequest() bool {
 	_r := objc.Send[bool](objref.IDOf(fre), objc.RegisterName("isCountOnlyRequest"))
 	return _r

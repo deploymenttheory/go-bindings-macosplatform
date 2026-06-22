@@ -139,7 +139,7 @@ func (ssm *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMa
 	return ssm
 }
 
-// Mark wraps the corresponding Objective-C method.
+// Mark returns the mark.
 func (ssm *SpeechSynthesisMarker) Mark() SpeechSynthesisMarkerMark {
 	_r := objc.Send[SpeechSynthesisMarkerMark](objref.IDOf(ssm), objc.RegisterName("mark"))
 	return _r
@@ -157,7 +157,7 @@ func (ssm *SpeechSynthesisMarker) TextRange() foundation.NSRange {
 	return _r
 }
 
-// BookmarkName wraps the corresponding Objective-C method.
+// BookmarkName returns the bookmark name.
 func (ssm *SpeechSynthesisMarker) BookmarkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("bookmarkName"))
 	if _r == 0 {
@@ -166,7 +166,7 @@ func (ssm *SpeechSynthesisMarker) BookmarkName() string {
 	return purego.GoString(_r)
 }
 
-// Phoneme wraps the corresponding Objective-C method.
+// Phoneme returns the phoneme.
 func (ssm *SpeechSynthesisMarker) Phoneme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("phoneme"))
 	if _r == 0 {

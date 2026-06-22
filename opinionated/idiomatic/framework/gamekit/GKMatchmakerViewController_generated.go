@@ -114,7 +114,7 @@ func (mvc *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, c
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
 }
 
-// MatchRequest wraps the corresponding Objective-C method.
+// MatchRequest returns the match request.
 func (mvc *MatchmakerViewController) MatchRequest() *MatchRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("matchRequest"))
 	return MatchRequestFromID(_r)

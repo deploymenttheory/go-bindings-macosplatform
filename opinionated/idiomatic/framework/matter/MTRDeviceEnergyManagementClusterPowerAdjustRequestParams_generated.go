@@ -70,19 +70,19 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustRequestParams() *MTRDeviceEne
 	return mTRDeviceEnergyManagementClusterPowerAdjustRequestParamsAdopt(_id)
 }
 
-// WithPower sets the property and returns the receiver so calls can be chained.
+// WithPower sets the power.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithPower(power obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setPower:"), objref.IDOf(power))
 	return mdemcparp
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcparp
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcparp
@@ -100,19 +100,19 @@ func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithS
 	return mdemcparp
 }
 
-// Power wraps the corresponding Objective-C method.
+// Power returns the power.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("power"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

@@ -94,7 +94,7 @@ func (vc *ViewController) WithChildViewControllers(items ...ViewControllerProvid
 	return vc
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (vc *ViewController) WithSourceItemView(sourceItemView ViewProvider) *ViewController {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return vc
@@ -135,7 +135,7 @@ func (vc *ViewController) LoadView() {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadView"))
 }
 
-// LoadViewIfNeeded wraps the corresponding Objective-C method.
+// LoadViewIfNeeded loads view if needed.
 func (vc *ViewController) LoadViewIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadViewIfNeeded"))
 }
@@ -191,25 +191,25 @@ func (vc *ViewController) ViewDidLayout() {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLayout"))
 }
 
-// NibName wraps the corresponding Objective-C method.
+// NibName returns the nib name.
 func (vc *ViewController) NibName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibName"))
 	return obj.Wrap(_r)
 }
 
-// NibBundle wraps the corresponding Objective-C method.
+// NibBundle returns the nib bundle.
 func (vc *ViewController) NibBundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibBundle"))
 	return obj.Wrap(_r)
 }
 
-// RepresentedObject wraps the corresponding Objective-C method.
+// RepresentedObject returns the represented object.
 func (vc *ViewController) RepresentedObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (vc *ViewController) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("title"))
 	if _r == 0 {
@@ -218,25 +218,25 @@ func (vc *ViewController) Title() string {
 	return purego.GoString(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (vc *ViewController) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// ViewIfLoaded wraps the corresponding Objective-C method.
+// ViewIfLoaded returns the view if loaded.
 func (vc *ViewController) ViewIfLoaded() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewIfLoaded"))
 	return ViewFromID(_r)
 }
 
-// IsViewLoaded wraps the corresponding Objective-C method.
+// IsViewLoaded reports whether the object is view loaded.
 func (vc *ViewController) IsViewLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isViewLoaded"))
 	return _r
 }
 
-// PreferredContentSize wraps the corresponding Objective-C method.
+// PreferredContentSize returns the preferred content size.
 func (vc *ViewController) PreferredContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredContentSize"))
 	return _r
@@ -247,12 +247,12 @@ func (vc *ViewController) DismissViewController(viewController *ViewController) 
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissViewController:"), objref.IDOf(viewController))
 }
 
-// DismissController wraps the corresponding Objective-C method.
+// DismissController dismisses controller.
 func (vc *ViewController) DismissController(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissController:"), objref.IDOf(sender))
 }
 
-// PresentedViewControllers wraps the corresponding Objective-C method.
+// PresentedViewControllers returns the presented view controllers.
 //
 // PresentedViewControllers returns the collection as a Go slice.
 func (vc *ViewController) PresentedViewControllers() []*ViewController {
@@ -260,7 +260,7 @@ func (vc *ViewController) PresentedViewControllers() []*ViewController {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// PresentingViewController wraps the corresponding Objective-C method.
+// PresentingViewController returns the presenting view controller.
 func (vc *ViewController) PresentingViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentingViewController"))
 	return ViewControllerFromID(_r)
@@ -323,13 +323,13 @@ func (vc *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillTransitionToSize:"), newSize)
 }
 
-// ParentViewController wraps the corresponding Objective-C method.
+// ParentViewController returns the parent view controller.
 func (vc *ViewController) ParentViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("parentViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// ChildViewControllers wraps the corresponding Objective-C method.
+// ChildViewControllers returns the child view controllers.
 //
 // ChildViewControllers returns the collection as a Go slice.
 func (vc *ViewController) ChildViewControllers() []*ViewController {
@@ -337,37 +337,37 @@ func (vc *ViewController) ChildViewControllers() []*ViewController {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// Storyboard wraps the corresponding Objective-C method.
+// Storyboard returns the storyboard.
 func (vc *ViewController) Storyboard() *Storyboard {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("storyboard"))
 	return StoryboardFromID(_r)
 }
 
-// ExtensionContext wraps the corresponding Objective-C method.
+// ExtensionContext returns the extension context.
 func (vc *ViewController) ExtensionContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("extensionContext"))
 	return obj.Wrap(_r)
 }
 
-// SourceItemView wraps the corresponding Objective-C method.
+// SourceItemView returns the source item view.
 func (vc *ViewController) SourceItemView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("sourceItemView"))
 	return ViewFromID(_r)
 }
 
-// PreferredScreenOrigin wraps the corresponding Objective-C method.
+// PreferredScreenOrigin returns the preferred screen origin.
 func (vc *ViewController) PreferredScreenOrigin() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(vc), objc.RegisterName("preferredScreenOrigin"))
 	return _r
 }
 
-// PreferredMinimumSize wraps the corresponding Objective-C method.
+// PreferredMinimumSize returns the preferred minimum size.
 func (vc *ViewController) PreferredMinimumSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMinimumSize"))
 	return _r
 }
 
-// PreferredMaximumSize wraps the corresponding Objective-C method.
+// PreferredMaximumSize returns the preferred maximum size.
 func (vc *ViewController) PreferredMaximumSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vc), objc.RegisterName("preferredMaximumSize"))
 	return _r

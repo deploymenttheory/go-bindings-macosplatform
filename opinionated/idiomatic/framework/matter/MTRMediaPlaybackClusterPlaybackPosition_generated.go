@@ -50,13 +50,13 @@ func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlayba
 	return mTRMediaPlaybackClusterPlaybackPositionAdopt(_id)
 }
 
-// WithUpdatedAt sets the property and returns the receiver so calls can be chained.
+// WithUpdatedAt sets the updated at.
 func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return mmpcpp
 }
 
-// WithPosition sets the property and returns the receiver so calls can be chained.
+// WithPosition sets the position.
 func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return mmpcpp

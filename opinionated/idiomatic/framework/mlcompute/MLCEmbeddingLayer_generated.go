@@ -63,7 +63,7 @@ func (el *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Embed
 	return el
 }
 
-// Descriptor wraps the corresponding Objective-C method.
+// Descriptor returns the descriptor.
 func (el *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("descriptor"))
 	return EmbeddingDescriptorFromID(_r)

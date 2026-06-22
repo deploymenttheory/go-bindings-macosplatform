@@ -15,7 +15,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion wraps the corresponding Objective-C method.
+// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion prepares custom language model for URL client identifier configuration completion.
 //
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration) error {
@@ -34,7 +34,7 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx
 	}
 }
 
-// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion wraps the corresponding Objective-C method.
+// PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion prepares custom language model for URL client identifier configuration ignores cache completion.
 //
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
 func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {

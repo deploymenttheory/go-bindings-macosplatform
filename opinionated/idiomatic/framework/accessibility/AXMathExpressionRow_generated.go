@@ -50,7 +50,7 @@ func NewMathExpressionRowWithExpressions(expressions []*MathExpression) *MathExp
 	return mathExpressionRowAdopt(_id)
 }
 
-// Expressions wraps the corresponding Objective-C method.
+// Expressions returns the expressions.
 //
 // Expressions returns the collection as a Go slice.
 func (mer *MathExpressionRow) Expressions() []*MathExpression {

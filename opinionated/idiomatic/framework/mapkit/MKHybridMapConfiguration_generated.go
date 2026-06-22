@@ -76,7 +76,7 @@ func (hmc *HybridMapConfiguration) WithElevationStyle(elevationStyle MapElevatio
 	return hmc
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (hmc *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)

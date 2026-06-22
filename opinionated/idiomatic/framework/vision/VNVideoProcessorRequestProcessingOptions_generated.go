@@ -78,7 +78,7 @@ func (vprpo *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoPr
 	return vprpo
 }
 
-// Cadence wraps the corresponding Objective-C method.
+// Cadence returns the cadence.
 func (vprpo *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
 	_r := objc.Send[objc.ID](objref.IDOf(vprpo), objc.RegisterName("cadence"))
 	return VideoProcessorCadenceFromID(_r)

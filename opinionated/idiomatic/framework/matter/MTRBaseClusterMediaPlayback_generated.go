@@ -136,7 +136,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.
 	}
 }
 
-// PauseWithCompletion wraps the corresponding Objective-C method.
+// PauseWithCompletion pauses with completion.
 //
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -186,7 +186,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.C
 	}
 }
 
-// StopWithCompletion wraps the corresponding Objective-C method.
+// StopWithCompletion stops with completion.
 //
 // StopWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -236,7 +236,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx cont
 	}
 }
 
-// StartOverWithCompletion wraps the corresponding Objective-C method.
+// StartOverWithCompletion starts over with completion.
 //
 // StartOverWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -536,7 +536,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.C
 	}
 }
 
-// ReadAttributeCurrentStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentStateWithCompletion reads attribute current state with completion.
 //
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithPara
 	}
 }
 
-// ReadAttributeStartTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartTimeWithCompletion reads attribute start time with completion.
 //
 // ReadAttributeStartTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsS
 	}
 }
 
-// ReadAttributeDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDurationWithCompletion reads attribute duration with completion.
 //
 // ReadAttributeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSu
 	}
 }
 
-// ReadAttributeSampledPositionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSampledPositionWithCompletion reads attribute sampled position with completion.
 //
 // ReadAttributeSampledPositionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPositionStruct, err error) {
@@ -736,7 +736,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithP
 	}
 }
 
-// ReadAttributePlaybackSpeedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePlaybackSpeedWithCompletion reads attribute playback speed with completion.
 //
 // ReadAttributePlaybackSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithPar
 	}
 }
 
-// ReadAttributeSeekRangeEndWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeEndWithCompletion reads attribute seek range end with completion.
 //
 // ReadAttributeSeekRangeEndWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithPara
 	}
 }
 
-// ReadAttributeSeekRangeStartWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeStartWithCompletion reads attribute seek range start with completion.
 //
 // ReadAttributeSeekRangeStartWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithPa
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -986,7 +986,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1036,7 +1036,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithPar
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1086,7 +1086,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParams
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1186,7 +1186,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (result *MTR
 	}
 }
 
-// PauseWithParams wraps the corresponding Objective-C method.
+// PauseWithParams pauses with params.
 //
 // PauseWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -1236,7 +1236,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (result *MT
 	}
 }
 
-// StopPlaybackWithParams wraps the corresponding Objective-C method.
+// StopPlaybackWithParams stops playback with params.
 //
 // StopPlaybackWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -1261,7 +1261,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Con
 	}
 }
 
-// StopPlayback wraps the corresponding Objective-C method.
+// StopPlayback stops playback.
 //
 // StopPlayback blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -1286,7 +1286,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (res
 	}
 }
 
-// StartOverWithParams wraps the corresponding Objective-C method.
+// StartOverWithParams starts over with params.
 //
 // StartOverWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -1311,7 +1311,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Contex
 	}
 }
 
-// StartOver wraps the corresponding Objective-C method.
+// StartOver starts over.
 //
 // StartOver blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -1611,7 +1611,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, pa
 	}
 }
 
-// ReadAttributeCurrentState wraps the corresponding Objective-C method.
+// ReadAttributeCurrentState reads attribute current state.
 //
 // ReadAttributeCurrentState blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinI
 	}
 }
 
-// ReadAttributeStartTime wraps the corresponding Objective-C method.
+// ReadAttributeStartTime reads attribute start time.
 //
 // ReadAttributeStartTime blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinInte
 	}
 }
 
-// ReadAttributeDuration wraps the corresponding Objective-C method.
+// ReadAttributeDuration reads attribute duration.
 //
 // ReadAttributeDuration blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinInter
 	}
 }
 
-// ReadAttributeSampledPosition wraps the corresponding Objective-C method.
+// ReadAttributeSampledPosition reads attribute sampled position.
 //
 // ReadAttributeSampledPosition blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPosition, err error) {
@@ -1811,7 +1811,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithM
 	}
 }
 
-// ReadAttributePlaybackSpeed wraps the corresponding Objective-C method.
+// ReadAttributePlaybackSpeed reads attribute playback speed.
 //
 // ReadAttributePlaybackSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMin
 	}
 }
 
-// ReadAttributeSeekRangeEnd wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeEnd reads attribute seek range end.
 //
 // ReadAttributeSeekRangeEnd blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinI
 	}
 }
 
-// ReadAttributeSeekRangeStart wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeStart reads attribute seek range start.
 //
 // ReadAttributeSeekRangeStart blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMin
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinInt
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

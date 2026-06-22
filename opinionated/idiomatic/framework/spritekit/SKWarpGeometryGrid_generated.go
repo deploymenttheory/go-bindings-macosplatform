@@ -53,19 +53,19 @@ func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
 	return warpGeometryGridAdopt(_id)
 }
 
-// NumberOfColumns wraps the corresponding Objective-C method.
+// NumberOfColumns returns the number of columns.
 func (wgg *WarpGeometryGrid) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// NumberOfRows wraps the corresponding Objective-C method.
+// NumberOfRows returns the number of rows.
 func (wgg *WarpGeometryGrid) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
-// VertexCount wraps the corresponding Objective-C method.
+// VertexCount returns the vertex count.
 func (wgg *WarpGeometryGrid) VertexCount() int {
 	_r := objc.Send[int](objref.IDOf(wgg), objc.RegisterName("vertexCount"))
 	return _r

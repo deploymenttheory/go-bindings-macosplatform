@@ -66,19 +66,19 @@ func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
 	return rt.Description(objref.IDOf(mclcais))
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) WithName(name string) *MTRContentLauncherClusterAdditionalInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("setName:"), purego.NSString(name))
 	return mclcais
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value string) *MTRContentLauncherClusterAdditionalInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("setValue:"), purego.NSString(value))
 	return mclcais
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("name"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("value"))
 	if _r == 0 {

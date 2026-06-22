@@ -68,7 +68,7 @@ func (aur *AudioUnitReverb) LoadFactoryPreset(preset AudioUnitReverbPreset) {
 	objc.Send[objc.ID](objref.IDOf(aur), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
-// WetDryMix wraps the corresponding Objective-C method.
+// WetDryMix returns the wet dry mix.
 func (aur *AudioUnitReverb) WetDryMix() float32 {
 	_r := objc.Send[float32](objref.IDOf(aur), objc.RegisterName("wetDryMix"))
 	return _r

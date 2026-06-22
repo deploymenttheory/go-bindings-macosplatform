@@ -488,31 +488,31 @@ func (cbc *ComboBoxCell) IndexOfItemWithObjectValue(object obj.Object) int {
 	return _r
 }
 
-// HasVerticalScroller wraps the corresponding Objective-C method.
+// HasVerticalScroller reports whether the object has vertical scroller.
 func (cbc *ComboBoxCell) HasVerticalScroller() bool {
 	_r := objc.Send[bool](objref.IDOf(cbc), objc.RegisterName("hasVerticalScroller"))
 	return _r
 }
 
-// IntercellSpacing wraps the corresponding Objective-C method.
+// IntercellSpacing returns the intercell spacing.
 func (cbc *ComboBoxCell) IntercellSpacing() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cbc), objc.RegisterName("intercellSpacing"))
 	return _r
 }
 
-// ItemHeight wraps the corresponding Objective-C method.
+// ItemHeight returns the item height.
 func (cbc *ComboBoxCell) ItemHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(cbc), objc.RegisterName("itemHeight"))
 	return _r
 }
 
-// NumberOfVisibleItems wraps the corresponding Objective-C method.
+// NumberOfVisibleItems returns the number of visible items.
 func (cbc *ComboBoxCell) NumberOfVisibleItems() int {
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("numberOfVisibleItems"))
 	return _r
 }
 
-// IsButtonBordered wraps the corresponding Objective-C method.
+// IsButtonBordered reports whether the object is button bordered.
 func (cbc *ComboBoxCell) IsButtonBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(cbc), objc.RegisterName("isButtonBordered"))
 	return _r
@@ -524,13 +524,13 @@ func (cbc *ComboBoxCell) UsesDataSource() bool {
 	return _r
 }
 
-// IndexOfSelectedItem wraps the corresponding Objective-C method.
+// IndexOfSelectedItem returns the index of selected item.
 func (cbc *ComboBoxCell) IndexOfSelectedItem() int {
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("indexOfSelectedItem"))
 	return _r
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (cbc *ComboBoxCell) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(cbc), objc.RegisterName("numberOfItems"))
 	return _r
@@ -542,13 +542,13 @@ func (cbc *ComboBoxCell) Completes() bool {
 	return _r
 }
 
-// ObjectValueOfSelectedItem wraps the corresponding Objective-C method.
+// ObjectValueOfSelectedItem returns the object value of selected item.
 func (cbc *ComboBoxCell) ObjectValueOfSelectedItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("objectValueOfSelectedItem"))
 	return obj.Wrap(_r)
 }
 
-// ObjectValues wraps the corresponding Objective-C method.
+// ObjectValues returns the object values.
 func (cbc *ComboBoxCell) ObjectValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cbc), objc.RegisterName("objectValues"))
 	return obj.Wrap(_r)

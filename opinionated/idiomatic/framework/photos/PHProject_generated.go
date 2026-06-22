@@ -52,7 +52,7 @@ func NewProject() *Project {
 	return projectAdopt(_id)
 }
 
-// ProjectExtensionData wraps the corresponding Objective-C method.
+// ProjectExtensionData returns the project extension data.
 func (p *Project) ProjectExtensionData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("projectExtensionData"))
 	return obj.Wrap(_r)

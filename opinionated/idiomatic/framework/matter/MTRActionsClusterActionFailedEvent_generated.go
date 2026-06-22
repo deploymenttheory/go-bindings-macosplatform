@@ -70,49 +70,49 @@ func NewMTRActionsClusterActionFailedEvent() *MTRActionsClusterActionFailedEvent
 	return mTRActionsClusterActionFailedEventAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (macafe *MTRActionsClusterActionFailedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macafe
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (macafe *MTRActionsClusterActionFailedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macafe
 }
 
-// WithNewState sets the property and returns the receiver so calls can be chained.
+// WithNewState sets the new state.
 func (macafe *MTRActionsClusterActionFailedEvent) WithNewState(newState obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return macafe
 }
 
-// WithError sets the property and returns the receiver so calls can be chained.
+// WithError sets the error.
 func (macafe *MTRActionsClusterActionFailedEvent) WithError(error_ obj.Object) *MTRActionsClusterActionFailedEvent {
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setError:"), objref.IDOf(error_))
 	return macafe
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (macafe *MTRActionsClusterActionFailedEvent) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (macafe *MTRActionsClusterActionFailedEvent) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
-// GetNewState wraps the corresponding Objective-C method.
-func (macafe *MTRActionsClusterActionFailedEvent) GetNewState() obj.Object {
+// NewState returns the new state.
+func (macafe *MTRActionsClusterActionFailedEvent) NewState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("getNewState"))
 	return obj.Wrap(_r)
 }
 
-// Error wraps the corresponding Objective-C method.
+// Error returns the error.
 func (macafe *MTRActionsClusterActionFailedEvent) Error() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("error"))
 	return obj.Wrap(_r)

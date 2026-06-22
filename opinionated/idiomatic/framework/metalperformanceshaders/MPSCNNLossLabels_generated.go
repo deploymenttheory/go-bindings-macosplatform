@@ -52,7 +52,7 @@ func NewCNNLossLabels() *CNNLossLabels {
 	return cNNLossLabelsAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cll *CNNLossLabels) WithReadCount(readCount int) *CNNLossLabels {
 	objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("setReadCount:"), readCount)
 	return cll

@@ -58,53 +58,53 @@ func NewMTRClusterLocalizationConfigurationWithDeviceEndpointQueue(device *MTRDe
 	return mTRClusterLocalizationConfigurationAdopt(_id)
 }
 
-// ReadAttributeActiveLocaleWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveLocaleWithParams reads attribute active locale with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeActiveLocaleWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeActiveLocaleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeActiveLocaleWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeActiveLocaleWithValueExpectedValueInterval writes attribute active locale with value expected value interval.
 func (mclc *MTRClusterLocalizationConfiguration) WriteAttributeActiveLocaleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeActiveLocaleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams writes attribute active locale with value expected value interval params.
 func (mclc *MTRClusterLocalizationConfiguration) WriteAttributeActiveLocaleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeActiveLocaleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeSupportedLocalesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedLocalesWithParams reads attribute supported locales with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeSupportedLocalesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeSupportedLocalesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mclc *MTRClusterLocalizationConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

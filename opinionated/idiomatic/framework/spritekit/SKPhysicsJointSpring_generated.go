@@ -75,13 +75,13 @@ func (pjs *PhysicsJointSpring) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSpring
 	return pjs
 }
 
-// Damping wraps the corresponding Objective-C method.
+// Damping returns the damping.
 func (pjs *PhysicsJointSpring) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("damping"))
 	return _r
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (pjs *PhysicsJointSpring) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("frequency"))
 	return _r

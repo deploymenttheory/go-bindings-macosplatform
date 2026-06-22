@@ -75,7 +75,7 @@ func NewTokenSessionWithToken(token *Token) *TokenSession {
 	return tokenSessionAdopt(_id)
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (ts *TokenSession) Token() *Token {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("token"))
 	return TokenFromID(_r)

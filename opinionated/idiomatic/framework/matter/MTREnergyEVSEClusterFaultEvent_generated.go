@@ -70,49 +70,49 @@ func NewMTREnergyEVSEClusterFaultEvent() *MTREnergyEVSEClusterFaultEvent {
 	return mTREnergyEVSEClusterFaultEventAdopt(_id)
 }
 
-// WithSessionID sets the property and returns the receiver so calls can be chained.
+// WithSessionID sets the session ID.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecfe
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithState(state obj.Object) *MTREnergyEVSEClusterFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecfe
 }
 
-// WithFaultStatePreviousState sets the property and returns the receiver so calls can be chained.
+// WithFaultStatePreviousState sets the fault state previous state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithFaultStatePreviousState(faultStatePreviousState obj.Object) *MTREnergyEVSEClusterFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setFaultStatePreviousState:"), objref.IDOf(faultStatePreviousState))
 	return meecfe
 }
 
-// WithFaultStateCurrentState sets the property and returns the receiver so calls can be chained.
+// WithFaultStateCurrentState sets the fault state current state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithFaultStateCurrentState(faultStateCurrentState obj.Object) *MTREnergyEVSEClusterFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setFaultStateCurrentState:"), objref.IDOf(faultStateCurrentState))
 	return meecfe
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// FaultStatePreviousState wraps the corresponding Objective-C method.
+// FaultStatePreviousState returns the fault state previous state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("faultStatePreviousState"))
 	return obj.Wrap(_r)
 }
 
-// FaultStateCurrentState wraps the corresponding Objective-C method.
+// FaultStateCurrentState returns the fault state current state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("faultStateCurrentState"))
 	return obj.Wrap(_r)

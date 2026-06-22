@@ -49,121 +49,121 @@ func NewDOMHTMLFrameSetElement() *DOMHTMLFrameSetElement {
 	return dOMHTMLFrameSetElementAdopt(_id)
 }
 
-// WithCols sets the property and returns the receiver so calls can be chained.
+// WithCols sets the cols.
 func (dfse *DOMHTMLFrameSetElement) WithCols(cols string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setCols:"), purego.NSString(cols))
 	return dfse
 }
 
-// WithRows sets the property and returns the receiver so calls can be chained.
+// WithRows sets the rows.
 func (dfse *DOMHTMLFrameSetElement) WithRows(rows string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setRows:"), purego.NSString(rows))
 	return dfse
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dfse *DOMHTMLFrameSetElement) WithTitle(title string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dfse
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dfse *DOMHTMLFrameSetElement) WithLang(lang string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dfse
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dfse *DOMHTMLFrameSetElement) WithDir(dir string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dfse
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dfse *DOMHTMLFrameSetElement) WithTabIndex(tabIndex int) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dfse
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dfse *DOMHTMLFrameSetElement) WithAccessKey(accessKey string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dfse
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dfse *DOMHTMLFrameSetElement) WithInnerText(innerText string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dfse
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dfse *DOMHTMLFrameSetElement) WithOuterText(outerText string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dfse
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dfse *DOMHTMLFrameSetElement) WithContentEditable(contentEditable string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dfse
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dfse *DOMHTMLFrameSetElement) WithIDName(idName string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dfse
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dfse *DOMHTMLFrameSetElement) WithScrollLeft(scrollLeft int) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dfse
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dfse *DOMHTMLFrameSetElement) WithScrollTop(scrollTop int) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dfse
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dfse *DOMHTMLFrameSetElement) WithInnerHTML(innerHTML string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dfse
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dfse *DOMHTMLFrameSetElement) WithOuterHTML(outerHTML string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dfse
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dfse *DOMHTMLFrameSetElement) WithClassName(className string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dfse
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dfse *DOMHTMLFrameSetElement) WithNodeValue(nodeValue string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dfse
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dfse *DOMHTMLFrameSetElement) WithPrefix(prefix string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dfse
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dfse *DOMHTMLFrameSetElement) WithTextContent(textContent string) *DOMHTMLFrameSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dfse
 }
 
-// Cols wraps the corresponding Objective-C method.
+// Cols returns the cols.
 func (dfse *DOMHTMLFrameSetElement) Cols() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("cols"))
 	if _r == 0 {
@@ -172,7 +172,7 @@ func (dfse *DOMHTMLFrameSetElement) Cols() string {
 	return purego.GoString(_r)
 }
 
-// Rows wraps the corresponding Objective-C method.
+// Rows returns the rows.
 func (dfse *DOMHTMLFrameSetElement) Rows() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("rows"))
 	if _r == 0 {

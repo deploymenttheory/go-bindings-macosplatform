@@ -87,7 +87,7 @@ func (mi *ModuleIdentity) URL() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (mi *ModuleIdentity) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r

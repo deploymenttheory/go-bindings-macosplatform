@@ -49,115 +49,115 @@ func NewDOMHTMLQuoteElement() *DOMHTMLQuoteElement {
 	return dOMHTMLQuoteElementAdopt(_id)
 }
 
-// WithCite sets the property and returns the receiver so calls can be chained.
+// WithCite sets the cite.
 func (dqe *DOMHTMLQuoteElement) WithCite(cite string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setCite:"), purego.NSString(cite))
 	return dqe
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dqe *DOMHTMLQuoteElement) WithTitle(title string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dqe
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dqe *DOMHTMLQuoteElement) WithLang(lang string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dqe
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dqe *DOMHTMLQuoteElement) WithDir(dir string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dqe
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dqe *DOMHTMLQuoteElement) WithTabIndex(tabIndex int) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dqe
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dqe *DOMHTMLQuoteElement) WithAccessKey(accessKey string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dqe
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dqe *DOMHTMLQuoteElement) WithInnerText(innerText string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dqe
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dqe *DOMHTMLQuoteElement) WithOuterText(outerText string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dqe
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dqe *DOMHTMLQuoteElement) WithContentEditable(contentEditable string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dqe
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dqe *DOMHTMLQuoteElement) WithIDName(idName string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dqe
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dqe *DOMHTMLQuoteElement) WithScrollLeft(scrollLeft int) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dqe
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dqe *DOMHTMLQuoteElement) WithScrollTop(scrollTop int) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dqe
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dqe *DOMHTMLQuoteElement) WithInnerHTML(innerHTML string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dqe
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dqe *DOMHTMLQuoteElement) WithOuterHTML(outerHTML string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dqe
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dqe *DOMHTMLQuoteElement) WithClassName(className string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dqe
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dqe *DOMHTMLQuoteElement) WithNodeValue(nodeValue string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dqe
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dqe *DOMHTMLQuoteElement) WithPrefix(prefix string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dqe
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dqe *DOMHTMLQuoteElement) WithTextContent(textContent string) *DOMHTMLQuoteElement {
 	objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dqe
 }
 
-// Cite wraps the corresponding Objective-C method.
+// Cite returns the cite.
 func (dqe *DOMHTMLQuoteElement) Cite() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("cite"))
 	if _r == 0 {

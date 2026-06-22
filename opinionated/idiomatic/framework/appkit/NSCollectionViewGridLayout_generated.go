@@ -102,49 +102,49 @@ func (cvgl *CollectionViewGridLayout) WithBackgroundColors(items ...*Color) *Col
 	return cvgl
 }
 
-// Margins wraps the corresponding Objective-C method.
+// Margins returns the margins.
 func (cvgl *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cvgl), objc.RegisterName("margins"))
 	return _r
 }
 
-// MinimumInteritemSpacing wraps the corresponding Objective-C method.
+// MinimumInteritemSpacing returns the minimum interitem spacing.
 func (cvgl *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumInteritemSpacing"))
 	return _r
 }
 
-// MinimumLineSpacing wraps the corresponding Objective-C method.
+// MinimumLineSpacing returns the minimum line spacing.
 func (cvgl *CollectionViewGridLayout) MinimumLineSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(cvgl), objc.RegisterName("minimumLineSpacing"))
 	return _r
 }
 
-// MaximumNumberOfRows wraps the corresponding Objective-C method.
+// MaximumNumberOfRows returns the maximum number of rows.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfRows"))
 	return _r
 }
 
-// MaximumNumberOfColumns wraps the corresponding Objective-C method.
+// MaximumNumberOfColumns returns the maximum number of columns.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(cvgl), objc.RegisterName("maximumNumberOfColumns"))
 	return _r
 }
 
-// MinimumItemSize wraps the corresponding Objective-C method.
+// MinimumItemSize returns the minimum item size.
 func (cvgl *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("minimumItemSize"))
 	return _r
 }
 
-// MaximumItemSize wraps the corresponding Objective-C method.
+// MaximumItemSize returns the maximum item size.
 func (cvgl *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvgl), objc.RegisterName("maximumItemSize"))
 	return _r
 }
 
-// BackgroundColors wraps the corresponding Objective-C method.
+// BackgroundColors returns the background colors.
 //
 // BackgroundColors returns the collection as a Go slice.
 func (cvgl *CollectionViewGridLayout) BackgroundColors() []*Color {

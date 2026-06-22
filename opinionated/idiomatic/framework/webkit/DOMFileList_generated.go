@@ -55,7 +55,7 @@ func (dfl *DOMFileList) Item(index int) *DOMFile {
 	return DOMFileFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dfl *DOMFileList) Length() int {
 	_r := objc.Send[int](objref.IDOf(dfl), objc.RegisterName("length"))
 	return _r

@@ -52,25 +52,25 @@ func NewCollectionList() *CollectionList {
 	return collectionListAdopt(_id)
 }
 
-// CollectionListSubtype wraps the corresponding Objective-C method.
+// CollectionListSubtype returns the collection list subtype.
 func (cl *CollectionList) CollectionListSubtype() CollectionListSubtype {
 	_r := objc.Send[CollectionListSubtype](objref.IDOf(cl), objc.RegisterName("collectionListSubtype"))
 	return _r
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (cl *CollectionList) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (cl *CollectionList) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedLocationNames wraps the corresponding Objective-C method.
+// LocalizedLocationNames returns the localized location names.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
 func (cl *CollectionList) LocalizedLocationNames() []string {

@@ -74,7 +74,7 @@ func (spc *SerialPortConfiguration) WithAttachment(attachment SerialPortAttachme
 	return spc
 }
 
-// Attachment wraps the corresponding Objective-C method.
+// Attachment returns the attachment.
 func (spc *SerialPortConfiguration) Attachment() *SerialPortAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(spc), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)

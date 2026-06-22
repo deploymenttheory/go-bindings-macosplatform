@@ -106,13 +106,13 @@ func (tt *TextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutMa
 	objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("drawBackgroundForBlock:withFrame:inView:characterRange:layoutManager:"), objref.IDOf(block), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
 }
 
-// NumberOfColumns wraps the corresponding Objective-C method.
+// NumberOfColumns returns the number of columns.
 func (tt *TextTable) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(tt), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// LayoutAlgorithm wraps the corresponding Objective-C method.
+// LayoutAlgorithm returns the layout algorithm.
 func (tt *TextTable) LayoutAlgorithm() TextTableLayoutAlgorithm {
 	_r := objc.Send[TextTableLayoutAlgorithm](objref.IDOf(tt), objc.RegisterName("layoutAlgorithm"))
 	return _r

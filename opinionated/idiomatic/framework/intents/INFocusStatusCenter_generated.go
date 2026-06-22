@@ -72,13 +72,13 @@ func NewFocusStatusCenter() *FocusStatusCenter {
 	return focusStatusCenterAdopt(_id)
 }
 
-// FocusStatus wraps the corresponding Objective-C method.
+// FocusStatus returns the focus status.
 func (fsc *FocusStatusCenter) FocusStatus() *FocusStatus {
 	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)
 }
 
-// AuthorizationStatus wraps the corresponding Objective-C method.
+// AuthorizationStatus returns the authorization status.
 func (fsc *FocusStatusCenter) AuthorizationStatus() FocusStatusAuthorizationStatus {
 	_r := objc.Send[FocusStatusAuthorizationStatus](objref.IDOf(fsc), objc.RegisterName("authorizationStatus"))
 	return _r

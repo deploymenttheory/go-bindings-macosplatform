@@ -169,13 +169,13 @@ func (un *UserNotification) WithAdditionalActions(items ...*UserNotificationActi
 	return un
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (un *UserNotification) WithScriptingProperties(scriptingProperties obj.Object) *UserNotification {
 	objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return un
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (un *UserNotification) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("title"))
 	if _r == 0 {
@@ -184,7 +184,7 @@ func (un *UserNotification) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (un *UserNotification) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -193,7 +193,7 @@ func (un *UserNotification) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// InformativeText wraps the corresponding Objective-C method.
+// InformativeText returns the informative text.
 func (un *UserNotification) InformativeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("informativeText"))
 	if _r == 0 {
@@ -202,7 +202,7 @@ func (un *UserNotification) InformativeText() string {
 	return purego.GoString(_r)
 }
 
-// ActionButtonTitle wraps the corresponding Objective-C method.
+// ActionButtonTitle returns the action button title.
 func (un *UserNotification) ActionButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actionButtonTitle"))
 	if _r == 0 {
@@ -211,49 +211,49 @@ func (un *UserNotification) ActionButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (un *UserNotification) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// DeliveryDate wraps the corresponding Objective-C method.
+// DeliveryDate returns the delivery date.
 func (un *UserNotification) DeliveryDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryDate"))
 	return DateFromID(_r)
 }
 
-// DeliveryTimeZone wraps the corresponding Objective-C method.
+// DeliveryTimeZone returns the delivery time zone.
 func (un *UserNotification) DeliveryTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// DeliveryRepeatInterval wraps the corresponding Objective-C method.
+// DeliveryRepeatInterval returns the delivery repeat interval.
 func (un *UserNotification) DeliveryRepeatInterval() *DateComponents {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("deliveryRepeatInterval"))
 	return DateComponentsFromID(_r)
 }
 
-// ActualDeliveryDate wraps the corresponding Objective-C method.
+// ActualDeliveryDate returns the actual delivery date.
 func (un *UserNotification) ActualDeliveryDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("actualDeliveryDate"))
 	return DateFromID(_r)
 }
 
-// IsPresented wraps the corresponding Objective-C method.
+// IsPresented reports whether the object is presented.
 func (un *UserNotification) IsPresented() bool {
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isPresented"))
 	return _r
 }
 
-// IsRemote wraps the corresponding Objective-C method.
+// IsRemote reports whether the object is remote.
 func (un *UserNotification) IsRemote() bool {
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("isRemote"))
 	return _r
 }
 
-// SoundName wraps the corresponding Objective-C method.
+// SoundName returns the sound name.
 func (un *UserNotification) SoundName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("soundName"))
 	if _r == 0 {
@@ -262,19 +262,19 @@ func (un *UserNotification) SoundName() string {
 	return purego.GoString(_r)
 }
 
-// HasActionButton wraps the corresponding Objective-C method.
+// HasActionButton reports whether the object has action button.
 func (un *UserNotification) HasActionButton() bool {
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasActionButton"))
 	return _r
 }
 
-// ActivationType wraps the corresponding Objective-C method.
+// ActivationType returns the activation type.
 func (un *UserNotification) ActivationType() UserNotificationActivationType {
 	_r := objc.Send[UserNotificationActivationType](objref.IDOf(un), objc.RegisterName("activationType"))
 	return _r
 }
 
-// OtherButtonTitle wraps the corresponding Objective-C method.
+// OtherButtonTitle returns the other button title.
 func (un *UserNotification) OtherButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("otherButtonTitle"))
 	if _r == 0 {
@@ -283,7 +283,7 @@ func (un *UserNotification) OtherButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (un *UserNotification) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -292,19 +292,19 @@ func (un *UserNotification) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// ContentImage wraps the corresponding Objective-C method.
+// ContentImage returns the content image.
 func (un *UserNotification) ContentImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("contentImage"))
 	return obj.Wrap(_r)
 }
 
-// HasReplyButton wraps the corresponding Objective-C method.
+// HasReplyButton reports whether the object has reply button.
 func (un *UserNotification) HasReplyButton() bool {
 	_r := objc.Send[bool](objref.IDOf(un), objc.RegisterName("hasReplyButton"))
 	return _r
 }
 
-// ResponsePlaceholder wraps the corresponding Objective-C method.
+// ResponsePlaceholder returns the response placeholder.
 func (un *UserNotification) ResponsePlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("responsePlaceholder"))
 	if _r == 0 {
@@ -313,13 +313,13 @@ func (un *UserNotification) ResponsePlaceholder() string {
 	return purego.GoString(_r)
 }
 
-// Response wraps the corresponding Objective-C method.
+// Response returns the response.
 func (un *UserNotification) Response() *AttributedString {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("response"))
 	return AttributedStringFromID(_r)
 }
 
-// AdditionalActions wraps the corresponding Objective-C method.
+// AdditionalActions returns the additional actions.
 //
 // AdditionalActions returns the collection as a Go slice.
 func (un *UserNotification) AdditionalActions() []*UserNotificationAction {
@@ -327,7 +327,7 @@ func (un *UserNotification) AdditionalActions() []*UserNotificationAction {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotificationAction { return UserNotificationActionFromID(_id) })
 }
 
-// AdditionalActivationAction wraps the corresponding Objective-C method.
+// AdditionalActivationAction returns the additional activation action.
 func (un *UserNotification) AdditionalActivationAction() *UserNotificationAction {
 	_r := objc.Send[objc.ID](objref.IDOf(un), objc.RegisterName("additionalActivationAction"))
 	return UserNotificationActionFromID(_r)

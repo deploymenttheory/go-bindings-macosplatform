@@ -78,25 +78,25 @@ func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueE
 	return mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(_id), nil
 }
 
-// WithSystemTimeMs sets the property and returns the receiver so calls can be chained.
+// WithSystemTimeMs sets the system time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithSystemTimeMs(systemTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 	return mgdctsrp
 }
 
-// WithPosixTimeMs sets the property and returns the receiver so calls can be chained.
+// WithPosixTimeMs sets the posix time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs(posixTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
 	return mgdctsrp
 }
 
-// SystemTimeMs wraps the corresponding Objective-C method.
+// SystemTimeMs returns the system time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("systemTimeMs"))
 	return obj.Wrap(_r)
 }
 
-// PosixTimeMs wraps the corresponding Objective-C method.
+// PosixTimeMs returns the posix time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("posixTimeMs"))
 	return obj.Wrap(_r)

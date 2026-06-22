@@ -232,7 +232,7 @@ func HKObjectTypeElectrocardiogramType() *ElectrocardiogramType {
 	return ElectrocardiogramTypeFromID(_r)
 }
 
-// HKObjectTypeMedicationDoseEventType wraps the corresponding Objective-C method.
+// HKObjectTypeMedicationDoseEventType returns the hk object type medication dose event type.
 func HKObjectTypeMedicationDoseEventType() *MedicationDoseEventType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("medicationDoseEventType"))
 	return MedicationDoseEventTypeFromID(_r)
@@ -244,13 +244,13 @@ func HKObjectTypeVisionPrescriptionType() *PrescriptionType {
 	return PrescriptionTypeFromID(_r)
 }
 
-// HKObjectTypeStateOfMindType wraps the corresponding Objective-C method.
+// HKObjectTypeStateOfMindType returns the hk object type state of mind type.
 func HKObjectTypeStateOfMindType() *StateOfMindType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("stateOfMindType"))
 	return StateOfMindTypeFromID(_r)
 }
 
-// HKObjectTypeUserAnnotatedMedicationType wraps the corresponding Objective-C method.
+// HKObjectTypeUserAnnotatedMedicationType returns the hk object type user annotated medication type.
 func HKObjectTypeUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("userAnnotatedMedicationType"))
 	return UserAnnotatedMedicationTypeFromID(_r)
@@ -934,7 +934,7 @@ func LuxUnit() *Unit {
 	return UnitFromID(_r)
 }
 
-// AppleEffortScoreUnit wraps the corresponding Objective-C method.
+// AppleEffortScoreUnit returns the apple effort score unit.
 func AppleEffortScoreUnit() *Unit {
 	_r := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("appleEffortScoreUnit"))
 	return UnitFromID(_r)

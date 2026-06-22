@@ -66,37 +66,37 @@ func (mclcds *MTRContentLauncherClusterDimensionStruct) String() string {
 	return rt.Description(objref.IDOf(mclcds))
 }
 
-// WithWidth sets the property and returns the receiver so calls can be chained.
+// WithWidth sets the width.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return mclcds
 }
 
-// WithHeight sets the property and returns the receiver so calls can be chained.
+// WithHeight sets the height.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return mclcds
 }
 
-// WithMetric sets the property and returns the receiver so calls can be chained.
+// WithMetric sets the metric.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return mclcds
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("width"))
 	return obj.Wrap(_r)
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("height"))
 	return obj.Wrap(_r)
 }
 
-// Metric wraps the corresponding Objective-C method.
+// Metric returns the metric.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("metric"))
 	return obj.Wrap(_r)

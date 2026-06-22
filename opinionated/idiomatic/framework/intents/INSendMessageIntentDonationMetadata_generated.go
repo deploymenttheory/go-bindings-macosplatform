@@ -49,25 +49,25 @@ func NewSendMessageIntentDonationMetadata() *SendMessageIntentDonationMetadata {
 	return sendMessageIntentDonationMetadataAdopt(_id)
 }
 
-// WithMentionsCurrentUser sets the property and returns the receiver so calls can be chained.
+// WithMentionsCurrentUser sets the mentions current user.
 func (smidm *SendMessageIntentDonationMetadata) WithMentionsCurrentUser(mentionsCurrentUser bool) *SendMessageIntentDonationMetadata {
 	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setMentionsCurrentUser:"), mentionsCurrentUser)
 	return smidm
 }
 
-// WithReplyToCurrentUser sets the property and returns the receiver so calls can be chained.
+// WithReplyToCurrentUser sets the reply to current user.
 func (smidm *SendMessageIntentDonationMetadata) WithReplyToCurrentUser(replyToCurrentUser bool) *SendMessageIntentDonationMetadata {
 	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setReplyToCurrentUser:"), replyToCurrentUser)
 	return smidm
 }
 
-// WithNotifyRecipientAnyway sets the property and returns the receiver so calls can be chained.
+// WithNotifyRecipientAnyway sets the notify recipient anyway.
 func (smidm *SendMessageIntentDonationMetadata) WithNotifyRecipientAnyway(notifyRecipientAnyway bool) *SendMessageIntentDonationMetadata {
 	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setNotifyRecipientAnyway:"), notifyRecipientAnyway)
 	return smidm
 }
 
-// WithRecipientCount sets the property and returns the receiver so calls can be chained.
+// WithRecipientCount sets the recipient count.
 func (smidm *SendMessageIntentDonationMetadata) WithRecipientCount(recipientCount int) *SendMessageIntentDonationMetadata {
 	objc.Send[objc.ID](objref.IDOf(smidm), objc.RegisterName("setRecipientCount:"), recipientCount)
 	return smidm
@@ -79,7 +79,7 @@ func (smidm *SendMessageIntentDonationMetadata) MentionsCurrentUser() bool {
 	return _r
 }
 
-// IsReplyToCurrentUser wraps the corresponding Objective-C method.
+// IsReplyToCurrentUser reports whether the object is reply to current user.
 func (smidm *SendMessageIntentDonationMetadata) IsReplyToCurrentUser() bool {
 	_r := objc.Send[bool](objref.IDOf(smidm), objc.RegisterName("isReplyToCurrentUser"))
 	return _r
@@ -91,7 +91,7 @@ func (smidm *SendMessageIntentDonationMetadata) NotifyRecipientAnyway() bool {
 	return _r
 }
 
-// RecipientCount wraps the corresponding Objective-C method.
+// RecipientCount returns the recipient count.
 func (smidm *SendMessageIntentDonationMetadata) RecipientCount() int {
 	_r := objc.Send[int](objref.IDOf(smidm), objc.RegisterName("recipientCount"))
 	return _r

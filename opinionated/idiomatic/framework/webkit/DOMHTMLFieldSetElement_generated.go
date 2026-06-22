@@ -49,109 +49,109 @@ func NewDOMHTMLFieldSetElement() *DOMHTMLFieldSetElement {
 	return dOMHTMLFieldSetElementAdopt(_id)
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dfse *DOMHTMLFieldSetElement) WithTitle(title string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dfse
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dfse *DOMHTMLFieldSetElement) WithLang(lang string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dfse
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dfse *DOMHTMLFieldSetElement) WithDir(dir string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dfse
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dfse *DOMHTMLFieldSetElement) WithTabIndex(tabIndex int) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dfse
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dfse *DOMHTMLFieldSetElement) WithAccessKey(accessKey string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dfse
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dfse *DOMHTMLFieldSetElement) WithInnerText(innerText string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dfse
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dfse *DOMHTMLFieldSetElement) WithOuterText(outerText string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dfse
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dfse *DOMHTMLFieldSetElement) WithContentEditable(contentEditable string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dfse
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dfse *DOMHTMLFieldSetElement) WithIDName(idName string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dfse
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dfse *DOMHTMLFieldSetElement) WithScrollLeft(scrollLeft int) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dfse
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dfse *DOMHTMLFieldSetElement) WithScrollTop(scrollTop int) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dfse
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dfse *DOMHTMLFieldSetElement) WithInnerHTML(innerHTML string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dfse
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dfse *DOMHTMLFieldSetElement) WithOuterHTML(outerHTML string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dfse
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dfse *DOMHTMLFieldSetElement) WithClassName(className string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dfse
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dfse *DOMHTMLFieldSetElement) WithNodeValue(nodeValue string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dfse
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dfse *DOMHTMLFieldSetElement) WithPrefix(prefix string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dfse
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dfse *DOMHTMLFieldSetElement) WithTextContent(textContent string) *DOMHTMLFieldSetElement {
 	objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dfse
 }
 
-// Form wraps the corresponding Objective-C method.
+// Form returns the form.
 func (dfse *DOMHTMLFieldSetElement) Form() *DOMHTMLFormElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)

@@ -190,14 +190,14 @@ func (uc *URLComponents) WithQueryItems(items ...*URLQueryItem) *URLComponents {
 	return uc
 }
 
-// WithPercentEncodedQueryItems sets the property and returns the receiver so calls can be chained.
+// WithPercentEncodedQueryItems sets the percent encoded query items.
 func (uc *URLComponents) WithPercentEncodedQueryItems(items ...*URLQueryItem) *URLComponents {
 	_arr := purego.SliceToNSArray(items, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setPercentEncodedQueryItems:"), _arr)
 	return uc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uc *URLComponents) WithScriptingProperties(scriptingProperties obj.Object) *URLComponents {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uc
@@ -209,13 +209,13 @@ func (uc *URLComponents) URLRelativeToURL(baseURL string) *URL {
 	return URLFromID(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (uc *URLComponents) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
-// Scheme wraps the corresponding Objective-C method.
+// Scheme returns the scheme.
 func (uc *URLComponents) Scheme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("scheme"))
 	if _r == 0 {
@@ -224,7 +224,7 @@ func (uc *URLComponents) Scheme() string {
 	return purego.GoString(_r)
 }
 
-// User wraps the corresponding Objective-C method.
+// User returns the user.
 func (uc *URLComponents) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("user"))
 	if _r == 0 {
@@ -233,7 +233,7 @@ func (uc *URLComponents) User() string {
 	return purego.GoString(_r)
 }
 
-// Password wraps the corresponding Objective-C method.
+// Password returns the password.
 func (uc *URLComponents) Password() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("password"))
 	if _r == 0 {
@@ -242,7 +242,7 @@ func (uc *URLComponents) Password() string {
 	return purego.GoString(_r)
 }
 
-// Host wraps the corresponding Objective-C method.
+// Host returns the host.
 func (uc *URLComponents) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("host"))
 	if _r == 0 {
@@ -251,13 +251,13 @@ func (uc *URLComponents) Host() string {
 	return purego.GoString(_r)
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (uc *URLComponents) Port() *Number {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("port"))
 	return NumberFromID(_r)
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (uc *URLComponents) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("path"))
 	if _r == 0 {
@@ -266,7 +266,7 @@ func (uc *URLComponents) Path() string {
 	return purego.GoString(_r)
 }
 
-// Query wraps the corresponding Objective-C method.
+// Query returns the query.
 func (uc *URLComponents) Query() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("query"))
 	if _r == 0 {
@@ -275,7 +275,7 @@ func (uc *URLComponents) Query() string {
 	return purego.GoString(_r)
 }
 
-// Fragment wraps the corresponding Objective-C method.
+// Fragment returns the fragment.
 func (uc *URLComponents) Fragment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("fragment"))
 	if _r == 0 {
@@ -284,7 +284,7 @@ func (uc *URLComponents) Fragment() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedUser wraps the corresponding Objective-C method.
+// PercentEncodedUser returns the percent encoded user.
 func (uc *URLComponents) PercentEncodedUser() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedUser"))
 	if _r == 0 {
@@ -293,7 +293,7 @@ func (uc *URLComponents) PercentEncodedUser() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedPassword wraps the corresponding Objective-C method.
+// PercentEncodedPassword returns the percent encoded password.
 func (uc *URLComponents) PercentEncodedPassword() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedPassword"))
 	if _r == 0 {
@@ -302,7 +302,7 @@ func (uc *URLComponents) PercentEncodedPassword() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedHost wraps the corresponding Objective-C method.
+// PercentEncodedHost returns the percent encoded host.
 func (uc *URLComponents) PercentEncodedHost() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedHost"))
 	if _r == 0 {
@@ -311,7 +311,7 @@ func (uc *URLComponents) PercentEncodedHost() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedPath wraps the corresponding Objective-C method.
+// PercentEncodedPath returns the percent encoded path.
 func (uc *URLComponents) PercentEncodedPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedPath"))
 	if _r == 0 {
@@ -320,7 +320,7 @@ func (uc *URLComponents) PercentEncodedPath() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedQuery wraps the corresponding Objective-C method.
+// PercentEncodedQuery returns the percent encoded query.
 func (uc *URLComponents) PercentEncodedQuery() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedQuery"))
 	if _r == 0 {
@@ -329,7 +329,7 @@ func (uc *URLComponents) PercentEncodedQuery() string {
 	return purego.GoString(_r)
 }
 
-// PercentEncodedFragment wraps the corresponding Objective-C method.
+// PercentEncodedFragment returns the percent encoded fragment.
 func (uc *URLComponents) PercentEncodedFragment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("percentEncodedFragment"))
 	if _r == 0 {
@@ -338,7 +338,7 @@ func (uc *URLComponents) PercentEncodedFragment() string {
 	return purego.GoString(_r)
 }
 
-// EncodedHost wraps the corresponding Objective-C method.
+// EncodedHost returns the encoded host.
 func (uc *URLComponents) EncodedHost() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("encodedHost"))
 	if _r == 0 {
@@ -347,7 +347,7 @@ func (uc *URLComponents) EncodedHost() string {
 	return purego.GoString(_r)
 }
 
-// QueryItems wraps the corresponding Objective-C method.
+// QueryItems returns the query items.
 //
 // QueryItems returns the collection as a Go slice.
 func (uc *URLComponents) QueryItems() []*URLQueryItem {
@@ -355,7 +355,7 @@ func (uc *URLComponents) QueryItems() []*URLQueryItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *URLQueryItem { return URLQueryItemFromID(_id) })
 }
 
-// PercentEncodedQueryItems wraps the corresponding Objective-C method.
+// PercentEncodedQueryItems returns the percent encoded query items.
 //
 // PercentEncodedQueryItems returns the collection as a Go slice.
 func (uc *URLComponents) PercentEncodedQueryItems() []*URLQueryItem {

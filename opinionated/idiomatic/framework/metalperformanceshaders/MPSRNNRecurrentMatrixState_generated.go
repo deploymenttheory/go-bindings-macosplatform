@@ -52,7 +52,7 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	return rNNRecurrentMatrixStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (rrms *RNNRecurrentMatrixState) WithReadCount(readCount int) *RNNRecurrentMatrixState {
 	objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("setReadCount:"), readCount)
 	return rrms

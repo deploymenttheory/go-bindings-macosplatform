@@ -51,7 +51,7 @@ func NewAnimatedScalar() *AnimatedScalar {
 	return animatedScalarAdopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (as *AnimatedScalar) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setInterpolation:"), interpolation)
 	return as
@@ -79,7 +79,7 @@ func (as *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
 	return _r
 }
 
-// ResetWithFloatArrayAtTimesCount wraps the corresponding Objective-C method.
+// ResetWithFloatArrayAtTimesCount resets with float array at times count.
 func (as *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArray float32, timesArray float64) {
 	var _out0 float32
 	var _out1 float64
@@ -87,7 +87,7 @@ func (as *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArra
 	return _out0, _out1
 }
 
-// ResetWithDoubleArrayAtTimesCount wraps the corresponding Objective-C method.
+// ResetWithDoubleArrayAtTimesCount resets with double array at times count.
 func (as *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(count int) (valuesArray float64, timesArray float64) {
 	var _out0 float64
 	var _out1 float64

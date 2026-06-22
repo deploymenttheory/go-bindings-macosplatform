@@ -100,7 +100,7 @@ func (fpr *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperatio
 	}
 }
 
-// FileTypes wraps the corresponding Objective-C method.
+// FileTypes returns the file types.
 //
 // FileTypes returns the collection as a Go slice.
 func (fpr *FilePromiseReceiver) FileTypes() []string {
@@ -108,7 +108,7 @@ func (fpr *FilePromiseReceiver) FileTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// FileNames wraps the corresponding Objective-C method.
+// FileNames returns the file names.
 //
 // FileNames returns the collection as a Go slice.
 func (fpr *FilePromiseReceiver) FileNames() []string {

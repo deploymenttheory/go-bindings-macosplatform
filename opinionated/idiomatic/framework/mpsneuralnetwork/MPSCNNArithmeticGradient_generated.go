@@ -45,19 +45,19 @@ func cNNArithmeticGradientAdopt(id objc.ID) *CNNArithmeticGradient {
 	return x
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (cag *CNNArithmeticGradient) WithPrimaryScale(primaryScale float32) *CNNArithmeticGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return cag
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (cag *CNNArithmeticGradient) WithSecondaryScale(secondaryScale float32) *CNNArithmeticGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return cag
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (cag *CNNArithmeticGradient) WithBias(bias float32) *CNNArithmeticGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setBias:"), bias)
 	return cag
@@ -165,19 +165,19 @@ func (cag *CNNArithmeticGradient) WithSecondaryStrideInPixelsY(secondaryStrideIn
 	return cag
 }
 
-// PrimaryScale wraps the corresponding Objective-C method.
+// PrimaryScale returns the primary scale.
 func (cag *CNNArithmeticGradient) PrimaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("primaryScale"))
 	return _r
 }
 
-// SecondaryScale wraps the corresponding Objective-C method.
+// SecondaryScale returns the secondary scale.
 func (cag *CNNArithmeticGradient) SecondaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// Bias wraps the corresponding Objective-C method.
+// Bias returns the bias.
 func (cag *CNNArithmeticGradient) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(cag), objc.RegisterName("bias"))
 	return _r

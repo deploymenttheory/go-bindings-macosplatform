@@ -66,7 +66,7 @@ func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) String() st
 	return rt.Description(objref.IDOf(mutcsserp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutcsserp
@@ -84,7 +84,7 @@ func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerS
 	return mutcsserp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutcsserp *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcsserp), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)

@@ -56,7 +56,7 @@ func NewMTRClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue(device *MT
 	return mTRClusterOvenCavityOperationalStateAdopt(_id)
 }
 
-// StopWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopWithParamsExpectedValuesExpectedValueIntervalCompletion stops with params expected values expected value interval completion.
 //
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcocos *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -81,7 +81,7 @@ func (mcocos *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValues
 	}
 }
 
-// StopWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopWithExpectedValuesExpectedValueIntervalCompletion stops with expected values expected value interval completion.
 //
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcocos *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -106,7 +106,7 @@ func (mcocos *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpect
 	}
 }
 
-// StartWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StartWithParamsExpectedValuesExpectedValueIntervalCompletion starts with params expected values expected value interval completion.
 //
 // StartWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcocos *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -131,7 +131,7 @@ func (mcocos *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValue
 	}
 }
 
-// StartWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StartWithExpectedValuesExpectedValueIntervalCompletion starts with expected values expected value interval completion.
 //
 // StartWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcocos *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -156,67 +156,67 @@ func (mcocos *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpec
 	}
 }
 
-// ReadAttributePhaseListWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhaseListWithParams reads attribute phase list with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPhaseWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPhaseWithParams reads attribute current phase with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCountdownTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCountdownTimeWithParams reads attribute countdown time with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateListWithParams reads attribute operational state list with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateWithParams reads attribute operational state with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalErrorWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalErrorWithParams reads attribute operational error with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

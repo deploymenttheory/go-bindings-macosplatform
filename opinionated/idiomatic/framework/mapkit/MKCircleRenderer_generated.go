@@ -120,19 +120,19 @@ func (cr *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
 	return cr
 }
 
-// Circle wraps the corresponding Objective-C method.
+// Circle returns the circle.
 func (cr *CircleRenderer) Circle() *Circle {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("circle"))
 	return CircleFromID(_r)
 }
 
-// StrokeStart wraps the corresponding Objective-C method.
+// StrokeStart returns the stroke start.
 func (cr *CircleRenderer) StrokeStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
-// StrokeEnd wraps the corresponding Objective-C method.
+// StrokeEnd returns the stroke end.
 func (cr *CircleRenderer) StrokeEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeEnd"))
 	return _r

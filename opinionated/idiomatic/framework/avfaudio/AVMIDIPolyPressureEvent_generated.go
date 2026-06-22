@@ -70,13 +70,13 @@ func (mppe *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEve
 	return mppe
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (mppe *MIDIPolyPressureEvent) Key() int {
 	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("key"))
 	return _r
 }
 
-// Pressure wraps the corresponding Objective-C method.
+// Pressure returns the pressure.
 func (mppe *MIDIPolyPressureEvent) Pressure() int {
 	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("pressure"))
 	return _r

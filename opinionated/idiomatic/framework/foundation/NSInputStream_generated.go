@@ -70,13 +70,13 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return inputStreamAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (is *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return is
 }
 
-// ReadMaxLength wraps the corresponding Objective-C method.
+// ReadMaxLength reads max length.
 func (is *InputStream) ReadMaxLength(len_ int) (result int, buffer uint8) {
 	var _out0 uint8
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), len_)
@@ -91,7 +91,7 @@ func (is *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
 	return _r, _out0, _out1
 }
 
-// HasBytesAvailable wraps the corresponding Objective-C method.
+// HasBytesAvailable reports whether the object has bytes available.
 func (is *InputStream) HasBytesAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("hasBytesAvailable"))
 	return _r

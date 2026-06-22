@@ -161,71 +161,71 @@ func (mcgc *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedVal
 	}
 }
 
-// ReadAttributeBreadcrumbWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBreadcrumbWithParams reads attribute breadcrumb with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeBreadcrumbWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeBreadcrumbWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBreadcrumbWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBreadcrumbWithValueExpectedValueInterval writes attribute breadcrumb with value expected value interval.
 func (mcgc *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams writes attribute breadcrumb with value expected value interval params.
 func (mcgc *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBasicCommissioningInfoWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBasicCommissioningInfoWithParams reads attribute basic commissioning info with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeBasicCommissioningInfoWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRegulatoryConfigWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRegulatoryConfigWithParams reads attribute regulatory config with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeRegulatoryConfigWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLocationCapabilityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLocationCapabilityWithParams reads attribute location capability with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeLocationCapabilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportsConcurrentConnectionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportsConcurrentConnectionWithParams reads attribute supports concurrent connection with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeSupportsConcurrentConnectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

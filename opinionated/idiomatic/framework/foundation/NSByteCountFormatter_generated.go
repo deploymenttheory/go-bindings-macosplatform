@@ -52,61 +52,61 @@ func NewByteCountFormatter() *ByteCountFormatter {
 	return byteCountFormatterAdopt(_id)
 }
 
-// WithAllowedUnits sets the property and returns the receiver so calls can be chained.
+// WithAllowedUnits sets the allowed units.
 func (bcf *ByteCountFormatter) WithAllowedUnits(allowedUnits ByteCountFormatterUnits) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 	return bcf
 }
 
-// WithCountStyle sets the property and returns the receiver so calls can be chained.
+// WithCountStyle sets the count style.
 func (bcf *ByteCountFormatter) WithCountStyle(countStyle ByteCountFormatterCountStyle) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setCountStyle:"), countStyle)
 	return bcf
 }
 
-// WithAllowsNonnumericFormatting sets the property and returns the receiver so calls can be chained.
+// WithAllowsNonnumericFormatting sets the allows nonnumeric formatting.
 func (bcf *ByteCountFormatter) WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAllowsNonnumericFormatting:"), allowsNonnumericFormatting)
 	return bcf
 }
 
-// WithIncludesUnit sets the property and returns the receiver so calls can be chained.
+// WithIncludesUnit sets the includes unit.
 func (bcf *ByteCountFormatter) WithIncludesUnit(includesUnit bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesUnit:"), includesUnit)
 	return bcf
 }
 
-// WithIncludesCount sets the property and returns the receiver so calls can be chained.
+// WithIncludesCount sets the includes count.
 func (bcf *ByteCountFormatter) WithIncludesCount(includesCount bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesCount:"), includesCount)
 	return bcf
 }
 
-// WithIncludesActualByteCount sets the property and returns the receiver so calls can be chained.
+// WithIncludesActualByteCount sets the includes actual byte count.
 func (bcf *ByteCountFormatter) WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setIncludesActualByteCount:"), includesActualByteCount)
 	return bcf
 }
 
-// WithAdaptive sets the property and returns the receiver so calls can be chained.
+// WithAdaptive sets the adaptive.
 func (bcf *ByteCountFormatter) WithAdaptive(adaptive bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setAdaptive:"), adaptive)
 	return bcf
 }
 
-// WithZeroPadsFractionDigits sets the property and returns the receiver so calls can be chained.
+// WithZeroPadsFractionDigits sets the zero pads fraction digits.
 func (bcf *ByteCountFormatter) WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setZeroPadsFractionDigits:"), zeroPadsFractionDigits)
 	return bcf
 }
 
-// WithFormattingContext sets the property and returns the receiver so calls can be chained.
+// WithFormattingContext sets the formatting context.
 func (bcf *ByteCountFormatter) WithFormattingContext(formattingContext FormattingContext) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return bcf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (bcf *ByteCountFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ByteCountFormatter {
 	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return bcf
@@ -130,13 +130,13 @@ func (bcf *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) str
 	return purego.GoString(_r)
 }
 
-// AllowedUnits wraps the corresponding Objective-C method.
+// AllowedUnits returns the allowed units.
 func (bcf *ByteCountFormatter) AllowedUnits() ByteCountFormatterUnits {
 	_r := objc.Send[ByteCountFormatterUnits](objref.IDOf(bcf), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
-// CountStyle wraps the corresponding Objective-C method.
+// CountStyle returns the count style.
 func (bcf *ByteCountFormatter) CountStyle() ByteCountFormatterCountStyle {
 	_r := objc.Send[ByteCountFormatterCountStyle](objref.IDOf(bcf), objc.RegisterName("countStyle"))
 	return _r
@@ -166,7 +166,7 @@ func (bcf *ByteCountFormatter) IncludesActualByteCount() bool {
 	return _r
 }
 
-// IsAdaptive wraps the corresponding Objective-C method.
+// IsAdaptive reports whether the object is adaptive.
 func (bcf *ByteCountFormatter) IsAdaptive() bool {
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("isAdaptive"))
 	return _r
@@ -178,7 +178,7 @@ func (bcf *ByteCountFormatter) ZeroPadsFractionDigits() bool {
 	return _r
 }
 
-// FormattingContext wraps the corresponding Objective-C method.
+// FormattingContext returns the formatting context.
 func (bcf *ByteCountFormatter) FormattingContext() FormattingContext {
 	_r := objc.Send[FormattingContext](objref.IDOf(bcf), objc.RegisterName("formattingContext"))
 	return _r

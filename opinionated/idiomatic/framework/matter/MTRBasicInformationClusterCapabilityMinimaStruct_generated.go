@@ -66,25 +66,25 @@ func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) String() string
 	return rt.Description(objref.IDOf(mbiccms))
 }
 
-// WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
+// WithCaseSessionsPerFabric sets the case sessions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return mbiccms
 }
 
-// WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
+// WithSubscriptionsPerFabric sets the subscriptions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return mbiccms
 }
 
-// CaseSessionsPerFabric wraps the corresponding Objective-C method.
+// CaseSessionsPerFabric returns the case sessions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("caseSessionsPerFabric"))
 	return obj.Wrap(_r)
 }
 
-// SubscriptionsPerFabric wraps the corresponding Objective-C method.
+// SubscriptionsPerFabric returns the subscriptions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("subscriptionsPerFabric"))
 	return obj.Wrap(_r)

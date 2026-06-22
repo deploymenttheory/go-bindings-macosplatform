@@ -73,7 +73,7 @@ func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier str
 	return adjustmentDataAdopt(_id)
 }
 
-// FormatIdentifier wraps the corresponding Objective-C method.
+// FormatIdentifier returns the format identifier.
 func (ad *AdjustmentData) FormatIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatIdentifier"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (ad *AdjustmentData) FormatIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// FormatVersion wraps the corresponding Objective-C method.
+// FormatVersion returns the format version.
 func (ad *AdjustmentData) FormatVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatVersion"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (ad *AdjustmentData) FormatVersion() string {
 	return purego.GoString(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (ad *AdjustmentData) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("data"))
 	return obj.Wrap(_r)

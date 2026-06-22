@@ -81,7 +81,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithPar
 	}
 }
 
-// ReadAttributePreferredExtendedPanIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePreferredExtendedPanIDWithCompletion reads attribute preferred extended pan ID with completion.
 //
 // ReadAttributePreferredExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -131,7 +131,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributePreferredE
 	}
 }
 
-// ReadAttributeThreadNetworksWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThreadNetworksWithCompletion reads attribute thread networks with completion.
 //
 // ReadAttributeThreadNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -181,7 +181,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetw
 	}
 }
 
-// ReadAttributeThreadNetworkTableSizeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThreadNetworkTableSizeWithCompletion reads attribute thread network table size with completion.
 //
 // ReadAttributeThreadNetworkTableSizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -231,7 +231,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeThreadNetw
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -281,7 +281,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeGeneratedC
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -331,7 +331,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAcceptedCo
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -381,7 +381,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeAttributeL
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -431,7 +431,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDirectory) SubscribeAttributeFeatureMap
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

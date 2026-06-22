@@ -86,7 +86,7 @@ func (psi *PaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *PaymentSu
 	return psi
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (psi *PaymentSummaryItem) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("label"))
 	if _r == 0 {
@@ -95,13 +95,13 @@ func (psi *PaymentSummaryItem) Label() string {
 	return purego.GoString(_r)
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (psi *PaymentSummaryItem) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (psi *PaymentSummaryItem) Type() PaymentSummaryItemType {
 	_r := objc.Send[PaymentSummaryItemType](objref.IDOf(psi), objc.RegisterName("type"))
 	return _r

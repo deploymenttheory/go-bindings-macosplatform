@@ -68,7 +68,7 @@ func (pja *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
 	return pja
 }
 
-// JointPaths wraps the corresponding Objective-C method.
+// JointPaths returns the joint paths.
 //
 // JointPaths returns the collection as a Go slice.
 func (pja *PackedJointAnimation) JointPaths() []string {
@@ -76,19 +76,19 @@ func (pja *PackedJointAnimation) JointPaths() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Translations wraps the corresponding Objective-C method.
+// Translations returns the translations.
 func (pja *PackedJointAnimation) Translations() *AnimatedVector3Array {
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("translations"))
 	return AnimatedVector3ArrayFromID(_r)
 }
 
-// Rotations wraps the corresponding Objective-C method.
+// Rotations returns the rotations.
 func (pja *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("rotations"))
 	return AnimatedQuaternionArrayFromID(_r)
 }
 
-// Scales wraps the corresponding Objective-C method.
+// Scales returns the scales.
 func (pja *PackedJointAnimation) Scales() *AnimatedVector3Array {
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("scales"))
 	return AnimatedVector3ArrayFromID(_r)

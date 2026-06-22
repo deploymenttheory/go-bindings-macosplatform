@@ -90,7 +90,7 @@ func (u *Update) AuthorizationRestricted() bool {
 	return _r
 }
 
-// IsStationary wraps the corresponding Objective-C method.
+// IsStationary reports whether the object is stationary.
 func (u *Update) IsStationary() bool {
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isStationary"))
 	return _r

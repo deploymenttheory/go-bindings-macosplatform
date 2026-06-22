@@ -52,13 +52,13 @@ func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEve
 	return persistentCloudKitContainerEventResultAdopt(_id)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (pckcer *PersistentCloudKitContainerEventResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pckcer), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (pckcer *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r

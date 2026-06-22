@@ -54,7 +54,7 @@ func NewMTRBaseClusterSmokeCOAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevic
 	return mTRBaseClusterSmokeCOAlarmAdopt(_id)
 }
 
-// ReadAttributeExpressedStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExpressedStateWithCompletion reads attribute expressed state with completion.
 //
 // ReadAttributeExpressedStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpressedStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpressedStateWithPa
 	}
 }
 
-// ReadAttributeSmokeStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSmokeStateWithCompletion reads attribute smoke state with completion.
 //
 // ReadAttributeSmokeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeStateWithParams
 	}
 }
 
-// ReadAttributeCOStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCOStateWithCompletion reads attribute co state with completion.
 //
 // ReadAttributeCOStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeCOStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeCOStateWithParamsSub
 	}
 }
 
-// ReadAttributeBatteryAlertWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatteryAlertWithCompletion reads attribute battery alert with completion.
 //
 // ReadAttributeBatteryAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeBatteryAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeBatteryAlertWithPara
 	}
 }
 
-// ReadAttributeDeviceMutedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDeviceMutedWithCompletion reads attribute device muted with completion.
 //
 // ReadAttributeDeviceMutedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeDeviceMutedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeDeviceMutedWithParam
 	}
 }
 
-// ReadAttributeTestInProgressWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTestInProgressWithCompletion reads attribute test in progress with completion.
 //
 // ReadAttributeTestInProgressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeTestInProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeTestInProgressWithPa
 	}
 }
 
-// ReadAttributeHardwareFaultAlertWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareFaultAlertWithCompletion reads attribute hardware fault alert with completion.
 //
 // ReadAttributeHardwareFaultAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeHardwareFaultAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeHardwareFaultAlertWi
 	}
 }
 
-// ReadAttributeEndOfServiceAlertWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEndOfServiceAlertWithCompletion reads attribute end of service alert with completion.
 //
 // ReadAttributeEndOfServiceAlertWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeEndOfServiceAlertWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeEndOfServiceAlertWit
 	}
 }
 
-// ReadAttributeInterconnectSmokeAlarmWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInterconnectSmokeAlarmWithCompletion reads attribute interconnect smoke alarm with completion.
 //
 // ReadAttributeInterconnectSmokeAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectSmokeAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectSmokeAla
 	}
 }
 
-// ReadAttributeInterconnectCOAlarmWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInterconnectCOAlarmWithCompletion reads attribute interconnect co alarm with completion.
 //
 // ReadAttributeInterconnectCOAlarmWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeInterconnectCOAlarmWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeInterconnectCOAlarmW
 	}
 }
 
-// ReadAttributeContaminationStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeContaminationStateWithCompletion reads attribute contamination state with completion.
 //
 // ReadAttributeContaminationStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeContaminationStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -604,7 +604,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeContaminationStateWi
 	}
 }
 
-// ReadAttributeSmokeSensitivityLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSmokeSensitivityLevelWithCompletion reads attribute smoke sensitivity level with completion.
 //
 // ReadAttributeSmokeSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeSmokeSensitivityLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -654,7 +654,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeSmokeSensitivityLeve
 	}
 }
 
-// ReadAttributeExpiryDateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExpiryDateWithCompletion reads attribute expiry date with completion.
 //
 // ReadAttributeExpiryDateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeExpiryDateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -704,7 +704,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeExpiryDateWithParams
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -754,7 +754,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -804,7 +804,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -854,7 +854,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeAttributeListWithPar
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -904,7 +904,7 @@ func (mbcsca *MTRBaseClusterSmokeCOAlarm) SubscribeAttributeFeatureMapWithParams
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsca *MTRBaseClusterSmokeCOAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

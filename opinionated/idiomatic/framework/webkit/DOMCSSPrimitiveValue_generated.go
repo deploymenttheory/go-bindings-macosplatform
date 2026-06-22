@@ -49,7 +49,7 @@ func NewDOMCSSPrimitiveValue() *DOMCSSPrimitiveValue {
 	return dOMCSSPrimitiveValueAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dpv *DOMCSSPrimitiveValue) WithCSSText(cssText string) *DOMCSSPrimitiveValue {
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dpv
@@ -71,8 +71,8 @@ func (dpv *DOMCSSPrimitiveValue) SetStringValueStringValue(stringType uint16, st
 	objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("setStringValue:stringValue:"), stringType, purego.NSString(stringValue))
 }
 
-// GetStringValue wraps the corresponding Objective-C method.
-func (dpv *DOMCSSPrimitiveValue) GetStringValue() string {
+// StringValue returns the string value.
+func (dpv *DOMCSSPrimitiveValue) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getStringValue"))
 	if _r == 0 {
 		return ""
@@ -80,25 +80,25 @@ func (dpv *DOMCSSPrimitiveValue) GetStringValue() string {
 	return purego.GoString(_r)
 }
 
-// GetCounterValue wraps the corresponding Objective-C method.
-func (dpv *DOMCSSPrimitiveValue) GetCounterValue() *DOMCounter {
+// CounterValue returns the counter value.
+func (dpv *DOMCSSPrimitiveValue) CounterValue() *DOMCounter {
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getCounterValue"))
 	return DOMCounterFromID(_r)
 }
 
-// GetRectValue wraps the corresponding Objective-C method.
-func (dpv *DOMCSSPrimitiveValue) GetRectValue() *DOMRect {
+// RectValue returns the rect value.
+func (dpv *DOMCSSPrimitiveValue) RectValue() *DOMRect {
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getRectValue"))
 	return DOMRectFromID(_r)
 }
 
-// GetRGBColorValue wraps the corresponding Objective-C method.
-func (dpv *DOMCSSPrimitiveValue) GetRGBColorValue() *DOMRGBColor {
+// RGBColorValue returns the rgb color value.
+func (dpv *DOMCSSPrimitiveValue) RGBColorValue() *DOMRGBColor {
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("getRGBColorValue"))
 	return DOMRGBColorFromID(_r)
 }
 
-// PrimitiveType wraps the corresponding Objective-C method.
+// PrimitiveType returns the primitive type.
 func (dpv *DOMCSSPrimitiveValue) PrimitiveType() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dpv), objc.RegisterName("primitiveType"))
 	return _r

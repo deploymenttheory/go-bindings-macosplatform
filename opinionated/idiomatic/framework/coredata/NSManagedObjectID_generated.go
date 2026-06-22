@@ -78,19 +78,19 @@ func (moi *ManagedObjectID) URIRepresentation() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (moi *ManagedObjectID) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// PersistentStore wraps the corresponding Objective-C method.
+// PersistentStore returns the persistent store.
 func (moi *ManagedObjectID) PersistentStore() *PersistentStore {
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("persistentStore"))
 	return PersistentStoreFromID(_r)
 }
 
-// IsTemporaryID wraps the corresponding Objective-C method.
+// IsTemporaryID reports whether the object is temporary ID.
 func (moi *ManagedObjectID) IsTemporaryID() bool {
 	_r := objc.Send[bool](objref.IDOf(moi), objc.RegisterName("isTemporaryID"))
 	return _r

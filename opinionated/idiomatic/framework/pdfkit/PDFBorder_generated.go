@@ -90,19 +90,19 @@ func (b *Border) DrawInRect(rect corefoundation.CGRect) {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("drawInRect:"), rect)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (b *Border) Style() BorderStyle {
 	_r := objc.Send[BorderStyle](objref.IDOf(b), objc.RegisterName("style"))
 	return _r
 }
 
-// LineWidth wraps the corresponding Objective-C method.
+// LineWidth returns the line width.
 func (b *Border) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// DashPattern wraps the corresponding Objective-C method.
+// DashPattern returns the dash pattern.
 func (b *Border) DashPattern() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("dashPattern"))
 	return obj.Wrap(_r)
@@ -113,7 +113,7 @@ func (b *Border) SetDashPattern(dashPattern obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
 }
 
-// BorderKeyValues wraps the corresponding Objective-C method.
+// BorderKeyValues returns the border key values.
 func (b *Border) BorderKeyValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderKeyValues"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func (egs *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHand
 	return egs
 }
 
-// SnapshotData wraps the corresponding Objective-C method.
+// SnapshotData returns the snapshot data.
 func (egs *ExtendedGamepadSnapshot) SnapshotData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(egs), objc.RegisterName("snapshotData"))
 	return obj.Wrap(_r)

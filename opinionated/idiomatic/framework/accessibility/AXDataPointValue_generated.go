@@ -84,13 +84,13 @@ func (dpv *DataPointValue) WithCategory(category string) *DataPointValue {
 	return dpv
 }
 
-// Number wraps the corresponding Objective-C method.
+// Number returns the number.
 func (dpv *DataPointValue) Number() float64 {
 	_r := objc.Send[float64](objref.IDOf(dpv), objc.RegisterName("number"))
 	return _r
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (dpv *DataPointValue) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("category"))
 	if _r == 0 {

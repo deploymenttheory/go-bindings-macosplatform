@@ -52,7 +52,7 @@ func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
 	return occluderAdopt(_id)
 }
 
-// Shapes wraps the corresponding Objective-C method.
+// Shapes returns the shapes.
 //
 // Shapes returns the collection as a Go slice.
 func (o *Occluder) Shapes() []*Shape {

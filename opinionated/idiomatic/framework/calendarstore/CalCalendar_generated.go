@@ -70,31 +70,31 @@ func NewCalCalendar() *CalCalendar {
 	return calCalendarAdopt(_id)
 }
 
-// WithColor sets the property and returns the receiver so calls can be chained.
+// WithColor sets the color.
 func (cc *CalCalendar) WithColor(color obj.Object) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return cc
 }
 
-// WithNotes sets the property and returns the receiver so calls can be chained.
+// WithNotes sets the notes.
 func (cc *CalCalendar) WithNotes(notes string) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return cc
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (cc *CalCalendar) WithTitle(title string) *CalCalendar {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return cc
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (cc *CalCalendar) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// Notes wraps the corresponding Objective-C method.
+// Notes returns the notes.
 func (cc *CalCalendar) Notes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("notes"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (cc *CalCalendar) Notes() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (cc *CalCalendar) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("title"))
 	if _r == 0 {
@@ -112,7 +112,7 @@ func (cc *CalCalendar) Title() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (cc *CalCalendar) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("type"))
 	if _r == 0 {
@@ -121,7 +121,7 @@ func (cc *CalCalendar) Type() string {
 	return purego.GoString(_r)
 }
 
-// UID wraps the corresponding Objective-C method.
+// UID returns the UID.
 func (cc *CalCalendar) UID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("uid"))
 	if _r == 0 {
@@ -130,7 +130,7 @@ func (cc *CalCalendar) UID() string {
 	return purego.GoString(_r)
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (cc *CalCalendar) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEditable"))
 	return _r

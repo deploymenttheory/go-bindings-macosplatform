@@ -49,37 +49,37 @@ func NewMTRContentLauncherClusterBrandingInformation() *MTRContentLauncherCluste
 	return mTRContentLauncherClusterBrandingInformationAdopt(_id)
 }
 
-// WithProviderName sets the property and returns the receiver so calls can be chained.
+// WithProviderName sets the provider name.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProviderName(providerName string) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setProviderName:"), purego.NSString(providerName))
 	return mclcbi
 }
 
-// WithBackground sets the property and returns the receiver so calls can be chained.
+// WithBackground sets the background.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithBackground(background MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setBackground:"), objref.IDOf(background))
 	return mclcbi
 }
 
-// WithLogo sets the property and returns the receiver so calls can be chained.
+// WithLogo sets the logo.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithLogo(logo MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setLogo:"), objref.IDOf(logo))
 	return mclcbi
 }
 
-// WithProgressBar sets the property and returns the receiver so calls can be chained.
+// WithProgressBar sets the progress bar.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithProgressBar(progressBar MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setProgressBar:"), objref.IDOf(progressBar))
 	return mclcbi
 }
 
-// WithSplash sets the property and returns the receiver so calls can be chained.
+// WithSplash sets the splash.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithSplash(splash MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setSplash:"), objref.IDOf(splash))
 	return mclcbi
 }
 
-// WithWaterMark sets the property and returns the receiver so calls can be chained.
+// WithWaterMark sets the water mark.
 func (mclcbi *MTRContentLauncherClusterBrandingInformation) WithWaterMark(waterMark MTRContentLauncherClusterStyleInformationStructProvider) *MTRContentLauncherClusterBrandingInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcbi), objc.RegisterName("setWaterMark:"), objref.IDOf(waterMark))
 	return mclcbi

@@ -467,25 +467,25 @@ func (sc *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefound
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawSegment:inFrame:withView:"), segment, frame, objref.IDOf(controlView))
 }
 
-// SegmentCount wraps the corresponding Objective-C method.
+// SegmentCount returns the segment count.
 func (sc *SegmentedCell) SegmentCount() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("segmentCount"))
 	return _r
 }
 
-// SelectedSegment wraps the corresponding Objective-C method.
+// SelectedSegment returns the selected segment.
 func (sc *SegmentedCell) SelectedSegment() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("selectedSegment"))
 	return _r
 }
 
-// TrackingMode wraps the corresponding Objective-C method.
+// TrackingMode returns the tracking mode.
 func (sc *SegmentedCell) TrackingMode() SegmentSwitchTracking {
 	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(sc), objc.RegisterName("trackingMode"))
 	return _r
 }
 
-// SegmentStyle wraps the corresponding Objective-C method.
+// SegmentStyle returns the segment style.
 func (sc *SegmentedCell) SegmentStyle() SegmentStyle {
 	_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
 	return _r

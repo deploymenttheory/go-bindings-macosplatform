@@ -68,73 +68,73 @@ func (ps *ParagraphStyle) String() string {
 	return rt.Description(objref.IDOf(ps))
 }
 
-// LineSpacing wraps the corresponding Objective-C method.
+// LineSpacing returns the line spacing.
 func (ps *ParagraphStyle) LineSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineSpacing"))
 	return _r
 }
 
-// ParagraphSpacing wraps the corresponding Objective-C method.
+// ParagraphSpacing returns the paragraph spacing.
 func (ps *ParagraphStyle) ParagraphSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacing"))
 	return _r
 }
 
-// HeadIndent wraps the corresponding Objective-C method.
+// HeadIndent returns the head indent.
 func (ps *ParagraphStyle) HeadIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("headIndent"))
 	return _r
 }
 
-// TailIndent wraps the corresponding Objective-C method.
+// TailIndent returns the tail indent.
 func (ps *ParagraphStyle) TailIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("tailIndent"))
 	return _r
 }
 
-// FirstLineHeadIndent wraps the corresponding Objective-C method.
+// FirstLineHeadIndent returns the first line head indent.
 func (ps *ParagraphStyle) FirstLineHeadIndent() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("firstLineHeadIndent"))
 	return _r
 }
 
-// MinimumLineHeight wraps the corresponding Objective-C method.
+// MinimumLineHeight returns the minimum line height.
 func (ps *ParagraphStyle) MinimumLineHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("minimumLineHeight"))
 	return _r
 }
 
-// MaximumLineHeight wraps the corresponding Objective-C method.
+// MaximumLineHeight returns the maximum line height.
 func (ps *ParagraphStyle) MaximumLineHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("maximumLineHeight"))
 	return _r
 }
 
-// LineBreakMode wraps the corresponding Objective-C method.
+// LineBreakMode returns the line break mode.
 func (ps *ParagraphStyle) LineBreakMode() LineBreakMode {
 	_r := objc.Send[LineBreakMode](objref.IDOf(ps), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
-// BaseWritingDirection wraps the corresponding Objective-C method.
+// BaseWritingDirection returns the base writing direction.
 func (ps *ParagraphStyle) BaseWritingDirection() WritingDirection {
 	_r := objc.Send[WritingDirection](objref.IDOf(ps), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
-// LineHeightMultiple wraps the corresponding Objective-C method.
+// LineHeightMultiple returns the line height multiple.
 func (ps *ParagraphStyle) LineHeightMultiple() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("lineHeightMultiple"))
 	return _r
 }
 
-// ParagraphSpacingBefore wraps the corresponding Objective-C method.
+// ParagraphSpacingBefore returns the paragraph spacing before.
 func (ps *ParagraphStyle) ParagraphSpacingBefore() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("paragraphSpacingBefore"))
 	return _r
 }
 
-// HyphenationFactor wraps the corresponding Objective-C method.
+// HyphenationFactor returns the hyphenation factor.
 func (ps *ParagraphStyle) HyphenationFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("hyphenationFactor"))
 	return _r
@@ -146,7 +146,7 @@ func (ps *ParagraphStyle) UsesDefaultHyphenation() bool {
 	return _r
 }
 
-// TabStops wraps the corresponding Objective-C method.
+// TabStops returns the tab stops.
 //
 // TabStops returns the collection as a Go slice.
 func (ps *ParagraphStyle) TabStops() []*TextTab {
@@ -154,13 +154,13 @@ func (ps *ParagraphStyle) TabStops() []*TextTab {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextTab { return TextTabFromID(_id) })
 }
 
-// DefaultTabInterval wraps the corresponding Objective-C method.
+// DefaultTabInterval returns the default tab interval.
 func (ps *ParagraphStyle) DefaultTabInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("defaultTabInterval"))
 	return _r
 }
 
-// TextLists wraps the corresponding Objective-C method.
+// TextLists returns the text lists.
 //
 // TextLists returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextLists() []*TextList {
@@ -174,25 +174,25 @@ func (ps *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
 	return _r
 }
 
-// LineBreakStrategy wraps the corresponding Objective-C method.
+// LineBreakStrategy returns the line break strategy.
 func (ps *ParagraphStyle) LineBreakStrategy() LineBreakStrategy {
 	_r := objc.Send[LineBreakStrategy](objref.IDOf(ps), objc.RegisterName("lineBreakStrategy"))
 	return _r
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (ps *ParagraphStyle) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(ps), objc.RegisterName("alignment"))
 	return _r
 }
 
-// TighteningFactorForTruncation wraps the corresponding Objective-C method.
+// TighteningFactorForTruncation returns the tightening factor for truncation.
 func (ps *ParagraphStyle) TighteningFactorForTruncation() float32 {
 	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("tighteningFactorForTruncation"))
 	return _r
 }
 
-// TextBlocks wraps the corresponding Objective-C method.
+// TextBlocks returns the text blocks.
 //
 // TextBlocks returns the collection as a Go slice.
 func (ps *ParagraphStyle) TextBlocks() []*TextBlock {
@@ -200,7 +200,7 @@ func (ps *ParagraphStyle) TextBlocks() []*TextBlock {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextBlock { return TextBlockFromID(_id) })
 }
 
-// HeaderLevel wraps the corresponding Objective-C method.
+// HeaderLevel returns the header level.
 func (ps *ParagraphStyle) HeaderLevel() int {
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("headerLevel"))
 	return _r

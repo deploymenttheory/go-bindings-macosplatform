@@ -78,7 +78,7 @@ func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(respo
 	return mTREnergyEVSEClusterGetTargetsResponseParamsAdopt(_id), nil
 }
 
-// ChargingTargetSchedules wraps the corresponding Objective-C method.
+// ChargingTargetSchedules returns the charging target schedules.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecgtrp), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)

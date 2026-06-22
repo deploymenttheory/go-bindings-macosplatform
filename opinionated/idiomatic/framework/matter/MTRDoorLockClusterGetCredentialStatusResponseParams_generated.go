@@ -78,37 +78,37 @@ func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueErro
 	return mTRDoorLockClusterGetCredentialStatusResponseParamsAdopt(_id), nil
 }
 
-// WithCredentialExists sets the property and returns the receiver so calls can be chained.
+// WithCredentialExists sets the credential exists.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCredentialExists(credentialExists obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCredentialExists:"), objref.IDOf(credentialExists))
 	return mdlcgcsrp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgcsrp
 }
 
-// WithCreatorFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithCreatorFabricIndex sets the creator fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 	return mdlcgcsrp
 }
 
-// WithLastModifiedFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithLastModifiedFabricIndex sets the last modified fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 	return mdlcgcsrp
 }
 
-// WithNextCredentialIndex sets the property and returns the receiver so calls can be chained.
+// WithNextCredentialIndex sets the next credential index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithNextCredentialIndex(nextCredentialIndex obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setNextCredentialIndex:"), objref.IDOf(nextCredentialIndex))
 	return mdlcgcsrp
 }
 
-// WithCredentialData sets the property and returns the receiver so calls can be chained.
+// WithCredentialData sets the credential data.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithCredentialData(credentialData obj.Object) *MTRDoorLockClusterGetCredentialStatusResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("setCredentialData:"), objref.IDOf(credentialData))
 	return mdlcgcsrp
@@ -120,37 +120,37 @@ func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) WithTimedI
 	return mdlcgcsrp
 }
 
-// CredentialExists wraps the corresponding Objective-C method.
+// CredentialExists returns the credential exists.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialExists() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("credentialExists"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// CreatorFabricIndex wraps the corresponding Objective-C method.
+// CreatorFabricIndex returns the creator fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CreatorFabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("creatorFabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// LastModifiedFabricIndex wraps the corresponding Objective-C method.
+// LastModifiedFabricIndex returns the last modified fabric index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) LastModifiedFabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("lastModifiedFabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// NextCredentialIndex wraps the corresponding Objective-C method.
+// NextCredentialIndex returns the next credential index.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) NextCredentialIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("nextCredentialIndex"))
 	return obj.Wrap(_r)
 }
 
-// CredentialData wraps the corresponding Objective-C method.
+// CredentialData returns the credential data.
 func (mdlcgcsrp *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsrp), objc.RegisterName("credentialData"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 	return resourceStatePassDescriptorAdopt(_id)
 }
 
-// SampleBufferAttachments wraps the corresponding Objective-C method.
+// SampleBufferAttachments returns the sample buffer attachments.
 func (rspd *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(rspd), objc.RegisterName("sampleBufferAttachments"))
 	return ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_r)

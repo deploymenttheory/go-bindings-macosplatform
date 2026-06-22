@@ -60,19 +60,19 @@ func NewCompoundPredicateWithCoder(coder *Coder) *CompoundPredicate {
 	return compoundPredicateAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cp *CompoundPredicate) WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cp
 }
 
-// CompoundPredicateType wraps the corresponding Objective-C method.
+// CompoundPredicateType returns the compound predicate type.
 func (cp *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
 	_r := objc.Send[CompoundPredicateType](objref.IDOf(cp), objc.RegisterName("compoundPredicateType"))
 	return _r
 }
 
-// Subpredicates wraps the corresponding Objective-C method.
+// Subpredicates returns the subpredicates.
 func (cp *CompoundPredicate) Subpredicates() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("subpredicates"))
 	return obj.Wrap(_r)

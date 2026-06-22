@@ -107,7 +107,7 @@ func (a *Asset) ProvidesPreciseDurationAndTiming() bool {
 	return _r
 }
 
-// ReferenceRestrictions wraps the corresponding Objective-C method.
+// ReferenceRestrictions returns the reference restrictions.
 func (a *Asset) ReferenceRestrictions() AssetReferenceRestrictions {
 	_r := objc.Send[AssetReferenceRestrictions](objref.IDOf(a), objc.RegisterName("referenceRestrictions"))
 	return _r

@@ -80,7 +80,7 @@ func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host st
 	return uRLProtectionSpaceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ups *URLProtectionSpace) WithScriptingProperties(scriptingProperties obj.Object) *URLProtectionSpace {
 	objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ups
@@ -149,7 +149,7 @@ func (ups *URLProtectionSpace) AuthenticationMethod() string {
 	return purego.GoString(_r)
 }
 
-// DistinguishedNames wraps the corresponding Objective-C method.
+// DistinguishedNames returns the distinguished names.
 //
 // DistinguishedNames returns the collection as a Go slice.
 func (ups *URLProtectionSpace) DistinguishedNames() []*Data {
@@ -157,7 +157,7 @@ func (ups *URLProtectionSpace) DistinguishedNames() []*Data {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
-// ServerTrust wraps the corresponding Objective-C method.
+// ServerTrust returns the server trust.
 func (ups *URLProtectionSpace) ServerTrust() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ups), objc.RegisterName("serverTrust"))
 	return obj.Wrap(_r)

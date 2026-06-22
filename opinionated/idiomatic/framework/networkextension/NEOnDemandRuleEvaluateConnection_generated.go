@@ -93,7 +93,7 @@ func (nodrec *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *N
 	return nodrec
 }
 
-// ConnectionRules wraps the corresponding Objective-C method.
+// ConnectionRules returns the connection rules.
 //
 // ConnectionRules returns the collection as a Go slice.
 func (nodrec *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {

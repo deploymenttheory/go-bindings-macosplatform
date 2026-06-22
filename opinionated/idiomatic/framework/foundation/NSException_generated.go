@@ -73,7 +73,7 @@ func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo
 	return exceptionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (e *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return e
@@ -84,13 +84,13 @@ func (e *Exception) Raise() {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("raise"))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (e *Exception) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
-// Reason wraps the corresponding Objective-C method.
+// Reason returns the reason.
 func (e *Exception) Reason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("reason"))
 	if _r == 0 {
@@ -99,13 +99,13 @@ func (e *Exception) Reason() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (e *Exception) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// CallStackReturnAddresses wraps the corresponding Objective-C method.
+// CallStackReturnAddresses returns the call stack return addresses.
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (e *Exception) CallStackReturnAddresses() []*Number {
@@ -113,7 +113,7 @@ func (e *Exception) CallStackReturnAddresses() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// CallStackSymbols wraps the corresponding Objective-C method.
+// CallStackSymbols returns the call stack symbols.
 //
 // CallStackSymbols returns the collection as a Go slice.
 func (e *Exception) CallStackSymbols() []string {

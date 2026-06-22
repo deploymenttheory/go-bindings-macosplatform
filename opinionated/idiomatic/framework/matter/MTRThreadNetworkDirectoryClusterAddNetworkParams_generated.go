@@ -70,7 +70,7 @@ func NewMTRThreadNetworkDirectoryClusterAddNetworkParams() *MTRThreadNetworkDire
 	return mTRThreadNetworkDirectoryClusterAddNetworkParamsAdopt(_id)
 }
 
-// WithOperationalDataset sets the property and returns the receiver so calls can be chained.
+// WithOperationalDataset sets the operational dataset.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 	return mtndcanp
@@ -88,7 +88,7 @@ func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithServerSide
 	return mtndcanp
 }
 
-// OperationalDataset wraps the corresponding Objective-C method.
+// OperationalDataset returns the operational dataset.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) OperationalDataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("operationalDataset"))
 	return obj.Wrap(_r)

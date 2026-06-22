@@ -78,31 +78,31 @@ func NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseV
 	return mTRContentAppObserverClusterContentAppMessageResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithStatus(status obj.Object) *MTRContentAppObserverClusterContentAppMessageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mcaoccamrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mcaoccamrp
 }
 
-// WithEncodingHint sets the property and returns the receiver so calls can be chained.
+// WithEncodingHint sets the encoding hint.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
 	return mcaoccamrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("data"))
 	if _r == 0 {
@@ -111,7 +111,7 @@ func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) D
 	return purego.GoString(_r)
 }
 
-// EncodingHint wraps the corresponding Objective-C method.
+// EncodingHint returns the encoding hint.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("encodingHint"))
 	if _r == 0 {

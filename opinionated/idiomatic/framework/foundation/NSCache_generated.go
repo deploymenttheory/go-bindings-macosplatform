@@ -96,7 +96,7 @@ func (c *Cache) WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscarded
 	return c
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (c *Cache) WithScriptingProperties(scriptingProperties obj.Object) *Cache {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
@@ -128,7 +128,7 @@ func (c *Cache) RemoveAllObjects() {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeAllObjects"))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (c *Cache) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
@@ -137,13 +137,13 @@ func (c *Cache) Name() string {
 	return purego.GoString(_r)
 }
 
-// TotalCostLimit wraps the corresponding Objective-C method.
+// TotalCostLimit returns the total cost limit.
 func (c *Cache) TotalCostLimit() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("totalCostLimit"))
 	return _r
 }
 
-// CountLimit wraps the corresponding Objective-C method.
+// CountLimit returns the count limit.
 func (c *Cache) CountLimit() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("countLimit"))
 	return _r

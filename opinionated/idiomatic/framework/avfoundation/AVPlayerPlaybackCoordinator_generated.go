@@ -84,7 +84,7 @@ func (ppc *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordina
 	return nil
 }
 
-// PlaybackCoordinationMedium wraps the corresponding Objective-C method.
+// PlaybackCoordinationMedium returns the playback coordination medium.
 func (ppc *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("playbackCoordinationMedium"))
 	return PlaybackCoordinationMediumFromID(_r)

@@ -52,7 +52,7 @@ func NewCorrelationQuery() *CorrelationQuery {
 	return correlationQueryAdopt(_id)
 }
 
-// CorrelationType wraps the corresponding Objective-C method.
+// CorrelationType returns the correlation type.
 func (cq *CorrelationQuery) CorrelationType() *CorrelationType {
 	_r := objc.Send[objc.ID](objref.IDOf(cq), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)

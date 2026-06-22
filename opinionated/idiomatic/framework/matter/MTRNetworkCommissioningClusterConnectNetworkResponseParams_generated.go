@@ -78,19 +78,19 @@ func NewMTRNetworkCommissioningClusterConnectNetworkResponseParamsWithResponseVa
 	return mTRNetworkCommissioningClusterConnectNetworkResponseParamsAdopt(_id), nil
 }
 
-// WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
+// WithNetworkingStatus sets the networking status.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 	return mncccnrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return mncccnrp
 }
 
-// WithErrorValue sets the property and returns the receiver so calls can be chained.
+// WithErrorValue sets the error value.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) WithErrorValue(errorValue obj.Object) *MTRNetworkCommissioningClusterConnectNetworkResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("setErrorValue:"), objref.IDOf(errorValue))
 	return mncccnrp
@@ -102,13 +102,13 @@ func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) With
 	return mncccnrp
 }
 
-// NetworkingStatus wraps the corresponding Objective-C method.
+// NetworkingStatus returns the networking status.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) NetworkingStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("networkingStatus"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("debugText"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) Debu
 	return purego.GoString(_r)
 }
 
-// ErrorValue wraps the corresponding Objective-C method.
+// ErrorValue returns the error value.
 func (mncccnrp *MTRNetworkCommissioningClusterConnectNetworkResponseParams) ErrorValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mncccnrp), objc.RegisterName("errorValue"))
 	return obj.Wrap(_r)

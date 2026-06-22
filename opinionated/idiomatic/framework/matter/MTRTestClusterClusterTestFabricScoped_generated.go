@@ -50,43 +50,43 @@ func NewMTRTestClusterClusterTestFabricScoped() *MTRTestClusterClusterTestFabric
 	return mTRTestClusterClusterTestFabricScopedAdopt(_id)
 }
 
-// WithFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveInt8u sets the fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 	return mtcctfs
 }
 
-// WithOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithOptionalFabricSensitiveInt8u sets the optional fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 	return mtcctfs
 }
 
-// WithNullableFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithNullableFabricSensitiveInt8u sets the nullable fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 	return mtcctfs
 }
 
-// WithNullableOptionalFabricSensitiveInt8u sets the property and returns the receiver so calls can be chained.
+// WithNullableOptionalFabricSensitiveInt8u sets the nullable optional fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 	return mtcctfs
 }
 
-// WithFabricSensitiveCharString sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveCharString sets the fabric sensitive char string.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveCharString(fabricSensitiveCharString string) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveCharString:"), purego.NSString(fabricSensitiveCharString))
 	return mtcctfs
 }
 
-// WithFabricSensitiveStruct sets the property and returns the receiver so calls can be chained.
+// WithFabricSensitiveStruct sets the fabric sensitive struct.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 	return mtcctfs
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScoped {
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mtcctfs

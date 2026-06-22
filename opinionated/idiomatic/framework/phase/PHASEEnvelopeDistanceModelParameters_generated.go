@@ -58,7 +58,7 @@ func (edmp *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParame
 	return edmp
 }
 
-// Envelope wraps the corresponding Objective-C method.
+// Envelope returns the envelope.
 func (edmp *EnvelopeDistanceModelParameters) Envelope() *Envelope {
 	_r := objc.Send[objc.ID](objref.IDOf(edmp), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)

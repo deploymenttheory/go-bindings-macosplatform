@@ -57,7 +57,7 @@ func (hucir *HangUpCallIntentResponse) WithUserActivity(userActivity obj.Object)
 	return hucir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (hucir *HangUpCallIntentResponse) Code() HangUpCallIntentResponseCode {
 	_r := objc.Send[HangUpCallIntentResponseCode](objref.IDOf(hucir), objc.RegisterName("code"))
 	return _r

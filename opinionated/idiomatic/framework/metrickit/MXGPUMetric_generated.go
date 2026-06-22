@@ -52,7 +52,7 @@ func NewGPUMetric() *GPUMetric {
 	return gPUMetricAdopt(_id)
 }
 
-// CumulativeGPUTime wraps the corresponding Objective-C method.
+// CumulativeGPUTime returns the cumulative GPU time.
 func (gm *GPUMetric) CumulativeGPUTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gm), objc.RegisterName("cumulativeGPUTime"))
 	return obj.Wrap(_r)

@@ -88,13 +88,13 @@ func NewSamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
 	return samplerAdopt(_id)
 }
 
-// Definition wraps the corresponding Objective-C method.
+// Definition returns the definition.
 func (s *Sampler) Definition() *FilterShape {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("definition"))
 	return FilterShapeFromID(_r)
 }
 
-// Extent wraps the corresponding Objective-C method.
+// Extent returns the extent.
 func (s *Sampler) Extent() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("extent"))
 	return _r

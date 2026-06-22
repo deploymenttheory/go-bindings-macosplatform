@@ -134,13 +134,13 @@ func (trpd *TileRenderPipelineDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
-// RasterSampleCount wraps the corresponding Objective-C method.
+// RasterSampleCount returns the raster sample count.
 func (trpd *TileRenderPipelineDescriptor) RasterSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(trpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
-// ColorAttachments wraps the corresponding Objective-C method.
+// ColorAttachments returns the color attachments.
 func (trpd *TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("colorAttachments"))
 	return TileRenderPipelineColorAttachmentDescriptorArrayFromID(_r)
@@ -152,7 +152,7 @@ func (trpd *TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool 
 	return _r
 }
 
-// TileBuffers wraps the corresponding Objective-C method.
+// TileBuffers returns the tile buffers.
 func (trpd *TileRenderPipelineDescriptor) TileBuffers() *PipelineBufferDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(trpd), objc.RegisterName("tileBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)

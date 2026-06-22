@@ -50,13 +50,13 @@ func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClus
 	return mTRApplicationLauncherClusterApplicationEPAdopt(_id)
 }
 
-// WithApplication sets the property and returns the receiver so calls can be chained.
+// WithApplication sets the application.
 func (malcae *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
 	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcae
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (malcae *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP {
 	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return malcae

@@ -70,31 +70,31 @@ func NewMTRColorControlClusterEnhancedMoveToHueAndSaturationParams() *MTRColorCo
 	return mTRColorControlClusterEnhancedMoveToHueAndSaturationParamsAdopt(_id)
 }
 
-// WithEnhancedHue sets the property and returns the receiver so calls can be chained.
+// WithEnhancedHue sets the enhanced hue.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithEnhancedHue(enhancedHue obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setEnhancedHue:"), objref.IDOf(enhancedHue))
 	return mcccemthasp
 }
 
-// WithSaturation sets the property and returns the receiver so calls can be chained.
+// WithSaturation sets the saturation.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithSaturation(saturation obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setSaturation:"), objref.IDOf(saturation))
 	return mcccemthasp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccemthasp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccemthasp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams {
 	objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccemthasp
@@ -112,31 +112,31 @@ func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) W
 	return mcccemthasp
 }
 
-// EnhancedHue wraps the corresponding Objective-C method.
+// EnhancedHue returns the enhanced hue.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) EnhancedHue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("enhancedHue"))
 	return obj.Wrap(_r)
 }
 
-// Saturation wraps the corresponding Objective-C method.
+// Saturation returns the saturation.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) Saturation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("saturation"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccemthasp *MTRColorControlClusterEnhancedMoveToHueAndSaturationParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccemthasp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

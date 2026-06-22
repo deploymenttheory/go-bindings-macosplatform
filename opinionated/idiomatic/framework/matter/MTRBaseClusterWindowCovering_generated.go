@@ -61,7 +61,7 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterWindowCoveringAdopt(_id)
 }
 
-// ReadAttributeTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTypeWithCompletion reads attribute type with completion.
 //
 // ReadAttributeTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubsc
 	}
 }
 
-// ReadAttributePhysicalClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitLiftWithCompletion reads attribute physical closed limit lift with completion.
 //
 // ReadAttributePhysicalClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 	}
 }
 
-// ReadAttributePhysicalClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitTiltWithCompletion reads attribute physical closed limit tilt with completion.
 //
 // ReadAttributePhysicalClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 	}
 }
 
-// ReadAttributeCurrentPositionLiftWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftWithCompletion reads attribute current position lift with completion.
 //
 // ReadAttributeCurrentPositionLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTiltWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltWithCompletion reads attribute current position tilt with completion.
 //
 // ReadAttributeCurrentPositionTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeNumberOfActuationsLiftWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsLiftWithCompletion reads attribute number of actuations lift with completion.
 //
 // ReadAttributeNumberOfActuationsLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 	}
 }
 
-// ReadAttributeNumberOfActuationsTiltWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsTiltWithCompletion reads attribute number of actuations tilt with completion.
 //
 // ReadAttributeNumberOfActuationsTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 	}
 }
 
-// ReadAttributeConfigStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeConfigStatusWithCompletion reads attribute config status with completion.
 //
 // ReadAttributeConfigStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithPar
 	}
 }
 
-// ReadAttributeCurrentPositionLiftPercentageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercentageWithCompletion reads attribute current position lift percentage with completion.
 //
 // ReadAttributeCurrentPositionLiftPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTiltPercentageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercentageWithCompletion reads attribute current position tilt percentage with completion.
 //
 // ReadAttributeCurrentPositionTiltPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeOperationalStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStatusWithCompletion reads attribute operational status with completion.
 //
 // ReadAttributeOperationalStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 	}
 }
 
-// ReadAttributeTargetPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionLiftPercent100thsWithCompletion reads attribute target position lift percent100ths with completion.
 //
 // ReadAttributeTargetPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 	}
 }
 
-// ReadAttributeTargetPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionTiltPercent100thsWithCompletion reads attribute target position tilt percent100ths with completion.
 //
 // ReadAttributeTargetPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 	}
 }
 
-// ReadAttributeEndProductTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEndProductTypeWithCompletion reads attribute end product type with completion.
 //
 // ReadAttributeEndProductTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithP
 	}
 }
 
-// ReadAttributeCurrentPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercent100thsWithCompletion reads attribute current position lift percent100ths with completion.
 //
 // ReadAttributeCurrentPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercent100thsWithCompletion reads attribute current position tilt percent100ths with completion.
 //
 // ReadAttributeCurrentPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeInstalledOpenLimitLiftWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitLiftWithCompletion reads attribute installed open limit lift with completion.
 //
 // ReadAttributeInstalledOpenLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 	}
 }
 
-// ReadAttributeInstalledClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitLiftWithCompletion reads attribute installed closed limit lift with completion.
 //
 // ReadAttributeInstalledClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 	}
 }
 
-// ReadAttributeInstalledOpenLimitTiltWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitTiltWithCompletion reads attribute installed open limit tilt with completion.
 //
 // ReadAttributeInstalledOpenLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 	}
 }
 
-// ReadAttributeInstalledClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitTiltWithCompletion reads attribute installed closed limit tilt with completion.
 //
 // ReadAttributeInstalledClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 	}
 }
 
-// ReadAttributeModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeModeWithCompletion reads attribute mode with completion.
 //
 // ReadAttributeModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubsc
 	}
 }
 
-// ReadAttributeSafetyStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSafetyStatusWithCompletion reads attribute safety status with completion.
 //
 // ReadAttributeSafetyStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithPar
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithPa
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParam
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-// ReadAttributeType wraps the corresponding Objective-C method.
+// ReadAttributeType reads attribute type.
 //
 // ReadAttributeType blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinInterval
 	}
 }
 
-// ReadAttributePhysicalClosedLimitLift wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitLift reads attribute physical closed limit lift.
 //
 // ReadAttributePhysicalClosedLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 	}
 }
 
-// ReadAttributePhysicalClosedLimitTilt wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitTilt reads attribute physical closed limit tilt.
 //
 // ReadAttributePhysicalClosedLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 	}
 }
 
-// ReadAttributeCurrentPositionLift wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLift reads attribute current position lift.
 //
 // ReadAttributeCurrentPositionLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTilt wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTilt reads attribute current position tilt.
 //
 // ReadAttributeCurrentPositionTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeNumberOfActuationsLift wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsLift reads attribute number of actuations lift.
 //
 // ReadAttributeNumberOfActuationsLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 	}
 }
 
-// ReadAttributeNumberOfActuationsTilt wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsTilt reads attribute number of actuations tilt.
 //
 // ReadAttributeNumberOfActuationsTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 	}
 }
 
-// ReadAttributeConfigStatus wraps the corresponding Objective-C method.
+// ReadAttributeConfigStatus reads attribute config status.
 //
 // ReadAttributeConfigStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMin
 	}
 }
 
-// ReadAttributeCurrentPositionLiftPercentage wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercentage reads attribute current position lift percentage.
 //
 // ReadAttributeCurrentPositionLiftPercentage blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTiltPercentage wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercentage reads attribute current position tilt percentage.
 //
 // ReadAttributeCurrentPositionTiltPercentage blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeOperationalStatus wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStatus reads attribute operational status.
 //
 // ReadAttributeOperationalStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 	}
 }
 
-// ReadAttributeTargetPositionLiftPercent100ths wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionLiftPercent100ths reads attribute target position lift percent100ths.
 //
 // ReadAttributeTargetPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 	}
 }
 
-// ReadAttributeTargetPositionTiltPercent100ths wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionTiltPercent100ths reads attribute target position tilt percent100ths.
 //
 // ReadAttributeTargetPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 	}
 }
 
-// ReadAttributeEndProductType wraps the corresponding Objective-C method.
+// ReadAttributeEndProductType reads attribute end product type.
 //
 // ReadAttributeEndProductType blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithM
 	}
 }
 
-// ReadAttributeCurrentPositionLiftPercent100ths wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercent100ths reads attribute current position lift percent100ths.
 //
 // ReadAttributeCurrentPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 	}
 }
 
-// ReadAttributeCurrentPositionTiltPercent100ths wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercent100ths reads attribute current position tilt percent100ths.
 //
 // ReadAttributeCurrentPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 	}
 }
 
-// ReadAttributeInstalledOpenLimitLift wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitLift reads attribute installed open limit lift.
 //
 // ReadAttributeInstalledOpenLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 	}
 }
 
-// ReadAttributeInstalledClosedLimitLift wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitLift reads attribute installed closed limit lift.
 //
 // ReadAttributeInstalledClosedLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 	}
 }
 
-// ReadAttributeInstalledOpenLimitTilt wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitTilt reads attribute installed open limit tilt.
 //
 // ReadAttributeInstalledOpenLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 	}
 }
 
-// ReadAttributeInstalledClosedLimitTilt wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitTilt reads attribute installed closed limit tilt.
 //
 // ReadAttributeInstalledClosedLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 	}
 }
 
-// ReadAttributeMode wraps the corresponding Objective-C method.
+// ReadAttributeMode reads attribute mode.
 //
 // ReadAttributeMode blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinInterval
 	}
 }
 
-// ReadAttributeSafetyStatus wraps the corresponding Objective-C method.
+// ReadAttributeSafetyStatus reads attribute safety status.
 //
 // ReadAttributeSafetyStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMin
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMi
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIn
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

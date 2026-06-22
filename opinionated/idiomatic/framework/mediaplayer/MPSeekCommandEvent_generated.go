@@ -51,7 +51,7 @@ func NewSeekCommandEvent() *SeekCommandEvent {
 	return seekCommandEventAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (sce *SeekCommandEvent) Type() SeekCommandEventType {
 	_r := objc.Send[SeekCommandEventType](objref.IDOf(sce), objc.RegisterName("type"))
 	return _r

@@ -71,7 +71,7 @@ func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string
 	return plugInViewControllerAdopt(_id)
 }
 
-// PlugIn wraps the corresponding Objective-C method.
+// PlugIn returns the plug in.
 func (pivc *PlugInViewController) PlugIn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pivc), objc.RegisterName("plugIn"))
 	return obj.Wrap(_r)

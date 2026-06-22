@@ -143,7 +143,7 @@ func (dr *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *
 	return dr
 }
 
-// MerchantIdentifier wraps the corresponding Objective-C method.
+// MerchantIdentifier returns the merchant identifier.
 func (dr *DisbursementRequest) MerchantIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("merchantIdentifier"))
 	if _r == 0 {
@@ -152,7 +152,7 @@ func (dr *DisbursementRequest) MerchantIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// RegionCode wraps the corresponding Objective-C method.
+// RegionCode returns the region code.
 func (dr *DisbursementRequest) RegionCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("regionCode"))
 	if _r == 0 {
@@ -161,7 +161,7 @@ func (dr *DisbursementRequest) RegionCode() string {
 	return purego.GoString(_r)
 }
 
-// SupportedNetworks wraps the corresponding Objective-C method.
+// SupportedNetworks returns the supported networks.
 //
 // SupportedNetworks returns the collection as a Go slice.
 func (dr *DisbursementRequest) SupportedNetworks() []obj.Object {
@@ -169,13 +169,13 @@ func (dr *DisbursementRequest) SupportedNetworks() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// MerchantCapabilities wraps the corresponding Objective-C method.
+// MerchantCapabilities returns the merchant capabilities.
 func (dr *DisbursementRequest) MerchantCapabilities() MerchantCapability {
 	_r := objc.Send[MerchantCapability](objref.IDOf(dr), objc.RegisterName("merchantCapabilities"))
 	return _r
 }
 
-// SummaryItems wraps the corresponding Objective-C method.
+// SummaryItems returns the summary items.
 //
 // SummaryItems returns the collection as a Go slice.
 func (dr *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
@@ -183,7 +183,7 @@ func (dr *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
 
-// CurrencyCode wraps the corresponding Objective-C method.
+// CurrencyCode returns the currency code.
 func (dr *DisbursementRequest) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
@@ -192,7 +192,7 @@ func (dr *DisbursementRequest) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// RequiredRecipientContactFields wraps the corresponding Objective-C method.
+// RequiredRecipientContactFields returns the required recipient contact fields.
 //
 // RequiredRecipientContactFields returns the collection as a Go slice.
 func (dr *DisbursementRequest) RequiredRecipientContactFields() []obj.Object {
@@ -200,13 +200,13 @@ func (dr *DisbursementRequest) RequiredRecipientContactFields() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RecipientContact wraps the corresponding Objective-C method.
+// RecipientContact returns the recipient contact.
 func (dr *DisbursementRequest) RecipientContact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("recipientContact"))
 	return ContactFromID(_r)
 }
 
-// SupportedRegions wraps the corresponding Objective-C method.
+// SupportedRegions returns the supported regions.
 //
 // SupportedRegions returns the collection as a Go slice.
 func (dr *DisbursementRequest) SupportedRegions() []string {
@@ -214,7 +214,7 @@ func (dr *DisbursementRequest) SupportedRegions() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ApplicationData wraps the corresponding Objective-C method.
+// ApplicationData returns the application data.
 func (dr *DisbursementRequest) ApplicationData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("applicationData"))
 	return obj.Wrap(_r)

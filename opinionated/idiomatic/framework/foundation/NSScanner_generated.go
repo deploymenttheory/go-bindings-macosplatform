@@ -75,43 +75,43 @@ func NewScannerWithString(string_ string) *Scanner {
 	return scannerAdopt(_id)
 }
 
-// WithScanLocation sets the property and returns the receiver so calls can be chained.
+// WithScanLocation sets the scan location.
 func (s *Scanner) WithScanLocation(scanLocation int) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScanLocation:"), scanLocation)
 	return s
 }
 
-// WithCharactersToBeSkipped sets the property and returns the receiver so calls can be chained.
+// WithCharactersToBeSkipped sets the characters to be skipped.
 func (s *Scanner) WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
 	return s
 }
 
-// WithCaseSensitive sets the property and returns the receiver so calls can be chained.
+// WithCaseSensitive sets the case sensitive.
 func (s *Scanner) WithCaseSensitive(caseSensitive bool) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 	return s
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (s *Scanner) WithLocale(locale obj.Object) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return s
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (s *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return s
 }
 
-// ScanLocation wraps the corresponding Objective-C method.
+// ScanLocation returns the scan location.
 func (s *Scanner) ScanLocation() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("scanLocation"))
 	return _r
 }
 
-// CharactersToBeSkipped wraps the corresponding Objective-C method.
+// CharactersToBeSkipped returns the characters to be skipped.
 func (s *Scanner) CharactersToBeSkipped() *CharacterSet {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("charactersToBeSkipped"))
 	return CharacterSetFromID(_r)
@@ -123,7 +123,7 @@ func (s *Scanner) CaseSensitive() bool {
 	return _r
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (s *Scanner) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
@@ -223,7 +223,7 @@ func (s *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result 
 	return _r
 }
 
-// IsAtEnd wraps the corresponding Objective-C method.
+// IsAtEnd reports whether the object is at end.
 func (s *Scanner) IsAtEnd() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAtEnd"))
 	return _r

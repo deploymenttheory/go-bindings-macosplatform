@@ -102,7 +102,7 @@ func (lc *LayoutConstraint) WithIdentifier(identifier string) *LayoutConstraint 
 	return lc
 }
 
-// Priority wraps the corresponding Objective-C method.
+// Priority returns the priority.
 func (lc *LayoutConstraint) Priority() float32 {
 	_r := objc.Send[float32](objref.IDOf(lc), objc.RegisterName("priority"))
 	return _r
@@ -114,67 +114,67 @@ func (lc *LayoutConstraint) ShouldBeArchived() bool {
 	return _r
 }
 
-// FirstItem wraps the corresponding Objective-C method.
+// FirstItem returns the first item.
 func (lc *LayoutConstraint) FirstItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("firstItem"))
 	return obj.Wrap(_r)
 }
 
-// SecondItem wraps the corresponding Objective-C method.
+// SecondItem returns the second item.
 func (lc *LayoutConstraint) SecondItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("secondItem"))
 	return obj.Wrap(_r)
 }
 
-// FirstAttribute wraps the corresponding Objective-C method.
+// FirstAttribute returns the first attribute.
 func (lc *LayoutConstraint) FirstAttribute() LayoutAttribute {
 	_r := objc.Send[LayoutAttribute](objref.IDOf(lc), objc.RegisterName("firstAttribute"))
 	return _r
 }
 
-// SecondAttribute wraps the corresponding Objective-C method.
+// SecondAttribute returns the second attribute.
 func (lc *LayoutConstraint) SecondAttribute() LayoutAttribute {
 	_r := objc.Send[LayoutAttribute](objref.IDOf(lc), objc.RegisterName("secondAttribute"))
 	return _r
 }
 
-// FirstAnchor wraps the corresponding Objective-C method.
+// FirstAnchor returns the first anchor.
 func (lc *LayoutConstraint) FirstAnchor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("firstAnchor"))
 	return obj.Wrap(_r)
 }
 
-// SecondAnchor wraps the corresponding Objective-C method.
+// SecondAnchor returns the second anchor.
 func (lc *LayoutConstraint) SecondAnchor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("secondAnchor"))
 	return obj.Wrap(_r)
 }
 
-// Relation wraps the corresponding Objective-C method.
+// Relation returns the relation.
 func (lc *LayoutConstraint) Relation() LayoutRelation {
 	_r := objc.Send[LayoutRelation](objref.IDOf(lc), objc.RegisterName("relation"))
 	return _r
 }
 
-// Multiplier wraps the corresponding Objective-C method.
+// Multiplier returns the multiplier.
 func (lc *LayoutConstraint) Multiplier() float64 {
 	_r := objc.Send[float64](objref.IDOf(lc), objc.RegisterName("multiplier"))
 	return _r
 }
 
-// Constant wraps the corresponding Objective-C method.
+// Constant returns the constant.
 func (lc *LayoutConstraint) Constant() float64 {
 	_r := objc.Send[float64](objref.IDOf(lc), objc.RegisterName("constant"))
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (lc *LayoutConstraint) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(lc), objc.RegisterName("isActive"))
 	return _r
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (lc *LayoutConstraint) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("identifier"))
 	if _r == 0 {

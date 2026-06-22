@@ -124,25 +124,25 @@ func (rgr *RotationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEve
 	return rgr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (rgr *RotationGestureRecognizer) WithName(name string) *RotationGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setName:"), purego.NSString(name))
 	return rgr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (rgr *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RotationGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return rgr
 }
 
-// Rotation wraps the corresponding Objective-C method.
+// Rotation returns the rotation.
 func (rgr *RotationGestureRecognizer) Rotation() float64 {
 	_r := objc.Send[float64](objref.IDOf(rgr), objc.RegisterName("rotation"))
 	return _r
 }
 
-// RotationInDegrees wraps the corresponding Objective-C method.
+// RotationInDegrees returns the rotation in degrees.
 func (rgr *RotationGestureRecognizer) RotationInDegrees() float64 {
 	_r := objc.Send[float64](objref.IDOf(rgr), objc.RegisterName("rotationInDegrees"))
 	return _r

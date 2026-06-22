@@ -76,25 +76,25 @@ func (vns *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
 	return vns
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (vns *VoronoiNoiseSource) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("frequency"))
 	return _r
 }
 
-// Displacement wraps the corresponding Objective-C method.
+// Displacement returns the displacement.
 func (vns *VoronoiNoiseSource) Displacement() float64 {
 	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("displacement"))
 	return _r
 }
 
-// IsDistanceEnabled wraps the corresponding Objective-C method.
+// IsDistanceEnabled reports whether the object is distance enabled.
 func (vns *VoronoiNoiseSource) IsDistanceEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(vns), objc.RegisterName("isDistanceEnabled"))
 	return _r
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func (vns *VoronoiNoiseSource) Seed() int32 {
 	_r := objc.Send[int32](objref.IDOf(vns), objc.RegisterName("seed"))
 	return _r

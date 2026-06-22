@@ -49,13 +49,13 @@ func NewDOMProgressEvent() *DOMProgressEvent {
 	return dOMProgressEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (dpe *DOMProgressEvent) WithReturnValue(returnValue bool) *DOMProgressEvent {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setReturnValue:"), returnValue)
 	return dpe
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (dpe *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEvent {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return dpe
@@ -67,13 +67,13 @@ func (dpe *DOMProgressEvent) LengthComputable() bool {
 	return _r
 }
 
-// Loaded wraps the corresponding Objective-C method.
+// Loaded returns the loaded.
 func (dpe *DOMProgressEvent) Loaded() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("loaded"))
 	return _r
 }
 
-// Total wraps the corresponding Objective-C method.
+// Total returns the total.
 func (dpe *DOMProgressEvent) Total() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("total"))
 	return _r

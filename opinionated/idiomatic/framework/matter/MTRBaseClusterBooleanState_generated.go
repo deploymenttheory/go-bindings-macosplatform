@@ -61,7 +61,7 @@ func NewMTRBaseClusterBooleanStateWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterBooleanStateAdopt(_id)
 }
 
-// ReadAttributeStateValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStateValueWithCompletion reads attribute state value with completion.
 //
 // ReadAttributeStateValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeStateValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeStateValueWithParamsS
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeAttributeListWithPara
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeFeatureMapWithParamsS
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeClusterRevisionWithPa
 	}
 }
 
-// ReadAttributeStateValue wraps the corresponding Objective-C method.
+// ReadAttributeStateValue reads attribute state value.
 //
 // ReadAttributeStateValue blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeStateValue(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeStateValueWithMinInte
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeAttributeListWithMinI
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcbs *MTRBaseClusterBooleanState) SubscribeAttributeFeatureMapWithMinInte
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcbs *MTRBaseClusterBooleanState) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

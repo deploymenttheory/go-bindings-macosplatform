@@ -529,7 +529,7 @@ func (mbctc *MTRBaseClusterTestCluster) TestEmitTestFabricScopedEventRequestWith
 	}
 }
 
-// ReadAttributeBoolean wraps the corresponding Objective-C method.
+// ReadAttributeBoolean reads attribute boolean.
 //
 // ReadAttributeBoolean blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBoolean(ctx context.Context) (result obj.Object, err error) {
@@ -579,7 +579,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBooleanWithMinInterval
 	}
 }
 
-// ReadAttributeBitmap8 wraps the corresponding Objective-C method.
+// ReadAttributeBitmap8 reads attribute bitmap8.
 //
 // ReadAttributeBitmap8 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap8(ctx context.Context) (result obj.Object, err error) {
@@ -629,7 +629,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap8WithMinInterval
 	}
 }
 
-// ReadAttributeBitmap16 wraps the corresponding Objective-C method.
+// ReadAttributeBitmap16 reads attribute bitmap16.
 //
 // ReadAttributeBitmap16 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap16(ctx context.Context) (result obj.Object, err error) {
@@ -679,7 +679,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap16WithMinInterva
 	}
 }
 
-// ReadAttributeBitmap32 wraps the corresponding Objective-C method.
+// ReadAttributeBitmap32 reads attribute bitmap32.
 //
 // ReadAttributeBitmap32 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap32(ctx context.Context) (result obj.Object, err error) {
@@ -729,7 +729,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap32WithMinInterva
 	}
 }
 
-// ReadAttributeBitmap64 wraps the corresponding Objective-C method.
+// ReadAttributeBitmap64 reads attribute bitmap64.
 //
 // ReadAttributeBitmap64 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeBitmap64(ctx context.Context) (result obj.Object, err error) {
@@ -779,7 +779,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeBitmap64WithMinInterva
 	}
 }
 
-// ReadAttributeInt8u wraps the corresponding Objective-C method.
+// ReadAttributeInt8u reads attribute int8u.
 //
 // ReadAttributeInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -829,7 +829,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt8uWithMinIntervalMa
 	}
 }
 
-// ReadAttributeInt16u wraps the corresponding Objective-C method.
+// ReadAttributeInt16u reads attribute int16u.
 //
 // ReadAttributeInt16u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt16u(ctx context.Context) (result obj.Object, err error) {
@@ -879,7 +879,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt16uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt24u wraps the corresponding Objective-C method.
+// ReadAttributeInt24u reads attribute int24u.
 //
 // ReadAttributeInt24u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt24u(ctx context.Context) (result obj.Object, err error) {
@@ -929,7 +929,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt24uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt32u wraps the corresponding Objective-C method.
+// ReadAttributeInt32u reads attribute int32u.
 //
 // ReadAttributeInt32u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt32u(ctx context.Context) (result obj.Object, err error) {
@@ -979,7 +979,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt32uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt40u wraps the corresponding Objective-C method.
+// ReadAttributeInt40u reads attribute int40u.
 //
 // ReadAttributeInt40u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt40u(ctx context.Context) (result obj.Object, err error) {
@@ -1029,7 +1029,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt40uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt48u wraps the corresponding Objective-C method.
+// ReadAttributeInt48u reads attribute int48u.
 //
 // ReadAttributeInt48u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt48u(ctx context.Context) (result obj.Object, err error) {
@@ -1079,7 +1079,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt48uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt56u wraps the corresponding Objective-C method.
+// ReadAttributeInt56u reads attribute int56u.
 //
 // ReadAttributeInt56u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt56u(ctx context.Context) (result obj.Object, err error) {
@@ -1129,7 +1129,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt56uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt64u wraps the corresponding Objective-C method.
+// ReadAttributeInt64u reads attribute int64u.
 //
 // ReadAttributeInt64u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt64u(ctx context.Context) (result obj.Object, err error) {
@@ -1179,7 +1179,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt64uWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt8s wraps the corresponding Objective-C method.
+// ReadAttributeInt8s reads attribute int8s.
 //
 // ReadAttributeInt8s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt8s(ctx context.Context) (result obj.Object, err error) {
@@ -1229,7 +1229,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt8sWithMinIntervalMa
 	}
 }
 
-// ReadAttributeInt16s wraps the corresponding Objective-C method.
+// ReadAttributeInt16s reads attribute int16s.
 //
 // ReadAttributeInt16s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt16s(ctx context.Context) (result obj.Object, err error) {
@@ -1279,7 +1279,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt16sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt24s wraps the corresponding Objective-C method.
+// ReadAttributeInt24s reads attribute int24s.
 //
 // ReadAttributeInt24s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt24s(ctx context.Context) (result obj.Object, err error) {
@@ -1329,7 +1329,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt24sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt32s wraps the corresponding Objective-C method.
+// ReadAttributeInt32s reads attribute int32s.
 //
 // ReadAttributeInt32s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt32s(ctx context.Context) (result obj.Object, err error) {
@@ -1379,7 +1379,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt32sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt40s wraps the corresponding Objective-C method.
+// ReadAttributeInt40s reads attribute int40s.
 //
 // ReadAttributeInt40s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt40s(ctx context.Context) (result obj.Object, err error) {
@@ -1429,7 +1429,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt40sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt48s wraps the corresponding Objective-C method.
+// ReadAttributeInt48s reads attribute int48s.
 //
 // ReadAttributeInt48s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt48s(ctx context.Context) (result obj.Object, err error) {
@@ -1479,7 +1479,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt48sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt56s wraps the corresponding Objective-C method.
+// ReadAttributeInt56s reads attribute int56s.
 //
 // ReadAttributeInt56s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt56s(ctx context.Context) (result obj.Object, err error) {
@@ -1529,7 +1529,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt56sWithMinIntervalM
 	}
 }
 
-// ReadAttributeInt64s wraps the corresponding Objective-C method.
+// ReadAttributeInt64s reads attribute int64s.
 //
 // ReadAttributeInt64s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeInt64s(ctx context.Context) (result obj.Object, err error) {
@@ -1579,7 +1579,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeInt64sWithMinIntervalM
 	}
 }
 
-// ReadAttributeEnum8 wraps the corresponding Objective-C method.
+// ReadAttributeEnum8 reads attribute enum8.
 //
 // ReadAttributeEnum8 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnum8(ctx context.Context) (result obj.Object, err error) {
@@ -1629,7 +1629,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnum8WithMinIntervalMa
 	}
 }
 
-// ReadAttributeEnum16 wraps the corresponding Objective-C method.
+// ReadAttributeEnum16 reads attribute enum16.
 //
 // ReadAttributeEnum16 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnum16(ctx context.Context) (result obj.Object, err error) {
@@ -1679,7 +1679,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnum16WithMinIntervalM
 	}
 }
 
-// ReadAttributeFloatSingle wraps the corresponding Objective-C method.
+// ReadAttributeFloatSingle reads attribute float single.
 //
 // ReadAttributeFloatSingle blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFloatSingle(ctx context.Context) (result obj.Object, err error) {
@@ -1729,7 +1729,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFloatSingleWithMinInte
 	}
 }
 
-// ReadAttributeFloatDouble wraps the corresponding Objective-C method.
+// ReadAttributeFloatDouble reads attribute float double.
 //
 // ReadAttributeFloatDouble blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFloatDouble(ctx context.Context) (result obj.Object, err error) {
@@ -1779,7 +1779,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFloatDoubleWithMinInte
 	}
 }
 
-// ReadAttributeOctetString wraps the corresponding Objective-C method.
+// ReadAttributeOctetString reads attribute octet string.
 //
 // ReadAttributeOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -1829,7 +1829,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeOctetStringWithMinInte
 	}
 }
 
-// ReadAttributeListInt8u wraps the corresponding Objective-C method.
+// ReadAttributeListInt8u reads attribute list int8u.
 //
 // ReadAttributeListInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -1879,7 +1879,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListInt8uWithMinInterv
 	}
 }
 
-// ReadAttributeListOctetString wraps the corresponding Objective-C method.
+// ReadAttributeListOctetString reads attribute list octet string.
 //
 // ReadAttributeListOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -1929,7 +1929,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListOctetStringWithMin
 	}
 }
 
-// ReadAttributeListStructOctetString wraps the corresponding Objective-C method.
+// ReadAttributeListStructOctetString reads attribute list struct octet string.
 //
 // ReadAttributeListStructOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListStructOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -1979,7 +1979,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListStructOctetStringW
 	}
 }
 
-// ReadAttributeLongOctetString wraps the corresponding Objective-C method.
+// ReadAttributeLongOctetString reads attribute long octet string.
 //
 // ReadAttributeLongOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeLongOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -2029,7 +2029,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeLongOctetStringWithMin
 	}
 }
 
-// ReadAttributeCharString wraps the corresponding Objective-C method.
+// ReadAttributeCharString reads attribute char string.
 //
 // ReadAttributeCharString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeCharString(ctx context.Context) (result string, err error) {
@@ -2079,7 +2079,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeCharStringWithMinInter
 	}
 }
 
-// ReadAttributeLongCharString wraps the corresponding Objective-C method.
+// ReadAttributeLongCharString reads attribute long char string.
 //
 // ReadAttributeLongCharString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeLongCharString(ctx context.Context) (result string, err error) {
@@ -2129,7 +2129,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeLongCharStringWithMinI
 	}
 }
 
-// ReadAttributeEpochUs wraps the corresponding Objective-C method.
+// ReadAttributeEpochUs reads attribute epoch us.
 //
 // ReadAttributeEpochUs blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEpochUs(ctx context.Context) (result obj.Object, err error) {
@@ -2179,7 +2179,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEpochUsWithMinInterval
 	}
 }
 
-// ReadAttributeEpochS wraps the corresponding Objective-C method.
+// ReadAttributeEpochS reads attribute epoch s.
 //
 // ReadAttributeEpochS blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEpochS(ctx context.Context) (result obj.Object, err error) {
@@ -2229,7 +2229,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEpochSWithMinIntervalM
 	}
 }
 
-// ReadAttributeVendorID wraps the corresponding Objective-C method.
+// ReadAttributeVendorID reads attribute vendor ID.
 //
 // ReadAttributeVendorID blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeVendorID(ctx context.Context) (result obj.Object, err error) {
@@ -2279,7 +2279,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeVendorIDWithMinInterva
 	}
 }
 
-// ReadAttributeListNullablesAndOptionalsStruct wraps the corresponding Objective-C method.
+// ReadAttributeListNullablesAndOptionalsStruct reads attribute list nullables and optionals struct.
 //
 // ReadAttributeListNullablesAndOptionalsStruct blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListNullablesAndOptionalsStruct(ctx context.Context) (result obj.Object, err error) {
@@ -2329,7 +2329,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListNullablesAndOption
 	}
 }
 
-// ReadAttributeEnumAttr wraps the corresponding Objective-C method.
+// ReadAttributeEnumAttr reads attribute enum attr.
 //
 // ReadAttributeEnumAttr blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeEnumAttr(ctx context.Context) (result obj.Object, err error) {
@@ -2379,7 +2379,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeEnumAttrWithMinInterva
 	}
 }
 
-// ReadAttributeStructAttr wraps the corresponding Objective-C method.
+// ReadAttributeStructAttr reads attribute struct attr.
 //
 // ReadAttributeStructAttr blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeStructAttr(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
@@ -2429,7 +2429,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeStructAttrWithMinInter
 	}
 }
 
-// ReadAttributeRangeRestrictedInt8u wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt8u reads attribute range restricted int8u.
 //
 // ReadAttributeRangeRestrictedInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -2479,7 +2479,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8uWi
 	}
 }
 
-// ReadAttributeRangeRestrictedInt8s wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt8s reads attribute range restricted int8s.
 //
 // ReadAttributeRangeRestrictedInt8s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
@@ -2529,7 +2529,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt8sWi
 	}
 }
 
-// ReadAttributeRangeRestrictedInt16u wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt16u reads attribute range restricted int16u.
 //
 // ReadAttributeRangeRestrictedInt16u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
@@ -2579,7 +2579,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16uW
 	}
 }
 
-// ReadAttributeRangeRestrictedInt16s wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt16s reads attribute range restricted int16s.
 //
 // ReadAttributeRangeRestrictedInt16s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
@@ -2629,7 +2629,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeRangeRestrictedInt16sW
 	}
 }
 
-// ReadAttributeListLongOctetString wraps the corresponding Objective-C method.
+// ReadAttributeListLongOctetString reads attribute list long octet string.
 //
 // ReadAttributeListLongOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListLongOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -2679,7 +2679,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListLongOctetStringWit
 	}
 }
 
-// ReadAttributeListFabricScopedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeListFabricScopedWithParams reads attribute list fabric scoped with params.
 //
 // ReadAttributeListFabricScopedWithParams blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeListFabricScopedWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -2729,7 +2729,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeListFabricScopedWithMi
 	}
 }
 
-// ReadAttributeTimedWriteBoolean wraps the corresponding Objective-C method.
+// ReadAttributeTimedWriteBoolean reads attribute timed write boolean.
 //
 // ReadAttributeTimedWriteBoolean blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeTimedWriteBoolean(ctx context.Context) (result obj.Object, err error) {
@@ -2779,7 +2779,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeTimedWriteBooleanWithM
 	}
 }
 
-// ReadAttributeGeneralErrorBoolean wraps the corresponding Objective-C method.
+// ReadAttributeGeneralErrorBoolean reads attribute general error boolean.
 //
 // ReadAttributeGeneralErrorBoolean blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeGeneralErrorBoolean(ctx context.Context) (result obj.Object, err error) {
@@ -2829,7 +2829,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeGeneralErrorBooleanWit
 	}
 }
 
-// ReadAttributeClusterErrorBoolean wraps the corresponding Objective-C method.
+// ReadAttributeClusterErrorBoolean reads attribute cluster error boolean.
 //
 // ReadAttributeClusterErrorBoolean blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeClusterErrorBoolean(ctx context.Context) (result obj.Object, err error) {
@@ -2879,7 +2879,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeClusterErrorBooleanWit
 	}
 }
 
-// ReadAttributeUnsupported wraps the corresponding Objective-C method.
+// ReadAttributeUnsupported reads attribute unsupported.
 //
 // ReadAttributeUnsupported blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeUnsupported(ctx context.Context) (result obj.Object, err error) {
@@ -2929,7 +2929,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeUnsupportedWithMinInte
 	}
 }
 
-// ReadAttributeNullableBoolean wraps the corresponding Objective-C method.
+// ReadAttributeNullableBoolean reads attribute nullable boolean.
 //
 // ReadAttributeNullableBoolean blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBoolean(ctx context.Context) (result obj.Object, err error) {
@@ -2979,7 +2979,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBooleanWithMin
 	}
 }
 
-// ReadAttributeNullableBitmap8 wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap8 reads attribute nullable bitmap8.
 //
 // ReadAttributeNullableBitmap8 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap8(ctx context.Context) (result obj.Object, err error) {
@@ -3029,7 +3029,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap8WithMin
 	}
 }
 
-// ReadAttributeNullableBitmap16 wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap16 reads attribute nullable bitmap16.
 //
 // ReadAttributeNullableBitmap16 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap16(ctx context.Context) (result obj.Object, err error) {
@@ -3079,7 +3079,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap16WithMi
 	}
 }
 
-// ReadAttributeNullableBitmap32 wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap32 reads attribute nullable bitmap32.
 //
 // ReadAttributeNullableBitmap32 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap32(ctx context.Context) (result obj.Object, err error) {
@@ -3129,7 +3129,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap32WithMi
 	}
 }
 
-// ReadAttributeNullableBitmap64 wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap64 reads attribute nullable bitmap64.
 //
 // ReadAttributeNullableBitmap64 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableBitmap64(ctx context.Context) (result obj.Object, err error) {
@@ -3179,7 +3179,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableBitmap64WithMi
 	}
 }
 
-// ReadAttributeNullableInt8u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt8u reads attribute nullable int8u.
 //
 // ReadAttributeNullableInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -3229,7 +3229,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8uWithMinIn
 	}
 }
 
-// ReadAttributeNullableInt16u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt16u reads attribute nullable int16u.
 //
 // ReadAttributeNullableInt16u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt16u(ctx context.Context) (result obj.Object, err error) {
@@ -3279,7 +3279,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt24u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt24u reads attribute nullable int24u.
 //
 // ReadAttributeNullableInt24u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt24u(ctx context.Context) (result obj.Object, err error) {
@@ -3329,7 +3329,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt32u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt32u reads attribute nullable int32u.
 //
 // ReadAttributeNullableInt32u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt32u(ctx context.Context) (result obj.Object, err error) {
@@ -3379,7 +3379,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt40u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt40u reads attribute nullable int40u.
 //
 // ReadAttributeNullableInt40u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt40u(ctx context.Context) (result obj.Object, err error) {
@@ -3429,7 +3429,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt48u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt48u reads attribute nullable int48u.
 //
 // ReadAttributeNullableInt48u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt48u(ctx context.Context) (result obj.Object, err error) {
@@ -3479,7 +3479,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt56u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt56u reads attribute nullable int56u.
 //
 // ReadAttributeNullableInt56u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt56u(ctx context.Context) (result obj.Object, err error) {
@@ -3529,7 +3529,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt64u wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt64u reads attribute nullable int64u.
 //
 // ReadAttributeNullableInt64u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt64u(ctx context.Context) (result obj.Object, err error) {
@@ -3579,7 +3579,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64uWithMinI
 	}
 }
 
-// ReadAttributeNullableInt8s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt8s reads attribute nullable int8s.
 //
 // ReadAttributeNullableInt8s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt8s(ctx context.Context) (result obj.Object, err error) {
@@ -3629,7 +3629,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt8sWithMinIn
 	}
 }
 
-// ReadAttributeNullableInt16s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt16s reads attribute nullable int16s.
 //
 // ReadAttributeNullableInt16s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt16s(ctx context.Context) (result obj.Object, err error) {
@@ -3679,7 +3679,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt16sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt24s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt24s reads attribute nullable int24s.
 //
 // ReadAttributeNullableInt24s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt24s(ctx context.Context) (result obj.Object, err error) {
@@ -3729,7 +3729,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt24sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt32s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt32s reads attribute nullable int32s.
 //
 // ReadAttributeNullableInt32s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt32s(ctx context.Context) (result obj.Object, err error) {
@@ -3779,7 +3779,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt32sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt40s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt40s reads attribute nullable int40s.
 //
 // ReadAttributeNullableInt40s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt40s(ctx context.Context) (result obj.Object, err error) {
@@ -3829,7 +3829,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt40sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt48s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt48s reads attribute nullable int48s.
 //
 // ReadAttributeNullableInt48s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt48s(ctx context.Context) (result obj.Object, err error) {
@@ -3879,7 +3879,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt48sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt56s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt56s reads attribute nullable int56s.
 //
 // ReadAttributeNullableInt56s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt56s(ctx context.Context) (result obj.Object, err error) {
@@ -3929,7 +3929,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt56sWithMinI
 	}
 }
 
-// ReadAttributeNullableInt64s wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt64s reads attribute nullable int64s.
 //
 // ReadAttributeNullableInt64s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableInt64s(ctx context.Context) (result obj.Object, err error) {
@@ -3979,7 +3979,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableInt64sWithMinI
 	}
 }
 
-// ReadAttributeNullableEnum8 wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnum8 reads attribute nullable enum8.
 //
 // ReadAttributeNullableEnum8 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnum8(ctx context.Context) (result obj.Object, err error) {
@@ -4029,7 +4029,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum8WithMinIn
 	}
 }
 
-// ReadAttributeNullableEnum16 wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnum16 reads attribute nullable enum16.
 //
 // ReadAttributeNullableEnum16 blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnum16(ctx context.Context) (result obj.Object, err error) {
@@ -4079,7 +4079,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnum16WithMinI
 	}
 }
 
-// ReadAttributeNullableFloatSingle wraps the corresponding Objective-C method.
+// ReadAttributeNullableFloatSingle reads attribute nullable float single.
 //
 // ReadAttributeNullableFloatSingle blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableFloatSingle(ctx context.Context) (result obj.Object, err error) {
@@ -4129,7 +4129,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatSingleWit
 	}
 }
 
-// ReadAttributeNullableFloatDouble wraps the corresponding Objective-C method.
+// ReadAttributeNullableFloatDouble reads attribute nullable float double.
 //
 // ReadAttributeNullableFloatDouble blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableFloatDouble(ctx context.Context) (result obj.Object, err error) {
@@ -4179,7 +4179,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableFloatDoubleWit
 	}
 }
 
-// ReadAttributeNullableOctetString wraps the corresponding Objective-C method.
+// ReadAttributeNullableOctetString reads attribute nullable octet string.
 //
 // ReadAttributeNullableOctetString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableOctetString(ctx context.Context) (result obj.Object, err error) {
@@ -4229,7 +4229,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableOctetStringWit
 	}
 }
 
-// ReadAttributeNullableCharString wraps the corresponding Objective-C method.
+// ReadAttributeNullableCharString reads attribute nullable char string.
 //
 // ReadAttributeNullableCharString blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableCharString(ctx context.Context) (result string, err error) {
@@ -4279,7 +4279,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableCharStringWith
 	}
 }
 
-// ReadAttributeNullableEnumAttr wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnumAttr reads attribute nullable enum attr.
 //
 // ReadAttributeNullableEnumAttr blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableEnumAttr(ctx context.Context) (result obj.Object, err error) {
@@ -4329,7 +4329,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableEnumAttrWithMi
 	}
 }
 
-// ReadAttributeNullableStruct wraps the corresponding Objective-C method.
+// ReadAttributeNullableStruct reads attribute nullable struct.
 //
 // ReadAttributeNullableStruct blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableStruct(ctx context.Context) (result *MTRTestClusterClusterSimpleStruct, err error) {
@@ -4379,7 +4379,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableStructWithMinI
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt8u wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt8u reads attribute nullable range restricted int8u.
 //
 // ReadAttributeNullableRangeRestrictedInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -4429,7 +4429,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt8s wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt8s reads attribute nullable range restricted int8s.
 //
 // ReadAttributeNullableRangeRestrictedInt8s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt8s(ctx context.Context) (result obj.Object, err error) {
@@ -4479,7 +4479,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt16u wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt16u reads attribute nullable range restricted int16u.
 //
 // ReadAttributeNullableRangeRestrictedInt16u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16u(ctx context.Context) (result obj.Object, err error) {
@@ -4529,7 +4529,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt16s wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt16s reads attribute nullable range restricted int16s.
 //
 // ReadAttributeNullableRangeRestrictedInt16s blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeNullableRangeRestrictedInt16s(ctx context.Context) (result obj.Object, err error) {
@@ -4579,7 +4579,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeWriteOnlyInt8u wraps the corresponding Objective-C method.
+// ReadAttributeWriteOnlyInt8u reads attribute write only int8u.
 //
 // ReadAttributeWriteOnlyInt8u blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeWriteOnlyInt8u(ctx context.Context) (result obj.Object, err error) {
@@ -4629,7 +4629,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeWriteOnlyInt8uWithMinI
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -4679,7 +4679,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -4729,7 +4729,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -4779,7 +4779,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeAttributeListWithMinIn
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -4829,7 +4829,7 @@ func (mbctc *MTRBaseClusterTestCluster) SubscribeAttributeFeatureMapWithMinInter
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctc *MTRBaseClusterTestCluster) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

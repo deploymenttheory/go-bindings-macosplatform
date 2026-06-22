@@ -83,7 +83,7 @@ func (sa *SpringAnimation) WithInitialVelocity(initialVelocity float64) *SpringA
 	return sa
 }
 
-// WithAllowsOverdamping sets the property and returns the receiver so calls can be chained.
+// WithAllowsOverdamping sets the allows overdamping.
 func (sa *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *SpringAnimation {
 	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setAllowsOverdamping:"), allowsOverdamping)
 	return sa
@@ -143,19 +143,19 @@ func (sa *SpringAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Sp
 	return sa
 }
 
-// Mass wraps the corresponding Objective-C method.
+// Mass returns the mass.
 func (sa *SpringAnimation) Mass() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("mass"))
 	return _r
 }
 
-// Stiffness wraps the corresponding Objective-C method.
+// Stiffness returns the stiffness.
 func (sa *SpringAnimation) Stiffness() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("stiffness"))
 	return _r
 }
 
-// Damping wraps the corresponding Objective-C method.
+// Damping returns the damping.
 func (sa *SpringAnimation) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("damping"))
 	return _r
@@ -167,19 +167,19 @@ func (sa *SpringAnimation) AllowsOverdamping() bool {
 	return _r
 }
 
-// SettlingDuration wraps the corresponding Objective-C method.
+// SettlingDuration returns the settling duration.
 func (sa *SpringAnimation) SettlingDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("settlingDuration"))
 	return _r
 }
 
-// PerceptualDuration wraps the corresponding Objective-C method.
+// PerceptualDuration returns the perceptual duration.
 func (sa *SpringAnimation) PerceptualDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("perceptualDuration"))
 	return _r
 }
 
-// Bounce wraps the corresponding Objective-C method.
+// Bounce returns the bounce.
 func (sa *SpringAnimation) Bounce() float64 {
 	_r := objc.Send[float64](objref.IDOf(sa), objc.RegisterName("bounce"))
 	return _r

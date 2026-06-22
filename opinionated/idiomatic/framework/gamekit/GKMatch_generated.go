@@ -156,7 +156,7 @@ func (m *Match) VoiceChatWithName(name string) *VoiceChat {
 	return VoiceChatFromID(_r)
 }
 
-// Players wraps the corresponding Objective-C method.
+// Players returns the players.
 //
 // Players returns the collection as a Go slice.
 func (m *Match) Players() []*Player {
@@ -164,13 +164,13 @@ func (m *Match) Players() []*Player {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
-// ExpectedPlayerCount wraps the corresponding Objective-C method.
+// ExpectedPlayerCount returns the expected player count.
 func (m *Match) ExpectedPlayerCount() int {
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("expectedPlayerCount"))
 	return _r
 }
 
-// PlayerProperties wraps the corresponding Objective-C method.
+// PlayerProperties returns the player properties.
 func (m *Match) PlayerProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)
@@ -210,7 +210,7 @@ func (m *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []strin
 	return nil
 }
 
-// PlayerIDs wraps the corresponding Objective-C method.
+// PlayerIDs returns the player i ds.
 //
 // PlayerIDs returns the collection as a Go slice.
 func (m *Match) PlayerIDs() []string {

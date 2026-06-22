@@ -74,7 +74,7 @@ func (ir *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentRespo
 	return ir
 }
 
-// UserActivity wraps the corresponding Objective-C method.
+// UserActivity returns the user activity.
 func (ir *IntentResponse) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)

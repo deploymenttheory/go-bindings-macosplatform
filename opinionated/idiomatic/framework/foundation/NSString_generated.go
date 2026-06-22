@@ -235,7 +235,7 @@ func NewStringWithCString(bytes_ string) *String {
 	return stringAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (s *String) WithScriptingProperties(scriptingProperties obj.Object) *String {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return s
@@ -248,7 +248,7 @@ func (s *String) CharacterAtIndex(index int) uint16 {
 	return _r
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (s *String) Length() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("length"))
 	return _r
@@ -522,31 +522,31 @@ func (s *String) WriteToFileAtomicallyEncoding(path string, useAuxiliaryFile boo
 	return nil
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (s *String) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (s *String) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// IntValue wraps the corresponding Objective-C method.
+// IntValue returns the int value.
 func (s *String) IntValue() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("intValue"))
 	return _r
 }
 
-// IntegerValue wraps the corresponding Objective-C method.
+// IntegerValue returns the integer value.
 func (s *String) IntegerValue() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("integerValue"))
 	return _r
 }
 
-// LongLongValue wraps the corresponding Objective-C method.
+// LongLongValue returns the long long value.
 func (s *String) LongLongValue() int64 {
 	_r := objc.Send[int64](objref.IDOf(s), objc.RegisterName("longLongValue"))
 	return _r
@@ -558,7 +558,7 @@ func (s *String) BoolValue() bool {
 	return _r
 }
 
-// UppercaseString wraps the corresponding Objective-C method.
+// UppercaseString returns the uppercase string.
 func (s *String) UppercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("uppercaseString"))
 	if _r == 0 {
@@ -567,7 +567,7 @@ func (s *String) UppercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LowercaseString wraps the corresponding Objective-C method.
+// LowercaseString returns the lowercase string.
 func (s *String) LowercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("lowercaseString"))
 	if _r == 0 {
@@ -576,7 +576,7 @@ func (s *String) LowercaseString() string {
 	return purego.GoString(_r)
 }
 
-// CapitalizedString wraps the corresponding Objective-C method.
+// CapitalizedString returns the capitalized string.
 func (s *String) CapitalizedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("capitalizedString"))
 	if _r == 0 {
@@ -585,7 +585,7 @@ func (s *String) CapitalizedString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedUppercaseString wraps the corresponding Objective-C method.
+// LocalizedUppercaseString returns the localized uppercase string.
 func (s *String) LocalizedUppercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedUppercaseString"))
 	if _r == 0 {
@@ -594,7 +594,7 @@ func (s *String) LocalizedUppercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedLowercaseString wraps the corresponding Objective-C method.
+// LocalizedLowercaseString returns the localized lowercase string.
 func (s *String) LocalizedLowercaseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedLowercaseString"))
 	if _r == 0 {
@@ -603,7 +603,7 @@ func (s *String) LocalizedLowercaseString() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedCapitalizedString wraps the corresponding Objective-C method.
+// LocalizedCapitalizedString returns the localized capitalized string.
 func (s *String) LocalizedCapitalizedString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedCapitalizedString"))
 	if _r == 0 {
@@ -612,19 +612,19 @@ func (s *String) LocalizedCapitalizedString() string {
 	return purego.GoString(_r)
 }
 
-// FastestEncoding wraps the corresponding Objective-C method.
+// FastestEncoding returns the fastest encoding.
 func (s *String) FastestEncoding() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("fastestEncoding"))
 	return _r
 }
 
-// SmallestEncoding wraps the corresponding Objective-C method.
+// SmallestEncoding returns the smallest encoding.
 func (s *String) SmallestEncoding() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("smallestEncoding"))
 	return _r
 }
 
-// DecomposedStringWithCanonicalMapping wraps the corresponding Objective-C method.
+// DecomposedStringWithCanonicalMapping returns the decomposed string with canonical mapping.
 func (s *String) DecomposedStringWithCanonicalMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decomposedStringWithCanonicalMapping"))
 	if _r == 0 {
@@ -633,7 +633,7 @@ func (s *String) DecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
-// PrecomposedStringWithCanonicalMapping wraps the corresponding Objective-C method.
+// PrecomposedStringWithCanonicalMapping returns the precomposed string with canonical mapping.
 func (s *String) PrecomposedStringWithCanonicalMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("precomposedStringWithCanonicalMapping"))
 	if _r == 0 {
@@ -642,7 +642,7 @@ func (s *String) PrecomposedStringWithCanonicalMapping() string {
 	return purego.GoString(_r)
 }
 
-// DecomposedStringWithCompatibilityMapping wraps the corresponding Objective-C method.
+// DecomposedStringWithCompatibilityMapping returns the decomposed string with compatibility mapping.
 func (s *String) DecomposedStringWithCompatibilityMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("decomposedStringWithCompatibilityMapping"))
 	if _r == 0 {
@@ -651,7 +651,7 @@ func (s *String) DecomposedStringWithCompatibilityMapping() string {
 	return purego.GoString(_r)
 }
 
-// PrecomposedStringWithCompatibilityMapping wraps the corresponding Objective-C method.
+// PrecomposedStringWithCompatibilityMapping returns the precomposed string with compatibility mapping.
 func (s *String) PrecomposedStringWithCompatibilityMapping() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("precomposedStringWithCompatibilityMapping"))
 	if _r == 0 {
@@ -764,7 +764,7 @@ func (s *String) GetFileSystemRepresentationMaxLength(cname string, max int) boo
 	return _r
 }
 
-// PathComponents wraps the corresponding Objective-C method.
+// PathComponents returns the path components.
 //
 // PathComponents returns the collection as a Go slice.
 func (s *String) PathComponents() []string {
@@ -772,13 +772,13 @@ func (s *String) PathComponents() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsAbsolutePath wraps the corresponding Objective-C method.
+// IsAbsolutePath reports whether the object is absolute path.
 func (s *String) IsAbsolutePath() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAbsolutePath"))
 	return _r
 }
 
-// LastPathComponent wraps the corresponding Objective-C method.
+// LastPathComponent returns the last path component.
 func (s *String) LastPathComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("lastPathComponent"))
 	if _r == 0 {
@@ -787,7 +787,7 @@ func (s *String) LastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// StringByDeletingLastPathComponent wraps the corresponding Objective-C method.
+// StringByDeletingLastPathComponent returns the string by deleting last path component.
 func (s *String) StringByDeletingLastPathComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByDeletingLastPathComponent"))
 	if _r == 0 {
@@ -796,7 +796,7 @@ func (s *String) StringByDeletingLastPathComponent() string {
 	return purego.GoString(_r)
 }
 
-// PathExtension wraps the corresponding Objective-C method.
+// PathExtension returns the path extension.
 func (s *String) PathExtension() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("pathExtension"))
 	if _r == 0 {
@@ -805,7 +805,7 @@ func (s *String) PathExtension() string {
 	return purego.GoString(_r)
 }
 
-// StringByDeletingPathExtension wraps the corresponding Objective-C method.
+// StringByDeletingPathExtension returns the string by deleting path extension.
 func (s *String) StringByDeletingPathExtension() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByDeletingPathExtension"))
 	if _r == 0 {
@@ -814,7 +814,7 @@ func (s *String) StringByDeletingPathExtension() string {
 	return purego.GoString(_r)
 }
 
-// StringByAbbreviatingWithTildeInPath wraps the corresponding Objective-C method.
+// StringByAbbreviatingWithTildeInPath returns the string by abbreviating with tilde in path.
 func (s *String) StringByAbbreviatingWithTildeInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByAbbreviatingWithTildeInPath"))
 	if _r == 0 {
@@ -823,7 +823,7 @@ func (s *String) StringByAbbreviatingWithTildeInPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByExpandingTildeInPath wraps the corresponding Objective-C method.
+// StringByExpandingTildeInPath returns the string by expanding tilde in path.
 func (s *String) StringByExpandingTildeInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByExpandingTildeInPath"))
 	if _r == 0 {
@@ -832,7 +832,7 @@ func (s *String) StringByExpandingTildeInPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByStandardizingPath wraps the corresponding Objective-C method.
+// StringByStandardizingPath returns the string by standardizing path.
 func (s *String) StringByStandardizingPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByStandardizingPath"))
 	if _r == 0 {
@@ -841,7 +841,7 @@ func (s *String) StringByStandardizingPath() string {
 	return purego.GoString(_r)
 }
 
-// StringByResolvingSymlinksInPath wraps the corresponding Objective-C method.
+// StringByResolvingSymlinksInPath returns the string by resolving symlinks in path.
 func (s *String) StringByResolvingSymlinksInPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByResolvingSymlinksInPath"))
 	if _r == 0 {
@@ -877,7 +877,7 @@ func (s *String) StringByReplacingPercentEscapesUsingEncoding(enc int) string {
 	return purego.GoString(_r)
 }
 
-// StringByRemovingPercentEncoding wraps the corresponding Objective-C method.
+// StringByRemovingPercentEncoding returns the string by removing percent encoding.
 func (s *String) StringByRemovingPercentEncoding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stringByRemovingPercentEncoding"))
 	if _r == 0 {

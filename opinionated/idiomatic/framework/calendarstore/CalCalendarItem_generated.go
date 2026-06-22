@@ -66,69 +66,69 @@ func (cci *CalCalendarItem) String() string {
 	return rt.Description(objref.IDOf(cci))
 }
 
-// WithCalendar sets the property and returns the receiver so calls can be chained.
+// WithCalendar sets the calendar.
 func (cci *CalCalendarItem) WithCalendar(calendar *CalCalendar) *CalCalendarItem {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return cci
 }
 
-// WithNotes sets the property and returns the receiver so calls can be chained.
+// WithNotes sets the notes.
 func (cci *CalCalendarItem) WithNotes(notes string) *CalCalendarItem {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return cci
 }
 
-// WithURL sets the property and returns the receiver so calls can be chained.
+// WithURL sets the URL.
 func (cci *CalCalendarItem) WithURL(url string) *CalCalendarItem {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return cci
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (cci *CalCalendarItem) WithTitle(title string) *CalCalendarItem {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return cci
 }
 
-// HasAlarm wraps the corresponding Objective-C method.
+// HasAlarm reports whether the object has alarm.
 func (cci *CalCalendarItem) HasAlarm() bool {
 	_r := objc.Send[bool](objref.IDOf(cci), objc.RegisterName("hasAlarm"))
 	return _r
 }
 
-// NextAlarmDate wraps the corresponding Objective-C method.
+// NextAlarmDate returns the next alarm date.
 func (cci *CalCalendarItem) NextAlarmDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("nextAlarmDate"))
 	return obj.Wrap(_r)
 }
 
-// AddAlarm wraps the corresponding Objective-C method.
+// AddAlarm adds alarm.
 func (cci *CalCalendarItem) AddAlarm(alarm *CalAlarm) {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("addAlarm:"), objref.IDOf(alarm))
 }
 
-// AddAlarms wraps the corresponding Objective-C method.
+// AddAlarms adds alarms.
 func (cci *CalCalendarItem) AddAlarms(alarms obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("addAlarms:"), objref.IDOf(alarms))
 }
 
-// RemoveAlarm wraps the corresponding Objective-C method.
+// RemoveAlarm removes alarm.
 func (cci *CalCalendarItem) RemoveAlarm(alarm *CalAlarm) {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("removeAlarm:"), objref.IDOf(alarm))
 }
 
-// RemoveAlarms wraps the corresponding Objective-C method.
+// RemoveAlarms removes alarms.
 func (cci *CalCalendarItem) RemoveAlarms(alarms obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("removeAlarms:"), objref.IDOf(alarms))
 }
 
-// Calendar wraps the corresponding Objective-C method.
+// Calendar returns the calendar.
 func (cci *CalCalendarItem) Calendar() *CalCalendar {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("calendar"))
 	return CalCalendarFromID(_r)
 }
 
-// Notes wraps the corresponding Objective-C method.
+// Notes returns the notes.
 func (cci *CalCalendarItem) Notes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("notes"))
 	if _r == 0 {
@@ -137,13 +137,13 @@ func (cci *CalCalendarItem) Notes() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (cci *CalCalendarItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (cci *CalCalendarItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("title"))
 	if _r == 0 {
@@ -152,7 +152,7 @@ func (cci *CalCalendarItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// UID wraps the corresponding Objective-C method.
+// UID returns the UID.
 func (cci *CalCalendarItem) UID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("uid"))
 	if _r == 0 {
@@ -161,13 +161,13 @@ func (cci *CalCalendarItem) UID() string {
 	return purego.GoString(_r)
 }
 
-// DateStamp wraps the corresponding Objective-C method.
+// DateStamp returns the date stamp.
 func (cci *CalCalendarItem) DateStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("dateStamp"))
 	return obj.Wrap(_r)
 }
 
-// Alarms wraps the corresponding Objective-C method.
+// Alarms returns the alarms.
 func (cci *CalCalendarItem) Alarms() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cci), objc.RegisterName("alarms"))
 	return obj.Wrap(_r)

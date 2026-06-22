@@ -73,7 +73,7 @@ func NewNotificationQueueWithNotificationCenter(notificationCenter *Notification
 	return notificationQueueAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (nq *NotificationQueue) WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue {
 	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return nq

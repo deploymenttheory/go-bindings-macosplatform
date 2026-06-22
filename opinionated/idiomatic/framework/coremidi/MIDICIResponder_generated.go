@@ -95,7 +95,7 @@ func (cr *CIResponder) Stop() {
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("stop"))
 }
 
-// DeviceInfo wraps the corresponding Objective-C method.
+// DeviceInfo returns the device info.
 func (cr *CIResponder) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)

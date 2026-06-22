@@ -26,7 +26,7 @@ func MTLAccelerationStructureMotionBoundingBoxGeometryDescriptorDescriptor() *Ac
 	return AccelerationStructureMotionBoundingBoxGeometryDescriptorFromID(_r)
 }
 
-// MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor wraps the corresponding Objective-C method.
+// MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor returns the mtl acceleration structure motion curve geometry descriptor descriptor.
 func MTLAccelerationStructureMotionCurveGeometryDescriptorDescriptor() *AccelerationStructureMotionCurveGeometryDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureMotionCurveGeometryDescriptor")), objc.RegisterName("descriptor"))
 	return AccelerationStructureMotionCurveGeometryDescriptorFromID(_r)
@@ -80,7 +80,7 @@ func MTLFunctionDescriptorFunctionDescriptor() *FunctionDescriptor {
 	return FunctionDescriptorFromID(_r)
 }
 
-// MTLIndirectInstanceAccelerationStructureDescriptorDescriptor wraps the corresponding Objective-C method.
+// MTLIndirectInstanceAccelerationStructureDescriptorDescriptor returns the mtl indirect instance acceleration structure descriptor descriptor.
 func MTLIndirectInstanceAccelerationStructureDescriptorDescriptor() *IndirectInstanceAccelerationStructureDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLIndirectInstanceAccelerationStructureDescriptor")), objc.RegisterName("descriptor"))
 	return IndirectInstanceAccelerationStructureDescriptorFromID(_r)
@@ -128,13 +128,13 @@ func MTLResourceStatePassDescriptorResourceStatePassDescriptor() *ResourceStateP
 	return ResourceStatePassDescriptorFromID(_r)
 }
 
-// SharedListener wraps the corresponding Objective-C method.
+// SharedListener returns the shared listener.
 func SharedListener() *SharedEventListener {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("sharedListener"))
 	return SharedEventListenerFromID(_r)
 }
 
-// MTLStageInputOutputDescriptorStageInputOutputDescriptor wraps the corresponding Objective-C method.
+// MTLStageInputOutputDescriptorStageInputOutputDescriptor returns the mtl stage input output descriptor stage input output descriptor.
 func MTLStageInputOutputDescriptorStageInputOutputDescriptor() *StageInputOutputDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTLStageInputOutputDescriptor")), objc.RegisterName("stageInputOutputDescriptor"))
 	return StageInputOutputDescriptorFromID(_r)

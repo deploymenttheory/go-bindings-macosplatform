@@ -72,13 +72,13 @@ func NewVisit() *Visit {
 	return visitAdopt(_id)
 }
 
-// ArrivalDate wraps the corresponding Objective-C method.
+// ArrivalDate returns the arrival date.
 func (v_ *Visit) ArrivalDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("arrivalDate"))
 	return obj.Wrap(_r)
 }
 
-// DepartureDate wraps the corresponding Objective-C method.
+// DepartureDate returns the departure date.
 func (v_ *Visit) DepartureDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("departureDate"))
 	return obj.Wrap(_r)

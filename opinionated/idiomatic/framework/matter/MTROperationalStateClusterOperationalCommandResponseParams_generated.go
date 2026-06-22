@@ -78,13 +78,13 @@ func NewMTROperationalStateClusterOperationalCommandResponseParamsWithResponseVa
 	return mTROperationalStateClusterOperationalCommandResponseParamsAdopt(_id), nil
 }
 
-// WithCommandResponseState sets the property and returns the receiver so calls can be chained.
+// WithCommandResponseState sets the command response state.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalCommandResponseParams {
 	objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 	return moscocrp
 }
 
-// CommandResponseState wraps the corresponding Objective-C method.
+// CommandResponseState returns the command response state.
 func (moscocrp *MTROperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROperationalStateClusterErrorStateStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("commandResponseState"))
 	return MTROperationalStateClusterErrorStateStructFromID(_r)

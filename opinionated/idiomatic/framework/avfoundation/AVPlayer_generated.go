@@ -324,7 +324,7 @@ func (p *Player) AppliesMediaSelectionCriteriaAutomatically() bool {
 	return _r
 }
 
-// AudioOutputDeviceUniqueID wraps the corresponding Objective-C method.
+// AudioOutputDeviceUniqueID returns the audio output device unique ID.
 func (p *Player) AudioOutputDeviceUniqueID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("audioOutputDeviceUniqueID"))
 	if _r == 0 {
@@ -351,7 +351,7 @@ func (p *Player) OutputObscuredDueToInsufficientExternalProtection() bool {
 	return _r
 }
 
-// PreferredVideoDecoderGPURegistryID wraps the corresponding Objective-C method.
+// PreferredVideoDecoderGPURegistryID returns the preferred video decoder GPU registry ID.
 func (p *Player) PreferredVideoDecoderGPURegistryID() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(p), objc.RegisterName("preferredVideoDecoderGPURegistryID"))
 	return _r
@@ -363,7 +363,7 @@ func (p *Player) PreventsDisplaySleepDuringVideoPlayback() bool {
 	return _r
 }
 
-// AudiovisualBackgroundPlaybackPolicy wraps the corresponding Objective-C method.
+// AudiovisualBackgroundPlaybackPolicy returns the audiovisual background playback policy.
 func (p *Player) AudiovisualBackgroundPlaybackPolicy() PlayerAudiovisualBackgroundPlaybackPolicy {
 	_r := objc.Send[PlayerAudiovisualBackgroundPlaybackPolicy](objref.IDOf(p), objc.RegisterName("audiovisualBackgroundPlaybackPolicy"))
 	return _r
@@ -375,13 +375,13 @@ func (p *Player) PlaybackCoordinator() *PlayerPlaybackCoordinator {
 	return PlayerPlaybackCoordinatorFromID(_r)
 }
 
-// VideoOutput wraps the corresponding Objective-C method.
+// VideoOutput returns the video output.
 func (p *Player) VideoOutput() *PlayerVideoOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("videoOutput"))
 	return PlayerVideoOutputFromID(_r)
 }
 
-// NetworkResourcePriority wraps the corresponding Objective-C method.
+// NetworkResourcePriority returns the network resource priority.
 func (p *Player) NetworkResourcePriority() PlayerNetworkResourcePriority {
 	_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(p), objc.RegisterName("networkResourcePriority"))
 	return _r

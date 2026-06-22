@@ -70,25 +70,25 @@ func NewPathControlItem() *PathControlItem {
 	return pathControlItemAdopt(_id)
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (pci *PathControlItem) WithTitle(title string) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return pci
 }
 
-// WithAttributedTitle sets the property and returns the receiver so calls can be chained.
+// WithAttributedTitle sets the attributed title.
 func (pci *PathControlItem) WithAttributedTitle(attributedTitle obj.Object) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return pci
 }
 
-// WithImage sets the property and returns the receiver so calls can be chained.
+// WithImage sets the image.
 func (pci *PathControlItem) WithImage(image *Image) *PathControlItem {
 	objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return pci
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (pci *PathControlItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("title"))
 	if _r == 0 {
@@ -97,19 +97,19 @@ func (pci *PathControlItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (pci *PathControlItem) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (pci *PathControlItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (pci *PathControlItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

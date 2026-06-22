@@ -43,25 +43,25 @@ func dOMTextAdopt(id objc.ID) *DOMText {
 	return x
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (dt *DOMText) WithData(data string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setData:"), purego.NSString(data))
 	return dt
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dt *DOMText) WithNodeValue(nodeValue string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dt
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dt *DOMText) WithPrefix(prefix string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dt
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dt *DOMText) WithTextContent(textContent string) *DOMText {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dt
@@ -73,13 +73,13 @@ func (dt *DOMText) SplitText(offset int) *DOMText {
 	return DOMTextFromID(_r)
 }
 
-// ReplaceWholeText wraps the corresponding Objective-C method.
+// ReplaceWholeText replaces whole text.
 func (dt *DOMText) ReplaceWholeText(content string) *DOMText {
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
 	return DOMTextFromID(_r)
 }
 
-// WholeText wraps the corresponding Objective-C method.
+// WholeText returns the whole text.
 func (dt *DOMText) WholeText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("wholeText"))
 	if _r == 0 {

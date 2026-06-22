@@ -66,33 +66,33 @@ func (mdcfp *MTRDeviceControllerFactoryParams) String() string {
 	return rt.Description(objref.IDOf(mdcfp))
 }
 
-// WithProductAttestationAuthorityCertificates sets the property and returns the receiver so calls can be chained.
+// WithProductAttestationAuthorityCertificates sets the product attestation authority certificates.
 func (mdcfp *MTRDeviceControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
 	return mdcfp
 }
 
-// WithCertificationDeclarationCertificates sets the property and returns the receiver so calls can be chained.
+// WithCertificationDeclarationCertificates sets the certification declaration certificates.
 func (mdcfp *MTRDeviceControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
 	return mdcfp
 }
 
-// WithPort sets the property and returns the receiver so calls can be chained.
+// WithPort sets the port.
 func (mdcfp *MTRDeviceControllerFactoryParams) WithPort(port obj.Object) *MTRDeviceControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return mdcfp
 }
 
-// WithShouldStartServer sets the property and returns the receiver so calls can be chained.
+// WithShouldStartServer sets the should start server.
 func (mdcfp *MTRDeviceControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRDeviceControllerFactoryParams {
 	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
 	return mdcfp
 }
 
-// ProductAttestationAuthorityCertificates wraps the corresponding Objective-C method.
+// ProductAttestationAuthorityCertificates returns the product attestation authority certificates.
 //
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (mdcfp *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() []obj.Object {
@@ -100,7 +100,7 @@ func (mdcfp *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertif
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CertificationDeclarationCertificates wraps the corresponding Objective-C method.
+// CertificationDeclarationCertificates returns the certification declaration certificates.
 //
 // CertificationDeclarationCertificates returns the collection as a Go slice.
 func (mdcfp *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates() []obj.Object {
@@ -108,7 +108,7 @@ func (mdcfp *MTRDeviceControllerFactoryParams) CertificationDeclarationCertifica
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (mdcfp *MTRDeviceControllerFactoryParams) Port() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("port"))
 	return obj.Wrap(_r)

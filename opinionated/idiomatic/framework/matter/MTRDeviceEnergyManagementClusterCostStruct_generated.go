@@ -70,49 +70,49 @@ func NewMTRDeviceEnergyManagementClusterCostStruct() *MTRDeviceEnergyManagementC
 	return mTRDeviceEnergyManagementClusterCostStructAdopt(_id)
 }
 
-// WithCostType sets the property and returns the receiver so calls can be chained.
+// WithCostType sets the cost type.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCostType(costType obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCostType:"), objref.IDOf(costType))
 	return mdemccs
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithValue(value obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mdemccs
 }
 
-// WithDecimalPoints sets the property and returns the receiver so calls can be chained.
+// WithDecimalPoints sets the decimal points.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithDecimalPoints(decimalPoints obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setDecimalPoints:"), objref.IDOf(decimalPoints))
 	return mdemccs
 }
 
-// WithCurrency sets the property and returns the receiver so calls can be chained.
+// WithCurrency sets the currency.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency obj.Object) *MTRDeviceEnergyManagementClusterCostStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setCurrency:"), objref.IDOf(currency))
 	return mdemccs
 }
 
-// CostType wraps the corresponding Objective-C method.
+// CostType returns the cost type.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) CostType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("costType"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// DecimalPoints wraps the corresponding Objective-C method.
+// DecimalPoints returns the decimal points.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("decimalPoints"))
 	return obj.Wrap(_r)
 }
 
-// Currency wraps the corresponding Objective-C method.
+// Currency returns the currency.
 func (mdemccs *MTRDeviceEnergyManagementClusterCostStruct) Currency() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("currency"))
 	return obj.Wrap(_r)

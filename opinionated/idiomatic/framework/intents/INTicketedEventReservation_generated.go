@@ -61,13 +61,13 @@ func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeRes
 	return ticketedEventReservationAdopt(_id)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func (ter *TicketedEventReservation) Event() *TicketedEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("event"))
 	return TicketedEventFromID(_r)
 }
 
-// ReservedSeat wraps the corresponding Objective-C method.
+// ReservedSeat returns the reserved seat.
 func (ter *TicketedEventReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(ter), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)

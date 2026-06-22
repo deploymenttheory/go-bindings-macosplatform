@@ -70,19 +70,19 @@ func NewMTRActionsClusterInstantActionWithTransitionParams() *MTRActionsClusterI
 	return mTRActionsClusterInstantActionWithTransitionParamsAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithActionID(actionID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
 	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return maciawtp
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
 	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return maciawtp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithTransitionTime(transitionTime obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
 	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return maciawtp
@@ -100,19 +100,19 @@ func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithServerSi
 	return maciawtp
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)

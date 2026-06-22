@@ -50,37 +50,37 @@ func NewMTRGeneralDiagnosticsClusterNetworkInterfaceType() *MTRGeneralDiagnostic
 	return mTRGeneralDiagnosticsClusterNetworkInterfaceTypeAdopt(_id)
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setName:"), purego.NSString(name))
 	return mgdcnit
 }
 
-// WithIsOperational sets the property and returns the receiver so calls can be chained.
+// WithIsOperational sets the is operational.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
 	return mgdcnit
 }
 
-// WithOffPremiseServicesReachableIPv4 sets the property and returns the receiver so calls can be chained.
+// WithOffPremiseServicesReachableIPv4 sets the off premise services reachable i pv4.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
 	return mgdcnit
 }
 
-// WithOffPremiseServicesReachableIPv6 sets the property and returns the receiver so calls can be chained.
+// WithOffPremiseServicesReachableIPv6 sets the off premise services reachable i pv6.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
 	return mgdcnit
 }
 
-// WithHardwareAddress sets the property and returns the receiver so calls can be chained.
+// WithHardwareAddress sets the hardware address.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
 	return mgdcnit
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mgdcnit

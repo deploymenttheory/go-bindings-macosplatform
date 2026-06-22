@@ -61,7 +61,7 @@ func NewMTRBaseClusterApplicationBasicWithDeviceEndpointQueue(device *MTRBaseDev
 	return mTRBaseClusterApplicationBasicAdopt(_id)
 }
 
-// ReadAttributeVendorNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorNameWithCompletion reads attribute vendor name with completion.
 //
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeVendorNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -111,7 +111,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeVendorNameWithPar
 	}
 }
 
-// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithCompletion reads attribute vendor ID with completion.
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeVendorIDWithParam
 	}
 }
 
-// ReadAttributeApplicationNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApplicationNameWithCompletion reads attribute application name with completion.
 //
 // ReadAttributeApplicationNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplicationNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -211,7 +211,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationNameWi
 	}
 }
 
-// ReadAttributeProductIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductIDWithCompletion reads attribute product ID with completion.
 //
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeProductIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeProductIDWithPara
 	}
 }
 
-// ReadAttributeApplicationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApplicationWithCompletion reads attribute application with completion.
 //
 // ReadAttributeApplicationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplicationWithCompletion(ctx context.Context) (result *MTRApplicationBasicClusterApplicationStruct, err error) {
@@ -311,7 +311,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationWithPa
 	}
 }
 
-// ReadAttributeStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStatusWithCompletion reads attribute status with completion.
 //
 // ReadAttributeStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeStatusWithParamsS
 	}
 }
 
-// ReadAttributeApplicationVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeApplicationVersionWithCompletion reads attribute application version with completion.
 //
 // ReadAttributeApplicationVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplicationVersionWithCompletion(ctx context.Context) (result string, err error) {
@@ -411,7 +411,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationVersio
 	}
 }
 
-// ReadAttributeAllowedVendorListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAllowedVendorListWithCompletion reads attribute allowed vendor list with completion.
 //
 // ReadAttributeAllowedVendorListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAllowedVendorListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAllowedVendorList
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-// ReadAttributeVendorName wraps the corresponding Objective-C method.
+// ReadAttributeVendorName reads attribute vendor name.
 //
 // ReadAttributeVendorName blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeVendorName(ctx context.Context) (result string, err error) {
@@ -761,7 +761,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeVendorNameWithMin
 	}
 }
 
-// ReadAttributeVendorID wraps the corresponding Objective-C method.
+// ReadAttributeVendorID reads attribute vendor ID.
 //
 // ReadAttributeVendorID blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeVendorID(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeVendorIDWithMinIn
 	}
 }
 
-// ReadAttributeApplicationName wraps the corresponding Objective-C method.
+// ReadAttributeApplicationName reads attribute application name.
 //
 // ReadAttributeApplicationName blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplicationName(ctx context.Context) (result string, err error) {
@@ -861,7 +861,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationNameWi
 	}
 }
 
-// ReadAttributeProductID wraps the corresponding Objective-C method.
+// ReadAttributeProductID reads attribute product ID.
 //
 // ReadAttributeProductID blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeProductID(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeProductIDWithMinI
 	}
 }
 
-// ReadAttributeApplication wraps the corresponding Objective-C method.
+// ReadAttributeApplication reads attribute application.
 //
 // ReadAttributeApplication blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplication(ctx context.Context) (result *MTRApplicationBasicClusterApplicationBasicApplication, err error) {
@@ -961,7 +961,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationWithMi
 	}
 }
 
-// ReadAttributeStatus wraps the corresponding Objective-C method.
+// ReadAttributeStatus reads attribute status.
 //
 // ReadAttributeStatus blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeStatusWithMinInte
 	}
 }
 
-// ReadAttributeApplicationVersion wraps the corresponding Objective-C method.
+// ReadAttributeApplicationVersion reads attribute application version.
 //
 // ReadAttributeApplicationVersion blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeApplicationVersion(ctx context.Context) (result string, err error) {
@@ -1061,7 +1061,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeApplicationVersio
 	}
 }
 
-// ReadAttributeAllowedVendorList wraps the corresponding Objective-C method.
+// ReadAttributeAllowedVendorList reads attribute allowed vendor list.
 //
 // ReadAttributeAllowedVendorList blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAllowedVendorList(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAllowedVendorList
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcab *MTRBaseClusterApplicationBasic) SubscribeAttributeFeatureMapWithMin
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcab *MTRBaseClusterApplicationBasic) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

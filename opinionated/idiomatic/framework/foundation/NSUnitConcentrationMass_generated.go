@@ -52,7 +52,7 @@ func NewUnitConcentrationMass() *UnitConcentrationMass {
 	return unitConcentrationMassAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ucm *UnitConcentrationMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitConcentrationMass {
 	objc.Send[objc.ID](objref.IDOf(ucm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ucm

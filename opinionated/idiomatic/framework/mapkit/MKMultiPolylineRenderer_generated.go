@@ -108,7 +108,7 @@ func (mpr *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRendere
 	return mpr
 }
 
-// MultiPolyline wraps the corresponding Objective-C method.
+// MultiPolyline returns the multi polyline.
 func (mpr *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
 	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolyline"))
 	return MultiPolylineFromID(_r)

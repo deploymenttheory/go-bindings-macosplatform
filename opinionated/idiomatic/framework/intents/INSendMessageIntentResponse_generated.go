@@ -59,13 +59,13 @@ func (smir *SendMessageIntentResponse) WithUserActivity(userActivity obj.Object)
 	return smir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (smir *SendMessageIntentResponse) Code() SendMessageIntentResponseCode {
 	_r := objc.Send[SendMessageIntentResponseCode](objref.IDOf(smir), objc.RegisterName("code"))
 	return _r
 }
 
-// SentMessages wraps the corresponding Objective-C method.
+// SentMessages returns the sent messages.
 func (smir *SendMessageIntentResponse) SentMessages() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(smir), objc.RegisterName("sentMessages"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -79,7 +79,7 @@ func (cl *ConditionLock) WithName(name StringProvider) *ConditionLock {
 	return cl
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cl *ConditionLock) WithScriptingProperties(scriptingProperties obj.Object) *ConditionLock {
 	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cl
@@ -119,13 +119,13 @@ func (cl *ConditionLock) LockWhenConditionBeforeDate(condition int, limit *Date)
 	return _r
 }
 
-// Condition wraps the corresponding Objective-C method.
+// Condition returns the condition.
 func (cl *ConditionLock) Condition() int {
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("condition"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (cl *ConditionLock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("name"))
 	if _r == 0 {

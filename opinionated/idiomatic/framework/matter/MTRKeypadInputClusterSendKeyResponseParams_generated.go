@@ -78,7 +78,7 @@ func NewMTRKeypadInputClusterSendKeyResponseParamsWithResponseValueError(respons
 	return mTRKeypadInputClusterSendKeyResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mkicskrp *MTRKeypadInputClusterSendKeyResponseParams) WithStatus(status obj.Object) *MTRKeypadInputClusterSendKeyResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mkicskrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mkicskrp
@@ -90,7 +90,7 @@ func (mkicskrp *MTRKeypadInputClusterSendKeyResponseParams) WithTimedInvokeTimeo
 	return mkicskrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mkicskrp *MTRKeypadInputClusterSendKeyResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mkicskrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)

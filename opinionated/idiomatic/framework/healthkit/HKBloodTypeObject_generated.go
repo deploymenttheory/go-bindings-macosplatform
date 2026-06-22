@@ -72,7 +72,7 @@ func NewBloodTypeObject() *BloodTypeObject {
 	return bloodTypeObjectAdopt(_id)
 }
 
-// BloodType wraps the corresponding Objective-C method.
+// BloodType returns the blood type.
 func (bto *BloodTypeObject) BloodType() BloodType {
 	_r := objc.Send[BloodType](objref.IDOf(bto), objc.RegisterName("bloodType"))
 	return _r

@@ -140,7 +140,7 @@ func (em *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolic
 	return em
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (em *EntityMapping) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("name"))
 	if _r == 0 {
@@ -149,13 +149,13 @@ func (em *EntityMapping) Name() string {
 	return purego.GoString(_r)
 }
 
-// MappingType wraps the corresponding Objective-C method.
+// MappingType returns the mapping type.
 func (em *EntityMapping) MappingType() EntityMappingType {
 	_r := objc.Send[EntityMappingType](objref.IDOf(em), objc.RegisterName("mappingType"))
 	return _r
 }
 
-// SourceEntityName wraps the corresponding Objective-C method.
+// SourceEntityName returns the source entity name.
 func (em *EntityMapping) SourceEntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityName"))
 	if _r == 0 {
@@ -164,13 +164,13 @@ func (em *EntityMapping) SourceEntityName() string {
 	return purego.GoString(_r)
 }
 
-// SourceEntityVersionHash wraps the corresponding Objective-C method.
+// SourceEntityVersionHash returns the source entity version hash.
 func (em *EntityMapping) SourceEntityVersionHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityVersionHash"))
 	return obj.Wrap(_r)
 }
 
-// DestinationEntityName wraps the corresponding Objective-C method.
+// DestinationEntityName returns the destination entity name.
 func (em *EntityMapping) DestinationEntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityName"))
 	if _r == 0 {
@@ -179,13 +179,13 @@ func (em *EntityMapping) DestinationEntityName() string {
 	return purego.GoString(_r)
 }
 
-// DestinationEntityVersionHash wraps the corresponding Objective-C method.
+// DestinationEntityVersionHash returns the destination entity version hash.
 func (em *EntityMapping) DestinationEntityVersionHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityVersionHash"))
 	return obj.Wrap(_r)
 }
 
-// AttributeMappings wraps the corresponding Objective-C method.
+// AttributeMappings returns the attribute mappings.
 //
 // AttributeMappings returns the collection as a Go slice.
 func (em *EntityMapping) AttributeMappings() []*PropertyMapping {
@@ -193,7 +193,7 @@ func (em *EntityMapping) AttributeMappings() []*PropertyMapping {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
 }
 
-// RelationshipMappings wraps the corresponding Objective-C method.
+// RelationshipMappings returns the relationship mappings.
 //
 // RelationshipMappings returns the collection as a Go slice.
 func (em *EntityMapping) RelationshipMappings() []*PropertyMapping {
@@ -201,19 +201,19 @@ func (em *EntityMapping) RelationshipMappings() []*PropertyMapping {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
 }
 
-// SourceExpression wraps the corresponding Objective-C method.
+// SourceExpression returns the source expression.
 func (em *EntityMapping) SourceExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceExpression"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (em *EntityMapping) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// EntityMigrationPolicyClassName wraps the corresponding Objective-C method.
+// EntityMigrationPolicyClassName returns the entity migration policy class name.
 func (em *EntityMapping) EntityMigrationPolicyClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("entityMigrationPolicyClassName"))
 	if _r == 0 {

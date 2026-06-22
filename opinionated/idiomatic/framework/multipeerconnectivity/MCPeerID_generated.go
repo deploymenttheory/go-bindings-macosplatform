@@ -73,7 +73,7 @@ func NewPeerIDWithDisplayName(myDisplayName string) *PeerID {
 	return peerIDAdopt(_id)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (pi *PeerID) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("displayName"))
 	if _r == 0 {

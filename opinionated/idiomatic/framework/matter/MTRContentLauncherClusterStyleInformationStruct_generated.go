@@ -66,25 +66,25 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) String() string 
 	return rt.Description(objref.IDOf(mclcsis))
 }
 
-// WithImageURL sets the property and returns the receiver so calls can be chained.
+// WithImageURL sets the image URL.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
 	return mclcsis
 }
 
-// WithColor sets the property and returns the receiver so calls can be chained.
+// WithColor sets the color.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) WithColor(color string) *MTRContentLauncherClusterStyleInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("setColor:"), purego.NSString(color))
 	return mclcsis
 }
 
-// WithSize sets the property and returns the receiver so calls can be chained.
+// WithSize sets the size.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformationStruct {
 	objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("setSize:"), objref.IDOf(size))
 	return mclcsis
 }
 
-// ImageURL wraps the corresponding Objective-C method.
+// ImageURL returns the image URL.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) ImageURL() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("imageURL"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) ImageURL() strin
 	return purego.GoString(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Color() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("color"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Color() string {
 	return purego.GoString(_r)
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (mclcsis *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mclcsis), objc.RegisterName("size"))
 	return MTRContentLauncherClusterDimensionStructFromID(_r)

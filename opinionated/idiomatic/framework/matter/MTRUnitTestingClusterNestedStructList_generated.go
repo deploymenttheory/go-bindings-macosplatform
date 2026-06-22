@@ -66,43 +66,43 @@ func (mutcnsl *MTRUnitTestingClusterNestedStructList) String() string {
 	return rt.Description(objref.IDOf(mutcnsl))
 }
 
-// WithA sets the property and returns the receiver so calls can be chained.
+// WithA sets the a.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithA(a obj.Object) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mutcnsl
 }
 
-// WithB sets the property and returns the receiver so calls can be chained.
+// WithB sets the b.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithB(b obj.Object) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mutcnsl
 }
 
-// WithC sets the property and returns the receiver so calls can be chained.
+// WithC sets the c.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNestedStructList {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mutcnsl
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) A() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
-// B wraps the corresponding Objective-C method.
+// B returns the b.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) B() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("b"))
 	return obj.Wrap(_r)
 }
 
-// C wraps the corresponding Objective-C method.
+// C returns the c.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) C() *MTRUnitTestingClusterSimpleStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("c"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// D wraps the corresponding Objective-C method.
+// D returns the d.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) D() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("d"))
 	return obj.Wrap(_r)
@@ -113,7 +113,7 @@ func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetD(d obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setD:"), objref.IDOf(d))
 }
 
-// E wraps the corresponding Objective-C method.
+// E returns the e.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) E() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("e"))
 	return obj.Wrap(_r)
@@ -124,7 +124,7 @@ func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetE(e obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setE:"), objref.IDOf(e))
 }
 
-// F wraps the corresponding Objective-C method.
+// F returns the f.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) F() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("f"))
 	return obj.Wrap(_r)
@@ -135,7 +135,7 @@ func (mutcnsl *MTRUnitTestingClusterNestedStructList) SetF(f obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("setF:"), objref.IDOf(f))
 }
 
-// G wraps the corresponding Objective-C method.
+// G returns the g.
 func (mutcnsl *MTRUnitTestingClusterNestedStructList) G() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcnsl), objc.RegisterName("g"))
 	return obj.Wrap(_r)

@@ -52,7 +52,7 @@ func NewUnitInformationStorage() *UnitInformationStorage {
 	return unitInformationStorageAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uis *UnitInformationStorage) WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage {
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uis

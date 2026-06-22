@@ -90,13 +90,13 @@ func (hccsm *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame ui
 	return nil
 }
 
-// ControllerState wraps the corresponding Objective-C method.
+// ControllerState returns the controller state.
 func (hccsm *HostCIControllerStateMachine) ControllerState() HostCIControllerState {
 	_r := objc.Send[HostCIControllerState](objref.IDOf(hccsm), objc.RegisterName("controllerState"))
 	return _r
 }
 
-// ControllerInterface wraps the corresponding Objective-C method.
+// ControllerInterface returns the controller interface.
 func (hccsm *HostCIControllerStateMachine) ControllerInterface() *HostControllerInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(hccsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)

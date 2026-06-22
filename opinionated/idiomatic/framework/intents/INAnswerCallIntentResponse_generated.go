@@ -51,7 +51,7 @@ func NewAnswerCallIntentResponseWithCodeUserActivity(code AnswerCallIntentRespon
 	return answerCallIntentResponseAdopt(_id)
 }
 
-// WithCallRecords sets the property and returns the receiver so calls can be chained.
+// WithCallRecords sets the call records.
 func (acir *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse {
 	_arr := purego.SliceToNSArray(items, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("setCallRecords:"), _arr)
@@ -64,13 +64,13 @@ func (acir *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) 
 	return acir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (acir *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
 	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(acir), objc.RegisterName("code"))
 	return _r
 }
 
-// CallRecords wraps the corresponding Objective-C method.
+// CallRecords returns the call records.
 //
 // CallRecords returns the collection as a Go slice.
 func (acir *AnswerCallIntentResponse) CallRecords() []*CallRecord {

@@ -76,25 +76,25 @@ func (mne *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
 	return mne
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mne *MIDINoteEvent) Channel() int {
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("channel"))
 	return _r
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (mne *MIDINoteEvent) Key() int {
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("key"))
 	return _r
 }
 
-// Velocity wraps the corresponding Objective-C method.
+// Velocity returns the velocity.
 func (mne *MIDINoteEvent) Velocity() int {
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("velocity"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mne *MIDINoteEvent) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(mne), objc.RegisterName("duration"))
 	return _r

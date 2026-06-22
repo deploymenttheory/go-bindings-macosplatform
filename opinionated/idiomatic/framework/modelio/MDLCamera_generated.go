@@ -165,7 +165,7 @@ func (c *Camera) WithHidden(hidden bool) *Camera {
 	return c
 }
 
-// Projection wraps the corresponding Objective-C method.
+// Projection returns the projection.
 func (c *Camera) Projection() CameraProjection {
 	_r := objc.Send[CameraProjection](objref.IDOf(c), objc.RegisterName("projection"))
 	return _r
@@ -177,7 +177,7 @@ func (c *Camera) NearVisibilityDistance() float32 {
 	return _r
 }
 
-// FarVisibilityDistance wraps the corresponding Objective-C method.
+// FarVisibilityDistance returns the far visibility distance.
 func (c *Camera) FarVisibilityDistance() float32 {
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("farVisibilityDistance"))
 	return _r

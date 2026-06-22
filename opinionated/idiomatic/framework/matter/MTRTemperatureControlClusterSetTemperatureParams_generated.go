@@ -70,13 +70,13 @@ func NewMTRTemperatureControlClusterSetTemperatureParams() *MTRTemperatureContro
 	return mTRTemperatureControlClusterSetTemperatureParamsAdopt(_id)
 }
 
-// WithTargetTemperature sets the property and returns the receiver so calls can be chained.
+// WithTargetTemperature sets the target temperature.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperature(targetTemperature obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperature:"), objref.IDOf(targetTemperature))
 	return mtccstp
 }
 
-// WithTargetTemperatureLevel sets the property and returns the receiver so calls can be chained.
+// WithTargetTemperatureLevel sets the target temperature level.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperatureLevel(targetTemperatureLevel obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperatureLevel:"), objref.IDOf(targetTemperatureLevel))
 	return mtccstp
@@ -94,13 +94,13 @@ func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithServerSideP
 	return mtccstp
 }
 
-// TargetTemperature wraps the corresponding Objective-C method.
+// TargetTemperature returns the target temperature.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperature"))
 	return obj.Wrap(_r)
 }
 
-// TargetTemperatureLevel wraps the corresponding Objective-C method.
+// TargetTemperatureLevel returns the target temperature level.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperatureLevel"))
 	return obj.Wrap(_r)

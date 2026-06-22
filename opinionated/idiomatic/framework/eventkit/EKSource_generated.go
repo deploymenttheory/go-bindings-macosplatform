@@ -58,7 +58,7 @@ func (s *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SourceIdentifier wraps the corresponding Objective-C method.
+// SourceIdentifier returns the source identifier.
 func (s *Source) SourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sourceIdentifier"))
 	if _r == 0 {
@@ -67,13 +67,13 @@ func (s *Source) SourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// SourceType wraps the corresponding Objective-C method.
+// SourceType returns the source type.
 func (s *Source) SourceType() SourceType {
 	_r := objc.Send[SourceType](objref.IDOf(s), objc.RegisterName("sourceType"))
 	return _r
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (s *Source) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {

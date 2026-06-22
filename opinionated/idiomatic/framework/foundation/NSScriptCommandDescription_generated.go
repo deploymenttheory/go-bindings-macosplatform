@@ -80,7 +80,7 @@ func NewScriptCommandDescriptionWithCoder(inCoder *Coder) *ScriptCommandDescript
 	return scriptCommandDescriptionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (scd *ScriptCommandDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription {
 	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return scd
@@ -113,7 +113,7 @@ func (scd *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
 	return ScriptCommandFromID(_r)
 }
 
-// SuiteName wraps the corresponding Objective-C method.
+// SuiteName returns the suite name.
 func (scd *ScriptCommandDescription) SuiteName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
 	if _r == 0 {
@@ -122,7 +122,7 @@ func (scd *ScriptCommandDescription) SuiteName() string {
 	return purego.GoString(_r)
 }
 
-// CommandName wraps the corresponding Objective-C method.
+// CommandName returns the command name.
 func (scd *ScriptCommandDescription) CommandName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandName"))
 	if _r == 0 {
@@ -131,19 +131,19 @@ func (scd *ScriptCommandDescription) CommandName() string {
 	return purego.GoString(_r)
 }
 
-// AppleEventClassCode wraps the corresponding Objective-C method.
+// AppleEventClassCode returns the apple event class code.
 func (scd *ScriptCommandDescription) AppleEventClassCode() int {
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventClassCode"))
 	return _r
 }
 
-// AppleEventCode wraps the corresponding Objective-C method.
+// AppleEventCode returns the apple event code.
 func (scd *ScriptCommandDescription) AppleEventCode() int {
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
-// CommandClassName wraps the corresponding Objective-C method.
+// CommandClassName returns the command class name.
 func (scd *ScriptCommandDescription) CommandClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandClassName"))
 	if _r == 0 {
@@ -152,7 +152,7 @@ func (scd *ScriptCommandDescription) CommandClassName() string {
 	return purego.GoString(_r)
 }
 
-// ReturnType wraps the corresponding Objective-C method.
+// ReturnType returns the return type.
 func (scd *ScriptCommandDescription) ReturnType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("returnType"))
 	if _r == 0 {
@@ -161,13 +161,13 @@ func (scd *ScriptCommandDescription) ReturnType() string {
 	return purego.GoString(_r)
 }
 
-// AppleEventCodeForReturnType wraps the corresponding Objective-C method.
+// AppleEventCodeForReturnType returns the apple event code for return type.
 func (scd *ScriptCommandDescription) AppleEventCodeForReturnType() int {
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForReturnType"))
 	return _r
 }
 
-// ArgumentNames wraps the corresponding Objective-C method.
+// ArgumentNames returns the argument names.
 //
 // ArgumentNames returns the collection as a Go slice.
 func (scd *ScriptCommandDescription) ArgumentNames() []string {

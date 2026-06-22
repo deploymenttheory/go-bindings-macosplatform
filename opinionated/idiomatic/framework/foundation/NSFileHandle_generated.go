@@ -90,19 +90,19 @@ func NewFileHandleWithFileDescriptor(fd int) *FileHandle {
 	return fileHandleAdopt(_id)
 }
 
-// WithReadabilityHandler sets the property and returns the receiver so calls can be chained.
+// WithReadabilityHandler sets the readability handler.
 func (fh *FileHandle) WithReadabilityHandler(readabilityHandler func(obj.Object)) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setReadabilityHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { readabilityHandler(obj.Wrap(_b0)) }))
 	return fh
 }
 
-// WithWriteabilityHandler sets the property and returns the receiver so calls can be chained.
+// WithWriteabilityHandler sets the writeability handler.
 func (fh *FileHandle) WithWriteabilityHandler(writeabilityHandler func(obj.Object)) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setWriteabilityHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { writeabilityHandler(obj.Wrap(_b0)) }))
 	return fh
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fh *FileHandle) WithScriptingProperties(scriptingProperties obj.Object) *FileHandle {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fh
@@ -180,7 +180,7 @@ func (fh *FileHandle) TruncateAtOffset(offset uint64) error {
 	return nil
 }
 
-// SynchronizeAndReturnError wraps the corresponding Objective-C method.
+// SynchronizeAndReturnError synchronizes and return error.
 //
 // SynchronizeAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) SynchronizeAndReturnError() error {
@@ -192,7 +192,7 @@ func (fh *FileHandle) SynchronizeAndReturnError() error {
 	return nil
 }
 
-// CloseAndReturnError wraps the corresponding Objective-C method.
+// CloseAndReturnError closes and return error.
 //
 // CloseAndReturnError returns an error if the operation did not succeed.
 func (fh *FileHandle) CloseAndReturnError() error {
@@ -204,28 +204,28 @@ func (fh *FileHandle) CloseAndReturnError() error {
 	return nil
 }
 
-// AvailableData wraps the corresponding Objective-C method.
+// AvailableData returns the available data.
 func (fh *FileHandle) AvailableData() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("availableData"))
 	return DataFromID(_r)
 }
 
-// ReadInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
+// ReadInBackgroundAndNotifyForModes reads in background and notify for modes.
 func (fh *FileHandle) ReadInBackgroundAndNotifyForModes(modes []*String) {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ReadInBackgroundAndNotify wraps the corresponding Objective-C method.
+// ReadInBackgroundAndNotify reads in background and notify.
 func (fh *FileHandle) ReadInBackgroundAndNotify() {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readInBackgroundAndNotify"))
 }
 
-// ReadToEndOfFileInBackgroundAndNotifyForModes wraps the corresponding Objective-C method.
+// ReadToEndOfFileInBackgroundAndNotifyForModes reads to end of file in background and notify for modes.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotifyForModes(modes []*String) {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotifyForModes:"), purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ReadToEndOfFileInBackgroundAndNotify wraps the corresponding Objective-C method.
+// ReadToEndOfFileInBackgroundAndNotify reads to end of file in background and notify.
 func (fh *FileHandle) ReadToEndOfFileInBackgroundAndNotify() {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readToEndOfFileInBackgroundAndNotify"))
 }
@@ -250,31 +250,31 @@ func (fh *FileHandle) WaitForDataInBackgroundAndNotify() {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("waitForDataInBackgroundAndNotify"))
 }
 
-// FileDescriptor wraps the corresponding Objective-C method.
+// FileDescriptor returns the file descriptor.
 func (fh *FileHandle) FileDescriptor() int {
 	_r := objc.Send[int](objref.IDOf(fh), objc.RegisterName("fileDescriptor"))
 	return _r
 }
 
-// ReadDataToEndOfFile wraps the corresponding Objective-C method.
+// ReadDataToEndOfFile returns the read data to end of file.
 func (fh *FileHandle) ReadDataToEndOfFile() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataToEndOfFile"))
 	return DataFromID(_r)
 }
 
-// ReadDataOfLength wraps the corresponding Objective-C method.
+// ReadDataOfLength reads data of length.
 func (fh *FileHandle) ReadDataOfLength(length int) *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("readDataOfLength:"), length)
 	return DataFromID(_r)
 }
 
-// OffsetInFile wraps the corresponding Objective-C method.
+// OffsetInFile returns the offset in file.
 func (fh *FileHandle) OffsetInFile() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("offsetInFile"))
 	return _r
 }
 
-// SeekToEndOfFile wraps the corresponding Objective-C method.
+// SeekToEndOfFile returns the seek to end of file.
 func (fh *FileHandle) SeekToEndOfFile() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(fh), objc.RegisterName("seekToEndOfFile"))
 	return _r
@@ -290,12 +290,12 @@ func (fh *FileHandle) TruncateFileAtOffset(offset uint64) {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("truncateFileAtOffset:"), offset)
 }
 
-// SynchronizeFile wraps the corresponding Objective-C method.
+// SynchronizeFile synchronizes file.
 func (fh *FileHandle) SynchronizeFile() {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("synchronizeFile"))
 }
 
-// CloseFile wraps the corresponding Objective-C method.
+// CloseFile closes file.
 func (fh *FileHandle) CloseFile() {
 	objc.Send[objc.ID](objref.IDOf(fh), objc.RegisterName("closeFile"))
 }

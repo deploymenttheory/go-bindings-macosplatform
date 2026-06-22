@@ -50,13 +50,13 @@ func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams() *MTROtaSo
 	return mTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsAdopt(_id)
 }
 
-// WithAction sets the property and returns the receiver so calls can be chained.
+// WithAction sets the action.
 func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithAction(action obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setAction:"), objref.IDOf(action))
 	return mosupcaurp
 }
 
-// WithDelayedActionTime sets the property and returns the receiver so calls can be chained.
+// WithDelayedActionTime sets the delayed action time.
 func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithDelayedActionTime(delayedActionTime obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setDelayedActionTime:"), objref.IDOf(delayedActionTime))
 	return mosupcaurp

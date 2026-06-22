@@ -72,7 +72,7 @@ func NewScriptSuiteRegistry() *ScriptSuiteRegistry {
 	return scriptSuiteRegistryAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ssr *ScriptSuiteRegistry) WithScriptingProperties(scriptingProperties obj.Object) *ScriptSuiteRegistry {
 	objc.Send[objc.ID](objref.IDOf(ssr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ssr
@@ -149,7 +149,7 @@ func (ssr *ScriptSuiteRegistry) AeteResource(languageName string) *Data {
 	return DataFromID(_r)
 }
 
-// SuiteNames wraps the corresponding Objective-C method.
+// SuiteNames returns the suite names.
 //
 // SuiteNames returns the collection as a Go slice.
 func (ssr *ScriptSuiteRegistry) SuiteNames() []string {

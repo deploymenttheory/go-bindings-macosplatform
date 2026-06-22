@@ -78,7 +78,7 @@ func (bad *BinaryArchiveDescriptor) WithURL(url string) *BinaryArchiveDescriptor
 	return bad
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (bad *BinaryArchiveDescriptor) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bad), objc.RegisterName("url"))
 	return obj.Wrap(_r)

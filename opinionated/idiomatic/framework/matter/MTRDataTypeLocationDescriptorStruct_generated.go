@@ -70,25 +70,25 @@ func NewMTRDataTypeLocationDescriptorStruct() *MTRDataTypeLocationDescriptorStru
 	return mTRDataTypeLocationDescriptorStructAdopt(_id)
 }
 
-// WithLocationName sets the property and returns the receiver so calls can be chained.
+// WithLocationName sets the location name.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
 	return mdtlds
 }
 
-// WithFloorNumber sets the property and returns the receiver so calls can be chained.
+// WithFloorNumber sets the floor number.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 	return mdtlds
 }
 
-// WithAreaType sets the property and returns the receiver so calls can be chained.
+// WithAreaType sets the area type.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct {
 	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
 	return mdtlds
 }
 
-// LocationName wraps the corresponding Objective-C method.
+// LocationName returns the location name.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) LocationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("locationName"))
 	if _r == 0 {
@@ -97,13 +97,13 @@ func (mdtlds *MTRDataTypeLocationDescriptorStruct) LocationName() string {
 	return purego.GoString(_r)
 }
 
-// FloorNumber wraps the corresponding Objective-C method.
+// FloorNumber returns the floor number.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) FloorNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("floorNumber"))
 	return obj.Wrap(_r)
 }
 
-// AreaType wraps the corresponding Objective-C method.
+// AreaType returns the area type.
 func (mdtlds *MTRDataTypeLocationDescriptorStruct) AreaType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("areaType"))
 	return obj.Wrap(_r)

@@ -73,7 +73,7 @@ func NewAccessibilityElement() *AccessibilityElement {
 	return accessibilityElementAdopt(_id)
 }
 
-// WithAccessibilityFrameInParentSpace sets the property and returns the receiver so calls can be chained.
+// WithAccessibilityFrameInParentSpace sets the accessibility frame in parent space.
 func (ae *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement {
 	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setAccessibilityFrameInParentSpace:"), accessibilityFrameInParentSpace)
 	return ae
@@ -84,7 +84,7 @@ func (ae *AccessibilityElement) AccessibilityAddChildElement(childElement *Acces
 	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("accessibilityAddChildElement:"), objref.IDOf(childElement))
 }
 
-// AccessibilityFrameInParentSpace wraps the corresponding Objective-C method.
+// AccessibilityFrameInParentSpace returns the accessibility frame in parent space.
 func (ae *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ae), objc.RegisterName("accessibilityFrameInParentSpace"))
 	return _r

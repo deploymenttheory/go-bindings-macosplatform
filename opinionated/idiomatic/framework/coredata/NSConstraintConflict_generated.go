@@ -73,7 +73,7 @@ func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictin
 	return constraintConflictAdopt(_id)
 }
 
-// Constraint wraps the corresponding Objective-C method.
+// Constraint returns the constraint.
 //
 // Constraint returns the collection as a Go slice.
 func (cc *ConstraintConflict) Constraint() []string {
@@ -81,25 +81,25 @@ func (cc *ConstraintConflict) Constraint() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ConstraintValues wraps the corresponding Objective-C method.
+// ConstraintValues returns the constraint values.
 func (cc *ConstraintConflict) ConstraintValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("constraintValues"))
 	return obj.Wrap(_r)
 }
 
-// DatabaseObject wraps the corresponding Objective-C method.
+// DatabaseObject returns the database object.
 func (cc *ConstraintConflict) DatabaseObject() *ManagedObject {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseObject"))
 	return ManagedObjectFromID(_r)
 }
 
-// DatabaseSnapshot wraps the corresponding Objective-C method.
+// DatabaseSnapshot returns the database snapshot.
 func (cc *ConstraintConflict) DatabaseSnapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseSnapshot"))
 	return obj.Wrap(_r)
 }
 
-// ConflictingObjects wraps the corresponding Objective-C method.
+// ConflictingObjects returns the conflicting objects.
 //
 // ConflictingObjects returns the collection as a Go slice.
 func (cc *ConstraintConflict) ConflictingObjects() []*ManagedObject {
@@ -107,7 +107,7 @@ func (cc *ConstraintConflict) ConflictingObjects() []*ManagedObject {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
 
-// ConflictingSnapshots wraps the corresponding Objective-C method.
+// ConflictingSnapshots returns the conflicting snapshots.
 //
 // ConflictingSnapshots returns the collection as a Go slice.
 func (cc *ConstraintConflict) ConflictingSnapshots() []obj.Object {

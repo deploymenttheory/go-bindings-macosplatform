@@ -123,7 +123,7 @@ func (hp *HapticPattern) ExportDictionaryAndReturnError() (result obj.Object, er
 	return obj.Wrap(_r), nil
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (hp *HapticPattern) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(hp), objc.RegisterName("duration"))
 	return _r

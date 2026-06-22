@@ -398,7 +398,7 @@ func (c *Camera) WithFocalDistance(focalDistance float64) *Camera {
 	return c
 }
 
-// ProjectionTransform wraps the corresponding Objective-C method.
+// ProjectionTransform returns the projection transform.
 func (c *Camera) ProjectionTransform() quartzcore.CATransform3D {
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(c), objc.RegisterName("projectionTransform"))
 	return _r

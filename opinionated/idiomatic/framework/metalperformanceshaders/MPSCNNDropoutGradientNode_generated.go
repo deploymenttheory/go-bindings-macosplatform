@@ -60,19 +60,19 @@ func (cdgn *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientN
 	return cdgn
 }
 
-// KeepProbability wraps the corresponding Objective-C method.
+// KeepProbability returns the keep probability.
 func (cdgn *CNNDropoutGradientNode) KeepProbability() float32 {
 	_r := objc.Send[float32](objref.IDOf(cdgn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func (cdgn *CNNDropoutGradientNode) Seed() int {
 	_r := objc.Send[int](objref.IDOf(cdgn), objc.RegisterName("seed"))
 	return _r
 }
 
-// MaskStrideInPixels wraps the corresponding Objective-C method.
+// MaskStrideInPixels returns the mask stride in pixels.
 func (cdgn *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cdgn), objc.RegisterName("maskStrideInPixels"))
 	return _r

@@ -59,7 +59,7 @@ func (sfsir *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.O
 	return sfsir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (sfsir *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
 	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(sfsir), objc.RegisterName("code"))
 	return _r

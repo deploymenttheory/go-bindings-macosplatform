@@ -92,7 +92,7 @@ func (fid *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicat
 	return fid
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (fid *FetchIndexDescription) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("name"))
 	if _r == 0 {
@@ -101,7 +101,7 @@ func (fid *FetchIndexDescription) Name() string {
 	return purego.GoString(_r)
 }
 
-// Elements wraps the corresponding Objective-C method.
+// Elements returns the elements.
 //
 // Elements returns the collection as a Go slice.
 func (fid *FetchIndexDescription) Elements() []*FetchIndexElementDescription {
@@ -109,13 +109,13 @@ func (fid *FetchIndexDescription) Elements() []*FetchIndexElementDescription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexElementDescription { return FetchIndexElementDescriptionFromID(_id) })
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (fid *FetchIndexDescription) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// PartialIndexPredicate wraps the corresponding Objective-C method.
+// PartialIndexPredicate returns the partial index predicate.
 func (fid *FetchIndexDescription) PartialIndexPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fid), objc.RegisterName("partialIndexPredicate"))
 	return obj.Wrap(_r)

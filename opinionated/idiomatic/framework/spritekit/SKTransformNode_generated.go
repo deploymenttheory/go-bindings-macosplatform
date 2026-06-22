@@ -53,13 +53,13 @@ func NewTransformNode() *TransformNode {
 	return transformNodeAdopt(_id)
 }
 
-// WithXRotation sets the property and returns the receiver so calls can be chained.
+// WithXRotation sets the x rotation.
 func (tn *TransformNode) WithXRotation(xRotation float64) *TransformNode {
 	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setXRotation:"), xRotation)
 	return tn
 }
 
-// WithYRotation sets the property and returns the receiver so calls can be chained.
+// WithYRotation sets the y rotation.
 func (tn *TransformNode) WithYRotation(yRotation float64) *TransformNode {
 	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setYRotation:"), yRotation)
 	return tn
@@ -216,13 +216,13 @@ func (tn *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Tr
 	return tn
 }
 
-// XRotation wraps the corresponding Objective-C method.
+// XRotation returns the x rotation.
 func (tn *TransformNode) XRotation() float64 {
 	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("xRotation"))
 	return _r
 }
 
-// YRotation wraps the corresponding Objective-C method.
+// YRotation returns the y rotation.
 func (tn *TransformNode) YRotation() float64 {
 	_r := objc.Send[float64](objref.IDOf(tn), objc.RegisterName("yRotation"))
 	return _r

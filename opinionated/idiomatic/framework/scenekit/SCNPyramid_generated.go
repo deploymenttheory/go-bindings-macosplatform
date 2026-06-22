@@ -113,7 +113,7 @@ func (p *Pyramid) WithLevelsOfDetail(items ...*LevelOfDetail) *Pyramid {
 	return p
 }
 
-// WithTessellator sets the property and returns the receiver so calls can be chained.
+// WithTessellator sets the tessellator.
 func (p *Pyramid) WithTessellator(tessellator *GeometryTessellator) *Pyramid {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return p

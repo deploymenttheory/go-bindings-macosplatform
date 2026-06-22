@@ -51,7 +51,7 @@ func NewClassificationObservation() *ClassificationObservation {
 	return classificationObservationAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (co *ClassificationObservation) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("identifier"))
 	if _r == 0 {

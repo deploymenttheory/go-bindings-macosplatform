@@ -51,143 +51,143 @@ func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device 
 	return mTRClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
-// ReadAttributeVendorNameWithParams wraps the corresponding Objective-C method.
+// ReadAttributeVendorNameWithParams reads attribute vendor name with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeVendorIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithParams reads attribute vendor ID with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductNameWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProductNameWithParams reads attribute product name with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProductIDWithParams reads attribute product ID with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNodeLabelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNodeLabelWithParams reads attribute node label with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeNodeLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeNodeLabelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeNodeLabelWithValueExpectedValueInterval writes attribute node label with value expected value interval.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeNodeLabelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeNodeLabelWithValueExpectedValueIntervalParams writes attribute node label with value expected value interval params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeHardwareVersionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionWithParams reads attribute hardware version with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeHardwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeHardwareVersionStringWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionStringWithParams reads attribute hardware version string with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeHardwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSoftwareVersionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionWithParams reads attribute software version with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSoftwareVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSoftwareVersionStringWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionStringWithParams reads attribute software version string with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSoftwareVersionStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeManufacturingDateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeManufacturingDateWithParams reads attribute manufacturing date with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeManufacturingDateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePartNumberWithParams wraps the corresponding Objective-C method.
+// ReadAttributePartNumberWithParams reads attribute part number with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributePartNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductURLWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProductURLWithParams reads attribute product URL with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductURLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductLabelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProductLabelWithParams reads attribute product label with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductLabelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSerialNumberWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSerialNumberWithParams reads attribute serial number with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSerialNumberWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeReachableWithParams wraps the corresponding Objective-C method.
+// ReadAttributeReachableWithParams reads attribute reachable with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeReachableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUniqueIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUniqueIDWithParams reads attribute unique ID with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeUniqueIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductAppearanceWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProductAppearanceWithParams reads attribute product appearance with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductAppearanceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

@@ -70,37 +70,37 @@ func NewMTRServiceAreaClusterProgressStruct() *MTRServiceAreaClusterProgressStru
 	return mTRServiceAreaClusterProgressStructAdopt(_id)
 }
 
-// WithAreaID sets the property and returns the receiver so calls can be chained.
+// WithAreaID sets the area ID.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 	return msacps
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return msacps
 }
 
-// WithTotalOperationalTime sets the property and returns the receiver so calls can be chained.
+// WithTotalOperationalTime sets the total operational time.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct {
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return msacps
 }
 
-// AreaID wraps the corresponding Objective-C method.
+// AreaID returns the area ID.
 func (msacps *MTRServiceAreaClusterProgressStruct) AreaID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("areaID"))
 	return obj.Wrap(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (msacps *MTRServiceAreaClusterProgressStruct) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// TotalOperationalTime wraps the corresponding Objective-C method.
+// TotalOperationalTime returns the total operational time.
 func (msacps *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("totalOperationalTime"))
 	return obj.Wrap(_r)

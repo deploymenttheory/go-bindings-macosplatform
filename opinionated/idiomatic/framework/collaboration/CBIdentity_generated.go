@@ -80,7 +80,7 @@ func (i *Identity) Authority() *IdentityAuthority {
 	return IdentityAuthorityFromID(_r)
 }
 
-// UniqueIdentifier wraps the corresponding Objective-C method.
+// UniqueIdentifier returns the unique identifier.
 func (i *Identity) UniqueIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)

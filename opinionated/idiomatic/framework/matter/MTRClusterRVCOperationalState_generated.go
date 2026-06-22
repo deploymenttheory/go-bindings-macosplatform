@@ -54,7 +54,7 @@ func NewMTRClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *MTRDevice
 	return mTRClusterRVCOperationalStateAdopt(_id)
 }
 
-// PauseWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// PauseWithParamsExpectedValuesExpectedValueIntervalCompletion pauses with params expected values expected value interval completion.
 //
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcros *MTRClusterRVCOperationalState) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -79,7 +79,7 @@ func (mcros *MTRClusterRVCOperationalState) PauseWithParamsExpectedValuesExpecte
 	}
 }
 
-// PauseWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// PauseWithExpectedValuesExpectedValueIntervalCompletion pauses with expected values expected value interval completion.
 //
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcros *MTRClusterRVCOperationalState) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -104,7 +104,7 @@ func (mcros *MTRClusterRVCOperationalState) PauseWithExpectedValuesExpectedValue
 	}
 }
 
-// ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion resumes with params expected values expected value interval completion.
 //
 // ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcros *MTRClusterRVCOperationalState) ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterResumeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -129,7 +129,7 @@ func (mcros *MTRClusterRVCOperationalState) ResumeWithParamsExpectedValuesExpect
 	}
 }
 
-// ResumeWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// ResumeWithExpectedValuesExpectedValueIntervalCompletion resumes with expected values expected value interval completion.
 //
 // ResumeWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcros *MTRClusterRVCOperationalState) ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
@@ -204,67 +204,67 @@ func (mcros *MTRClusterRVCOperationalState) GoHomeWithExpectedValuesExpectedValu
 	}
 }
 
-// ReadAttributePhaseListWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhaseListWithParams reads attribute phase list with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPhaseWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPhaseWithParams reads attribute current phase with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCountdownTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCountdownTimeWithParams reads attribute countdown time with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateListWithParams reads attribute operational state list with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStateWithParams reads attribute operational state with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalErrorWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalErrorWithParams reads attribute operational error with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcros *MTRClusterRVCOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcros), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

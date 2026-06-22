@@ -76,7 +76,7 @@ func (cpv *CompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAt
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
 }
 
-// Compositions wraps the corresponding Objective-C method.
+// Compositions returns the compositions.
 func (cpv *CompositionPickerView) Compositions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("compositions"))
 	return obj.Wrap(_r)
@@ -87,7 +87,7 @@ func (cpv *CompositionPickerView) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (cpv *CompositionPickerView) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
@@ -120,7 +120,7 @@ func (cpv *CompositionPickerView) SetCompositionAspectRatio(ratio corefoundation
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setCompositionAspectRatio:"), ratio)
 }
 
-// CompositionAspectRatio wraps the corresponding Objective-C method.
+// CompositionAspectRatio returns the composition aspect ratio.
 func (cpv *CompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cpv), objc.RegisterName("compositionAspectRatio"))
 	return _r
@@ -131,7 +131,7 @@ func (cpv *CompositionPickerView) SetDefaultValueForInputKey(value obj.Object, k
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// ResetDefaultInputValues wraps the corresponding Objective-C method.
+// ResetDefaultInputValues resets default input values.
 func (cpv *CompositionPickerView) ResetDefaultInputValues() {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("resetDefaultInputValues"))
 }
@@ -141,23 +141,23 @@ func (cpv *CompositionPickerView) SetSelectedComposition(composition obj.Object)
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
 }
 
-// SelectedComposition wraps the corresponding Objective-C method.
+// SelectedComposition returns the selected composition.
 func (cpv *CompositionPickerView) SelectedComposition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("selectedComposition"))
 	return obj.Wrap(_r)
 }
 
-// StartAnimation wraps the corresponding Objective-C method.
+// StartAnimation starts animation.
 func (cpv *CompositionPickerView) StartAnimation(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 }
 
-// StopAnimation wraps the corresponding Objective-C method.
+// StopAnimation stops animation.
 func (cpv *CompositionPickerView) StopAnimation(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 }
 
-// IsAnimating wraps the corresponding Objective-C method.
+// IsAnimating reports whether the object is animating.
 func (cpv *CompositionPickerView) IsAnimating() bool {
 	_r := objc.Send[bool](objref.IDOf(cpv), objc.RegisterName("isAnimating"))
 	return _r
@@ -168,7 +168,7 @@ func (cpv *CompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
 }
 
-// MaxAnimationFrameRate wraps the corresponding Objective-C method.
+// MaxAnimationFrameRate returns the max animation frame rate.
 func (cpv *CompositionPickerView) MaxAnimationFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(cpv), objc.RegisterName("maxAnimationFrameRate"))
 	return _r
@@ -179,7 +179,7 @@ func (cpv *CompositionPickerView) SetBackgroundColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (cpv *CompositionPickerView) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
@@ -196,7 +196,7 @@ func (cpv *CompositionPickerView) DrawsBackground() bool {
 	return _r
 }
 
-// NumberOfColumns wraps the corresponding Objective-C method.
+// NumberOfColumns returns the number of columns.
 func (cpv *CompositionPickerView) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(cpv), objc.RegisterName("numberOfColumns"))
 	return _r
@@ -207,7 +207,7 @@ func (cpv *CompositionPickerView) SetNumberOfColumns(columns int) {
 	objc.Send[objc.ID](objref.IDOf(cpv), objc.RegisterName("setNumberOfColumns:"), columns)
 }
 
-// NumberOfRows wraps the corresponding Objective-C method.
+// NumberOfRows returns the number of rows.
 func (cpv *CompositionPickerView) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(cpv), objc.RegisterName("numberOfRows"))
 	return _r

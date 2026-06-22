@@ -70,25 +70,25 @@ func NewMTRDoorLockClusterSetAliroReaderConfigParams() *MTRDoorLockClusterSetAli
 	return mTRDoorLockClusterSetAliroReaderConfigParamsAdopt(_id)
 }
 
-// WithSigningKey sets the property and returns the receiver so calls can be chained.
+// WithSigningKey sets the signing key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithSigningKey(signingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setSigningKey:"), objref.IDOf(signingKey))
 	return mdlcsarcp
 }
 
-// WithVerificationKey sets the property and returns the receiver so calls can be chained.
+// WithVerificationKey sets the verification key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithVerificationKey(verificationKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 	return mdlcsarcp
 }
 
-// WithGroupIdentifier sets the property and returns the receiver so calls can be chained.
+// WithGroupIdentifier sets the group identifier.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupIdentifier(groupIdentifier obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setGroupIdentifier:"), objref.IDOf(groupIdentifier))
 	return mdlcsarcp
 }
 
-// WithGroupResolvingKey sets the property and returns the receiver so calls can be chained.
+// WithGroupResolvingKey sets the group resolving key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithGroupResolvingKey(groupResolvingKey obj.Object) *MTRDoorLockClusterSetAliroReaderConfigParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("setGroupResolvingKey:"), objref.IDOf(groupResolvingKey))
 	return mdlcsarcp
@@ -106,25 +106,25 @@ func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) WithServerSidePro
 	return mdlcsarcp
 }
 
-// SigningKey wraps the corresponding Objective-C method.
+// SigningKey returns the signing key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) SigningKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("signingKey"))
 	return obj.Wrap(_r)
 }
 
-// VerificationKey wraps the corresponding Objective-C method.
+// VerificationKey returns the verification key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) VerificationKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("verificationKey"))
 	return obj.Wrap(_r)
 }
 
-// GroupIdentifier wraps the corresponding Objective-C method.
+// GroupIdentifier returns the group identifier.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) GroupIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("groupIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// GroupResolvingKey wraps the corresponding Objective-C method.
+// GroupResolvingKey returns the group resolving key.
 func (mdlcsarcp *MTRDoorLockClusterSetAliroReaderConfigParams) GroupResolvingKey() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsarcp), objc.RegisterName("groupResolvingKey"))
 	return obj.Wrap(_r)

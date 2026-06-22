@@ -75,7 +75,7 @@ func NewStateWithResources(resources []obj.Object) *State {
 	return stateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (s *State) WithReadCount(readCount int) *State {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setReadCount:"), readCount)
 	return s
@@ -111,13 +111,13 @@ func (s *State) ResourceCount() int {
 	return _r
 }
 
-// ReadCount wraps the corresponding Objective-C method.
+// ReadCount returns the read count.
 func (s *State) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("readCount"))
 	return _r
 }
 
-// IsTemporary wraps the corresponding Objective-C method.
+// IsTemporary reports whether the object is temporary.
 func (s *State) IsTemporary() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isTemporary"))
 	return _r

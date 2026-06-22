@@ -84,7 +84,7 @@ func (isn *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescr
 	return obj.Wrap(_r)
 }
 
-// ObjectID wraps the corresponding Objective-C method.
+// ObjectID returns the object ID.
 func (isn *IncrementalStoreNode) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)

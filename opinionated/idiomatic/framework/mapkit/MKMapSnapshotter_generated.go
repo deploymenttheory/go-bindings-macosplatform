@@ -78,7 +78,7 @@ func (ms *MapSnapshotter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("cancel"))
 }
 
-// IsLoading wraps the corresponding Objective-C method.
+// IsLoading reports whether the object is loading.
 func (ms *MapSnapshotter) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("isLoading"))
 	return _r

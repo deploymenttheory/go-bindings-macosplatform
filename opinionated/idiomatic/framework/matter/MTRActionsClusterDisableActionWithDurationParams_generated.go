@@ -70,19 +70,19 @@ func NewMTRActionsClusterDisableActionWithDurationParams() *MTRActionsClusterDis
 	return mTRActionsClusterDisableActionWithDurationParamsAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) WithActionID(actionID obj.Object) *MTRActionsClusterDisableActionWithDurationParams {
 	objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macdawdp
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterDisableActionWithDurationParams {
 	objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macdawdp
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) WithDuration(duration obj.Object) *MTRActionsClusterDisableActionWithDurationParams {
 	objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return macdawdp
@@ -100,19 +100,19 @@ func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) WithServerSide
 	return macdawdp
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (macdawdp *MTRActionsClusterDisableActionWithDurationParams) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macdawdp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)

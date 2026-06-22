@@ -87,7 +87,7 @@ func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (result *Ar
 	return arrayBatchProviderAdopt(_id), nil
 }
 
-// Array wraps the corresponding Objective-C method.
+// Array returns the array.
 func (abp *ArrayBatchProvider) Array() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(abp), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

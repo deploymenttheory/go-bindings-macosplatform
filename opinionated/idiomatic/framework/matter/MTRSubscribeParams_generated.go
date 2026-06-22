@@ -57,13 +57,13 @@ func NewMTRSubscribeParamsWithMinIntervalMaxInterval(minInterval obj.Object, max
 	return mTRSubscribeParamsAdopt(_id)
 }
 
-// WithReplaceExistingSubscriptions sets the property and returns the receiver so calls can be chained.
+// WithReplaceExistingSubscriptions sets the replace existing subscriptions.
 func (msp *MTRSubscribeParams) WithReplaceExistingSubscriptions(replaceExistingSubscriptions bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setReplaceExistingSubscriptions:"), replaceExistingSubscriptions)
 	return msp
 }
 
-// WithResubscribeAutomatically sets the property and returns the receiver so calls can be chained.
+// WithResubscribeAutomatically sets the resubscribe automatically.
 func (msp *MTRSubscribeParams) WithResubscribeAutomatically(resubscribeAutomatically bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setResubscribeAutomatically:"), resubscribeAutomatically)
 	return msp
@@ -81,25 +81,25 @@ func (msp *MTRSubscribeParams) WithMaxInterval(maxInterval obj.Object) *MTRSubsc
 	return msp
 }
 
-// WithReportEventsUrgently sets the property and returns the receiver so calls can be chained.
+// WithReportEventsUrgently sets the report events urgently.
 func (msp *MTRSubscribeParams) WithReportEventsUrgently(reportEventsUrgently bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setReportEventsUrgently:"), reportEventsUrgently)
 	return msp
 }
 
-// WithKeepPreviousSubscriptions sets the property and returns the receiver so calls can be chained.
+// WithKeepPreviousSubscriptions sets the keep previous subscriptions.
 func (msp *MTRSubscribeParams) WithKeepPreviousSubscriptions(keepPreviousSubscriptions obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setKeepPreviousSubscriptions:"), objref.IDOf(keepPreviousSubscriptions))
 	return msp
 }
 
-// WithAutoResubscribe sets the property and returns the receiver so calls can be chained.
+// WithAutoResubscribe sets the auto resubscribe.
 func (msp *MTRSubscribeParams) WithAutoResubscribe(autoResubscribe obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setAutoResubscribe:"), objref.IDOf(autoResubscribe))
 	return msp
 }
 
-// WithFilterByFabric sets the property and returns the receiver so calls can be chained.
+// WithFilterByFabric sets the filter by fabric.
 func (msp *MTRSubscribeParams) WithFilterByFabric(filterByFabric bool) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setFilterByFabric:"), filterByFabric)
 	return msp
@@ -117,7 +117,7 @@ func (msp *MTRSubscribeParams) WithAssumeUnknownAttributesReportable(assumeUnkno
 	return msp
 }
 
-// WithFabricFiltered sets the property and returns the receiver so calls can be chained.
+// WithFabricFiltered sets the fabric filtered.
 func (msp *MTRSubscribeParams) WithFabricFiltered(fabricFiltered obj.Object) *MTRSubscribeParams {
 	objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("setFabricFiltered:"), objref.IDOf(fabricFiltered))
 	return msp
@@ -153,13 +153,13 @@ func (msp *MTRSubscribeParams) ShouldReportEventsUrgently() bool {
 	return _r
 }
 
-// KeepPreviousSubscriptions wraps the corresponding Objective-C method.
+// KeepPreviousSubscriptions returns the keep previous subscriptions.
 func (msp *MTRSubscribeParams) KeepPreviousSubscriptions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("keepPreviousSubscriptions"))
 	return obj.Wrap(_r)
 }
 
-// AutoResubscribe wraps the corresponding Objective-C method.
+// AutoResubscribe returns the auto resubscribe.
 func (msp *MTRSubscribeParams) AutoResubscribe() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("autoResubscribe"))
 	return obj.Wrap(_r)

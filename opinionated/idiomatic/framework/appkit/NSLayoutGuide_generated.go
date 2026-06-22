@@ -91,85 +91,85 @@ func (lg *LayoutGuide) ConstraintsAffectingLayoutForOrientation(orientation Layo
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *LayoutConstraint { return LayoutConstraintFromID(_id) })
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (lg *LayoutGuide) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lg), objc.RegisterName("frame"))
 	return _r
 }
 
-// OwningView wraps the corresponding Objective-C method.
+// OwningView returns the owning view.
 func (lg *LayoutGuide) OwningView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("owningView"))
 	return ViewFromID(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (lg *LayoutGuide) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// LeadingAnchor wraps the corresponding Objective-C method.
+// LeadingAnchor returns the leading anchor.
 func (lg *LayoutGuide) LeadingAnchor() *LayoutXAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("leadingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
-// TrailingAnchor wraps the corresponding Objective-C method.
+// TrailingAnchor returns the trailing anchor.
 func (lg *LayoutGuide) TrailingAnchor() *LayoutXAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("trailingAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
-// LeftAnchor wraps the corresponding Objective-C method.
+// LeftAnchor returns the left anchor.
 func (lg *LayoutGuide) LeftAnchor() *LayoutXAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("leftAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
-// RightAnchor wraps the corresponding Objective-C method.
+// RightAnchor returns the right anchor.
 func (lg *LayoutGuide) RightAnchor() *LayoutXAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("rightAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
-// TopAnchor wraps the corresponding Objective-C method.
+// TopAnchor returns the top anchor.
 func (lg *LayoutGuide) TopAnchor() *LayoutYAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("topAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
-// BottomAnchor wraps the corresponding Objective-C method.
+// BottomAnchor returns the bottom anchor.
 func (lg *LayoutGuide) BottomAnchor() *LayoutYAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("bottomAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
-// WidthAnchor wraps the corresponding Objective-C method.
+// WidthAnchor returns the width anchor.
 func (lg *LayoutGuide) WidthAnchor() *LayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("widthAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
-// HeightAnchor wraps the corresponding Objective-C method.
+// HeightAnchor returns the height anchor.
 func (lg *LayoutGuide) HeightAnchor() *LayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("heightAnchor"))
 	return LayoutDimensionFromID(_r)
 }
 
-// CenterXAnchor wraps the corresponding Objective-C method.
+// CenterXAnchor returns the center x anchor.
 func (lg *LayoutGuide) CenterXAnchor() *LayoutXAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("centerXAnchor"))
 	return LayoutXAxisAnchorFromID(_r)
 }
 
-// CenterYAnchor wraps the corresponding Objective-C method.
+// CenterYAnchor returns the center y anchor.
 func (lg *LayoutGuide) CenterYAnchor() *LayoutYAxisAnchor {
 	_r := objc.Send[objc.ID](objref.IDOf(lg), objc.RegisterName("centerYAnchor"))
 	return LayoutYAxisAnchorFromID(_r)
 }
 
-// HasAmbiguousLayout wraps the corresponding Objective-C method.
+// HasAmbiguousLayout reports whether the object has ambiguous layout.
 func (lg *LayoutGuide) HasAmbiguousLayout() bool {
 	_r := objc.Send[bool](objref.IDOf(lg), objc.RegisterName("hasAmbiguousLayout"))
 	return _r

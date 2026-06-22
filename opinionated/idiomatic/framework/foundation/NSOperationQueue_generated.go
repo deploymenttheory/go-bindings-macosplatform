@@ -74,53 +74,53 @@ func NewOperationQueue() *OperationQueue {
 	return operationQueueAdopt(_id)
 }
 
-// WithMaxConcurrentOperationCount sets the property and returns the receiver so calls can be chained.
+// WithMaxConcurrentOperationCount sets the max concurrent operation count.
 func (oq *OperationQueue) WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setMaxConcurrentOperationCount:"), maxConcurrentOperationCount)
 	return oq
 }
 
-// WithSuspended sets the property and returns the receiver so calls can be chained.
+// WithSuspended sets the suspended.
 func (oq *OperationQueue) WithSuspended(suspended bool) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setSuspended:"), suspended)
 	return oq
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (oq *OperationQueue) WithName(name StringProvider) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setName:"), objref.IDOf(name))
 	return oq
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (oq *OperationQueue) WithQualityOfService(qualityOfService QualityOfService) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return oq
 }
 
-// WithUnderlyingQueue sets the property and returns the receiver so calls can be chained.
+// WithUnderlyingQueue sets the underlying queue.
 func (oq *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
 	return oq
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (oq *OperationQueue) WithScriptingProperties(scriptingProperties obj.Object) *OperationQueue {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return oq
 }
 
-// AddOperation wraps the corresponding Objective-C method.
+// AddOperation adds operation.
 func (oq *OperationQueue) AddOperation(op *Operation) {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperation:"), objref.IDOf(op))
 }
 
-// AddOperationsWaitUntilFinished wraps the corresponding Objective-C method.
+// AddOperationsWaitUntilFinished adds operations wait until finished.
 func (oq *OperationQueue) AddOperationsWaitUntilFinished(ops []*Operation, wait bool) {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("addOperations:waitUntilFinished:"), purego.SliceToNSArray(ops, func(_v *Operation) objc.ID { return objref.IDOf(_v) }), wait)
 }
 
-// AddOperationWith wraps the corresponding Objective-C method.
+// AddOperationWith adds operation with.
 //
 // AddOperationWith blocks until the operation completes or ctx is cancelled.
 func (oq *OperationQueue) AddOperationWith(ctx context.Context) error {
@@ -154,7 +154,7 @@ func (oq *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	}
 }
 
-// CancelAllOperations wraps the corresponding Objective-C method.
+// CancelAllOperations cancels all operations.
 func (oq *OperationQueue) CancelAllOperations() {
 	objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("cancelAllOperations"))
 }
@@ -170,19 +170,19 @@ func (oq *OperationQueue) Progress() *Progress {
 	return ProgressFromID(_r)
 }
 
-// MaxConcurrentOperationCount wraps the corresponding Objective-C method.
+// MaxConcurrentOperationCount returns the max concurrent operation count.
 func (oq *OperationQueue) MaxConcurrentOperationCount() int {
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("maxConcurrentOperationCount"))
 	return _r
 }
 
-// IsSuspended wraps the corresponding Objective-C method.
+// IsSuspended reports whether the object is suspended.
 func (oq *OperationQueue) IsSuspended() bool {
 	_r := objc.Send[bool](objref.IDOf(oq), objc.RegisterName("isSuspended"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (oq *OperationQueue) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("name"))
 	if _r == 0 {
@@ -191,19 +191,19 @@ func (oq *OperationQueue) Name() string {
 	return purego.GoString(_r)
 }
 
-// QualityOfService wraps the corresponding Objective-C method.
+// QualityOfService returns the quality of service.
 func (oq *OperationQueue) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(oq), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// UnderlyingQueue wraps the corresponding Objective-C method.
+// UnderlyingQueue returns the underlying queue.
 func (oq *OperationQueue) UnderlyingQueue() *Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oq), objc.RegisterName("underlyingQueue"))
 	return ObjectFromID(_r)
 }
 
-// Operations wraps the corresponding Objective-C method.
+// Operations returns the operations.
 //
 // Operations returns the collection as a Go slice.
 func (oq *OperationQueue) Operations() []*Operation {
@@ -211,7 +211,7 @@ func (oq *OperationQueue) Operations() []*Operation {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
-// OperationCount wraps the corresponding Objective-C method.
+// OperationCount returns the operation count.
 func (oq *OperationQueue) OperationCount() int {
 	_r := objc.Send[int](objref.IDOf(oq), objc.RegisterName("operationCount"))
 	return _r

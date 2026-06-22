@@ -92,43 +92,43 @@ func (s *Screen) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundati
 	return _r
 }
 
-// Depth wraps the corresponding Objective-C method.
+// Depth returns the depth.
 func (s *Screen) Depth() WindowDepth {
 	_r := objc.Send[WindowDepth](objref.IDOf(s), objc.RegisterName("depth"))
 	return _r
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (s *Screen) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("frame"))
 	return _r
 }
 
-// VisibleFrame wraps the corresponding Objective-C method.
+// VisibleFrame returns the visible frame.
 func (s *Screen) VisibleFrame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("visibleFrame"))
 	return _r
 }
 
-// DeviceDescription wraps the corresponding Objective-C method.
+// DeviceDescription returns the device description.
 func (s *Screen) DeviceDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (s *Screen) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// BackingScaleFactor wraps the corresponding Objective-C method.
+// BackingScaleFactor returns the backing scale factor.
 func (s *Screen) BackingScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("backingScaleFactor"))
 	return _r
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (s *Screen) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -137,19 +137,19 @@ func (s *Screen) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// SafeAreaInsets wraps the corresponding Objective-C method.
+// SafeAreaInsets returns the safe area insets.
 func (s *Screen) SafeAreaInsets() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(s), objc.RegisterName("safeAreaInsets"))
 	return _r
 }
 
-// AuxiliaryTopLeftArea wraps the corresponding Objective-C method.
+// AuxiliaryTopLeftArea returns the auxiliary top left area.
 func (s *Screen) AuxiliaryTopLeftArea() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("auxiliaryTopLeftArea"))
 	return _r
 }
 
-// AuxiliaryTopRightArea wraps the corresponding Objective-C method.
+// AuxiliaryTopRightArea returns the auxiliary top right area.
 func (s *Screen) AuxiliaryTopRightArea() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("auxiliaryTopRightArea"))
 	return _r
@@ -161,19 +161,19 @@ func (s *Screen) CGDirectDisplayID() uint32 {
 	return _r
 }
 
-// MaximumExtendedDynamicRangeColorComponentValue wraps the corresponding Objective-C method.
+// MaximumExtendedDynamicRangeColorComponentValue returns the maximum extended dynamic range color component value.
 func (s *Screen) MaximumExtendedDynamicRangeColorComponentValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("maximumExtendedDynamicRangeColorComponentValue"))
 	return _r
 }
 
-// MaximumPotentialExtendedDynamicRangeColorComponentValue wraps the corresponding Objective-C method.
+// MaximumPotentialExtendedDynamicRangeColorComponentValue returns the maximum potential extended dynamic range color component value.
 func (s *Screen) MaximumPotentialExtendedDynamicRangeColorComponentValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("maximumPotentialExtendedDynamicRangeColorComponentValue"))
 	return _r
 }
 
-// MaximumReferenceExtendedDynamicRangeColorComponentValue wraps the corresponding Objective-C method.
+// MaximumReferenceExtendedDynamicRangeColorComponentValue returns the maximum reference extended dynamic range color component value.
 func (s *Screen) MaximumReferenceExtendedDynamicRangeColorComponentValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("maximumReferenceExtendedDynamicRangeColorComponentValue"))
 	return _r

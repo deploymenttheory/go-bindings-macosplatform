@@ -49,163 +49,163 @@ func NewDOMHTMLFrameElement() *DOMHTMLFrameElement {
 	return dOMHTMLFrameElementAdopt(_id)
 }
 
-// WithFrameBorder sets the property and returns the receiver so calls can be chained.
+// WithFrameBorder sets the frame border.
 func (dfe *DOMHTMLFrameElement) WithFrameBorder(frameBorder string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setFrameBorder:"), purego.NSString(frameBorder))
 	return dfe
 }
 
-// WithLongDesc sets the property and returns the receiver so calls can be chained.
+// WithLongDesc sets the long desc.
 func (dfe *DOMHTMLFrameElement) WithLongDesc(longDesc string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setLongDesc:"), purego.NSString(longDesc))
 	return dfe
 }
 
-// WithMarginHeight sets the property and returns the receiver so calls can be chained.
+// WithMarginHeight sets the margin height.
 func (dfe *DOMHTMLFrameElement) WithMarginHeight(marginHeight string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setMarginHeight:"), purego.NSString(marginHeight))
 	return dfe
 }
 
-// WithMarginWidth sets the property and returns the receiver so calls can be chained.
+// WithMarginWidth sets the margin width.
 func (dfe *DOMHTMLFrameElement) WithMarginWidth(marginWidth string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setMarginWidth:"), purego.NSString(marginWidth))
 	return dfe
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (dfe *DOMHTMLFrameElement) WithName(name string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setName:"), purego.NSString(name))
 	return dfe
 }
 
-// WithNoResize sets the property and returns the receiver so calls can be chained.
+// WithNoResize sets the no resize.
 func (dfe *DOMHTMLFrameElement) WithNoResize(noResize bool) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setNoResize:"), noResize)
 	return dfe
 }
 
-// WithScrolling sets the property and returns the receiver so calls can be chained.
+// WithScrolling sets the scrolling.
 func (dfe *DOMHTMLFrameElement) WithScrolling(scrolling string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setScrolling:"), purego.NSString(scrolling))
 	return dfe
 }
 
-// WithSrc sets the property and returns the receiver so calls can be chained.
+// WithSrc sets the src.
 func (dfe *DOMHTMLFrameElement) WithSrc(src string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setSrc:"), purego.NSString(src))
 	return dfe
 }
 
-// WithLocation sets the property and returns the receiver so calls can be chained.
+// WithLocation sets the location.
 func (dfe *DOMHTMLFrameElement) WithLocation(location string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setLocation:"), purego.NSString(location))
 	return dfe
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dfe *DOMHTMLFrameElement) WithTitle(title string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dfe
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dfe *DOMHTMLFrameElement) WithLang(lang string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dfe
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dfe *DOMHTMLFrameElement) WithDir(dir string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dfe
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dfe *DOMHTMLFrameElement) WithTabIndex(tabIndex int) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dfe
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dfe *DOMHTMLFrameElement) WithAccessKey(accessKey string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dfe
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dfe *DOMHTMLFrameElement) WithInnerText(innerText string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dfe
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dfe *DOMHTMLFrameElement) WithOuterText(outerText string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dfe
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dfe *DOMHTMLFrameElement) WithContentEditable(contentEditable string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dfe
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dfe *DOMHTMLFrameElement) WithIDName(idName string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dfe
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dfe *DOMHTMLFrameElement) WithScrollLeft(scrollLeft int) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dfe
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dfe *DOMHTMLFrameElement) WithScrollTop(scrollTop int) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dfe
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dfe *DOMHTMLFrameElement) WithInnerHTML(innerHTML string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dfe
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dfe *DOMHTMLFrameElement) WithOuterHTML(outerHTML string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dfe
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dfe *DOMHTMLFrameElement) WithClassName(className string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dfe
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dfe *DOMHTMLFrameElement) WithNodeValue(nodeValue string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dfe
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dfe *DOMHTMLFrameElement) WithPrefix(prefix string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dfe
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dfe *DOMHTMLFrameElement) WithTextContent(textContent string) *DOMHTMLFrameElement {
 	objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dfe
 }
 
-// FrameBorder wraps the corresponding Objective-C method.
+// FrameBorder returns the frame border.
 func (dfe *DOMHTMLFrameElement) FrameBorder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("frameBorder"))
 	if _r == 0 {
@@ -214,7 +214,7 @@ func (dfe *DOMHTMLFrameElement) FrameBorder() string {
 	return purego.GoString(_r)
 }
 
-// LongDesc wraps the corresponding Objective-C method.
+// LongDesc returns the long desc.
 func (dfe *DOMHTMLFrameElement) LongDesc() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("longDesc"))
 	if _r == 0 {
@@ -223,7 +223,7 @@ func (dfe *DOMHTMLFrameElement) LongDesc() string {
 	return purego.GoString(_r)
 }
 
-// MarginHeight wraps the corresponding Objective-C method.
+// MarginHeight returns the margin height.
 func (dfe *DOMHTMLFrameElement) MarginHeight() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("marginHeight"))
 	if _r == 0 {
@@ -232,7 +232,7 @@ func (dfe *DOMHTMLFrameElement) MarginHeight() string {
 	return purego.GoString(_r)
 }
 
-// MarginWidth wraps the corresponding Objective-C method.
+// MarginWidth returns the margin width.
 func (dfe *DOMHTMLFrameElement) MarginWidth() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("marginWidth"))
 	if _r == 0 {
@@ -241,7 +241,7 @@ func (dfe *DOMHTMLFrameElement) MarginWidth() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (dfe *DOMHTMLFrameElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("name"))
 	if _r == 0 {
@@ -256,7 +256,7 @@ func (dfe *DOMHTMLFrameElement) NoResize() bool {
 	return _r
 }
 
-// Scrolling wraps the corresponding Objective-C method.
+// Scrolling returns the scrolling.
 func (dfe *DOMHTMLFrameElement) Scrolling() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("scrolling"))
 	if _r == 0 {
@@ -265,7 +265,7 @@ func (dfe *DOMHTMLFrameElement) Scrolling() string {
 	return purego.GoString(_r)
 }
 
-// Src wraps the corresponding Objective-C method.
+// Src returns the src.
 func (dfe *DOMHTMLFrameElement) Src() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("src"))
 	if _r == 0 {
@@ -274,19 +274,19 @@ func (dfe *DOMHTMLFrameElement) Src() string {
 	return purego.GoString(_r)
 }
 
-// ContentDocument wraps the corresponding Objective-C method.
+// ContentDocument returns the content document.
 func (dfe *DOMHTMLFrameElement) ContentDocument() *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentDocument"))
 	return DOMDocumentFromID(_r)
 }
 
-// ContentWindow wraps the corresponding Objective-C method.
+// ContentWindow returns the content window.
 func (dfe *DOMHTMLFrameElement) ContentWindow() *DOMAbstractView {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentWindow"))
 	return DOMAbstractViewFromID(_r)
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (dfe *DOMHTMLFrameElement) Location() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("location"))
 	if _r == 0 {
@@ -295,19 +295,19 @@ func (dfe *DOMHTMLFrameElement) Location() string {
 	return purego.GoString(_r)
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (dfe *DOMHTMLFrameElement) Width() int {
 	_r := objc.Send[int](objref.IDOf(dfe), objc.RegisterName("width"))
 	return _r
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (dfe *DOMHTMLFrameElement) Height() int {
 	_r := objc.Send[int](objref.IDOf(dfe), objc.RegisterName("height"))
 	return _r
 }
 
-// ContentFrame wraps the corresponding Objective-C method.
+// ContentFrame returns the content frame.
 func (dfe *DOMHTMLFrameElement) ContentFrame() *WebFrame {
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentFrame"))
 	return WebFrameFromID(_r)

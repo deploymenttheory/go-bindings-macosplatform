@@ -78,7 +78,7 @@ func (lpoir *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInte
 	return lpoir
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (lpoir *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lpoir), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)

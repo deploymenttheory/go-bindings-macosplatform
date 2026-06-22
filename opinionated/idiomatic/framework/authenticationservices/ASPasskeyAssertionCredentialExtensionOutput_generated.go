@@ -73,7 +73,7 @@ func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *
 	return passkeyAssertionCredentialExtensionOutputAdopt(_id)
 }
 
-// LargeBlobAssertionOutput wraps the corresponding Objective-C method.
+// LargeBlobAssertionOutput returns the large blob assertion output.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(paceo), objc.RegisterName("largeBlobAssertionOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)

@@ -63,37 +63,37 @@ func (lvc *LeaderboardViewController) WithCategory(category string) *Leaderboard
 	return lvc
 }
 
-// WithViewState sets the property and returns the receiver so calls can be chained.
+// WithViewState sets the view state.
 func (lvc *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setViewState:"), viewState)
 	return lvc
 }
 
-// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the leaderboard time scope.
 func (lvc *LeaderboardViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return lvc
 }
 
-// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the leaderboard identifier.
 func (lvc *LeaderboardViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return lvc
 }
 
-// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the leaderboard category.
 func (lvc *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategory string) *LeaderboardViewController {
 	objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return lvc
 }
 
-// TimeScope wraps the corresponding Objective-C method.
+// TimeScope returns the time scope.
 func (lvc *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(lvc), objc.RegisterName("timeScope"))
 	return _r
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (lvc *LeaderboardViewController) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lvc), objc.RegisterName("category"))
 	if _r == 0 {

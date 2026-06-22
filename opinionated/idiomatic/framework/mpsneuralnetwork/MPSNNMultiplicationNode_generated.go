@@ -51,67 +51,67 @@ func NewNNMultiplicationNode() *NNMultiplicationNode {
 	return nNMultiplicationNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nmn *NNMultiplicationNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nmn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nmn *NNMultiplicationNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nmn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nmn *NNMultiplicationNode) WithBias(bias float32) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setBias:"), bias)
 	return nmn
 }
 
-// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the primary stride in pixels x.
 func (nmn *NNMultiplicationNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return nmn
 }
 
-// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the primary stride in pixels y.
 func (nmn *NNMultiplicationNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return nmn
 }
 
-// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the primary stride in feature channels.
 func (nmn *NNMultiplicationNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return nmn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nmn *NNMultiplicationNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nmn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nmn *NNMultiplicationNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nmn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nmn *NNMultiplicationNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nmn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nmn *NNMultiplicationNode) WithMinimumValue(minimumValue float32) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nmn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nmn *NNMultiplicationNode) WithMaximumValue(maximumValue float32) *NNMultiplicationNode {
 	objc.Send[objc.ID](objref.IDOf(nmn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nmn

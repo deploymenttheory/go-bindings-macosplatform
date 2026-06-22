@@ -49,7 +49,7 @@ func NewTemporaryImage() *TemporaryImage {
 	return temporaryImageAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (ti *TemporaryImage) WithReadCount(readCount int) *TemporaryImage {
 	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setReadCount:"), readCount)
 	return ti
@@ -61,7 +61,7 @@ func (ti *TemporaryImage) WithLabel(label string) *TemporaryImage {
 	return ti
 }
 
-// ReadCount wraps the corresponding Objective-C method.
+// ReadCount returns the read count.
 func (ti *TemporaryImage) ReadCount() int {
 	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("readCount"))
 	return _r

@@ -80,13 +80,13 @@ func NewOrthographyWithCoder(coder *Coder) *Orthography {
 	return orthographyAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (o *Orthography) WithScriptingProperties(scriptingProperties obj.Object) *Orthography {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return o
 }
 
-// DominantScript wraps the corresponding Objective-C method.
+// DominantScript returns the dominant script.
 func (o *Orthography) DominantScript() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantScript"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (o *Orthography) DominantScript() string {
 	return purego.GoString(_r)
 }
 
-// LanguageMap wraps the corresponding Objective-C method.
+// LanguageMap returns the language map.
 func (o *Orthography) LanguageMap() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("languageMap"))
 	return obj.Wrap(_r)
@@ -116,7 +116,7 @@ func (o *Orthography) DominantLanguageForScript(script string) string {
 	return purego.GoString(_r)
 }
 
-// DominantLanguage wraps the corresponding Objective-C method.
+// DominantLanguage returns the dominant language.
 func (o *Orthography) DominantLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {
@@ -125,7 +125,7 @@ func (o *Orthography) DominantLanguage() string {
 	return purego.GoString(_r)
 }
 
-// AllScripts wraps the corresponding Objective-C method.
+// AllScripts returns the all scripts.
 //
 // AllScripts returns the collection as a Go slice.
 func (o *Orthography) AllScripts() []string {
@@ -133,7 +133,7 @@ func (o *Orthography) AllScripts() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AllLanguages wraps the corresponding Objective-C method.
+// AllLanguages returns the all languages.
 //
 // AllLanguages returns the collection as a Go slice.
 func (o *Orthography) AllLanguages() []string {

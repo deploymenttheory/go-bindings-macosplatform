@@ -118,25 +118,25 @@ func (gc *GraphicsContext) FlushGraphics() {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("flushGraphics"))
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (gc *GraphicsContext) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// IsDrawingToScreen wraps the corresponding Objective-C method.
+// IsDrawingToScreen reports whether the object is drawing to screen.
 func (gc *GraphicsContext) IsDrawingToScreen() bool {
 	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isDrawingToScreen"))
 	return _r
 }
 
-// CGContext wraps the corresponding Objective-C method.
+// CGContext returns the cg context.
 func (gc *GraphicsContext) CGContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("CGContext"))
 	return obj.Wrap(_r)
 }
 
-// IsFlipped wraps the corresponding Objective-C method.
+// IsFlipped reports whether the object is flipped.
 func (gc *GraphicsContext) IsFlipped() bool {
 	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isFlipped"))
 	return _r
@@ -148,31 +148,31 @@ func (gc *GraphicsContext) ShouldAntialias() bool {
 	return _r
 }
 
-// ImageInterpolation wraps the corresponding Objective-C method.
+// ImageInterpolation returns the image interpolation.
 func (gc *GraphicsContext) ImageInterpolation() ImageInterpolation {
 	_r := objc.Send[ImageInterpolation](objref.IDOf(gc), objc.RegisterName("imageInterpolation"))
 	return _r
 }
 
-// PatternPhase wraps the corresponding Objective-C method.
+// PatternPhase returns the pattern phase.
 func (gc *GraphicsContext) PatternPhase() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gc), objc.RegisterName("patternPhase"))
 	return _r
 }
 
-// CompositingOperation wraps the corresponding Objective-C method.
+// CompositingOperation returns the compositing operation.
 func (gc *GraphicsContext) CompositingOperation() CompositingOperation {
 	_r := objc.Send[CompositingOperation](objref.IDOf(gc), objc.RegisterName("compositingOperation"))
 	return _r
 }
 
-// ColorRenderingIntent wraps the corresponding Objective-C method.
+// ColorRenderingIntent returns the color rendering intent.
 func (gc *GraphicsContext) ColorRenderingIntent() ColorRenderingIntent {
 	_r := objc.Send[ColorRenderingIntent](objref.IDOf(gc), objc.RegisterName("colorRenderingIntent"))
 	return _r
 }
 
-// CIContext wraps the corresponding Objective-C method.
+// CIContext returns the ci context.
 func (gc *GraphicsContext) CIContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("CIContext"))
 	return obj.Wrap(_r)

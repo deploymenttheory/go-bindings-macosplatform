@@ -52,7 +52,7 @@ func NewDisplayMetric() *DisplayMetric {
 	return displayMetricAdopt(_id)
 }
 
-// AveragePixelLuminance wraps the corresponding Objective-C method.
+// AveragePixelLuminance returns the average pixel luminance.
 func (dm *DisplayMetric) AveragePixelLuminance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("averagePixelLuminance"))
 	return obj.Wrap(_r)

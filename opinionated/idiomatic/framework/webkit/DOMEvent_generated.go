@@ -57,19 +57,19 @@ func NewDOMEventEvent(eventTypeArg string, canBubbleArg bool, cancelableArg bool
 	return dOMEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (de *DOMEvent) WithReturnValue(returnValue bool) *DOMEvent {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setReturnValue:"), returnValue)
 	return de
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (de *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return de
 }
 
-// StopPropagation wraps the corresponding Objective-C method.
+// StopPropagation stops propagation.
 func (de *DOMEvent) StopPropagation() {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("stopPropagation"))
 }
@@ -79,7 +79,7 @@ func (de *DOMEvent) PreventDefault() {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("preventDefault"))
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (de *DOMEvent) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("type"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (de *DOMEvent) Type() string {
 	return purego.GoString(_r)
 }
 
-// EventPhase wraps the corresponding Objective-C method.
+// EventPhase returns the event phase.
 func (de *DOMEvent) EventPhase() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(de), objc.RegisterName("eventPhase"))
 	return _r
@@ -106,7 +106,7 @@ func (de *DOMEvent) Cancelable() bool {
 	return _r
 }
 
-// TimeStamp wraps the corresponding Objective-C method.
+// TimeStamp returns the time stamp.
 func (de *DOMEvent) TimeStamp() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(de), objc.RegisterName("timeStamp"))
 	return _r

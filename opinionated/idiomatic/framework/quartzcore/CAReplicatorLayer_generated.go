@@ -210,25 +210,25 @@ func (rl *ReplicatorLayer) WithContentsFormat(contentsFormat obj.Object) *Replic
 	return rl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (rl *ReplicatorLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return rl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (rl *ReplicatorLayer) WithToneMapMode(toneMapMode obj.Object) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return rl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (rl *ReplicatorLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return rl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (rl *ReplicatorLayer) WithContentsHeadroom(contentsHeadroom float64) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return rl
@@ -294,13 +294,13 @@ func (rl *ReplicatorLayer) WithCornerRadius(cornerRadius float64) *ReplicatorLay
 	return rl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (rl *ReplicatorLayer) WithMaskedCorners(maskedCorners CornerMask) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return rl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (rl *ReplicatorLayer) WithCornerCurve(cornerCurve obj.Object) *ReplicatorLayer {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return rl
@@ -409,7 +409,7 @@ func (rl *ReplicatorLayer) WithConstraints(items ...*Constraint) *ReplicatorLaye
 	return rl
 }
 
-// InstanceCount wraps the corresponding Objective-C method.
+// InstanceCount returns the instance count.
 func (rl *ReplicatorLayer) InstanceCount() int {
 	_r := objc.Send[int](objref.IDOf(rl), objc.RegisterName("instanceCount"))
 	return _r
@@ -421,37 +421,37 @@ func (rl *ReplicatorLayer) PreservesDepth() bool {
 	return _r
 }
 
-// InstanceDelay wraps the corresponding Objective-C method.
+// InstanceDelay returns the instance delay.
 func (rl *ReplicatorLayer) InstanceDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(rl), objc.RegisterName("instanceDelay"))
 	return _r
 }
 
-// InstanceColor wraps the corresponding Objective-C method.
+// InstanceColor returns the instance color.
 func (rl *ReplicatorLayer) InstanceColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("instanceColor"))
 	return obj.Wrap(_r)
 }
 
-// InstanceRedOffset wraps the corresponding Objective-C method.
+// InstanceRedOffset returns the instance red offset.
 func (rl *ReplicatorLayer) InstanceRedOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceRedOffset"))
 	return _r
 }
 
-// InstanceGreenOffset wraps the corresponding Objective-C method.
+// InstanceGreenOffset returns the instance green offset.
 func (rl *ReplicatorLayer) InstanceGreenOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceGreenOffset"))
 	return _r
 }
 
-// InstanceBlueOffset wraps the corresponding Objective-C method.
+// InstanceBlueOffset returns the instance blue offset.
 func (rl *ReplicatorLayer) InstanceBlueOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceBlueOffset"))
 	return _r
 }
 
-// InstanceAlphaOffset wraps the corresponding Objective-C method.
+// InstanceAlphaOffset returns the instance alpha offset.
 func (rl *ReplicatorLayer) InstanceAlphaOffset() float32 {
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceAlphaOffset"))
 	return _r

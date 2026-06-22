@@ -56,7 +56,7 @@ func NewMTRBaseClusterPowerTopologyWithDeviceEndpointIDQueue(device *MTRBaseDevi
 	return mTRBaseClusterPowerTopologyAdopt(_id)
 }
 
-// ReadAttributeAvailableEndpointsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAvailableEndpointsWithCompletion reads attribute available endpoints with completion.
 //
 // ReadAttributeAvailableEndpointsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeAvailableEndpointsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAvailableEndpointsWi
 	}
 }
 
-// ReadAttributeActiveEndpointsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveEndpointsWithCompletion reads attribute active endpoints with completion.
 //
 // ReadAttributeActiveEndpointsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeActiveEndpointsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeActiveEndpointsWithP
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeAttributeListWithPar
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcpt *MTRBaseClusterPowerTopology) SubscribeAttributeFeatureMapWithParams
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpt *MTRBaseClusterPowerTopology) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

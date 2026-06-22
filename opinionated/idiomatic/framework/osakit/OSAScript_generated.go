@@ -142,7 +142,7 @@ func NewScriptWithScriptDataDescriptorFromURLLanguageInstanceUsingStorageOptions
 	return scriptAdopt(_id), nil
 }
 
-// WithLanguage sets the property and returns the receiver so calls can be chained.
+// WithLanguage sets the language.
 func (s *Script) WithLanguage(language *Language) *Script {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 	return s
@@ -184,13 +184,13 @@ func (s *Script) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// WriteToURLOfTypeError wraps the corresponding Objective-C method.
+// WriteToURLOfTypeError writes to URL of type error.
 func (s *Script) WriteToURLOfTypeError(url string, type_ string, errorInfo obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:error:"), rt.FileURL(url), purego.NSString(type_), objref.IDOf(errorInfo))
 	return _r
 }
 
-// WriteToURLOfTypeUsingStorageOptionsError wraps the corresponding Objective-C method.
+// WriteToURLOfTypeUsingStorageOptionsError writes to URL of type using storage options error.
 func (s *Script) WriteToURLOfTypeUsingStorageOptionsError(url string, type_ string, storageOptions StorageOptions, errorInfo obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("writeToURL:ofType:usingStorageOptions:error:"), rt.FileURL(url), purego.NSString(type_), storageOptions, objref.IDOf(errorInfo))
 	return _r
@@ -202,7 +202,7 @@ func (s *Script) CompiledDataForTypeUsingStorageOptionsError(type_ string, stora
 	return obj.Wrap(_r)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (s *Script) Source() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("source"))
 	if _r == 0 {
@@ -211,25 +211,25 @@ func (s *Script) Source() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (s *Script) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (s *Script) Language() *Language {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
-// IsCompiled wraps the corresponding Objective-C method.
+// IsCompiled reports whether the object is compiled.
 func (s *Script) IsCompiled() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isCompiled"))
 	return _r
 }
 
-// RichTextSource wraps the corresponding Objective-C method.
+// RichTextSource returns the rich text source.
 func (s *Script) RichTextSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("richTextSource"))
 	return obj.Wrap(_r)

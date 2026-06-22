@@ -61,7 +61,7 @@ func NewMTRBaseClusterOccupancySensingWithDeviceEndpointQueue(device *MTRBaseDev
 	return mTRBaseClusterOccupancySensingAdopt(_id)
 }
 
-// ReadAttributeOccupancyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupancyWithCompletion reads attribute occupancy with completion.
 //
 // ReadAttributeOccupancyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithPara
 	}
 }
 
-// ReadAttributeOccupancySensorTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupancySensorTypeWithCompletion reads attribute occupancy sensor type with completion.
 //
 // ReadAttributeOccupancySensorTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 	}
 }
 
-// ReadAttributeOccupancySensorTypeBitmapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOccupancySensorTypeBitmapWithCompletion reads attribute occupancy sensor type bitmap with completion.
 //
 // ReadAttributeOccupancySensorTypeBitmapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 	}
 }
 
-// ReadAttributeHoldTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHoldTimeWithCompletion reads attribute hold time with completion.
 //
 // ReadAttributeHoldTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParam
 	}
 }
 
-// ReadAttributeHoldTimeLimitsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHoldTimeLimitsWithCompletion reads attribute hold time limits with completion.
 //
 // ReadAttributeHoldTimeLimitsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithCompletion(ctx context.Context) (result *MTROccupancySensingClusterHoldTimeLimitsStruct, err error) {
@@ -311,7 +311,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWit
 	}
 }
 
-// ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion reads attribute pir occupied to unoccupied delay with completion.
 //
 // ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoc
 	}
 }
 
-// ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion reads attribute pir unoccupied to occupied delay with completion.
 //
 // ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 	}
 }
 
-// ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion reads attribute pir unoccupied to occupied threshold with completion.
 //
 // ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 	}
 }
 
-// ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion reads attribute ultrasonic occupied to unoccupied delay with completion.
 //
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 	}
 }
 
-// ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion reads attribute ultrasonic unoccupied to occupied delay with completion.
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 	}
 }
 
-// ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion reads attribute ultrasonic unoccupied to occupied threshold with completion.
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 	}
 }
 
-// ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion reads attribute physical contact occupied to unoccupied delay with completion.
 //
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 	}
 }
 
-// ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion reads attribute physical contact unoccupied to occupied delay with completion.
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 	}
 }
 
-// ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion reads attribute physical contact unoccupied to occupied threshold with completion.
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-// ReadAttributeOccupancy wraps the corresponding Objective-C method.
+// ReadAttributeOccupancy reads attribute occupancy.
 //
 // ReadAttributeOccupancy blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinI
 	}
 }
 
-// ReadAttributeOccupancySensorType wraps the corresponding Objective-C method.
+// ReadAttributeOccupancySensorType reads attribute occupancy sensor type.
 //
 // ReadAttributeOccupancySensorType blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 	}
 }
 
-// ReadAttributeOccupancySensorTypeBitmap wraps the corresponding Objective-C method.
+// ReadAttributeOccupancySensorTypeBitmap reads attribute occupancy sensor type bitmap.
 //
 // ReadAttributeOccupancySensorTypeBitmap blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmap(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 	}
 }
 
-// ReadAttributePirOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributePirOccupiedToUnoccupiedDelay reads attribute pir occupied to unoccupied delay.
 //
 // ReadAttributePirOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoc
 	}
 }
 
-// ReadAttributePirUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributePirUnoccupiedToOccupiedDelay reads attribute pir unoccupied to occupied delay.
 //
 // ReadAttributePirUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 	}
 }
 
-// ReadAttributePirUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+// ReadAttributePirUnoccupiedToOccupiedThreshold reads attribute pir unoccupied to occupied threshold.
 //
 // ReadAttributePirUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 	}
 }
 
-// ReadAttributeUltrasonicOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicOccupiedToUnoccupiedDelay reads attribute ultrasonic occupied to unoccupied delay.
 //
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 	}
 }
 
-// ReadAttributeUltrasonicUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicUnoccupiedToOccupiedDelay reads attribute ultrasonic unoccupied to occupied delay.
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 	}
 }
 
-// ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+// ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold reads attribute ultrasonic unoccupied to occupied threshold.
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 	}
 }
 
-// ReadAttributePhysicalContactOccupiedToUnoccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactOccupiedToUnoccupiedDelay reads attribute physical contact occupied to unoccupied delay.
 //
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 	}
 }
 
-// ReadAttributePhysicalContactUnoccupiedToOccupiedDelay wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactUnoccupiedToOccupiedDelay reads attribute physical contact unoccupied to occupied delay.
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 	}
 }
 
-// ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold wraps the corresponding Objective-C method.
+// ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold reads attribute physical contact unoccupied to occupied threshold.
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMin
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

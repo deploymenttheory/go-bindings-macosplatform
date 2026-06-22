@@ -49,7 +49,7 @@ func NewNDArrayGatherGradientState() *NDArrayGatherGradientState {
 	return nDArrayGatherGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (naggs *NDArrayGatherGradientState) WithReadCount(readCount int) *NDArrayGatherGradientState {
 	objc.Send[objc.ID](objref.IDOf(naggs), objc.RegisterName("setReadCount:"), readCount)
 	return naggs

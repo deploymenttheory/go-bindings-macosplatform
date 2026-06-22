@@ -76,7 +76,7 @@ func (dpsi *DeferredPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *
 	return dpsi
 }
 
-// DeferredDate wraps the corresponding Objective-C method.
+// DeferredDate returns the deferred date.
 func (dpsi *DeferredPaymentSummaryItem) DeferredDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpsi), objc.RegisterName("deferredDate"))
 	return obj.Wrap(_r)

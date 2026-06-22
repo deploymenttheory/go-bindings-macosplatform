@@ -43,13 +43,13 @@ func dOMStyleSheetAdopt(id objc.ID) *DOMStyleSheet {
 	return x
 }
 
-// WithDisabled sets the property and returns the receiver so calls can be chained.
+// WithDisabled sets the disabled.
 func (dss *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("setDisabled:"), disabled)
 	return dss
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dss *DOMStyleSheet) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("type"))
 	if _r == 0 {
@@ -64,19 +64,19 @@ func (dss *DOMStyleSheet) Disabled() bool {
 	return _r
 }
 
-// OwnerNode wraps the corresponding Objective-C method.
+// OwnerNode returns the owner node.
 func (dss *DOMStyleSheet) OwnerNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerNode"))
 	return DOMNodeFromID(_r)
 }
 
-// ParentStyleSheet wraps the corresponding Objective-C method.
+// ParentStyleSheet returns the parent style sheet.
 func (dss *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("parentStyleSheet"))
 	return DOMStyleSheetFromID(_r)
 }
 
-// Href wraps the corresponding Objective-C method.
+// Href returns the href.
 func (dss *DOMStyleSheet) Href() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("href"))
 	if _r == 0 {
@@ -85,7 +85,7 @@ func (dss *DOMStyleSheet) Href() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (dss *DOMStyleSheet) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("title"))
 	if _r == 0 {
@@ -94,7 +94,7 @@ func (dss *DOMStyleSheet) Title() string {
 	return purego.GoString(_r)
 }
 
-// Media wraps the corresponding Objective-C method.
+// Media returns the media.
 func (dss *DOMStyleSheet) Media() *DOMMediaList {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)

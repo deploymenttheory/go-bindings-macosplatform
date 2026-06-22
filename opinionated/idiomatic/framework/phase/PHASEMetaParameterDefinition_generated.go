@@ -46,7 +46,7 @@ func metaParameterDefinitionAdopt(id objc.ID) *MetaParameterDefinition {
 	return x
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mpd *MetaParameterDefinition) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpd), objc.RegisterName("value"))
 	return obj.Wrap(_r)

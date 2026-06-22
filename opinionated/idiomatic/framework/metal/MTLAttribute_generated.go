@@ -72,7 +72,7 @@ func NewAttribute() *Attribute {
 	return attributeAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Attribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,31 +81,31 @@ func (a *Attribute) Name() string {
 	return purego.GoString(_r)
 }
 
-// AttributeIndex wraps the corresponding Objective-C method.
+// AttributeIndex returns the attribute index.
 func (a *Attribute) AttributeIndex() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
-// AttributeType wraps the corresponding Objective-C method.
+// AttributeType returns the attribute type.
 func (a *Attribute) AttributeType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(a), objc.RegisterName("attributeType"))
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (a *Attribute) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
 	return _r
 }
 
-// IsPatchData wraps the corresponding Objective-C method.
+// IsPatchData reports whether the object is patch data.
 func (a *Attribute) IsPatchData() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isPatchData"))
 	return _r
 }
 
-// IsPatchControlPointData wraps the corresponding Objective-C method.
+// IsPatchControlPointData reports whether the object is patch control point data.
 func (a *Attribute) IsPatchControlPointData() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isPatchControlPointData"))
 	return _r

@@ -107,7 +107,7 @@ func (sr *SpeechRecognizer) StopListening() {
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("stopListening"))
 }
 
-// Commands wraps the corresponding Objective-C method.
+// Commands returns the commands.
 //
 // Commands returns the collection as a Go slice.
 func (sr *SpeechRecognizer) Commands() []string {
@@ -115,7 +115,7 @@ func (sr *SpeechRecognizer) Commands() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DisplayedCommandsTitle wraps the corresponding Objective-C method.
+// DisplayedCommandsTitle returns the displayed commands title.
 func (sr *SpeechRecognizer) DisplayedCommandsTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("displayedCommandsTitle"))
 	if _r == 0 {

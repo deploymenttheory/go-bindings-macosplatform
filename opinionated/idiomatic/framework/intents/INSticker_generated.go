@@ -71,13 +71,13 @@ func NewStickerWithTypeEmoji(type_ StickerType, emoji string) *Sticker {
 	return stickerAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (s *Sticker) Type() StickerType {
 	_r := objc.Send[StickerType](objref.IDOf(s), objc.RegisterName("type"))
 	return _r
 }
 
-// Emoji wraps the corresponding Objective-C method.
+// Emoji returns the emoji.
 func (s *Sticker) Emoji() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("emoji"))
 	if _r == 0 {

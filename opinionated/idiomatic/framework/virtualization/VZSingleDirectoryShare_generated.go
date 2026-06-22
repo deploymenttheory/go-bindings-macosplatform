@@ -52,7 +52,7 @@ func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDir
 	return singleDirectoryShareAdopt(_id)
 }
 
-// Directory wraps the corresponding Objective-C method.
+// Directory returns the directory.
 func (sds *SingleDirectoryShare) Directory() *SharedDirectory {
 	_r := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("directory"))
 	return SharedDirectoryFromID(_r)

@@ -78,7 +78,7 @@ func (nh *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (nh *NetworkHost) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("name"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (nh *NetworkHost) Name() string {
 	return purego.GoString(_r)
 }
 
-// Address wraps the corresponding Objective-C method.
+// Address returns the address.
 func (nh *NetworkHost) Address() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("address"))
 	if _r == 0 {
@@ -96,13 +96,13 @@ func (nh *NetworkHost) Address() string {
 	return purego.GoString(_r)
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (nh *NetworkHost) Port() int {
 	_r := objc.Send[int](objref.IDOf(nh), objc.RegisterName("port"))
 	return _r
 }
 
-// NetServiceName wraps the corresponding Objective-C method.
+// NetServiceName returns the net service name.
 func (nh *NetworkHost) NetServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceName"))
 	if _r == 0 {
@@ -111,7 +111,7 @@ func (nh *NetworkHost) NetServiceName() string {
 	return purego.GoString(_r)
 }
 
-// NetServiceDomain wraps the corresponding Objective-C method.
+// NetServiceDomain returns the net service domain.
 func (nh *NetworkHost) NetServiceDomain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceDomain"))
 	if _r == 0 {

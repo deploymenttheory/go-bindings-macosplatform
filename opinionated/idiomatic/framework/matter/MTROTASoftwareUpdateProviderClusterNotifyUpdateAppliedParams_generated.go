@@ -66,13 +66,13 @@ func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) S
 	return rt.Description(objref.IDOf(msupcnuap))
 }
 
-// WithUpdateToken sets the property and returns the receiver so calls can be chained.
+// WithUpdateToken sets the update token.
 func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithUpdateToken(updateToken obj.Object) *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
 	objc.Send[objc.ID](objref.IDOf(msupcnuap), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
 	return msupcnuap
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams {
 	objc.Send[objc.ID](objref.IDOf(msupcnuap), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return msupcnuap
@@ -90,13 +90,13 @@ func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) W
 	return msupcnuap
 }
 
-// UpdateToken wraps the corresponding Objective-C method.
+// UpdateToken returns the update token.
 func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) UpdateToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msupcnuap), objc.RegisterName("updateToken"))
 	return obj.Wrap(_r)
 }
 
-// SoftwareVersion wraps the corresponding Objective-C method.
+// SoftwareVersion returns the software version.
 func (msupcnuap *MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msupcnuap), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)

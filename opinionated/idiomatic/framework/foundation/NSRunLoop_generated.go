@@ -74,29 +74,29 @@ func NewRunLoop() *RunLoop {
 	return runLoopAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (rl *RunLoop) WithScriptingProperties(scriptingProperties obj.Object) *RunLoop {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return rl
 }
 
-// GetCFRunLoop wraps the corresponding Objective-C method.
-func (rl *RunLoop) GetCFRunLoop() obj.Object {
+// CFRunLoop returns the cf run loop.
+func (rl *RunLoop) CFRunLoop() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("getCFRunLoop"))
 	return obj.Wrap(_r)
 }
 
-// AddTimerForMode wraps the corresponding Objective-C method.
+// AddTimerForMode adds timer for mode.
 func (rl *RunLoop) AddTimerForMode(timer *Timer, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addTimer:forMode:"), objref.IDOf(timer), objref.IDOf(mode))
 }
 
-// AddPortForMode wraps the corresponding Objective-C method.
+// AddPortForMode adds port for mode.
 func (rl *RunLoop) AddPortForMode(aPort *Port, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("addPort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
 
-// RemovePortForMode wraps the corresponding Objective-C method.
+// RemovePortForMode removes port for mode.
 func (rl *RunLoop) RemovePortForMode(aPort *Port, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("removePort:forMode:"), objref.IDOf(aPort), objref.IDOf(mode))
 }
@@ -112,7 +112,7 @@ func (rl *RunLoop) AcceptInputForModeBeforeDate(mode *String, limitDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("acceptInputForMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
 }
 
-// CurrentMode wraps the corresponding Objective-C method.
+// CurrentMode returns the current mode.
 func (rl *RunLoop) CurrentMode() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("currentMode"))
 	return StringFromID(_r)
@@ -123,12 +123,12 @@ func (rl *RunLoop) Run() {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("run"))
 }
 
-// RunUntilDate wraps the corresponding Objective-C method.
+// RunUntilDate runs until date.
 func (rl *RunLoop) RunUntilDate(limitDate *Date) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("runUntilDate:"), objref.IDOf(limitDate))
 }
 
-// RunModeBeforeDate wraps the corresponding Objective-C method.
+// RunModeBeforeDate runs mode before date.
 func (rl *RunLoop) RunModeBeforeDate(mode *String, limitDate *Date) bool {
 	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("runMode:beforeDate:"), objref.IDOf(mode), objref.IDOf(limitDate))
 	return _r
@@ -173,7 +173,7 @@ func (rl *RunLoop) PerformBlock(ctx context.Context) error {
 	}
 }
 
-// CancelPerformSelectorsWithTarget wraps the corresponding Objective-C method.
+// CancelPerformSelectorsWithTarget cancels perform selectors with target.
 func (rl *RunLoop) CancelPerformSelectorsWithTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("cancelPerformSelectorsWithTarget:"), objref.IDOf(target))
 }

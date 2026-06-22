@@ -79,13 +79,13 @@ func (mia *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Objec
 	return obj.Wrap(_r)
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (mia *MediaItemArtwork) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("bounds"))
 	return _r
 }
 
-// ImageCropRect wraps the corresponding Objective-C method.
+// ImageCropRect returns the image crop rect.
 func (mia *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("imageCropRect"))
 	return _r

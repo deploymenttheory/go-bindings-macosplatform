@@ -78,19 +78,19 @@ func (lasr *LookAroundSceneRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
 }
 
-// MapItem wraps the corresponding Objective-C method.
+// MapItem returns the map item.
 func (lasr *LookAroundSceneRequest) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (lasr *LookAroundSceneRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsLoading wraps the corresponding Objective-C method.
+// IsLoading reports whether the object is loading.
 func (lasr *LookAroundSceneRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isLoading"))
 	return _r

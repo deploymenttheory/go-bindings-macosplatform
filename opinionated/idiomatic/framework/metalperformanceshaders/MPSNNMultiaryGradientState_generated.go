@@ -49,7 +49,7 @@ func NewNNMultiaryGradientState() *NNMultiaryGradientState {
 	return nNMultiaryGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (nmgs *NNMultiaryGradientState) WithReadCount(readCount int) *NNMultiaryGradientState {
 	objc.Send[objc.ID](objref.IDOf(nmgs), objc.RegisterName("setReadCount:"), readCount)
 	return nmgs

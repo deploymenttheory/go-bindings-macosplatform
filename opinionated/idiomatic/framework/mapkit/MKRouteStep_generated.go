@@ -72,7 +72,7 @@ func NewRouteStep() *RouteStep {
 	return routeStepAdopt(_id)
 }
 
-// Instructions wraps the corresponding Objective-C method.
+// Instructions returns the instructions.
 func (rs *RouteStep) Instructions() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("instructions"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (rs *RouteStep) Instructions() string {
 	return purego.GoString(_r)
 }
 
-// Notice wraps the corresponding Objective-C method.
+// Notice returns the notice.
 func (rs *RouteStep) Notice() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("notice"))
 	if _r == 0 {
@@ -90,13 +90,13 @@ func (rs *RouteStep) Notice() string {
 	return purego.GoString(_r)
 }
 
-// Polyline wraps the corresponding Objective-C method.
+// Polyline returns the polyline.
 func (rs *RouteStep) Polyline() *Polyline {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
-// TransportType wraps the corresponding Objective-C method.
+// TransportType returns the transport type.
 func (rs *RouteStep) TransportType() DirectionsTransportType {
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(rs), objc.RegisterName("transportType"))
 	return _r

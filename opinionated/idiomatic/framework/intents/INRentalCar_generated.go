@@ -73,7 +73,7 @@ func NewRentalCarWithRentalCompanyNameTypeMakeModelRentalCarDescription(rentalCo
 	return rentalCarAdopt(_id)
 }
 
-// RentalCompanyName wraps the corresponding Objective-C method.
+// RentalCompanyName returns the rental company name.
 func (rc *RentalCar) RentalCompanyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCompanyName"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (rc *RentalCar) RentalCompanyName() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (rc *RentalCar) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("type"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (rc *RentalCar) Type() string {
 	return purego.GoString(_r)
 }
 
-// Make wraps the corresponding Objective-C method.
+// Make returns the make.
 func (rc *RentalCar) Make() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("make"))
 	if _r == 0 {
@@ -100,7 +100,7 @@ func (rc *RentalCar) Make() string {
 	return purego.GoString(_r)
 }
 
-// Model wraps the corresponding Objective-C method.
+// Model returns the model.
 func (rc *RentalCar) Model() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("model"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (rc *RentalCar) Model() string {
 	return purego.GoString(_r)
 }
 
-// RentalCarDescription wraps the corresponding Objective-C method.
+// RentalCarDescription returns the rental car description.
 func (rc *RentalCar) RentalCarDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("rentalCarDescription"))
 	if _r == 0 {

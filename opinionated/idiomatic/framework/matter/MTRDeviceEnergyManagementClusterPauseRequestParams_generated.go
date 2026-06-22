@@ -70,13 +70,13 @@ func NewMTRDeviceEnergyManagementClusterPauseRequestParams() *MTRDeviceEnergyMan
 	return mTRDeviceEnergyManagementClusterPauseRequestParamsAdopt(_id)
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mdemcprp *MTRDeviceEnergyManagementClusterPauseRequestParams) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcprp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcprp
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcprp *MTRDeviceEnergyManagementClusterPauseRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPauseRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcprp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcprp
@@ -94,13 +94,13 @@ func (mdemcprp *MTRDeviceEnergyManagementClusterPauseRequestParams) WithServerSi
 	return mdemcprp
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mdemcprp *MTRDeviceEnergyManagementClusterPauseRequestParams) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcprp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcprp *MTRDeviceEnergyManagementClusterPauseRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcprp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

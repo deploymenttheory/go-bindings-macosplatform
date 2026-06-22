@@ -70,7 +70,7 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModePar
 	return mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mratccmcctmp
@@ -88,8 +88,8 @@ func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterCha
 	return mratccmcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

@@ -240,55 +240,55 @@ func (mv *MapView) ShowAnnotationsAnimated(annotations []obj.Object, animated bo
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("showAnnotations:animated:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), animated)
 }
 
-// MapType wraps the corresponding Objective-C method.
+// MapType returns the map type.
 func (mv *MapView) MapType() MapType {
 	_r := objc.Send[MapType](objref.IDOf(mv), objc.RegisterName("mapType"))
 	return _r
 }
 
-// PreferredConfiguration wraps the corresponding Objective-C method.
+// PreferredConfiguration returns the preferred configuration.
 func (mv *MapView) PreferredConfiguration() *MapConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("preferredConfiguration"))
 	return MapConfigurationFromID(_r)
 }
 
-// Camera wraps the corresponding Objective-C method.
+// Camera returns the camera.
 func (mv *MapView) Camera() *MapCamera {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
 }
 
-// CameraZoomRange wraps the corresponding Objective-C method.
+// CameraZoomRange returns the camera zoom range.
 func (mv *MapView) CameraZoomRange() *MapCameraZoomRange {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraZoomRange"))
 	return MapCameraZoomRangeFromID(_r)
 }
 
-// CameraBoundary wraps the corresponding Objective-C method.
+// CameraBoundary returns the camera boundary.
 func (mv *MapView) CameraBoundary() *MapCameraBoundary {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraBoundary"))
 	return MapCameraBoundaryFromID(_r)
 }
 
-// IsZoomEnabled wraps the corresponding Objective-C method.
+// IsZoomEnabled reports whether the object is zoom enabled.
 func (mv *MapView) IsZoomEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isZoomEnabled"))
 	return _r
 }
 
-// IsScrollEnabled wraps the corresponding Objective-C method.
+// IsScrollEnabled reports whether the object is scroll enabled.
 func (mv *MapView) IsScrollEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isScrollEnabled"))
 	return _r
 }
 
-// IsRotateEnabled wraps the corresponding Objective-C method.
+// IsRotateEnabled reports whether the object is rotate enabled.
 func (mv *MapView) IsRotateEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isRotateEnabled"))
 	return _r
 }
 
-// IsPitchEnabled wraps the corresponding Objective-C method.
+// IsPitchEnabled reports whether the object is pitch enabled.
 func (mv *MapView) IsPitchEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isPitchEnabled"))
 	return _r
@@ -300,7 +300,7 @@ func (mv *MapView) ShowsUserTrackingButton() bool {
 	return _r
 }
 
-// PitchButtonVisibility wraps the corresponding Objective-C method.
+// PitchButtonVisibility returns the pitch button visibility.
 func (mv *MapView) PitchButtonVisibility() FeatureVisibility {
 	_r := objc.Send[FeatureVisibility](objref.IDOf(mv), objc.RegisterName("pitchButtonVisibility"))
 	return _r
@@ -330,7 +330,7 @@ func (mv *MapView) ShowsScale() bool {
 	return _r
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (mv *MapView) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
@@ -360,31 +360,31 @@ func (mv *MapView) ShowsUserLocation() bool {
 	return _r
 }
 
-// UserLocation wraps the corresponding Objective-C method.
+// UserLocation returns the user location.
 func (mv *MapView) UserLocation() *UserLocation {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("userLocation"))
 	return UserLocationFromID(_r)
 }
 
-// UserTrackingMode wraps the corresponding Objective-C method.
+// UserTrackingMode returns the user tracking mode.
 func (mv *MapView) UserTrackingMode() UserTrackingMode {
 	_r := objc.Send[UserTrackingMode](objref.IDOf(mv), objc.RegisterName("userTrackingMode"))
 	return _r
 }
 
-// IsUserLocationVisible wraps the corresponding Objective-C method.
+// IsUserLocationVisible reports whether the object is user location visible.
 func (mv *MapView) IsUserLocationVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isUserLocationVisible"))
 	return _r
 }
 
-// Annotations wraps the corresponding Objective-C method.
+// Annotations returns the annotations.
 func (mv *MapView) Annotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("annotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SelectedAnnotations wraps the corresponding Objective-C method.
+// SelectedAnnotations returns the selected annotations.
 func (mv *MapView) SelectedAnnotations() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("selectedAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -395,7 +395,7 @@ func (mv *MapView) SetSelectedAnnotations(selectedAnnotations []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setSelectedAnnotations:"), purego.SliceToNSArray(selectedAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// AnnotationVisibleRect wraps the corresponding Objective-C method.
+// AnnotationVisibleRect returns the annotation visible rect.
 func (mv *MapView) AnnotationVisibleRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mv), objc.RegisterName("annotationVisibleRect"))
 	return _r
@@ -427,7 +427,7 @@ func (mv *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 int, index2 i
 	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:"), index1, index2)
 }
 
-// Overlays wraps the corresponding Objective-C method.
+// Overlays returns the overlays.
 func (mv *MapView) Overlays() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlays"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

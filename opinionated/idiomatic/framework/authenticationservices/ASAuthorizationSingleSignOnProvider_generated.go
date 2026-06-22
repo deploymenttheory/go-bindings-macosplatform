@@ -78,7 +78,7 @@ func (assop *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSi
 	return AuthorizationSingleSignOnRequestFromID(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (assop *AuthorizationSingleSignOnProvider) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(assop), objc.RegisterName("url"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewMethodSignature() *MethodSignature {
 	return methodSignatureAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ms *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ms
@@ -90,19 +90,19 @@ func (ms *MethodSignature) IsOneway() bool {
 	return _r
 }
 
-// NumberOfArguments wraps the corresponding Objective-C method.
+// NumberOfArguments returns the number of arguments.
 func (ms *MethodSignature) NumberOfArguments() int {
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("numberOfArguments"))
 	return _r
 }
 
-// FrameLength wraps the corresponding Objective-C method.
+// FrameLength returns the frame length.
 func (ms *MethodSignature) FrameLength() int {
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("frameLength"))
 	return _r
 }
 
-// MethodReturnLength wraps the corresponding Objective-C method.
+// MethodReturnLength returns the method return length.
 func (ms *MethodSignature) MethodReturnLength() int {
 	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("methodReturnLength"))
 	return _r

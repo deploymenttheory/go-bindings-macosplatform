@@ -70,7 +70,7 @@ func NewMTRMediaPlaybackClusterFastForwardParams() *MTRMediaPlaybackClusterFastF
 	return mTRMediaPlaybackClusterFastForwardParamsAdopt(_id)
 }
 
-// WithAudioAdvanceUnmuted sets the property and returns the receiver so calls can be chained.
+// WithAudioAdvanceUnmuted sets the audio advance unmuted.
 func (mmpcffp *MTRMediaPlaybackClusterFastForwardParams) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterFastForwardParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcffp), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 	return mmpcffp
@@ -88,7 +88,7 @@ func (mmpcffp *MTRMediaPlaybackClusterFastForwardParams) WithServerSideProcessin
 	return mmpcffp
 }
 
-// AudioAdvanceUnmuted wraps the corresponding Objective-C method.
+// AudioAdvanceUnmuted returns the audio advance unmuted.
 func (mmpcffp *MTRMediaPlaybackClusterFastForwardParams) AudioAdvanceUnmuted() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcffp), objc.RegisterName("audioAdvanceUnmuted"))
 	return obj.Wrap(_r)

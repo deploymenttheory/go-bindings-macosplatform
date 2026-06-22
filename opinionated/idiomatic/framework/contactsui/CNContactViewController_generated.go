@@ -78,7 +78,7 @@ func (cvc *ContactViewController) WithContact(contact obj.Object) *ContactViewCo
 	return cvc
 }
 
-// Contact wraps the corresponding Objective-C method.
+// Contact returns the contact.
 func (cvc *ContactViewController) Contact() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvc), objc.RegisterName("contact"))
 	return obj.Wrap(_r)

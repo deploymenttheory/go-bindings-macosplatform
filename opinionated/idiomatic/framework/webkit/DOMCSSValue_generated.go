@@ -43,13 +43,13 @@ func dOMCSSValueAdopt(id objc.ID) *DOMCSSValue {
 	return x
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dv *DOMCSSValue) WithCSSText(cssText string) *DOMCSSValue {
 	objc.Send[objc.ID](objref.IDOf(dv), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dv
 }
 
-// CSSText wraps the corresponding Objective-C method.
+// CSSText returns the CSS text.
 func (dv *DOMCSSValue) CSSText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dv), objc.RegisterName("cssText"))
 	if _r == 0 {
@@ -58,7 +58,7 @@ func (dv *DOMCSSValue) CSSText() string {
 	return purego.GoString(_r)
 }
 
-// CSSValueType wraps the corresponding Objective-C method.
+// CSSValueType returns the CSS value type.
 func (dv *DOMCSSValue) CSSValueType() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dv), objc.RegisterName("cssValueType"))
 	return _r

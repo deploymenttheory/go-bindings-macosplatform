@@ -196,7 +196,7 @@ func (auc *AudioUnitComponent) IconURL() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Icon wraps the corresponding Objective-C method.
+// Icon returns the icon.
 func (auc *AudioUnitComponent) Icon() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("icon"))
 	return obj.Wrap(_r)

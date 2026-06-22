@@ -61,7 +61,7 @@ func NewMTRBaseClusterMediaInputWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterMediaInputAdopt(_id)
 }
 
-// ReadAttributeInputListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInputListWithCompletion reads attribute input list with completion.
 //
 // ReadAttributeInputListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeInputListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeInputListWithParamsSubs
 	}
 }
 
-// ReadAttributeCurrentInputWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentInputWithCompletion reads attribute current input with completion.
 //
 // ReadAttributeCurrentInputWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeCurrentInputWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeCurrentInputWithParamsS
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
-// ReadAttributeInputList wraps the corresponding Objective-C method.
+// ReadAttributeInputList reads attribute input list.
 //
 // ReadAttributeInputList blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeInputList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeInputListWithMinInterva
 	}
 }
 
-// ReadAttributeCurrentInput wraps the corresponding Objective-C method.
+// ReadAttributeCurrentInput reads attribute current input.
 //
 // ReadAttributeCurrentInput blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeCurrentInput(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeCurrentInputWithMinInte
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcmi *MTRBaseClusterMediaInput) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcmi *MTRBaseClusterMediaInput) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

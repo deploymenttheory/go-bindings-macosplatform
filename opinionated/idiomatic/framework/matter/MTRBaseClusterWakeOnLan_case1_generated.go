@@ -54,7 +54,7 @@ func NewMTRBaseClusterWakeOnLanWithDeviceEndpointQueue(device *MTRBaseDevice, en
 	return mTRBaseClusterWakeOnLanAdopt(_id)
 }
 
-// ReadAttributeMACAddress wraps the corresponding Objective-C method.
+// ReadAttributeMACAddress reads attribute MAC address.
 //
 // ReadAttributeMACAddress blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeMACAddress(ctx context.Context) (result string, err error) {
@@ -104,7 +104,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeMACAddressWithMinInterv
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcwol *MTRBaseClusterWakeOnLan) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLan) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

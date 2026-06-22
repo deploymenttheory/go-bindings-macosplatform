@@ -70,7 +70,7 @@ func NewMTRWindowCoveringClusterGoToLiftPercentageParams() *MTRWindowCoveringClu
 	return mTRWindowCoveringClusterGoToLiftPercentageParamsAdopt(_id)
 }
 
-// WithLiftPercent100thsValue sets the property and returns the receiver so calls can be chained.
+// WithLiftPercent100thsValue sets the lift percent100ths value.
 func (mwccgtlpp *MTRWindowCoveringClusterGoToLiftPercentageParams) WithLiftPercent100thsValue(liftPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToLiftPercentageParams {
 	objc.Send[objc.ID](objref.IDOf(mwccgtlpp), objc.RegisterName("setLiftPercent100thsValue:"), objref.IDOf(liftPercent100thsValue))
 	return mwccgtlpp
@@ -88,7 +88,7 @@ func (mwccgtlpp *MTRWindowCoveringClusterGoToLiftPercentageParams) WithServerSid
 	return mwccgtlpp
 }
 
-// LiftPercent100thsValue wraps the corresponding Objective-C method.
+// LiftPercent100thsValue returns the lift percent100ths value.
 func (mwccgtlpp *MTRWindowCoveringClusterGoToLiftPercentageParams) LiftPercent100thsValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgtlpp), objc.RegisterName("liftPercent100thsValue"))
 	return obj.Wrap(_r)

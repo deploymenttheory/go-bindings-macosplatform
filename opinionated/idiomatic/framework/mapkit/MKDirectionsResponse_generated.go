@@ -72,19 +72,19 @@ func NewDirectionsResponse() *DirectionsResponse {
 	return directionsResponseAdopt(_id)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (dr *DirectionsResponse) Source() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (dr *DirectionsResponse) Destination() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
-// Routes wraps the corresponding Objective-C method.
+// Routes returns the routes.
 //
 // Routes returns the collection as a Go slice.
 func (dr *DirectionsResponse) Routes() []*Route {

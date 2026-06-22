@@ -67,7 +67,7 @@ func (dc *DOMHTMLCollection) Tags(name string) *DOMNodeList {
 	return DOMNodeListFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dc *DOMHTMLCollection) Length() int {
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("length"))
 	return _r

@@ -78,7 +78,7 @@ func (dl *DeviceLight) WithColor(color *Color) *DeviceLight {
 	return dl
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (dl *DeviceLight) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("color"))
 	return ColorFromID(_r)

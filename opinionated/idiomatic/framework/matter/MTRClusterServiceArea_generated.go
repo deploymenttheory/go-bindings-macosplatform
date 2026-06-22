@@ -56,7 +56,7 @@ func NewMTRClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRDevice, endpoi
 	return mTRClusterServiceAreaAdopt(_id)
 }
 
-// SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion selects areas with params expected values expected value interval completion.
 //
 // SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcsa *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
@@ -106,67 +106,67 @@ func (mcsa *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValue
 	}
 }
 
-// ReadAttributeSupportedAreasWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedAreasWithParams reads attribute supported areas with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedAreasWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSupportedAreasWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedMapsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedMapsWithParams reads attribute supported maps with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeSupportedMapsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSupportedMapsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSelectedAreasWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSelectedAreasWithParams reads attribute selected areas with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeSelectedAreasWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeSelectedAreasWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentAreaWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentAreaWithParams reads attribute current area with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeCurrentAreaWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeCurrentAreaWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEstimatedEndTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEstimatedEndTimeWithParams reads attribute estimated end time with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeEstimatedEndTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeEstimatedEndTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeProgressWithParams wraps the corresponding Objective-C method.
+// ReadAttributeProgressWithParams reads attribute progress with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeProgressWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeProgressWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcsa *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcsa), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

@@ -54,7 +54,7 @@ func NewMTRBaseClusterWakeOnLANWithDeviceEndpointIDQueue(device *MTRBaseDevice, 
 	return mTRBaseClusterWakeOnLANAdopt(_id)
 }
 
-// ReadAttributeMACAddressWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMACAddressWithCompletion reads attribute MAC address with completion.
 //
 // ReadAttributeMACAddressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeMACAddressWithCompletion(ctx context.Context) (result string, err error) {
@@ -104,7 +104,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeMACAddressWithParamsSub
 	}
 }
 
-// ReadAttributeLinkLocalAddressWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLinkLocalAddressWithCompletion reads attribute link local address with completion.
 //
 // ReadAttributeLinkLocalAddressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeLinkLocalAddressWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeLinkLocalAddressWithPar
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcwol *MTRBaseClusterWakeOnLAN) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwol *MTRBaseClusterWakeOnLAN) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

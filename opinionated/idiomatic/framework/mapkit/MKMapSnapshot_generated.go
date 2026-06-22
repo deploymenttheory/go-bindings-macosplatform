@@ -72,7 +72,7 @@ func NewMapSnapshot() *MapSnapshot {
 	return mapSnapshotAdopt(_id)
 }
 
-// Appearance wraps the corresponding Objective-C method.
+// Appearance returns the appearance.
 func (ms *MapSnapshot) Appearance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)

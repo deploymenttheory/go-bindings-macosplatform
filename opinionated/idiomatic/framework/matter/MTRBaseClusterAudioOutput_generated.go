@@ -61,7 +61,7 @@ func NewMTRBaseClusterAudioOutputWithDeviceEndpointQueue(device *MTRBaseDevice, 
 	return mTRBaseClusterAudioOutputAdopt(_id)
 }
 
-// ReadAttributeOutputListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOutputListWithCompletion reads attribute output list with completion.
 //
 // ReadAttributeOutputListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithParamsSu
 	}
 }
 
-// ReadAttributeCurrentOutputWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentOutputWithCompletion reads attribute current output with completion.
 //
 // ReadAttributeCurrentOutputWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutputWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithParam
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeClusterRevisionWithPar
 	}
 }
 
-// ReadAttributeOutputList wraps the corresponding Objective-C method.
+// ReadAttributeOutputList reads attribute output list.
 //
 // ReadAttributeOutputList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithMinInter
 	}
 }
 
-// ReadAttributeCurrentOutput wraps the corresponding Objective-C method.
+// ReadAttributeCurrentOutput reads attribute current output.
 //
 // ReadAttributeCurrentOutput blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutput(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithMinIn
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithMinIn
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithMinInter
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

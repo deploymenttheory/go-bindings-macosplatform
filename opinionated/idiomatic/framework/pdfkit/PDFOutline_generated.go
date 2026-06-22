@@ -106,25 +106,25 @@ func (o *Outline) RemoveFromParent() {
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeFromParent"))
 }
 
-// Document wraps the corresponding Objective-C method.
+// Document returns the document.
 func (o *Outline) Document() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("document"))
 	return DocumentFromID(_r)
 }
 
-// NumberOfChildren wraps the corresponding Objective-C method.
+// NumberOfChildren returns the number of children.
 func (o *Outline) NumberOfChildren() int {
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("numberOfChildren"))
 	return _r
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (o *Outline) Index() int {
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("index"))
 	return _r
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (o *Outline) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("label"))
 	if _r == 0 {
@@ -133,13 +133,13 @@ func (o *Outline) Label() string {
 	return purego.GoString(_r)
 }
 
-// IsOpen wraps the corresponding Objective-C method.
+// IsOpen reports whether the object is open.
 func (o *Outline) IsOpen() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isOpen"))
 	return _r
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func (o *Outline) Destination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("destination"))
 	return DestinationFromID(_r)

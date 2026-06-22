@@ -80,13 +80,13 @@ func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *
 	return netServiceAdopt(_id)
 }
 
-// WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
+// WithIncludesPeerToPeer sets the includes peer to peer.
 func (ns *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
 	return ns
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ns *NetService) WithScriptingProperties(scriptingProperties obj.Object) *NetService {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ns
@@ -97,7 +97,7 @@ func (ns *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) 
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
+// RemoveFromRunLoopForMode removes from run loop for mode.
 func (ns *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
@@ -139,18 +139,18 @@ func (ns *NetService) SetTXTRecordData(recordData *Data) bool {
 	return _r
 }
 
-// TXTRecordData wraps the corresponding Objective-C method.
+// TXTRecordData returns the txt record data.
 func (ns *NetService) TXTRecordData() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("TXTRecordData"))
 	return DataFromID(_r)
 }
 
-// StartMonitoring wraps the corresponding Objective-C method.
+// StartMonitoring starts monitoring.
 func (ns *NetService) StartMonitoring() {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("startMonitoring"))
 }
 
-// StopMonitoring wraps the corresponding Objective-C method.
+// StopMonitoring stops monitoring.
 func (ns *NetService) StopMonitoring() {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stopMonitoring"))
 }
@@ -161,7 +161,7 @@ func (ns *NetService) IncludesPeerToPeer() bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ns *NetService) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
 	if _r == 0 {
@@ -170,7 +170,7 @@ func (ns *NetService) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (ns *NetService) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("type"))
 	if _r == 0 {
@@ -179,7 +179,7 @@ func (ns *NetService) Type() string {
 	return purego.GoString(_r)
 }
 
-// Domain wraps the corresponding Objective-C method.
+// Domain returns the domain.
 func (ns *NetService) Domain() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("domain"))
 	if _r == 0 {
@@ -188,7 +188,7 @@ func (ns *NetService) Domain() string {
 	return purego.GoString(_r)
 }
 
-// HostName wraps the corresponding Objective-C method.
+// HostName returns the host name.
 func (ns *NetService) HostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("hostName"))
 	if _r == 0 {
@@ -197,7 +197,7 @@ func (ns *NetService) HostName() string {
 	return purego.GoString(_r)
 }
 
-// Addresses wraps the corresponding Objective-C method.
+// Addresses returns the addresses.
 //
 // Addresses returns the collection as a Go slice.
 func (ns *NetService) Addresses() []*Data {
@@ -205,7 +205,7 @@ func (ns *NetService) Addresses() []*Data {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (ns *NetService) Port() int {
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("port"))
 	return _r

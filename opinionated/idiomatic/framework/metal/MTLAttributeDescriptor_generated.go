@@ -90,19 +90,19 @@ func (ad *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescri
 	return ad
 }
 
-// Format wraps the corresponding Objective-C method.
+// Format returns the format.
 func (ad *AttributeDescriptor) Format() AttributeFormat {
 	_r := objc.Send[AttributeFormat](objref.IDOf(ad), objc.RegisterName("format"))
 	return _r
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (ad *AttributeDescriptor) Offset() int {
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("offset"))
 	return _r
 }
 
-// BufferIndex wraps the corresponding Objective-C method.
+// BufferIndex returns the buffer index.
 func (ad *AttributeDescriptor) BufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("bufferIndex"))
 	return _r

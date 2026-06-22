@@ -58,13 +58,13 @@ func (mcce *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeE
 	return mcce
 }
 
-// MessageType wraps the corresponding Objective-C method.
+// MessageType returns the message type.
 func (mcce *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
 	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(mcce), objc.RegisterName("messageType"))
 	return _r
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mcce *MIDIControlChangeEvent) Value() int {
 	_r := objc.Send[int](objref.IDOf(mcce), objc.RegisterName("value"))
 	return _r

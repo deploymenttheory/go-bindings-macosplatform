@@ -112,19 +112,19 @@ func (pq *PaymentQueue) CancelDownloads(downloads []*Download) {
 	objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("cancelDownloads:"), purego.SliceToNSArray(downloads, func(_v *Download) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Storefront wraps the corresponding Objective-C method.
+// Storefront returns the storefront.
 func (pq *PaymentQueue) Storefront() *Storefront {
 	_r := objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("storefront"))
 	return StorefrontFromID(_r)
 }
 
-// TransactionObservers wraps the corresponding Objective-C method.
+// TransactionObservers returns the transaction observers.
 func (pq *PaymentQueue) TransactionObservers() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pq), objc.RegisterName("transactionObservers"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Transactions wraps the corresponding Objective-C method.
+// Transactions returns the transactions.
 //
 // Transactions returns the collection as a Go slice.
 func (pq *PaymentQueue) Transactions() []*PaymentTransaction {

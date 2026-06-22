@@ -70,7 +70,7 @@ func (ssa *ShellScriptAction) RemapLineEndings() bool {
 	return _r
 }
 
-// InputFieldSeparator wraps the corresponding Objective-C method.
+// InputFieldSeparator returns the input field separator.
 func (ssa *ShellScriptAction) InputFieldSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("inputFieldSeparator"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (ssa *ShellScriptAction) InputFieldSeparator() string {
 	return purego.GoString(_r)
 }
 
-// OutputFieldSeparator wraps the corresponding Objective-C method.
+// OutputFieldSeparator returns the output field separator.
 func (ssa *ShellScriptAction) OutputFieldSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("outputFieldSeparator"))
 	if _r == 0 {
